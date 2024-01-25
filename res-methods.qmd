@@ -1,3 +1,15 @@
 ---
 title: "Research methods"
 ---
+
+## Research objectives
+
+-   Establish facts as they are.
+
+    -   Fill a gap in knowledge.
+
+    -   Accumulate evidence for an idea.
+
+-   Improve fit of framework to facts.
+
+-   Compare fit of different frameworks.
