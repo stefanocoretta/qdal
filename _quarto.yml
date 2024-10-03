@@ -6,13 +6,11 @@ book:
   title: "Quantitative Data Analysis for Linguists in R"
   author: "Stefano Coretta"
   date: "25/01/2024"
+  page-navigation: true
   chapters:
     - index.qmd
-    - intro.qmd
-    - res-methods.qmd
-    - references.qmd
 
-bibliography: references.bib
+bibliography: linguistics.bib
 
 format:
   html:
