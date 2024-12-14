@@ -9,14 +9,19 @@ book:
   page-navigation: true
   chapters:
     - index.qmd
+    - part: "Week 1"
+      chapters:
+        - ch-research-methods.qmd
+        - ch-quantitative.qmd
+    - references.qmd
 
-bibliography: linguistics.bib
+bibliography: "https://raw.githubusercontent.com/stefanocoretta/biblio/refs/heads/main/linguistics.bib"
 
 format:
   html:
     theme: cosmo
-  pdf:
-    documentclass: scrreprt
+  # pdf:
+  #   documentclass: scrreprt
 
 editor: visual
 
