@@ -14,7 +14,9 @@ There are two main approaches to data analysis:
 
 ![](img/data-quant-qual.png)
 
-Note that while it is common to talk about "quantitative vs qualitative *data*" in fact in most cases data can be conceived as both quantitative *and* qualitative. It is really how we approach the data that can be quantitative and/or qualitative.
+Note that while it is common to talk about "quantitative vs qualitative *data*" in fact in most cases data can be conceived as both quantitative *and* qualitative. It is really how we approach the data that can be quantitative and/or qualitative. Moreover, these two approaches to data analysis are not necessarily opposite to each other and there are some aspects of each in each other. This will become clearer at the end of the course this textbook is written for.
+
+The Quantitative Methods in Linguistics and English language focuses on quantitative data analysis. The rest of this chapter introduces fundamental concepts of quantitative methods.
 
 ## Quantitative data analysis
 
@@ -22,43 +24,41 @@ Note that while it is common to talk about "quantitative vs qualitative *data*" 
 
 Quantitative analyses are usually comprised of three parts (these are not strictly distinct and the boundaries are sometimes blurred):
 
--   Summarise data with [summary measures](summaries.qmd).
+-   Summarise data with summary measures.
 
--   Visualise data with [plots](intro-plot.qmd).
+-   Visualise data with plots.
 
--   Model data with [statistical models](intro-regression.qmd).
+-   Model data with statistical models.
+
+**Summary measures** are numbers that represent certain properties of the data: common summary measures are the mean and the standard deviation. You will have frequently seen these in published paper, either in text or as a table. You will learn about summary measures in [Summary measure](ch-summaries.qmd).
+
+**Plots**, or graphs, are another common way to summarise data but they are based on visual representation rather than single numbers. As the saying goes, "[a picture is worth a thousand words](https://en.wikipedia.org/wiki/A_picture_is_worth_a_thousand_words)". The aim of plots is to make explicit certain patterns in the data. Choosing and designing plots that are effective and captivating is more of an art and you will learn the basics and heuristics of good (and bad plots) in [Plotting basics](ch-plotting-basics.qmd).
+
+**Statistical models** are mathematical representations of patterns and relationship in data. Statistical modelling is a powerful tool to learn from the data or to assess research hypotheses. This textbook introduces you to a specific type of statistical models: regression models. These are highly flexible model that can be used with a variety of data types. You will start learning about statistical models in [Regression models basics](ch-regression-basics.qmd).
 
 ## Numbers have no meaning
 
-Both qualitative and quantitative approaches are valid and necessary to improve our understanding of things. Moreover, even a very complex quantitative analysis will always contain some qualitative aspects.
+As mentioned earlier, both qualitative and quantitative approaches are valid and necessary to improve our understanding of things. Moreover, even a very complex quantitative analysis will always contain some qualitative aspects.
 
-::: callout-important
+::: {.callout-important appearance="simple"}
 The numbers have no way of speaking for themselves. We speak for them. We imbue them with meaning.
 
 — Nate Silver, *The Signal and the Noise*
 :::
 
-There's a lot of wisdom in that quote. Numbers do not mean anything by themselves. We need to interpret numbers, "imbue them with meaning", based on many aspects of research and beyond, including our own identity and positionality.
+There's a lot of wisdom in that quote. Numbers do not mean anything by themselves. We need to interpret numbers, "imbue them with meaning", based on many aspects of research and beyond, including our own identity and positionality [@jafar2018; @darwin2020].
 
 ## Inference process
 
 ![](img/bro.png){fig-align="center" width="250"}
 
-Imbuing numbers with meaning (see this [section](data-analysis.qmd#numbers-have-no-meaning)) is a good characterisation of the **inference process**.
+Imbuing numbers with meaning is a good characterisation of the **inference process**.
 
-Here is how it works. We have a question about something. Let's imagine that this something is the population of British Sign Language signers.
-
-We want to know whether the cultural background of the BSL signers is linked to different pragmatic uses of the sign for BROTHER.
-
-But we *can't survey the entire population* of BSL signers.[^ch-quantitative-1]
+Here is how it works. We have a question about something. Let's imagine that this something is the population of British Sign Language signers. We want to know whether the cultural background of the BSL signers is linked to different pragmatic uses of the sign for BROTHER. But we *can't survey the entire population* of BSL signers.[^ch-quantitative-1]
 
 [^ch-quantitative-1]: NOTE: *Population* can be a set of anything, not just a specific group of people. For example, the words in a dictionary can be a "population"; or the antipassive constructions of Austronesian languages...
 
-So instead of surveying *all* BSL users, we take a **sample** from the BSL population.
-
-The sample is our empirical data (the product of our study or observation).
-
-Now, how do we go from data/observation to answering our question about the use of BROTHER? We can use the inference process!
+So instead of surveying *all* BSL users, we take a **sample** from the BSL population. The sample is our data (the product of our study or observation). Now, how do we go from data/observation to answering our question about the use of BROTHER? We can use the inference process!
 
 ::: callout-note
 #### Inference process
@@ -69,6 +69,8 @@ Now, how do we go from data/observation to answering our question about the use 
 The figure below is a schematic representation of the inference process.
 
 ![](img/inference.png)
+
+XXX
 
 ## Inference is not infallible
 
@@ -81,7 +83,7 @@ In fact, any observation we make comes with a certain degree of **uncertainty an
 
 -   Check out this article: <https://www.scientificamerican.com/article/if-you-say-science-is-right-youre-wrong/>.
 -   Find out about Popper's view of falsification and fallibilism.
--   Learn more about uncertainty and subjectivity in research: [Vasishth and Gelman 2021](https://doi.org/10.1515/ling-2019-0051), [Gelman and Hennig 2017](https://doi.org/10.1111/rssa.12276).
+-   Learn more about uncertainty and subjectivity in research: @vasishth2021, @gelman2017.
 :::
 
 ## Uncertainty and variability

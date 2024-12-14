@@ -24,4 +24,5 @@ format:
   #   documentclass: scrreprt
 
 editor: visual
+callout-icon: false
 
