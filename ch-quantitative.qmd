@@ -1,5 +1,12 @@
 # Quantitative data analysis
 
+```{r}
+#| label: setup
+#| include: false
+
+library(webexercises)
+```
+
 ![](https://img.shields.io/badge/Area-Statistics-red)
 
 ![](img/res-process-data-ana.png)
@@ -16,7 +23,7 @@ There are two main approaches to data analysis:
 
 Note that while it is common to talk about "quantitative vs qualitative *data*" in fact in most cases data can be conceived as both quantitative *and* qualitative. It is really how we approach the data that can be quantitative and/or qualitative. Moreover, these two approaches to data analysis are not necessarily opposite to each other and there are some aspects of each in each other. This will become clearer at the end of the course this textbook is written for.
 
-The Quantitative Methods in Linguistics and English language focuses on quantitative data analysis. The rest of this chapter introduces fundamental concepts of quantitative methods.
+This textbook focuses on quantitative data analysis. The rest of this chapter introduces fundamental concepts of quantitative methods.
 
 ## Quantitative data analysis
 
@@ -72,11 +79,23 @@ The figure below is a schematic representation of the inference process.
 
 XXX
 
-## Inference is not infallible
+However, inference, despite being based on data, does not guarantee that the answers to our questions are right or even that they are true. In fact, any observation we make comes with a certain degree of **uncertainty and variability**.
 
-However, inference, despite being based on data, does not guarantee that the answers to our questions are right or even that they are true.
+::: callout-note
+### Quiz 1
 
-In fact, any observation we make comes with a certain degree of **uncertainty and variability**.
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+cat("**True or false?**", "\n\n")
+cat("a. Inference is not needed if you gather data from the entire population.", torf(TRUE), "\n\n")
+cat("b. Population refers only to human participants.", torf(FALSE), "\n\n")
+cat("c. A sample is *always* a truthful representation fo the population.", torf(FALSE), "\n\n")
+cat("d. You can collect the same sample multiple times.", torf(FALSE))
+```
+:::
 
 ::: {.callout-important collapse="true"}
 #### Extra
@@ -90,13 +109,13 @@ In fact, any observation we make comes with a certain degree of **uncertainty an
 
 ![](img/pliny.jpg)
 
-[Pliny the Elder](https://en.wikipedia.org/wiki/Pliny_the_Elder) was a Roman philosopher who died in the Vesuvius eruption in 79 CE. The only second certain thing must have been death.
+[Pliny the Elder](https://en.wikipedia.org/wiki/Pliny_the_Elder) was a Roman philosopher who died in the Vesuvius eruption in 79 CE. He certainly did not expect to die then. Leaving dark irony aside, as researchers we have to deal with uncertainty and variability:
 
-Moving away from dark irony, as researchers we have to deal with:
+-   **Uncertainty** is about each observation of a phenomenon due to measurement error or because we cannot directly measure what we want to measure.
 
--   **Uncertainty** in any observation of a phenomenon due to measurement error or because we can directly measure what we want to measure.
+-   **Variability** is found among different observations of the same phenomenon due natural fluctuations and measurement error.
 
--   **Variability** among different observations of the same phenomenon due to natural and inevitable variability and measurement error.
+So uncertainty is a feature of each mesurement, while variability occurs between different measurements. Together, uncertainty and variability render the inference process more complex and can interfere with its outcomes.
 
 The following picture is a reconstruction of what Galileo Galilei saw when he pointed one of his first telescopes towards Saturn, based on his 1610 sketch: a blurry circle flanked by two smaller blurry circles.
 
@@ -104,15 +123,7 @@ The following picture is a reconstruction of what Galileo Galilei saw when he po
 
 Only six years later, telescopes were much better and Galileo could correctly identify that the flaking circles were not spheres orbiting around Saturn, but rings.
 
-The moral of the story is that at any point in history we are like Galileo in at least some of our research: we might be close to understanding something but not quite there yet.
-
-## Statistics as a tool
-
-So what do we do with such uncertainty and variability? We can use statistics to quantify them!
-
-**Statistics is a tool that helps us quantifying uncertainty and controlling for variability.**
-
-But what is exactly statistics?
+The moral of the story is that at any point in history we are like Galileo in at least some of our research: we might be close to understanding something but not quite there yet. So what do we do with such uncertainty and variability? We can use statistics to quantify them! **Statistics is a tool that helps us quantifying uncertainty and controlling for variability.** But what is statistics exacly?
 
 ## What is statistics?
 
@@ -124,17 +135,15 @@ Statistics is a **tool**. But what does it do? There are at least four ways of l
 
 -   Statistics is a **mathematical and conceptual** discipline that focuses on the relation between data and hypotheses. (From the [Standford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/statistics/))
 
--   Statistics as the **art** of applying the science of scientific methods. (From [ORI Results](https://www.oriresults.com/articles/blog-posts/the-art-of-statistics/), [Nature](https://www.nature.com/articles/d41586-019-00898-0))
+-   Statistics is the **art** of applying the science of scientific methods. (From [ORI Results](https://www.oriresults.com/articles/blog-posts/the-art-of-statistics/), [Nature](https://www.nature.com/articles/d41586-019-00898-0))
 
 To quote a statistician:
 
-::: callout-note
-*Statistic is both a science and an art*.
-
-It is a *science* in that its methods are basically systematic and have general application and an *art* in that their successful application depends, to a considerable degree, on the skill and special experience of the statistician, and on his knowledge of the field of application.
+> *Statistic is both a science and an art*.
+>
+> It is a *science* in that its methods are basically systematic and have general application and an *art* in that their successful application depends, to a considerable degree, on the skill and special experience of the statistician, and on his knowledge of the field of application.
 
 —L. H. C. Tippett
-:::
 
 ::: {.callout-important collapse="true"}
 #### Extra
@@ -144,7 +153,7 @@ Check out the etymology of *statistics* here: <https://en.wiktionary.org/wiki/st
 
 ## What statistics is NOT
 
-Statistics is a lot of things, but it is also *not* a lot of things.
+Statistics is a many things, but it is also *not* a lot of things.
 
 -   Statistics is **not maths**, but it is informed by maths.
 
