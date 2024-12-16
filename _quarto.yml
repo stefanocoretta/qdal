@@ -13,6 +13,7 @@ book:
       chapters:
         - ch-research-methods.qmd
         - ch-quantitative.qmd
+        - ch-r-rstudio.qmd
     - references.qmd
 
 bibliography: "https://raw.githubusercontent.com/stefanocoretta/biblio/refs/heads/main/linguistics.bib"
@@ -20,6 +21,9 @@ bibliography: "https://raw.githubusercontent.com/stefanocoretta/biblio/refs/head
 format:
   html:
     theme: cosmo
+    css: [webex.css]
+    include-after-body: [webex.js]
+    embed-resources: false
   # pdf:
   #   documentclass: scrreprt
 
