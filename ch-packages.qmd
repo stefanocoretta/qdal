@@ -1,0 +1,152 @@
+# R packages
+
+![](https://img.shields.io/badge/Area-R-green)
+
+```{r}
+#| label: setup
+#| include: false
+
+library(webexercises)
+```
+
+::: callout-important
+## Important
+
+When working through the book, always **make sure you are in a Quarto Project** by checking the top-right corner of RStudio.
+:::
+
+When you install R, a **library** of packages is also installed. **Packages** provide R with extra functionalities, usually by making extra functions available for use. You can think of packages as "plug-ins" that you install once and then you can "activate" them when you need them. The library installed with R contains a set of packages that are collectively known as the **base R packages**, but you can install more any time!
+
+Note that the R library is a folder on your computer. Packages are *not* installed inside RStudio. Remember that RStudio is just an interface.
+
+You can check all of the currently installed packages in the bottom-right panel of RStudio, in the **Packages** tab. There you can also install new packages.
+
+::: callout-tip
+## R library and packages
+
+-   The **R library** contains the base R packages and all the user-installed packages.
+
+-   **R packages** provide R with extra functionalities and are installed into the R library.
+:::
+
+::: callout-important
+## Extra: Where is my R library?
+
+If you want to find the path of the R library on your computer, type `.libPaths()` in the Console. The function returns (i.e. outputs) the path or paths where your R library is.
+:::
+
+## Install packages
+
+You can install extra packages in the R library in two ways:
+
+1.  You can use the `install.packages()` function. This function takes the name of the package you want to install as a string, for example `install.packages("cowsay")`.
+
+::: callout-important
+If you install a package with the function `install.packages()`, do so in the Console! You will start using R scripts soon, so please **do not include this function in your scripts** (this is because you install packages only once, see below).
+:::
+
+2.  Or you can go the `Packages` tab in the bottom-right panel of RStudio and click on `Install`. A small window will pop up. See the screenshot below.
+
+![](img/install-packages.png){fig-align="center" width="350"}
+
+Go ahead and try to install a package using the second method. Install the **cowsay** and the **fortunes** packages (see picture above for how to write the packages). After installing you will see that the package fortunes is listed in the Packages tab.
+
+::: callout-tip
+### Install packages
+
+To **install packages**, go to the Packages tab of the bottom-right panel of RStudio and click on `Install`.
+
+In the "Install packages" window, list the package names and then click `Install`.
+:::
+
+::: callout-important
+**You need to install a package ONLY ONCE!** Once installed, it's there for ever, saved in the R library. You will be able to use all of your installed packages in any RStudio/Quarto project you create.
+:::
+
+## Attaching packages
+
+Now, to use a package you need to **attach** the package to the current R session with the `library()` function. Attaching a package makes the functions that come with the package available to us.
+
+::: callout-important
+**You need to attach the packages you want to use once per R session.**
+
+Note that every time you open RStudio, a new R session is started.
+:::
+
+Let's attach the cowsay and fortunes packages. Run the following code in the Console.
+
+```{r}
+#| label: attach
+
+library(cowsay)
+library(fortunes)
+```
+
+Note that `library(cowsay)` takes the name of the package without quotes, although if you put the name in quotes it also works. You need one `library()` function per package (there are other ways, but we will stick with this one).
+
+::: callout-tip
+### Attaching packages
+
+Packages are **attached** with the `library(pkg.name)` function, where `pkg.name` is the name of the package.
+:::
+
+Now you can use the functions provided by the attached packages. Try out the `say()` function from the cowsay package.
+
+```{r}
+#| label: cowsay
+#| eval: false
+
+say("hot diggity", "frog")
+```
+
+(I know, the usefulness of the package might be questionable, but it is fun!)
+
+::: callout-important
+Remember, you need to install a package only once but you need to attach it with `library()` every time you start R.
+
+Think of `install.packages()` as mounting a light bulb (installing the package) and `library()` as the light switch (attaching the package).
+
+![](img/install-vs-attach.jpeg)
+:::
+
+## Package documentation
+
+To learn what a function does, you can check its documentation by typing in the Console the function name preceded by a `?` question mark. Type `?say` in the Console and hit `ENTER` to see the function documentation. You should see something like this:
+
+![](img/say-doc.png){fig-align="center"}
+
+The `Description` section is usually a brief explanation of what the function does.
+
+In the `Usage` section, the usage of the function is shown by showing which arguments the function has and which default values (if any) each argument has. When the argument does not have a default value, `NULL` is listed as the value.
+
+The `Arguments` section gives a thorough explanation of each function argument. (Ignore `…` for now).
+
+How many arguments does `say()` have? How many arguments have a default value?
+
+Default argument values allow you to use the function without specifying those arguments. Just write `say()` in your script on a new line and run it. Does the output make sense based on the `Usage` section of the documentation?
+
+The rest of the function documentation usually has further details, which are followed by `Examples`. It is always a good idea to look at the example and test them in the Console when learning new functions.
+
+::: callout-note
+## Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+   answer = "You attach libraries with `library()`.\n\n",
+   "`install.packages()` does not load packages.\n\n",
+   "The R library is a folder."
+)
+
+cat("Which of the following statements is wrong?", longmcq(opts_1))
+```
+:::
+
+::: {.callout-important collapse="true"}
+## Explanation
+
+This was a question about terminology. In R, you attach packages from the library using (confusingly) the `library()` function.
+:::

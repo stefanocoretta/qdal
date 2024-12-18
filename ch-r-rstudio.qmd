@@ -1,6 +1,6 @@
 # R basics
 
-![](https://img.shields.io/badge/Area-R-green){alt="https://img.shields.io/badge/Area-Statistics-red"}
+![](https://img.shields.io/badge/Area-R-green)
 
 ## Why R?
 

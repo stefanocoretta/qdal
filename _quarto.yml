@@ -17,6 +17,8 @@ book:
     - part: "Week 2"
       chapters:
         - ch-statistical-vars.qmd
+        - ch-packages.qmd
+        - ch-scripts.qmd
     - references.qmd
 
 bibliography: "https://raw.githubusercontent.com/stefanocoretta/biblio/refs/heads/main/linguistics.bib"
