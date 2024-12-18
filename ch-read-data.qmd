@@ -1,4 +1,351 @@
-## Read data in R
+# Read data in R
 
 ![](https://img.shields.io/badge/Area-R-green)
 
+## Tabular data
+
+::: callout-warning
+### Important
+
+When working through the book, always **make sure you are in a Quarto Project** by checking the top-right corner of RStudio.
+:::
+
+Data comes in a lot of different formats, shape and sizes. However, the most common way to store data used in quantitative analysis is so-called tabular data. R is especially designed to work with such data. Tabular (aka rectangular) data is simply data in the form of a table, with columns and rows.
+
+::: callout-tip
+### Tabular data
+
+**Tabular data** is data that has a form of a table: i.e. values structured in columns and rows.
+:::
+
+Tabular data can be save in different file formats. Different file formats have different file extensions. The **comma separated values format** (file extension `.csv`) is the best format to save data in because it is basically a plain text file, it's quick to parse, and can be opened and edited with any software (plus, it’s not a proprietary format like `.docx` or `.xlsx`---these formats are specific to particular commercial software).
+
+This is what a `.csv` file looks like when you open it in a text editor (showing only the first few lines).
+
+``` txt
+Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching
+L1,L1_01,A,banoshment,1,423,6.0474,Filler,Nonword,Phonological,NA
+L1,L1_01,A,unawareness,1,603,6.4019,Critical,Word,Unrelated,Left
+L1,L1_01,A,unholiness,1,739,6.6053,Critical,Word,Constituent,Left
+L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA
+```
+
+The file contains tabular data (data that is structured as columns and rows, like a spreadsheet). To separate the values of each column, a `.csv` file uses a comma `,` (hence the name "comma separated values") to separate the values in every row. The first line of the file indicates the names of the columns of the table:
+
+``` txt
+Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching
+```
+
+There are 11 columns. The rest of the rows is the data, i.e. the values of each column separated by commas.
+
+``` txt
+L1,L1_01,A,banoshment,1,423,6.0474,Filler,Nonword,Phonological,NA
+L1,L1_01,A,unawareness,1,603,6.4019,Critical,Word,Unrelated,Left
+L1,L1_01,A,unholiness,1,739,6.6053,Critical,Word,Constituent,Left
+L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA
+```
+
+This might look a bit confusing, but you will see later that, after importing this type of file, you can view it as a nice spreadsheet (as you would in Excel).
+
+Another common type of tabular data file is **spreadsheets**, like spreadsheets created by Microsoft Excel or Apple Numbers. These are all proprietary formats that require you to have the software that were created with if you want to modify them. Portability and openness are important aspects of conducting research, so that using open and non-proprietary file types makes your research more accessible and doesn't privilege those who have access to specific software (remember, R is free!). Despite of this, a lot of data is shared as Excel files.
+
+There are also variations of the comma separated values type, like **tab separated values** files (`.tsv`, which uses tab characters instead of commas) and **fixed-width** files (usually `.txt`, where columns are separated by as many white spaces as needed so that the columns align).
+
+### Non-tabular data
+
+Of course, R can import also data that is not tabular, like map data and complex hierarchical data. We will not cover this type of data, but you can check out the resources in the Extra box.
+
+::: {.callour-important collapse="true"}
+#### Extra: Non-tabular data
+
+-   Chapters 21-24 of [R4DS](https://r4ds.hadley.nz).
+
+-   [sf](https://r-spatial.github.io/sf/) package for mapping.
+:::
+
+### `.rds` files
+
+R has a special way of saving data: `.rds` files. `.rds` files allow you to save an R object to a file on your computer, so that you can read that file back in when you need it. A common use for `.rds` files is to save tabular data that you have processed so that it can be readily used in many different scripts or even by other people. In the following sections you will learn how to import (aka read) three types of data: `.csv`, Excel and `.rds` files.
+
+## Get the data
+
+The data used in this textbook come from a variety of published and unpublished linguistic studies. You can download the data files from the [QML Data](https://uoelel.github.io/qml-data/) website according to the following instructions.
+
+::: callout-note
+### How to get the data
+
+1.  Download the zip archive with all the data by right-clicking on the following link and download the file: [data.zip](https://uoelel.github.io/qml-data/data.zip).
+
+2.  Unzip the zip file to extract the contents. (If you don't know how to do this, search for it online for your operating system!)
+
+3.  Create a folder called `data/` (the slash is there just to remind you that it's a folder, but you don't have to include it in the name) in the Quarto project you are using for the course.
+
+    1.  To create a folder, go to the Files tab of the bottom-right panel in RStudio.
+
+    2.  Make sure you are viewing the project's main folder.
+
+    3.  Click on the `New Folder` button, enter "data" in the text box and click `OK`
+
+4.  Move the contents of the `data.zip` archive into the `data/` folder.
+
+    1.  Open a Finder or File Explorer window.
+
+    2.  Navigate to the folder where you have extracted the zip file (it will very likely be the `Downloads/` folder).
+
+    3.  Copy the contents of the zip file.
+
+    4.  In Finder or File Explorer, navigate to the Quarto project folder, then the `data/` folder, and paste the contents in there. (You can also drag and drop if you prefer.)
+:::
+
+The rest of this chapter will assume that you have created a folder called `data/` in the Quarto project folder and that the files you downloaded are in that folder. The data folder should like something like this:
+
+```         
+data/
+└── cameron2020/
+    └── gestures.csv
+└── coretta2018/
+    └── formants.csv
+    └── token-measures.csv
+└── ...
+```
+
+I recommend that you start being very organised with your files in other projects from now on, whether it's for a course or your dissertation or anything else. I also suggest to avoid overly nested structures, unless strictly necessary.
+
+## Organising your files
+
+The [Open Science Framework](https://osf.io) has the [following recommendations](https://help.osf.io/article/147-organizing-files) that can be applied to any type of research project.
+
+-   Use **one folder** per project. The project folder will also be your RStudio/Quarto project folder. Ideally, the project folder should have all the files related to the project (one exception is PDFs of papers that form the literature background of the project: for those I recommend using bibliography managing software, like the free [JabRef](https://www.jabref.org)).
+
+-   Separate **code** from **data**. A general recommendation is to have a folder `code/` whith all the code files of the project and a folder `data/` that has all the data. This makes keeping files in order easier, since everything has its natural place.
+
+-   Separate **raw data** from **derived data**. Raw data is data that you have gathered that, if lost, is lost for ever. Derived data is any data that is derived from raw data and that can be derived again (for example by running a script) if it's deleted or corrupted.
+
+-   Make **raw data read-only**. You should assume that anything can happen to raw data, so you should treat it as "read-only".
+
+To summarise, these recommendations suggest to have a folder for your research project/course/else, and inside the folder two more folders: one for data and one for code. The `data/` folder could further contain `raw/` for raw data (data that should not be lost or changed, for example collected data or annotations) and `derived/` for data that derives from the raw data, for example through automated data processing.
+
+It might be useful to also have a separate folder called `figs/` or `img/` to save figures and plots. Of course which folders you will have it's ultimately up to you and needs will vary depending on the nature and practical aspects of each study.
+
+## Read `.csv` files
+
+In this section, you will learn how to read `.csv` files. Reading `.csv` files is very easy. You can use the `read_csv()` function from a collection of R packages known as the [tidyverse](https://www.tidyverse.org). Specifically, the `read_csv()` function is from the [readr](https://readr.tidyverse.org) package, one of the tidyverse packages. If you are learning R for the first time, then you won't already have the tidyverse packages installed (you can check in the `Packages` tab in the bottom-right panel). Installing the tidyverse packages is easy: you just need to install the **tidyverse** package and that will take care of installing the most important packages in the collection (called the ["core" tidyverse packages](https://www.tidyverse.org/packages/)). Note that installation of the core tidyverse packages can take some time (but remember that you do this only *once*).
+
+::: callout-important
+### Did you open the Quarto project?
+
+Before moving on, make sure that you have opened the RStudio Quarto project correctly (see warning at the beginning of the chapter).
+:::
+
+Now that you have ensured the tidyverse packages are available, let's read in data from @song2020. The study consists of a lexical decision task in which participants were first shown a prime, followed by a target word for which they had to indicate whether it was a real word or a nonce word. The prime word belonged to one of three possible groups, each of which refers to the morphological relation of the prime and the target word. We will get back to this date in later chapters, so for now it is sufficient if you just read the paper's abstract to get a general idea of the research context.
+
+The `read_csv()` function from the readr package only requires you to specify the file path as a string (remember, strings are quoted between `" "`, for example `"year_data.txt"`). The data to be read are in the `data/` folder, in `song2020/shallow.csv`. On my computer, the file path of `song2020/shallow.csv` is `/Users/ste/qdal/data/song2020/shallow.csv`, but on your computer the file path will be different, of course. However, you will learn a trick below, i.e. relative paths, that allows you to specify file paths in a shortened form.
+
+<!-- For this trick to work, you have to change a setting of the Quarto project: the setting instructs RStudio to always run (i.e. execute) code with the working directory set as the project folder (more on working directories below). Here is how to enable this setting.
+
+::: callout-warning
+### Set execute directory
+
+-   Open the `_quarto.yml` file. This is the file that contains the settings of the Quarto project.
+
+-   At the top of the file you will see something like this:
+
+``` yaml
+project:
+  title: "my-proj"
+```
+
+-   Add the line as below (make sure you keep the indentation!):
+
+``` yaml
+project:
+  title: "my-proj"
+  execute-dir: project
+```
+:::
+-->
+
+Note that while the `read_csv()` function does read the data in R, you must assign the output of the `read_csv()` function (i.e. the data we are reading) to a variable, using the assignment arrow `<-`, just like we were assigning values to R variables in previous chapters. And since the `read_csv()` is a function from the tidyverse, you first need to attach the tidyverse packages with `library(tidyverse)` (remember, you need to attach packages **only once** per session). This will attach the core tidyverse packages, including readr. Of course, you can also attach the individual packages directly: `library(readr)`. If you use `library(tidyverse)` there is no need to attach individual tidyverse packages.
+
+Create a new R script and save it in the `code/` folder. Write the following lines in the script exactly as they are written here and run the code.
+
+```{r}
+#| label: read-shallow
+
+library(tidyverse)
+
+shallow <- read_csv("./data/song2020/shallow.csv")
+```
+
+If you look at the `Environment` tab, you will see `shallow` listed under `Data`. You can preview the data by clicking on the name of the data in the `Environment` tab. A `View` tab will be opened in the top-left panel of RStudio and you will see a nicely formatted table, as you would in a programme like Excel.
+
+::: callout-tip
+### Data frames and tibbles
+
+In R, a data table is called a **data frame**.
+
+**Tibbles** are special data frame created with the read functions from the tidyverse. If you are curious about the difference, check [this page](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html#:~:text=There%20are%20three%20key%20differences,%2C%20subsetting%2C%20and%20recycling%20rules.).
+
+In this textbook, "data frame" and "tibble" will be used interchangeably (since we are using the read functions from the tidyverse, all resulting data frames will be tibbles).
+:::
+
+But wait, what is that `"./data/song2020/shallow.csv"`? That's a **relative path**. Let's understand the concept of relative paths now.
+
+### Relative paths
+
+File paths can be specified in two formats. One format is called **absolute** file path. An absolute file path include *all* folders from the top-most folder, which is normally your computer's hard drive. For example, `/Users/ste/qdal/data/song2020/shallow.csv` from above is an absolute path. You know it's an absolute path because it starts with the forward slash `/`. This means that there isn't anything above `Users/`: it's the top-most folder. A downside of absolute paths is that they are not portable: if I move the `qdal/` folder to `ste/Documents` then I need to change every occurrence in my scripts to `/Users/ste/Documents/qdal/data/song2020/shallow.csv`. Moreover, when you share your research code (and you should!), using absolute paths means that each person that wants to run the code has to update the absolute path to reflect their own.
+
+A solution is to use **relative paths**. Relative paths work by including the path only from within a specific folder. Whichever folders contain that specific folder do not matter. The specific folder is called the **working directory**. When you are using Quarto projects, the working directory is the project folder, i.e. the folder with the `.Rproj` and `_quarto.yml` files. 
+
+::: callout-tip
+#### Working directory
+
+The **working directory** is the folder which relative paths are relative to.
+
+When using Quarto projects, the working directory is the project folder.
+:::
+
+Relative paths are spcified by starting the path with `./`. For example, if your project is called `awesome_proj` and it's in `Downloads/stuff/`, then if you write `read_csv("./data/results.csv")` R knows you mean to read the file in `Downloads/stuff/awesome_proj/data/results.csv`! This works because when working with Quarto projects, all relative paths are relative to the working directory which is automatically set to the project folder.
+
+::: callout-tip
+#### Relative path
+
+A **relative path** is a file path that is relative to a folder (the working directory). The folder the path starts at is represented by `./`.
+:::
+
+The code `read_csv("./data/song2020/shallow.csv")` above will work because you are using a Quarto project and inside the project folder there is a folder called `data/` and in it there's the `song2020/shallow.csv` file. I strongly recommend you to use Quarto projects and relative paths to make your work portable. As hinted at above, the benefit of Quarto projects and relative paths is that, if you move your project or rename it, or if you share the project with somebody, all the paths will just work because they are relative.
+
+::: callout-warning
+#### Get the working directory
+
+You can get the current working directory with the `getwd()` command.
+
+Run it now in the Console! Is the returned path the project folder path?
+
+If not, it might be that you are not working from a Quarto project. Check the top-right corner of RStudio: is the project name in there or do you see `Project (none)?`
+
+If it's the latter, you are not in a Quarto project, but you are running R from somewhere else (meaning, the working directory is somewhere else). If so, close RStudio and open the project.
+:::
+
+The `shallow` data frame contains 11 columns (called variables in the `Environment` tab). The 11 columns are the following:
+
+-   `Group`: `L1` vs `L2` speakers of English.
+-   `ID`: Subject unique ID.
+-   `List`: Word list (A to F).
+-   `Target`: Target word in the lexical decision trial.
+-   `ACC`: Lexical decision response accuracy (`0` incorrect response, `1` correct response).
+-   `RT`: Reaction times of response in milliseconds.
+-   `logRT`: Logged reaction times.
+-   `Critical_Filler`: Whether the trial was a `filler` or `critical`.
+-   `Word_Nonword`: Whether the Target was a real `Word` or a `Nonword`.
+-   `Relation_type`: The type of relation between prime and target word (`Unrelated`, `NonCostituent`, `Constituent`, `Phonological`).
+-   `Branching`: Constituent syntactic branching, `Left` and `Right` (shout out to Charlie Puth).
+
+::: callout-note
+### Quiz 3
+
+```{r}
+#| label: quiz-3
+#| results: asis
+#| echo: false
+
+opts_3 <- c(
+   "11",
+   "650",
+   answer = "6500"
+)
+
+cat("How many rows does `shallow` have?", longmcq(opts_3))
+```
+:::
+
+## Read Excel sheets
+
+To read an Excel file we need first to attach the [readxl](https://readxl.tidyverse.org/index.html) package. It should already be installed, because it comes with the tidyverse. If not, then install it.
+
+```{r}
+#| label: readxl
+
+library(readxl)
+
+```
+
+Then we can use the `read_excel()` function. Let's read the file.
+
+```{r}
+#| label: los2023
+
+relatives <- read_excel("./data/los2023/relatives.xlsx")
+
+```
+
+Now you can view the tibble `los2023`.
+
+Note that if the Excel file has more than one sheet, you can specify the sheet number when reading the file (the default is `sheet = 1`).
+
+```{r}
+#| label: los2023-2
+
+relatives_2 <- read_excel("./data/los2023/relatives.xlsx", sheet = 2)
+```
+
+The second sheet in `los2023/relatives.xlx` contains the description of the columns in the first sheet.
+
+## Import `.rds` files
+
+Another useful type of data files is a file type specifically designed for r: `.rds` files.
+
+Usually, each `.rds` file contains one R object, like one tibble.
+
+You can read `.rds` files with the `readRDS()` function.
+
+```{r}
+#| label: glot-status
+
+glot_status <- readRDS("./data/coretta2022/glot_status.rds")
+```
+
+As always, you need to assign the output of the function to a variable, here `glot_status`.
+
+::: callout-tip
+#### `.rds` files
+
+`.rds` files are a type of R file which can store any R object and save it on disk.
+
+R objects can be saved to an `.rds` file with the `saveRDS()` function and they can be read with the `readRDS()` function.
+:::
+
+View the `glot_status` tibble now.
+
+It is also very easy to save a tibble to an `.rds` file with the `saveRDS()` function.
+
+For example:
+
+```{r}
+#| label: save-rds
+#| eval: false
+
+saveRDS(shallow, "./data/song2020/shallow.rds")
+```
+
+The first argument is the name of the tibble object and the second argument is the file path to save the object to.
+
+::: {.callout-note collapse="true"}
+### Practice 1
+
+Read the following files in R, making sure you use the right `read_*()` function.
+
+-   [koppensteiner2016/takete_maluma.txt](../data/koppensteiner2016/takete_maluma.txt) (a tab separated file)
+
+-   [pankratz2021/si.csv](../data/pankratz2021/si.csv)
+
+-   Go to <https://datashare.ed.ac.uk/handle/10283/4006> and download the file `conflict_data_.xlsx`. Read both sheets ("conflict_data2" and "demographics"). Any issues? (I suggest looking at the spread sheet in Excel if it helps).
+:::
+
+## Summary
+
+::: {.callout-note appearance="minimal"}
+-   You can import tabular data in R with the `read_*()` functions from the tidyverse package readr.
+
+-   You can view data in RStudio as spreadsheets.
+:::

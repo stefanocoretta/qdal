@@ -1,6 +1,7 @@
 project:
   type: book
   output-dir: docs
+  execute-dir: project
 
 book:
   title: "Quantitative Data Analysis for Linguists in R"
@@ -23,7 +24,7 @@ book:
         - ch-summarise.qmd
     - references.qmd
 
-bibliography: "https://raw.githubusercontent.com/stefanocoretta/biblio/refs/heads/main/linguistics.bib"
+bibliography: linguistics.bib
 
 format:
   html:
