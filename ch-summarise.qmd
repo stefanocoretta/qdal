@@ -1,4 +1,4 @@
-# Summarise and group data
+# Summarise and group data {#sec-summarise}
 
 ![](https://img.shields.io/badge/Area-R-green)
 
@@ -188,7 +188,7 @@ Check the documentation of `?mean`.
 
 ## Grouping data with `group_by()`.
 
-XXX.
+XXX. 
 
 ## Summary table of summary measures
 

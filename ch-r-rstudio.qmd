@@ -184,7 +184,7 @@ In this part of the tutorial you will learn the very basics of R. If you have pr
 
 In the following sections, you should just run code directly in the R Console in RStudio, i.e. you will type code in the Console and press `ENTER` to run it.
 
-In the future, you will learn how to save your code in a [script](scripts.qmd) file or in [Quarto documents](intro-quarto.qmd), so that you can keep track of which code you have run and make your work reproducible.
+In later chapters, you will learn how to save your code in a script file or in Quarto documents, so that you can keep track of which code you have run and make your work reproducible.
 
 ### R as a calculator
 

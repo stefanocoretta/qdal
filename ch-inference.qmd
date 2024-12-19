@@ -1,0 +1,3 @@
+# Inference  {#sec-inference}
+
+![](https://img.shields.io/badge/Area-Research_methods-blue)

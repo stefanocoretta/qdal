@@ -1,0 +1,3 @@
+# Introduction to regression {#sec-reg-intro}
+
+![](https://img.shields.io/badge/Area-Statistics-red)

@@ -23,6 +23,16 @@ book:
         - ch-read-data.qmd
         - ch-sum-measures.qmd
         - ch-summarise.qmd
+    - part: "Week 3"
+      chapters:
+        - ch-research-cycle.qmd
+        - ch-viz-principles.qmd
+        - ch-plotting.qmd
+    - part: "Week 4"
+      chapters:
+        - ch-inference.qmd
+        - ch-regression-intro.qmd
+        - ch-regression.qmd
     - references.qmd
 
 bibliography: linguistics.bib

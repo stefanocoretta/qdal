@@ -1,4 +1,4 @@
-# Quantitative data analysis  {#sec-quantitative}
+# Quantitative data analysis {#sec-quantitative}
 
 ```{r}
 #| label: setup
@@ -37,11 +37,11 @@ Quantitative analyses are usually comprised of three parts (these are not strict
 
 -   Model data with statistical models.
 
-**Summary measures** are numbers that represent certain properties of the data: common summary measures are the mean and the standard deviation. You will have frequently seen these in published paper, either in text or as a table. You will learn about summary measures in [Summary measure](ch-summaries.qmd).
+**Summary measures** are numbers that represent certain properties of the data: common summary measures are the mean and the standard deviation. You will have frequently seen these in published paper, either in text or as a table. You will learn about summary measures in @sec-summaries.
 
-**Plots**, or graphs, are another common way to summarise data but they are based on visual representation rather than single numbers. As the saying goes, "[a picture is worth a thousand words](https://en.wikipedia.org/wiki/A_picture_is_worth_a_thousand_words)". The aim of plots is to make explicit certain patterns in the data. Choosing and designing plots that are effective and captivating is more of an art and you will learn the basics and heuristics of good (and bad plots) in [Plotting basics](ch-plotting-basics.qmd).
+**Plots**, or graphs, are another common way to summarise data but they are based on visual representation rather than single numbers. As the saying goes, "[a picture is worth a thousand words](https://en.wikipedia.org/wiki/A_picture_is_worth_a_thousand_words)". The aim of plots is to make explicit certain patterns in the data. Choosing and designing plots that are effective and captivating is more of an art and you will learn the basics and heuristics of good (and bad plots) in @sec-viz.
 
-**Statistical models** are mathematical representations of patterns and relationship in data. Statistical modelling is a powerful tool to learn from the data or to assess research hypotheses. This textbook introduces you to a specific type of statistical models: regression models. These are highly flexible model that can be used with a variety of data types. You will start learning about statistical models in [Regression models basics](ch-regression-basics.qmd).
+**Statistical models** are mathematical representations of patterns and relationship in data. Statistical modelling is a powerful tool to learn from the data or to assess research hypotheses. This textbook introduces you to a specific type of statistical models: regression models. These are highly flexible model that can be used with a variety of data types. You will start learning about statistical models in @sec-reg-intro.
 
 ## Numbers have no meaning
 
@@ -157,7 +157,7 @@ Statistics is a many things, but it is also *not* a lot of things.
 
 -   Statistics is **not maths**, but it is informed by maths.
 
--   Statistics is **not about hard truths** not how to seek the truth (see [Inference and uncertainty](inference.qmd)).
+-   Statistics is **not about hard truths** not how to seek the truth.
 
 -   Statistics is **not a purely objective** endeavour. In fact there are a *lot* of subjective aspects to statistics (see below).
 
@@ -236,4 +236,4 @@ The classical approach to statistics is the **frequentist method**, based on wor
 
 **Bayesian statistics** provides researchers with more appropriate and more robust ways to answer research questions, by reallocation of belief/credibility across possibilities.
 
-You can learn more about the frequentist and the Bayesian approach [here](freq-bayes.qmd).
+You will learn more about the frequentist and the Bayesian approaches in @sec-inference.
