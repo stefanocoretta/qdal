@@ -1,6 +1,6 @@
-# Summarise variables
+# Summarise and group data
 
-![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
+![](https://img.shields.io/badge/Area-R-green)
 
 ```{r}
 #| label: setup
@@ -10,206 +10,7 @@ library(tidyverse)
 library(webexercises)
 ```
 
-## Overview
-
-![](img/data-summ.png){fig-align="center" width="500"}
-
-As you learned in @sec-quantitative, quantitative data analysis can be concieved as three activities: summarising, visualising and modeling data. In this chapter, you will learn about summarising data. When we say "summarising data" we usually mean summarising data variables, by themselves or in group. We can summarise statistical variables using **summary measures**. There are two types of summary measures.
-
--   **Measures of central tendency** indicate the **typical or central value** of a variable.
-
--   **Measures of dispersion** indicate the **spread or dispersion** of the variable values around the central tendency value.
-
-**Always report a measure of central tendency together with its measure of dispersion!** A central tendency mesure captures only one aspect of the "distribution" of the values and variables with the same central tendency value could have very different dispersion, and hence be very different in nature. For example, look at the density plot in @fig-same-mean (you will learn more about them in XXX). These plots are good at showing the distribution of values of numeric variables. The higher the density the curve, the more the values under that part of the curve are represented in the sample. Varible `a` and `b` have the same mean (central tendency): the mean is 0. But `a` has a standard deviation (measure of dispertion, more on this below) of 1 while `b`'s standard deviation is 3. You can appreciate how different `a` and `b` are, despite having exactly the same mean. This should show how important it is to not only report (and think about) central tendencies, like the mean, but also the dispertion of the data around the central tendency.
-
-```{r}
-#| label: fig-same-mean
-#| echo: false
-set.seed(8736)
-
-same <- tibble(
-  variable = rep(c("a", "b"), each = 100),
-  value = c(rnorm(100), rnorm(100, sd = 3))
-)
-
-same |> 
-  ggplot(aes(value, fill = variable)) +
-  geom_density(alpha = 0.5)
-```
-
-The following call-outs list common measures of central tendency and dispersions and how they are calculated. You will probably be familiar with most of them and you don't have to memorise the formulae. The sections after this one will dive into when to use each measure (and how to get them in R), which is much more important.
-
-::: callout-note
-### Measures of central tendency
-
-**Mean**
-
-$$\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n} = \frac{x_1 + ... + x_n}{n}$$
-
-**Median**
-
-$$\text{if } n \text{ is odd, } x_\frac{n+1}{2}$$
-
-$$\text{if } n \text{ is even,  } \frac{x_\frac{n}{2} + x_{\frac{n}{2}+1}}{2}$$
-
-**Mode**
-
-The most common value.
-:::
-
-::: callout-note
-### Measures of dispersion
-
-**Minimum and maximum** values
-
-**Range**
-
-$$ max(x) - min(x)$$
-
-The difference between the largest and smallest value.
-
-**Standard deviation**
-
-$$\text{SD} = \sqrt{\frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n-1}} = \sqrt{\frac{(x_1 - \bar{x})^2 + ... + (x_n - \bar{x})^2}{n-1}}$$
-:::
-
-## Measures of central tendency
-
-### Mean
-
-Use the mean with **numeric continuous variables**, if:
-
--   The variable can take on any positive and negative number, including 0.
-
-```{r mean-1}
-mean(c(-1.12, 0.95, 0.41, -2.1, 0.09))
-```
-
--   The variable can take on any positive number only.
-
-```{r mean-2}
-mean(c(0.32, 2.58, 1.5, 0.12, 1.09))
-```
-
-::: callout-important
-**Don't take the mean of proportions and percentages!**
-
-Better to calculate the proportion/percentage across the entire data, rather than take the mean of individual proportions/percentages: see [this blog post](https://www.robertoreif.com/blog/2018/1/7/why-you-should-be-careful-when-averaging-percentages). If you really really have to, use the *median*.
-:::
-
-### Median
-
-Use the median with **numeric (continuous and discrete) variables**.
-
-```{r median-1}
-# odd N
-median(c(-1.12, 0.95, 0.41, -2.1, 0.09))
-
-# even N
-even <- c(4, 6, 3, 9, 7, 15)
-median(even)
-# the median is the mean of the two "central" number
-sort(even)
-mean(c(6, 7))
-```
-
-::: callout-important
--   **The mean is very sensitive to outliers.**
-
--   The median is **not**.
-
-The following list of numbers does not have obvious outliers. The mean and median are not to different.
-
-```{r}
-#| label: no-out
-
-# no outliers
-median(c(4, 6, 3, 9, 7, 15))
-mean(c(4, 6, 3, 9, 7, 15))
-```
-
-In the following case, there is quite a clear outlier, `40`. Look how the mean is higher than the median. This is because the outlier `40` pulls the mean towards it.
-
-```{r}
-#| label: outlier
-# one outlier
-median(c(4, 6, 3, 9, 7, 40))
-mean(c(4, 6, 3, 9, 7, 40))
-```
-:::
-
-### Mode
-
-Use the mode with **categorical (discrete) variables**. Unfortunately the `mode()` function in R is not the *statistical* mode, but rather it returns the R object type.
-
-You can use the `table()` function to "table" out the number of occurrences of elements in a vector.
-
-```{r mode}
-table(c("red", "red", "blue", "yellow", "blue", "green", "red", "yellow"))
-```
-
-The mode is the most frequent value: here it is `red`, with 3 occurrences.
-
-::: callout-important
-**Likert scales are ordinal (categorical) variables, so the mean and median are not appropriate!** This is true even when Likert scales are represented with numbers, like "1, 2, 3, 4, 5" for a 5-point scale.
-
-You should use the mode (you can use the median with Likert scales if you really really need to...).
-:::
-
-## Measures of dispersion
-
-### Minimum and maximum
-
-You can report minimum and maximum values for any **numeric variable**.
-
-```{r min-max}
-x_1 <- c(-1.12, 0.95, 0.41, -2.1, 0.09)
-
-min(x_1)
-max(x_1)
-range(x_1)
-```
-
-Note that the `range()` function does not return the statistical range (see next section), but simply prints both the minimum and the maximum.
-
-### Range
-
-Use the range with any **numeric variable**.
-
-```{r range}
-x_1 <- c(-1.12, 0.95, 0.41, -2.1, 0.09)
-max(x_1) - min(x_1)
-
-x_2 <- c(0.32, 2.58, 1.5, 0.12, 1.09)
-max(x_2) - min(x_2)
-
-x_3 <- c(4, 6, 3, 9, 7, 15)
-max(x_3) - min(x_3)
-```
-
-### Standard deviation
-
-Use the standard deviation with **numeric continuous variables**, if:
-
--   The variable can take on any positive and negative number, including 0.
-
-```{r sd-1}
-sd(c(-1.12, 0.95, 0.41, -2.1, 0.09))
-```
-
--   The variable can take on any positive number only.
-
-```{r sd-2}
-sd(c(0.32, 2.58, 1.5, 0.12, 1.09))
-```
-
-::: callout-important
-Standard deviations are **relative** and depend on the measurement **unit/scale!**
-
-**Don't use the standard deviation with proportions and percentages!**
-:::
-
-## Summarise data in R
+## Summarise with `summarise()`
 
 When you work with data, you always want to get summary measures for most of the variables in the data. Data reports usually include summary measures. It is also important to understand which summary measure is appropriate for which type of variable, which was covered in the previous section. Now, you will learn how to obtain summary measures using the `summarise()` function from the [dplyr](https://dplyr.tidyverse.org) tidyverse package. `summarise()` takes at least two arguments: (1) the tibble to summarise, (2) one or more summary functions applied to columns in the tibble. Let's practice with the data from @song2020 you read in @sec-read-data. We want to get a measure of central tendency and dispersion for the reaction times, in the `RT` column. In order to decide which measures to pick, think about the nature of the `RT` variable. Rection times is a numeric and continuous statistical variable, and it can only have positive values. So the mean and standard deviations are appropriate measures. Let's start with the mean of the reaction time column `RT`. First, create a new R script (or continue writing in an existing script), attach the tidyverse and read the `song2020/shallow.csv` file into a variable called `shallow`.
 
@@ -315,7 +116,7 @@ We won't go into the details of what standard deviations are, but you can just t
 Calculate the median of RTs in the `shallow` data.
 :::
 
-### `NA`s
+## `NA`s
 
 Most base R functions, like `mean()`, `sd()`, `median()` and so on, behave unexpectedly if the vector they are used on contains `NA` values. `NA` is a special object in R, that indicates that a value is **N**ot **A**vailable, meaning that that observation does not have a value (or that the value was not observed in that case). For example, in the following numeric vector, there are 5 objects:
 
@@ -385,11 +186,12 @@ Check the documentation of `?mean`.
 :::
 ::::
 
+## Grouping data with `group_by()`.
+
+XXX.
 
 ## Summary table of summary measures
 
 To conclude, here is a table that summarises when each measure should be used, depending on the nature of the variable. You can use this table as a cheat-sheet. Green cells indicate that the measure is appropriate for the variable, red cells indicates that they are not and should not be used, and orange cells indicate you should exercise caution when using those measures with those variables.
 
 ![](img/measures-overview.png)
-
-

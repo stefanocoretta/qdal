@@ -21,6 +21,7 @@ book:
         - ch-scripts.qmd
         - ch-statistical-vars.qmd
         - ch-read-data.qmd
+        - ch-sum-measures.qmd
         - ch-summarise.qmd
     - references.qmd
 
