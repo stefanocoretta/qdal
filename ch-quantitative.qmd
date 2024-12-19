@@ -1,4 +1,4 @@
-# Quantitative data analysis
+# Quantitative data analysis  {#sec-quantitative}
 
 ```{r}
 #| label: setup

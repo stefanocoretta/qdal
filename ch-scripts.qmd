@@ -101,7 +101,7 @@ For example:
 #### Quiz 1
 
 ```{r}
-#| label: quiz-4
+#| label: quiz-1
 #| results: asis
 #| echo: false
 
