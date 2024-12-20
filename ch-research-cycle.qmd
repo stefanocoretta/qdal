@@ -1,3 +1,13 @@
 # Research cycle
 
 ![](https://img.shields.io/badge/Area-Research_methods-blue)
+
+In @sec-res-meth, you learned about the research process, which includes the research context, data acquisition, data analysis and communication. A different perspective on the research process that highlights the temporal succession of the process steps is the [research cycle]{.smallcaps}, represented in an idealised form in @fig-res-cycle.
+
+![The research cycle](img/res-process-cycle.png){#fig-res-cycle fig-align="center" width="500"}
+
+The cycle starts with the development of **research questions and hypotheses**. This step involves a thorough literature review and the identification of the topic, research problem, goal, questions and, possibly, hypotheses (as described in @sec-res-context). Once the research questions and hypotheses have been determined, the researcher proceeds with the **design of the study** which sets out to answer the research questions and assess the research hypotheses. The study design process includes determining a large number of interconnected aspects, like materials, procedures, data management and data analysis plans, target population, sampling method and so on. At times the study design process reveals shortcomings or unforeseen aspects of the research questions/hypotheses which can be updated accordingly.
+
+Once the study design has been finalised, one proceeds with **acquiring data** based on the protocols detailed in their plan. After the completion of data acquisition, researchers **analyse data** and **interpret the results** in light of the research questions and hypotheses. Finally, the outcomes of the study are **published** in some form and the **next study cycle** begins once again.
+
+This sounds all very reasonable, but in reality, the researchers' practice is quite different. This chapter introduces the concept of "researcher's degrees of freedom" and describes the so-called Questionable Research Practices (QRPs). We will review literature that shows the grim reality of how common QRPs are. In @sec-open-research, you will learn about principles and tools that are designed to help minimise the presence and impact of QRPs in one's own research.
