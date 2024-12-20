@@ -1,3 +1,231 @@
-# Visualisation principles  {#sec-viz}
+# Visualisation principles {#sec-viz}
 
 ![](https://img.shields.io/badge/Area-Statistics-red)
+
+```{r}
+#| label: setup
+#| echo: false
+#| message: false
+
+library(tidyverse)
+theme_set(theme_light())
+library(webexercises)
+```
+
+## Good data visualisation
+
+Alberto Cairo has identified four common features of good data visualisation ([Spiegelhalter 2019](https://www.penguin.co.uk/books/294857/the-art-of-statistics-by-spiegelhalter-david/9780241258767):64--66):
+
+::: callout-tip
+### Good data visualisation
+
+1.  It contains **reliable information**.
+
+2.  The design has been chosen so that relevant **patterns become noticeable**.
+
+3.  It is presented in an **attractive** manner, but appearance should not get in the way of **honesty, clarity and depth**.
+
+4.  When appropriate, it is organized in a way that **enables some exploration**.
+:::
+
+Let's see a few examples that illustrate each point.
+
+```{r}
+#| label: read-data
+#| include: false
+
+glot_status <- readRDS("data/coretta2022/glot_status.rds")
+formants <- read_csv("data/coretta2018/formants.csv")
+albvot <- read_csv("data/coretta2021/alb-vot.csv") %>%
+  mutate(vot = (voi_onset - release) * 1000)
+gestures <- read_csv("data/cameron2020/gestures.csv")
+
+formants <- formants %>%
+  mutate(
+    time = time / 9
+  ) %>%
+  pivot_longer(f1:f2, names_to = "formant") %>%
+  mutate(
+    id = paste(file, formant, sep = "_")
+  )
+```
+
+## Information is (not) reliable
+
+Let's use the `glot_status` data. You will not see the code used to create the plots because you will learn about it later.
+
+```{r}
+#| label: glot-status
+#| echo: true
+
+glot_status
+```
+
+The following plot is titled *Number of endangered languages by macroarea and status*, but the plot contains both endangered and non-endangered languages.
+
+```{r}
+#| label: status-bar-1
+#| echo: false
+
+glot_status %>%
+  # filter(status != "extinct") %>%
+  ggplot(aes(Macroarea, fill = status)) +
+  geom_bar() +
+  scale_fill_brewer(type = "seq", palette = "BuPu") +
+  labs(
+    title = "Number of endangered languages by macroarea and status",
+    caption = "Stacked bar-chart"
+  )
+```
+
+We can fix that by filtering the data so that it contains only endangered languages.
+
+```{r}
+#| label: status-bar-2
+#| echo: false
+glot_status %>%
+  filter(status != "extinct") %>%
+  ggplot(aes(Macroarea, fill = status)) +
+  geom_bar() +
+  scale_fill_brewer(type = "seq", palette = "BuPu") +
+  labs(
+    title = "Number of endangered languages by macroarea and status",
+    caption = "Stacked bar-chart"
+  )
+```
+
+## Patterns are (not) noticeable
+
+The `albvot` data contains data on VOT in Albanian. It has data from 6 speakers [@coretta2022].
+
+```{r}
+#| label: albot
+#| echo: false
+
+albvot
+
+```
+
+The following plot uses a bar chart to show the VOT of different stops, but what you can't really see is that there is a lot of variability within and among stops and within and among speakers.
+
+```{r}
+#| label: alb-vot-1
+#| echo: false
+albvot %>%
+  filter(consonant %in% c("p", "t", "k", "b", "d", "ɡ")) %>%
+  ggplot(aes(vot, consonant)) +
+  geom_bar(stat = "identity") +
+  labs(
+    title = "Albanian Voice Onset Time"
+  )
+```
+
+We can do better. The following plot shows individual measurements of VOT for different stops and speakers. Now an interesting pattern emerges: speaker 5 (`s05`) has particularly long VOT for /t/ and /k/ relative to the other speakers.
+
+```{r}
+#| label: alb-vot-2
+#| echo: false
+albvot %>%
+  filter(consonant %in% c("p", "t", "k", "b", "d", "\u261")) %>%
+  mutate(consonant = factor(consonant, levels = rev(c("p", "t", "k", "b", "d", "\u261")))) %>%
+  ggplot(aes(consonant, vot, colour = speaker)) +
+  geom_line(aes(group = interaction(speaker, consonant)), position = position_dodge(width = 0.5)) +
+  geom_point(size = 1.5, alpha = 0.9, position = position_dodge(width = 0.5), aes(group = speaker)) +
+  geom_hline(aes(yintercept = 0)) +
+  scale_y_continuous(breaks = seq(-200, 200, by = 50)) +
+  coord_flip() +
+  labs(
+    ttile = "Albanian Voice Onset Time",
+    y = "Voice Onset Time (ms)", x = "Consonant",
+    caption = "Time 0 corresponds to the plosive release."
+  )
+  
+```
+
+Bar charts are unfortunately overused in research, even in those cases when they are not appropriate.
+
+## Aesthetics (should not) get in the way
+
+[![](/img/Speaking-the-world.jpg){fig-align="center" width="400"}](https://flowingdata.com/2013/07/15/open-thread-what-is-wrong-with-these-charts/)
+
+The graph above has a lot of issues:
+
+1.  The bar length and thickness are not proportional. Compare Japanese with 123 million speakers vs English with 765 million speakers.
+2.  The graph mixes two scales: million speakers and billion speakers. This makes it look as if Chinese does not have that many more speakers.
+3.  The shade of orange of the bars does not seem to become proportionally darker with more speakers. Look at Arabic and Hindi: they have a very similar number of speakers but one bar is darker than the other.
+4.  The three dudes speaking are just fillers. Are they really necessary? Also, they are all white men...
+
+Can you find other issues?
+
+See more examples on [Ugly Charts](https://flowingdata.com/category/visualization/ugly-visualization/).
+
+## (Does not) enable exploration
+
+The plot below shows the number of gestures enacted by infants of English, Bengali and Chinese background as recorded during a controlled session [@cameronfaulkner2020].
+
+```{r}
+#| label: gestures
+#| echo: false
+
+gestures
+
+```
+
+Three different types of gestures are shown: hold out and give gestures (`ho_gv`), index-finger pointing (`point`) and reach out gestures (`reach`). Moreover the plot shows the number of gestures at 10 and 12 months.
+
+```{r}
+#| label: gest-bar
+#| echo: false
+gestures %>%
+  filter(months %in% c(10, 12)) %>%
+  drop_na(count) %>%
+  group_by(months, background, gesture) %>%
+  summarise(
+    count_sum = sum(count), .groups = "drop"
+  ) %>%
+  ggplot(aes(as.factor(months), count_sum, fill = background)) +
+  geom_bar(stat = "identity") +
+  facet_grid(background ~ gesture) +
+  scale_fill_brewer(type = "qual") +
+  labs(
+    title = "Infant gesture counts (tally) at 10 and 12 mo",
+    x = "Months old", y = "Gesture count"
+  )
+```
+
+A bar chart is appropriate with count data, like in this case, but it does not allow for much exploration. Each infant was recorded at 10 and 12 months of age, but in the plot you don't see whether individual infants changed their number of gestures. We can only notice that overall the number of gestures increases from 10 to 12 months old.
+
+We can use a "connected point" plot: each infant is represented by a dot at 10 and 12 months and the dots of the same infant are connected by a line. This allows us to see whether an individual infant uses more gestures at 12 months.
+
+```{r}
+#| label: gest-line
+#| echo: false
+gestures %>%
+  filter(months %in% c(10, 12)) %>%
+  drop_na(count) %>%
+  ggplot(aes(as.factor(months), count, colour = background)) +
+  geom_line(aes(group = id), alpha = 0.5) +
+  geom_point(alpha = 0.7) +
+  facet_grid(background ~ gesture) +
+  scale_color_brewer(type = "qual") +
+  labs(
+    title = "Infant gesture counts at 10 and 12 mo",
+    x = "Months old", y = "Gesture count"
+  )
+```
+
+You will notice that some infants don't really use more gestures and others even use slightly less gestures. You would not be able to see any of this if you used a bar chart, like we used above.
+
+## Practical tips
+
+::: callout-tip
+1.  Show **raw data** (e.g. individual observations, participants, items...).
+
+2.  Separate data in different **panels** as needed.
+
+3.  Use **simple but informative labels** for axes, panels, etc...
+
+4.  Use colour as a **visual aid**, not just for aesthetics.
+
+5.  **Reuse** labels, colours, shapes throughout different plots to indicate the same thing.
+:::

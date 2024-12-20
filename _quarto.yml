@@ -43,6 +43,11 @@ format:
     css: [webex.css]
     include-after-body: [webex.js]
     embed-resources: false
+    df-print: paged
+    number-sections: true
+    fig-align: center
+    link-external-icon: true
+    link-external-newwindow: true
   # pdf:
   #   documentclass: scrreprt
 
