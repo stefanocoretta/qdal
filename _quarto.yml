@@ -35,7 +35,7 @@ book:
         - ch-regression.qmd
     - references.qmd
 
-bibliography: linguistics.bib
+bibliography: references.bib
 
 format:
   html:

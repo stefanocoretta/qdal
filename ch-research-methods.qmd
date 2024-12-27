@@ -117,7 +117,7 @@ Examples:
 
 Each of the three objectives are important in research, but note that in order to really advance our understanding of things the third objective is fundamental: it is only by directly comparing different frameworks that we can accumulate knowledge and weed out inaccurate explanations.
 
-## Research context  {#sec-res-context}
+## Research context {#sec-res-context}
 
 @ellis2008 introduce a nice break-down of the concept of "research context".
 
