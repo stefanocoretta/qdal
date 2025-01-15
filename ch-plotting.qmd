@@ -1,3 +1,410 @@
-# Plotting
+# Plotting  {#sec-plotting}
 
 ![](https://img.shields.io/badge/Area-R-green)
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(webexercises)
+polite <- read_csv("data/winter2012/polite.csv")
+```
+
+In the previous chapter, @sec-viz, you have learnt about basic visualisation principles.
+
+::: callout-tip
+### Good data visualisation
+
+1.  It contains **reliable information**.
+
+2.  The design has been chosen so that relevant **patterns become noticeable**.
+
+3.  It is presented in an **attractive** manner, but appearance should not get in the way of **honesty, clarity and depth**.
+
+4.  When appropriate, it is organized in a way that **enables some exploration**.
+:::
+
+With these principles in mind, this chapter will teach you the basics of data visualisation (aka plotting) in R. In R, you can create plots using different systems: base R, [ggplot2](https://ggplot2.tidyverse.org/index.html), [plotly](https://plotly-r.com), [lattice](https://lattice.r-forge.r-project.org) and others. This book focusses on the ggplot2 system, which is part of the tidyverse (you will learn the basics of plotly as well to create interactive plots, in a later chapter), but before we dive in, it is useful to have a look at the base R plotting system.
+
+### Base R plotting function
+
+Let's create two numeric vectors, `q` and `w` and plot them. The function `plot()` takes two arguments: the first argument `x` takes a vector with the horizontal coordinates (*x*-axis), here `q`, and the argument `y` takes a vector of the same length as the vector of the first argument, with the vertical coordinates (*y*-axis).
+
+```{r}
+#| label: scatter
+
+# N:M is a shortcut for all integer numbers between N and M
+q <- 1:10
+# w is the cube of q
+w <- q^3
+
+# Plot a scatter plot with x as the x-axis and y as the y-axis
+plot(x = q, y = w)
+```
+
+The function takes care of adding tick-marks with numbers on the *x* and *y* axis, name the axes with the names of the vectors and add the points based on the coordinates in the vectors. It could not be easier! Now let's add a few more things to this basic plot. Let's specify we want a line plot (`type = "l"`) instead of points, that the line should be coloured purple (`col = "purple"`), with a width of 3 (`lwd = 3`) and dashed (`lty = "dashed"`). The function connects the points from the coordinates given in the vectors with a line.
+
+```{r}
+#| label: line
+
+plot(q, w, type = "l", col = "purple", lwd = 3, lty = "dashed")
+```
+
+With plots as simple as this one, the base R plotting system is sufficient, but to create more complex plots (which is virtually always the case), base R gets incredibly complicated. Instead, we can use the tidyverse package [ggplot2](https://ggplot2.tidyverse.org). ggplot2 works well with the other tidyverse packages and it follows the same principles, so it is convenient to use it for data visualisation instead of base R. The following sections will go through the basics of plotting with ggplot2.
+
+## Your first ggplot2 plot
+
+The tidyverse package [ggplot2](https://ggplot2.tidyverse.org) provides users with a consistent set of functions to create captivating graphics, and the package works well in combination with the other tidyverse packages. We will plot data from `winter2012/polite.csv` [@winter2012] to learn the basics. @fig-final-plot shows the finished plot. XXX explain plot.
+
+```{r}
+#| label: fig-final-plot
+#| echo: false
+#| warning: false
+
+polite |>
+  ggplot(aes(f0mn, H1H2, colour = gender)) +
+  geom_point() +
+  labs(
+    x = "Mean f0 (Hz)",
+    y = "H1-H2 difference (dB)",
+    colour = "Gender"
+  )
+
+```
+
+We can read the data with `read_csv()` from readr and plot it with `ggplot()` from ggplot2. Since both readr and the ggplot2 package are part of the tidyverse, it is sufficient to attach the tidyverse with `library(tidyverse)`.
+
+```{r}
+#| label: read-data
+#| message: false
+
+library(tidyverse)
+
+polite <- read_csv("data/winter2012/polite.csv")
+polite
+```
+
+The `polite` data contains several acoustic measurements from utterances spoken by Korean students in Germany. Each row is a single utterance and each participant has spoken many utterances. These are the columns that we need to produce @fig-final-plot.
+
+-   `f0mn`: the mean f0 (fundamental frequency). This is the mean f0 of each utterance (i.e. the f0 is calculated along the entire utterance and the mean is taken).
+
+-   `H1H2`: the difference between H2 and H1 (second and first harmonic; the paper reports that this "was based on the central vowel portion of each vowel" although it is not clear if the H1-H2 value of each vowel in the utterance was averaged to produce a mean H1-H2 difference per utterance). A higher H1-H2 difference indicates that the voice is more breathy (as opposed to modal).
+
+-   `gender`: the gender of the speaker (`F` = female, `M` = male).
+
+Each ggplot2 plot has a minimum of two constituents (which correspond to two arguments of the `ggplot()` function): the data and aesthetics mapping.
+
+::: callout-tip
+### ggplot2 basic constituents
+
+-   The `data`: you have to specify the data frame with the data (i.e. columns) you want to plot.
+
+-   The `mapping`: the mapping tells ggplot how to map data columns to parts of the plot like the axes or groupings within the data. (For example, which variable is shown on the x axis, and which one is on the y axis? If data comes from two different groups, should each group get its own colour?) These different parts of the plot are called *aesthetics*, or `aes` for short.
+:::
+
+You can specify the data and mapping with the `data` and `mapping` arguments of the `ggplot()` function. Note that the `mapping` argument is always specified with `aes()`: `mapping = aes(…)`. In the following bare plot, we are just mapping `f0mn` to the *x*-axis and `H1H2` to the *y*-axis, from the `polite` data frame. From this point on I will assume you'll be creating a new code chunk (XXX make sure you introduced Quarto), copy-paste the code and run it, without explicit instructions.
+
+```{r}
+#| label: bare-plot
+
+ggplot(
+  data = polite,
+  mapping = aes(x = f0mn, y = H1H2)
+)
+```
+
+Not much to see here: just two axes! So where's the data? Don't worry, we didn't do anything wrong. Showing the data itself requires a further step, adding geometries, which we'll turn to next.
+
+::: callout-note
+### Quiz 2
+
+```{r}
+#| label: quiz-2
+#| results: asis
+#| echo: false
+
+cat("Is the following code correct? Justify your answer.", torf(FALSE))
+
+```
+
+``` r
+ggplot(
+  data = polite,
+  mapping = c(x = total_duration, y = articulation_rate)
+)
+```
+:::
+
+### Let's add geometries
+
+Our code so far makes nice axes, but we are missing the most important part: showing the data! Data is represented with **geometries**, or `geom`s for short. `geom`s are added to the base ggplot with functions whose names all start with `geom_`.
+
+::: callout-tip
+#### Geometries
+
+**Geometries** are plot elements that show the data through geometric shapes.
+
+Different geometries are added to a ggplot using one of the `geom_*()` functions.
+:::
+
+For this plot, you want to use `geom_point()`. This geom simply adds point to the plot based on the data in the `polite` data frame. To *add* `geom`s to a plot, you write a `+` at the end of the `ggplot()` command and include the geom on the next line.[^ch-plotting-1] The `geom_point()` geometry creates a **scatter plot**, which is a plot with two continuous axes where data is represented with points. @fig-first-plot is a scatter plot of mean f0 (`mnf0`) and H1-H2 difference (`H1H2`).
+
+[^ch-plotting-1]: Note that going on the next line is just for reasons of code clarity and you could write the entire code for a plot on a single line.
+
+::: callout-tip
+#### Scatter plot
+
+A **scatter plot** is a plot with two numeric axes and points indicating the data. It is used when you want to show the relationship between two numeric variables.
+
+To create a scatter plot, use the `geom_point()` geometry.
+:::
+
+```{r}
+#| label: fig-first-plot
+#| fig-cap: "Scatter plot of mean f0 and H1-H2 difference."
+#| warning: false
+
+ggplot(
+  data = polite,
+  mapping = aes(x = f0mn, y = H1H2)
+) +
+  geom_point()
+```
+
+Look at @fig-first-plot: is there a relationship between mean f0 and H1-H2? A pattern can be observed: when mean f0 is low, H1-H2 is high (meaning more breathiness) and when f0 is high, H1-H2 is low (meaning less breathiness). Statistically, this is called a negative relationship. The opposite is a positive relationship, when an increase in $x$ corresponds to an increase in $y$. Spoiler: the negative relationship in the plot is a mirage: if you look more closely, there seems to be two subgroups in the data: one up to about 150 hz and one from 150 hz up. We will see below that these two groups correspond to the speakers' genders.
+
+For the time being, let's pretend we don't know that and we want to write a description of the plot and the pattern. You could describe the plot this way:
+
+> @fig-first-plot shows a scatter plot of mean f0 on the *x*-axis and H1-H2 difference on the *y*-axis. The plot suggest an overall negative relationship between mean f0 and H1-H2 difference. In other words, increasing mean f0 corresponds to decreasing breathiness.
+
+::: callout-important
+#### Extra: The Layered Grammar of Graphics
+
+Note that using the `+` is a quirk of `ggplot()`. The idea behind it is that you start from a bare plot and you **add** (`+`) layers of data on top of it. This is because of the philosophy behind the package, called the [Layered Grammar of Graphics](http://vita.had.co.nz/papers/layered-grammar.html). In fact, Grammar of Graphics is where you get the GG in ggplot!
+:::
+
+### Function arguments
+
+Note that the `data` and `mapping` arguments don't have to be named explicitly (with `data =` and `mapping =`) in the `ggplot()` function, since they are obligatory and they are specified in that order.
+
+```{r}
+#| label: named-arguments
+#| warning: false
+
+ggplot(
+  polite,
+  aes(x = f0mn, y = H1H2)
+) +
+  geom_point()
+```
+
+In fact, you can also leave out `x =` and `y =`.
+
+```{r}
+#| label: named-arguments-2
+
+ggplot(
+  polite,
+  aes(f0mn, H1H2)
+) +
+  geom_point()
+```
+
+Try running `?ggplot` in the Console to see the arguments of the function and the order they appear in.
+
+:::: callout-note
+#### Quiz 3
+
+```{r}
+#| label: quiz-3
+#| results: asis
+#| echo: false
+
+opts_3 <- c(
+  "`ggplot(polite, aes(H1H2, f0mn)) + geom_point()`",
+  answer = "`ggplot(polite, aes(y = H1H2, x = f0mn)) + geom_point()`",
+  "`ggplot(polite, aes(y = f0mn, x = H1H2)) + geom_point()`"
+)
+
+cat("**Which of the following will produce the same plot as the one above?** Reason through it first without running the code, then run all of these to check whether they look the way you expected.", longmcq(opts_3))
+```
+
+::: {.callout-tip collapse="true"}
+#### Hint
+
+When specifying arguments, the order matters when not using the argument names.
+
+So `aes(a, b)` is different from `aes(b, a)`.
+
+But `aes(y = b, x = a)` is the same as `aes(a, b)`.
+:::
+::::
+
+### What the pipe?!
+
+The code of the latest plot can also be written this way.
+
+```{r}
+#| label: plot-pipe
+#| eval: false
+
+polite |>
+  ggplot(aes(f0mn, H1H2)) +
+    geom_point()
+```
+
+Wait, what is that thing, `|>`?
+
+It's called a **pipe**. Think of a pipe as a teleporter.
+
+The pipe `|>` teleports the data `polite` into the following function as the first argument. So `polite |> ggplot()` is equivalent to `ggplot(polite)`.
+
+For now it might not make much sense using the pipe, but you will learn next week how to chain many functions one after the other using the pipe, at which point its usefulness will be more obvious.
+
+As a sneak peek, you will be able to filter the data before plotting it, like so:
+
+```{r}
+#| label: filter-plot-pipe
+
+polite |>
+  # include only rows where f0mn < 300
+  filter(f0mn < 300) |>
+  ggplot(aes(f0mn, H1H2)) +
+    geom_point()
+```
+
+## Changing aesthetics
+
+### `colour` aesthetic
+
+You might notice that there seems to be two subgroups within the data: one below about 200 Hz and one above about it.
+
+In fact, these subgroups are related to `gender`. Let's colour the points by gender then.
+
+You can use the `colour` aesthetic to colour the points by `gender`, like so:
+
+```{r}
+#| label: fig-polite-gender
+#| fig-cap: "Scatter plot of mean f0 and H1-H2 difference, by gender."
+#| warning: false
+
+polite |>
+  ggplot(aes(f0mn, H1H2, colour = gender)) +
+  geom_point()
+```
+
+::: callout-tip
+#### `colour` or `color`?
+
+To make ggplot easy for users of different Englishes, it's possible to write the colour aesthetic either as the British-style `colour` or the American-style `color`! Both will get the job done.
+:::
+
+Notice how `colour = gender` must be inside the `aes()` function, because we are trying to map `colour` to the values of the column `gender`. Colours are automatically assigned to each level in `gender`.
+
+The default colour palette is used, but you can customise it. You will learn later in the course how to create custom palettes, but you can quickly change palette using one of the `scale_colour_*()` functions.
+
+A useful function is the `scale_colour_brewer()` function. This function creates palettes based on [ColorBrewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) 2.0. There are three types of palettes (see the linked website for examples):
+
+-   Sequential (`seq`): a gradient sequence of hues from lighter to darker.
+
+-   Diverging (`div`): useful when you need a neutral middle colour and sequential colours on either side of the neutral colour.
+
+-   Qualitative (`qual`): useful for categorical variables.
+
+Let's use the default qualitative palette.
+
+```{r}
+#| label: fig-polite-gender-brewer
+#| fig-cap: "Scatter plot of mean f0 and H1-H2 difference, by gender."
+#| warning: false
+
+polite |>
+  ggplot(aes(f0mn, H1H2, colour = gender)) +
+  geom_point() +
+  scale_color_brewer(type = "qual")
+```
+
+Now try changing the `palette` argument of the `scale_colour_brewer()` function to different palettes. (Check the function documentation for a list).
+
+Another set of palettes is provided by `scale_colour_viridis_d()` (the `d` stands for "discrete" palette, to be used for categorical variables). Here's an example.
+
+```{r}
+#| label: fig-polite-gender-viridis
+#| fig-cap: "Scatter plot of mean f0 and H1-H2 difference, by gender."
+#| warning: false
+
+polite |>
+  ggplot(aes(f0mn, H1H2, colour = gender)) +
+  geom_point() +
+  scale_color_viridis_d(option = "B")
+```
+
+::: {.callout-important collapse="true"}
+#### Extra: The default colour palette
+
+If you want to know more about the default colour palette, check this [blog post](https://www.statology.org/ggplot-default-colors/) out.
+:::
+
+### `alpha` aesthetic
+
+Another useful ggplot2 aesthetic is `alpha`. This aesthetic sets the transparency of the geometry: `0` means completely transparent and `1` means completely opaque.
+
+Change alpha in the code below to `0.5`.
+
+```{r}
+#| label: polite-gender-alpha-ex
+#| fig-cap: "Scatter plot of mean f0 and H1-H2 difference, by gender."
+#| eval: false
+
+polite |>
+  ggplot(aes(f0mn, H1H2, colour = gender)) +
+  geom_point(alpha = ...) +
+  scale_color_brewer(type = "qual")
+```
+
+When you are setting a value yourself that should apply to all instances of some geometry, rather than mapping an aesthetic to values in a specific column (like we did above with `colour`), you should add the aesthetic outside of `aes()` and usually in the geom function you want to modify.
+
+Setting a lower alpha is useful when there are a lot of points or other geometries that overlap with each other and it just looks like a blob of colour (you can't really see the individual geometries; you will see an example next week). It is not the case here, and in fact reducing the alpha makes the plot quite illegible!
+
+## Labels
+
+If you want to change the labels of the axes and the legend, you can use the `labs()` function, like this.
+
+```{r}
+#| label: fig-polite-gender-labs
+#| fig-cap: "Scatter plot of mean f0 and H1-H2 difference, by gender."
+#| warning: false
+
+polite |>
+  ggplot(aes(f0mn, H1H2, colour = gender)) +
+  geom_point() +
+  labs(
+    x = "Mean f0 (Hz)",
+    y = "H1-H2 difference (dB)",
+    colour = "Gender"
+  )
+```
+
+Also add a `title` and a `subtitle` (use these two arguments within the `labs()` function).
+
+::: {.callout-tip collapse="true"}
+#### Hint
+
+For example, `labs(title = "...", ...)`.
+:::
+
+## Summary
+
+::: {.callout-note appearance="minimal"}
+-   **ggplot2** is a plotting package from the tidyverse.
+
+-   To create a basic plot, you use the `ggplot()` function and specify `data` and `mapping`.
+
+    -   The `aes()` function allows you to specify aesthetics (like axes, colours, ...) in the `mapping` argument.
+
+    -   Geometries map data values onto shapes in the plot. All geometry functions are of the type `geom_*()`.
+
+-   **Scatter plots** are created with `geom_point()` and can be used with two numeric variables.
+:::
+

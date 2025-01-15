@@ -1,4 +1,4 @@
-# Summary measures  {#sec-summaries}
+# Summary measures {#sec-summaries}
 
 ![](https://img.shields.io/badge/Area-Statistics-red)
 

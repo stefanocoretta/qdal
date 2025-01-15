@@ -12,9 +12,13 @@ theme_set(theme_light())
 library(webexercises)
 ```
 
+![](img/data-viz.png){fig-align="center" width="500"}
+
+As you learned in [Chapter 2](#0), quantitative data analysis can be concieved as three activities: summarising, visualising and modeling data. This chapter introduces you to basic principles of good data visualisation, while in @sec-plotting you will learn the basics of plotting data in R.
+
 ## Good data visualisation
 
-Alberto Cairo has identified four common features of good data visualisation ([Spiegelhalter 2019](https://www.penguin.co.uk/books/294857/the-art-of-statistics-by-spiegelhalter-david/9780241258767):64--66):
+Alberto Cairo has identified four common features of good data visualisation ([Spiegelhalter 2019](https://www.penguin.co.uk/books/294857/the-art-of-statistics-by-spiegelhalter-david/9780241258767): 64-66):
 
 ::: callout-tip
 ### Good data visualisation
