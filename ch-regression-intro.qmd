@@ -108,12 +108,12 @@ ggplot(line, aes(x, y)) +
 
 Now, in the context of research, you usually measure $x$ (the predictor variable) and $y$ (the outcome variable). Then you have to **estimate** (i.e. to find the values of) $\beta_0$ and $\beta_1$. This is what regression models are for: given the measured $y$ and $x$, the model estimates $\beta_0$ and $\beta_1$. You can play around with [this web app](https://stefanocoretta.shinyapps.io/lines/) by changing the intercept and slope of the line.
 
-## Add some error...
+## Add error
 
-Measurements are **noisy**: they usually contain errors. Error can have many different causes (for example, measurement error due to technical limitations or variability in human behaviour), but we are usually not that interested in learning about those causes. Rather, we just want our model to be able to deal with error. Look at the following plot. The plot shows measurements of $x$ and $y$. The points corresponding to the observed measurements are almost on a straight line, but not quite. The vertical distance between the observed points and the expected straight line, called the **regression line**, is the **residual error** (red lines in the plot). The blue line in the plot is the expected line as estimated by a regression model (you'll learn how to run such model below), based on the $x$ and $y$ observations.
+Measurements are **noisy**: they usually contain errors. Error can have many different causes (for example, measurement error due to technical limitations or variability in human behaviour), but we are usually not that interested in learning about those causes. Rather, we just want our model to be able to deal with error. Let's see what errors looks like. @fig-error shows values of $y$ simulated with the equation $y = 1 + 1.5x$ (with $x$ equal 1 to 10), to which the random error $\epsilon$ was added. Due to the added error, the points are almost on the straight line defined by $y = 1 + 1.5x$, but not quite. The vertical distance between the observed points and the expected line, called the **regression line**, is the **residual error** (red lines in the plot).
 
 ```{r}
-#| label: error
+#| label: fig-error
 #| fig-cap: "Illustration of residual error."
 #| code-fold: true
 
@@ -134,18 +134,22 @@ ggplot(line, aes(x, y)) +
   geom_point(size = 4) +
   geom_smooth(method = "lm", formula = y ~ x, se = FALSE) +
   scale_x_continuous(breaks = 1:10) +
-  labs(title = bquote(italic(y) == beta[0] + beta[1] * italic(x) + epsilon))
+  labs(title = bquote(italic(y) == 1 + 1.5 * italic(x) + epsilon))
 ```
 
-The formula of this regression model is the following:
+When taking into account error, the equation of a regression model becomes the following:
 
 $$
 y = \beta_0 + \beta_1 * x + \epsilon
 $$
 
-where $\epsilon$ is the error. In other words, $y$ is the sum of $\beta_0$ and $\beta_1 * x$, plus some error.
+where $\epsilon$ is the error. In other words, $y$ is the sum of $\beta_0$, $\beta_1 * x$ and some error. In regression modelling, the error $\epsilon$ is assumed to come from a Gaussian distribution with mean 0 and standard deviation $\sigma$: $Gaussian(\mu = 0, \sigma)$.
 
-Given that the error $\epsilon$ is assumed to come from a distribution defined as $Gaussian(0, \sigma)$, the formula can be rewritten by using a probability distribution (see (Introduction to regression models)\[posts/intro-regression.qmd\]).
+$$
+y = \beta_0 + \beta_1 * x + Gaussian(0, \sigma)
+$$
+
+This equation can be rewritten like so (since the mean of the Gaussian error is 0):
 
 $$
 \begin{align}
@@ -153,3 +157,9 @@ y & \sim Gaussian(\mu, \sigma)\\
 \mu & = \beta_0 + \beta_1 * x\\
 \end{align}
 $$
+
+Now, the goal of a regression model is to estimate $\beta_0$, $\beta_1$ and $\sigma$ from the data (i.e. from the values of $x$ and $y$). In the following chapters, you will learn how to fit regression models to a variety of data to answer research questions.
+
+::: {.callout-important collapse="true"}
+## Extra: Regression, a history
+:::
