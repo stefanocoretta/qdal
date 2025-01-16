@@ -276,7 +276,7 @@ So far, the only aesthetics you have been using were the `x` and `y` aesthetics,
 
 ### `colour` aesthetic
 
-As briefly mentioned earlier, there seems to be two subgroups within the data: one below about 175 Hz and one above it. These subgroups are in fact related to the `gender` of the participants. We can colour the points by gender, using the `colour` aesthetic.[^ch-plotting-2]
+As briefly mentioned earlier, there seems to be two subgroups within the data: one below about 175 Hz and one above it. These subgroups are in fact related to the `gender` of the participants. We can colour the points by gender, using the `colour` aesthetic.[^ch-plotting-2] @fig-polite-gender shows a scatter plot of mean f0 and the H1-H2 difference, with points coloured depending on the gender of the speaker. Now the two subgroups are quite visible, although we can also appreciate some overlap between the two gender subgroups (some blue points overlap with the red points and there is one red point that has a very low mean f0).
 
 [^ch-plotting-2]: To make ggplot inclusive, it's possible to write the colour aesthetic either as the British-style *colour* or the American-style *color*! Both will get the job done.
 
@@ -399,6 +399,8 @@ Add a `title` and a `subtitle` (use these two arguments within the `labs()` func
 For example, `labs(title = "...", ...)`.
 :::
 ::::
+
+Let's update out description of the plot from above to
 
 ## Summary
 
