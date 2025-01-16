@@ -172,7 +172,7 @@ ggplot(
   geom_point()
 ```
 
-Look at @fig-first-plot: is there a relationship between mean f0 and H1-H2? A pattern can be observed: when mean f0 is low, H1-H2 is high (meaning more breathiness) and when f0 is high, H1-H2 is low (meaning less breathiness). Statistically, this is called a negative relationship. The opposite is a positive relationship, when an increase in $x$ corresponds to an increase in $y$. Spoiler: the negative relationship in the plot is a mirage: if you look more closely, there seems to be two subgroups in the data: one up to about 150 hz and one from 150 hz up. We will see below that these two groups correspond to the speakers' genders.
+Look at @fig-first-plot: is there a relationship between mean f0 and H1-H2? A pattern can be observed: when mean f0 is low, H1-H2 is high (meaning more breathiness) and when f0 is high, H1-H2 is low (meaning less breathiness). Statistically, this is called a negative relationship. The opposite is a positive relationship, when an increase in $x$ corresponds to an increase in $y$. Spoiler: the negative relationship in the plot is a mirage: if you look more closely, there seems to be two subgroups in the data: one up to about 175 hz and one from 175 hz up. We will see below that these two groups correspond to the speakers' genders.
 
 For the time being, let's pretend we don't know that and we want to write a description of the plot and the pattern. You could describe the plot this way:
 
@@ -186,7 +186,7 @@ Note that using the `+` is a quirk of `ggplot()`. The idea behind it is that you
 
 ### Function arguments
 
-Note that the `data` and `mapping` arguments don't have to be named explicitly (with `data =` and `mapping =`) in the `ggplot()` function, since they are obligatory and they are specified in that order.
+Note that the `data` and `mapping` arguments don't have to be named explicitly (with `data =` and `mapping =`) in the `ggplot()` function, since they are obligatory and they are specified in that order. So you can write:
 
 ```{r}
 #| label: named-arguments
@@ -211,7 +211,11 @@ ggplot(
   geom_point()
 ```
 
-Try running `?ggplot` in the Console to see the arguments of the function and the order they appear in.
+::: callout-warning
+#### Exercise 1
+
+Run `?ggplot` in the Console and check the documentation of the function. Pay special attention to the arguments of the function and the order they appear in.
+:::
 
 :::: callout-note
 #### Quiz 3
@@ -231,7 +235,7 @@ cat("**Which of the following will produce the same plot as the one above?** Rea
 ```
 
 ::: {.callout-tip collapse="true"}
-#### Hint
+##### Hint
 
 When specifying arguments, the order matters when not using the argument names.
 
@@ -254,15 +258,7 @@ polite |>
     geom_point()
 ```
 
-Wait, what is that thing, `|>`?
-
-It's called a **pipe**. Think of a pipe as a teleporter.
-
-The pipe `|>` teleports the data `polite` into the following function as the first argument. So `polite |> ggplot()` is equivalent to `ggplot(polite)`.
-
-For now it might not make much sense using the pipe, but you will learn next week how to chain many functions one after the other using the pipe, at which point its usefulness will be more obvious.
-
-As a sneak peek, you will be able to filter the data before plotting it, like so:
+Wait, what is that thing, `|>`? It's called a **pipe**. Think of a pipe as a teleporter. The pipe `|>` teleports the data `polite` into the following function as the first argument. So `polite |> ggplot()` is equivalent to `ggplot(polite)`. For now it might not make much sense using the pipe, but later in the book you will start to chain many functions one after the other using the pipe, at which point its usefulness will be more obvious. For example, you will filter the data before plotting it, like so:
 
 ```{r}
 #| label: filter-plot-pipe
@@ -274,15 +270,15 @@ polite |>
     geom_point()
 ```
 
-## Changing aesthetics
+## Working with aesthetics
+
+So far, the only aesthetics you have been using were the `x` and `y` aesthetics, which correspond to the *x* and *y* axes. ggplot2 has many other aesthetics that can be employed to represent other variables in the plot: in this section you will learn about `colour` (which is used to colour geometries, like points) and `alpha` (which is used to set the transparency of geometries).
 
 ### `colour` aesthetic
 
-You might notice that there seems to be two subgroups within the data: one below about 200 Hz and one above about it.
+As briefly mentioned earlier, there seems to be two subgroups within the data: one below about 175 Hz and one above it. These subgroups are in fact related to the `gender` of the participants. We can colour the points by gender, using the `colour` aesthetic.[^ch-plotting-2]
 
-In fact, these subgroups are related to `gender`. Let's colour the points by gender then.
-
-You can use the `colour` aesthetic to colour the points by `gender`, like so:
+[^ch-plotting-2]: To make ggplot inclusive, it's possible to write the colour aesthetic either as the British-style *colour* or the American-style *color*! Both will get the job done.
 
 ```{r}
 #| label: fig-polite-gender
@@ -294,17 +290,9 @@ polite |>
   geom_point()
 ```
 
-::: callout-tip
-#### `colour` or `color`?
+Notice how `colour = gender` must be inside the `aes()` function, because we are trying to map `colour` to the values of the column `gender` (when you map values to aesthetics, the aesthetics have to be inside `aes()`. Colours are automatically assigned to each level in `gender` (here, `F` for female which gets red and `M` for male which gets blue).
 
-To make ggplot easy for users of different Englishes, it's possible to write the colour aesthetic either as the British-style `colour` or the American-style `color`! Both will get the job done.
-:::
-
-Notice how `colour = gender` must be inside the `aes()` function, because we are trying to map `colour` to the values of the column `gender`. Colours are automatically assigned to each level in `gender`.
-
-The default colour palette is used, but you can customise it. You will learn later in the course how to create custom palettes, but you can quickly change palette using one of the `scale_colour_*()` functions.
-
-A useful function is the `scale_colour_brewer()` function. This function creates palettes based on [ColorBrewer](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) 2.0. There are three types of palettes (see the linked website for examples):
+The default colour palette is used, but you can customise it. One way to quickly change the palette it to use one of the `scale_colour_*()` functions. The relevant function for our plot is `scale_colour_brewer()`. This function creates palettes based on [ColorBrewer 2.0](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3). There are three types of palettes (see the linked website for examples):
 
 -   Sequential (`seq`): a gradient sequence of hues from lighter to darker.
 
@@ -312,7 +300,7 @@ A useful function is the `scale_colour_brewer()` function. This function creates
 
 -   Qualitative (`qual`): useful for categorical variables.
 
-Let's use the default qualitative palette.
+Let's use the default qualitative palette, since `gender` is a categorical variable in the data. @fig-polite-gender-brewer is the same as @fig-polite-gender, but we are now using a qualitative ColorBrewer palette.
 
 ```{r}
 #| label: fig-polite-gender-brewer
@@ -325,9 +313,13 @@ polite |>
   scale_color_brewer(type = "qual")
 ```
 
-Now try changing the `palette` argument of the `scale_colour_brewer()` function to different palettes. (Check the function documentation for a list).
+::: callout-warning
+### Exercise 2
 
-Another set of palettes is provided by `scale_colour_viridis_d()` (the `d` stands for "discrete" palette, to be used for categorical variables). Here's an example.
+Change the `palette` argument of the `scale_colour_brewer()` function to different palettes. Check the function documentation for a list of available palettes.
+:::
+
+Another set of palettes is provided by `scale_colour_viridis_d()` (the `d` stands for "discrete" palette, to be used for categorical variables like `gender`). @fig-polite-gender-viridis uses the "B" palette from the viridis palettes.
 
 ```{r}
 #| label: fig-polite-gender-viridis
@@ -348,9 +340,12 @@ If you want to know more about the default colour palette, check this [blog post
 
 ### `alpha` aesthetic
 
-Another useful ggplot2 aesthetic is `alpha`. This aesthetic sets the transparency of the geometry: `0` means completely transparent and `1` means completely opaque.
+Another useful ggplot2 aesthetic is `alpha`. This aesthetic sets the transparency of the geometry: `0` means completely transparent and `1` means completely opaque. When you are setting the value of an aesthetic yourself that should apply to all instances of some geometry, rather than mapping an aesthetic to values in a specific column (like we did above with `colour`), you should add the aesthetic outside of `aes()` and usually in the `geom` function you want to set the aesthetic for.
 
-Change alpha in the code below to `0.5`.
+:::: callout-warning
+### Exercise 3
+
+Set `alpha` for the point geometry to `0.5`.
 
 ```{r}
 #| label: polite-gender-alpha-ex
@@ -359,17 +354,24 @@ Change alpha in the code below to `0.5`.
 
 polite |>
   ggplot(aes(f0mn, H1H2, colour = gender)) +
-  geom_point(alpha = ...) +
+  geom_point(...) +
   scale_color_brewer(type = "qual")
 ```
 
-When you are setting a value yourself that should apply to all instances of some geometry, rather than mapping an aesthetic to values in a specific column (like we did above with `colour`), you should add the aesthetic outside of `aes()` and usually in the geom function you want to modify.
+::: {.callout-tip collapse="true"}
+#### Hint
 
-Setting a lower alpha is useful when there are a lot of points or other geometries that overlap with each other and it just looks like a blob of colour (you can't really see the individual geometries; you will see an example next week). It is not the case here, and in fact reducing the alpha makes the plot quite illegible!
+``` r
+geom_point(alpha = ...)
+```
+:::
+::::
+
+Setting a lower alpha is useful when there are a lot of points or other geometries that overlap with each other and it just looks like a blob of colour (so that, for example, you can't really see the individual points). It is not the case here, and in fact reducing the alpha makes the plot quite illegible!
 
 ## Labels
 
-If you want to change the labels of the axes and the legend, you can use the `labs()` function, like this.
+The labels of the plot, like the axes labels and the legend, are automatically included by ggplot2 based on the names of the variables/columns. If you want to change the labels to something you set yourself, you can use the `labs()` function, like in @fig-polite-gender-labs below.
 
 ```{r}
 #| label: fig-polite-gender-labs
@@ -386,13 +388,17 @@ polite |>
   )
 ```
 
-Also add a `title` and a `subtitle` (use these two arguments within the `labs()` function).
+:::: callout-warning
+### Exercise 4
+
+Add a `title` and a `subtitle` (use these two arguments within the `labs()` function).
 
 ::: {.callout-tip collapse="true"}
 #### Hint
 
 For example, `labs(title = "...", ...)`.
 :::
+::::
 
 ## Summary
 
@@ -405,6 +411,9 @@ For example, `labs(title = "...", ...)`.
 
     -   Geometries map data values onto shapes in the plot. All geometry functions are of the type `geom_*()`.
 
--   **Scatter plots** are created with `geom_point()` and can be used with two numeric variables.
-:::
+-   **Scatter plots** are created with `geom_point()` and can be used with two numeric variables set as the `x` and `y` aesthetics.
 
+-   The `colour` and `alpha` aesthetics set the geometry's colour and transparency.
+
+-   If you need to set an aesthetic to be applied to the entire geometry, you can specify the aesthetic in the geometry, without the `aes()` function.
+:::
