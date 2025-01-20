@@ -1,0 +1,3 @@
+# Probability distributions {#sec-probability}
+
+![](https://img.shields.io/badge/Area-Statistics-red)

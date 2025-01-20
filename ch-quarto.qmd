@@ -1,0 +1,11 @@
+# Quarto {#sec-quarto}
+
+![](https://img.shields.io/badge/Area-R-green)
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(webexercises)
+```
