@@ -10,6 +10,7 @@
 
 library(tidyverse)
 library(webexercises)
+library(glue)
 ```
 
 ```{r}
@@ -39,6 +40,8 @@ mald |>
 ```
 
 ```{r}
+#| label: rt-l
+
 set.seed(9899)
 rt_l <- list()
 for (i in 1:10) {
@@ -71,6 +74,131 @@ cat("d. When one event cannot occur if another does occur, these are called equa
 ```
 :::
 
-
 ## Probability distributions
 
+## The Gaussian distribution
+
+In the previous section, we have seen that you can visualise probability distributions by plotting the values of the probability function applied to sampled values. For discrete variables, the probability mass function is used while the probability density function is used for continuous variables. Visualising probability distributions is more practical than listing all the possible values and their probability (especially with continuous variables—since they are continuous there is an infinite number of values!). Another convenient way to express probability distributions is by specifing the values of set of parameters, which can reconstruct the entire distribution. Different **probability distribution families** have a different number of parameters and different parameters. A probability family is an abstraction of specific probability distributions (i.e. probability distributions of observed values).
+
+A convenient probability distribution family is the **Gaussian** \[ˈgaʊsɪən\] **probability distribution**. The Gaussian distribution is a continuous probability distribution and it has two parameters:
+
+-   The **mean**, represented with the Greek letter $\mu$ \[mjuː\]. This parameter is the probability's central tendency. Values around the mean have higher probability than values further away from the mean.
+
+-   The **standard deviation**, represented with the Greek letter $\sigma$ \[ˈsɪgmə\]. This parameter is the probability's dispersion around the mean. The higher $\sigma$ the greater the spread (i.e. the dispersion) of values around the mean.
+
+In statistical notation, we write the Gaussian distribution family like this:
+
+$$
+Gaussian(\mu, \sigma)
+$$
+
+Specific types of Gaussian distributions will have specific values for the parameters $\mu$ and $\sigma$: for example $Gaussian(0, 1)$, $Gaussian(50, 32)$, $Gaussian(2.5, 6.25)$, and so on. All of these specific probability distributions belong to the Gaussian family.
+
+::: callout-warning
+### Exercise
+
+-   Go to [Seeing Theory](https://seeing-theory.brown.edu/probability-distributions/index.html#section2), Chapter 3 Probability distributions.
+
+-   Select "Continuous".
+
+-   In the drop-down menu, select "Normal". This is another term for Gaussian.
+
+-   Scroll down and change the mean $\mu$. What happens to the probability density (shown on the right)?
+
+-   Change the standard deviation $\sigma$. What happens to the probability density?
+:::
+
+## A Gaussian model of reaction times
+
+In the context of a quantitative research study, one of the objectives is to figure out the probability distribution of the variable of interest: Voice Onset Time, number of telic verbs, informativity score, acceptability ratings, reaction times, and so on. Let's imagine we are interested in understanding more about the nature of reaction times in auditory lexical decision tasks (lexical decision tasks in which the target is presented aurally rather than in writing). We can revisit the RT data from above to try and address the following research question:
+
+> RQ: In a typical auditory lexical decision task, what are the mean and standard deviation of reaction times (RTs)?
+
+Now, you might wonder why the mean and the standard deviation? This is because we are assuming that reaction times (i.e the population of reaction times, rather than our specific sample) are distributed according to a Gaussian probability distribution. It is usually the honus of the researcher to assume a probability distribution family. You will learn some heuristics for picking a distribution family later, but for now the Gaussian family will be a safe assumption to make. In statistical notation, we can write:
+
+$$
+\text{RT} \sim Gaussian(\mu, \sigma)
+$$
+
+which you can read as: "reaction times are distributed according to a Gaussian distribution with mean $\mu$ and standard deviation $\sigma$". So the research question above is about finding the values of $\mu$ and $\sigma$.
+
+For illustration's sake, let's assume the sample mean and standard deviation are also the population $\mu$ and $\sigma$. @fig-mald-rt-distr shows the empirical sample probability distribution (in grey) and the theoretical sample probability distribution (in purple) based on the sample mean and SD: in other words, the purple curve is the density curve of the probability distribution $Gaussian(1010, 318)$, We have seen earlier that the sample mean and SD of the RTs from the `mald` data are biased, due to uncertainty and variability. What we are really after is the values of $\mu$ and $\sigma$ which are the mean and standard deviation of the Gaussian distribution of the *population* of RTs in auditory lexical decision tasks. In other words, we want to make inference from the sample to the population of RTs.
+
+```{r}
+#| label: fig-mald-rt-distr
+#| code-fold: true
+
+rt_mean <- mean(mald$RT)
+rt_sd <- sd(mald$RT)
+rt_mean_text <- glue("mean: {round(rt_mean)} ms")
+rt_sd_text <- glue("SD: {round(rt_sd)} ms")
+x_int <- 2000
+
+ggplot(data = tibble(x = 0:300), aes(x)) +
+  geom_density(data = mald, aes(RT), colour = "grey", fill = "grey", alpha = 0.2) +
+  stat_function(fun = dnorm, n = 101, args = list(rt_mean, rt_sd), colour = "#9970ab", linewidth = 1.5) +
+  scale_x_continuous(n.breaks = 5) +
+  geom_vline(xintercept = rt_mean, colour = "#1b7837", linewidth = 1) +
+  geom_rug(data = mald, aes(RT), alpha = 0.1) +
+  annotate(
+    "label", x = rt_mean + 1, y = 0.0015,
+    label = rt_mean_text,
+    fill = "#1b7837", colour = "white"
+  ) +
+  annotate(
+    "label", x = x_int, y = 0.0015,
+    label = rt_sd_text,
+    fill = "#8c510a", colour = "white"
+  ) +
+  annotate(
+    "label", x = x_int, y = 0.001,
+    label = "theoretical sample\ndistribution",
+    fill = "#9970ab", colour = "white"
+  ) +
+  annotate(
+    "label", x = x_int, y = 0.0003,
+    label = "empirical sample\ndistribution",
+    fill = "grey", colour = "white"
+  ) +
+  labs(
+    title = "Theoretical sample distribution of reaction times",
+    subtitle = glue("Gaussian distribution: mean = {round(rt_mean)} ms, SD = {round(rt_sd)}"),
+    x = "RT (ms)", y = "Relative probability (density)"
+  )
+```
+
+A tool to obtain an estimate of $\mu$ and $\sigma$ is to use a Gaussian model. A Gaussian model is a statistical model that estimates the values of the parameters of a Gaussian distribution, i.e. $\mu$ and $\sigma$. Since the values of the parameters are uncertain, we can estimate their probability distribution, rather than just their values, from the data. This is what a Bayesian Gaussian model does. You can fit a Gaussian model to data using the [brms](https://paulbuerkner.com/brms/) package.
+
+```{r}
+#| label: rt-bm
+#| eval: false
+
+library(brms)
+
+rt_bm <- brm(
+  RT ~ 1,
+  family = gaussian,
+  data = mald
+)
+
+```
+
+```{r}
+#| label: rt-bm-run
+#| include: false
+
+library(brms)
+
+rt_bm <- brm(
+  RT ~ 1,
+  family = gaussian,
+  data = mald,
+  seed = 6725,
+  file = "cache/ch-probability-rt_bm"
+)
+```
+
+```{r}
+#| label: rt-bm-summ
+summary(rt_bm)
+```

@@ -1,4 +1,4 @@
-# Plotting  {#sec-plotting}
+# Plotting {#sec-plotting}
 
 ![](https://img.shields.io/badge/Area-R-green)
 
