@@ -1,3 +1,76 @@
 # Probability distributions {#sec-probability}
 
 ![](https://img.shields.io/badge/Area-Statistics-red)
+
+## Inference: From sample to population
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(webexercises)
+```
+
+```{r}
+#| label: mald
+
+mald <- readRDS("data/tucker2019/mald_1_1.rds")
+
+```
+
+```{r}
+#| label: mald-rt
+
+mald |> 
+  ggplot(aes(RT)) +
+  geom_density(fill = "purple", alpha = 0.5) +
+  geom_rug(alpha = 0.1) +
+  labs(x = "Reaction Times (ms)")
+
+```
+
+```{r}
+#| label: mald-summ
+mald |> 
+  summarise(
+    mean_RT = round(mean(RT)), sd_RT = round(sd(RT)), median_RT = round(median(RT))
+  )
+```
+
+```{r}
+set.seed(9899)
+rt_l <- list()
+for (i in 1:10) {
+  rt_l[i] <- list(rnorm(n = 20, mean = 1010, sd = 318))
+}
+rt_l[[1]]
+```
+
+```{r}
+# TODO: make into table
+cat("Mean:\n", round(unlist(lapply(rt_l, mean))), "\n")
+cat("SD:\n", round(unlist(lapply(rt_l, sd))))
+```
+
+## Probabilities
+
+::: callout-note
+### Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+cat("**True or false?**", "\n\n")
+cat("a. A certain event is an event that has a probability equal to or greater than 1.", torf(FALSE), "\n\n")
+cat("b. An event that has probability of 0 is an impossible event.", torf(TRUE), "\n\n")
+cat("c. Probabilities are expressed with a number between 0 and 1 (inclusive).", torf(TRUE), "\n\n")
+cat("d. When one event cannot occur if another does occur, these are called equally likely events.", torf(FALSE))
+```
+:::
+
+
+## Probability distributions
+
