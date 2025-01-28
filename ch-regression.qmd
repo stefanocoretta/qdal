@@ -1,4 +1,4 @@
-# Regression models
+# Regression models  {#sec-regression}
 
 ![](https://img.shields.io/badge/Area-R-green)
 

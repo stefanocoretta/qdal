@@ -234,20 +234,34 @@ The model summary reports the Bayesian Credible Intervals (CrIs) of the posterio
 posterior_summary(rt_bm)[1:2,]
 ```
 
-The 95% CrI of the `b_Intercept` is between `{r} round(brms::fixef(rt_bm)[3])` and `{r} round(brms::fixef(rt_bm)[4])`. This means there is a 95% probability, or that we can be 95% confident, that the `Intercept` value is within that range. For `sigma`, the 95% CrI is between `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q2.5"], 1)` and `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q97.5"], 1)`. So, again, there is a 95% probability that the `sigma` value is between those values. So, to summarise, **a 95% CrI tells us that we can be 95% confident, or in other words that there is a 95% probability, that the value of the coefficient is between the values of the CrI.**
+The 95% CrI of the `b_Intercept` is between `{r} round(brms::fixef(rt_bm)[3])` and `{r} round(brms::fixef(rt_bm)[4])`. This means that there is a 95% probability, or (equivalently) that we can be 95% confident, that the `Intercept`, i.e. $\mu$, is within that range. For `sigma`, i.e. $\sigma$, the 95% CrI is between `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q2.5"], 1)` and `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q97.5"], 1)`. So, again, there is a 95% probability that the `sigma` value is between those values. So, to summarise, a 95% CrI tells us that we can be 95% confident, or in other words that there is a 95% probability, that the value of the coefficient is between the values of the CrI.
 
-Here you have the results from the regression model. Really, the results of the model are the full posterior probabilities, but it makes things easier to focus on the CrI. The model has "recovered" the values we used to simulate the height data quite well: above, we used a mean of 165 and a standard deviation of 8 to simulate data. The model is suggesting that the mean and SD of `h` is between 164-166 cm and 7-9 cm respectively: quite neat!
+There is nothing special about 95% CrI and in fact it is recommended to calculate and report a few. Personally, I use 90, 80, 70 and 60% CrIs. You can get any CrI with the `summary()` and the `posterior_summary()` functions, but you will also learn an alternative way in @sec-regression. Here is how to get an 80% CrI with `summary()`.
 
-Regression models work.
+```{r}
+#| label: rt-bm-post-80
+
+summary(rt_bm, prob = 0.8)
+
+```
+
+For `posterior_summary()`, you specify the quantiles rather than the probability level.
+
+```{r}
+#| label: rt-bm-post-80-2
+
+posterior_summary(rt_bm, probs = c(0.1, 0.9))[1:2,]
+
+```
+
+Here you have the results from the regression model. Really, the results of the model are the full posterior probabilities, but it makes things easier to focus on the CrI.
 
 ## Reporting
 
-What about reporting the model in writing? We could report the model and the results like this.[^ch-gauss-model-1]
+What about reporting the model in writing? We could report the model and the results like this (for simplicity, we report only the 95% CrIs here. You will learn how to report multiple CrIs in tables in XXX).[^ch-gauss-model-1]
 
 [^ch-gauss-model-1]: To know how to add a citation for any R package, simply run `citation("package")` in the R Console, where `"package"` is the package name between double quotes.
 
-::: callout-tip
-We fitted a Bayesian regression using the brms package (Bürkner 2017) in R (R Core Team 2024). The outcome variable was height and we did not include any predictor, to estimate the overall mean and standard deviation of height.
-
-Based on the model results, there is a 95% probability that the mean is between `{r} round(brms::fixef(rt_bm)[3])` and `{r} round(brms::fixef(rt_bm)[4])` cm and that the standard deviation is between `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q2.5"], 1)` and `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q97.5"], 1)` cm.
-:::
+> We fitted a Bayesian Gaussian model of reaction times (RTs) using the brms package (Bürkner 2017) in R (R Core Team 2024). The model estimates the mean and standard deviation of RTs.
+>
+> Based on the model results, there is a 95% probability that the mean is between `{r} round(brms::fixef(rt_bm)[3])` and `{r} round(brms::fixef(rt_bm)[4])` ms (mean = `{r} round(brms::fixef(rt_bm)[1])`, SD = `{r} round(brms::fixef(rt_bm)[2])`) and that the standard deviation is between `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q2.5"], 0)` and `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q97.5"], 0)` ms (mean = `{r} round(brms::posterior_summary(rt_bm)["sigma", "Estimate"], 0)`, SD = `{r} round(brms::posterior_summary(rt_bm)["sigma", "Est.Error"], 0)`).
