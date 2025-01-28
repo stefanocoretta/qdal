@@ -108,3 +108,4 @@ Specific types of Gaussian distributions will have specific values for the param
 -   Change the standard deviation $\sigma$. What happens to the probability density?
 :::
 
+## Intervals

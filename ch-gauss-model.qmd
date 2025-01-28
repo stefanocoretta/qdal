@@ -17,7 +17,11 @@ In the context of a quantitative research study, one of the objectives is to fig
 
 > RQ: In a typical auditory lexical decision task, what are the mean and standard deviation of reaction times (RTs)?
 
-Now, you might wonder why the mean and the standard deviation? This is because we are assuming that reaction times (i.e the population of reaction times, rather than our specific sample) are distributed according to a Gaussian probability distribution. It is usually the onus of the researcher to assume a probability distribution family. You will learn some heuristics for picking a distribution family later, but for now the Gaussian family will be a safe assumption to make. In statistical notation, we can write: $\text{RT} \sim Gaussian(\mu, \sigma)$
+Now, you might wonder why the mean and the standard deviation? This is because we are assuming that reaction times (i.e the population of reaction times, rather than our specific sample) are distributed according to a Gaussian probability distribution. It is usually the onus of the researcher to assume a probability distribution family. You will learn some heuristics for picking a distribution family later, but for now the Gaussian family will be a safe assumption to make. In statistical notation, we can write:
+
+$$
+\text{RT} \sim Gaussian(\mu, \sigma)
+$$
 
 which you can read as: "reaction times are distributed according to a Gaussian distribution with mean $\mu$ and standard deviation $\sigma$". So the research question above is about finding the values of $\mu$ and $\sigma$.
 
@@ -172,59 +176,67 @@ Let's break down the summary bit by bit:
 
 ## Posterior probability distributions
 
-The `Regression Coefficients` table is the most important part of the model summary, the part that gives you information on the estimates of the model parameters.
+The main characteristic of Bayesian models is that they don't just provide you with a single numeric estimate for the model parameters. Rather, the model estimates a *full probability distribution* for each parameter/coefficient. These probability distributions are called **posterior probability distributions** (or posteriors for short). They are called *posterior* because they are derived from the data and the prior probability distributions (you will learn about priors in XXX). The model we fitted has two parameters: the mean $\mu$ and the standard deviation $\sigma$. For reasons that will become clear in @sec-reg-intro, the $\mu$ parameter is called `Intercept` in the summary: you can find it in the `Regression Coefficients` table. The standard deviation $\sigma$ is in the `Further distributional parameters` table.
 
-The main characteristics of Bayesian regressions is that they don't just provide you with a single numeric estimate for the model parameters. Rather, the model estimates a *full probability distribution* for each parameter/coefficient. These probability distributions are called **posterior probability distributions** (or posteriors for short).
-
-They are called *posterior* because they are derived from the data (and the prior probability distributions, you will learn more about these later).
-
-The `Regression Coefficients` table reports a few summary measures of these posterior distributions. Here, we only have the summary measures of one posterior: the posterior of the model's mean $\mu$. The table also has three diagnostic measures, which you can ignore for now.
+The `Regression Coefficients` table reports for each estimated coefficient a few summary measures of the posterior distributions of the estimated coefficients. Here, we only have the summary measures of one posterior: the posterior of the model's mean $\mu$. The table also has three diagnostic measures, which you can ignore for now.
 
 Here's a break down of the table's columns:
 
--   `Estimate`, the mean estimate of the coefficient (i.e. the mean of the posterior distribution of the coefficient).
+-   `Estimate`, the mean estimate of the coefficient (i.e. the mean of the posterior distribution of the coefficient). In our model, this is the mean of the posterior distribution of the mean $\mu$ (`Intercept`). Yes, you read right: the mean of the mean! Remember, Bayesian models estimate a full probability distribution and this can be summarised with a mean and a standard deviation. In this model, the posterior mean (short for mean of the posterior probability distribution) of $\mu$ is 1010.5 ms.
 
--   `Est.error`, the error of the mean estimate (i.e. the standard deviation of the posterior distribution of the coefficient).
+-   `Est.error`, the error of the mean estimate, or *est*imate *error*. The estimate error is the standard deviation of the posterior distribution of the coefficient (here the mean $\mu$). Yes, the standard deviation of the mean! Again, since we are estimating a full probability distribution for $\mu$, we can summarise it with a mean and SD as we do for any Gaussian distribution. In this model, the posterior SD of $\mu$ is 4.45 ms.
 
 -   `l-95% CI` and `u-95% CI`, the lower and upper limits of the 95% Bayesian Credible Interval (more on these below).
 
--   `Rhat`, `Bulk_ESS`, `Tail_ESS` are diagnostics of the MCMC chains.
+-   Finally, `Rhat`, `Bulk_ESS`, `Tail_ESS` are diagnostics of the MCMC chains. We will treat model diagnostics in XXX.
+
+The `Further distributional parameters` table has the same structure. In this model, the posterior mean of $\sigma$ is 317.88 ms and the posterior SD of $\sigma$ is 3.17 ms.
+
+Putting all this together in mathematical notation:
+
+$$
+\begin{align}
+\text{RT} & \sim Gaussian(\mu, \sigma)\\
+\mu & \sim Gaussian(1010.5, 4.45)\\
+\sigma & \sim Gaussian(317.88, 3.17)
+\end{align}
+$$
+
+In other words, according to the model and data, the mean or RTs is a value from the distribution $Gaussian(1010.5, 4.45)$ and the SD of RTs is a value from the distribution $Gaussian(317.88, 3.17)$. The model has quantified the uncertainty around the value of the $\mu$ and $\sigma$ parameters and this uncertainty is reflected by the fact that we get a full posterior probability distribution (summarised by its mean and SD) for each of the parameters. We don't know *exactly* the values of the parameters of the Gaussian distribution assumed to have generated the sampled RTs.
+
+::: {.callout-important collapse="true"}
+## Extra: Student-t
+:::
 
 ## Plotting the posterior distributions
 
-While the model summary reports *summaries* of the posterior distributions, it is always helpful to *plot* the posteriors.
+While the model summary reports *summaries* of the posterior distributions, it is always helpful to *plot* the posteriors. We can easily do so with the base R `plot()` function, like in @fig-rt-bm. The density plots of the posteriors distributions of the two parameters estimated in the model are shown on the left of the figure: `b_Intercept` which corresponds to `Intercept` from the summary and `sigma` (the reason for why it's `b_Intercept` will become clear in @sec-reg-intro).
 
 ```{r}
-#| label: rt-bm-plot
+#| label: fig-rt-bm
+#| fig-cap: "Posterior plots of the rt_bm Gaussian model"
+
 plot(rt_bm, combo = c("dens", "trace"))
 ```
 
-The plot above shows the posterior distribution of the estimated coefficient `b_Intercept` and `sigma`, which correspond to the $\mu$ and $\sigma$ of the formula above, respectively.
+For the `b_Intercept` coefficient, i.e. the mean $\mu$, the posterior probability encompasses values between 1000 and 1020 ms, approximately. But some values are more probable then others: the values in the centre of the distribution have a higher probability density then the values on the sides. The mean of that posterior probability distribution is the `Estimate` value in the model summary: 1010.5 ms. Its standard deviation is the `Est.error`: 4.45 ms. The mean indicates the value with the highest probability density, which corresponds to the value on the horizontal axis of the density plot below the highest peak of the density curve. Based on these properties, values around 1010.5 ms are more probable than values further away from it.
 
-For the `b_Intercept` coefficient, the posterior probability encompasses values between 163 and 167 cm, approximately. But some values are more probable then others: the values in the centre of the distribution have a higher probability density then the values on the sides. In other words, values around 165 cm are more probable than values below 164 and above 166, for example.
+For `sigma`, i.e. $\sigma$, the posterior probability covers values between 310 and 325. What is the mean of the posterior probability of $\sigma$? The answer is in the summary, in `Further distributional parameters`. There you will also find the standard deviation of the posterior of $\sigma$. That's a standard deviation of a standard deviation! As before, this is because we are not estimating a simple value for $\sigma$ but a full (posterior) probability distribution and we can summarise this distribution with a mean and a standard deviation. Again, the highest peak in the distribution corresponds to the `Estimate` value.
 
-However, looking at a full probability distribution like that is not super straightforward. Credible Intervals (CrIs) help summarise the posterior distributions so that interpretation is more straightforward.
+Now, looking at a full probability distribution like that is not very straightforward and summary measures can be even less straightforward. Credible Intervals (CrIs) help summarise the posterior distributions so that interpretation is more straightforward.
 
 ## Interpreting Credible Intervals
 
-The model summary reports the Bayesian Credible Intervals (CrIs) of the posterior distributions.
-
-Another way of obtaining summaries of the coefficients is to use the `posterior_summary()` function. Ignore the last three lines.
+The model summary reports the Bayesian Credible Intervals (CrIs) of the posterior distributions. Another way of obtaining summaries of the coefficients is to use the `posterior_summary()` function which returns a table (technically, a matrix, another type of R objects; we print only the first two rows with `[1:2,]` because we can ignore the other ones).
 
 ```{r}
 #| label: rt-bm-post-summary
-posterior_summary(rt_bm)
+posterior_summary(rt_bm)[1:2,]
 ```
 
-The 95% CrI of the `b_Intercept` is between `{r} round(brms::fixef(rt_bm)[3])` and `{r} round(brms::fixef(rt_bm)[4])`. This means there is a 95% probability, or that we can be 95% confident, that the `Intercept` value is within that range.
+The 95% CrI of the `b_Intercept` is between `{r} round(brms::fixef(rt_bm)[3])` and `{r} round(brms::fixef(rt_bm)[4])`. This means there is a 95% probability, or that we can be 95% confident, that the `Intercept` value is within that range. For `sigma`, the 95% CrI is between `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q2.5"], 1)` and `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q97.5"], 1)`. So, again, there is a 95% probability that the `sigma` value is between those values. So, to summarise, **a 95% CrI tells us that we can be 95% confident, or in other words that there is a 95% probability, that the value of the coefficient is between the values of the CrI.**
 
-For `sigma`, the 95% CrI is between `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q2.5"], 1)` and `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q97.5"], 1)`. So, again, there is a 95% probability that the `sigma` value is between those values.
-
-So, to summarise, **a 95% CrI tells us that we can be 95% confident, or in other words that there is a 95% probability, that the value of the coefficient is between the values of the CrI.**
-
-Here you have the results from the regression model. Really, the results of the model are the full posterior probabilitis, but it makes things easier to focus on the CrI.
-
-The model has "recovered" the values we used to simulate the height data quite well: above, we used a mean of 165 and a standard deviation of 8 to simulate data. The model is suggesting that the mean and SD of `h` is between 164-166 cm and 7-9 cm respectively: quite neat!
+Here you have the results from the regression model. Really, the results of the model are the full posterior probabilities, but it makes things easier to focus on the CrI. The model has "recovered" the values we used to simulate the height data quite well: above, we used a mean of 165 and a standard deviation of 8 to simulate data. The model is suggesting that the mean and SD of `h` is between 164-166 cm and 7-9 cm respectively: quite neat!
 
 Regression models work.
 
