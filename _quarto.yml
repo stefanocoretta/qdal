@@ -33,6 +33,7 @@ book:
       chapters:
         - ch-inference.qmd
         - ch-probability.qmd
+        - ch-gauss-model.qmd
         - ch-regression-intro.qmd
         - ch-regression.qmd
     - references.qmd

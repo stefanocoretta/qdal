@@ -1348,6 +1348,18 @@
       ],
       "Hash": "5bfe2927efa9f87766ca9605301ea48f"
     },
+    "pak": {
+      "Package": "pak",
+      "Version": "0.8.0.1",
+      "Source": "Repository",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "Requirements": [
+        "R",
+        "tools",
+        "utils"
+      ],
+      "Hash": "7a5f3ae05388bfd4adfeb5d7fad1b8de"
+    },
     "parallelly": {
       "Package": "parallelly",
       "Version": "1.41.0",
