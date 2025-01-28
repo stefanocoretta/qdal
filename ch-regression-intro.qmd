@@ -2,6 +2,8 @@
 
 ![](https://img.shields.io/badge/Area-Statistics-red)
 
+In @sec-probability, you have learnt the basics of probability and how to run Gaussian models to estimate the mean and standard deviation ($\mu$ and $\sigma$) of a variable. This chapter extends the Gaussian model to what is commonly called a Gaussian **regression model**. Regression models (including the Gaussian) are models based on the equation of a straight line. They allow you to model the relationship between two or more variables. This textbook introduces you to regression models of varying complexity which can model variables frequently encountered in linguistics. Note that regression models are very powerful and flexible statistical models which can deal with a great variety of types of variables. \[TODO: Appendix of types of regression models cheatsheet\].
+
 ## A straight line
 
 ```{r}
@@ -12,9 +14,7 @@ library(tidyverse)
 
 ```
 
-A regression model is a statistical model that estimates the relationship between an outcome variable and one or more predictor variables (more on outcome/predictor below).
-
-Regression models are based on the **equation of a straight line**.
+A regression model is a statistical model that estimates the relationship between an outcome variable and one or more predictor variables (more on outcome/predictor below). Regression models are based on the **equation of a straight line**.
 
 $$
 y = mx + c
@@ -26,18 +26,16 @@ $$
 y = \beta_0 + \beta_1 x
 $$
 
-Where $\beta_0$ is $c$ and $\beta_1$ is $m$ in the first notation. We will use the second notation (with `a` and `b`) in this book, since using $\beta$'s with subscript indexes will help understand the process of extracting information from regression models later.[^ch-regression-intro-1]
+Where $\beta_0$ is $c$ and $\beta_1$ is $m$ in the first notation. We will use the second notation (with $\beta_0$ and $beta_1$) in this book, since using $\beta$'s with subscript indexes will help understand the process of extracting information from regression models later.[^ch-regression-intro-1]
 
 [^ch-regression-intro-1]: Yet other notations are $y = a + bx$ and $y = \alpha + \beta x$.
 
 ## Back to school
 
-You might remember from school when you were asked to find the values of $y$ given certain values of $x$ and specific values of $\beta_0$ and $\beta_1$.
-
-For example, you were given the following formula:
+You might remember from school when you were asked to find the values of $y$ given certain values of $x$ and specific values of $\beta_0$ and $\beta_1$. For example, you were given the following formula (the dot $\cdot$ stands for multiplication; it can be dropped so $2 \cdot x$ and $2x$ are equivalent):
 
 $$
-y = 3 + 2 * x
+y = 3 + 2 \cdot x
 $$
 
 and the values $x = (2, 4, 5, 8, 10, 23, 36)$. The homework was to calculate the values of $y$ and maybe plot them on a Cartesian coordinate space.
@@ -59,7 +57,7 @@ ggplot(line, aes(x, y)) +
   labs(title = bquote(italic(y) == 3 + 2 * italic(x)))
 ```
 
-Using the formula, we are able to find the values of $y$. Note that in $y = 3 + 2 * x$, $\beta_0 = 3$ and $\beta_1 = 2$. Importantly, $\beta_0$ is the value of $y$ when $x = 0$. $\beta_0$ is commonly called the **intercept** of the line. The intercept is the value where the line crosses the *y*-axis (the value where the line "intercepts" the *y*-axis).
+Using the provided formula, we are able to find the values of $y$. Note that in $y = 3 + 2 * x$, $\beta_0 = 3$ and $\beta_1 = 2$. Importantly, $\beta_0$ is the value of $y$ when $x = 0$. $\beta_0$ is commonly called the **intercept** of the line. The intercept is the value where the line crosses the *y*-axis (the value where the line "intercepts" the *y*-axis).
 
 $$
 \begin{align}
@@ -106,7 +104,17 @@ ggplot(line, aes(x, y)) +
   labs(title = bquote(italic(y) == 3 + 2 * italic(x)))
 ```
 
-Now, in the context of research, you usually measure $x$ (the predictor variable) and $y$ (the outcome variable). Then you have to **estimate** (i.e. to find the values of) $\beta_0$ and $\beta_1$. This is what regression models are for: given the measured $y$ and $x$, the model estimates $\beta_0$ and $\beta_1$. You can play around with [this web app](https://stefanocoretta.shinyapps.io/lines/) by changing the intercept and slope of the line.
+Now, in the context of research, you usually start with a sample of measures (values) of $x$ (the predictor variable) and $y$ (the outcome variable). Then you have to **estimate** (i.e. to find the values of) $\beta_0$ and $\beta_1$ from the formula. This is what regression models are for: given the sampled values of $y$ and $x$, the model estimates $\beta_0$ and $\beta_1$.
+
+::: callout-warning
+### Exercise
+
+-   Go to the web app [Linear Models Illustrated](https://stefanocoretta.shinyapps.io/lines/).
+
+-   In the first tab, "Continuous", you will find instructions on the left and a plot on the right. The plot on the right is the plot resulting from the parameters specified to the left.
+
+-   Play around with the intercept and slope parameters to see what happens to the line with different values of $\beta_0$ and $\beta_1$.
+:::
 
 ## Add error
 
@@ -158,7 +166,7 @@ y & \sim Gaussian(\mu, \sigma)\\
 \end{align}
 $$
 
-You can read those formulae like so: "The variable $y$ is distributed according to a Gaussian distribution with mean $\mu$ and standard deviation $\sigma$. The mean $\mu$ is equal to the intercept $\beta_0$ plus the slope $\beta_1$ times the variable $x$." Now, the goal of a regression model is to estimate $\beta_0$, $\beta_1$ and $\sigma$ from the data (i.e. from the values of $x$ and $y$). In the following chapters, you will learn how to fit regression models to a variety of data to answer research questions.
+You can read those formulae like so: "The variable $y$ is distributed according to a Gaussian distribution with mean $\mu$ and standard deviation $\sigma$. The mean $\mu$ is equal to the intercept $\beta_0$ plus the slope $\beta_1$ times the variable $x$." This is a Gaussian regression model, because the assumed family of the outcome $y$ is Gaussian. Now, the goal of a (Gaussian) regression model is to estimate $\beta_0$, $\beta_1$ and $\sigma$ from the data (i.e. from the values of $x$ and $y$). Of course, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family (the other most common families are Bernoulli, Poisson, beta and cumulative). In the following chapters, you will learn how to fit regression models to a variety of data to answer linguistic research questions.
 
 ::: {.callout-important collapse="true"}
 ## Extra: Regression, a history
