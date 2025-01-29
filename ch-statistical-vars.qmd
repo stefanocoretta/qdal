@@ -127,7 +127,7 @@ Numeric variables can be either continuous or discrete, while categorical variab
 -   **Ordinal**: The variable can take any of three of more values and the values have a natural order. For example, Likert scales of attitude (positive, indifferent, negative), proficiency (functional, good, very good, native-like), lenition (stop, fricative, approximant, deletion).
 :::
 
-## Operationalisation
+## Operationalisation {#sec-operationalise}
 
 You might appreciate that the estimand is not quite the same thing as the estimandum. The estimand is the researcher's way to capture the estimandum so that it can be analysed. The relationship between the estimandum and the estimand variable is called **operationalisation**: an estimandum is operationalised into an estimand. The action of **operationalisation** consists in choosing how to measure something: as a numeric or as a categorical variable. In some cases, the choice is obvious, but in most cases something could be operationalised either way and different considerations have to be taken into account when choosing, like the particular framework adopted and the study design.
 

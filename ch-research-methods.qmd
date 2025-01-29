@@ -2,13 +2,9 @@
 
 ![](https://img.shields.io/badge/Area-Research_methods-blue)
 
-[Research Methods]{.smallcaps} are about the theory, methods and practice of conducting research. I like to call the discipline that deals with research methods [Hodotics]{.smallcaps}, but it hasn't caught on yet.
+![A conceptual model of Research Methods (Hodotics).](img/res-methods-2.png){#fig-hodotics fig-align="center"}
 
-One way of categorising different aspects of research methods is represented in the following figure.
-
-![](img/res-methods-2.png){fig-align="center"}
-
-You can think of **research methods** as the combination of:
+[Research Methods]{.smallcaps} are about the theory, methods and practice of conducting research. I like to call the discipline that deals with research methods [Hodotics]{.smallcaps}, but it hasn't caught on yet. One way of categorising different aspects of research methods is represented in @fig-hodotics. You can think of **research methods** as the combination of:
 
 -   The **research process**: the process of conducting a research project, from determining the research context to communicating results.
 
@@ -20,9 +16,9 @@ You can think of **research methods** as the combination of:
 
 -   **Ethics**: all research is not performed in a social vacuum and ethical considerations are a fundamental aspect of research.
 
-Let's zoom in on the [research process]{.smallcaps}.
+Let's zoom in on the [research process]{.smallcaps}, as represented in @fig-res-process.
 
-![](img/res-process.png){fig-align="center"}
+![A conceptual model of research process.](img/res-process.png){#fig-res-process fig-align="center"}
 
 -   **Context**: the research context includes several aspects of the research process, including the background (i.e. the previous literature and current knowledge) and the rational of the study (from the general topic to specific research questions/hypotheses).
 
@@ -46,7 +42,7 @@ Lear more about the etymology of *empirical* [here](https://en.wiktionary.org/wi
 
 ## Axes of research
 
-![](img/axes-research.png)
+![Research axes.](img/axes-research.png){#fig-res-axes}
 
 There are two main "axes" of empirical research types:
 
@@ -62,7 +58,7 @@ There are two main "axes" of empirical research types:
 -   **Corroboratory research** (aka as confirmatory research) is about checking expectations against data. It is also known as "hypothesis testing" because it is about testing hypotheses using data.
 :::
 
-While there is still a lot of prejudice against exploratory research (typical sentiments are "it doesn't have theory") it is an important way of doing research, as recognised by important scholars like Tukey. In [*We need both Exploratory and Confirmatory*](https://www.doi.org/10.2307/2682991), Tukey stressed the importance of both approaches to research.
+While there is still a lot of prejudice against exploratory research (typical sentiments are "it doesn't have theory") it is an important way of doing research, as recognised by important scholars. For example, @tukey1980 stressed the importance of *both* approaches. The other axis of research is the descriptive/explanatory axis.
 
 ::: callout-note
 ### Descriptive vs explanatory research
@@ -72,9 +68,11 @@ While there is still a lot of prejudice against exploratory research (typical se
 -   **Explanatory research** is about *explaining* facts, i.e. understanding why they are the way they are. In other words, explanatory research is about the *why*.
 :::
 
+Similarly to the exploratory/corroboratory axis, there is still prejudice against descriptive research (again, typical sentiments are that "it doesn't have theory"). Within linguistics, several scholars have shown that both descriptive and explanatory research are fundamental and that both need conceptual and methodological theories to function. Indeed, [@dryer2008] talks about descriptive theories and explanatory theories, granting both the same status.
+
 ## Research objectives
 
-There can be three types of **research objectives**. Each has its merits and to improve our understanding of the Universe we need all three, although there is nothing wrong for any one study to focus just on one or two!
+Orthogonal to the two research axes from the previous section, we can classify research instances based on their objectives. There are in principle three types of **research objectives**: establishing facts, improving the fit of a framework to the facts, and comparing the fit of difference frameworks to the facts. Each has its merits and to improve our understanding of the Universe we need all three, although there is nothing wrong for any one study to focus just on one or two!
 
 ::: callout-tip
 ### Establish facts
@@ -115,45 +113,44 @@ Examples:
 -   A strict feed-forward architecture of grammar does not allow phonetic details to be sensitive to morphological structure, while some exemplar-based models allow that.
 :::
 
-Each of the three objectives are important in research, but note that in order to really advance our understanding of things the third objective is fundamental: it is only by directly comparing different frameworks that we can accumulate knowledge and weed out inaccurate explanations.
+Each of the three objectives are important in research, but note that in order to really advance our understanding of things the third objective is fundamental: it is only by directly comparing different frameworks that we can accumulate knowledge and weed out inaccurate explanations. Every time you read about a study, ask yourself which of these objectives the study is setting to address.
 
 ## Research context {#sec-res-context}
 
-@ellis2008 introduce a nice break-down of the concept of "research context".
+@fig-res-process shows the main steps that compose the research process. The first component is the [research context]{.smallcaps}. @ellis2008 discuss the research context and propose a convenient break-down of the concept. @fig-res-context is a schematic representation of different aspects of the research context, from the most general to the most specific. An example of each is also provided.
 
-The image below is a schematic representation of different aspects of the research context, from the most general to the most specific. An example of each is also provided.
+![Aspects of the research context, from general to specific [@ellis2008].](img/research-topic.png){#fig-res-context}
 
-![](img/research-topic.png)
+The following sections treat research questions and research hypotheses in more detail.
 
 ### Research questions
 
-Research questions are **testable questions** whose answers directly address the problem.
-
-They take the form of actual *questions*:
+Research questions are **questions** whose answers directly address the research problem. They take the form of actual *questions*. For example:
 
 -   What is the average speech rate of adolescents vs that of older adults?
 -   What happens to infants syntactic processing when they move from a monolingual to a multilingual environment?
 -   Is the morphological complexity of languages spoken by larger populations different from that of languages spoken by smaller populations?
 
-Research questions are always necessary, independent of the type and objective of the research.
-
-While there is an undue pressure on researcher to come up with "novel" research questions all the time, it is perfectly fine to ask the same question multiple times.
+Research questions are always necessary, independent of the type and objective of the research. While there is an undue pressure on researcher to come up with "novel" research questions all the time, it is perfectly fine to ask the same question multiple times.
 
 <!-- TODO: Add link to repro/repli -->
 
 ### Research hypotheses
 
-Research hypotheses are **statements** (not questions) about the research problem.
+Research questions can be further developed into **research hypotheses**. Research hypotheses are **statements** (not questions) about the research problem. Hypotheses **are never true nor confirmed**. We can only **corroborate** hypothesis, and it's a long term process. The same hypothesis has to be tested again and again, by multiple researchers in multiple contexts. Research is not a one-off matter: knowledge can only be acquired slowly and with a lot of effort. This idea has been beautifully synthesised into the "Slow Science" movement [@slowscienceacademy2010]: "\[Researchers\] need time to think. \[Researchers\] need time to read, and time to fail. \[Researchers\] do not always know what it might be at right now."
 
-Hypotheses must be **falsifiable** (there can be in principle an outcome that shows them to be false). See below.
+It is however perfectly fine to run a study with only research questions, without a research hypothesis. As long as you clearly state whether you are talking about research *questions* or research *hypotheses* and you don't mix them up, you are fine.
 
-Hypotheses **are never true nor confirmed**. We can only **corroborate** hypothesis, and it's a long term process. The same hypothesis has to be tested again and again, but multiple researchers in multiple contexts.
+### Precision and testability
 
-Research is not a one-off matter: knowledge can only be acquired slowly and with a lot of effort.
+Solid research questions and hypotheses must have two main properties: they must be **precise and testable**. Precision is about the semantics of the words and phrases that make up the question or hypothesis. For example, in the question "Is the morphological complexity of languages spoken by larger populations different from that of languages spoken by smaller populations?" we need to clearly define the following: morphological complexity, larger population, smaller population. What do we mean by "morphological complexity"? How do we classify a population as large or small? For our research question to be a good research question, it is important that we think very hard about what we mean by those words. This is because depending on the specific meaning, we might obtain different outcomes and to be sure that the outcomes answer out specific research question we need to ensure that the question itself and the words within it are well defined.
 
-It is however perfectly fine to run a study with only research questions, without a research hypothesis. As long as you clearly state whether you are talking about research *questions* or research *hypotheses*, you are fine.
+Secondly, research questions and hypotheses must be testable. *Testability* is about formulating research questions and hypotheses in an enough precise manner that naturally leads to a well defined, specific study design. For example, the testability of the hypothesis from @fig-res-context would be compromised if we didn't define "processing cost" precisely. For example, processing cost could be related to the cognitive load of processing the sentences, or to the number of "computational steps" needed to process the sentence, or to ease of the computational steps independent of their number. All of these aspects are strictly entangled with the researcher's assumptions and favourite linguistic framework or model of sentence processing. Very often, "fast research" leads to hypotheses that look precise and testable on the surface, but they fail to hit the mark upon greater scrutiny.
 
-### Falsifiability
+::: {.callout-important collapse="true"}
+## Extra: Falsificationism and falsifiability
+
+XXX
 
 You might be wondering what it is meant by "falsifiable" statements. From [Seven examples of falsifiability](https://simplicable.com/new/falsifiability) by John Spacey:
 
@@ -162,10 +159,11 @@ You might be wondering what it is meant by "falsifiable" statements. From [Seven
 Some examples of falsifiable hypotheses:
 
 -   "Life only exists on Earth." (it would be falsified by the observation of life somewhere else).
--   "If there is a 1st person exclusive dual, then there is also a 1st person inclusive dual." [\[Universal 1871\]](https://typo.uni-konstanz.de/rara/universals-archive/1876/) (it would be falsified by the observation of languages with a 1st person exclusive dual but without the incluve alternative).
+-   "If there is a 1st person exclusive dual, then there is also a 1st person inclusive dual." [\[Universal 1871\]](https://typo.uni-konstanz.de/rara/universals-archive/1876/) (it would be falsified by the observation of languages with a 1st person exclusive dual but without the inclusive alternative).
 -   "Infants start uttering full sentences only after their 12th month of life." (it would be falsified by the observation of infants uttering full sentences before their 12th month of life).
 
 And some examples of non-falsifiable hypotheses.
 
 -   "Life might exist outside of the Solar system." (if we observe life outside the Solar system or we don't, the statement is still true).
 -   "Languages with a 1st person inclusive dual can have a 1st person exclusive dual." (whether we observe a language with both 1st inclusive and exclusive dual or not, the statement is still true.)
+:::
