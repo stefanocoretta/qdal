@@ -1,4 +1,4 @@
-# Research Methods {#sec-res-meth}
+# Research methods {#sec-res-meth}
 
 ![](https://img.shields.io/badge/Area-Research_methods-blue)
 

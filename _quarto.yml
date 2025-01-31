@@ -19,6 +19,7 @@ book:
         - ch-packages.qmd
     - part: "Week 2"
       chapters:
+        - ch-inference.qmd
         - ch-scripts.qmd
         - ch-statistical-vars.qmd
         - ch-read-data.qmd
@@ -32,8 +33,8 @@ book:
         - ch-plotting.qmd
     - part: "Week 4"
       chapters:
-        - ch-inference.qmd
         - ch-probability.qmd
+        - ch-freq-bayes.qmd
         - ch-gauss-model.qmd
     - part: "Week 5"
       chapters:
