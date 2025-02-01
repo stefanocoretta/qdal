@@ -11,7 +11,7 @@ library(webexercises)
 library(glue)
 ```
 
-In the context of a quantitative research study, one of the objectives is to figure out the probability distribution of the variable of interest: Voice Onset Time, number of telic verbs, informativity score, acceptability ratings, reaction times, and so on. Let's imagine we are interested in understanding more about the nature of reaction times in auditory lexical decision tasks (lexical decision tasks in which the target is presented aurally rather than in writing). We can revisit the RT data from above to try and address the following research question:
+In the context of a quantitative research study, one simple objectives could be to figure out the probability distribution of the variable of interest: Voice Onset Time, number of telic verbs, informativity score, acceptability ratings, reaction times, and so on. Let's imagine we are interested in understanding more about the nature of reaction times in auditory lexical decision tasks (lexical decision tasks in which the target is presented aurally rather than in writing). We can revisit the RT data from above to try and address the following research question:
 
 > RQ: In a typical auditory lexical decision task, what are the mean and standard deviation of reaction times (RTs)?
 
@@ -72,17 +72,13 @@ ggplot(data = tibble(x = 0:300), aes(x)) +
 
 A statistical tool we can use to obtain an estimate of $\mu$ and $\sigma$ is a Gaussian model. A Gaussian model is a statistical model that estimates the values of the parameters of a Gaussian distribution, i.e. $\mu$ and $\sigma$. Since the values of the parameters are uncertain, we can estimate a probability distribution of the parameters from the data, rather than just their values. This is what a Bayesian Gaussian model does.
 
-You can fit a Gaussian model to data using the [brms](https://paulbuerkner.com/brms/) package (the name is an initialism of Bayesian Regression Models using Stan; Gaussian models are a special type of regression models, which will be introduced in @sec-reg-intro).
+## Prior probability distributions
 
-The brms package can run a variety of Bayesian (regression) models. It is a very flexible package that allows you to model a lot of different types of variables. You don't really need to understand all of the technical details to be able to effectively use the package and interpret the results, so this textbook will focus on how to use the package in the context of research. We will cover some of the technicalities, but if you are are particularly interested in the inner workings of the package, feel free to do so (you can find materials on specific aspects by searching online). One useful thing to know is that brms is a bridge between R and the statistical programming software [Stan](https://mc-stan.org). Stan is a powerful piece of software that can run any type of Bayesian models. What brms does is that it allows you to write Bayesian models in R, which are translated into Stan models and run with Stan under the hood. You can safely use brms without learning Stan, but if you are interested in the computational aspects of Stan, you can check the [Stan documentation](https://mc-stan.org).
-
-As mentioned in @sec-freq-bayes, the essense of Bayesian inference is the estimation of posterior probability distributions from prior probability distributions and data. In practical terms, you need prior probability distributions, or **priors** for short, and data.
+As mentioned in @sec-freq-bayes, the essence of Bayesian inference is updating prior knowledge with . the estimation of posterior probability distributions from prior probability distributions and data. In practical terms, you need prior probability distributions, or **priors** for short, and data.
 
 \[XXX illustration of prior to posterior\]
 
-Priors have to be specified by the researcher. The following section explains how.
-
-## Prior probability distributions
+Priors have to be specified by the researcher.
 
 Parameter values can be modelled to come from Gaussian distributions themselves. So, for the mean $\mu$, we can estimate a Gaussian distribution, with its own mean and standard deviation, $\mu_1$ and $\sigma_1$. For the standard deviation $\sigma$, we can estimate a *half* Gaussian distribution: why half? Because standard deviations cannot be negative, we can simply include the positive side of a Gaussian distribution centred at 0 (i.e. with mean = 0). In other words, we assume $\sigma$ to be distributed according to $Gaussian(0, \sigma_2)$. We can extend the model mathematical notation above to include the distributions of $\mu$ and $\sigma$.
 
@@ -95,6 +91,10 @@ $$
 $$
 
 ## Fitting a Gaussian model
+
+You can fit a Gaussian model to data using the [brms](https://paulbuerkner.com/brms/) package (the name is an initialism of Bayesian Regression Models using Stan; Gaussian models are a special type of regression models, which will be introduced in @sec-reg-intro).
+
+The brms package can run a variety of Bayesian (regression) models. It is a very flexible package that allows you to model a lot of different types of variables. You don't really need to understand all of the technical details to be able to effectively use the package and interpret the results, so this textbook will focus on how to use the package in the context of research. We will cover some of the technicalities, but if you are are particularly interested in the inner workings of the package, feel free to do so (you can find materials on specific aspects by searching online). One useful thing to know is that brms is a bridge between R and the statistical programming software [Stan](https://mc-stan.org). Stan is a powerful piece of software that can run any type of Bayesian models. What brms does is that it allows you to write Bayesian models in R, which are translated into Stan models and run with Stan under the hood. You can safely use brms without learning Stan, but if you are interested in the computational aspects of Stan, you can check the [Stan documentation](https://mc-stan.org).
 
 The first thing to do is of course to attach the brms package (see code below). You can then run a regression model with the `brm()` function, short for Bayesian Regression Model (a Gaussian model is a special type of regression model). The mandatory arguments of `brm()` are a model formula, a distribution family (of the outcome variable), and the data you want to run the model with. Running a model with data is also formally known as *fitting the model to the data*. Remember the model mathematical formula from above: $\text{RT} \sim Gaussian(\mu, \sigma)$. It would be nice if `brms()` allowed you to write the formula like that.
 
