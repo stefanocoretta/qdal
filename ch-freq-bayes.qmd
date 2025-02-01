@@ -2,11 +2,7 @@
 
 ![](https://img.shields.io/badge/Area-Statistics-red)
 
-::: {layout-ncol="2"}
-![](img/volcano.png){fig-align="center" width="200"}
-
-![](img/raining.png){fig-align="center" width="200"}
-:::
+![](img/volcano-raining.png){fig-align="center" width="500"}
 
 ## Frequentist vs Bayesian probability
 
@@ -22,11 +18,9 @@ In the context of research, a frequentist probability tells you the probability 
 
 Most of current research is carried out with frequentist methods. This is a historical accident, based on both a misunderstanding of Bayesian statistics (which is, by the way, older than frequentist statistics) and the fact that frequentist maths was much easier (and personal computers did not exist).
 
-The commonly accepted approach to frequentist inference is the so-called **Null Hypothesis Significance Testing**, or NHST. As practised by researchers, the NHST approach is a (sometimes incoherent) mix of the frequentist work of Fisher on one hand, and Neyman and Pearson on the other.
+The commonly accepted approach to frequentist inference is the so-called **Null Hypothesis Significance Testing**, or NHST. As practised by researchers, the NHST approach is a (sometimes incoherent) mix of the frequentist work of Fisher on one hand, and Neyman and Pearson on the other. The inconsistent nature of NHST as practised has led to the elaboration of the concept and label "**Null Ritual**" [@gigerenzer2004; @gigerenzer2004a; @gigerenzer2018]. The Null Ritual has been criticised by frequentist and Bayesian statisticians alike and has resulted in the proposal or alternative, stricter, versions of NHST, like Statistical Inference as Severe Testing [SIST, @mayo2018; for a critique see @gelman2019].
 
-The main tenet of NHST is that you set a **null hypothesis** and you try to **reject** it. A null hypothesis is, in practice, a *nil* hypothesis: in other words, it is the hypothesis that there is *no* difference between two values (these usually being means of two or more groups of interest). Using a variety of techniques, one obtains a **p-value**, i.e. a frequentist probability. *p*-values are very commonly mistaken for Bayesian probabilities ([Cassidy et al 2019](https://www.doi.org/10.1177/2515245919858072)) and this results in various misinterpretations of reported results. To learn the meaning (and dangers) of *p*-values, check [this post](p-values.qmd).
-
-The NHST framework has been criticised because of its incoherence (both by frequentist and non-frequentist folk). A must-read is [*Mindless statistics*](https://www.doi.org/10.1016/j.socec.2004.09.033) by Gigerenzer and Gerd.
+The main tenet of NHST (or better, the Null Ritual) is that you set a **null hypothesis** and you try to **reject** it. A null hypothesis is, in practice, always a *nil* hypothesis: in other words, it is the hypothesis that there is *no* difference between two estimands (these usually being means of two or more groups of interest). Using a variety of numerical techniques, one obtains a ***p*****-value**, i.e. a frequentist probability. The *p*-value is used for inference: if the *p*-value is smaller than a threshold, one can reject the nil hypothesis; if the *p*-value is equal to or greater than the threshold, you cannot reject the null hypothesis. *p*-values are very commonly mistaken for Bayesian probabilities [@cassidy2019] and this results in various misinterpretations of reported results. You will learn about the meaning (and misunderstandings) of *p*-values in @sec-pvalues.
 
 ## Bayesian inference
 
