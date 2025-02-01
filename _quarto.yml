@@ -36,6 +36,7 @@ book:
         - ch-probability.qmd
         - ch-freq-bayes.qmd
         - ch-gauss-model.qmd
+        - ch-fit-model.qmd
     - part: "Week 5"
       chapters:
         - ch-regression-intro.qmd
