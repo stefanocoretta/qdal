@@ -1,4 +1,4 @@
-# Gaussian models {#sec-gauss-model}
+# Running Gaussian models {#sec-fit-model}
 
 ![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
 
@@ -10,8 +10,6 @@ library(tidyverse)
 library(webexercises)
 library(glue)
 ```
-
-## Fitting a Gaussian model
 
 You can fit a Gaussian model to data using the [brms](https://paulbuerkner.com/brms/) package (the name is an initialism of Bayesian Regression Models using Stan; Gaussian models are a special type of regression models, which will be introduced in @sec-reg-intro).
 
@@ -44,6 +42,8 @@ As with other R functions, we want to save the output of `brm()` to a variable, 
 
 ``` r
 library(brms)
+
+mald <- readRDS("data/tucker2019/mald_1_1.rds")
 
 rt_bm <- brm(
   RT ~ 1,
@@ -80,12 +80,14 @@ The messages in the text are related to Stan and the statistical algorithm used 
 
 library(brms)
 
+mald <- readRDS("data/tucker2019/mald_1_1.rds")
+
 rt_bm <- brm(
   RT ~ 1,
   family = gaussian,
   data = mald,
   seed = 6725,
-  file = "cache/ch-gauss-model-rt_bm"
+  file = "cache/ch-fit-model-rt_bm"
 )
 ```
 

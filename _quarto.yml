@@ -62,3 +62,5 @@ format:
 editor: visual
 callout-icon: false
 
+execute:
+  freeze: true
