@@ -72,24 +72,6 @@ ggplot(data = tibble(x = 0:300), aes(x)) +
 
 A statistical tool we can use to obtain an estimate of $\mu$ and $\sigma$ is a Gaussian model. A Gaussian model is a statistical model that estimates the values of the parameters of a Gaussian distribution, i.e. $\mu$ and $\sigma$. Since the values of the parameters are uncertain, we can estimate a probability distribution of the parameters from the data, rather than just their values. This is what a Bayesian Gaussian model does.
 
-## Prior probability distributions
-
-As mentioned in @sec-freq-bayes, the essence of Bayesian inference is updating prior knowledge with . the estimation of posterior probability distributions from prior probability distributions and data. In practical terms, you need prior probability distributions, or **priors** for short, and data.
-
-\[XXX illustration of prior to posterior\]
-
-Priors have to be specified by the researcher.
-
-Parameter values can be modelled to come from Gaussian distributions themselves. So, for the mean $\mu$, we can estimate a Gaussian distribution, with its own mean and standard deviation, $\mu_1$ and $\sigma_1$. For the standard deviation $\sigma$, we can estimate a *half* Gaussian distribution: why half? Because standard deviations cannot be negative, we can simply include the positive side of a Gaussian distribution centred at 0 (i.e. with mean = 0). In other words, we assume $\sigma$ to be distributed according to $Gaussian(0, \sigma_2)$. We can extend the model mathematical notation above to include the distributions of $\mu$ and $\sigma$.
-
-$$
-\begin{align}
-\text{RT} & \sim Gaussian(\mu, \sigma)\\
-\mu & \sim Gaussian(\mu_1, \sigma_1)\\
-\sigma & \sim HalfGaussian(\mu_2 = 0, \sigma_2)\\
-\end{align}
-$$
-
 ## Fitting a Gaussian model
 
 You can fit a Gaussian model to data using the [brms](https://paulbuerkner.com/brms/) package (the name is an initialism of Bayesian Regression Models using Stan; Gaussian models are a special type of regression models, which will be introduced in @sec-reg-intro).
