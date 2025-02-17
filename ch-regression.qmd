@@ -225,8 +225,8 @@ In this post you have learnt the very basics of Bayesian regression models. As m
 
 The perk of using brms is that you can just learn the basics of one package and one approach and use it to fit a large variety of regression models.
 
-This is different from the standard frequentis approach, where different models require different packages or functions, with their different syntax and quirks.
+This is different from the standard frequentist approach, where different models require different packages or functions, with their different syntax and quirks.
 
-In the folllowing posts, you will build your understanding of Bayesian regression models, which will enable you to approach even the most complex models! However, due to time limits you won't learn everything there is to learn.
+In the following posts, you will build your understanding of Bayesian regression models, which will enable you to approach even the most complex models! However, due to time limits you won't learn everything there is to learn.
 
 Developing conceptual and practical skills in quantitative methods is a long-term process and unfortunately one semester will not be enough. So be prepared to continue your learning journey for years to come!

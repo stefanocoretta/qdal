@@ -1,0 +1,192 @@
+# Regression models: categorical predictors {#sec-regression-cat}
+
+![](https://img.shields.io/badge/Area-R-green)
+
+In @sec-regression you learned how to fit regression models of the following form in R using the brms package.
+
+$$
+\begin{align}
+y & \sim Gaussian(\mu, \sigma)\\
+\mu & = \beta_0 + \beta_1 \cdot x\\
+\end{align}
+$$
+
+In these models, $x$ was a numeric predictor, like speech rate. Numeric predictors are not the only type of predictors that a regression model can handle. Regression predictors can also be categorical: gender, age group, place of articulation, mono- vs bi-lingual, etc. However, regression model cannot handle categorical predictors directly: think about it, what would it mean to multiply $\beta_1$ by "female" or by "old". Categorical predictors have to be re-coded as numbers.
+
+In this chapter we will revisit the MALD reaction times data from @sec-fit-model, this time modelling RTs depending on the lexical status of the target work (real vs nonce word). You will learn about two ways of coding categorical predictors: treatment contrasts (the default type in most implementations of regression models) and indexing.
+
+## Revisiting reaction times
+
+```{r}
+#| label: mald
+
+library(tidyverse)
+
+mald <- readRDS("data/tucker2019/mald_1_1.rds")
+mald
+```
+
+```{r}
+#| label: fig-mald-dens
+mald |> 
+  ggplot(aes(RT, fill = IsWord)) +
+  geom_density(alpha = 0.5)
+```
+
+```{r}
+#| label: fig-mald-jit
+mald |>
+  ggplot(aes(IsWord, RT, fill = IsWord)) +
+  geom_jitter(alpha = 0.1, width = 0.2) +
+  geom_violin(width = 0.2)
+```
+
+```{r}
+#| label: mald-summ
+mald |> 
+  group_by(IsWord) |> 
+  summarise(
+    round(mean(RT)), median(RT), round(sd(RT))
+  )
+```
+
+$$
+\begin{align}
+y_i & \sim Gaussian(\mu_i, \sigma)\\
+\mu_i & = \beta_0 + \beta_1 \cdot w_i\\
+\end{align}
+$$
+
+| `IsWord`       | `w` |
+|----------------|:---:|
+| IsWord = TRUE  |  0  |
+| IsWord = FALSE |  1  |
+
+: Treatment contrasts coding of the categorical predictor `IsWord`. {#tbl-treat}
+
+$$
+\begin{align}
+\mu_i & = \beta_0 + \beta_1 \cdot w_i\\
+\mu_{\text{T}} & = \beta_0 + \beta_1 \cdot 0 = \beta_0\\
+\mu_{\text{F}} & = \beta_0 + \beta_1 \cdot 1 = \beta_0 + \beta_1
+\end{align}
+$$
+
+If $\beta_0$ is the *mean* RT when `IsWord` is TRUE, what is $\beta_1$? Simple.
+
+$$
+\begin{align}
+\beta_1 & = \mu_\text{F} - \mu_\text{T}\\
+& = (\beta_0 + \beta_1) - \beta_0
+\end{align}
+$$
+
+$\beta_0$ is the *difference* between the mean RT when `IsWord` is TRUE and the mean RT when `IsWord` is FALSE.
+
+```{r}
+#| label: rt-bm-1
+library(brms)
+
+rt_bm_1 <- brm(
+  RT ~ IsWord,
+  family = gaussian,
+  data = mald,
+  seed = 6725,
+  file = "cache/ch-regression-cat-rt_bm_1"
+)
+```
+
+```{r}
+#| label: rt-bm-1-summ
+summary(rt_bm_1)
+```
+
+## Indexing of categorical predictors
+
+$$
+\begin{align}
+y_i & \sim Gaussian(\mu_i, \sigma)\\
+\mu_i & = \beta_{\text{W}[i]}\\
+\end{align}
+$$
+
+```{r}
+#| label: rt-bm-2
+
+rt_bm_2 <- brm(
+  RT ~ 0 + IsWord,
+  family = gaussian,
+  data = mald,
+  seed = 6725,
+  file = "cache/ch-regression-cat-rt_bm_2"
+)
+```
+
+```{r}
+#| label: rt-bm-2-summ
+summary(rt_bm_2)
+```
+
+## More than two levels
+
+```{r}
+#| label: eu-vot
+
+eu_vot <- read_csv("data/egurtzegi2020/eu_vot.csv")
+eu_vot
+```
+
+```{r}
+#| label: eu-vot-three
+
+eu_vot <- eu_vot |> 
+  mutate(
+    phonation = case_when(
+      phone %in% c("p", "t", "k") ~ "voiceless",
+      phone %in% c("b", "d", "g") ~ "voiced",
+      phone %in% c("ph", "th", "kh") ~ "aspirated"
+    ),
+    VOT = VOT * 1000
+  )
+
+```
+
+```{r}
+#| label: fig-eu-vot-dens
+
+eu_vot |> 
+  drop_na(phonation) |> 
+  ggplot(aes(VOT, fill = phonation)) +
+  geom_density(alpha = 0.5)
+
+```
+
+```{r}
+#| label: fig-eu-vot-jit
+
+eu_vot |> 
+  drop_na(phonation) |> 
+  ggplot(aes(phonation, VOT)) +
+  geom_jitter(alpha = 0.5, width = 0.2)
+
+```
+
+```{r}
+#| label: vot_bm
+
+vot_bm <- brm(
+  VOT ~ 0 + phonation,
+  family = gaussian,
+  data = eu_vot,
+  seed = 6725,
+  file = "cache/ch-regression-cat-vot_bm"
+)
+
+```
+
+`Warning: Rows containing NAs were excluded from the model.`
+
+```{r}
+#| label: vot-bm-summ
+summary(vot_bm)
+```

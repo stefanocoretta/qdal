@@ -41,6 +41,9 @@ book:
       chapters:
         - ch-regression-intro.qmd
         - ch-regression.qmd
+    - part: "Week 6"
+      chapters:
+        - ch-regression-cat.qmd
     - references.qmd
 
 bibliography: references.bib
