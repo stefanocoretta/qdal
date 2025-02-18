@@ -870,6 +870,16 @@
       ],
       "Hash": "66488692cb8621bc78df1b9b819497a6"
     },
+    "gitcreds": {
+      "Package": "gitcreds",
+      "Version": "0.1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "ab08ac61f3e1be454ae21911eb8bc2fe"
+    },
     "globals": {
       "Package": "globals",
       "Version": "0.16.3",
@@ -1347,18 +1357,6 @@
         "askpass"
       ],
       "Hash": "5bfe2927efa9f87766ca9605301ea48f"
-    },
-    "pak": {
-      "Package": "pak",
-      "Version": "0.8.0.1",
-      "Source": "Repository",
-      "Repository": "https://packagemanager.posit.co/cran/latest",
-      "Requirements": [
-        "R",
-        "tools",
-        "utils"
-      ],
-      "Hash": "7a5f3ae05388bfd4adfeb5d7fad1b8de"
     },
     "parallelly": {
       "Package": "parallelly",
