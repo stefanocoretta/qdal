@@ -13,6 +13,8 @@ library(webexercises)
 library(glue)
 ```
 
+Let's start by reading the RT data from the MALD dataset [@tucker2019]. The study the data comes from used an auditory lexical decision task to elicit RTs and accuracy data. In each trial, participants would listen to a word and would have to press a button to say if the word is a real English word or not. The RT is the time lag between the offset of the auditory stimulus (the target word) and the button press. Note that to keep things more manageable, the data we will read is just a subset of the full data.
+
 ```{r}
 #| label: mald
 
