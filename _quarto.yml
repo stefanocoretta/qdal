@@ -43,6 +43,9 @@ book:
         - ch-regression.qmd
     - part: "Week 6"
       chapters:
+        - ch-interim-summ.qmd
+    - part: "Week 7"
+      chapters:
         - ch-regression-cat.qmd
         - ch-regression-index.qmd
         - ch-regression-more.qmd
