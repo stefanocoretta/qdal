@@ -1,0 +1,103 @@
+# Regression models: indexing categorical predictors {#sec-regression-index}
+
+![](https://img.shields.io/badge/Area-R-green)
+
+$$
+\begin{align}
+y_i & \sim Gaussian(\mu_i, \sigma)\\
+\mu_i & = \beta_{\text{W}[i]}\\
+\end{align}
+$$
+
+```{r}
+#| label: mald
+#| message: false
+
+library(tidyverse)
+
+mald <- readRDS("data/tucker2019/mald_1_1.rds")
+```
+
+
+```{r}
+#| label: rt-bm-2
+
+library(brms)
+
+rt_bm_2 <- brm(
+  RT ~ 0 + IsWord,
+  family = gaussian,
+  data = mald,
+  seed = 6725,
+  file = "cache/ch-regression-cat-rt_bm_2"
+)
+```
+
+```{r}
+#| label: rt-bm-2-summ
+summary(rt_bm_2)
+```
+
+## More than two levels
+
+```{r}
+#| label: eu-vot
+
+eu_vot <- read_csv("data/egurtzegi2020/eu_vot.csv")
+eu_vot
+```
+
+```{r}
+#| label: eu-vot-three
+
+eu_vot <- eu_vot |> 
+  mutate(
+    phonation = case_when(
+      phone %in% c("p", "t", "k") ~ "voiceless",
+      phone %in% c("b", "d", "g") ~ "voiced",
+      phone %in% c("ph", "th", "kh") ~ "aspirated"
+    ),
+    VOT = VOT * 1000
+  )
+
+```
+
+```{r}
+#| label: fig-eu-vot-dens
+
+eu_vot |> 
+  drop_na(phonation) |> 
+  ggplot(aes(VOT, fill = phonation)) +
+  geom_density(alpha = 0.5)
+
+```
+
+```{r}
+#| label: fig-eu-vot-jit
+
+eu_vot |> 
+  drop_na(phonation) |> 
+  ggplot(aes(phonation, VOT)) +
+  geom_jitter(alpha = 0.5, width = 0.2)
+
+```
+
+```{r}
+#| label: vot_bm
+
+vot_bm <- brm(
+  VOT ~ 0 + phonation,
+  family = gaussian,
+  data = eu_vot,
+  seed = 6725,
+  file = "cache/ch-regression-cat-vot_bm"
+)
+
+```
+
+`Warning: Rows containing NAs were excluded from the model.`
+
+```{r}
+#| label: vot-bm-summ
+summary(vot_bm)
+```

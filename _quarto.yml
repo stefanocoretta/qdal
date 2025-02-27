@@ -44,6 +44,7 @@ book:
     - part: "Week 6"
       chapters:
         - ch-regression-cat.qmd
+        - ch-regression-index.qmd
     - references.qmd
 
 bibliography: references.bib

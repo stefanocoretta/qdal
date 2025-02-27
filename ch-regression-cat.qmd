@@ -1,6 +1,6 @@
 # Regression models: categorical predictors {#sec-regression-cat}
 
-![](https://img.shields.io/badge/Area-R-green)
+![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
 
 In @sec-regression you learned how to fit regression models of the following form in R using the brms package.
 
@@ -92,6 +92,8 @@ mald_summ <- mald |>
 mald_summ
 ```
 
+The mean and median RTs for nonce words (`IsWord = FALSE`) are about 100 ms higher than the mean and median of real words. We could stop here and call it a day, but we would make the mistake of not considering uncertainty and variability: this is just one (admittedly large) sample of all the RT values that could be produced by the entire English speaking population. So we should apply inference from the sample to the population to obtain an estimate of the difference in RTs that accounts for that uncertainty and variability. The inderence method we are learning is using regression modelling. The next sections will teach you how to model the RTs with regression models in brms.
+
 ::: {.callout-warning collapse="true"}
 ## Extra: Tables with `kable()`
 
@@ -110,9 +112,9 @@ knitr::kable(
 ```
 :::
 
-## Model RTs by word type
+## Model RTs by word type: treatment contrasts
 
-We can model RTs with a Gaussian distribution (although as mentioned above, this family of distribution is generally not appropriate for variables liker RTs) with a mean \$\\mu\$ and a standard deviation $\sigma$. This time though we want to model a different mean $\mu$ depending on the word type in `IsWord`. Each observation (RT value) is either of a real word or a nonce word. This is what the subscript $i$ is for in the equation below:
+We can model RTs with a Gaussian distribution (although as mentioned above, this family of distribution is generally not appropriate for variables liker RTs) with a mean $\mu$ and a standard deviation $\sigma$. This time though we want to model a different mean $\mu$ depending on the word type in `IsWord`. Each observation (RT value) is either of a real word or a nonce word. This is what the subscript $i$ is for in the equation below and since there are 5000 observations, $i = [1..5000]$ :
 
 $$
 RT_i \sim Gaussian(\mu_i, \sigma)
@@ -120,7 +122,7 @@ $$
 
 The mean $\mu_i$ will depend on the specific observation $RT_i$. We will see why in a second.
 
-Now, how do we make the model estimate a different mean depending on `IsWord`. There are several ways of setting this up. The default method is to use so-called "treatment contrasts" coding of categorical predictors. Let's work by example with `IsWord`. This is a categorical predictor with two levels: `TRUE` and `FALSE`. With treatment contrasts, one level is chosen as the "reference" level and the other is compared to the reference level. The reference level is automatically set as the first level in the predictor in alphabetical order. This would mean that `FALSE` would be the reference level, because "F" comes before "T".
+Now, how do we make the model estimate a different mean depending on `IsWord`. There are several ways of setting this up. The default method is to use so-called **treatment contrasts** coding of categorical predictors. Let's work by example with `IsWord`. This is a categorical predictor with two levels: `TRUE` and `FALSE`. With treatment contrasts, one level is chosen as the **reference level** and the other is compared to the reference level. The reference level is automatically set as the first level in the predictor in alphabetical order. This would mean that `FALSE` would be the reference level, because "F" comes before "T".
 
 However, in the `mald` data, the column `IsWord` is a factor column and the levels have been ordered so that `TRUE` is the first level and `FALSE` the second. You can see this in the Environment panel, if you click on the arrow next to `mald` and look next to `IsWord`: it will say `Factor w/ 2 levels "TRUE","FALSE"`. You can also check the order of the levels of a factor with the `levels()` function.
 
@@ -144,7 +146,7 @@ levels(fac$fac_1)
 levels(fac$fac_2)
 ```
 
-We will use `IsWord` with the order `TRUE` and `FALSE`. This means that `TRUE` will be the reference level and the RTs when `IsWord` is `FALSE` will be compared to the RTs of when `IsWord` is `TRUE`. In other words, now the mean $\mu_i$ varies depending on the level of `IsWord`. Let's assume a "dummy variable" $w_i$ that says if `IsWord` is `TRUE`, in which case $w_i = 0$, or `FALSE`, in which case $w_i = 1$. See @tbl-treat.
+We will use `IsWord` with the order `TRUE` and `FALSE`. This means that `TRUE` will be the reference level and the RTs when `IsWord` is `FALSE` will be compared to the RTs of when `IsWord` is `TRUE`. In other words, now the mean $\mu_i$ varies depending on the level of `IsWord`. Let's assume a **dummy variable** $w_i$ that says if `IsWord` is `TRUE`, in which case $w_i = 0$, or `FALSE`, in which case $w_i = 1$. See @tbl-treat.
 
 | `IsWord`       | `w` |
 |----------------|:---:|
@@ -162,7 +164,7 @@ RT_i & \sim Gaussian(\mu_i, \sigma)\\
 \end{align}
 $$
 
-$\beta_0$ and $\beta_1$ are two "regression coefficients", estimated from the data by the regression model. So $\mu_i$ is the sum of $\beta_0$ and $\beta_1 \cdot w_i$. $w_i$ is 0 (when the word is real) or 1 (the the word is a nonce word). The outcome of plugging in the value of $w_i$ is laid out in the following formulae.
+$\beta_0$ and $\beta_1$ are two "regression coefficients", estimated from the data by the regression model. So $\mu_i$ is the sum of $\beta_0$ and $\beta_1 \cdot w_i$. $w_i$ is 0 (when the word is real) or 1 (the the word is a nonce word). That is why we write $RT_i$: the subscript $i$ allows us to pick the correct value of $w_i$ for each specific observation. The result of plugging in the value of $w_i$ is laid out in the following formulae.
 
 $$
 \begin{align}
@@ -185,7 +187,11 @@ $$
 \end{align}
 $$
 
-$\beta_0$ is the *difference* between the mean RT when `IsWord` is TRUE and the mean RT when `IsWord` is FALSE. As mentioned above, with treatment contrasts you are comparing the second level to the first. So one regression coefficient will be the mean of the reference level, but the other coefficient will be the *difference* between the mean of the two levels. I know this is not particularly user-friendly, but this is the default in R when using categorical predictors. Fitting a regression model with a categorical predictor like `IsWord` is as simple as including the predictor in the model formula, to the right of the tilde `~`.
+$\beta_0$ is the *difference* between the mean RT when `IsWord` is TRUE and the mean RT when `IsWord` is FALSE. As mentioned above, with treatment contrasts you are comparing the second level to the first. So one regression coefficient will be the mean of the reference level, but the other coefficient will be the *difference* between the mean of the two levels. I know this is not particularly user-friendly, but this is the default in R when using categorical predictors.
+
+## Fit the model
+
+Fitting a regression model with a categorical predictor like `IsWord` is as simple as including the predictor in the model formula, to the right of the tilde `~`.
 
 ```{r}
 #| label: rt-bm-1
@@ -203,99 +209,45 @@ rt_bm_1 <- brm(
 )
 ```
 
-Treatment contrasts are applied by default: you do not need to create a dummy variable yourself or tell brms to use that coding (which is both a blessing and a curse).
+Treatment contrasts are applied by default: you do not need to create a dummy variable yourself or tell brms to use that coding (which is both a blessing and a curse). The following code chunk returns the summary of the model `rt_bm_1`.
 
 ```{r}
 #| label: rt-bm-1-summ
 summary(rt_bm_1)
 ```
 
-## Indexing of categorical predictors
-
-$$
-\begin{align}
-y_i & \sim Gaussian(\mu_i, \sigma)\\
-\mu_i & = \beta_{\text{W}[i]}\\
-\end{align}
-$$
+The first few lines should be familiar: they report information about the model, like the distribution family, the formula and so on. Then we have the `Regression Coefficients` table. The estimates of the coefficients and the 95% Credible Intervals (CrIs) are reported in @tbl-rt-1.
 
 ```{r}
-#| label: rt-bm-2
+#| label: tbl-rt-1
+#| tbl-cap: "Regression coefficients from a model of RTs by word type."
+#| code-fold: true
 
-rt_bm_2 <- brm(
-  RT ~ 0 + IsWord,
-  family = gaussian,
-  data = mald,
-  seed = 6725,
-  file = "cache/ch-regression-cat-rt_bm_2"
-)
+fixef(rt_bm_1) |> knitr::kable()
 ```
+
+The `Estimate` column is the mean of the posterior distribution of the regression coefficients, and `Est.Error` is the standard deviation of the posterior distribution of the regression coefficients. `Q2.5` and `Q97.5` are the lower and upper limit of the 95% CrI of the posterior distribution of the regression coefficients. These are summary measures of (posterior) probability distributions. We can quickly plot these with `mcmc_dens()` from the bayesplot package:
 
 ```{r}
-#| label: rt-bm-2-summ
-summary(rt_bm_2)
+#| label: fig-rt-1-dens
+#| fig-cap: "Density plots of the posterior probability distributions of the regression coefficients of model `rt_bm_1`."
+#| message: false
+
+library(bayesplot)
+
+mcmc_dens(rt_bm_1, pars = vars(starts_with("b_")))
 ```
 
-## More than two levels
+-   `b_Intercept` or `Intercept` in the model summary is the mean RT when `IsWord` is `TRUE`. This is $\beta_0$ in the model's mathematical formula.
 
-```{r}
-#| label: eu-vot
+-   `b_IsWordFALSE` or `IsWordFALSE` in the model summary is the *difference* in mean between nonce and real words. This is $\beta_1$ in the model's mathematical formula.
 
-eu_vot <- read_csv("data/egurtzegi2020/eu_vot.csv")
-eu_vot
-```
+The posterior distributions of the coefficients $\beta_0$ and $\beta_1$ capture the uncertainty in the estimated values of those coefficients. The 95% CrIs indicate the range of values of the posterior that cover 95% of the area under the curve of the posterior, i.e. 95% of the density mass. This means that at 95% probability, the value of the coefficient is within that range.
 
-```{r}
-#| label: eu-vot-three
+-   The 95% CrI of `Intercept` $\beta_0$ is \[941, 965\] ms: this means that there is a 95% probability that the mean RT when `IsWord` is `TRUE` is between 941 and 965 ms.
 
-eu_vot <- eu_vot |> 
-  mutate(
-    phonation = case_when(
-      phone %in% c("p", "t", "k") ~ "voiceless",
-      phone %in% c("b", "d", "g") ~ "voiced",
-      phone %in% c("ph", "th", "kh") ~ "aspirated"
-    ),
-    VOT = VOT * 1000
-  )
+-   The 95% CrI of `IsWordFALSE` $\beta_0$ is \[99, 134\] ms: this means that there is a 95% probability that the *difference* in mean RT between nonce and real words is between 99 and 134 ms.
 
-```
+So here we have our answer: at 95% confidence (another way of saying at 95% probability), based on the model and data, RTs for nonce words are 99 to 134 ms longer than RTs for real words. Now is 99-134 ms a linguistically meaningful question? Statistics cannot help with that: only a well developed linguistic mathematical model of lexical retrieval and related neurocognitive processes allows us to make any statement regarding the linguistic relevance of a particular result. This aspect applies to any statistical approach, whether frequentist of Bayesian. Within a frequentist framework, "statistical significance" is *not* "linguistic significance". A difference between two groups can be statistically significant and not be linguistically meaningful and vice versa.
 
-```{r}
-#| label: fig-eu-vot-dens
-
-eu_vot |> 
-  drop_na(phonation) |> 
-  ggplot(aes(VOT, fill = phonation)) +
-  geom_density(alpha = 0.5)
-
-```
-
-```{r}
-#| label: fig-eu-vot-jit
-
-eu_vot |> 
-  drop_na(phonation) |> 
-  ggplot(aes(phonation, VOT)) +
-  geom_jitter(alpha = 0.5, width = 0.2)
-
-```
-
-```{r}
-#| label: vot_bm
-
-vot_bm <- brm(
-  VOT ~ 0 + phonation,
-  family = gaussian,
-  data = eu_vot,
-  seed = 6725,
-  file = "cache/ch-regression-cat-vot_bm"
-)
-
-```
-
-`Warning: Rows containing NAs were excluded from the model.`
-
-```{r}
-#| label: vot-bm-summ
-summary(vot_bm)
-```
+After having obtained estimates from the model, always ask yourself: what do those estimates mean, based on our current understanding of the linguistic phenomenon we are investigating?
