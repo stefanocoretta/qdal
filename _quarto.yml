@@ -45,6 +45,7 @@ book:
       chapters:
         - ch-regression-cat.qmd
         - ch-regression-index.qmd
+        - ch-regression-more.qmd
     - references.qmd
 
 bibliography: references.bib

@@ -13,7 +13,7 @@ $$
 
 In these models, $x$ was a numeric predictor, like speech rate. Numeric predictors are not the only type of predictors that a regression model can handle. Regression predictors can also be categorical: gender, age group, place of articulation, mono- vs bi-lingual, etc. However, regression model cannot handle categorical predictors directly: think about it, what would it mean to multiply $\beta_1$ by "female" or by "old". Categorical predictors have to be re-coded as numbers.
 
-In this chapter we will revisit the MALD reaction times (RTs) data from @sec-fit-model, this time modelling RTs depending on the lexical status of the target work (real vs nonce word). You will learn about two ways of coding categorical predictors: treatment contrasts (the default type in most implementations of regression models) and indexing.
+In this chapter and the next we will revisit the MALD reaction times (RTs) data from @sec-fit-model, this time modelling RTs depending on the lexical status of the target work (real vs nonce word). This chapter will teach you the default way of including categorical predictors in regression models: numerical coding with treatment contrasts; while in @sec-regression-index you will learn about an alternative way: indexing.
 
 ## Revisiting reaction times
 
@@ -112,7 +112,7 @@ knitr::kable(
 ```
 :::
 
-## Model RTs by word type: treatment contrasts
+## Treatment contrasts
 
 We can model RTs with a Gaussian distribution (although as mentioned above, this family of distribution is generally not appropriate for variables liker RTs) with a mean $\mu$ and a standard deviation $\sigma$. This time though we want to model a different mean $\mu$ depending on the word type in `IsWord`. Each observation (RT value) is either of a real word or a nonce word. This is what the subscript $i$ is for in the equation below and since there are 5000 observations, $i = [1..5000]$ :
 
@@ -122,7 +122,7 @@ $$
 
 The mean $\mu_i$ will depend on the specific observation $RT_i$. We will see why in a second.
 
-Now, how do we make the model estimate a different mean depending on `IsWord`. There are several ways of setting this up. The default method is to use so-called **treatment contrasts** coding of categorical predictors. Let's work by example with `IsWord`. This is a categorical predictor with two levels: `TRUE` and `FALSE`. With treatment contrasts, one level is chosen as the **reference level** and the other is compared to the reference level. The reference level is automatically set as the first level in the predictor in alphabetical order. This would mean that `FALSE` would be the reference level, because "F" comes before "T".
+Now, how do we make the model estimate a different mean depending on `IsWord`? There are several ways of setting this up. The default method is to use so-called **treatment contrasts** which involves numerical coding of categorical predictors (the coding takes the same naming as the contrasts, so the coding for treatment contrasts is treatment coding). Let's work by example with `IsWord`. This is a categorical predictor with two levels: `TRUE` and `FALSE`. With treatment contrasts, one level is chosen as the **reference level** and the other is compared to the reference level. The reference level is automatically set as the first level in the predictor in alphabetical order. This would mean that `FALSE` would be the reference level, because "F" comes before "T".
 
 However, in the `mald` data, the column `IsWord` is a factor column and the levels have been ordered so that `TRUE` is the first level and `FALSE` the second. You can see this in the Environment panel, if you click on the arrow next to `mald` and look next to `IsWord`: it will say `Factor w/ 2 levels "TRUE","FALSE"`. You can also check the order of the levels of a factor with the `levels()` function.
 
@@ -146,7 +146,7 @@ levels(fac$fac_1)
 levels(fac$fac_2)
 ```
 
-We will use `IsWord` with the order `TRUE` and `FALSE`. This means that `TRUE` will be the reference level and the RTs when `IsWord` is `FALSE` will be compared to the RTs of when `IsWord` is `TRUE`. In other words, now the mean $\mu_i$ varies depending on the level of `IsWord`. Let's assume a **dummy variable** $w_i$ that says if `IsWord` is `TRUE`, in which case $w_i = 0$, or `FALSE`, in which case $w_i = 1$. See @tbl-treat.
+We will use `IsWord` with the order `TRUE` and `FALSE`. This means that `TRUE` will be the reference level and the RTs when `IsWord` is `FALSE` will be compared to the RTs of when `IsWord` is `TRUE`. In other words, now the mean $\mu_i$ varies depending on the level of `IsWord`. Now we need to numerically code `IsWord` (i.e. use numbers to refer to the levels of the categorical predictor). With treatment contrasts, treatment coding is used to code categorical predictors. Treatment coding uses **indicator variables** (also known as "dummy" variables) which take the values 0 or 1. Let's make an indicator variable $w_i$ that says if `IsWord` is `TRUE`, in which case $w = 0$, or `FALSE`, in which case $w = 1$. We only need one indicator variable because there are only two levels and they can be coded with a 0 and a 1 respectively. See @tbl-treat for the correspondence between the predictor `IsWord` and the value of the indicator variable $w$.
 
 | `IsWord`       | `w` |
 |----------------|:---:|
@@ -164,7 +164,13 @@ RT_i & \sim Gaussian(\mu_i, \sigma)\\
 \end{align}
 $$
 
-$\beta_0$ and $\beta_1$ are two "regression coefficients", estimated from the data by the regression model. So $\mu_i$ is the sum of $\beta_0$ and $\beta_1 \cdot w_i$. $w_i$ is 0 (when the word is real) or 1 (the the word is a nonce word). That is why we write $RT_i$: the subscript $i$ allows us to pick the correct value of $w_i$ for each specific observation. The result of plugging in the value of $w_i$ is laid out in the following formulae.
+$\beta_0$ and $\beta_1$ are two "regression coefficients", estimated from the data by the regression model. You can think of $\beta_0$ as the model's intercept and of $\beta_1$ as the model's slope. Can you figure out why?
+
+Recall that a regression model with a numeric predictor like the one we saw in @sec-regression is basically the formula of a line. We modelled vowel duration as a function of speech rate. The intercept of the regression line estimated by the model indicates where the line crosses the *y*-axis when the *x* value is 0: in our case, that is the vowel duration when speech rate is 0. In the model above, with RTs as a function of word type, the numeric predictor is the indicator variable $w$ (which stands for the categorical predictor `IsWord`). The formula of a line really works just with numbers so for the formula to make sense, categorical predictors have to be made into numbers and treatment contrasts is such one way of doing so.
+
+Now, $\beta_0$ is the model's intercept because that is the mean RT when $w$ is 0 (like with vowel duration when speech rate is 0; can you see the parallel?). And $\beta_1$ is the model's slope because $\beta_1$ is the change in RT for a unit increase of $w$, which is when $w$ goes from 0 to 1. This in turn corresponds to the change in level in the categorical predictor. Do you see the connection? It's a bit contorted, but once you get this it should explain several aspects of regression models with categorical predictors and treatment contrasts.
+
+So $\mu_i$ is the sum of $\beta_0$ and $\beta_1 \cdot w_i$. $w_i$ is 0 (when the word is real) or 1 (the the word is a nonce word). That is why we write $RT_i$: the subscript $i$ allows us to pick the correct value of $w_i$ for each specific observation. The result of plugging in the value of $w_i$ is laid out in the following formulae.
 
 $$
 \begin{align}
@@ -189,7 +195,7 @@ $$
 
 $\beta_0$ is the *difference* between the mean RT when `IsWord` is TRUE and the mean RT when `IsWord` is FALSE. As mentioned above, with treatment contrasts you are comparing the second level to the first. So one regression coefficient will be the mean of the reference level, but the other coefficient will be the *difference* between the mean of the two levels. I know this is not particularly user-friendly, but this is the default in R when using categorical predictors.
 
-## Fit the model
+## Model RTs by word type
 
 Fitting a regression model with a categorical predictor like `IsWord` is as simple as including the predictor in the model formula, to the right of the tilde `~`.
 
@@ -209,7 +215,7 @@ rt_bm_1 <- brm(
 )
 ```
 
-Treatment contrasts are applied by default: you do not need to create a dummy variable yourself or tell brms to use that coding (which is both a blessing and a curse). The following code chunk returns the summary of the model `rt_bm_1`.
+Treatment contrasts are applied by default: you do not need to create an indicator variable yourself or tell brms to use that coding (which is both a blessing and a curse). The following code chunk returns the summary of the model `rt_bm_1`.
 
 ```{r}
 #| label: rt-bm-1-summ

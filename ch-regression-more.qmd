@@ -1,0 +1,74 @@
+# Indexing categorical predictors {#sec-regression-more}
+
+![](https://img.shields.io/badge/Area-R-green)
+
+@sec-regression-cat showed you how to fit a regression model with a categorical predictor. We modelled reaction times as a function of word type (real or nonce). The categorical predictor `IsWord` (word type) was coded with so-called treatment contrasts: the model's intercept is the mean of the first level and the "slope" is the difference between the second level and the first.
+
+
+## More than two levels
+
+```{r}
+#| label: eu-vot
+
+library(tidyverse)
+
+eu_vot <- read_csv("data/egurtzegi2020/eu_vot.csv")
+eu_vot
+```
+
+```{r}
+#| label: eu-vot-three
+
+eu_vot <- eu_vot |> 
+  mutate(
+    phonation = case_when(
+      phone %in% c("p", "t", "k") ~ "voiceless",
+      phone %in% c("b", "d", "g") ~ "voiced",
+      phone %in% c("ph", "th", "kh") ~ "aspirated"
+    ),
+    VOT = VOT * 1000
+  )
+
+```
+
+```{r}
+#| label: fig-eu-vot-dens
+
+eu_vot |> 
+  drop_na(phonation) |> 
+  ggplot(aes(VOT, fill = phonation)) +
+  geom_density(alpha = 0.5)
+
+```
+
+```{r}
+#| label: fig-eu-vot-jit
+
+eu_vot |> 
+  drop_na(phonation) |> 
+  ggplot(aes(phonation, VOT)) +
+  geom_jitter(alpha = 0.5, width = 0.2)
+
+```
+
+```{r}
+#| label: vot_bm
+
+library(brms)
+
+vot_bm <- brm(
+  VOT ~ 0 + phonation,
+  family = gaussian,
+  data = eu_vot,
+  seed = 6725,
+  file = "cache/ch-regression-index-vot_bm"
+)
+
+```
+
+`Warning: Rows containing NAs were excluded from the model.`
+
+```{r}
+#| label: vot-bm-summ
+summary(vot_bm)
+```
