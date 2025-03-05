@@ -4,7 +4,24 @@
 
 @sec-regression-cat showed you how to fit a regression model with a categorical predictor. We modelled reaction times as a function of word type (real or nonce). The categorical predictor `IsWord` (word type) was coded with so-called treatment contrasts: the model's intercept is the mean of the first level and the "slope" is the difference between the second level and the first.
 
+Another way to include categorical predictors in a regression model is to use **indexing**: with indexing, separate regression coefficients are estimated for each level in the categorical predictor. This involves no coding of categories into numbers and no contrasts (i.e. the coefficients do not represent differences between levels).
+
+In this chapter we revisit the regression model from @sec-regression-cat using indexing.
+
 ## Indexing and intercept suppression
+
+When using treatment coding and contrasts, the model coefficients are set up this way:
+
+$$
+\begin{align}
+RT_i & \sim Gaussian(\mu_i, \sigma)\\
+\mu_i & = \beta_0 + \beta_1 \cdot w_i\\
+\end{align}
+$$
+
+where $w$ is the indicator variable for `IsWord`. $\beta_0$ is the mean RT with real words and $\beta_1$ is the difference between the mean RT with nonce words and that with real words.
+
+With indexing, the model mathematical specification is the following:
 
 $$
 \begin{align}
@@ -12,6 +29,28 @@ y_i & \sim Gaussian(\mu_i, \sigma)\\
 \mu_i & = \beta_{\text{W}[i]}\\
 \end{align}
 $$
+
+where $\text{W}$ is an **index variable**, indexing `IsWord`, according to @tbl-index.
+
+| `IsWord`       | `W` |
+|----------------|:---:|
+| IsWord = TRUE  |  1  |
+| IsWord = FALSE |  2  |
+
+: Indexing of the categorical predictor `IsWord`. {#tbl-index}
+
+This means there are actually two parameters: $\beta_1$ for the first level of `IsWord` (i.e. $W = 1$ so that `IsWord= TRUE`) and $\beta_2$ for the second level of `IsWord` (i.e. $W = 2$, so that `IsWord = FALSE`). $\text{W}_{[i]}$ just means the value of $\text{W}$ for the data row $i$. Thus the mean $\mu$ is either $\beta_1$ or $\beta_2$ depending on the level of `IsWord` ($\mu_T$is the mean RT for `IsWord = TRUE` and $\mu_F$ for `IsWord = FALSE`).
+
+$$
+\begin{align}
+\mu_T & = \beta_1\\
+\mu_F & = \beta_2\\
+\end{align}
+$$
+
+Since treatment contrasts are the default in R, the formula `RT ~ IsWord` gives us treatment contrasts. So how do you instruct R to use indexing instead?
+
+The syntax for indexing is not particularly intuitive: `RT ~ 0 + IsWord`.
 
 ```{r}
 #| label: mald

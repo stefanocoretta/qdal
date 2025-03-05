@@ -82,27 +82,57 @@ The regression model estimates the parameters in the mathematical formulae: para
 
 -   The standard deviation of the Gaussian distribution, $\sigma$.
 
-Before that though, create a folder called `cache/` in the `data/` folder of the RStudio project of the course. We will use this folder to save the output of model fitting so that you don't have to refit the model every time. This is useful because as models get more and more complex, they can take quite a while to fit.
+To instruct R to model vowel duration as a function of the numeric predictor speech rate you simply *add* it to the `1` we have used in the right-hand side of the tilde in @sec-fit-model (i.e. `v1_duration ~ 1`): so `v1_duration ~ 1 + speech_rate`. Now it should be clear what the `1` is for: it stands for the intercept, $\beta_0$. You can also think about it as the $1$ in the revised formula below:
+
+$$
+\begin{align}
+\text{vdur} & \sim Gaussian(\mu, \sigma)\\
+\mu & = \beta_0 \cdot 1 + \beta_1 \cdot \text{sr}\\
+\end{align}
+$$
+
+Of course, $\beta_0 \cdot 1$ is the same as $\beta_0$. The R formula is based on what you multiply the coefficients with in the mathematical formula: $1$ and $sr$. While the predictor $sr$ can take different values, the $1$ is constant so it is also called the **constant term**, or the **intercept term**. In the R formula, you don't need to explicitly include the coefficients $\beta_0$ and $\beta_1$. Put all this together and you get `1 + speech_rate`. There is more: in R, since the $1$ is constant you can omit it! So `v1_duration ~ 1 + speech_rate` can also be written as `v1_duration ~ speech_rate`. They are equivalent.
+
+Now that we have clarified how the R formula is set up, here is the full code to fit a Gaussian regression model of vowel duration with brms.
 
 ```{r}
 #| label: vow-bm
+#| eval: false
 
 library(brms)
 
 vow_bm <- brm(
-  v1_duration ~ speech_rate,
+  # `1 +` can be omitted.
+  v1_duration ~ 1 + speech_rate,
+  # v1_duration ~ speech rate,
+  family = gaussian,
+  data = ita_egg_clean
+)
+```
+
+```{r}
+#| label: vow-bm-run
+#| include: false
+
+library(brms)
+
+vow_bm <- brm(
+  # `1 +` can be omitted.
+  v1_duration ~ 1 + speech_rate,
+  # v1_duration ~ speech rate,
   family = gaussian,
   data = ita_egg_clean,
   cores = 4,
   seed = 20912,
+  # see below for an explanation of the file argument
   file = "cache/ch-regression-vow_bm"
 )
 ```
 
-The model will be fitted and saved in `cache/` with the file name `vow_bm.rds`. If you now re-run the same code again, you will notice that `brm()` does not fit the model again, but rather reads it from the file (no output is shown, but trust me, it works! Check the contents of `cache/` to see for yourself.).
+::: {.callout-important collapse="true"}
+## Extra: the rethinking package
 
-::: callout-warning
-When you save the model fit to a file, R does not keep track of changes in the model specification, so if you make changes to the formula or data, you need to **delete the saved model file** before re-running the code for the changes to have effect!
+XXX
 :::
 
 ## Interpret the model summary
@@ -165,6 +195,16 @@ If you wish to include the raw data in the plot, you can wrap `conditional_effec
 
 plot(conditional_effects(vow_bm, effects = "speech_rate"), points = TRUE, point_args = list(alpha = 0.1))
 ```
+
+## Reproducible model fit
+
+XXX Before you fit the model, create a folder called `cache/` folder in the RStudio project folder. We will use this folder to save the output of model fitting so that you don't have to refit the model every time. This is useful because as models get more and more complex, they can take quite a while to fit.
+
+The model will be fitted and saved in `cache/` with the file name `vow_bm.rds`. If you now re-run the same code again, you will notice that `brm()` does not fit the model again, but rather reads it from the file (no output is shown, but trust me, it works! Check the contents of `cache/` to see for yourself.).
+
+::: callout-important
+When you save the model fit to a file, R does not keep track of changes in the model specification, so if you make changes to the formula or data, you need to **delete the saved model file** before re-running the code for the changes to have effect!
+:::
 
 ## Simulating Gaussian data
 
