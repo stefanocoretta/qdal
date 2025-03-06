@@ -193,11 +193,11 @@ $$
 \end{align}
 $$
 
-$\beta_0$ is the *difference* between the mean RT when `IsWord` is TRUE and the mean RT when `IsWord` is FALSE. As mentioned above, with treatment contrasts you are comparing the second level to the first. So one regression coefficient will be the mean of the reference level, but the other coefficient will be the *difference* between the mean of the two levels. I know this is not particularly user-friendly, but this is the default in R when using categorical predictors.
+$\beta_0$ is the *difference* between the mean RT when `IsWord` is `TRUE` and the mean RT when `IsWord` is `FALSE`. As mentioned above, with treatment contrasts you are comparing the second level to the first. So one regression coefficient will be the mean of the reference level, but the other coefficient will be the *difference* between the mean of the two levels. I know this is not particularly user-friendly, but this is the default in R when using categorical predictors.
 
 ## Model RTs by word type
 
-Fitting a regression model with a categorical predictor like `IsWord` is as simple as including the predictor in the model formula, to the right of the tilde `~`.
+Fitting a regression model with a categorical predictor like `IsWord` is as simple as including the predictor in the model formula, to the right of the tilde `~`. From now on we will stop including `1 +` since an intercept term is included by default.
 
 ```{r}
 #| label: rt-bm-1
@@ -207,6 +207,7 @@ Fitting a regression model with a categorical predictor like `IsWord` is as simp
 library(brms)
 
 rt_bm_1 <- brm(
+  # equivalent: RT ~ 1 + IsWord
   RT ~ IsWord,
   family = gaussian,
   data = mald,

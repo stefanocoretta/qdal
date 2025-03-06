@@ -39,7 +39,7 @@ where $\text{W}$ is an **index variable**, indexing `IsWord`, according to @tbl-
 
 : Indexing of the categorical predictor `IsWord`. {#tbl-index}
 
-This means there are actually two parameters: $\beta_1$ for the first level of `IsWord` (i.e. $W = 1$ so that `IsWord= TRUE`) and $\beta_2$ for the second level of `IsWord` (i.e. $W = 2$, so that `IsWord = FALSE`). $\text{W}_{[i]}$ just means the value of $\text{W}$ for the data row $i$. Thus the mean $\mu$ is either $\beta_1$ or $\beta_2$ depending on the level of `IsWord` ($\mu_T$is the mean RT for `IsWord = TRUE` and $\mu_F$ for `IsWord = FALSE`).
+This means there are actually two parameters: $\beta_1$ for the first level of `IsWord` (i.e. $W = 1$ so that `IsWord` = `TRUE`) and $\beta_2$ for the second level of `IsWord` (i.e. $W = 2$, so that `IsWord` = `FALSE`). $\text{W}_{[i]}$ just means the value of $\text{W}$ for the data row $i$. Thus the mean $\mu$ is either $\beta_1$ or $\beta_2$ depending on the level of `IsWord` ($\mu_T$is the mean RT for `IsWord` = `TRUE` and $\mu_F$ for `IsWord` = `FALSE`).
 
 $$
 \begin{align}
@@ -50,7 +50,9 @@ $$
 
 Since treatment contrasts are the default in R, the formula `RT ~ IsWord` gives us treatment contrasts. So how do you instruct R to use indexing instead?
 
-The syntax for indexing is not particularly intuitive: `RT ~ 0 + IsWord`.
+The syntax for indexing is not particularly intuitive: `RT ~ 0 + IsWord`. Why `0 +`? That is the way to tell R to remove the intercept term: remember that the R formula includes a `1 +` by default (even when not explicitly written out) and that `1` is the constant or intercept term? Removing the intercept term changes the implied mathematical formula for $\mu$ from $\beta_0 + \beta_1 \cdot w_i$ to $\beta_{\text{W}[i]}$.
+
+Let's read the MALD data.
 
 ```{r}
 #| label: mald
@@ -61,12 +63,16 @@ library(tidyverse)
 mald <- readRDS("data/tucker2019/mald_1_1.rds")
 ```
 
+Now let's fit a Gaussian regression model of RTs depending on the lexical status of the target word (real, `IsWord` = `TRUE`, or nonce, `IsWord` = `FALSE`). As usual, we set a seed and save the model output to a file for reproducibility.
+
 ```{r}
 #| label: rt-idx
+#| message: false
 
 library(brms)
 
 rt_idx <- brm(
+  # Remove the intercept term with `0 +`
   RT ~ 0 + IsWord,
   family = gaussian,
   data = mald,
@@ -75,7 +81,10 @@ rt_idx <- brm(
 )
 ```
 
+Now we can inspect the model summary. Pay particular attention to the `Regression Coefficients`.
+
 ```{r}
 #| label: rt-idx-summ
+
 summary(rt_idx)
 ```
