@@ -2,13 +2,13 @@
 
 ![](https://img.shields.io/badge/Area-R-green)
 
-@sec-regression-cat showed you how to fit a regression model with a categorical predictor. We modelled reaction times as a function of word type (real or nonce). The categorical predictor `IsWord` (word type) was coded with so-called treatment contrasts: the model's intercept is the mean of the first level and the "slope" is the difference between the second level and the first.
+@sec-regression-cat showed you how to fit a regression model with a categorical predictor. We modelled reaction times as a function of word type (real or nonce). The categorical predictor `IsWord` (word type) was coded with so-called treatment contrasts using dummy coding: the model's intercept is the mean of the first level and the "slope" is the difference between the second level and the first.
 
-Another way to include categorical predictors in a regression model is to use **indexing**: with indexing, separate regression coefficients are estimated for each level in the categorical predictor. This involves no coding of categories into numbers and no contrasts (i.e. the coefficients do not represent differences between levels).
+Another way to include categorical predictors in a regression model is to use **indexing**: with indexing, separate regression coefficients are estimated for each level in the categorical predictor. This involves so-called "one-hot encoding" of categorical predictors into numbers and no contrasts (i.e. the coefficients do not represent differences between levels).
 
 In this chapter we revisit the regression model from @sec-regression-cat using indexing.
 
-## Indexing and intercept suppression
+## Indexing categorical predictors
 
 When using treatment coding and contrasts, the model coefficients are set up this way:
 
@@ -26,31 +26,35 @@ With indexing, the model mathematical specification is the following:
 $$
 \begin{align}
 y_i & \sim Gaussian(\mu_i, \sigma)\\
-\mu_i & = \beta_{\text{W}[i]}\\
+\mu_i & = \beta_1 \cdot W_{\text{T}[i]} + \beta_2 \cdot W_{\text{F}[i]}\\
 \end{align}
 $$
 
-where $\text{W}$ is an **index variable**, indexing `IsWord`, according to @tbl-index.
+In this formula, $\text{W}_\text{T}$ and $\text{W}_\text{T}$ are indicator variables. The system these indicator variables use is known as "one-hot encoding": each level of the categorical predictor gets an indicator variable, which is $1$ if the level of the observation $i$ is the level encoded by that indicator variable, otherwise 0. @tbl-index shows the correspondence between levels of `IsWord` and the values of the indicator variables.
 
-| `IsWord`       | `W` |
-|----------------|:---:|
-| IsWord = TRUE  |  1  |
-| IsWord = FALSE |  2  |
+| `IsWord`       | $W_\text{T}$ | $W_\text{F}$ |
+|----------------|:------------:|:------------:|
+| IsWord = TRUE  |      1       |      0       |
+| IsWord = FALSE |      0       |      1       |
 
-: Indexing of the categorical predictor `IsWord`. {#tbl-index}
+: Indicator variables of the categorical predictor `IsWord` when using indexing instead of contrasts. {#tbl-index}
 
-This means there are actually two parameters: $\beta_1$ for the first level of `IsWord` (i.e. $W = 1$ so that `IsWord` = `TRUE`) and $\beta_2$ for the second level of `IsWord` (i.e. $W = 2$, so that `IsWord` = `FALSE`). $\text{W}_{[i]}$ just means the value of $\text{W}$ for the data row $i$. Thus the mean $\mu$ is either $\beta_1$ or $\beta_2$ depending on the level of `IsWord` ($\mu_T$is the mean RT for `IsWord` = `TRUE` and $\mu_F$ for `IsWord` = `FALSE`).
+The regression formula has two coefficients to be estimated: $\beta_1$ and $\beta_2$. $\beta_1$ is the mean RT when `IsWord` is `TRUE` ($\mu_\text{T}$) and $\beta_2$ is the mean RT when `IsWord` is `FALSE` ($\mu_\text{F}$), as shown below by substituting the indicator variables with the values $0$ or $1$ depending on the level of `IsWord`.
 
 $$
 \begin{align}
-\mu_T & = \beta_1\\
-\mu_F & = \beta_2\\
+\mu_\text{T} & = \beta_1 \cdot 1 + \beta_2 \cdot 0\\
+& = \beta_1\\
+\mu_\text{F} & = \beta_1 \cdot 0 + \beta_2 \cdot 1\\
+& = \beta_2\\
 \end{align}
 $$
 
 Since treatment contrasts are the default in R, the formula `RT ~ IsWord` gives us treatment contrasts. So how do you instruct R to use indexing instead?
 
-The syntax for indexing is not particularly intuitive: `RT ~ 0 + IsWord`. Why `0 +`? That is the way to tell R to remove the intercept term: remember that the R formula includes a `1 +` by default (even when not explicitly written out) and that `1` is the constant or intercept term? Removing the intercept term changes the implied mathematical formula for $\mu$ from $\beta_0 + \beta_1 \cdot w_i$ to $\beta_{\text{W}[i]}$.
+The syntax for indexing is not particularly intuitive: `RT ~ 0 + IsWord`. Why `0 +`? That is the way to tell R to remove the intercept term: remember that the R formula includes a `1 +` by default (even when not explicitly written out) and that `1` is the constant or intercept term? Removing the intercept term changes the implied mathematical formula for $\mu$ from $\beta_0 + \beta_1 \cdot w_i$ to $\beta_1 \cdot W_{\text{T}[i]} + \beta_2 \cdot W_{\text{F}[i]}$.
+
+## A model of RTs with indexing
 
 Let's read the MALD data.
 
@@ -88,3 +92,38 @@ Now we can inspect the model summary. Pay particular attention to the `Regressio
 
 summary(rt_idx)
 ```
+
+```{r}
+#| label: rt-idx-ef
+#| include: false
+
+rt_idx_ef <- fixef(rt_idx)
+
+```
+
+The regression coefficients are also reported in @tbl-index.
+
+```{r}
+#| label: tbl-rt-idx-ef
+#| tbl-cap: "Regression coefficients of the `rt_idx` model."
+#| code-fold: true
+
+rt_idx_ef |> knitr::kable(digits = 0)
+
+```
+
+-   `IsWordTRUE` is $\beta_1$, in other words $\mu_\text{T}$, or the mean RT with real words. According to our data and model, there is 95% probability that the mean RT with real words is between `{r} round(rt_idx_ef[1,3])` and `{r} round(rt_idx_ef[1,4])` ms.
+
+-   `IsWordFALSE` is $\beta_2$, in other words $\mu_\text{F}$, or the mean RT with nonce words. According to the data and model, we can be 95% confident that the mean RT with nonce words is between `{r} round(rt_idx_ef[2,3])` and `{r} round(rt_idx_ef[2,4])` ms.
+
+While in the model we fitted in @sec-regression-cat one of the regression coefficients gave us the *difference* in mean RT between the two word conditions, in the model we just fitted we don't get this information from the summary. Instead, you will have to calculate the difference between the two levels of `IsWord` by wrangling the MCMC draws of the model. This will be covered in @sec-mcmc-draws, so for now focus on understanding the concepts and application of treatment contrasts vs indexing.
+
+## Why indexing?
+
+You might be asking yourself: if I am interested in the difference between real and nonce words, why should I use indexing instead of treatment contrasts?
+
+In the simple case of a model with one categorical predictor with two levels, it might seem a overhead to have to further process the model to get the difference of interest when with treatment contrasts the difference is directly estimated by the model. But in most cases you will have more than two levels and more than one predictor! In those models, it is not possible to get all of the logical "contrasts" be estimated by the model and you will still have to process the model's MCMC draws to get the comparisons you need. When the model estimates the means of different levels, it is more straightforward to process the draws. You will see examples in later chapters.
+
+Another advantage of using indexing is related to specifying prior probability distributions. So far, we have used the default priors set by brms and we will continue to do so. However, in real research contexts it is important to think about priors and to specify custom priors, tailored for the specific context. It is much easier to think about prior probability distributions of means than of differences between means: with treatment contrasts, you would have to specify a prior probability distribution for the mean of the first level and a prior probability distribution for the difference between the second and first level.
+
+The next chapter, @sec-regression-more, will illustrate models with one categorical predictor that has three levels. The chapter will show you both a model that uses treatment contrasts and the same model but with indexing of the categorical predictor. It is important to be familiar with both ways of including categorical predictors, but we will drop treatment contrasts after that and stick with indexing.
