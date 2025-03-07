@@ -148,7 +148,7 @@ levels(fac$fac_2)
 
 We will use `IsWord` with the order `TRUE` and `FALSE`. This means that `TRUE` will be the reference level and the RTs when `IsWord` is `FALSE` will be compared to the RTs of when `IsWord` is `TRUE`. In other words, now the mean $\mu_i$ varies depending on the level of `IsWord`. Now we need to numerically code `IsWord` (i.e. use numbers to refer to the levels of the categorical predictor). With treatment contrasts, treatment coding is used to numerically code categorical predictors. Treatment coding uses **indicator variables** which take the values 0 or 1. Let's make an indicator variable $w_i$ that says if `IsWord` is `TRUE`, in which case $w = 0$, or `FALSE`, in which case $w = 1$. We only need one indicator variable because there are only two levels and they can be coded with a 0 and a 1 respectively. This way of setting up indicator variables is called **dummy coding**. See @tbl-treat for the correspondence between the predictor `IsWord` and the value of the indicator variable $w$.
 
-| `IsWord`       | `w` |
+| `IsWord`       | $w$ |
 |----------------|:---:|
 | IsWord = TRUE  |  0  |
 | IsWord = FALSE |  1  |

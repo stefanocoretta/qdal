@@ -83,7 +83,7 @@ To remove the legend, you should use the `theme()` function. Check the documenta
 :::: {.callout-important collapse="true"}
 ### Solution
 
-Have you tried the `legend.position` argument?
+Have you tried `legend.position` in `theme()`?
 
 ::: {.callout-important collapse="true"}
 ### Show me
@@ -111,7 +111,32 @@ eu_vot |>
 Calculate appropriate measures of central tendency and dispersion of VOT depending on the phonation type.
 :::
 
-## Regression model of VOT
+## Treatment contrasts with three levels
+
+Let's proceed with modelling VOT. We will assume that VOT values follow a Gaussian distribution: as with reaction times, this is just a pedagogical step for you to get familiar with fitting models with categorical predictors, but other distribution families might be more appropriate. While for reaction times there are some recommended distributions (which you will learn about in XXX), there are really no recommendations for VOT, so a Gaussian distribution will have to do for now.
+
+Before fitting the model, it is important to go through the model's mathematical formula and to pay particular attention to how phonation type is coded using treatment contrasts. The `phonation` predictor has three levels: aspirated, voiced and voiceless. The order of the levels follows the alphabetical order. You will remember from @sec-regression-cat that the mean of the first level of a categorical predictor ends up being the intercept of the model while the difference of the second level relative to the first is the slope. With a third level, the model estimates another slope, which is the difference between the third level and the first. With treatment contrasts, the second and higher levels of a categorical predictor are compared (or contrasted) with the first level. With the default alphabetical order, this means that the intercept of the model will tell us the mean VOT of aspirated stops, and the mean of voiced and voiceless stops will be compared to that of aspirated stops.
+
+An important aspect of treatment coding of categorical predictors that we haven't discussed is the number of indicator variables needed: the number of indicator variables is always the number of the levels of the predictor minus one ($N - 1$, where $N$ is the number of levels). It follows that a predictor with three levels needs two indicator variables ($N = 3$, $3 - 1 = 2$). This is illustrated in @tbl-phon-treat.
+
+| `phonation`               | $ph_\text{VD}$ | $ph_\text{VL}$ |
+|---------------------------|:--------------:|:--------------:|
+| `phonation` = `aspirated` |       0        |       0        |
+| `phonation` = `voiced`    |       1        |       0        |
+| `phonation` = `voiceless` |       0        |       1        |
+
+: Treatment contrasts coding of the categorical predictor `phonation`. {#tbl-phon-treat}
+
+...
+
+$$
+\begin{align}
+\text{VOT}_i & \sim Gaussian(\mu_i, \sigma)\\
+\mu_i & = \beta_0 + \beta_1 \cdot ph_{\text{}[i]}\\
+\end{align}
+$$
+
+The code below fits a Gaussian regression model, with VOT (in milliseconds) as the outcome variable and phonation type as the (categorical) predictor. Phonation type (`phonation`) is coded with treatment contrasts.
 
 ```{r}
 #| label: vot_bm
@@ -120,7 +145,7 @@ Calculate appropriate measures of central tendency and dispersion of VOT dependi
 library(brms)
 
 vot_bm <- brm(
-  VOT ~ 0 + phonation,
+  VOT_ms ~ phonation,
   family = gaussian,
   data = eu_vot,
   seed = 6725,
@@ -135,3 +160,4 @@ vot_bm <- brm(
 #| label: vot-bm-summ
 summary(vot_bm)
 ```
+
