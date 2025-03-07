@@ -2,16 +2,27 @@
 
 ![](https://img.shields.io/badge/Area-R-green)
 
-@sec-regression-cat showed you how to fit a regression model with a categorical predictor. We modelled reaction times as a function of word type (real or nonce). The categorical predictor `IsWord` (word type) was coded with so-called treatment contrasts: the model's intercept is the mean of the first level and the "slope" is the difference between the second level and the first.
+@sec-regression-cat and @sec-regression-index showed you how to fit a regression model with a categorical predictor. We modelled reaction times as a function of word type (real or nonce) from the MALD dataset [@tucker2019]. The categorical predictor `IsWord` (word type: real or nonce) was included with treatment contrasts in @sec-regression-cat and using indexing in @sec-regression-index: in the former case, the model's intercept is the mean of the first level and the "slope" is the difference between the second level and the first; in the latter case, the model estimated the mean of the two levels of `IsWord`.
+
+In this chapter we will look at new data, Voice Onset Time (VOT) of Mixean Basque [@egurtzegi2020], to illustrate a categorical predictor with three levels.
+
+## Mixean Basque VOT
+
+The data `egurtzegi2020/eu_vot.csv` contains measurements of VOT from 10 speakers of Mixean Basque [@egurtzegi2020]. Mixean Basque contrasts voiceless unaspirated, voiceless aspirated and voiced stops. Let's read the data.
 
 ```{r}
 #| label: eu-vot
+#| message: false
 
 library(tidyverse)
 
 eu_vot <- read_csv("data/egurtzegi2020/eu_vot.csv")
 eu_vot
 ```
+
+The VOT should increase from voiced to voiceless unaspirated to voiceless aspirated stops. We can use a Gaussian regression model to assess whether the data is compatible with our expectations. The `eu_vot` data has a `voicing` column that tells only if the stop is voiceless or voiced, but we need a column that further differentiates between unaspirated and aspirated voiceless stops. We can create a new column, `phonation` depending on the `phone`, using the `case_when()` function inside `mutate()`.
+
+`case_when()` works like an extended `ifelse()` function: while `ifelse()` is restricted to two conditions (i.e. when something is TRUE or FALSE), case when allows you to specify many conditions. The general syntax for the conditions in `case_when()` is `condition ~ replacement` where `condition` is a matching statement and `replacement` is the value that should be returned when there is a match. In the following code, we use `case_when()` to match specific phones in the `phone` column and based on that we return `voiceless`, `voiced` or `aspirated`. These values are saved in the new column `phonation`. We also convert the VOT values from seconds to milliseconds by multiply the VOT by 1000 in a new column `VOT_ms`.
 
 ```{r}
 #| label: eu-vot-three
@@ -23,33 +34,88 @@ eu_vot <- eu_vot |>
       phone %in% c("b", "d", "g") ~ "voiced",
       phone %in% c("ph", "th", "kh") ~ "aspirated"
     ),
-    VOT = VOT * 1000
+    # convert to milliseconds
+    VOT_ms = VOT * 1000
   )
 
 ```
 
+@fig-eu-vot-dens shows the densities of the VOT values for voiced, voiceless (unaspirated) and (voiceless) aspirated stops separately. Do the densities match our expectations about VOT?
+
 ```{r}
 #| label: fig-eu-vot-dens
+#| fig-cap: ""
+#| code-fold: true
 
 eu_vot |> 
   drop_na(phonation) |> 
-  ggplot(aes(VOT, fill = phonation)) +
+  ggplot(aes(VOT_ms, fill = phonation)) +
   geom_density(alpha = 0.5)
 
 ```
 
+:::::: callout-warning
+### Exercise 1
+
+Recreate the following plot.
+
 ```{r}
-#| label: fig-eu-vot-jit
+#| label: eu-vot-jit-ex
+#| echo: false
 
 eu_vot |> 
   drop_na(phonation) |> 
-  ggplot(aes(phonation, VOT)) +
-  geom_jitter(alpha = 0.5, width = 0.2)
+  ggplot(aes(phonation, VOT_ms, fill = phonation)) +
+  geom_jitter(alpha = 0.1, width = 0.2) +
+  geom_violin(alpha = 0.8, width = 0.2) +
+  labs(x = "Phonation", y = "VOT (ms)") +
+  theme(legend.position = "none")
+```
+
+::: {.callout-tip collapse="true"}
+### Hint
+
+The fill legend is not really needed, since the *x*-axis already separates the different phonations types, but different fill colours can help with the overall legibility of the violins since they highlight the area covered by the violin shape.
+
+To remove the legend, you should use the `theme()` function. Check the documentation of `?theme` and search online for the argument value that hides the legend.
+:::
+
+:::: {.callout-important collapse="true"}
+### Solution
+
+Have you tried the `legend.position` argument?
+
+::: {.callout-important collapse="true"}
+### Show me
+
+```{r}
+#| label: eu-vot-jit-solution
+#| eval: false
+
+eu_vot |> 
+  drop_na(phonation) |> 
+  ggplot(aes(phonation, VOT_ms, fill = phonation)) +
+  geom_jitter(alpha = 0.1, width = 0.2) +
+  geom_violin(alpha = 0.8, width = 0.2) +
+  labs(x = "Phonation", y = "VOT (ms)") +
+  theme(legend.position = "none")
 
 ```
+:::
+::::
+::::::
+
+::: callout-warning
+### Exercise 2
+
+Calculate appropriate measures of central tendency and dispersion of VOT depending on the phonation type.
+:::
+
+## Regression model of VOT
 
 ```{r}
 #| label: vot_bm
+#| message: false
 
 library(brms)
 
