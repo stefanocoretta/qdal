@@ -25,7 +25,7 @@ With indexing, the model mathematical specification is the following:
 
 $$
 \begin{align}
-y_i & \sim Gaussian(\mu_i, \sigma)\\
+RT_i & \sim Gaussian(\mu_i, \sigma)\\
 \mu_i & = \beta_1 \cdot W_{\text{T}[i]} + \beta_2 \cdot W_{\text{F}[i]}\\
 \end{align}
 $$
