@@ -63,12 +63,14 @@ input.webex-solveme.webex-correct,
   content: "  ";
 }
 
-.webex-incorrect span::before,
+/* STEFANO: apply before to first span only */
+
+.webex-incorrect > span::before,
 .webex-incorrect + .webex-icon::after {
   content: "\274C  ";
 }
 
-.webex-correct span::before,
+.webex-correct > span::before,
 .webex-correct + .webex-icon::after {
   content: "\2705  ";
 }
