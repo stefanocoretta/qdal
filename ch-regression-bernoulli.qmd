@@ -1,0 +1,3 @@
+# Binary outcomes {#sec-regression-bernoulli}
+
+![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)

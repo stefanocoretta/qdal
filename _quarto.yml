@@ -49,6 +49,9 @@ book:
     - ch-regression-cat.qmd
     - ch-regression-index.qmd
     - ch-regression-more.qmd
+  - part: Week 8
+    chapters:
+      - ch-regression-bernoulli.qmd
   - references.qmd
 
 bibliography: references.bib
