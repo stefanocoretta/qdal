@@ -1,3 +1,238 @@
+---
+author: ["Stefano Coretta", "Elizabeth Pankratz"]
+---
+
 # Binary outcomes {#sec-regression-bernoulli}
 
 ![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+theme_set(theme_light())
+library(brms)
+```
+
+## Binary outcomes and the Bernoulli family
+
+**Binary outcome variables** are very common in linguistics. These are categorical variable that have **two levels**, e.g.:
+
+-   yes / no
+-   grammatical / ungrammatical
+-   Spanish / English
+-   direct object (*gave the girl the book*) / prepositional phrase (*gave the book to the girl*)
+-   correct / incorrect
+
+So far you have been fitting regression models in which the outcome variable was numeric and continuous. However, a lot of studies use binary outcome variables and it thus important to learn how to deal with those. This is what this post is about.
+
+When modelling binary outcomes, what the researcher is usually interested in is the probability of obtaining one of the two levels. For example, in a lexical decision task one might want to know the probability that real words were recognised as such (in other words, we are interested in accuracy: incorrect or correct response).
+
+Let's say there is an 80% probability of responding correctly. So ($p()$ stands for "probability of"):
+
+-   $p(\text{correct}) = 0.8$
+-   $p(\text{incorrect}) = 1 - p(\text{correct}) = 0.2$
+
+You see that if you know the probability of one level (correct) you automatically know the probability of the other level, since there are only two levels and the total probability has to sum to 1.
+
+The distribution family for binary probabilities is the **Bernoulli family**. The Bernoulli family has only one parameter, $p$, which is the probability of obtaining one of the two levels (one generally picks which level).
+
+With out lexical decision task example, we can write:
+
+$$
+\begin{align}
+\text{resp}_{correct} & \sim Bernoulli(p) \\
+p & = 0.8
+\end{align}
+$$
+
+You can read it as:
+
+> The probability of getting a correct response follows a Bernoulli distribution with $p$ = 0.8.
+
+If you randomly sampled from $Bernoulli(0.8)$ you would get "correct" 80% of the times and "incorrect" 20% of the times.
+
+Now, what we are trying to do when modelling binary outcome variables is to estimate the probability $p$ from the data. But there is a catch: probabilities are bounded between 0 and 1 and regression models don't work with bounded variables out of the box!
+
+Bounded probabilities are transformed into an unbounded numeric variable. The following section explains how.
+
+## Probability and log-odds
+
+As we have just learnt probabilities are bounded between 0 and 1 but we need something that is not bounded because regression models don't work with bounded numeric variables.
+
+This is where the **logit function** comes in: the logit function (from "*log*istic un*it*") is a mathematical function that transforms probabilities into log-odds.
+
+The plot below shows the correspondence of probabilities (on the *y*-axis) and log-odds (on the *x*-axis), as marked by the black S-shaped line. Since probabilities can't be smaller than 0 and greater than 1, the black line slopes in either direction and it approaches 0 and 1 on the *y*-axis without ever reaching them (in mathematical terms, it's an *asymptotic* line). It is helpful to just memorise that probability 0.5 corresponds to log-odds 0.
+
+```{r}
+#| label: p-log-odds
+#| warning: false
+#| echo: false
+
+dots <- tibble(
+  p = seq(0.1, 0.9, by = 0.1),
+  log_odds = qlogis(p)
+)
+
+p_log_odds <- tibble(
+  p = seq(0, 1, by = 0.001),
+  log_odds = qlogis(p)
+) %>%
+  ggplot(aes(log_odds, p)) +
+  geom_hline(yintercept = 0.5, linetype = "dashed") +
+  geom_hline(yintercept = 0, colour = "#8856a7", linewidth = 1) +
+  geom_hline(yintercept = 1, colour = "#8856a7", linewidth = 1) +
+  geom_vline(xintercept = 0, alpha = 0.5) +
+  geom_line(linewidth = 2) +
+  # geom_point(data = dots, size = 4) +
+  geom_point(x = 0, y = 0.5, colour = "#8856a7", size = 4) +
+  annotate("text", x = -4, y = 0.8, label = "logit(p) = log-odds") +
+  scale_x_continuous(breaks = seq(-6, 6, by = 1), minor_breaks = NULL, limits = c(-6, 6)) +
+  scale_y_continuous(breaks = seq(0, 1, by = 0.1), minor_breaks = NULL) +
+  labs(
+    title = "Correspondence between log-odds and probabilities",
+    x = "Log-odds",
+    y = "Probability"
+  )
+p_log_odds
+```
+
+When you fit a regression model with a binary outcome and a Bernoulli family, the estimates are in log-odds. To transform log-odds back into probability, one uses the **inverse logit** (or logistic) **function**. The logit and inverse logit functions in R are applied with the `qlogis()` and `plogis()` functions respectively.
+
+```{r}
+#| label: pq-logis
+p <- 0.3
+
+# from probability to log-odds
+LO <- qlogis(p)
+LO
+
+# from log-odds to probability
+plogis(LO)
+```
+
+That is all you have to understand for now to be able to fit and interpret a Bernoulli regression!
+
+## Fitting a Bernoulli model
+
+::: {.callout-warning collapse="true"}
+#### Bernoulli, binomial and logistic regression
+
+A lot of researchers know Bernoulli models under the name "binomial" or "logistic" regression. Please, note that these are exactly equivalent: they refer to a model with a Bernoulli distribution for the outcome variable. It is just that different research traditions call them differently.
+
+So if somebody asks you to run a logistic regression, or if you read a paper that reports one, what they just mean is to run a regression with a binary outcome variable and a Bernoulli distribution!
+:::
+
+### The data
+
+To illustrate how to fit a Bernoulli model, we will use data from [Brentari 2024](https://uoelel.github.io/qml-data/data/brentari2024/verb_org.html) on the emergent Nicaraguan Sign Language (*Lengua de Señas Nicaragüense*, NSL).
+
+```{r}
+#| label: verb-org
+
+verb_org <- read_csv("data/brentari2024/verb_org.csv")
+```
+
+`verb_org` contains information on predicates as signed by three groups (`Group`): home-signers (`homesign`), first generation NSL signers (`NSL1`) and second generation NSL signers (`NSL2`). Specifically, the data coded in `Num_Predicates` whether the predicates uttered by the signer were single-verb predicates (SVP, `single`) or a multi-verb predicates (MVP, `multiple`). The hypothesis of the study is that use of multi-verb predicates would increase with each generation, i.e. that NSL1 signers would use more MVPs than home-signers and that NSL2 signers would use more MVPs than home-signers and NSL1 signers. (For the linguistic reasons behind this hypothesis, check the paper linked above).
+
+Let's plot the data to learn a bit more about it.
+
+```{r}
+#| label: verb-org-plot
+
+verb_org |> 
+  ggplot(aes(Group, fill = Num_Predicates)) +
+  geom_bar(position = "fill")
+```
+
+What do you notice about the type of predicates in the three groups?
+
+To assess the study hypothesis, we can fit a Bernoulli model with `Num_Predicates` as the outcome variable and `Group` as the predictor.
+
+Before we move on onto fitting the model, it is useful to transform `Num_Predicates` into a factor and specify the order of the levels so that `single` is the first level and `multiple` is the second level.
+
+This is useful because Bernoulli models estimate the probability (the parameter $p$ in $Bernoulli(p)$ of getting the *second* level in the outcome variable.
+
+You can also think of this in terms of `0`s and `1`s: the first level is assigned to `0` and the second level is assigned to `1`. Then a Bernoulli distribution with probability $p$ tells you the probability of getting a `1`. It doesn't matter how you prefer to think about Bernoulli distributions, as long as you remember that the probability being estimated is the probability of the *second* level.
+
+Now let's mutate `verb_org`.
+
+```{r}
+#| label: num-preds-mutate
+
+verb_org <- verb_org |> 
+  mutate(
+    Num_Predicates = factor(Num_Predicates, levels = c("single", "multiple"))
+  )
+```
+
+If you reproduce the plot above you will see now that the order of `Num_Predicates` in the legend is "single" then "multiple" and that the order of the proportions in the bar chart have flipped.
+
+Now we can move on onto modelling.
+
+### The model
+
+$$
+\begin{align}
+\text{Num\_Preds}_{MVP} & \sim Bernoulli(p_i) \\
+logit(p_i) & = \alpha_{\text{Group}[i]} \\
+\end{align}
+$$
+
+-   The probability of using an MVP follows a Bernoulli distribution with probability $p$.
+
+-   The log-odds of $p$ are equal to $\alpha$ for each Group.
+
+In other words, the model estimates $p$ for each group. Here is the code. Remember that to use the indexing approach for categorical predictors (`Group`) we need to suppress the intercept with the `0 +` syntax.
+
+```{r}
+#| label: mvp-bm
+
+mvp_bm <- brm(
+  Num_Predicates ~ 0 + Group,
+  family = bernoulli,
+  data = verb_org,
+  cores = 4,
+  seed = 1329,
+  file = "cache/ch-regression-bernoulli_mvp_bm"
+)
+```
+
+Let's inspect the model summary (we will get 80% CrIs).
+
+```{r}
+#| label: mvp-bm-summ
+
+summary(mvp_bm, prob = 0.8)
+```
+
+Based on the model, there is an 80% probability that the log-odds of a MVP are between -0.76 and -0.38 in home-signers, between -1.68 and -1.24 in NSL1 signers and between -0.21 and 0.16 in NSL2 signers.
+
+It's easier to understand the results if we convert the log-odds to probabilities. The quickest way to do this is to get the `Regression Coefficients` table from the summary with `fixef()` and mutate the `Q` columns with `plogis()`.
+
+```{r}
+#| label: mvp-bm-p
+
+fixef(mvp_bm, prob = c(0.1, 0.9)) |>
+  # we need to convert the output of fixef() to a tibble to use mutate()
+  as_tibble() |>
+  # we plogis() the Q columns and round to the second digit
+  mutate(
+    Q10 = round(plogis(Q10), 2),
+    Q90 = round(plogis(Q90), 2)
+  )
+```
+
+Based on the model, there is an 80% probability that the probability of using an MVP is between 32-41% in home-signers, between 16-22% in NSL1 signers and between 45-54% in NSL2 signers.
+
+We can now see more clearly that the hypothesis of the study is not fully borne out by the data: while NSL2 signers are more likely to use an MVP than home-signers and NSL1 signers, it is not the case that NSL1 signers are more likely to use MVPs than home-signers.
+
+To conclude this introduction to Bernoulli models (aka binomial/logistic regressions) we can get the predicted probabilities of use of MVPs in the three groups with `conditional_effects()`.
+
+```{r}
+#| label: mvp-bm-cond
+
+conditional_effects(mvp_bm)
+```
+
