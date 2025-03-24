@@ -62,7 +62,7 @@ eu_vot |>
 
 ```
 
-:::::: callout-warning
+::: callout-warning
 ### Exercise 1
 
 Recreate the following plot.
@@ -79,8 +79,7 @@ eu_vot |>
   labs(x = "Phonation", y = "VOT (ms)") +
   theme(legend.position = "none")
 ```
-
-::::::
+:::
 
 ::: {.callout-tip collapse="true"}
 ### Hint
@@ -147,13 +146,11 @@ $$
 
 The formula states that each observation of VOT come from a Gaussian distribution with a mean and standard deviation and that the mean depends on the value of the indicator variables $ph_\text{VD}$ and $ph_\text{VL}$: that is what the subscript $i$ is for.
 
-:::: callout-warning
+::: callout-warning
 ### Exercise 3
 
 Work out the formula of the mean VOT for each level of `phonation` by substituting the correct value for $ph_\text{VD}$ and $ph_\text{VL}$.
-
-
-::::
+:::
 
 ::: {.callout-tip collapse="true"}
 ### Hint
@@ -169,7 +166,6 @@ $$
 $$
 
 So the mean VOT with aspirated stops is $\beta_0$.
-
 :::
 
 The code below fits a Gaussian regression model, with VOT (in milliseconds) as the outcome variable and phonation type as the (categorical) predictor. Phonation type (`phonation`) is coded with treatment contrasts. Before fitting the model, answer the question in Quiz 1 below.
@@ -228,29 +224,23 @@ cat("**Based on the density plots of VOT you made above, which of the following 
 ```
 :::
 
-
-
 ::: {.callout-important collapse="true"}
 ### Solution
 
 You can just check the summary of the model. Does the summary meet your expectations?
 
-```r
+``` r
 summary(vot_bm)
 ```
-
 :::
 
-
-Carefully look through the `Regression Coefficients` of the model and make sure you understand what each raw corresponds to. It should be clear by now that while the first coefficient, the "intercept", is the mean VOT with aspirated stops, the second and third coefficients are the *difference* between the mean VOT of aspirated stops and the mean VOT of voiced and voiceless stops respectively. This falls out of the formulae you worked out in Exercise 3. 
+Carefully look through the `Regression Coefficients` of the model and make sure you understand what each raw corresponds to. It should be clear by now that while the first coefficient, the "intercept", is the mean VOT with aspirated stops, the second and third coefficients are the *difference* between the mean VOT of aspirated stops and the mean VOT of voiced and voiceless stops respectively. This falls out of the formulae you worked out in Exercise 3.
 
 The following paragraph shows you how you could write up the model and results in a paper.
 
 > We fitted a Bayesian regression model to Voice Onset Time (VOT) of Mixean Basque stops. We used a Gaussian distribution for the outcome and phonation (aspirated, voiced, voiceless) as the only predictor. Phonation was coded using the default treatment coding.
 >
 > According to the model, the mean VOT of aspirated stops is between 30 and 36 ms, at 95% probability ($\beta$ = 33, SD = 1.5). At 95% confidence, the VOT of voiced stops is 73-81 ms shorter than that of aspirated stops ($\beta$ = -77, SD = 1.86), while the VOT of voiceless stops is 10-16 ms shorter than that of aspirated stops ($\beta$ = -13, SD = 1.58).
-
-
 
 ## Indexing with three levels
 
@@ -263,19 +253,18 @@ $$
 \text{VOT}_i & \sim Gaussian(\mu_i, \sigma)\\
 \mu_i & = \beta_1 \cdot P_{\text{A}[i]} + \beta_2 \cdot P_{\text{VD}[i]} + \beta_3 \cdot P_{\text{VL}[i]}\\
 \end{align}
-$$
-The coefficients $\beta_1, \beta_2, \beta_3$ are the mean VOT for each level of `phonation`.
+$$ The coefficients $\beta_1, \beta_2, \beta_3$ are the mean VOT for each level of `phonation`.
 
 ::: callout-warning
 ### Exercise 4
 
 Figure out the coding table for the levels of `phonation` like we did in @sec-regression-index for `IsWord`.
-
 :::
 
+To fit a model of VOT by phonation using indexing, simply use the `0 +` syntax, like shown in the following code.
 
 ```{r}
-#| label: vot_bm_i
+#| label: vot-bm-i
 #| message: false
 
 vot_bm_i <- brm(
@@ -287,3 +276,18 @@ vot_bm_i <- brm(
 )
 
 ```
+
+Run the model and look at the regression coefficients. Do they match your expectations? It is always good to also plot the predicted values.
+
+```{r}
+#| label: fig-vot-bm-i
+#| fig-cap: "Predicted VOT by consonant phonation in Mixean Basque based on `vot_bm_i`."
+
+conditional_effects(vot_bm_i)
+```
+
+::: callout-warning
+### Exercise 5
+
+Write a short report of the model. Include information on the model specification, including coding of categorical predictors, and the regression coefficients. Do these results suggest three different VOT categories?
+:::
