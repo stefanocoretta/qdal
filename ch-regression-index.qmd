@@ -116,7 +116,7 @@ rt_idx_ef |> knitr::kable(digits = 0)
 
 -   `IsWordFALSE` is $\beta_2$, in other words $\mu_\text{F}$, or the mean RT with nonce words. According to the data and model, we can be 95% confident that the mean RT with nonce words is between `{r} round(rt_idx_ef[2,3])` and `{r} round(rt_idx_ef[2,4])` ms.
 
-While in the model we fitted in @sec-regression-cat one of the regression coefficients gave us the *difference* in mean RT between the two word conditions, in the model we just fitted we don't get this information from the summary. Instead, you will have to calculate the difference between the two levels of `IsWord` by wrangling the MCMC draws of the model. This will be covered in @sec-mcmc-draws, so for now focus on understanding the concepts and application of treatment contrasts vs indexing.
+While in the model we fitted in @sec-regression-cat one of the regression coefficients gave us the *difference* in mean RT between the two word conditions, in the model we just fitted we don't get this information from the summary. Instead, you will have to calculate the difference between the two levels of `IsWord` by wrangling the MCMC draws of the model. This will be covered in @sec-regression-draws, so for now focus on understanding the concepts and application of treatment contrasts vs indexing.
 
 ## Why indexing?
 

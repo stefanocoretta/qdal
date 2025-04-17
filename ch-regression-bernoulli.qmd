@@ -235,4 +235,3 @@ To conclude this introduction to Bernoulli models (aka binomial/logistic regress
 
 conditional_effects(mvp_bm)
 ```
-
