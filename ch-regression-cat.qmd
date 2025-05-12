@@ -92,7 +92,7 @@ mald_summ <- mald |>
 mald_summ
 ```
 
-The mean and median RTs for nonce words (`IsWord = FALSE`) are about 100 ms higher than the mean and median of real words. We could stop here and call it a day, but we would make the mistake of not considering uncertainty and variability: this is just one (admittedly large) sample of all the RT values that could be produced by the entire English speaking population. So we should apply inference from the sample to the population to obtain an estimate of the difference in RTs that accounts for that uncertainty and variability. The inderence method we are learning is using regression modelling. The next sections will teach you how to model the RTs with regression models in brms.
+The mean and median RTs for nonce words (`IsWord = FALSE`) are about 100 ms higher than the mean and median of real words. We could stop here and call it a day, but we would make the mistake of not considering uncertainty and variability: this is just one (admittedly large) sample of all the RT values that could be produced by the entire English speaking population. So we should apply inference from the sample to the population to obtain an estimate of the difference in RTs that accounts for that uncertainty and variability. The inference method we are learning is using regression modelling. The next sections will teach you how to model the RTs with regression models in brms.
 
 ::: {.callout-important collapse="true"}
 ## Extra: Tables with `kable()`
@@ -184,7 +184,7 @@ $$
 
 -   When `IsWord` is `FALSE`, the mean RT is equal to $\beta_0 + \beta_1$.
 
-If $\beta_0$ is the *mean* RT when `IsWord` is TRUE, what is $\beta_1$ by itself? Simple.
+If $\beta_0$ is the *mean* RT when `IsWord` is `TRUE`, what is $\beta_1$ by itself? Simple.
 
 $$
 \begin{align}

@@ -1,4 +1,4 @@
-# Binary outcomes {#sec-regression-draws}
+# Wrangling MCMC draws {#sec-regression-draws}
 
 ![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
 
@@ -13,124 +13,123 @@ library(brms)
 
 ## MCMC what?
 
-Bayesian regression models fitted with brms/Stan use the Markov Chain Monte Carlo (MCMC) sampling algorithm to estimate the probability distributions of the model's coefficient. You have first encountered MCMC in @ch-fit-model. The MCMC algorithm does two things: first it finds a probability area that is the most compatible with the prior probabilities and the probability of the data given the priors; then, it sample values (called *draws*) from this high-probability area to reconstruct the posterior distribution. Elizabeth Pankras has written a nice short introduction to MCMC algorithms here: [Finding posteriors through sampling](https://elizabethpankratz.github.io/bayes_stat/day1/mcmc.html). I strongly recommend that you read that before proceeding (if you want to further your understanding of MCMC, the resources linked on that page are an excellent starting point). Note that to be a proficient user of brms and Bayesian regression models, you don't need to fully understand the mathematics behind MCMC algorithms, as long as you understand them conceptually.
+<!--# Use mald reaction times from chapter 23 -->
+
+<!--# Split this chapter: take out difference of difference because for that you need interactions which we haven't done yet -->
+
+Bayesian regression models fitted with brms/Stan use the Markov Chain Monte Carlo (MCMC) sampling algorithm to estimate the probability distributions of the model's coefficient. You have first encountered MCMC in @ch-fit-model. The MCMC algorithm does two things: first it finds a probability area that is the most compatible with the prior probabilities and the probability of the data given the priors; then, it sample values (called *draws*) from this high-probability area to reconstruct the posterior distribution. Since the high-probability area is assumed to be representative of the posterior distribution (that's why we sample from it), the MCMC draws are also called *posterior draws*. Elizabeth Pankratz has written a nice short introduction to MCMC algorithms here: [Finding posteriors through sampling](https://elizabethpankratz.github.io/bayes_stat/day1/mcmc.html). I strongly recommend that you read that before proceeding (if you want to further your understanding of MCMC, the resources linked on that page are an excellent starting point). Note that to be a proficient user of brms and Bayesian regression models, you don't need to fully understand the mathematics behind MCMC algorithms, as long as you understand them conceptually.
 
 When you run a model with brms, the draws (i.e. the sampled values) are stored in the model object. All operations on a model, like obtaining the `summary()`, are actually operations on those draws. We normally fit regression models with four MCMC chains. The sampling algorithm within each chain runs for 2000 iterations by default. The first half (1000 iterations) are used to "warm up" the algorithm (i.e. find the high-probability area) while the second half (1000 iterations) are the ones that sample from the high-probability area to reconstruct the posterior distribution. For four chains ran with 2000 iterations of which 1000 for warm up, we end up with 4000 iterations we can use to learn details about the posterior.
 
-The rest of the post will teach you how to extract and manipulate the model's draws.
+The rest of the post will teach you how to extract and manipulate the model's draws. We will first revisit the model fitted in @sec-regression-cat.
 
 ## Extract MCMC posterior draws
 
-Let's read the `winter2012/polite.csv` data again first.
+There are different ways to extract the MCMC posterior draws from a fitted model. In this book, we will use the `as_draws_df()` function from the posterior package. The function extracts the draws from a Bayesian regression model and outputs them as a data frame. Let's take the `rt_bm_1` model from @sec-regression-cat and extract the draws. Let's first read the `tucker2019/mald_1_1.rds` data again.
 
 ```{r}
-#| label: polite
+#| label: mald
 
 library(tidyverse)
 
-polite <- read_csv("data/winter2012/polite.csv")
-
-polite
+mald <- readRDS("data/tucker2019/mald_1_1.rds")
 ```
 
-Now we can reload the Bayesian regression model from [Introduction to regression models (Part II)](intro-regression-categorical.qmd). We simply use the same code: but now, instead of the model being fit again, the code will just read the file `cache/hnr_bm.rds`.
+Now we reload the Bayesian regression model from @sec-regression-cat. We simply use the same code we used in that chapter. If you run the code now, the file with the model will be loaded into R, so the model will not be fitted from scratch. This is both convenient and it ensure the code is reproducible.
 
 ```{r}
-#| label: hnr-bm
+#| label: rt-bm-1
 
 library(brms)
 
-hnr_bm <- brm(
-  HNRmn ~ attitude,
-  family = gaussian(),
-  data = polite,
-  cores = 4,
-  file = "cache/hnr_bm",
-  seed = 2913
+rt_bm_1 <- brm(
+  RT ~ IsWord,
+  family = gaussian,
+  data = mald,
+  seed = 6725,
+  file = "cache/ch-regression-cat-rt_bm_1"
 )
 ```
 
-It's always good to inspect the summary to make sure the model is the correct one.
+Let's review the model summary.
 
 ```{r}
-#| label: hnr-bm-summ
+#| label: rt-bm-1-summ
 
-summary(hnr_bm, prob = 0.8)
+summary(rt_bm_1)
 ```
 
-The `Regression Coefficients` table includes `Intercept` and `attitudepoliteite` which is what we expect from the model formula and data. We are good to go!
-
-Now we can extract the MCMC draws from the model using the `as_draws_df()` function.
-
-This function returns a tibble with values obtained at each draw of the MCMC draws. Since we fitted the model with 4 chains and 1000 sampling draws per chain, there is a total of 4000 drawn values (i.e. 4000 rows).
+The `Regression Coefficients` table includes `Intercept` and `IsWordFALSE` which is what we expect from the model formula and data. We are good to go! Now we can extract the MCMC draws from the model using the `as_draws_df()` function. This function from the posterior package returns a tibble with values obtained in each draw of the MCMC algorithm. Since we fitted the model with 4 MCMC chains and 1000 sampling draws per chain, there is a total of 4000 drawn values (i.e. 4000 rows in the data frame).
 
 ```{r}
-#| label: hnr-bm-draws
+#| label: rt-bm-1-draws
 
-hnr_bm_draws <- as_draws_df(hnr_bm)
-hnr_bm_draws
+rt_bm_1_draws <- as_draws_df(rt_bm_1)
+rt_bm_1_draws
 ```
 
-Don't worry about the `lprior` and `lp__` columns. The columns `.chain`, `.iteration` and `.draw` indicate:
+Don't worry about the `Intercept`, `lprior` and `lp__` columns. Open the data frame in the RStudio viewer. You will see three extra column: `.chain`, `.iteration` and `.draw`. They indicate:
 
--   The chain number (1 to 4).
--   The iteration number within chain (1 to 1000).
--   The draw number across all chains (1 to 4000).
+-   `.chain`: The MCMC chain number (1 to 4).
+-   `.iteration`: The iteration number within chain (1 to 1000).
+-   `.draw`: The draw number across all chains (1 to 4000).
 
-The following columns contain the drawn values at each draw for three parameters of the model: `b_Intercept`, `b_attitude` and `sigma`. To remind yourself what these mean, let's have a look at the mathematical formula of the model.
+Make sure that you understand these columns in light of the MCMC algorithm. The following columns contain the drawn values at each draw for three parameters of the model: `b_Intercept`, `b_IsWordFALSE` and `sigma`. To remind yourself what these mean, let's have a look at the mathematical formula of the model.
 
 $$
 \begin{align}
-\text{HNRmn} & \sim Gaussian(\mu, \sigma) \\
-\mu        & = \beta_0 + \beta_1 \cdot \text{is\_polite} \\
+RT_i & \sim Gaussian(\mu_i, \sigma) \\
+\mu_i        & = \beta_0 + \beta_1 \cdot w_i \\
 \end{align}
 $$
 
 So:
 
--   `b_Intercept` is $\beta_0$. This is the mean HNR when the attitude is informal.
--   `b_attitudepolite` is $\beta_1$. This is the *difference* in HNR between polite and informal attitude.
--   `sigma` is $\sigma$. This is the overall standard deviation.
+-   `b_Intercept` is $\beta_0$. This is the mean RT when the the word is a real word.
+-   `b_IsWordFALSE` is $\beta_1$. This is the *difference* in RT between nonce words and real words.
+-   `sigma` is $\sigma$. This is the overall standard deviation of the RTs.
 
-## Summaries and plotting of posterior draws
+Any inference made on the basis of the model are inferences derived from the draws. One could say that the model "results" are, to put it simply, these draws and that the draws can be used to make inferences about the population one is investigating (if one is interested in inference, in the first place).
 
-The `Regression Coefficients` table reports summaries of the distribution of the drawn values of `b_Intercept` and `b_attitudepolite`. These summary measures are the mean (`Estimate`), the standard deviation (`Est.error`) and the lower and upper limits of the credible interval.
+## Summary measures of the posterior draws
 
-We can of course obtain those same measures ourselves from the draws tibble!
+The `Regression Coefficients` table from the `summary()` of the model reports summary measures calculated from the drawn values of `b_Intercept` and `b_IsWordFALSE`. These summary measures are the mean (`Estimate`), the standard deviation (`Est.error`) and the lower and upper limits of the 95% Credible Interval (CrI). Since we have now the draws, we can of course obtain those same measures ourselves from the data frame with the draws! We will use the `quantile2()` function from the posterior package to obtain 95% and 80% CrIs.
 
 ```{r}
-#| label: hnr-bm-draws-summ
+#| label: rt-bm-1-draws-summ
 
 library(posterior)
 
-hnr_bm_draws |> 
-  select(-sigma) |> 
-  pivot_longer(b_Intercept:b_attitudepol) |> 
-  group_by(name) |> 
+rt_b1_summaries <- rt_bm_1_draws |> 
   summarise(
-    mean = mean(value), sd = sd(value),
-    lo_80 = quantile2(value, 0.1), up_80 = quantile2(value, 0.9)
+    intercept_mean = mean(b_Intercept), intercept_sd = sd(b_Intercept),
+    intercept_lo_95 = quantile2(b_Intercept, 0.025), intercept_up_95 = quantile2(b_Intercept, 0.975),
+    IsWordFALSE_mean = mean(b_IsWordFALSE), IsWordFALSE_sd = sd(b_IsWordFALSE),
+    IsWordFALSE_lo_95 = quantile2(b_IsWordFALSE, 0.025), IsWordFALSE_up_95 = quantile2(b_IsWordFALSE, 0.975),
   ) |> 
   # fancy way of mutating multiple columns
   mutate(
-    across(mean:up_80, ~round(., 2))
+    across(everything(), ~round(., 2))
   )
+rt_b1_summaries
 ```
 
-Hopefully now it is clear where the values in the `Regression Coefficient` table come from and how these are related to the MCMC draws.
+Compare the values obtained now with the values in the model summary above. They are the same, because the summary measures in the model summary are simply summary measures of the draws. Hopefully now it is clear where the values in the `Regression Coefficient` table come from and how these are related to the MCMC draws.
 
-Next we can plot the (posterior) probability distribution of the draws for any parameter. Let's plot `b_attitudepolite`. This will be the posterior probability density of the difference in HNR between the polite and informal attitude.
+## Plotting posterior draws
+
+Plotting posterior draws is as straightforward as plotting any data. You already have all of the tools to understand plotting draws with ggplo2. To plot the reconstructed posterior probability distribution os any parameter, we plot the probabilty density (with `geom_density()`) of the draws of that parameter. Let's plot `b_IsWordFALSE`. This will be the posterior probability density of the difference in RTs between nonce (`IsWord` is `FALSE`) and real words (`IsWord` is `TRUE`).
 
 ```{r}
-#| label: hnr-bm-draws-plot
+#| label: rt-bm-1-draws-plot
 
-hnr_bm_draws |>
-  ggplot(aes(b_attitudepol)) +
+rt_bm_1_draws |>
+  ggplot(aes(b_IsWordFALSE)) +
   geom_density() +
   geom_rug(alpha = 0.2)
 ```
 
-## Calculate predictions based on the draws
+## Calculate posterior predictions from the draws
 
 The question we ended up with in [Introduction to regression models (Part II)](intro-regression-categorical.qmd) was: what about the posterior probability of the predicted HNR *when the attitude is polite?*.
 
@@ -237,55 +236,3 @@ hnr_bm_draws_pred_long |>
 You could report the summary like so:
 
 > According to the model, the predicted HNR when attitude is informal is between 16 and 16.48 at 80% confidence ($\beta$ = 16.27, SD = 0.16). When attitude is polite, the predicted HNR is between 17.31 and 17.73 ($\beta$ = 17.53, SD = 0.16).
-
-## Get the difference of differences
-
-As usual, we need to obtain the posterior draws.
-
-```{r}
-#| label: shallo-bm-draws
-shallow_bm_draws <- as_draws_df(shallow_bm)
-```
-
-Now, to get the difference between constituent and non-constituent/unrelated:
-
-1.  We must first get the mean of the non-constituent and unrelated relation types.
-2.  Then we can take the difference between the exponentiated posterior draws of the constituent type and the exponentiated posterior draws of the mean non-constituent/unrelated type. The exponentiation transforms the draws from logged ms to ms and then we take the difference.
-3.  Finally, we take the difference between the calculated differences in ms.
-
-Run the code and inspect the `shallow_bm_diff` tibble to understand what is going on.
-
-```{r}
-#| label: shallow-bm-diff
-shallow_bm_diff <- shallow_bm_draws |> 
-  mutate(
-    # 1. Mean non-constituent/unrelated for L1 and L2
-    L1_NCU = mean(c(`b_Relation_typeNonConstituent:GroupL1`, `b_Relation_typeUnrelated:GroupL1`)),
-    L2_NCU = mean(c(`b_Relation_typeNonConstituent:GroupL2`, `b_Relation_typeUnrelated:GroupL2`)),
-    
-    # 2. Difference between non-constituent/unrelated and constituent
-    L1_diff = exp(L1_NCU) - exp(`b_Relation_typeConstituent:GroupL1`),
-    L2_diff = exp(L2_NCU) - exp(`b_Relation_typeConstituent:GroupL2`),
-    
-    # 3. Difference of difference
-    L2_L1_diff = L2_diff - L1_diff
-  )
-shallow_bm_diff |> 
-  select(L1_NCU:L2_L1_diff)
-```
-
-The column `L2_L1_diff` contains the posterior draws of the difference between the constituent and non-constituent/unrelated type in the two groups. We can proceed as usual, like with any other posterior, and calculate the CrI of this difference of differences.
-
-```{r}
-#| label: shallow-bm-diff-post
-library(posterior)
-
-shallow_bm_diff |> 
-  summarise(
-    lo_80 = quantile2(L2_L1_diff, prob = 0.1),
-    hi_80 = quantile2(L2_L1_diff, prob = 0.9),
-    lo_80 = round(lo_80), hi_80 = round(hi_80),
-  )
-```
-
-Here, at 80% confidence, the difference between constituent and non-constituent/unrelated types in the L2 group is 6 to 53 ms smaller than the difference in the L1 group.
