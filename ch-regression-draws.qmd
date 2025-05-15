@@ -118,7 +118,7 @@ Compare the values obtained now with the values in the model summary above. They
 
 ## Plotting posterior draws
 
-Plotting posterior draws is as straightforward as plotting any data. You already have all of the tools to understand plotting draws with ggplo2. To plot the reconstructed posterior probability distribution os any parameter, we plot the probabilty density (with `geom_density()`) of the draws of that parameter. Let's plot `b_IsWordFALSE`. This will be the posterior probability density of the difference in RTs between nonce (`IsWord` is `FALSE`) and real words (`IsWord` is `TRUE`).
+Plotting posterior draws is as straightforward as plotting any data. You already have all of the tools to understand plotting draws with ggplot2. To plot the reconstructed posterior probability distribution of any parameter, we plot the probability density (with `geom_density()`) of the draws of that parameter. Let's plot `b_IsWordFALSE`. This will be the posterior probability density of the difference in RTs between nonce (`IsWord` is `FALSE`) and real words (`IsWord` is `TRUE`).
 
 ```{r}
 #| label: rt-bm-1-draws-plot
@@ -131,85 +131,73 @@ rt_bm_1_draws |>
 
 ## Calculate posterior predictions from the draws
 
-The question we ended up with in [Introduction to regression models (Part II)](intro-regression-categorical.qmd) was: what about the posterior probability of the predicted HNR *when the attitude is polite?*.
+In @sec-regression-index, you learned how to use indexing of categorical predictors to estimate the mean of the outcome variable for each level in the categorical predictor. You might be wondering: with contrasts you get the mean of the reference level and the difference between the second level and the reference level; with indexing you get the mean at each level; however, all of these estimands (the mean of all levels and the difference between the levels) are important for inference. So, should you fit the model twice to obtain all estimands? Of course, that is not necessary because independent from the way you code categorical predictors, the model will have all the information needed to calculate all of the estimands of interest. This information is in the MCMC draws. In this section, you will learn how to obtain the estimated mean RT when the word is a nonce word from the model that used contrasts.
 
-So far, we have seen the predicted HNR when attitude is informal and the mean *difference* between polite and informal.
-
-To calculate the predicted HNR when attitude is polite, we should look back at the equation of $\mu$ from the model mathematical formulae.
-
-$$
-\begin{align}
-\mu        & = \beta_0 + \beta_1 \cdot \text{is\_polite} \\
-\end{align}
-$$
-
-When `is_polite` is 0, attitude is informal and we have $\mu = \beta_0$. When `is_polite` is 1, attitude is polite and we have $\mu = \beta_0 + \beta_1$.
-
-So, to get the predicted HNR when attitude is polite, we just need to sum `b_Intercept` ($\beta_0$) and `b_attitudepolite` ($\beta_1$).
+Let's revise the formula of the mean $\mu$ from the model formula above: $\mu_i = \beta_0 + \beta_1 \cdot w_i$. The mean depends on the value of $w$ (that's what the subscript $i$ is for). We can substitute $w_i$ with 0 for `IsWord` = `TRUE` and with 1 for `IsWord` = `FALSE`. So we get $\mu_T = \beta_0$ for `TRUE` and $\mu_F = \beta_0 + \beta_1$. Look again at `rt_bm_1_draws`. Recall that `b_Intercept` is $\beta_0$ and `b_IsWordFALSE` is $\beta_1$. Can you figure out what you need to do to get the posterior probability distribution of $\mu_F$ (i.e. the mean RT when `IsWord` is `FALSE`)? You *sum* the columns `b_Intercept` and `b_IsWordFALSE`! It goes without saying that the posterior probability distribution of the mean RT when `IsWord` is `TRUE` is the probability density of `b_Intercept`.
 
 ```{r}
-#| label: hnr-bm-draws-pred
+#| label: hnr-bm-draws-draws
 
-hnr_bm_draws_pred <- hnr_bm_draws |> 
+rt_bm_1_draws <- rt_bm_1_draws |> 
   mutate(
-    # predicted HNR for informal attitude
-    informal = b_Intercept,
+    # predicted RT for real words
+    real = b_Intercept,
     # predicted HNR for polite attitude
-    polite = b_Intercept + b_attitudepol
+    nonce = b_Intercept + b_IsWordFALSE
   )
 
-hnr_bm_draws_pred
+rt_bm_1_draws |> select(real, nonce)
 ```
 
-The sum operation is applied row-wise, to each draw. So, for `polite`, the value of `b_Intercept` at draw 1 is added to the value of `b_attitudepolite` at draw 1, and so on. You end up with a list of sums that has the same length as the initial draws (here, 4000, i.e. 1000 per chain!). Then you can summarise and plot this new list as you did with the `b_` coefficients.
-
-To make that easier, let's pivot longer.
+The sum operation for `nonce` is applied row-wise, to each draw (remember, each row in the draw tibble is the draw from one iteration of the MCMC chains). So, for `nonce`, the value of `b_Intercept` at draw 1 is added to the value of `b_IsWordFALSE` at draw 1, and so on. You end up with a list of sums that has the same length as the initial draws (here, 4000, i.e. 1000 per chain!). Then you can summarise and plot this new list as you did with the `b_` coefficients earlier. To make further processing of the draws easier, we can reshape the tibble so that instead of having two columns `real` and `nonce` with the drawn values in them, we end up with a tibble with one column `IsWord` (where we store the value `real` or `nonce`) and a column named `value` with the drawn value. Reshaping tibbles is called *pivoting* in tidyverse parlance. We won't go into the details of all pivoting operations, so I strongly recommend you to look through the [vignette on pivoting](https://tidyr.tidyverse.org/articles/pivot.html) (a vignette is a short tutorial that some R packages provide for users to learn basic operations with the functions in the package). The operation we need to get the shape we want is pivoting from a "wider" format to a "longer" format: this is achieved with `pivot_longer()` from tidyr. Make sure you read the section on `pivot_longer()` in the vignette to understand what the following code does.
 
 ```{r}
-#| label: hnr-bm-draws-pred-long
+#| label: rt-bm-1-draws-long
 
-hnr_bm_draws_pred_long <- hnr_bm_draws_pred |> 
-  select(.chain, .iteration, .draw, informal, polite) |> 
-  pivot_longer(informal:polite, names_to = "attitude", values_to = "pred")
+rt_bm_1_draws_long <- rt_bm_1_draws |> 
+  select(.chain, .iteration, .draw, real, nonce) |> 
+  pivot_longer(real:nonce, names_to = "IsWord", values_to = "value")
 
-hnr_bm_draws_pred_long
+rt_bm_1_draws_long
 ```
 
-## Plot and summarise posterior predictions
-
-Now let's make a violin plot of the predicted HNR in informal and polite attitude!
+Check the resulting `rt_bm_1_draws_long` tibble. The first two rows are draw 1 of chain 1: one row is for the case when the word is a real word, and the other row is for the case when the word is a nonce word. There are a total of 8000 rows: 4000 draws (1000 draws times 4 chains) times 2 (two levels of `IsWord`). Now let's make a violin plot of the predicted HNR in informal and polite attitude!
 
 ```{r}
-#| label: hnr-bm-draws-pred-long-violin
+#| label: fig-rt-bm-pred-dens
+#| fig-cap: "Density plot of predicted mean RT for real and nonce words."
+#| echo: false
 
-hnr_bm_draws_pred_long |> 
-  ggplot(aes(attitude, pred)) +
+rt_bm_1_draws_long |> 
+  ggplot(aes(IsWord, value)) +
   geom_violin(width = 0.2) +
   labs(
-    x = "Attitude", y = "Predicted HNR"
+    x = "Word type", y = "Predicted RT (ms)"
   )
 ```
 
-We can use the ggdist package to plot something a bit fancier, like a half eye. Check the `?stat_halfeye` documentation to learn what those lines are.
+We can use the ggdist package to plot something a bit fancier, for example a "half eye" geometry (which can be obtained with the "halfeye" statistic, `stat_halfeye()`). Check the `?stat_halfeye` documentation to learn about it.
 
 ```{r}
-#| label: hnr-bm-draws-pred-long-halfeye
+#| label: fig-rt-bm-pred-halfeye
+#| fig-cap: "Half-eye plot of predicted mean RT for real and nonce words."
 
 library(ggdist)
 
-hnr_bm_draws_pred_long |> 
-  ggplot(aes(pred, attitude)) +
+rt_bm_1_draws_long |> 
+  ggplot(aes(value, IsWord)) +
   stat_halfeye() +
-  labs(x = "Predicted HNR", y = "Attitude")
+  labs(x = "Predicted RT (ms)", y = "Word type")
 ```
 
-Another useful stat is `stat_interval()`.
+Another useful ggplot2 statistic is `stat_interval()`.
 
 ```{r}
-#| label: hnr-bm-draws-pred-long-interval
+#| label: fig-rt-bm-pred-interval
+#| fig-cap: "Credible Intervals of predicted mean RT for real and nonce words."
 
-hnr_bm_draws_pred_long |> 
-  ggplot(aes(attitude, pred)) +
+rt_bm_1_draws_long |> 
+  ggplot(aes(IsWord, value)) +
   stat_interval() +
   labs(
     x = "Attitude", y = "Predicted HNR"
@@ -219,13 +207,13 @@ hnr_bm_draws_pred_long |>
 And finally, let's summarise the predictions.
 
 ```{r}
-#| label: hnr-bm-draws-pred-long-summ
+#| label: rt-bm-1-pred-summ
 
-hnr_bm_draws_pred_long |> 
-  group_by(attitude) |> 
+rt_bm_1_draws_long |> 
+  group_by(IsWord) |> 
   summarise(
-    mean = mean(pred), sd = sd(pred),
-    lo_80 = quantile2(pred, 0.1), up_80 = quantile2(pred, 0.9)
+    mean = mean(value), sd = sd(value),
+    lo_80 = quantile2(value, 0.1), up_80 = quantile2(value, 0.9)
   ) |> 
   # fancy way of mutating multiple columns
   mutate(
