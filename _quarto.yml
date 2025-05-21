@@ -52,6 +52,7 @@ book:
   - part: Week 8
     chapters:
       - ch-regression-bernoulli.qmd
+      - ch-regression-draws.qmd
   - references.qmd
 
 bibliography: references.bib
@@ -69,8 +70,6 @@ format:
     fig-align: center
     link-external-icon: true
     link-external-newwindow: true
-
-editor: visual
 
 callout-icon: false
 

@@ -200,27 +200,37 @@ rt_bm_1_draws_long |>
   ggplot(aes(IsWord, value)) +
   stat_interval() +
   labs(
-    x = "Attitude", y = "Predicted HNR"
+    x = "Word type", y = "Predicted RT (ms)"
   )
 ```
 
-And finally, let's summarise the predictions.
+When reporting the results, it is recommended to report the CrIs of the predicted outcome for each level in the categorical predictor. It is useful to include tables like @tbl-rt-cris. To make the generation of the table more straightforward, we can use a couple of tricks when creating the `rt_bm_cris` below. The `glue()` function from the tidyverse package [glue](https://glue.tidyverse.org) allows you to specify strings based on the output of R code computation. Code is included between curly braces `{}`.
 
 ```{r}
 #| label: rt-bm-1-pred-summ
 
-rt_bm_1_draws_long |> 
+library(glue)
+
+rt_bm_1_cris <- rt_bm_1_draws_long |> 
+  mutate(IsWord = factor(IsWord, levels = c("real", "nonce"))) |> 
   group_by(IsWord) |> 
   summarise(
     mean = mean(value), sd = sd(value),
-    lo_80 = quantile2(value, 0.1), up_80 = quantile2(value, 0.9)
-  ) |> 
-  # fancy way of mutating multiple columns
-  mutate(
-    across(mean:up_80, ~round(., 2))
+    ci_90 = glue("[{round(quantile2(value, 0.05))}, {round(quantile2(value, 0.95))}]"),
+    ci_80 = glue("[{round(quantile2(value, 0.1))}, {round(quantile2(value, 0.9))}]"),
+    ci_60 = glue("[{round(quantile2(value, 0.2))}, {round(quantile2(value, 0.8))}]"),
   )
+  
 ```
 
-You could report the summary like so:
+```{r}
+#| label: tbl-rt-cris
+#| tbl-cap: "Summary measures of predicted RTs by word type (in milliseconds)."
+#| 
+knitr::kable(rt_bm_1_cris, col.names = c("Type", "Mean RT", "SD", "90% CrI", "80% CrI", "60% CrI"), digits = 0)
+  
+```
 
-> According to the model, the predicted HNR when attitude is informal is between 16 and 16.48 at 80% confidence ($\beta$ = 16.27, SD = 0.16). When attitude is polite, the predicted HNR is between 17.31 and 17.73 ($\beta$ = 17.53, SD = 0.16).
+In the main text, you could report the results like so:
+
+> According to the model, the predicted RTs when the word is real word is between 1059 and 1080 ms at 90% confidence ($\beta$ = 1069, SD = 6). When the word is a nonce word, the predicted RTs are between 943 and 963 ms ($\beta$ = 953, SD = 6).
