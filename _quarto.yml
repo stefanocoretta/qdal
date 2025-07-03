@@ -49,6 +49,7 @@ book:
     - ch-regression-cat.qmd
     - ch-regression-index.qmd
     - ch-regression-more.qmd
+    - ch-null-ritual.qmd
   - part: Week 8
     chapters:
       - ch-regression-bernoulli.qmd
