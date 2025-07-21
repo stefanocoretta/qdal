@@ -41,6 +41,7 @@ book:
     chapters:
     - ch-regression-intro.qmd
     - ch-regression.qmd
+    - ch-regression-draws.qmd
   - part: Week 6
     chapters:
     - ch-interim-summ.qmd
@@ -53,7 +54,11 @@ book:
   - part: Week 8
     chapters:
       - ch-regression-bernoulli.qmd
-      - ch-regression-draws.qmd
+  - part: Week 9
+    chapters:
+      - ch-regression-cat-cat.qmd
+      - ch-regression-interaction.qmd
+      - ch-regression-interaction-index.qmd
   - references.qmd
 
 bibliography: references.bib

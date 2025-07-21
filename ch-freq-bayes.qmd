@@ -49,7 +49,7 @@ Here are a few practical and conceptual reasons for why you should consider swit
 
 -   While very simple models will return very similar estimates in frequentist and Bayesian statistics, in most cases more complex models won't fit if run with frequentist packages like lme4, especially without adequate enough sample sizes. Bayesian regression models always converge, while frequentist ones don't always do.
 
--   Frequentist regression models require as much work as Bayesian ones, although it is common practice to skip necessary steps when fitting the former, which gives the impression of it being a quicker process. Factoring out the time needed to run [Markov Chain Monte Carlo](regression-draws.qmd) chains in Bayesian regressions, in frequentist regressions you still have to perform robust perspective power analyses and post-hoc model checks.
+-   Frequentist regression models require as much work as Bayesian ones, although it is common practice to skip necessary steps when fitting the former, which gives the impression of it being a quicker process. Factoring out the time needed to run [Markov Chain Monte Carlo](ch-regression-draws.qmd) chains in Bayesian regressions, in frequentist regressions you still have to perform robust perspective power analyses and post-hoc model checks.
 
 -   With Bayesian models, you can reuse posterior distributions from previous work and include that knowledge as priors into your Bayesian analysis. This feature effectively speeds up the discovery process (getting to the real value estimate of interest faster). You can embed previous knowledge in Bayesian models while you can't in frequentist ones.
 :::

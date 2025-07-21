@@ -1,0 +1,74 @@
+# Regression models: interactions using indexing {#sec-regression-interaction-index}
+
+![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+theme_set(theme_light())
+library(brms)
+```
+
+```{r}
+#| label: polite
+#| message: false
+
+polite <- read_csv("data/winter2012/polite.csv")
+```
+
+```{r}
+#| label: f0-bm-int2
+
+f0_bm_int2 <- brm(
+  f0mn ~ 0 + gender:attitude,
+  family = gaussian,
+  data = polite,
+  cores = 4,
+  seed = 7123,
+  file = "cache/ch-regression-interaction-index_f0_bm_int2"
+)
+```
+
+```{r}
+#| label: f0-bm-int2-summary
+
+summary(f0_bm_int2)
+
+```
+
+```{r}
+#| label: f0-bm-int2-cond
+conditional_effects(f0_bm_int2, "gender:attitude")
+```
+
+```{r}
+#| label: f0-bm-int2-draws
+
+f0_bm_int2_draws <- as_draws_df(f0_bm_int2)
+```
+
+```{r}
+#| label: f0-bm-int2-draws-2
+
+f0_bm_int2_draws <- f0_bm_int2_draws |> 
+  mutate(
+    f_pol_inf = `b_genderF:attitudepol` - `b_genderF:attitudeinf`,
+    m_pol_inf = `b_genderM:attitudepol` - `b_genderM:attitudeinf`,
+  )
+```
+
+```{r}
+#| label: f0-bm-int2-draws-summarise
+
+library(posterior)
+
+f0_bm_int2_draws |>
+  summarise(
+    mean_diff = mean(m_pol_inf), sd_diff = sd(m_pol_inf),
+    lo_diff = quantile2(m_pol_inf, probs = 0.025), hi_diff = quantile2(m_pol_inf, probs = 0.975)
+  ) |>
+  round()
+```
+

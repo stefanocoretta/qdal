@@ -38,7 +38,7 @@ You see that if you know the probability of one level (correct) you automaticall
 
 The distribution family for binary probabilities is the **Bernoulli family**. The Bernoulli family has only one parameter, $p$, which is the probability of obtaining one of the two levels (one generally picks which level).
 
-With out lexical decision task example, we can write:
+With our lexical decision task example, we can write:
 
 $$
 \begin{align}
