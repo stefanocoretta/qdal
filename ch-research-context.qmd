@@ -37,9 +37,9 @@ It is difficult to come by precise *and* testable hypotheses in linguistics just
 ::: {.callout-important collapse="true"}
 ### Extra: Falsificationism and falsifiability
 
-XXX
+**Falsification** is a procedure proposed by philosopher Karl Popper in relation to the "problem of induction". Induction is based on observations. Imagine you observe several swans over a long time period in the United Kingdom and they are all white. You induce that "all swans are white" and expect that to be true because you have never observed a swan that was not white. However, black swans do exist (they are native of Australia and New Zealand). You can see that it doesn't matter how many white swans you observe in the UK, you cannot be certain of the truthfulness of the statement "all swans are white". On the other hand, you only need see one single black swan to know that "all swans are white" is false. In other words, a statement can only ever be shown to be false, never to be true.
 
-You might be wondering what it is meant by "falsifiable" statements. From [Seven examples of falsifiability](https://simplicable.com/new/falsifiability) by John Spacey:
+So, induction does not necessarily lead us to true statements, but falsification (observing even one case that makes the statement false) surely tells us which statements are false. A falsifiable statement or hypothesis should prevent us from wrongly accepting a false statement (but we can never know if it is true). John Spacey defines statement falsificability in his blog post [Seven examples of falsifiability](https://simplicable.com/new/falsifiability):
 
 > A statement is falsifiable if it can be contradicted by an observation. If such observation is impossible to make with current technology, falsifiability is not achieved.
 
@@ -49,8 +49,12 @@ Some examples of falsifiable hypotheses:
 -   "If there is a 1st person exclusive dual, then there is also a 1st person inclusive dual." [\[Universal 1871\]](https://typo.uni-konstanz.de/rara/universals-archive/1876/) (it would be falsified by the observation of languages with a 1st person exclusive dual but without the inclusive alternative).
 -   "Infants start uttering full sentences only after their 12th month of life." (it would be falsified by the observation of infants uttering full sentences before their 12th month of life).
 
-And some examples of non-falsifiable hypotheses.
+The following are some examples of non-falsifiable hypotheses:
 
--   "Life might exist outside of the Solar system." (if we observe life outside the Solar system or we don't, the statement is still true).
--   "Languages with a 1st person inclusive dual can have a 1st person exclusive dual." (whether we observe a language with both 1st inclusive and exclusive dual or not, the statement is still true.)
+-   "Life might exist outside of the Solar system." (if we observe life outside the Solar system or we don't, the statement is still true, because of the *might exist*).
+-   "Languages with a 1st person inclusive dual can have a 1st person exclusive dual." (whether we observe a language with both 1st inclusive and exclusive dual or not, the statement is still true, because of the *can have*.)
+
+Falsification has become a tenet of a lost of modern quantitative research and has become what could be regarded as *falsificationism*, but falsification is not the only approach to quantitative research, as you have learned in this chapter: precision and testability are two other equally valid criteria to follow when formulating hypotheses.
+
+If you are interested in the philosophy behind research and statistics (commonly known as "philosophy of science") I recommend the following books (of increasing length and depth): @okasha2016, @dienes2008, @rosenberg2020.
 :::
