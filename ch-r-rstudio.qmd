@@ -53,6 +53,12 @@ The next section will give you a tour of RStudio.
 
 ## RStudio
 
+::: callout-warning
+### Exercise 1
+
+-   Open RStudio on your computer and familiarise yourself with the different parts.
+:::
+
 When you open RStudio, you can see the window is divided into 3 panels:
 
 -   Blue (left): the **Console**.
@@ -66,7 +72,7 @@ When you open RStudio, you can see the window is divided into 3 panels:
 The **Console** is where R commands can be executed. Think of this as the interface to R. Now, try to run (execute) some R code in the console:
 
 ::: callout-warning
-### Exercise 1
+### Exercise 2
 
 -   Write the following code in the Console:
 
@@ -134,7 +140,7 @@ There are several ways of opening a Quarto Project:
 -   You can click on the project name in the top-right corner of RStudio, which will bring up a list of projects. Click on the desired project to open it.
 
 ::: callout-warning
-### Exercise 2
+### Exercise 3
 
 -   Close RStudio.
 
@@ -189,7 +195,7 @@ In later chapters, you will learn how to save your code in a script file or in Q
 ### R as a calculator
 
 ::: callout-warning
-## Exercise 3
+## Exercise 4
 
 -   Write this code `1 + 2` in the Console, then press `ENTER/RETURN` to run the code.
 :::

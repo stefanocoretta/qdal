@@ -32,7 +32,7 @@ Let's zoom in on the [research process]{.smallcaps}, as represented in @fig-res-
 
 **Empirical research** is one approach to research. This type of research focusses on learning about the Universe through data and observation.
 
-::: callout-note
+::: callout-tip
 ### Empirical research
 
 The word *empirical* is related to *experience*, and in the context of research it basically means "based on experience (i.e. data and observation)".
@@ -44,13 +44,9 @@ Lear more about the etymology of *empirical* [here](https://en.wiktionary.org/wi
 
 ![Research axes.](img/axes-research.png){#fig-res-axes}
 
-There are two main "axes" of empirical research types:
+There are two main "axes" of empirical research types: exploratory vs corroboratory and descriptive vs explanatory.
 
--   Exploratory vs corroboratory.
-
--   Descriptive vs explanatory.
-
-::: callout-note
+::: callout-tip
 ### Exploratory vs corroboratory research
 
 -   **Exploratory research** is about exploring the data looking for patterns, associations, features and so on. This type of research is also known as "hypothesis generating" because exploration can lead to the formulation of new hypotheses.
@@ -68,7 +64,7 @@ While there is still a lot of prejudice against exploratory research (typical se
 -   **Explanatory research** is about *explaining* facts, i.e. understanding why they are the way they are. In other words, explanatory research is about the *why*.
 :::
 
-Similarly to the exploratory/corroboratory axis, there is still prejudice against descriptive research (again, typical sentiments are that "it doesn't have theory"). Within linguistics, several scholars have shown that both descriptive and explanatory research are fundamental and that both need conceptual and methodological theories to function. Indeed, [@dryer2008] talks about descriptive theories and explanatory theories, granting both the same status.
+Similarly to the exploratory/corroboratory axis, there is still prejudice against descriptive research (again, typical sentiments are that "it doesn't have theory"). Within linguistics, several scholars have shown that both descriptive and explanatory research are fundamental and that both need conceptual and methodological theories to function. Indeed, @dryer2008 talks about descriptive theories and explanatory theories, granting both the same status.
 
 ## Research objectives
 
@@ -114,3 +110,28 @@ Examples:
 :::
 
 Each of the three objectives are important in research, but note that in order to really advance our understanding of things the third objective is fundamental: it is only by directly comparing different frameworks that we can accumulate knowledge and weed out inaccurate explanations. Every time you read about a study, ask yourself which of these objectives the study is setting to address.
+
+::: callout-note
+#### Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+  "Descriptive, exploratory.",
+  answer = "Descriptive, corroboratory.",
+  "Explanatory, corroboratory."
+)
+
+cat("a. Select the appropriate research types for the following study: Previous research showed that in several Euroasiatic languages, vowels followed by voiced consonants tend to be longer than vowels followed by voiceless consonants. We investigate this tendency in Quechua.", longmcq(opts_1))
+
+opts_2 <- c(
+   "We set out to test whether gestural timing is affected by foot-structure (as per the foot-sensitivity hypothesis) or not (as per the segmental hypothesis). In particular, we expect V-to-V timing to be stable within but not across feet independent of intervening segments if the foot-sensitivity hypothesis holds, while the timing should be affected by intervening segments both within and across feet if the segmental hypothesis holds.",
+   answer = "The Phase Impenetrability Condition (PIC) states that only phase heads (C and v*) allow for extraction of elements from their complements so that movement out of non-phase domains (like TP or VP when not headed by a strong v*) should be impossible. However, *What was said about the budget?* shows exactly that type of movement. Auxiliary assumptions can be made to make it so that the PIC is not violated, like covert movement to phase edges.\n\n"
+)
+
+cat("b. Which of the following studies aims to improve the fit of a framework to the data?", longmcq(opts_2))
+```
+:::

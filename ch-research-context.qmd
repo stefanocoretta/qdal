@@ -32,6 +32,12 @@ Solid research questions and hypotheses must have two main properties: they must
 
 Secondly, research questions and hypotheses must be testable. *Testability* is about formulating research questions and hypotheses in an enough precise manner that naturally leads to a well defined, specific study design. For example, the testability of the hypothesis from @fig-res-context would be compromised if we didn't define "processing cost" precisely. For example, processing cost could be related to the cognitive load of processing the sentences, or to the number of "computational steps" needed to process the sentence, or to ease of the computational steps independent of their number. All of these aspects are strictly entangled with the researcher's assumptions and favourite linguistic framework or model of sentence processing. Very often, "fast research" leads to hypotheses that look precise and testable on the surface, but they fail to hit the mark upon greater scrutiny. Lack of precision and testability undermines the robustness of research, as pointed out for example by @yarkoni2022, @scheel2022, @scheel2020, and @devezer2021.
 
+::: callout-tip
+## Precision and testability
+
+Research questions and hypotheses should be **precise** (all the components should be clearly defined) and **testable** (they clearly translate into a well-defined, specific study design).
+:::
+
 It is difficult to come by precise *and* testable hypotheses in linguistics just because our current knowledge and understanding of Language and languages is limited. At best, we can normally come up with vague hypotheses that state whether a difference between two conditions is expected or not and, if we are lucky, the direction of the difference (i.e. "A is greater than B" or vice versa). This state of affairs makes testing hypotheses using statistical methods less straightforward, because of the non-straightforward mapping of (vague) hypotheses to statistical models.
 
 ::: {.callout-important collapse="true"}
