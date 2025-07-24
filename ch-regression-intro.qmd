@@ -169,5 +169,35 @@ $$
 You can read those formulae like so: "The variable $y$ is distributed according to a Gaussian distribution with mean $\mu$ and standard deviation $\sigma$. The mean $\mu$ is equal to the intercept $\beta_0$ plus the slope $\beta_1$ times the variable $x$." This is a Gaussian regression model, because the assumed family of the outcome $y$ is Gaussian. Now, the goal of a (Gaussian) regression model is to estimate $\beta_0$, $\beta_1$ and $\sigma$ from the data (i.e. from the values of $x$ and $y$). Of course, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family (the other most common families are Bernoulli, Poisson, beta and cumulative). In the following chapters, you will learn how to fit regression models to a variety of data to answer linguistic research questions.
 
 ::: {.callout-important collapse="true"}
-## Extra: Regression, a history
+## Extra: Regression, eugenics and racism
+
+**Galton and regression**
+
+The basic logic of regression models is attributed to Francis Galton (1822–1911). Galton studied the relationship between the heights of parents and their children [@galton1980; @galton1886]. He noticed that while tall parents tended to have tall children, the children's heights were often closer to the average height of the population. This phenomenon, which he called "regression toward mediocrity" (now known as "regression to the mean"), showed that extreme values (e.g., very tall or very short parents) were less likely to be perfectly transmitted to the next generation.
+
+![](img/galton1886.png){fig-align="center" width="400"}
+
+The core idea of Galton’s framework can be expressed as a **regression model**:
+
+$$
+y = \beta_0 + \beta_1 \cdot x + \epsilon
+$$
+
+where:
+
+-   $y$: the child's height (response variable),
+-   $x$: the average of the parents' heights (predictor variable),
+-   $\beta_0$: the intercept (the expected height of a child when the parents' height is at the mean),
+-   $\beta_1$​: the slope, representing the rate of change in the child’s height with respect to the parents’ height,
+-   $\epsilon$: the error term, accounting for random variability.
+
+Galton found that the slope $\beta_1$ was less than 1, meaning that the children's heights were not as extreme as their parents' heights. For example, if tall parents (above the mean) had an average child height increase of $\beta_1 < 1$, it indicated a "regression" toward the population mean. The intercept $\beta_0$ ensured the line passed through the mean of both parents' and children's heights.
+
+**Galton, eugenics and racism**
+
+Galton is considered one of the founders of modern statistics and is widely recognized for his contributions to fields such as regression, correlation, and the study of heredity. However, his work is also deeply intertwined with controversial and now discredited views on race and eugenics. Galton coined the term *eugenics* in 1883, defining it as the "science of improving the genetic quality of the human population". His goal was to encourage the reproduction of individuals he deemed "fit" and discourage that of those he considered "unfit". He promoted selective breeding among humans, drawing inspiration from animal breeding practices.
+
+Galton believed in a hierarchy of intelligence and ability among "races", a belief that was common among many European intellectuals of his time. In works like *Hereditary Genius* (1869), he argued that intelligence and other traits were hereditary and that Europeans were superior to other racial groups. These conclusions were based on flawed assumptions and biased interpretations of data. His ideas contributed to the spread of pseudo-scientific racism, which attempted to justify inequality and colonialism.
+
+Galton’s eugenic ideas were later used to justify discriminatory policies, including forced sterilization programs and racial segregation in various countries. While Galton himself did not directly advocate for many of the extreme measures implemented in the 20th century, his work laid the groundwork for such abuses. His promotion of eugenics and racial hierarchies has left a damaging legacy.
 :::
