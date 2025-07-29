@@ -41,7 +41,7 @@ Research questions and hypotheses should be **precise** (all the components shou
 It is difficult to come by precise *and* testable hypotheses in linguistics just because our current knowledge and understanding of Language and languages is limited. At best, we can normally come up with vague hypotheses that state whether a difference between two conditions is expected or not and, if we are lucky, the direction of the difference (i.e. "A is greater than B" or vice versa). This state of affairs makes testing hypotheses using statistical methods less straightforward, because of the non-straightforward mapping of (vague) hypotheses to statistical models.
 
 ::: {.callout-important collapse="true"}
-### Extra: Falsificationism and falsifiability
+### Spotlight: Falsificationism and falsifiability
 
 **Falsification** is a procedure proposed by philosopher Karl Popper in relation to the "problem of induction". Induction is based on observations. Imagine you observe several swans over a long time period in the United Kingdom and they are all white. You induce that "all swans are white" and expect that to be true because you have never observed a swan that was not white. However, black swans do exist (they are native of Australia and New Zealand). You can see that it doesn't matter how many white swans you observe in the UK, you cannot be certain of the truthfulness of the statement "all swans are white". On the other hand, you only need see one single black swan to know that "all swans are white" is false. In other words, a statement can only ever be shown to be false, never to be true.
 

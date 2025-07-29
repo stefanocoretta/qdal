@@ -148,7 +148,7 @@ $$
 In other words, according to the model and data, the mean or RTs is a value from the distribution $Gaussian(1010.5, 4.45)$ and the SD of RTs is a value from the distribution $Gaussian(317.88, 3.17)$. The model has quantified the uncertainty around the value of the $\mu$ and $\sigma$ parameters and this uncertainty is reflected by the fact that we get a full posterior probability distribution (summarised by its mean and SD) for each of the parameters. We don't know *exactly* the values of the parameters of the Gaussian distribution assumed to have generated the sampled RTs.
 
 ::: {.callout-important collapse="true"}
-## Extra: Student-t
+## Spotlight: Student-t
 :::
 
 ## Plotting the posterior distributions

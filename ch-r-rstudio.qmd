@@ -439,7 +439,7 @@ The `Sys.Date()` function and other functions like it don't take any arguments.
 :::
 
 ::: {.callout-important collapse="true"}
-#### Extra: R vs Python
+#### Spotlight: R vs Python
 
 If you are familiar with Python, you will soon realise that R and Python, although they share many concepts and types of objects, they can differ substantially. This is because R is a **functional** programming language (based on *functions*) while Python is an **Object Oriented** programming language (based on *methods* applied on objects).
 

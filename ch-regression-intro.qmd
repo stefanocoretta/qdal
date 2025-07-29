@@ -169,7 +169,7 @@ $$
 You can read those formulae like so: "The variable $y$ is distributed according to a Gaussian distribution with mean $\mu$ and standard deviation $\sigma$. The mean $\mu$ is equal to the intercept $\beta_0$ plus the slope $\beta_1$ times the variable $x$." This is a Gaussian regression model, because the assumed family of the outcome $y$ is Gaussian. Now, the goal of a (Gaussian) regression model is to estimate $\beta_0$, $\beta_1$ and $\sigma$ from the data (i.e. from the values of $x$ and $y$). Of course, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family (the other most common families are Bernoulli, Poisson, beta and cumulative). In the following chapters, you will learn how to fit regression models to a variety of data to answer linguistic research questions.
 
 ::: {.callout-important collapse="true"}
-## Extra: Regression, eugenics and racism
+## Spotlight: Regression, eugenics and racism
 
 **Galton and regression**
 
