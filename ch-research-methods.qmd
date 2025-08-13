@@ -129,9 +129,9 @@ cat("a. Select the appropriate research types for the following study: Previous 
 
 opts_2 <- c(
    "We set out to test whether gestural timing is affected by foot-structure (as per the foot-sensitivity hypothesis) or not (as per the segmental hypothesis). In particular, we expect V-to-V timing to be stable within but not across feet independent of intervening segments if the foot-sensitivity hypothesis holds, while the timing should be affected by intervening segments both within and across feet if the segmental hypothesis holds.",
-   answer = "The Phase Impenetrability Condition (PIC) states that only phase heads (C and v*) allow for extraction of elements from their complements so that movement out of non-phase domains (like TP or VP when not headed by a strong v*) should be impossible. However, *What was said about the budget?* shows exactly that type of movement. Auxiliary assumptions can be made to make it so that the PIC is not violated, like covert movement to phase edges.\n\n"
+   answer = "According to one hypothesis, there is one operation, Agree, which assigns Case features to an argument (accusative to objects, in the example) and at the same time gets the argument's person, number, and gender features. This means that in an English sentence like *John sees her*, *her* gets accusative case from a functional head (v) and v in turn gets the object's features — these are not spelled out in English; there is never any object agreement. Other languages are different in this respect: for example, in Hungarian, all direct objects have accusative case and the verb can show object agreement but it doesn't always do so. So there are a few theoretical options: either in all of these languages Case and agreement happen but case is not always realised (in English, case is sometimes realised but agreement never is; in Hungarian, object case is always realised, but object agreement only sometimes is), or Agree is actually not both Case and feature-agreement at the same time."
 )
 
-cat("b. Which of the following studies aims to improve the fit of a framework to the data?", longmcq(opts_2))
+cat("b. Which of the following studies aims to improve the fit of a framework to the data? (Thanks to András Bárány for suggesting the second example)", longmcq(opts_2))
 ```
-:::
+::: 
