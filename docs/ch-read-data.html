@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; Read data in R – Quantitative Data Analysis for Linguists in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ch-sum-measures.html" rel="next">
+<link href="./ch-statistical-vars.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-485d01fc63b59abcd3ee1bf1e8e2748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<link rel="stylesheet" href="include/webex.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-inference.html">Week 2</a></li><li class="breadcrumb-item"><a href="./ch-read-data.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Read data in R</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Quantitative Data Analysis for Linguists in R</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome!</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-research-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Research methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-research-context.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research context</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-quantitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Quantitative data analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-r-rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R packages</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R scripts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-statistical-vars.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-read-data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Read data in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-sum-measures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summary measures</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-summarise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summarise and group data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-research-cycle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research cycle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-viz-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visualisation principles</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-plotting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Plotting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-freq-bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-gauss-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Gaussian models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-fit-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-draws.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 6</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-interim-summ.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 7</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models: categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Indexing categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 8</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 9</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-interaction-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: interactions using indexing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#tabular-data" id="toc-tabular-data" class="nav-link active" data-scroll-target="#tabular-data"><span class="header-section-number">9.1</span> Tabular data</a>
+  <ul class="collapse">
+  <li><a href="#non-tabular-data" id="toc-non-tabular-data" class="nav-link" data-scroll-target="#non-tabular-data"><span class="header-section-number">9.1.1</span> Non-tabular data</a></li>
+  <li><a href="#rds-files" id="toc-rds-files" class="nav-link" data-scroll-target="#rds-files"><span class="header-section-number">9.1.2</span> <code>.rds</code> files</a></li>
+  </ul></li>
+  <li><a href="#get-the-data" id="toc-get-the-data" class="nav-link" data-scroll-target="#get-the-data"><span class="header-section-number">9.2</span> Get the data</a></li>
+  <li><a href="#organising-your-files" id="toc-organising-your-files" class="nav-link" data-scroll-target="#organising-your-files"><span class="header-section-number">9.3</span> Organising your files</a></li>
+  <li><a href="#read-.csv-files" id="toc-read-.csv-files" class="nav-link" data-scroll-target="#read-.csv-files"><span class="header-section-number">9.4</span> Read <code>.csv</code> files</a>
+  <ul class="collapse">
+  <li><a href="#relative-paths" id="toc-relative-paths" class="nav-link" data-scroll-target="#relative-paths"><span class="header-section-number">9.4.1</span> Relative paths</a></li>
+  </ul></li>
+  <li><a href="#read-excel-sheets" id="toc-read-excel-sheets" class="nav-link" data-scroll-target="#read-excel-sheets"><span class="header-section-number">9.5</span> Read Excel sheets</a></li>
+  <li><a href="#import-.rds-files" id="toc-import-.rds-files" class="nav-link" data-scroll-target="#import-.rds-files"><span class="header-section-number">9.6</span> Import <code>.rds</code> files</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-inference.html">Week 2</a></li><li class="breadcrumb-item"><a href="./ch-read-data.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Read data in R</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-read-data" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Read data in R</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
+<section id="tabular-data" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="tabular-data"><span class="header-section-number">9.1</span> Tabular data</h2>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When working through the book, always <strong>make sure you are in a Quarto Project</strong> by checking the top-right corner of RStudio.</p>
+</div>
+</div>
+<p>Data comes in a lot of different formats, shape and sizes. However, the most common way to store data used in quantitative analysis is so-called tabular data. R is especially designed to work with such data. Tabular (aka rectangular) data is simply data in the form of a table, with columns and rows.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tabular data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Tabular data</strong> is data that has a form of a table: i.e.&nbsp;values structured in columns and rows.</p>
+</div>
+</div>
+<p>Tabular data can be save in different file formats. Different file formats have different file extensions. The <strong>comma separated values format</strong> (file extension <code>.csv</code>) is the best format to save data in because it is basically a plain text file, it’s quick to parse, and can be opened and edited with any software (plus, it’s not a proprietary format like <code>.docx</code> or <code>.xlsx</code>—these formats are specific to particular commercial software).</p>
+<p>This is what a <code>.csv</code> file looks like when you open it in a text editor (showing only the first few lines).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,banoshment,1,423,6.0474,Filler,Nonword,Phonological,NA</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unawareness,1,603,6.4019,Critical,Word,Unrelated,Left</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unholiness,1,739,6.6053,Critical,Word,Constituent,Left</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The file contains tabular data (data that is structured as columns and rows, like a spreadsheet). To separate the values of each column, a <code>.csv</code> file uses a comma <code>,</code> (hence the name “comma separated values”) to separate the values in every row. The first line of the file indicates the names of the columns of the table:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There are 11 columns. The rest of the rows is the data, i.e.&nbsp;the values of each column separated by commas.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,banoshment,1,423,6.0474,Filler,Nonword,Phonological,NA</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unawareness,1,603,6.4019,Critical,Word,Unrelated,Left</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unholiness,1,739,6.6053,Critical,Word,Constituent,Left</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This might look a bit confusing, but you will see later that, after importing this type of file, you can view it as a nice spreadsheet (as you would in Excel).</p>
+<p>Another common type of tabular data file is <strong>spreadsheets</strong>, like spreadsheets created by Microsoft Excel or Apple Numbers. These are all proprietary formats that require you to have the software that were created with if you want to modify them. Portability and openness are important aspects of conducting research, so that using open and non-proprietary file types makes your research more accessible and doesn’t privilege those who have access to specific software (remember, R is free!). Despite of this, a lot of data is shared as Excel files.</p>
+<p>There are also variations of the comma separated values type, like <strong>tab separated values</strong> files (<code>.tsv</code>, which uses tab characters instead of commas) and <strong>fixed-width</strong> files (usually <code>.txt</code>, where columns are separated by as many white spaces as needed so that the columns align).</p>
+<section id="non-tabular-data" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="non-tabular-data"><span class="header-section-number">9.1.1</span> Non-tabular data</h3>
+<p>Of course, R can import also data that is not tabular, like map data and complex hierarchical data, including XML, HTML and json data. We will not cover these types of data, but you can check out the resources in the Extra box.</p>
+<section id="extra-non-tabular-data" class="level4 callour-important" data-collapse="true" data-number="9.1.1.1">
+<h4 data-number="9.1.1.1" class="anchored" data-anchor-id="extra-non-tabular-data"><span class="header-section-number">9.1.1.1</span> Extra: Non-tabular data</h4>
+<ul>
+<li><p>Chapters 21-24 of <a href="https://r4ds.hadley.nz">R4DS</a>.</p></li>
+<li><p><a href="https://r-spatial.github.io/sf/">sf</a> package for mapping.</p></li>
+</ul>
+</section>
+</section>
+<section id="rds-files" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="rds-files"><span class="header-section-number">9.1.2</span> <code>.rds</code> files</h3>
+<p>R has a special way of saving data: <code>.rds</code> files. <code>.rds</code> files allow you to save an R object to a file on your computer, so that you can read that file back in when you need it. A common use for <code>.rds</code> files is to save tabular data that you have processed so that it can be readily used in many different scripts or even by other people, but <code>.rds</code> files can contain any type of R objects, also lists (so not only tabular data). In the following sections you will learn how to import (aka read) three types of data: <code>.csv</code>, Excel and <code>.rds</code> files.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quiz 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>Which of the following is not tabular data.
+<div id="radio_OOLIPQHAHD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OOLIPQHAHD" value=""> <span>a. A file with 3 columns and 100 rows.</span></label><label><input type="radio" autocomplete="off" name="radio_OOLIPQHAHD" value="answer"> <span>b. An HTML file.</span></label><label><input type="radio" autocomplete="off" name="radio_OOLIPQHAHD" value=""> <span>c.&nbsp;An Excel spreadsheet.</span></label>
+</div></li>
+<li>Non-tabular data can be saved to <code>.rds</code> files. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></li>
+</ol>
+</div>
+</div>
+</section>
+</section>
+<section id="get-the-data" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="get-the-data"><span class="header-section-number">9.2</span> Get the data</h2>
+<p>The data used in this textbook come from a variety of published and unpublished linguistic studies. You can download the data files from the <a href="https://uoelel.github.io/qml-data/">QML Data</a> website according to the following instructions.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+How to get the data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>Download the zip archive with all the data by right-clicking on the following link and download the file: <a href="https://uoelel.github.io/qml-data/data.zip">data.zip</a>.</p></li>
+<li><p>Unzip the zip file to extract the contents. (If you don’t know how to do this, search for it online for your operating system!)</p></li>
+<li><p>Create a folder called <code>data/</code> (the slash is there just to remind you that it’s a folder, but you don’t have to include it in the name) in the Quarto project you are using for the course.</p>
+<ol type="1">
+<li><p>To create a folder, go to the Files tab of the bottom-right panel in RStudio.</p></li>
+<li><p>Make sure you are viewing the project’s main folder.</p></li>
+<li><p>Click on the <code>New Folder</code> button, enter “data” in the text box and click <code>OK</code></p></li>
+</ol></li>
+<li><p>Move the contents of the <code>data.zip</code> archive into the <code>data/</code> folder.</p>
+<ol type="1">
+<li><p>Open a Finder or File Explorer window.</p></li>
+<li><p>Navigate to the folder where you have extracted the zip file (it will very likely be the <code>Downloads/</code> folder).</p></li>
+<li><p>Copy the contents of the zip file.</p></li>
+<li><p>In Finder or File Explorer, navigate to the Quarto project folder, then the <code>data/</code> folder, and paste the contents in there. (You can also drag and drop if you prefer.)</p></li>
+</ol></li>
+</ol>
+</div>
+</div>
+<p>The rest of this chapter will assume that you have created a folder called <code>data/</code> in the Quarto project folder and that the files you downloaded are in that folder. The data folder should like something like this:</p>
+<pre><code>data/
+└── cameron2020/
+    └── gestures.csv
+└── coretta2018/
+    └── formants.csv
+    └── token-measures.csv
+└── ...</code></pre>
+<p>I recommend that you start being very organised with your files in other projects from now on, whether it’s for a course or your dissertation or anything else. I also suggest to avoid overly nested structures, unless strictly necessary.</p>
+</section>
+<section id="organising-your-files" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="organising-your-files"><span class="header-section-number">9.3</span> Organising your files</h2>
+<p>The <a href="https://osf.io">Open Science Framework</a> has the <a href="https://help.osf.io/article/147-organizing-files">following recommendations</a> that can be applied to any type of research project.</p>
+<ul>
+<li><p>Use <strong>one folder</strong> per project. The project folder will also be your RStudio/Quarto project folder. Ideally, the project folder should have all the files related to the project (one exception is PDFs of papers that form the literature background of the project: for those I recommend using bibliography managing software, like the free <a href="https://www.jabref.org">JabRef</a>).</p></li>
+<li><p>Separate <strong>code</strong> from <strong>data</strong>. A general recommendation is to have a folder <code>code/</code> whith all the code files of the project and a folder <code>data/</code> that has all the data. This makes keeping files in order easier, since everything has its natural place.</p></li>
+<li><p>Separate <strong>raw data</strong> from <strong>derived data</strong>. Raw data is data that you have gathered that, if lost, is lost for ever. Derived data is any data that is derived from raw data and that can be derived again (for example by running a script) if it’s deleted or corrupted.</p></li>
+<li><p>Make <strong>raw data read-only</strong>. You should assume that anything can happen to raw data, so you should treat it as “read-only”.</p></li>
+</ul>
+<p>To summarise, these recommendations suggest to have a folder for your research project/course/else, and inside the folder two more folders: one for data and one for code. The <code>data/</code> folder could further contain <code>raw/</code> for raw data (data that should not be lost or changed, for example collected data or annotations) and <code>derived/</code> for data that derives from the raw data, for example through automated data processing.</p>
+<p>It might be useful to also have a separate folder called <code>figs/</code> or <code>img/</code> to save figures and plots. Of course which folders you will have it’s ultimately up to you and needs will vary depending on the nature and practical aspects of each study.</p>
+</section>
+<section id="read-.csv-files" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="read-.csv-files"><span class="header-section-number">9.4</span> Read <code>.csv</code> files</h2>
+<p>In this section, you will learn how to read <code>.csv</code> files. Reading <code>.csv</code> files is very easy. You can use the <code>read_csv()</code> function from a collection of R packages known as the <a href="https://www.tidyverse.org">tidyverse</a>. Specifically, the <code>read_csv()</code> function is from the <a href="https://readr.tidyverse.org">readr</a> package, one of the tidyverse packages. If you are learning R for the first time, then you won’t already have the tidyverse packages installed (you can check in the <code>Packages</code> tab in the bottom-right panel). Installing the tidyverse packages is easy: you just need to install the <strong>tidyverse</strong> package and that will take care of installing the most important packages in the collection (called the <a href="https://www.tidyverse.org/packages/">“core” tidyverse packages</a>). Note that installation of the core tidyverse packages can take some time (but remember that you do this only <em>once</em>).</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Did you open the Quarto project?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before moving on, make sure that you have opened the RStudio Quarto project correctly (see warning at the beginning of the chapter).</p>
+</div>
+</div>
+<p>Now that you have ensured the tidyverse packages are available, let’s read in data from <span class="citation" data-cites="song2020">Song et al. (<a href="references.html#ref-song2020" role="doc-biblioref">2020</a>)</span>. The study consists of a lexical decision task in which participants were first shown a prime, followed by a target word for which they had to indicate whether it was a real word or a nonce word. The prime word belonged to one of three possible groups, each of which refers to the morphological relation of the prime and the target word. We will get back to this date in later chapters, so for now it is sufficient if you just read the paper’s abstract to get a general idea of the research context.</p>
+<p>The <code>read_csv()</code> function from the readr package only requires you to specify the file path as a string (remember, strings are quoted between <code>" "</code>, for example <code>"year_data.txt"</code>). The data to be read are in the <code>data/</code> folder, in <code>song2020/shallow.csv</code>. On my computer, the file path of <code>song2020/shallow.csv</code> is <code>/Users/ste/qdal/data/song2020/shallow.csv</code>, but on your computer the file path will be different, of course. However, you will learn a trick below, i.e.&nbsp;relative paths, that allows you to specify file paths in a shortened form.</p>
+<!-- For this trick to work, you have to change a setting of the Quarto project: the setting instructs RStudio to always run (i.e. execute) code with the working directory set as the project folder (more on working directories below). Here is how to enable this setting.
+
+::: callout-warning
+### Set execute directory
+
+-   Open the `_quarto.yml` file. This is the file that contains the settings of the Quarto project.
+
+-   At the top of the file you will see something like this:
+
+``` yaml
+project:
+  title: "my-proj"
+```
+
+-   Add the line as below (make sure you keep the indentation!):
+
+``` yaml
+project:
+  title: "my-proj"
+  execute-dir: project
+```
+:::
+-->
+<p>Note that while the <code>read_csv()</code> function does read the data in R, you must assign the output of the <code>read_csv()</code> function (i.e.&nbsp;the data we are reading) to a variable, using the assignment arrow <code>&lt;-</code>, just like we were assigning values to R variables in previous chapters. And since the <code>read_csv()</code> is a function from the tidyverse, you first need to attach the tidyverse packages with <code>library(tidyverse)</code> (remember, you need to attach packages <strong>only once</strong> per session). This will attach the core tidyverse packages, including readr. Of course, you can also attach the individual packages directly: <code>library(readr)</code>. If you use <code>library(tidyverse)</code> there is no need to attach individual tidyverse packages.</p>
+<p>Create a new R script and save it in the <code>code/</code> folder. Write the following lines in the script exactly as they are written here and run the code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>shallow <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/song2020/shallow.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 6500 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (8): Group, ID, List, Target, Critical_Filler, Word_Nonword, Relation_ty...
+dbl (3): ACC, RT, logRT
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<p>If you look at the <code>Environment</code> tab, you will see <code>shallow</code> listed under <code>Data</code>. You can preview the data by clicking on the name of the data in the <code>Environment</code> tab. A <code>View</code> tab will be opened in the top-left panel of RStudio and you will see a nicely formatted table, as you would in a programme like Excel. We will dive into this data later, so just have a peak for now.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Data frames and tibbles
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In R, a data table is called a <strong>data frame</strong>.</p>
+<p><strong>Tibbles</strong> are special data frame created with the read functions from the tidyverse. If you are curious about the difference, check <a href="https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html#:~:text=There%20are%20three%20key%20differences,%2C%20subsetting%2C%20and%20recycling%20rules.">this page</a>.</p>
+<p>In this textbook, “data frame” and “tibble” will be used interchangeably (since we are using the read functions from the tidyverse, all resulting data frames will be tibbles).</p>
+</div>
+</div>
+<p>But wait, what is that <code>"./data/song2020/shallow.csv"</code>? That’s a <strong>relative path</strong>. Let’s understand the concept of relative paths now.</p>
+<section id="relative-paths" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="relative-paths"><span class="header-section-number">9.4.1</span> Relative paths</h3>
+<p>File paths can be specified in two formats. One format is called <strong>absolute</strong> file path. An absolute file path include <em>all</em> folders from the top-most folder, which is normally your computer’s hard drive. For example, <code>/Users/ste/qdal/data/song2020/shallow.csv</code> from above is an absolute path. You know it’s an absolute path because it starts with the forward slash <code>/</code>. This means that there isn’t anything above <code>Users/</code>: it’s the top-most folder. A downside of absolute paths is that they are not portable: if I move the <code>qdal/</code> folder to <code>ste/Documents</code> then I need to change every occurrence in my scripts to <code>/Users/ste/Documents/qdal/data/song2020/shallow.csv</code>. Moreover, when you share your research code (and you should!), using absolute paths means that each person that wants to run the code has to update the absolute path to reflect their own.</p>
+<p>A solution is to use <strong>relative paths</strong>. Relative paths work by including the path only from within a specific folder. Whichever folders contain that specific folder do not matter. The specific folder is called the <strong>working directory</strong>. When you are using Quarto projects, the working directory is the project folder, i.e.&nbsp;the folder with the <code>.Rproj</code> and <code>_quarto.yml</code> files.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Working directory
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <strong>working directory</strong> is the folder which relative paths are relative to.</p>
+<p>When using Quarto projects, the working directory is the project folder.</p>
+</div>
+</div>
+<p>Relative paths are spcified by starting the path with <code>./</code>. For example, if your project is called <code>awesome_proj</code> and it’s in <code>Downloads/stuff/</code>, then if you write <code>read_csv("./data/results.csv")</code> R knows you mean to read the file in <code>Downloads/stuff/awesome_proj/data/results.csv</code>! This works because when working with Quarto projects, all relative paths are relative to the working directory which is automatically set to the project folder.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Relative path
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>relative path</strong> is a file path that is relative to a folder (the working directory). The folder the path starts at is represented by <code>./</code>.</p>
+</div>
+</div>
+<p>The code <code>read_csv("./data/song2020/shallow.csv")</code> above will work because you are using a Quarto project and inside the project folder there is a folder called <code>data/</code> and in it there’s the <code>song2020/shallow.csv</code> file. When you run the code, R will “expand” the relative path to the absolute path and corectly find the file to read. I strongly recommend you to use Quarto projects and relative paths to make your work portable. As hinted at above, the benefit of Quarto projects and relative paths is that, if you move your project or rename it, or if you share the project with somebody, all the paths will just work because they are relative.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Get the working directory
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can get the current working directory with the <code>getwd()</code> command.</p>
+<p>Run it now in the Console! Is the returned path the project folder path?</p>
+<p>If not, it might be that you are not working from a Quarto project. Check the top-right corner of RStudio: is the project name in there or do you see <code>Project (none)?</code></p>
+<p>If it’s the latter, you are not in a Quarto project, but you are running R from somewhere else (meaning, the working directory is somewhere else). If so, close RStudio and open the project.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quiz 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Given the following absolute path <code>/Users/raj/projects/thesis/data/raw/data.csv</code> and the working directory <code>/Users/raj/projects/</code>, which of the following paths is the correct one to read the <code>data.csv</code> file?
+<div id="radio_YIYMEBCORZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YIYMEBCORZ" value=""> <span>a. <code>/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_YIYMEBCORZ" value=""> <span>b. <code>./projects/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_YIYMEBCORZ" value=""> <span>c.&nbsp;<code>./data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_YIYMEBCORZ" value="answer"> <span>d.&nbsp;<code>./thesis/data/raw/data.csv</code></span></label>
+</div></li>
+</ol>
+</div>
+</div>
+<!--
+The `shallow` data frame contains 11 columns (called variables in the `Environment` tab). The 11 columns are the following:
+
+-   `Group`: `L1` vs `L2` speakers of English.
+-   `ID`: Subject unique ID.
+-   `List`: Word list (A to F).
+-   `Target`: Target word in the lexical decision trial.
+-   `ACC`: Lexical decision response accuracy (`0` incorrect response, `1` correct response).
+-   `RT`: Reaction times of response in milliseconds.
+-   `logRT`: Logged reaction times.
+-   `Critical_Filler`: Whether the trial was a `filler` or `critical`.
+-   `Word_Nonword`: Whether the Target was a real `Word` or a `Nonword`.
+-   `Relation_type`: The type of relation between prime and target word (`Unrelated`, `NonCostituent`, `Constituent`, `Phonological`).
+-   `Branching`: Constituent syntactic branching, `Left` and `Right` (shout out to Charlie Puth).
+
+
+::: callout-note
+### Quiz 3
+
+How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_USFMXJWMJS'><label><input type="radio" autocomplete="off" name="radio_USFMXJWMJS" value=""></input> <span>11</span></label><label><input type="radio" autocomplete="off" name="radio_USFMXJWMJS" value=""></input> <span>650</span></label><label><input type="radio" autocomplete="off" name="radio_USFMXJWMJS" value="answer"></input> <span>6500</span></label></div>
+:::
+-->
+</section>
+</section>
+<section id="read-excel-sheets" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="read-excel-sheets"><span class="header-section-number">9.5</span> Read Excel sheets</h2>
+<p>To read an Excel file we need first to attach the <a href="https://readxl.tidyverse.org/index.html">readxl</a> package. It should already be installed, because it comes with the tidyverse. If not, then install it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Then we can use the <code>read_excel()</code> function. Let’s read the file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>relatives <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"./data/los2023/relatives.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now you can view the tibble <code>los2023</code> in the RStudio Viewer. Note that if the Excel file has more than one sheet, you can specify the sheet number when reading the file (the default is <code>sheet = 1</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>relatives_2 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"./data/los2023/relatives.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The second sheet in <code>los2023/relatives.xlx</code> contains the description of the columns in the first sheet.</p>
+</section>
+<section id="import-.rds-files" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="import-.rds-files"><span class="header-section-number">9.6</span> Import <code>.rds</code> files</h2>
+<p>Another useful type of data files is a file type specifically designed for r: <code>.rds</code> files. Each <code>.rds</code> file can only contain a single R object, like a tibble. You can read <code>.rds</code> files with the <code>readRDS()</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/coretta2022/glot_status.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As always, you need to assign the output of the function to a variable, here <code>glot_status</code>.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<code>.rds</code> files
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><code>.rds</code> files are a type of R file which can store any R object and save it on disk.</p>
+<p>R objects can be saved to an <code>.rds</code> file with the <code>saveRDS()</code> function and they can be read with the <code>readRDS()</code> function.</p>
+</div>
+</div>
+<p>View the <code>glot_status</code> tibble now. It is also very easy to save a tibble to an <code>.rds</code> file with the <code>saveRDS()</code> function. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(shallow, <span class="st">"./data/song2020/shallow.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The first argument is the name of the tibble object and the second argument is the file path to save the object to.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Read the following files in R, making sure you use the right <code>read_*()</code> function.</p>
+<ul>
+<li><p><a href="../data/koppensteiner2016/takete_maluma.txt">koppensteiner2016/takete_maluma.txt</a> (a tab separated file)</p></li>
+<li><p><a href="../data/pankratz2021/si.csv">pankratz2021/si.csv</a></p></li>
+<li><p>Go to <a href="https://datashare.ed.ac.uk/handle/10283/4006" class="uri">https://datashare.ed.ac.uk/handle/10283/4006</a>, download the file <code>conflict_data_.xlsx</code>, and save it in <code>data/</code>. Read both sheets (“conflict_data2” and “demographics”). Any issues? (I suggest looking at the spread sheet in Excel if it helps).</p></li>
+</ul>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-song2020" class="csl-entry" role="listitem">
+Song, Yoonsang, Youngah Do, Arthur L. Thompson, Eileen R. Waegemaekers, and Jongbong Lee. 2020. <span>“Second Language Users Exhibit Shallow Morphological Processing.”</span> <em>Studies in Second Language Acquisition</em> 42 (5): 11211136. <a href="https://doi.org/10.1017/s0272263120000170">https://doi.org/10.1017/s0272263120000170</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./ch-statistical-vars.html" class="pagination-link" aria-label="Statistical variables">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical variables</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./ch-sum-measures.html" class="pagination-link" aria-label="Summary measures">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summary measures</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

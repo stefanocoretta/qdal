@@ -56,7 +56,7 @@ There are two main "axes" of empirical research types: exploratory vs corroborat
 
 While there is still a lot of prejudice against exploratory research (typical sentiments are "it doesn't have theory") it is an important way of doing research, as recognised by important scholars. For example, @tukey1980 stressed the importance of *both* approaches. The other axis of research is the descriptive/explanatory axis.
 
-::: callout-note
+::: callout-tip
 ### Descriptive vs explanatory research
 
 -   **Descriptive research** is about *describing* facts through observation and collection of data. In other words, descriptive research is about the *what*.
@@ -84,7 +84,7 @@ Examples:
 -   Do people interact with AI as with other people?
 :::
 
-::: callout-note
+::: callout-tip
 ### Improve fit of framework to facts
 
 **Research can improve the fit of a specific framework to established facts.** Usually this is done to fine-tune a framework in light of new evidence but it also just works when you want to test new expectations/hypotheses. When the facts do not match the expectations, researchers modify the framework to accommodate the results.
@@ -96,7 +96,7 @@ Examples:
 -   Strong exemplar-based models preclude the possibility of abstract representations, but certain categorisation tasks seem to involve abstract representations so these must be included in exemplar-based models.
 :::
 
-::: callout-important
+::: callout-tip
 ### Compare fit of different frameworks to facts
 
 **This objective allows researcher two compare two or more frameworks in light of empirical results.** The main prerequisite for this approach is that each framework must have different expectations in relation to the phenomenon at hand.

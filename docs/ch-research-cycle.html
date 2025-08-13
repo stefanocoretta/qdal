@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>12&nbsp; Research cycle – Quantitative Data Analysis for Linguists in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ch-viz-principles.html" rel="next">
+<link href="./ch-summarise.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-485d01fc63b59abcd3ee1bf1e8e2748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="include/webex.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-research-cycle.html">Week 3</a></li><li class="breadcrumb-item"><a href="./ch-research-cycle.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research cycle</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Quantitative Data Analysis for Linguists in R</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome!</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-research-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Research methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-research-context.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research context</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-quantitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Quantitative data analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-r-rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R packages</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R scripts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-statistical-vars.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-read-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Read data in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-sum-measures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summary measures</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-summarise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summarise and group data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-research-cycle.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research cycle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-viz-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visualisation principles</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-plotting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Plotting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-freq-bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-gauss-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Gaussian models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-fit-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-draws.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 6</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-interim-summ.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 7</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models: categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Indexing categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 8</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 9</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-interaction-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: interactions using indexing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#researchers-degrees-of-freedom" id="toc-researchers-degrees-of-freedom" class="nav-link active" data-scroll-target="#researchers-degrees-of-freedom"><span class="header-section-number">12.1</span> Researcher’s degrees of freedom</a></li>
+  <li><a href="#questionable-research-practices" id="toc-questionable-research-practices" class="nav-link" data-scroll-target="#questionable-research-practices"><span class="header-section-number">12.2</span> Questionable Research Practices</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-research-cycle.html">Week 3</a></li><li class="breadcrumb-item"><a href="./ch-research-cycle.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research cycle</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research cycle</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><img src="https://img.shields.io/badge/Area-Research_methods-blue.png" class="img-fluid"></p>
+<p>In <a href="ch-research-methods.html" class="quarto-xref"><span>Chapter 1</span></a>, you learned about the research process, which includes the research context, data acquisition, data analysis and communication. A different perspective on the research process that highlights the temporal succession of the process steps is the <span class="smallcaps">research cycle</span>, represented in an idealised form in <a href="#fig-res-cycle" class="quarto-xref">Figure&nbsp;<span>12.1</span></a>.</p>
+<div id="fig-res-cycle" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-res-cycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/res-process-cycle.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-res-cycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.1: The research cycle
+</figcaption>
+</figure>
+</div>
+<p>The cycle starts with the development of <strong>research questions and hypotheses</strong>. This step involves a thorough literature review and the identification of the topic, research problem, goal, questions and, possibly, hypotheses (as described in <a href="ch-research-context.html" class="quarto-xref"><span>Chapter 2</span></a>). Once the research questions and hypotheses have been determined, the researcher proceeds with the <strong>design of the study</strong> which sets out to answer the research questions and assess the research hypotheses. The study design process includes determining a large number of interconnected aspects, like materials, procedures, data management and data analysis plans, target population, sampling method and so on. At times the study design process reveals shortcomings or unforeseen aspects of the research questions/hypotheses which can be updated accordingly.</p>
+<p>Once the study design has been finalised, one proceeds with <strong>acquiring data</strong> based on the protocols detailed in their plan. After the completion of data acquisition, researchers <strong>analyse data</strong> and <strong>interpret the results</strong> in light of the research questions and hypotheses. Finally, the outcomes of the study are <strong>published</strong> in some form and the <strong>next study cycle</strong> begins once again.</p>
+<p>This sounds all very reasonable, but in reality, the researchers’ practice is quite different. This chapter introduces the concept of “researcher’s degrees of freedom” and describes the so-called Questionable Research Practices (QRPs). We will review literature that shows the grim reality of how common QRPs are. In <span class="quarto-unresolved-ref">?sec-open-research</span>, you will learn about principles and tools that are designed to help minimise the presence and impact of QRPs in one’s own research.</p>
+<section id="researchers-degrees-of-freedom" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="researchers-degrees-of-freedom"><span class="header-section-number">12.1</span> Researcher’s degrees of freedom</h2>
+<div class="callout callout-style-simple callout-important no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This section is reproduced from <span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span> (CC-BY-NC) with minor edits.</p>
+</div>
+</div>
+</div>
+<p>Data analysis involves many decisions, such as how to operationalise and measure a given phenomenon or behaviour, which data to submit to statistical modelling and which to exclude in the final analysis, or which inferential approach to employ. This “freedom” can be problematic because humans show cognitive biases that can lead to erroneous inferences <span class="citation" data-cites="tversky1974">(<a href="references.html#ref-tversky1974" role="doc-biblioref">Tversky and Kahneman 1974</a>)</span>. For example, humans are prone to see coherent patterns even in the absence of them <span class="citation" data-cites="brugger2001">(<a href="references.html#ref-brugger2001" role="doc-biblioref">Brugger 2001</a>)</span>, convince themselves of the validity of prior expectations by cherry-picking evidence <span class="citation" data-cites="nickerson1998">(aka confirmation bias, “I knew it,” <a href="references.html#ref-nickerson1998" role="doc-biblioref">Nickerson 1998</a>)</span>, and perceive events as being plausible in hindsight <span class="citation" data-cites="fischhoff1975">(“I knew it all along,” <a href="references.html#ref-fischhoff1975" role="doc-biblioref">Fischhoff 1975</a>)</span>. In conjunction with an academic incentive system that rewards certain discovery processes more than others <span class="citation" data-cites="koole2012 sterling1959">(<a href="references.html#ref-koole2012" role="doc-biblioref">Koole and Lakens 2012</a>; <a href="references.html#ref-sterling1959" role="doc-biblioref">Sterling 1959</a>)</span>, we often find ourselves exploring many possible analytic pathways but reporting only a selected few depending on the quality of the narrative that we can achieve with them.</p>
+<p>This issue is particularly amplified in fields in which the raw data lend themselves to many possible ways of being measured <span class="citation" data-cites="roettger2019">(<a href="references.html#ref-roettger2019" role="doc-biblioref">Roettger 2019</a>)</span>. Combined with a wide variety of conceptual and methodological traditions as well as varying levels of quantitative training across sub-fields, the inherent flexibility of data analysis might lead to a vast plurality of analytic approaches that can itself lead to different scientific conclusions <span class="citation" data-cites="roettger2019a">(<a href="references.html#ref-roettger2019a" role="doc-biblioref">Roettger, Winter, and Baayen 2019</a>)</span>. Analytic flexibility has been widely discussed from a conceptual point of view <span class="citation" data-cites="nosek2014 simmons2011 wagenmakers2012">(<a href="references.html#ref-nosek2014" role="doc-biblioref">Nosek and Lakens 2014</a>; <a href="references.html#ref-simmons2011" role="doc-biblioref">Simmons, Nelson, and Simonsohn 2011</a>; <a href="references.html#ref-wagenmakers2012" role="doc-biblioref">Wagenmakers et al. 2012</a>)</span> and in regard to its application in individual scientific fields <span class="citation" data-cites="charles2019 roettger2019a wicherts2016">(e.g., <a href="references.html#ref-charles2019" role="doc-biblioref">Charles et al. 2019</a>; <a href="references.html#ref-roettger2019a" role="doc-biblioref">Roettger, Winter, and Baayen 2019</a>; <a href="references.html#ref-wicherts2016" role="doc-biblioref">Wicherts et al. 2016</a>)</span>. This notwithstanding, there are still many unknowns regarding the extent of analytic plurality in practice.</p>
+<p>Consequently, a substantial body of published articles likely present overconfident interpretations of data and statistical results based on idiosyncratic analytic strategies (e.g., <span class="citation" data-cites="gelman2014a">Gelman and Loken (<a href="references.html#ref-gelman2014a" role="doc-biblioref">2014</a>)</span>; <span class="citation" data-cites="simmons2011">Simmons, Nelson, and Simonsohn (<a href="references.html#ref-simmons2011" role="doc-biblioref">2011</a>)</span>). These interpretations, and the conclusions that derive from them, are thus associated with an unknown degree of uncertainty (dependent on the strength of evidence provided) and with an unknown degree of generalizability (dependent on the chosen analysis). Moreover, the same data could lead to very different conclusions depending on the analytic path taken by the researcher. However, instead of being critically evaluated, scientific results often remain unchallenged in the publication record.</p>
+</section>
+<section id="questionable-research-practices" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="questionable-research-practices"><span class="header-section-number">12.2</span> Questionable Research Practices</h2>
+<div class="callout callout-style-simple callout-important no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>This section contains text from <span class="citation" data-cites="coretta2020b">Coretta (<a href="references.html#ref-coretta2020b" role="doc-biblioref">2020</a>)</span> (CC-BY-NC) .</p>
+</div>
+</div>
+</div>
+<div id="fig-res-cycle-qrps" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-res-cycle-qrps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/res-process-cycle-qrps.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-res-cycle-qrps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12.2: The research cycle and questionable research practices
+</figcaption>
+</figure>
+</div>
+<p><span class="smallcaps">Questionable research practices</span> are practices, whether intentional or not, that undermine the robustness of research <span class="citation" data-cites="simmons2011 morin2015 flake2020">(<a href="references.html#ref-simmons2011" role="doc-biblioref">Simmons, Nelson, and Simonsohn 2011</a>; <a href="references.html#ref-morin2015" role="doc-biblioref">Morin 2015</a>; <a href="references.html#ref-flake2020" role="doc-biblioref">Flake and Fried 2020</a>)</span>. Questionable research practices are practices that negatively affect the research enterprise, but that are employed (most of the time unintentionally) by a surprisingly high number of researchers <span class="citation" data-cites="john2012">(<a href="references.html#ref-john2012" role="doc-biblioref">John, Loewenstein, and Prelec 2012</a>)</span>. For each step in the research cycle, questionable practices are available to researchers. These are part of the researcher’s degrees of freedom, introduced in the previous section. In this section, we will briefly review some of the most common questionable research practices identified in the literature.</p>
+<p><span class="citation" data-cites="makel2012">Makel, Plucker, and Hegarty (<a href="references.html#ref-makel2012" role="doc-biblioref">2012</a>)</span> looked at the publication history of 100 psychological journals since 1900. They found that only 1.07% of the papers (that is, 1 in 100 papers) were replications of previous studies. This means that the vast majority of studies are run only once and the field moves on. As <span class="citation" data-cites="tukey1969">Tukey (<a href="references.html#ref-tukey1969" role="doc-biblioref">1969, 84</a>)</span> said, “Confirmation comes from repetition. Any attempt to avoid this statement leads to failure and more probably to destruction”. This lack of replication attempts is problematic, given than we can’t be certain the results obtain from the one study would replicate if the study is run again. While the study in <span class="citation" data-cites="makel2012">Makel, Plucker, and Hegarty (<a href="references.html#ref-makel2012" role="doc-biblioref">2012</a>)</span> focused on psychology, <span class="citation" data-cites="kobrock2023">Kobrock and Roettger (<a href="references.html#ref-kobrock2023" role="doc-biblioref">2023</a>)</span> find that linguistics shows a more dire situation: only 0.08% of experimental articles contains an independent direct replication (1 in 1250).</p>
+<p>Another issue that affects modern research regards study design, including aspects related to sample size. Several studies have found that most research employs study designs that grant a 50% probability of being able to find effects of medium size <span class="citation" data-cites="cohen1962 sedlmeier1992 bezeau2001">(<a href="references.html#ref-cohen1962" role="doc-biblioref">Cohen 1962</a>; <a href="references.html#ref-sedlmeier1992" role="doc-biblioref">Sedlmeier and Gigerenzer 1992</a>; <a href="references.html#ref-bezeau2001" role="doc-biblioref">Bezeau and Graves 2001</a>)</span>. <span class="citation" data-cites="gaeta2020">Gaeta and Brydges (<a href="references.html#ref-gaeta2020" role="doc-biblioref">2020</a>)</span> find a similar scenario in speech, language and hearing research: the majority of studies they screened did not have an adequate sample size to be able to detect medium-sized effects.</p>
+<p>In a study about the prevalence of questionable research practices, <span class="citation" data-cites="john2012">John, Loewenstein, and Prelec (<a href="references.html#ref-john2012" role="doc-biblioref">2012</a>)</span> found that about 50% of the researchers interviewed admitted to selective reporting, i.e.&nbsp;reporting only some of the statistical analyses or studies conducted. Combined with a theoretical admission rate, the authors argue for a 100% rate of selective reporting (in other words, we can expect all published studies to be affected by selective reporting). They also found that about 35% of the researchers admitted to having changed the research question/hypothesis after seeing the results (or “claiming to have predicted an unexpected finding”), also known as HARKing <span class="citation" data-cites="kerr1998">(Hypothesising After the Results are Known, <a href="references.html#ref-kerr1998" role="doc-biblioref">Kerr 1998</a>)</span>. Combined with the theoretical admission rate, they estimate an actual rate of 90%.</p>
+<p>We will talk more about sharing research data when you will learn about Open Research practices in <span class="quarto-unresolved-ref">?sec-open-research</span>, but <span class="citation" data-cites="wicherts2006">Wicherts et al. (<a href="references.html#ref-wicherts2006" role="doc-biblioref">2006</a>)</span> contacted the authors of 141 articles in psychology asking to share the research data with them and a worrying 73% of the authors never shared their data. <span class="citation" data-cites="bochynska2023">Bochynska et al. (<a href="references.html#ref-bochynska2023" role="doc-biblioref">2023</a>)</span> surveyed 600 linguistic articles and less than 10% of them shared their data as part of the publication.</p>
+<p>Publication bias is used to refer to the bias towards publishing “positive” results (i.e.&nbsp;results that indicate the presence of an effect). <span class="citation" data-cites="fanelli2010">Fanelli (<a href="references.html#ref-fanelli2010" role="doc-biblioref">2010</a>)</span>; <span class="citation" data-cites="fanelli2012">Fanelli (<a href="references.html#ref-fanelli2012" role="doc-biblioref">2012</a>)</span> found that about 80% of published results are positive results across disciplines, while the prevalence of positive results was higher in fields like psychology and economics (about 90%). Of course, the very high prevalence of positive results indicates that a lot of “negative” results (i.e.&nbsp;results that don’t suggest the presence of an effect) are not published, because in a neutral scenario (where researchers propose and test hypotheses, in an iterative process), there should be many more negative results. <span class="citation" data-cites="ioannidis2005">Ioannidis (<a href="references.html#ref-ioannidis2005" role="doc-biblioref">2005</a>)</span>, for example, shows through computational modelling that a prevalence rate of positive results of 50% or above would be very difficult to obtain and concludes that “most published research findings are false”. Relatedly, <span class="citation" data-cites="nissen2016">Nissen et al. (<a href="references.html#ref-nissen2016" role="doc-biblioref">2016</a>)</span> also use computational modelling to show how false claims can frequently become canonized as fact, in the absence of sufficient negative results. Further to these points, <span class="citation" data-cites="scheel2022">Scheel (<a href="references.html#ref-scheel2022" role="doc-biblioref">2022</a>)</span> stresses that “most psychological research findings are not even wrong”, in that most claims made in the literature are “so critically underspecified that attempts to empirically evaluate them are doomed to failure” <span class="citation" data-cites="scheel2022">(<a href="references.html#ref-scheel2022" role="doc-biblioref">Scheel 2022, 1</a>)</span>.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-bezeau2001" class="csl-entry" role="listitem">
+Bezeau, Scott, and Roger Graves. 2001. <span>“Statistical Power and Effect Sizes of Clinical Neuropsychology Research.”</span> <em>Journal of Clinical and Experimental Neuropsychology</em> 23 (3): 399–406. <a href="https://doi.org/10.1076/jcen.23.3.399.1181">https://doi.org/10.1076/jcen.23.3.399.1181</a>.
+</div>
+<div id="ref-bochynska2023" class="csl-entry" role="listitem">
+Bochynska, Agata, Liam Keeble, Caitlin Halfacre, Joseph V. Casillas, Irys-Amélie Champagne, Kaidi Chen, Melanie Röthlisberger, Erin M. Buchanan, and Timo B. Roettger. 2023. <span>“Reproducible Research Practices and Transparency Across Linguistics.”</span> <em>Glossa Psycholinguistics</em> 2 (1). <a href="https://doi.org/10.5070/g6011239">https://doi.org/10.5070/g6011239</a>.
+</div>
+<div id="ref-brugger2001" class="csl-entry" role="listitem">
+Brugger, Peter. 2001. <span>“From Haunted Brain to Haunted Science: A Cognitive Neuroscience View of Paranormal and Pseudoscientific Thought.”</span> <em>Hauntings and Poltergeists: Multidisciplinary Perspectives</em>, 195213.
+</div>
+<div id="ref-charles2019" class="csl-entry" role="listitem">
+Charles, Sarah J., James E. Bartlett, Kyle J. Messick, Thomas J. Coleman, and Alex Uzdavines. 2019. <span>“Researcher Degrees of Freedom in the Psychology of Religion.”</span> <em>The International Journal for the Psychology of Religion</em> 29 (4): 230245.
+</div>
+<div id="ref-cohen1962" class="csl-entry" role="listitem">
+Cohen, Jacob. 1962. <span>“The Statistical Power of Abnormal-Social Psychological Research: A Review.”</span> <em>The Journal of Abnormal and Social Psychology</em> 65 (3): 145–53. <a href="https://doi.org/10.1037/h0045186">https://doi.org/10.1037/h0045186</a>.
+</div>
+<div id="ref-coretta2020b" class="csl-entry" role="listitem">
+Coretta, Stefano. 2020. <span>“Open Science in Phonetics and Phonology.”</span> <a href="https://doi.org/10.31219/osf.io/4dz5t">https://doi.org/10.31219/osf.io/4dz5t</a>.
+</div>
+<div id="ref-coretta2023" class="csl-entry" role="listitem">
+Coretta, Stefano, Joseph V. Casillas, Simon Roessig, Michael Franke, Byron Ahn, Ali H. Al-Hoorie, Jalal Al-Tamimi, et al. 2023. <span>“Multidimensional Signals and Analytic Flexibility: Estimating Degrees of Freedom in Human-Speech Analyses.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 6 (3). <a href="https://doi.org/10.1177/25152459231162567">https://doi.org/10.1177/25152459231162567</a>.
+</div>
+<div id="ref-fanelli2010" class="csl-entry" role="listitem">
+Fanelli, Daniele. 2010. <span>“Do Pressures to Publish Increase Scientists’ Bias? An Empirical Support from US States Data.”</span> Edited by Enrico Scalas. <em>PLoS ONE</em> 5 (4): e10271. <a href="https://doi.org/10.1371/journal.pone.0010271">https://doi.org/10.1371/journal.pone.0010271</a>.
+</div>
+<div id="ref-fanelli2012" class="csl-entry" role="listitem">
+———. 2012. <span>“Negative Results Are Disappearing from Most Disciplines and Countries.”</span> <em>Scientometrics</em> 90 (3): 891–904. <a href="https://doi.org/10.1007/s11192-011-0494-7">https://doi.org/10.1007/s11192-011-0494-7</a>.
+</div>
+<div id="ref-fischhoff1975" class="csl-entry" role="listitem">
+Fischhoff, Baruch. 1975. <span>“Hindsight Is Not Equal to Foresight: The Effect of Outcome Knowledge on Judgment Under Uncertainty.”</span> <em>Journal of Experimental Psychology: Human Perception and Performance</em> 1 (3): 288.
+</div>
+<div id="ref-flake2020" class="csl-entry" role="listitem">
+Flake, Jessica Kay, and Eiko I. Fried. 2020. <span>“Measurement Schmeasurement: Questionable Measurement Practices and How to Avoid Them.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 3 (4): 456465. <a href="https://doi.org/10.1177/2515245920952393">https://doi.org/10.1177/2515245920952393</a>.
+</div>
+<div id="ref-gaeta2020" class="csl-entry" role="listitem">
+Gaeta, Laura, and Christopher R. Brydges. 2020. <span>“An Examination of Effect Sizes and Statistical Power in Speech, Language, and Hearing Research.”</span> <em>Journal of Speech, Language, and Hearing Research</em> 63 (5): 15721580. <a href="https://doi.org/10.1044/2020_jslhr-19-00299">https://doi.org/10.1044/2020_jslhr-19-00299</a>.
+</div>
+<div id="ref-gelman2014a" class="csl-entry" role="listitem">
+Gelman, Andrew, and Eric Loken. 2014. <span>“The Statistical Crisis in Science: Data-Dependent Analysis. A <span>“</span>Garden of Forking Paths<span>”</span><span></span>explains Why Many Statistically Significant Comparisons Don’t Hold Up.”</span> <em>American Scientist</em> 102 (6): 460466.
+</div>
+<div id="ref-ioannidis2005" class="csl-entry" role="listitem">
+Ioannidis, John P. A. 2005. <span>“Why Most Published Research Findings Are False.”</span> <em>PLoS Medicine</em> 2 (8): e124. <a href="https://doi.org/10.1080/09332480.2019.1579573">https://doi.org/10.1080/09332480.2019.1579573</a>.
+</div>
+<div id="ref-john2012" class="csl-entry" role="listitem">
+John, Leslie K., George Loewenstein, and Drazen Prelec. 2012. <span>“Measuring the Prevalence of Questionable Research Practices with Incentives for Truth Telling.”</span> <em>Psychological Science</em> 23 (5): 524532. <a href="https://doi.org/10.1177/0956797611430953">https://doi.org/10.1177/0956797611430953</a>.
+</div>
+<div id="ref-kerr1998" class="csl-entry" role="listitem">
+Kerr, Norbert L. 1998. <span>“HARKing: Hypothesizing After the Results Are Known.”</span> <em>Personality and Social Psychology Review</em> 2 (3): 196217. <a href="https://doi.org/10.1207/s15327957pspr0203_4">https://doi.org/10.1207/s15327957pspr0203_4</a>.
+</div>
+<div id="ref-kobrock2023" class="csl-entry" role="listitem">
+Kobrock, Kristina, and Timo B. Roettger. 2023. <span>“Assessing the Replication Landscape in Experimental Linguistics.”</span> <em>Glossa Psycholinguistics</em> 2 (1). <a href="https://doi.org/10.5070/g6011135">https://doi.org/10.5070/g6011135</a>.
+</div>
+<div id="ref-koole2012" class="csl-entry" role="listitem">
+Koole, Sander L, and Daniël Lakens. 2012. <span>“Rewarding Replications: A Sure and Simple Way to Improve Psychological Science.”</span> <em>Perspectives on Psychological Science</em> 7 (6): 608614.
+</div>
+<div id="ref-makel2012" class="csl-entry" role="listitem">
+Makel, Matthew C., Jonathan A. Plucker, and Boyd Hegarty. 2012. <span>“Replications in Psychology Research: How Often Do They Really Occur?”</span> <em>Perspectives on Psychological Science</em> 7 (6): 537–42. <a href="https://doi.org/10.1177/1745691612460688">https://doi.org/10.1177/1745691612460688</a>.
+</div>
+<div id="ref-morin2015" class="csl-entry" role="listitem">
+Morin, Olivier. 2015. <span>“A Plea for <span>“</span>Shmeasurement<span>”</span> in the Social Sciences.”</span> <em>Biological Theory</em> 10 (3): 237245. <a href="https://doi.org/10.1007/s13752-015-0217-z">https://doi.org/10.1007/s13752-015-0217-z</a>.
+</div>
+<div id="ref-nickerson1998" class="csl-entry" role="listitem">
+Nickerson, Raymond S. 1998. <span>“Confirmation Bias: A Ubiquitous Phenomenon in Many Guises.”</span> <em>Review of General Psychology</em> 2 (2): 175220. <a href="https://doi.org/10.1037/1089-2680.2.2.175">https://doi.org/10.1037/1089-2680.2.2.175</a>.
+</div>
+<div id="ref-nissen2016" class="csl-entry" role="listitem">
+Nissen, Silas Boye, Tali Magidson, Kevin Gross, and Carl T. Bergstrom. 2016. <span>“Publication Bias and the Canonization of False Facts.”</span> <em>Elife</em> 5: e21451. <a href="https://doi.org/10.7554/eLife.21451">https://doi.org/10.7554/eLife.21451</a>.
+</div>
+<div id="ref-nosek2014" class="csl-entry" role="listitem">
+Nosek, Brian A, and Daniël Lakens. 2014. <span>“A Method to Increase the Credibility of Published Results.”</span> <em>Social Psychology</em> 45 (3): 137141.
+</div>
+<div id="ref-roettger2019" class="csl-entry" role="listitem">
+Roettger, Timo B. 2019. <span>“Researcher Degrees of Freedom in Phonetic Sciences.”</span> <em>Laboratory Phonology: Journal of the Association for Laboratory Phonology</em> 10 (1): 127.
+</div>
+<div id="ref-roettger2019a" class="csl-entry" role="listitem">
+Roettger, Timo B., Bodo Winter, and Harald Baayen. 2019. <span>“Emergent Data Analysis in Phonetic Sciences: Towards Pluralism and Reproducibility.”</span> <em>Journal of Phonetics</em> 73: 17. <a href="https://doi.org/10.1016/j.wocn.2018.12.001">https://doi.org/10.1016/j.wocn.2018.12.001</a>.
+</div>
+<div id="ref-scheel2022" class="csl-entry" role="listitem">
+Scheel, Anne M. 2022. <span>“Why Most Psychological Research Findings Are Not Even Wrong.”</span> <em>Infant and Child Development</em> 31 (1): e2295. <a href="https://doi.org/10.1002/icd.2295">https://doi.org/10.1002/icd.2295</a>.
+</div>
+<div id="ref-sedlmeier1992" class="csl-entry" role="listitem">
+Sedlmeier, Peter, and Gerd Gigerenzer. 1992. <span>“Do Studies of Statistical Power Have an Effect on the Power of Studies?”</span> In, 389–406. Washington: American Psychological Association. <a href="https://doi.org/10.1037/10109-032">https://doi.org/10.1037/10109-032</a>.
+</div>
+<div id="ref-simmons2011" class="csl-entry" role="listitem">
+Simmons, Joseph P, Leif D Nelson, and Uri Simonsohn. 2011. <span>“False-Positive Psychology: Undisclosed Flexibility in Data Collection and Analysis Allows Presenting Anything as Significant.”</span> <em>Psychological Science</em> 22 (11): 13591366.
+</div>
+<div id="ref-sterling1959" class="csl-entry" role="listitem">
+Sterling, Theodore D. 1959. <span>“Publication Decisions and Their Possible Effects on Inferences Drawn from Tests of Significance<span></span>or Vice Versa.”</span> <em>Journal of the American Statistical Association</em> 54 (285): 3034.
+</div>
+<div id="ref-tukey1969" class="csl-entry" role="listitem">
+Tukey, John W. 1969. <span>“Analyzing Data: Sanctification or Detective Work?”</span> <em>American Psychologist</em> 24 (2): 83–91. <a href="https://doi.org/10.1037/h0027108">https://doi.org/10.1037/h0027108</a>.
+</div>
+<div id="ref-tversky1974" class="csl-entry" role="listitem">
+Tversky, Amos, and Daniel Kahneman. 1974. <span>“Judgment Under Uncertainty: Heuristics and Biases: Biases in Judgments Reveal Some Heuristics of Thinking Under Uncertainty.”</span> <em>Science</em> 185 (4157): 11241131. <a href="https://doi.org/10.1126/science.185.4157.1124">https://doi.org/10.1126/science.185.4157.1124</a>.
+</div>
+<div id="ref-wagenmakers2012" class="csl-entry" role="listitem">
+Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der Maas, and Rogier A. Kievit. 2012. <span>“An Agenda for Purely Confirmatory Research.”</span> <em>Perspectives on Psychological Science</em> 7 (6): 632638. <a href="https://doi.org/10.1177/1745691612463078">https://doi.org/10.1177/1745691612463078</a>.
+</div>
+<div id="ref-wicherts2006" class="csl-entry" role="listitem">
+Wicherts, Jelte M., Denny Borsboom, Judith Kats, and Dylan Molenaar. 2006. <span>“The Poor Availability of Psychological Research Data for Reanalysis.”</span> <em>American Psychologist</em> 61 (7): 726.
+</div>
+<div id="ref-wicherts2016" class="csl-entry" role="listitem">
+Wicherts, Jelte M., Coosje L. S. Veldkamp, Hilde E. M. Augusteijn, Marjan Bakker, Robbie C. M. van Aert, and Marcel A. L. M. van Assen. 2016. <span>“Degrees of Freedom in Planning, Running, Analyzing, and Reporting Psychological Studies: A Checklist to Avoid p-Hacking.”</span> <em>Frontiers in Psychology</em> 7. <a href="https://doi.org/10.3389/fpsyg.2016.01832">https://doi.org/10.3389/fpsyg.2016.01832</a>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./ch-summarise.html" class="pagination-link" aria-label="Summarise and group data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summarise and group data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./ch-viz-principles.html" class="pagination-link" aria-label="Visualisation principles">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visualisation principles</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

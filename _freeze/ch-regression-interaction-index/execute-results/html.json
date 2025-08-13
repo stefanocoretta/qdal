@@ -1,0 +1,21 @@
+{
+  "hash": "4a443865b696450b5cf7c6b4e193735b",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Regression models: interactions using indexing {#sec-regression-interaction-index}\n\n![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\npolite <- read_csv(\"data/winter2012/polite.csv\")\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nf0_bm_int2 <- brm(\n  f0mn ~ 0 + gender:attitude,\n  family = gaussian,\n  data = polite,\n  cores = 4,\n  seed = 7123,\n  file = \"cache/ch-regression-interaction-index_f0_bm_int2\"\n)\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nsummary(f0_bm_int2)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n Family: gaussian \n  Links: mu = identity; sigma = identity \nFormula: f0mn ~ 0 + gender:attitude \n   Data: polite (Number of observations: 212) \n  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;\n         total post-warmup draws = 4000\n\nRegression Coefficients:\n                    Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS\ngenderF:attitudeinf   256.61      5.16   246.73   266.76 1.00     5037     2982\ngenderM:attitudeinf   137.23      5.87   125.37   148.66 1.00     5491     2936\ngenderF:attitudepol   238.93      5.08   229.06   248.85 1.00     5191     2912\ngenderM:attitudepol   126.28      5.82   114.88   137.71 1.00     5455     3018\n\nFurther Distributional Parameters:\n      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS\nsigma    39.13      1.94    35.51    43.18 1.00     4975     3159\n\nDraws were sampled using sampling(NUTS). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1).\n```\n\n\n:::\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nconditional_effects(f0_bm_int2, \"gender:attitude\")\n```\n\n::: {.cell-output-display}\n![](ch-regression-interaction-index_files/figure-html/f0-bm-int2-cond-1.png){width=672}\n:::\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nf0_bm_int2_draws <- as_draws_df(f0_bm_int2)\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nf0_bm_int2_draws <- f0_bm_int2_draws |> \n  mutate(\n    f_pol_inf = `b_genderF:attitudepol` - `b_genderF:attitudeinf`,\n    m_pol_inf = `b_genderM:attitudepol` - `b_genderM:attitudeinf`,\n  )\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(posterior)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nThis is posterior version 1.6.1\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\n\nAttaching package: 'posterior'\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nThe following objects are masked from 'package:stats':\n\n    mad, sd, var\n```\n\n\n:::\n\n::: {.cell-output .cell-output-stderr}\n\n```\nThe following objects are masked from 'package:base':\n\n    %in%, match\n```\n\n\n:::\n\n```{.r .cell-code}\nf0_bm_int2_draws |>\n  summarise(\n    mean_diff = mean(m_pol_inf), sd_diff = sd(m_pol_inf),\n    lo_diff = quantile2(m_pol_inf, probs = 0.025), hi_diff = quantile2(m_pol_inf, probs = 0.975)\n  ) |>\n  round()\n```\n\n::: {.cell-output-display}\n`````{=html}\n<div data-pagedtable=\"false\">\n  <script data-pagedtable-source type=\"application/json\">\n{\"columns\":[{\"label\":[\"mean_diff\"],\"name\":[1],\"type\":[\"dbl\"],\"align\":[\"right\"]},{\"label\":[\"sd_diff\"],\"name\":[2],\"type\":[\"dbl\"],\"align\":[\"right\"]},{\"label\":[\"lo_diff\"],\"name\":[3],\"type\":[\"dbl\"],\"align\":[\"right\"]},{\"label\":[\"hi_diff\"],\"name\":[4],\"type\":[\"dbl\"],\"align\":[\"right\"]}],\"data\":[{\"1\":\"-11\",\"2\":\"8\",\"3\":\"-27\",\"4\":\"5\"}],\"options\":{\"columns\":{\"min\":{},\"max\":[10]},\"rows\":{\"min\":[10],\"max\":[10]},\"pages\":{}}}\n  </script>\n</div>\n`````\n:::\n:::\n\n\n",
+    "supporting": [
+      "ch-regression-interaction-index_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"site_libs/pagedtable-1.1/css/pagedtable.css\" rel=\"stylesheet\" />\n<script src=\"site_libs/pagedtable-1.1/js/pagedtable.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

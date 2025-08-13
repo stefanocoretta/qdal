@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>References – Quantitative Data Analysis for Linguists in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ch-regression-interaction-index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-485d01fc63b59abcd3ee1bf1e8e2748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="include/webex.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./references.html">References</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Quantitative Data Analysis for Linguists in R</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome!</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./preface.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-research-methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Research methods</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-research-context.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Research context</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-quantitative.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Quantitative data analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-r-rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R basics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R packages</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-scripts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R scripts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-statistical-vars.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-read-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Read data in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-sum-measures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summary measures</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-summarise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summarise and group data</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-research-cycle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research cycle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-viz-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visualisation principles</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-plotting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Plotting</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-probability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Probability distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-freq-bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-gauss-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Gaussian models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-fit-model.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Introduction to regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-draws.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 6</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-interim-summ.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 7</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models: categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Indexing categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 8</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 9</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-interaction-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: interactions using indexing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">References</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bezeau2001" class="csl-entry" role="listitem">
+Bezeau, Scott, and Roger Graves. 2001. <span>“Statistical Power and
+Effect Sizes of Clinical Neuropsychology Research.”</span> <em>Journal
+of Clinical and Experimental Neuropsychology</em> 23 (3): 399–406. <a href="https://doi.org/10.1076/jcen.23.3.399.1181">https://doi.org/10.1076/jcen.23.3.399.1181</a>.
+</div>
+<div id="ref-bochynska2023" class="csl-entry" role="listitem">
+Bochynska, Agata, Liam Keeble, Caitlin Halfacre, Joseph V. Casillas,
+Irys-Amélie Champagne, Kaidi Chen, Melanie Röthlisberger, Erin M.
+Buchanan, and Timo B. Roettger. 2023. <span>“Reproducible Research
+Practices and Transparency Across Linguistics.”</span> <em>Glossa
+Psycholinguistics</em> 2 (1). <a href="https://doi.org/10.5070/g6011239">https://doi.org/10.5070/g6011239</a>.
+</div>
+<div id="ref-brugger2001" class="csl-entry" role="listitem">
+Brugger, Peter. 2001. <span>“From Haunted Brain to Haunted Science: A
+Cognitive Neuroscience View of Paranormal and Pseudoscientific
+Thought.”</span> <em>Hauntings and Poltergeists: Multidisciplinary
+Perspectives</em>, 195213.
+</div>
+<div id="ref-cameronfaulkner2020" class="csl-entry" role="listitem">
+Cameron-Faulkner, Thea, Nivedita Malik, Circle Steele, Stefano Coretta,
+Ludovica Serratrice, and Elena Lieven. 2020. <span>“A Cross-Cultural
+Analysis of Early Prelinguistic Gesture Development and Its Relationship
+to Language Development.”</span> <em>Child Development</em> 92 (1):
+273290. <a href="https://doi.org/10.1111/cdev.13406">https://doi.org/10.1111/cdev.13406</a>.
+</div>
+<div id="ref-cassidy2019" class="csl-entry" role="listitem">
+Cassidy, Scott A., Ralitza Dimova, Benjamin Giguère, Jeffrey R. Spence,
+and David J. Stanley. 2019. <span>“Failing Grade: 89 Per-Cent of
+Introduction to Psychology Textbooks That Define/Explain Statistical
+Significance Do so Incorrectly.”</span> <em>Advances in Methods and
+Practices in Psychological Science</em>. <a href="https://doi.org/10.1177/2515245919858072">https://doi.org/10.1177/2515245919858072</a>.
+</div>
+<div id="ref-charles2019" class="csl-entry" role="listitem">
+Charles, Sarah J., James E. Bartlett, Kyle J. Messick, Thomas J.
+Coleman, and Alex Uzdavines. 2019. <span>“Researcher Degrees of Freedom
+in the Psychology of Religion.”</span> <em>The International Journal for
+the Psychology of Religion</em> 29 (4): 230245.
+</div>
+<div id="ref-cohen1962" class="csl-entry" role="listitem">
+Cohen, Jacob. 1962. <span>“The Statistical Power of Abnormal-Social
+Psychological Research: A Review.”</span> <em>The Journal of Abnormal
+and Social Psychology</em> 65 (3): 145–53. <a href="https://doi.org/10.1037/h0045186">https://doi.org/10.1037/h0045186</a>.
+</div>
+<div id="ref-coretta2019" class="csl-entry" role="listitem">
+Coretta, Stefano. 2019. <span>“An Exploratory Study of Voicing-Related
+Differences in Vowel Duration as Compensatory Temporal Adjustment in
+Italian and Polish.”</span> <em>Glossa: A Journal of General
+Linguistics</em> 4 (1): 1–25. <a href="https://doi.org/10.5334/gjgl.869">https://doi.org/10.5334/gjgl.869</a>.
+</div>
+<div id="ref-coretta2020b" class="csl-entry" role="listitem">
+———. 2020. <span>“Open Science in Phonetics and Phonology.”</span> <a href="https://doi.org/10.31219/osf.io/4dz5t">https://doi.org/10.31219/osf.io/4dz5t</a>.
+</div>
+<div id="ref-coretta2019k" class="csl-entry" role="listitem">
+———. n.d. <span>“Vowel Duration, Voicing Duration, and Vowel Height:
+Acoustic and Articulatory Data from Italian [Research
+Compendium].”</span> <a href="https://doi.org/10.17605/OSF.IO/XDGFZ">https://doi.org/10.17605/OSF.IO/XDGFZ</a>.
+</div>
+<div id="ref-coretta2023" class="csl-entry" role="listitem">
+Coretta, Stefano, Joseph V. Casillas, Simon Roessig, Michael Franke,
+Byron Ahn, Ali H. Al-Hoorie, Jalal Al-Tamimi, et al. 2023.
+<span>“Multidimensional Signals and Analytic Flexibility: Estimating
+Degrees of Freedom in Human-Speech Analyses.”</span> <em>Advances in
+Methods and Practices in Psychological Science</em> 6 (3). <a href="https://doi.org/10.1177/25152459231162567">https://doi.org/10.1177/25152459231162567</a>.
+</div>
+<div id="ref-coretta2022" class="csl-entry" role="listitem">
+Coretta, Stefano, Josiane Riverin-Coutlée, Enkeleida Kapia, and Stephen
+Nichols. 2022. <span>“Northern Tosk Albanian.”</span> <em>Journal of the
+International Phonetic Association</em>, 123. <a href="https://doi.org/10.1017/s0025100322000044">https://doi.org/10.1017/s0025100322000044</a>.
+</div>
+<div id="ref-cumming2013" class="csl-entry" role="listitem">
+Cumming, Geoff. 2013. <span>“The New Statistics: Why and How.”</span>
+<em>Psychological Science</em> 25 (1): 729. <a href="https://doi.org/10.1177/0956797613504966">https://doi.org/10.1177/0956797613504966</a>.
+</div>
+<div id="ref-darwinholmes2020" class="csl-entry" role="listitem">
+Darwin Holmes, Andrew Gary. 2020. <span>“Researcher Positionality: A
+Consideration of Its Influence and Place in Qualitative
+Research<span></span>a New Researcher Guide.”</span> <em>Shanlax
+International Journal of Education</em> 8 (4): 110. <a href="https://doi.org/10.34293/education.v8i4.3232">https://doi.org/10.34293/education.v8i4.3232</a>.
+</div>
+<div id="ref-devezer2021" class="csl-entry" role="listitem">
+Devezer, Berna, Danielle J. Navarro, Joachim Vandekerckhove, and Erkan
+Ozge Buzbas. 2021. <span>“The Case for Formal Methodology in Scientific
+Reform.”</span> <em>Royal Society Open Science</em> 8 (3): rsos.200805,
+200805. <a href="https://doi.org/10.1098/rsos.200805">https://doi.org/10.1098/rsos.200805</a>.
+</div>
+<div id="ref-dienes2008" class="csl-entry" role="listitem">
+Dienes, Zoltan. 2008. <em>Understanding Psychology as a Science: An
+Introduction to Scientific and Statistical Inference</em>. Macmillan
+International Higher Education.
+</div>
+<div id="ref-dryer2008" class="csl-entry" role="listitem">
+Dryer, Matthew S. 2008. <span>“Descriptive Theories, Explanatory
+Theories, and Basic Linguistic Theory.”</span> In <em>Catching Language:
+The Standing Challenge of Grammar Writing</em>, edited by Felix K.
+Ameka, Alan Charles Dench, and Nicholas Evans. Vol. 167. Trends in
+Linguistics Studies and Monographs. Mouton De Gruyter.
+</div>
+<div id="ref-egurtzegi2020" class="csl-entry" role="listitem">
+Egurtzegi, Ander, and Christopher Carignan. 2020. <span>“An Acoustic
+Description of Mixean Basque.”</span> <em>The Journal of the Acoustical
+Society of America</em> 147 (4): 27912802. <a href="https://doi.org/10.1121/10.0000996">https://doi.org/10.1121/10.0000996</a>.
+</div>
+<div id="ref-ellis2008" class="csl-entry" role="listitem">
+Ellis, J. Timothy, and Yair Levy. 2008. <span>“Framework of
+Problem-Based Research: A Guide for Novice Researchers on the
+Development of a Research-Worthy Problem.”</span> <em>Informing Science:
+The International Journal of an Emerging Transdiscipline</em> 11: 1733.
+<a href="https://doi.org/10.28945/438">https://doi.org/10.28945/438</a>.
+</div>
+<div id="ref-fanelli2010" class="csl-entry" role="listitem">
+Fanelli, Daniele. 2010. <span>“Do Pressures to Publish Increase
+Scientists’ Bias? An Empirical Support from US States Data.”</span>
+Edited by Enrico Scalas. <em>PLoS ONE</em> 5 (4): e10271. <a href="https://doi.org/10.1371/journal.pone.0010271">https://doi.org/10.1371/journal.pone.0010271</a>.
+</div>
+<div id="ref-fanelli2012" class="csl-entry" role="listitem">
+———. 2012. <span>“Negative Results Are Disappearing from Most
+Disciplines and Countries.”</span> <em>Scientometrics</em> 90 (3):
+891–904. <a href="https://doi.org/10.1007/s11192-011-0494-7">https://doi.org/10.1007/s11192-011-0494-7</a>.
+</div>
+<div id="ref-fischhoff1975" class="csl-entry" role="listitem">
+Fischhoff, Baruch. 1975. <span>“Hindsight Is Not Equal to Foresight: The
+Effect of Outcome Knowledge on Judgment Under Uncertainty.”</span>
+<em>Journal of Experimental Psychology: Human Perception and
+Performance</em> 1 (3): 288.
+</div>
+<div id="ref-flake2020" class="csl-entry" role="listitem">
+Flake, Jessica Kay, and Eiko I. Fried. 2020. <span>“Measurement
+Schmeasurement: Questionable Measurement Practices and How to Avoid
+Them.”</span> <em>Advances in Methods and Practices in Psychological
+Science</em> 3 (4): 456465. <a href="https://doi.org/10.1177/2515245920952393">https://doi.org/10.1177/2515245920952393</a>.
+</div>
+<div id="ref-gaeta2020" class="csl-entry" role="listitem">
+Gaeta, Laura, and Christopher R. Brydges. 2020. <span>“An Examination of
+Effect Sizes and Statistical Power in Speech, Language, and Hearing
+Research.”</span> <em>Journal of Speech, Language, and Hearing
+Research</em> 63 (5): 15721580. <a href="https://doi.org/10.1044/2020_jslhr-19-00299">https://doi.org/10.1044/2020_jslhr-19-00299</a>.
+</div>
+<div id="ref-galton1886" class="csl-entry" role="listitem">
+Galton, Francis. 1886. <span>“Regression Towards Mediocrity in
+Hereditary Stature.”</span> <em>The Journal of the Anthropological
+Institute of Great Britain and Ireland</em> 15: 246. <a href="https://doi.org/10.2307/2841583">https://doi.org/10.2307/2841583</a>.
+</div>
+<div id="ref-galton1980" class="csl-entry" role="listitem">
+———. 1980. <span>“Kinship and Correlation.”</span> <em>The North
+American Review</em> 150 (401): 419431.
+</div>
+<div id="ref-gelman2017" class="csl-entry" role="listitem">
+Gelman, Andrew, and Christian Hennig. 2017. <span>“Beyond Subjective and
+Objective in Statistics.”</span> <em>Journal of the Royal Statistical
+Society: Series A (Statistics in Society)</em> 180 (4): 9671033. <a href="https://doi.org/10.1111/rssa.12276">https://doi.org/10.1111/rssa.12276</a>.
+</div>
+<div id="ref-gelman2019" class="csl-entry" role="listitem">
+Gelman, Andrew, Daniel Lakeland, Brian Haig, Christian Hennig, Art Owen,
+Robert Cousins, Stan Young, et al. 2019. <span>“Many Perspectives on
+Deborah Mayo’s <span>“</span>Statistical Inference as Severe Testing:
+How to Get Beyond the Statistics Wars<span>”</span>.”</span> <a href="https://doi.org/10.48550/arXiv.1905.08876">https://doi.org/10.48550/arXiv.1905.08876</a>.
+</div>
+<div id="ref-gelman2014a" class="csl-entry" role="listitem">
+Gelman, Andrew, and Eric Loken. 2014. <span>“The Statistical Crisis in
+Science: Data-Dependent Analysis. A <span>“</span>Garden of Forking
+Paths<span>”</span><span></span>explains Why Many Statistically
+Significant Comparisons Don’t Hold Up.”</span> <em>American
+Scientist</em> 102 (6): 460466.
+</div>
+<div id="ref-gelman2006a" class="csl-entry" role="listitem">
+Gelman, Andrew, and Hal Stern. 2006. <span>“The Difference Between
+<span>“</span>Significant<span>”</span> and <span>“</span>Not
+Significant<span>”</span> Is Not Itself Statistically
+Significant.”</span> <em>The American Statistician</em> 60 (4): 328331.
+<a href="https://doi.org/10.1198/000313006X152649">https://doi.org/10.1198/000313006X152649</a>.
+</div>
+<div id="ref-gigerenzer2004" class="csl-entry" role="listitem">
+Gigerenzer, Gerd. 2004. <span>“Mindless Statistics.”</span> <em>The
+Journal of Socio-Economics</em> 33 (5): 587606. <a href="https://doi.org/10.1016/j.socec.2004.09.033">https://doi.org/10.1016/j.socec.2004.09.033</a>.
+</div>
+<div id="ref-gigerenzer2018" class="csl-entry" role="listitem">
+———. 2018. <span>“Statistical Rituals: The Replication Delusion and How
+We Got There.”</span> <em>Advances in Methods and Practices in
+Psychological Science</em> 1 (2): 198218. <a href="https://doi.org/10.1177/2515245918771329">https://doi.org/10.1177/2515245918771329</a>.
+</div>
+<div id="ref-gigerenzer2004a" class="csl-entry" role="listitem">
+Gigerenzer, Gerd, Stefan Krauss, and Oliver Vitouch. 2004. <span>“The
+Null Ritual. What You Always Wanted to Know about
+Signi<span>fi</span>cance Testing but Were Afraid to Ask.”</span> In,
+391408.
+</div>
+<div id="ref-ioannidis2005" class="csl-entry" role="listitem">
+Ioannidis, John P. A. 2005. <span>“Why Most Published Research Findings
+Are False.”</span> <em>PLoS Medicine</em> 2 (8): e124. <a href="https://doi.org/10.1080/09332480.2019.1579573">https://doi.org/10.1080/09332480.2019.1579573</a>.
+</div>
+<div id="ref-jafar2018" class="csl-entry" role="listitem">
+Jafar, Anisa J. N. 2018. <span>“What Is Positionality and Should It Be
+Expressed in Quantitative Studies?”</span> <em>Emergency Medicine
+Journal</em>. <a href="https://doi.org/10.1136/emermed-2017-207158">https://doi.org/10.1136/emermed-2017-207158</a>.
+</div>
+<div id="ref-john2012" class="csl-entry" role="listitem">
+John, Leslie K., George Loewenstein, and Drazen Prelec. 2012.
+<span>“Measuring the Prevalence of Questionable Research Practices with
+Incentives for Truth Telling.”</span> <em>Psychological Science</em> 23
+(5): 524532. <a href="https://doi.org/10.1177/0956797611430953">https://doi.org/10.1177/0956797611430953</a>.
+</div>
+<div id="ref-kerr1998" class="csl-entry" role="listitem">
+Kerr, Norbert L. 1998. <span>“HARKing: Hypothesizing After the Results
+Are Known.”</span> <em>Personality and Social Psychology Review</em> 2
+(3): 196217. <a href="https://doi.org/10.1207/s15327957pspr0203_4">https://doi.org/10.1207/s15327957pspr0203_4</a>.
+</div>
+<div id="ref-kobrock2023" class="csl-entry" role="listitem">
+Kobrock, Kristina, and Timo B. Roettger. 2023. <span>“Assessing the
+Replication Landscape in Experimental Linguistics.”</span> <em>Glossa
+Psycholinguistics</em> 2 (1). <a href="https://doi.org/10.5070/g6011135">https://doi.org/10.5070/g6011135</a>.
+</div>
+<div id="ref-koole2012" class="csl-entry" role="listitem">
+Koole, Sander L, and Daniël Lakens. 2012. <span>“Rewarding Replications:
+A Sure and Simple Way to Improve Psychological Science.”</span>
+<em>Perspectives on Psychological Science</em> 7 (6): 608614.
+</div>
+<div id="ref-kruschke2018" class="csl-entry" role="listitem">
+Kruschke, John K., and Torrin M. Liddell. 2018. <span>“The Bayesian New
+Statistics: Hypothesis Testing, Estimation, Meta-Analysis, and Power
+Analysis from a Bayesian Perspective.”</span> <em>Psychonomic Bulletin
+&amp; Review</em> 25 (1): 178206. <a href="https://doi.org/10.3758/s13423-016-1221-4">https://doi.org/10.3758/s13423-016-1221-4</a>.
+</div>
+<div id="ref-makel2012" class="csl-entry" role="listitem">
+Makel, Matthew C., Jonathan A. Plucker, and Boyd Hegarty. 2012.
+<span>“Replications in Psychology Research: How Often Do They Really
+Occur?”</span> <em>Perspectives on Psychological Science</em> 7 (6):
+537–42. <a href="https://doi.org/10.1177/1745691612460688">https://doi.org/10.1177/1745691612460688</a>.
+</div>
+<div id="ref-mayo2018" class="csl-entry" role="listitem">
+Mayo, Deborah G. 2018. <em>Statistical Inference as Severe Testing: How
+to Get Beyond the Statistics Wars</em>. 1st ed. Cambridge University
+Press. <a href="https://doi.org/10.1017/9781107286184">https://doi.org/10.1017/9781107286184</a>.
+</div>
+<div id="ref-mcelreath2020" class="csl-entry" role="listitem">
+McElreath, Richard. 2020. <em>Statistical Rethinking: A Bayesian Course
+with Examples in R and Stan</em>. Second edition. Chapman &amp; Hall/CRC
+Texts in Statistical Science Series. Boca Raton: CRC Press.
+</div>
+<div id="ref-morin2015" class="csl-entry" role="listitem">
+Morin, Olivier. 2015. <span>“A Plea for
+<span>“</span>Shmeasurement<span>”</span> in the Social
+Sciences.”</span> <em>Biological Theory</em> 10 (3): 237245. <a href="https://doi.org/10.1007/s13752-015-0217-z">https://doi.org/10.1007/s13752-015-0217-z</a>.
+</div>
+<div id="ref-nicenboim2025" class="csl-entry" role="listitem">
+Nicenboim, Bruno, Daniel J. Schad, and Shravan Vasishth. 2025.
+<em>Introduction to Bayesian Data Analysis for Cognitive Science</em>.
+<a href="https://bruno.nicenboim.me/bayescogsci/">https://bruno.nicenboim.me/bayescogsci/</a>.
+</div>
+<div id="ref-nickerson1998" class="csl-entry" role="listitem">
+Nickerson, Raymond S. 1998. <span>“Confirmation Bias: A Ubiquitous
+Phenomenon in Many Guises.”</span> <em>Review of General Psychology</em>
+2 (2): 175220. <a href="https://doi.org/10.1037/1089-2680.2.2.175">https://doi.org/10.1037/1089-2680.2.2.175</a>.
+</div>
+<div id="ref-nissen2016" class="csl-entry" role="listitem">
+Nissen, Silas Boye, Tali Magidson, Kevin Gross, and Carl T. Bergstrom.
+2016. <span>“Publication Bias and the Canonization of False
+Facts.”</span> <em>Elife</em> 5: e21451. <a href="https://doi.org/10.7554/eLife.21451">https://doi.org/10.7554/eLife.21451</a>.
+</div>
+<div id="ref-nosek2014" class="csl-entry" role="listitem">
+Nosek, Brian A, and Daniël Lakens. 2014. <span>“A Method to Increase the
+Credibility of Published Results.”</span> <em>Social Psychology</em> 45
+(3): 137141.
+</div>
+<div id="ref-okasha2016" class="csl-entry" role="listitem">
+Okasha, Samir. 2016. <em>Philosophy of Science: Very Short
+Introduction</em>. Oxford: Oxford University Press. <a href="https://doi.org/10.1093/actrade/9780192802835.001.0001">https://doi.org/10.1093/actrade/9780192802835.001.0001</a>.
+</div>
+<div id="ref-roettger2019" class="csl-entry" role="listitem">
+Roettger, Timo B. 2019. <span>“Researcher Degrees of Freedom in Phonetic
+Sciences.”</span> <em>Laboratory Phonology: Journal of the Association
+for Laboratory Phonology</em> 10 (1): 127.
+</div>
+<div id="ref-roettger2019a" class="csl-entry" role="listitem">
+Roettger, Timo B., Bodo Winter, and Harald Baayen. 2019. <span>“Emergent
+Data Analysis in Phonetic Sciences: Towards Pluralism and
+Reproducibility.”</span> <em>Journal of Phonetics</em> 73: 17. <a href="https://doi.org/10.1016/j.wocn.2018.12.001">https://doi.org/10.1016/j.wocn.2018.12.001</a>.
+</div>
+<div id="ref-rosenberg2020" class="csl-entry" role="listitem">
+Rosenberg, Alexander, and Lee Mclntyre. 2020. <em>Philosophy of science:
+a contemporary introduction</em>. Fourth edition. Routledge contemporary
+introductions to philosophy. New York London: Routledge.
+</div>
+<div id="ref-scheel2022" class="csl-entry" role="listitem">
+Scheel, Anne M. 2022. <span>“Why Most Psychological Research Findings
+Are Not Even Wrong.”</span> <em>Infant and Child Development</em> 31
+(1): e2295. <a href="https://doi.org/10.1002/icd.2295">https://doi.org/10.1002/icd.2295</a>.
+</div>
+<div id="ref-scheel2020" class="csl-entry" role="listitem">
+Scheel, Anne M., Leonid Tiokhin, Peder M. Isager, and Daniël Lakens.
+2020. <span>“Why Hypothesis Testers Should Spend Less Time Testing
+Hypotheses.”</span> <em>Perspectives on Psychological Science</em> 16
+(4): 744–55. <a href="https://doi.org/10.1177/1745691620966795">https://doi.org/10.1177/1745691620966795</a>.
+</div>
+<div id="ref-sedlmeier1992" class="csl-entry" role="listitem">
+Sedlmeier, Peter, and Gerd Gigerenzer. 1992. <span>“Do Studies of
+Statistical Power Have an Effect on the Power of Studies?”</span> In,
+389–406. Washington: American Psychological Association. <a href="https://doi.org/10.1037/10109-032">https://doi.org/10.1037/10109-032</a>.
+</div>
+<div id="ref-silberzahn2018" class="csl-entry" role="listitem">
+Silberzahn, Raphael, Eric L. Uhlmann, Daniel P. Martin, Pasquale
+Anselmi, Frederik Aust, Eli Awtrey, Štěpán Bahník, Feng Bai, Colin
+Bannard, and Evelina Bonnier. 2018. <span>“Many Analysts, One Data Set:
+Making Transparent How Variations in Analytic Choices Affect
+Results.”</span> <em>Advances in Methods and Practices in Psychological
+Science</em> 1 (3): 337356. <a href="https://doi.org/10.1177/2515245917747646">https://doi.org/10.1177/2515245917747646</a>.
+</div>
+<div id="ref-simmons2011" class="csl-entry" role="listitem">
+Simmons, Joseph P, Leif D Nelson, and Uri Simonsohn. 2011.
+<span>“False-Positive Psychology: Undisclosed Flexibility in Data
+Collection and Analysis Allows Presenting Anything as
+Significant.”</span> <em>Psychological Science</em> 22 (11): 13591366.
+</div>
+<div id="ref-slowscienceacademy2010" class="csl-entry" role="listitem">
+Slow Science Academy. 2010. <span>“The Slow Science Manifesto.”</span>
+<a href="http://slow-science.org">http://slow-science.org</a>.
+</div>
+<div id="ref-song2020" class="csl-entry" role="listitem">
+Song, Yoonsang, Youngah Do, Arthur L. Thompson, Eileen R. Waegemaekers,
+and Jongbong Lee. 2020. <span>“Second Language Users Exhibit Shallow
+Morphological Processing.”</span> <em>Studies in Second Language
+Acquisition</em> 42 (5): 11211136. <a href="https://doi.org/10.1017/s0272263120000170">https://doi.org/10.1017/s0272263120000170</a>.
+</div>
+<div id="ref-sterling1959" class="csl-entry" role="listitem">
+Sterling, Theodore D. 1959. <span>“Publication Decisions and Their
+Possible Effects on Inferences Drawn from Tests of
+Significance<span></span>or Vice Versa.”</span> <em>Journal of the
+American Statistical Association</em> 54 (285): 3034.
+</div>
+<div id="ref-tucker2019" class="csl-entry" role="listitem">
+Tucker, Benjamin V, Daniel Brenner, Kyle Danielson D, Matthew C Kelley,
+Filip Nenadić, and Michelle Sims. 2019. <span>“The Massive Auditory
+Lexical Decision (MALD) Database.”</span> <em>Behavior Research
+Methods</em> 51 (3): 11871204. <a href="https://doi.org/10.3758/s13428-018-1056-1">https://doi.org/10.3758/s13428-018-1056-1</a>.
+</div>
+<div id="ref-tukey1969" class="csl-entry" role="listitem">
+Tukey, John W. 1969. <span>“Analyzing Data: Sanctification or Detective
+Work?”</span> <em>American Psychologist</em> 24 (2): 83–91. <a href="https://doi.org/10.1037/h0027108">https://doi.org/10.1037/h0027108</a>.
+</div>
+<div id="ref-tukey1980" class="csl-entry" role="listitem">
+———. 1980. <span>“We Need Both Exploratory and Confirmatory.”</span>
+<em>The American Statistician</em> 34 (1): 23–25. <a href="https://doi.org/10.2307/2682991">https://doi.org/10.2307/2682991</a>.
+</div>
+<div id="ref-tversky1974" class="csl-entry" role="listitem">
+Tversky, Amos, and Daniel Kahneman. 1974. <span>“Judgment Under
+Uncertainty: Heuristics and Biases: Biases in Judgments Reveal Some
+Heuristics of Thinking Under Uncertainty.”</span> <em>Science</em> 185
+(4157): 11241131. <a href="https://doi.org/10.1126/science.185.4157.1124">https://doi.org/10.1126/science.185.4157.1124</a>.
+</div>
+<div id="ref-vasishth2021" class="csl-entry" role="listitem">
+Vasishth, Shravan, and Andrew Gelman. 2021. <span>“How to Embrace
+Variation and Accept Uncertainty in Linguistic and Psycholinguistic Data
+Analysis.”</span> <em>Linguistics</em> 59 (5): 13111342. <a href="https://doi.org/10.1515/ling-2019-0051">https://doi.org/10.1515/ling-2019-0051</a>.
+</div>
+<div id="ref-wagenmakers2012" class="csl-entry" role="listitem">
+Wagenmakers, Eric-Jan, Ruud Wetzels, Denny Borsboom, Han L. J. van der
+Maas, and Rogier A. Kievit. 2012. <span>“An Agenda for Purely
+Confirmatory Research.”</span> <em>Perspectives on Psychological
+Science</em> 7 (6): 632638. <a href="https://doi.org/10.1177/1745691612463078">https://doi.org/10.1177/1745691612463078</a>.
+</div>
+<div id="ref-wicherts2006" class="csl-entry" role="listitem">
+Wicherts, Jelte M., Denny Borsboom, Judith Kats, and Dylan Molenaar.
+2006. <span>“The Poor Availability of Psychological Research Data for
+Reanalysis.”</span> <em>American Psychologist</em> 61 (7): 726.
+</div>
+<div id="ref-wicherts2016" class="csl-entry" role="listitem">
+Wicherts, Jelte M., Coosje L. S. Veldkamp, Hilde E. M. Augusteijn,
+Marjan Bakker, Robbie C. M. van Aert, and Marcel A. L. M. van Assen.
+2016. <span>“Degrees of Freedom in Planning, Running, Analyzing, and
+Reporting Psychological Studies: A Checklist to Avoid p-Hacking.”</span>
+<em>Frontiers in Psychology</em> 7. <a href="https://doi.org/10.3389/fpsyg.2016.01832">https://doi.org/10.3389/fpsyg.2016.01832</a>.
+</div>
+<div id="ref-wickham2023" class="csl-entry" role="listitem">
+Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.
+<em>R for Data Science (2e)</em>. Second edition. <a href="https://r4ds.hadley.nz">https://r4ds.hadley.nz</a>.
+</div>
+<div id="ref-winter2020" class="csl-entry" role="listitem">
+Winter, Bodo. 2020. <em>Statistics for Linguists: An Introduction Using
+r</em>. Routledge.
+</div>
+<div id="ref-winter2012" class="csl-entry" role="listitem">
+Winter, Bodo, and Sven Grawunder. 2012. <span>“The Phonetic Profile of
+Korean Formal and Informal Speech Registers.”</span> <em>Journal of
+Phonetics</em> 40 (6): 808–15. <a href="https://doi.org/10.1016/j.wocn.2012.08.006">https://doi.org/10.1016/j.wocn.2012.08.006</a>.
+</div>
+<div id="ref-yarkoni2022" class="csl-entry" role="listitem">
+Yarkoni, Tal. 2022. <span>“The Generalizability Crisis.”</span>
+<em>Behavioral and Brain Sciences</em> 45. <a href="https://doi.org/10.1017/s0140525x20001685">https://doi.org/10.1017/s0140525x20001685</a>.
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+  }
+
+  update_total_correct();
+}
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            // default icon
+            link.classList.add("external");
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./ch-regression-interaction-index.html" class="pagination-link" aria-label="Regression models: interactions using indexing">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: interactions using indexing</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

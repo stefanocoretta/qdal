@@ -49,3 +49,63 @@ Blue boxes contain quizzes, examples or summaries. The title in the box will spe
 
 Red boxes called "Spotlight" focus on some topic briefly covered in the text which is important but doesn't quite fit in the narrative of the main text. Red boxes called "Solutions" are solutions to the exercises.
 :::
+
+The textbook will teach how to use R. R is a programming language, meaning that you will have to write code which is executed and the results are returned to (as output in the R Console, as plots, tables, so on). R code in-text will look like this: `"this is R code"`, while longer code chunks will look like this:
+
+``` r
+# Sum two numbers!
+
+a <- 1 + 2
+print(a)
+```
+
+Sometimes, when the R code is not that important, for example for certain plots, you will see a little grey triangle next to `Code` and if you click on it the code will be shown, like in the following example.
+
+```{r}
+#| label: fig-mald-rt-distr
+#| code-fold: true
+#| message: false
+
+library(tidyverse)
+library(glue)
+mald <- readRDS("data/tucker2019/mald_1_1.rds")
+
+rt_mean <- mean(mald$RT)
+rt_sd <- sd(mald$RT)
+rt_mean_text <- glue("mean: {round(rt_mean)} ms")
+rt_sd_text <- glue("SD: {round(rt_sd)} ms")
+x_int <- 2000
+
+ggplot(data = tibble(x = 0:300), aes(x)) +
+  geom_density(data = mald, aes(RT), colour = "grey", fill = "grey", alpha = 0.2) +
+  stat_function(fun = dnorm, n = 101, args = list(rt_mean, rt_sd), colour = "#9970ab", linewidth = 1.5) +
+  scale_x_continuous(n.breaks = 5) +
+  geom_vline(xintercept = rt_mean, colour = "#1b7837", linewidth = 1) +
+  geom_rug(data = mald, aes(RT), alpha = 0.1) +
+  annotate(
+    "label", x = rt_mean + 1, y = 0.0015,
+    label = rt_mean_text,
+    fill = "#1b7837", colour = "white"
+  ) +
+  annotate(
+    "label", x = x_int, y = 0.0015,
+    label = rt_sd_text,
+    fill = "#8c510a", colour = "white"
+  ) +
+  annotate(
+    "label", x = x_int, y = 0.001,
+    label = "theoretical sample\ndistribution",
+    fill = "#9970ab", colour = "white"
+  ) +
+  annotate(
+    "label", x = x_int, y = 0.0003,
+    label = "empirical sample\ndistribution",
+    fill = "grey", colour = "white"
+  ) +
+  labs(
+    title = "Theoretical sample distribution of reaction times",
+    subtitle = glue("Gaussian distribution: mean = {round(rt_mean)} ms, SD = {round(rt_sd)}"),
+    x = "RT (ms)", y = "Relative probability (density)"
+  )
+```
+
