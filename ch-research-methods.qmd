@@ -134,4 +134,4 @@ opts_2 <- c(
 
 cat("b. Which of the following studies aims to improve the fit of a framework to the data? (Thanks to András Bárány for suggesting the second example)", longmcq(opts_2))
 ```
-::: 
+:::

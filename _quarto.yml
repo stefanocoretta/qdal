@@ -10,6 +10,7 @@ book:
   page-navigation: true
   chapters:
   - index.qmd
+  - preface.qmd
   - part: Week 1
     chapters:
     - ch-research-methods.qmd

@@ -1,4 +1,4 @@
-# Read data in R  {#sec-read-data}
+# Read data in R {#sec-read-data}
 
 ![](https://img.shields.io/badge/Area-R-green)
 
