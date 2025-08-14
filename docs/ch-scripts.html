@@ -462,6 +462,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#write-code" id="toc-write-code" class="nav-link" data-scroll-target="#write-code"><span class="header-section-number">7.2</span> Write code</a></li>
   <li><a href="#running-scripts" id="toc-running-scripts" class="nav-link" data-scroll-target="#running-scripts"><span class="header-section-number">7.3</span> Running scripts</a></li>
   <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments"><span class="header-section-number">7.4</span> Comments</a></li>
+  <li><a href="#ensuring-the-script-runs" id="toc-ensuring-the-script-runs" class="nav-link" data-scroll-target="#ensuring-the-script-runs"><span class="header-section-number">7.5</span> Ensuring the script runs</a></li>
   </ul>
 </nav>
     </div>
@@ -488,7 +489,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
-<p>So far, you’ve been writing R code in the <strong>Console</strong> and run it there. But this is not very efficient. Every time, you need to write the code and execute it in the right order and it quickly becomes very difficult to keep track of everything when things start getting more involved. A solution is to use <strong>R scripts</strong>.</p>
+<p>In <a href="ch-r-rstudio.html" class="quarto-xref"><span>Chapter 4</span></a> and <a href="ch-packages.html" class="quarto-xref"><span>Chapter 5</span></a>, you’ve been writing R code in the <strong>Console</strong> and run it there. But this is not a very efficient way of using R code. Every time, you need to write the code and execute it in the right order and it quickly becomes very difficult to keep track of everything when things start getting more involved. A solution is to use <strong>R scripts</strong>.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -502,14 +503,19 @@ R script
 <p>An <strong>R script</strong> is a file with the <code>.R</code> extension that contains R code.</p>
 </div>
 </div>
-<p>From now on, you should write all code in an R script, until you will learn about Quarto documents.</p>
+<p>From now on, you should write all code in an R script, until you will learn about Quarto documents in <a href="ch-quarto.html" class="quarto-xref"><span>Chapter 14</span></a>.</p>
 <section id="create-an-r-script" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="create-an-r-script"><span class="header-section-number">7.1</span> Create an R script</h2>
-<p>First, create a folder called <code>code</code> in your Quarto project folder. This will be the folder where you will save all of your R scripts and other documents.</p>
+<p>First, create a folder called <code>code</code> in your Quarto project folder. You can do so in two different ways:</p>
+<ul>
+<li><p>You can click on the <code>New Folder</code> button in the <code>Files</code> panel (bottom-right) in RStudio, set the name and click <code>Ok</code>. The folder will be created within the current folder shown in the <code>Files</code> list.</p></li>
+<li><p>Since Quarto Projects are just folders on your computer, you can create a new folder as you would with any other folder from your computer File Explorer/Finder.</p></li>
+</ul>
+<p>The <code>code/</code> folder will be the folder where you will save all of your R scripts and other documents.</p>
 <p>Now, to create a new R script, look at the top-left corner of RStudio: the first button to the left looks like a white sheet with a green plus sign. This is the <code>New file</code> button. Click on that and you will see a few options to create a new file.</p>
 <p>Click on <code>R Script</code>. A new empty R script will be created and will open in the File Editor window of RStudio.</p>
 <p><img src="img/new-script-button.png" class="img-fluid"></p>
-<p><strong>Note</strong> that creating an R script does not automatically saves it on your computer. To do so, either use the keyboard short-cut <code>CMD+S</code>/<code>CTRL+S</code> or click on the floppy disk icon in the menu below the file tab.</p>
+<p>Note that creating an R script does not automatically save it on your computer. To do so, either use the keyboard short-cut <code>CMD+S</code>/<code>CTRL+S</code> or click on the floppy disk icon in the menu below the file tab.</p>
 <p><img src="img/save-button.png" class="img-fluid"></p>
 <p>Save the file inside the <code>code/</code> folder with exactly the following name: <code>week-02.R</code>.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
@@ -530,8 +536,7 @@ Important
 </section>
 <section id="write-code" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="write-code"><span class="header-section-number">7.2</span> Write code</h2>
-<p>Now, let’s start filling up that script!</p>
-<p>Generally, you start the script with calls to <code>library()</code> to load all the packages you need for the script. Please, get in the habit of doing this from now, so that you can keep your scripts tidy and pretty! You will learn soon about the tidyverse packages in the following chapter so for now just attach the cowsay and fortune packages.</p>
+<p>Now, let’s start filling up that script! Generally, you start the script with calls to <code>library()</code> to load all the packages you need for the script. Please, get in the habit of doing this from now, so that you can keep your scripts tidy and pretty! You will learn soon about the tidyverse packages in the following chapter so for now just attach the cowsay and fortune packages.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -545,7 +550,7 @@ Important
 <p>Start your R scripts with calls to <code>library()</code> and attach all of the packages that are needed to run that script.</p>
 </div>
 </div>
-<p>Go ahead, write the following code in the top of the <code>.R</code> script.</p>
+<p>Go ahead, write the following code in the top of the <code>.R</code> script. (The code chunk has a convenient copy button in the top-right corner which appears when you place the cursor inside the chunk. If you click the button the code will be copied and you can then paste it in the script).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowsay)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fortunes)</span>
@@ -572,19 +577,35 @@ Important
 <section id="running-scripts" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="running-scripts"><span class="header-section-number">7.3</span> Running scripts</h2>
 <p>Finally, the time has come to <strong>run the script</strong>.</p>
-<p>There are several ways of doing this. The most straightforward is to click on the <code>Run</code> button. You can find this in the top-right corner of the script window.</p>
+<p>There are several ways of doing this. The most straightforward is to click on the <code>Run</code> button. You can find this in the top-right corner of the script window. Pressing <code>Run</code> will run the line of code your text cursor is currently on. So you should place the cursor back on line one and press <code>Run</code>. The code will be executed and you will see it in the <code>Console</code>. If the code returns any output, this will be shown in the <code>Console</code> too. After the line of code is executed, the text cursor moves to the next line. You can click on <code>Run</code> again and so on to run each line one by one. You can also just select all the code (like you would when selecting text in a text editor) and click <code>Run</code>: in this case, all of the code is run, line by line, in the order they appear in the script.</p>
 <p><img src="img/run-button.png" class="img-fluid"></p>
-<p>An alternative way is to place the text cursor on the line of code you want to run and then press <code>CMD+ENTER</code>/<code>CTRL+ENTER</code>. This will run the line of code and move the text cursor to the next line of code. You can even select multiple lines of code (as you would select text) and press <code>CMD+ENTER</code>/<code>CTRL+ENTER</code> to run multiple lines of code! Now that you know how to use R scripts and run code in them, I will assume that you will keep writing new code in your script and run it from there.</p>
+<p>An alternative way is to place the text cursor on the line of code you want to run and then press <code>CMD+ENTER</code>/<code>CTRL+ENTER</code>. As with clicking <code>Run</code>, this will run the line of code and move the text cursor to the next line of code. It also works with a selection, like the <code>Run</code> button. Now that you know how to use R scripts and run code in them, I will assume that you will keep writing new code in your script and run it from there.</p>
 </section>
 <section id="comments" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="comments"><span class="header-section-number">7.4</span> Comments</h2>
-<p>Sometimes we might want to add a few lines of text in our script, for example to take notes. You can add so-called <strong>comments</strong> in R scripts, simply by starting a line with <code>#</code>.</p>
-<p>For example:</p>
+<p>Sometimes we might want to add a few lines of text in our script, for example to take notes. You can add so-called <strong>comments</strong> in R scripts, simply by starting a line with <code>#</code>. You can also add trailing comments, by adding a <code>#</code> at the end of a line of R code. For example:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a comment. Let's add 6 + 3.</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">6</span> <span class="co"># This is a trailing comment. 6 + 3 = 3 + 6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code comments
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Text that starts with a hash symbol <code>#</code> in an R script is a comment. Comments are not executed.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
@@ -598,11 +619,11 @@ Quiz 1
 </div>
 <div class="callout-body-container callout-body">
 <p>Is the following a valid line of R code? <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x <span class="sc">+</span> <span class="dv">2</span>) <span class="co"># x = 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x <span class="sc">+</span> <span class="dv">2</span>) <span class="co"># x = 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -611,11 +632,39 @@ Explanation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>It is a valid line of R code, but if you got an error it is probably because the variable <code>x</code> does not exist (yet). If you add the line <code>x &lt;- 4</code> before <code>sum(x + 2) # x = 4</code>, the latter will work just fine.</p>
+<p>It is a valid line of R code with a trailing comment. If you tried to run it in the <code>Console</code> and got an error it is because the variable <code>x</code> does not exist (unless you had created one earlier). If you add the line <code>x &lt;- 4</code> before <code>sum(x + 2) # x = 4</code>, the latter will work just fine.</p>
 <p>So you see there is a difference between <em>valid</em> code and <em>working</em> code.</p>
 </div>
+</div>
+</div>
+</section>
+<section id="ensuring-the-script-runs" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="ensuring-the-script-runs"><span class="header-section-number">7.5</span> Ensuring the script runs</h2>
+<p>That’s all there is to know about using R scripts. You write code and some comments and you can run code in the script and see the output in the <code>Console</code>. However, there is an important aspect that was not explicitly mentioned above: <strong>a script is supposed to work from top (first line) to bottom (last line)</strong>, so the order of the code in the script matters. A good habit to get into is to restart the R session every now and then and re-run the entire script. To restart the R session you can either go to the <code>Session</code> menu &gt; <code>Restart R</code> or you can press <code>SHIFT+CMD/CTRL+0</code> (the last key is “zero”). Try this now. Restart the R session and run your script again.</p>
+<p>But why it is important to restart the session to verify that the script runs? A typical case of scripts that don’t run is when you call a variable in a function before having declared the variable (with <code>&lt;-</code>) or when you call a function without having attached the package the function is from. However, an R session remembers everything you run: if you try to run code with a non-declared variable (like <code>sum(a, 1)</code>, but <code>a</code> is not declared) you will get an error; if you now write the code that declares the variable (<code>a &lt;- 3</code>) but you put it after the line of code that uses the variable, the code will run because now the variable is declares and available in the session. If you keep the code this way and restart the session, the code will no longer work. This is because each line is executed in order and by the time R gets to the <code>sum(a, 1)</code> , the line <code>a &lt;- 3</code> hasn’t been executed yet so <code>a</code> is not available. This example might seem trivial (and it is) but with more complex scripts it is actually quite easy to do things like this (calling a variable on line 10 of the script while it is declared on line 1263).</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Create a new script and call it <code>week–02-ex1.R</code> (save it in <code>code/</code>). Copy the following code and try to run it. The script will not run because there are several errors: some are code errors (i.e.&nbsp;the code is wrong), others are because the code is not written in the right order. Fix the errors until the script runs correctly. Remember to restart the session!</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">libery</span>(fortunes)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">-&gt;</span> <span class="dv">3</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(a, b)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>Let<span class="st">'s print a fortune</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="st">fotrune(c)</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">c &lt;- a + b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 
