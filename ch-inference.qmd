@@ -166,7 +166,7 @@ This textbook adopts the Bayesian New Statistics approach. Note that we will not
 
 opts_3 <- c(
   "Researcher A. My team investigated the effect of emotional dysregulation on speaking rate and they found a significant effect. We have ultimately shown that people with emotional dysregulation speak faster.",
-  "Researcher B. I wanted to know if it is true that languages with morphologically rich grammars are more difficult to learn than isolating languages you speak an isolating language. We tested several measures of learning difficulty in two groups of infants, one learning a morphologically rich language and one learning an isolating language. We found that two measures were significantly higher for the morphologically rich language group than the isolating language group. Hence we have found solid evidence that morphologically rich grammars are more difficult to learn.",
+  "Researcher B. I wanted to know if it is true that languages with morphologically rich grammars are more difficult to learn than isolating languages. We tested several measures of learning difficulty in two groups of infants, one learning a morphologically rich language and one learning an isolating language. We found that two measures were significantly higher for the morphologically rich language group than the isolating language group. Hence we have found solid evidence that morphologically rich grammars are more difficult to learn.",
   answer = "Researcher C. We compared reaction times (RTs) of chimpanzees looking at videos of humans vs chimpanzees signing. If low-level motor perception is mostly affected by the conspecificity (human vs conspecific), we should see differences in RTs of 20-70 ms. If motor resonance is mostly affected (activation of the observer’s own motor system when seeing an action they could perform themselves), we should find differences in RTs of 80-200 ms. We found that in the conspecific condition, RTs were 74-98 ms shorter at 95% probability. This range mostly overlaps with the motor resonance hypothesis (80-200) but it also lies outside of it, somewhat close to the higher end of the low-level perception range (20-70). In sum, we could not establish which hypothesis could better explain the data."
 )
 
@@ -177,5 +177,11 @@ cat("Three researchers meet at a coffee shop. Each of them tells the other two a
 ::: callout-note
 ### Summary
 
+- Inference is the process of learning something about a population through a sample.
 
+- Uncertainty in each observation and variability across observations affect the inference process.
+
+- Statistics is a tool to quantify uncertainty and variability.
+
+- The (Bayesian) New Statistics is an approach to statistics that highlights the subjective nature of statistics and stressed the importance of estimation over statistical significance.
 :::
