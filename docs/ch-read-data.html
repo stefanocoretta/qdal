@@ -529,7 +529,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When working through the book, always <strong>make sure you are in a Quarto Project</strong> by checking the top-right corner of RStudio.</p>
+<p>When working through the book, always <strong>make sure you are in a Quarto Project</strong> by checking the top-right corner of RStudio. If you see the name of the project you are fine, if you see <code>Project (none)</code> then you are not in the Quarto Project. Close RStudio and open the Quarto project.</p>
 </div>
 </div>
 <p>Data comes in a lot of different formats, shape and sizes. However, the most common way to store data used in quantitative analysis is so-called tabular data. R is especially designed to work with such data. Tabular (aka rectangular) data is simply data in the form of a table, with columns and rows.</p>
@@ -546,33 +546,51 @@ Tabular data
 <p><strong>Tabular data</strong> is data that has a form of a table: i.e.&nbsp;values structured in columns and rows.</p>
 </div>
 </div>
-<p>Tabular data can be save in different file formats. Different file formats have different file extensions. The <strong>comma separated values format</strong> (file extension <code>.csv</code>) is the best format to save data in because it is basically a plain text file, it’s quick to parse, and can be opened and edited with any software (plus, it’s not a proprietary format like <code>.docx</code> or <code>.xlsx</code>—these formats are specific to particular commercial software).</p>
-<p>This is what a <code>.csv</code> file looks like when you open it in a text editor (showing only the first few lines).</p>
+<p>Tabular data can be saved in different file formats. Different file formats have different file extensions. The <strong>comma separated values format</strong> (file extension <code>.csv</code>) is the best format to save data in because it is basically a plain text file, it’s quick to parse, and can be opened and edited with any software (plus, it’s not a proprietary format like <code>.docx</code> or <code>.xlsx</code>—these formats are specific to particular commercial software).</p>
+<p>This is what a <code>.csv</code> file looks like when you open it in a text editor (showing only the first few lines). The file contains tabular data (data that is structured as columns and rows, like a spreadsheet).</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,banoshment,1,423,6.0474,Filler,Nonword,Phonological,NA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unawareness,1,603,6.4019,Critical,Word,Unrelated,Left</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unholiness,1,739,6.6053,Critical,Word,Constituent,Left</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The file contains tabular data (data that is structured as columns and rows, like a spreadsheet). To separate the values of each column, a <code>.csv</code> file uses a comma <code>,</code> (hence the name “comma separated values”) to separate the values in every row. The first line of the file indicates the names of the columns of the table:</p>
+<p>This is what the file would look like when layed out as a table.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/csv-table.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
+</figure>
+</div>
+<p>To separate the values of each column, a <code>.csv</code> file uses a comma <code>,</code> (hence the name “comma separated values”) to separate the values in every row. The first line of the file indicates the names of the columns of the table:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There are 11 columns. The rest of the rows is the data, i.e.&nbsp;the values of each column separated by commas.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,banoshment,1,423,6.0474,Filler,Nonword,Phonological,NA</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unawareness,1,603,6.4019,Critical,Word,Unrelated,Left</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unholiness,1,739,6.6053,Critical,Word,Constituent,Left</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This might look a bit confusing, but you will see later that, after importing this type of file, you can view it as a nice spreadsheet (as you would in Excel).</p>
+<p>This might look a bit confusing, but you will see later that, after importing this type of file, you can view it as a nice spreadsheet (as you would in Excel), like in the figure above.</p>
 <p>Another common type of tabular data file is <strong>spreadsheets</strong>, like spreadsheets created by Microsoft Excel or Apple Numbers. These are all proprietary formats that require you to have the software that were created with if you want to modify them. Portability and openness are important aspects of conducting research, so that using open and non-proprietary file types makes your research more accessible and doesn’t privilege those who have access to specific software (remember, R is free!). Despite of this, a lot of data is shared as Excel files.</p>
 <p>There are also variations of the comma separated values type, like <strong>tab separated values</strong> files (<code>.tsv</code>, which uses tab characters instead of commas) and <strong>fixed-width</strong> files (usually <code>.txt</code>, where columns are separated by as many white spaces as needed so that the columns align).</p>
 <section id="non-tabular-data" class="level3" data-number="9.1.1">
 <h3 data-number="9.1.1" class="anchored" data-anchor-id="non-tabular-data"><span class="header-section-number">9.1.1</span> Non-tabular data</h3>
 <p>Of course, R can import also data that is not tabular, like map data and complex hierarchical data, including XML, HTML and json data. We will not cover these types of data, but you can check out the resources in the Extra box.</p>
-<section id="extra-non-tabular-data" class="level4 callour-important" data-collapse="true" data-number="9.1.1.1">
-<h4 data-number="9.1.1.1" class="anchored" data-anchor-id="extra-non-tabular-data"><span class="header-section-number">9.1.1.1</span> Extra: Non-tabular data</h4>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Go deeper: Non-tabular data
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ul>
-<li><p>Chapters 21-24 of <a href="https://r4ds.hadley.nz">R4DS</a>.</p></li>
-<li><p><a href="https://r-spatial.github.io/sf/">sf</a> package for mapping.</p></li>
+<li><p>See Chapters 21-24 of <a href="https://r4ds.hadley.nz">R for Data Science</a>.</p></li>
+<li><p>Look up the <a href="https://r-spatial.github.io/sf/">sf</a> package for mapping.</p></li>
 </ul>
-</section>
+</div>
+</div>
+</div>
 </section>
 <section id="rds-files" class="level3" data-number="9.1.2">
 <h3 data-number="9.1.2" class="anchored" data-anchor-id="rds-files"><span class="header-section-number">9.1.2</span> <code>.rds</code> files</h3>
@@ -589,8 +607,8 @@ Quiz 1
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>Which of the following is not tabular data.
-<div id="radio_OOLIPQHAHD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OOLIPQHAHD" value=""> <span>a. A file with 3 columns and 100 rows.</span></label><label><input type="radio" autocomplete="off" name="radio_OOLIPQHAHD" value="answer"> <span>b. An HTML file.</span></label><label><input type="radio" autocomplete="off" name="radio_OOLIPQHAHD" value=""> <span>c.&nbsp;An Excel spreadsheet.</span></label>
+<div id="radio_ESFEHKVULH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ESFEHKVULH" value=""> <span>a. A file with 3 columns and 100 rows.</span></label><label><input type="radio" autocomplete="off" name="radio_ESFEHKVULH" value="answer"> <span>b. An HTML file.</span></label><label><input type="radio" autocomplete="off" name="radio_ESFEHKVULH" value=""> <span>c.&nbsp;An Excel spreadsheet.</span></label>
 </div></li>
 <li>Non-tabular data can be saved to <code>.rds</code> files. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></li>
 </ol>
@@ -612,14 +630,9 @@ How to get the data
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li><p>Download the zip archive with all the data by right-clicking on the following link and download the file: <a href="https://uoelel.github.io/qml-data/data.zip">data.zip</a>.</p></li>
-<li><p>Unzip the zip file to extract the contents. (If you don’t know how to do this, search for it online for your operating system!)</p></li>
-<li><p>Create a folder called <code>data/</code> (the slash is there just to remind you that it’s a folder, but you don’t have to include it in the name) in the Quarto project you are using for the course.</p>
-<ol type="1">
-<li><p>To create a folder, go to the Files tab of the bottom-right panel in RStudio.</p></li>
-<li><p>Make sure you are viewing the project’s main folder.</p></li>
-<li><p>Click on the <code>New Folder</code> button, enter “data” in the text box and click <code>OK</code></p></li>
-</ol></li>
+<li><p>Download the zip archive with all the data by clicking on the following link (if this doesn’t work, right-click and choose “Save linked file” or similar): <a href="https://uoelel.github.io/qml-data/data.zip">data.zip</a>. The data is in a zip archive.</p></li>
+<li><p>Unzip the zip file to extract the contents. (If you don’t know how to do this, search for it online for your operating system! Zip archives are a very common way of distributing data and it is important to know how to use them).</p></li>
+<li><p>Create a folder called <code>data/</code> (the slash is there just to remind you that it’s a folder, but you don’t have to include it in the name) in the Quarto project you are using for the course. You know how to do this from <a href="ch-scripts.html" class="quarto-xref"><span>Chapter 7</span></a>.</p></li>
 <li><p>Move the contents of the <code>data.zip</code> archive into the <code>data/</code> folder.</p>
 <ol type="1">
 <li><p>Open a Finder or File Explorer window.</p></li>
@@ -638,14 +651,14 @@ How to get the data
     └── formants.csv
     └── token-measures.csv
 └── ...</code></pre>
-<p>I recommend that you start being very organised with your files in other projects from now on, whether it’s for a course or your dissertation or anything else. I also suggest to avoid overly nested structures, unless strictly necessary.</p>
+<p>I recommend that you start being very organised with your files in other projects from now on, whether it’s for a course or your dissertation or anything else. I also suggest to avoid overly nested structures (folders in folders in folders in folders…), unless strictly necessary.</p>
 </section>
 <section id="organising-your-files" class="level2" data-number="9.3">
 <h2 data-number="9.3" class="anchored" data-anchor-id="organising-your-files"><span class="header-section-number">9.3</span> Organising your files</h2>
 <p>The <a href="https://osf.io">Open Science Framework</a> has the <a href="https://help.osf.io/article/147-organizing-files">following recommendations</a> that can be applied to any type of research project.</p>
 <ul>
-<li><p>Use <strong>one folder</strong> per project. The project folder will also be your RStudio/Quarto project folder. Ideally, the project folder should have all the files related to the project (one exception is PDFs of papers that form the literature background of the project: for those I recommend using bibliography managing software, like the free <a href="https://www.jabref.org">JabRef</a>).</p></li>
-<li><p>Separate <strong>code</strong> from <strong>data</strong>. A general recommendation is to have a folder <code>code/</code> whith all the code files of the project and a folder <code>data/</code> that has all the data. This makes keeping files in order easier, since everything has its natural place.</p></li>
+<li><p>Use <strong>one folder</strong> per project. The project folder will also be your RStudio/Quarto project folder. Ideally, the project folder should have all the files related to the project (one exception is PDFs of papers that form the literature background of the project: for those I recommend using bibliography managing software, like the free <a href="https://www.zotero.org">Zotero</a> or <a href="https://www.jabref.org">JabRef</a>).</p></li>
+<li><p>Separate <strong>code</strong> from <strong>data</strong>. A general recommendation is to have a folder <code>code/</code> or <code>scripts/</code> with all the code files of the project and a folder <code>data/</code> that has all the data. This makes keeping files in order easier, since everything has its natural place.</p></li>
 <li><p>Separate <strong>raw data</strong> from <strong>derived data</strong>. Raw data is data that you have gathered that, if lost, is lost for ever. Derived data is any data that is derived from raw data and that can be derived again (for example by running a script) if it’s deleted or corrupted.</p></li>
 <li><p>Make <strong>raw data read-only</strong>. You should assume that anything can happen to raw data, so you should treat it as “read-only”.</p></li>
 </ul>
@@ -654,7 +667,7 @@ How to get the data
 </section>
 <section id="read-.csv-files" class="level2" data-number="9.4">
 <h2 data-number="9.4" class="anchored" data-anchor-id="read-.csv-files"><span class="header-section-number">9.4</span> Read <code>.csv</code> files</h2>
-<p>In this section, you will learn how to read <code>.csv</code> files. Reading <code>.csv</code> files is very easy. You can use the <code>read_csv()</code> function from a collection of R packages known as the <a href="https://www.tidyverse.org">tidyverse</a>. Specifically, the <code>read_csv()</code> function is from the <a href="https://readr.tidyverse.org">readr</a> package, one of the tidyverse packages. If you are learning R for the first time, then you won’t already have the tidyverse packages installed (you can check in the <code>Packages</code> tab in the bottom-right panel). Installing the tidyverse packages is easy: you just need to install the <strong>tidyverse</strong> package and that will take care of installing the most important packages in the collection (called the <a href="https://www.tidyverse.org/packages/">“core” tidyverse packages</a>). Note that installation of the core tidyverse packages can take some time (but remember that you do this only <em>once</em>).</p>
+<p>In this section, you will learn how to read <code>.csv</code> files. Reading <code>.csv</code> files is very easy. You can use the <code>read_csv()</code> function from a collection of R packages known as the <a href="https://www.tidyverse.org">tidyverse</a>. Specifically, the <code>read_csv()</code> function is from the <a href="https://readr.tidyverse.org">readr</a> package, one of the tidyverse packages. If you are learning R for the first time, then you won’t already have the tidyverse packages installed (you can check in the <code>Packages</code> tab in the bottom-right panel). Installing the tidyverse packages is easy: you just need to install the <strong>tidyverse</strong> package and that will take care of installing the most important packages in the collection (called the <a href="https://www.tidyverse.org/packages/">“core” tidyverse packages</a>). Note that installation of the core tidyverse packages can take some time (but remember that you do this only <em>once</em>). If you need to install the tidyverse packages, do it now.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -668,7 +681,7 @@ Did you open the Quarto project?
 <p>Before moving on, make sure that you have opened the RStudio Quarto project correctly (see warning at the beginning of the chapter).</p>
 </div>
 </div>
-<p>Now that you have ensured the tidyverse packages are available, let’s read in data from <span class="citation" data-cites="song2020">Song et al. (<a href="references.html#ref-song2020" role="doc-biblioref">2020</a>)</span>. The study consists of a lexical decision task in which participants were first shown a prime, followed by a target word for which they had to indicate whether it was a real word or a nonce word. The prime word belonged to one of three possible groups, each of which refers to the morphological relation of the prime and the target word. We will get back to this date in later chapters, so for now it is sufficient if you just read the paper’s abstract to get a general idea of the research context.</p>
+<p>Now that you have ensured the tidyverse packages are available, let’s read in data from <span class="citation" data-cites="song2020">Song et al. (<a href="references.html#ref-song2020" role="doc-biblioref">2020</a>)</span>. The study consists of a lexical decision task in which participants were first shown a prime, followed by a target word for which they had to indicate whether it was a real word or a nonce word. The prime word belonged to one of three possible groups, each of which refers to the morphological relation of the prime and the target word. We will get back to this data in later chapters, so for now it is sufficient if you just read the paper’s abstract to get a general idea of the research context.</p>
 <p>The <code>read_csv()</code> function from the readr package only requires you to specify the file path as a string (remember, strings are quoted between <code>" "</code>, for example <code>"year_data.txt"</code>). The data to be read are in the <code>data/</code> folder, in <code>song2020/shallow.csv</code>. On my computer, the file path of <code>song2020/shallow.csv</code> is <code>/Users/ste/qdal/data/song2020/shallow.csv</code>, but on your computer the file path will be different, of course. However, you will learn a trick below, i.e.&nbsp;relative paths, that allows you to specify file paths in a shortened form.</p>
 <!-- For this trick to work, you have to change a setting of the Quarto project: the setting instructs RStudio to always run (i.e. execute) code with the working directory set as the project folder (more on working directories below). Here is how to enable this setting.
 
@@ -694,7 +707,7 @@ project:
 :::
 -->
 <p>Note that while the <code>read_csv()</code> function does read the data in R, you must assign the output of the <code>read_csv()</code> function (i.e.&nbsp;the data we are reading) to a variable, using the assignment arrow <code>&lt;-</code>, just like we were assigning values to R variables in previous chapters. And since the <code>read_csv()</code> is a function from the tidyverse, you first need to attach the tidyverse packages with <code>library(tidyverse)</code> (remember, you need to attach packages <strong>only once</strong> per session). This will attach the core tidyverse packages, including readr. Of course, you can also attach the individual packages directly: <code>library(readr)</code>. If you use <code>library(tidyverse)</code> there is no need to attach individual tidyverse packages.</p>
-<p>Create a new R script and save it in the <code>code/</code> folder. Write the following lines in the script exactly as they are written here and run the code.</p>
+<p>Open your <code>week-02.R</code> script. Add the following lines in the script (don’t change the file path! explanation below) and run the code (you might want to put the <code>library()</code> line at the top of the script, with the other packages). The <code>read_csv()</code> line will print information about the data and read the data into <code>shallow</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -745,7 +758,7 @@ Working directory
 <p>When using Quarto projects, the working directory is the project folder.</p>
 </div>
 </div>
-<p>Relative paths are spcified by starting the path with <code>./</code>. For example, if your project is called <code>awesome_proj</code> and it’s in <code>Downloads/stuff/</code>, then if you write <code>read_csv("./data/results.csv")</code> R knows you mean to read the file in <code>Downloads/stuff/awesome_proj/data/results.csv</code>! This works because when working with Quarto projects, all relative paths are relative to the working directory which is automatically set to the project folder.</p>
+<p>Relative paths are specified by starting the path with <code>./</code>. For example, if your project is called <code>awesome_proj</code> and it’s in <code>Downloads/stuff/</code>, then if you write <code>read_csv("./data/results.csv")</code> R knows you mean to read the file in <code>Downloads/stuff/awesome_proj/data/results.csv</code>! This works because when working with Quarto projects, all relative paths are relative to the working directory which is automatically set to the project folder.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -759,14 +772,14 @@ Relative path
 <p>A <strong>relative path</strong> is a file path that is relative to a folder (the working directory). The folder the path starts at is represented by <code>./</code>.</p>
 </div>
 </div>
-<p>The code <code>read_csv("./data/song2020/shallow.csv")</code> above will work because you are using a Quarto project and inside the project folder there is a folder called <code>data/</code> and in it there’s the <code>song2020/shallow.csv</code> file. When you run the code, R will “expand” the relative path to the absolute path and corectly find the file to read. I strongly recommend you to use Quarto projects and relative paths to make your work portable. As hinted at above, the benefit of Quarto projects and relative paths is that, if you move your project or rename it, or if you share the project with somebody, all the paths will just work because they are relative.</p>
+<p>The code <code>read_csv("./data/song2020/shallow.csv")</code> above will work because you are using a Quarto project and inside the project folder there is a folder called <code>data/</code> and in it there’s the <code>song2020/shallow.csv</code> file. When you run the code, R will “expand” the relative path to the absolute path and correctly find the file to read. I strongly recommend you to use Quarto projects and relative paths to make your work portable. As hinted at above, the benefit of Quarto projects and relative paths is that, if you move your project or rename it, or if you share the project with somebody, all the paths will just work because they are relative.</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Get the working directory
+Exercise 1: Get the working directory
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -788,8 +801,8 @@ Quiz 2
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li>Given the following absolute path <code>/Users/raj/projects/thesis/data/raw/data.csv</code> and the working directory <code>/Users/raj/projects/</code>, which of the following paths is the correct one to read the <code>data.csv</code> file?
-<div id="radio_YIYMEBCORZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YIYMEBCORZ" value=""> <span>a. <code>/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_YIYMEBCORZ" value=""> <span>b. <code>./projects/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_YIYMEBCORZ" value=""> <span>c.&nbsp;<code>./data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_YIYMEBCORZ" value="answer"> <span>d.&nbsp;<code>./thesis/data/raw/data.csv</code></span></label>
+<div id="radio_YSPTVTGGNK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YSPTVTGGNK" value=""> <span>a. <code>/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_YSPTVTGGNK" value=""> <span>b. <code>./projects/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_YSPTVTGGNK" value=""> <span>c.&nbsp;<code>./data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_YSPTVTGGNK" value="answer"> <span>d.&nbsp;<code>./thesis/data/raw/data.csv</code></span></label>
 </div></li>
 </ol>
 </div>
@@ -813,22 +826,22 @@ The `shallow` data frame contains 11 columns (called variables in the `Environme
 ::: callout-note
 ### Quiz 3
 
-How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_USFMXJWMJS'><label><input type="radio" autocomplete="off" name="radio_USFMXJWMJS" value=""></input> <span>11</span></label><label><input type="radio" autocomplete="off" name="radio_USFMXJWMJS" value=""></input> <span>650</span></label><label><input type="radio" autocomplete="off" name="radio_USFMXJWMJS" value="answer"></input> <span>6500</span></label></div>
+How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_EPZARXQSJV'><label><input type="radio" autocomplete="off" name="radio_EPZARXQSJV" value=""></input> <span>11</span></label><label><input type="radio" autocomplete="off" name="radio_EPZARXQSJV" value=""></input> <span>650</span></label><label><input type="radio" autocomplete="off" name="radio_EPZARXQSJV" value="answer"></input> <span>6500</span></label></div>
 :::
 -->
 </section>
 </section>
 <section id="read-excel-sheets" class="level2" data-number="9.5">
 <h2 data-number="9.5" class="anchored" data-anchor-id="read-excel-sheets"><span class="header-section-number">9.5</span> Read Excel sheets</h2>
-<p>To read an Excel file we need first to attach the <a href="https://readxl.tidyverse.org/index.html">readxl</a> package. It should already be installed, because it comes with the tidyverse. If not, then install it.</p>
+<p>To read an Excel file we need first to attach the <a href="https://readxl.tidyverse.org/index.html">readxl</a> package. It should already be installed, because it comes with the tidyverse. If not, install it. Then add the following line to the script.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Then we can use the <code>read_excel()</code> function. Let’s read the file.</p>
+<p>Now we can use the <code>read_excel()</code> function. Let’s read the file.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>relatives <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"./data/los2023/relatives.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now you can view the tibble <code>los2023</code> in the RStudio Viewer. Note that if the Excel file has more than one sheet, you can specify the sheet number when reading the file (the default is <code>sheet = 1</code>).</p>
+<p>Now you can view the tibble <code>relatives</code> in the RStudio Viewer. Note that if the Excel file has more than one sheet, you can specify the sheet number when reading the file (the default is <code>sheet = 1</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>relatives_2 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"./data/los2023/relatives.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -836,7 +849,7 @@ How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_USFMX
 </section>
 <section id="import-.rds-files" class="level2" data-number="9.6">
 <h2 data-number="9.6" class="anchored" data-anchor-id="import-.rds-files"><span class="header-section-number">9.6</span> Import <code>.rds</code> files</h2>
-<p>Another useful type of data files is a file type specifically designed for r: <code>.rds</code> files. Each <code>.rds</code> file can only contain a single R object, like a tibble. You can read <code>.rds</code> files with the <code>readRDS()</code> function.</p>
+<p>Another useful type of data files is a file type specifically designed for R: <code>.rds</code> files. Each <code>.rds</code> file can only contain a single R object, like a tibble. You can read <code>.rds</code> files with the <code>readRDS()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/coretta2022/glot_status.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -866,15 +879,15 @@ How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_USFMX
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Exercise 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Read the following files in R, making sure you use the right <code>read_*()</code> function.</p>
+<p>Read the following files in R, making sure you use the right <code>read_*()</code> function. You can write your code in the <code>week-02.R</code> script.</p>
 <ul>
-<li><p><a href="../data/koppensteiner2016/takete_maluma.txt">koppensteiner2016/takete_maluma.txt</a> (a tab separated file)</p></li>
-<li><p><a href="../data/pankratz2021/si.csv">pankratz2021/si.csv</a></p></li>
-<li><p>Go to <a href="https://datashare.ed.ac.uk/handle/10283/4006" class="uri">https://datashare.ed.ac.uk/handle/10283/4006</a>, download the file <code>conflict_data_.xlsx</code>, and save it in <code>data/</code>. Read both sheets (“conflict_data2” and “demographics”). Any issues? (I suggest looking at the spread sheet in Excel if it helps).</p></li>
+<li><p><code>data/koppensteiner2016/takete_maluma.txt</code> (a tab separated file).</p></li>
+<li><p><code>data/pankratz2021/si.csv</code>.</p></li>
+<li><p>Go to <a href="https://datashare.ed.ac.uk/handle/10283/4006" class="uri">https://datashare.ed.ac.uk/handle/10283/4006</a>, download the file <code>conflict_data_.xlsx</code>, and save it in <code>data/</code>. Read both sheets (“conflict_data2” and “demographics”). Any issues? (I suggest looking at the spreadsheet in Excel).</p></li>
 </ul>
 </div>
 </div>

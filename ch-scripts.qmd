@@ -1,4 +1,4 @@
-# R scripts
+# R scripts  {#sec-scripts}
 
 ![](https://img.shields.io/badge/Area-R-green)
 
@@ -140,7 +140,7 @@ But why it is important to restart the session to verify that the script runs? A
 ::: callout-warning
 ## Exercise 1
 
-Create a new script and call it `week–02-ex1.R` (save it in `code/`). Copy the following code and try to run it. The script will not run because there are several errors: some are code errors (i.e. the code is wrong), others are because the code is not written in the right order. Fix the errors until the script runs correctly. Remember to restart the session!
+Create a new script and call it `week–02-ex7.1.R` (save it in `code/`). Copy the following code and try to run it. The script will not run because there are several errors: some are code errors (i.e. the code is wrong), others are because the code is not written in the right order. Fix the errors until the script runs correctly. Remember to restart the session!
 
 ``` r
 libery(fortunes)
