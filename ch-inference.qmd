@@ -11,13 +11,7 @@
 library(webexercises)
 ```
 
-Imbuing numbers with meaning is a good characterisation of the **inference process**.
-
-Here is how it works. We have a question about something. Let's imagine that this something is the population of British Sign Language signers. We want to know whether the cultural background of the BSL signers is linked to different pragmatic uses of the sign for BROTHER. But we *can't survey the entire population* of BSL signers.[^ch-inference-1]
-
-[^ch-inference-1]: NOTE: *Population* can be a set of anything, not just a specific group of people. For example, the words in a dictionary can be a "population"; or the antipassive constructions of Austronesian languages...
-
-So instead of surveying *all* BSL users, we take a **sample** from the BSL population. The sample is our data (the product of our study or observation). Now, how do we go from data/observation to answering our question about the use of BROTHER? We can use the inference process!
+Imbuing numbers with meaning is a good characterisation of the **inference process**. Here is how it works. We have a question about something. Let's imagine that this something is the population of British Sign Language signers. We want to know whether the cultural background of the BSL signers is linked to different pragmatic uses of the sign for BROTHER. But we *can't survey the entire population* of BSL signers. So instead of surveying *all* BSL users, we take a **sample** from the BSL population. The sample is our data (the product of our study or observation). Now, how do we go from data/observation to answering our question about the use of BROTHER? We can use the inference process!
 
 ::: callout-note
 #### Inference process
@@ -29,9 +23,9 @@ The figure below is a schematic representation of the inference process.
 
 ![](img/inference.png)
 
-XXX
+The inference process has two main stages: producing data and inference. For the first step, **producing data**, we start off with a population. Note that *population* can be a set of anything, not just a specific group of people. For example, the words in a dictionary can be a "population"; or the antipassive constructions of Austronesian languages, and so on. From that population, we select a **sample** and that sample produces our **data**. We analyse the data to get results. Finally, we use **inference** to understand something about the population based on the results from the sampled data. Inference can take many forms and the type of inference we are interested in here is **statistical inference**: i.e. using statistics to do inference.
 
-However, inference, despite being based on data, does not guarantee that the answers to our questions are right or even that they are true. In fact, any observation we make comes with a certain degree of **uncertainty and variability**.
+However, despite inference being based on data, it does not guarantee that the answers to our questions are right or even that they are true. In fact, any observation we make comes with a certain degree of **uncertainty and variability**.
 
 ::: callout-note
 ### Quiz 1
@@ -50,10 +44,9 @@ cat("d. You can collect the same sample multiple times.", torf(FALSE))
 :::
 
 ::: {.callout-important collapse="true"}
-#### Extra
+#### Go deeper: Science is wrong
 
--   Check out this article: <https://www.scientificamerican.com/article/if-you-say-science-is-right-youre-wrong/>.
--   Find out about Popper's view of falsification and fallibilism.
+-   Check out the Scientific American article *If You Say 'Science Is Right,' You're Wrong* by Naomi Oreskes: <https://www.scientificamerican.com/article/if-you-say-science-is-right-youre-wrong/>.
 -   Learn more about uncertainty and subjectivity in research: @vasishth2021, @gelman2017.
 :::
 
@@ -61,23 +54,33 @@ cat("d. You can collect the same sample multiple times.", torf(FALSE))
 
 ![](img/pliny.jpg)
 
-[Pliny the Elder](https://en.wikipedia.org/wiki/Pliny_the_Elder) was a Roman philosopher who died in the Vesuvius eruption in 79 CE. He certainly did not expect to die then. Leaving dark irony aside, as researchers we have to deal with uncertainty and variability:
+[Pliny the Elder](https://en.wikipedia.org/wiki/Pliny_the_Elder) was a Roman philosopher who died in the Vesuvius eruption in 79 CE. He certainly did not expect to die then. Leaving dark irony aside, as researchers we have to deal with uncertainty and variability.
 
--   **Uncertainty** is about each observation of a phenomenon due to measurement error or because we cannot directly measure what we want to measure.
+::: callout-tip
+## Uncertainty and variability
 
--   **Variability** is found among different observations of the same phenomenon due natural fluctuations and measurement error.
+-   **Uncertainty** is a characteristic of each observation of a phenomenon, due to measurement error or because we cannot directly measure what we want to measure.
+
+-   **Variability** is found among different observations of the same phenomenon, due to natural fluctuations and measurement error.
+:::
 
 So uncertainty is a feature of each mesurement, while variability occurs between different measurements. Together, uncertainty and variability render the inference process more complex and can interfere with its outcomes.
 
-The following picture is a reconstruction of what Galileo Galilei saw when he pointed one of his first telescopes towards Saturn, based on his 1610 sketch: a blurry circle flanked by two smaller blurry circles.
+The following picture is a reconstruction of what [Galileo Galilei](https://en.wikipedia.org/wiki/Galileo_Galilei) saw when he pointed one of his first telescopes towards Saturn, based on his 1610 sketch: a blurry circle flanked by two smaller blurry circles.
 
 ![](img/uncertainty.png)
 
-Only six years later, telescopes were much better and Galileo could correctly identify that the flaking circles were not spheres orbiting around Saturn, but rings.
+Only six years later, telescopes were much better and Galileo could correctly identify that the flaking circles were not spheres orbiting around Saturn, but rings. The moral of the story is that at any point in history we are like Galileo in at least some of our research: we might be close to understanding something but not quite yet. So what do we do with such uncertainty and variability? We can use statistics to quantify them!
 
-The moral of the story is that at any point in history we are like Galileo in at least some of our research: we might be close to understanding something but not quite there yet. So what do we do with such uncertainty and variability? We can use statistics to quantify them! **Statistics is a tool that helps us quantifying uncertainty and controlling for variability.** But what is statistics exacly?
+::: callout-tip
+## Statistics
 
-## What is statistics?
+**Statistics is a tool that helps us quantifying uncertainty and controlling for variability.**
+:::
+
+But what is statistics exactly?
+
+## What is statistics (and isn't)?
 
 Statistics is a **tool**. But what does it do? There are at least four ways of looking at statistics as a tool.
 
@@ -89,21 +92,21 @@ Statistics is a **tool**. But what does it do? There are at least four ways of l
 
 -   Statistics is the **art** of applying the science of scientific methods. (From [ORI Results](https://www.oriresults.com/articles/blog-posts/the-art-of-statistics/), [Nature](https://www.nature.com/articles/d41586-019-00898-0))
 
-To quote a statistician:
+To quote a historically important statistician:
 
-> *Statistic is both a science and an art*.
->
-> It is a *science* in that its methods are basically systematic and have general application and an *art* in that their successful application depends, to a considerable degree, on the skill and special experience of the statistician, and on his knowledge of the field of application.
+::: {.callout-important appearance="simple"}
+*Statistic is both a science and an art*.
+
+It is a *science* in that its methods are basically systematic and have general application and an *art* in that their successful application depends, to a considerable degree, on the skill and special experience of the statistician, and on his knowledge of the field of application.
 
 —L. H. C. Tippett
-
-::: {.callout-important collapse="true"}
-#### Extra
-
-Check out the etymology of *statistics* here: <https://en.wiktionary.org/wiki/statistics#Etymology_1>.
 :::
 
-## What statistics is NOT
+::: {.callout-important collapse="true"}
+#### Spotlight: Etymology
+
+The word *statistics* is related to *state* and it is no coincidence. The discipline of statistics was born as a sub-field of politics and economics. Check out the full etymology of *statistics* here: <https://en.wiktionary.org/wiki/statistics#Etymology_1>.
+:::
 
 Statistics is a many things, but it is also *not* a lot of things.
 
@@ -121,71 +124,58 @@ As Gollum would put it, *all that glisters is not gold*.
 
 ![](img/gollum-statistician.png){fig-align="center" width="300"}
 
+::: callout-note
+### Quiz 2
+
+```{r}
+#| label: quiz-2
+#| results: asis
+#| echo: false
+
+cat("**True or false?**", "\n\n")
+cat("a. Statistics is a necessary if one wants to know the truth.", torf(FALSE), "\n\n")
+cat("b. Statistics is only relevant to objective science.", torf(FALSE), "\n\n")
+cat("c. Statistics is based on mathematics but it is also informed by philosophy.", torf(TRUE), "\n\n")
+cat("d. We can completely remove uncertainty with statistics.", torf(FALSE))
+```
+:::
+
 ## Many Analysts, One Data Set: subjectivity exposed
 
-![](img/red-card.jpg){fig-align="center" width="250"}
+In @silberzahn2018, a group of researchers asked 29 independent analysis teams to answer the following question based on provided data: Is there a link between player skin tone and number of red cards in soccer? Crucially, **69% of the teams reported an effect of player skin tone, and 31% did not**. In total, the 29 teams came up with 21 unique types of statistical analysis. These results clearly show how subjective statistics is and how even a straightforward question can lead to a multitude of answers. To put it in Silberzah et al's words: "The observed results from analyzing a complex data set can be highly contingent on **justifiable, but subjective**, analytic decisions. This is why you should always be somewhat **sceptical of the results of any single study**: you never know what results might have been found if another research team did the study. This is a reason for why replicating research is very important. You will learn about replication and related concepts in @sec-res-cycle.
 
-In @silberzahn2018, a group of researchers asked 29 independent analysis teams to answer the following question based on provided data: **Is there a link between player skin tone and number of red cards in soccer?**
+@coretta2023 tried something similar, but in the context of the speech sciences: they asked 30 independent analysis teams (84 signed up, 46 submitted an analysis, 30 submitted usable analyses) to answer the question: Do speakers acoustically modify utterances to signal atypical word combinations? Outstandingly, the 30 teams submitted 109 individual analyses—a bit more than 3 analyses per team!—and 52 unique measurement specifications in 47 unique model specifications. @coretta2023 say: "**Nine teams out of the thirty (30%) reported to have found at least one statistically reliable effect** (based on the inferential criteria they specified). Of the 170 critical model coefficients, 37 were claimed to show a statistically reliable effect (21.8%)." @fig-flex illustrates the analytic flexibility typical of acoustic analyses. (A) shows the pipeline of decision a researcher would have to do: which linguistic unit, which temporal window, which acoustic parameters and how to measure those. You can appreciate that there are potentially many combinations. (B) illustrates the fundamental frequency (f0) contour of the sentences "I can't bear ANOTHER meeting on Zoom" and "I can't bear another meeting on ZOOM". In both sentences, the green shaded area marks the word "another". Finally, in (C) you see the different parameters that can be extracted from the f0 contour of the word "another". In sum, there are many choices a researcher is faced with and, while most of these choices might be justifiable, they are still subjective, as shows by the large variability of actual analyses carried out by the analyses teams in @coretta2023.
 
-Crucially,
-
--   **69%** of the teams reported an effect of player skin tone, and **31%** did not.
-
--   In total, the 29 teams came up with **21 unique** types of statistical analysis.
-
-These results clearly show how subjective statistics is and how even a straightforward question can lead to a multitude of answers.
-
-To put it in Silberzah et al's words:
-
-> The observed results from analyzing a complex data set can be highly contingent on **justifiable**, but **subjective**, analytic decisions.
-
-This is why you should always be somewhat **sceptical of the results of any single study**: you never know what results might have been found if another research team did the study. This is a reason for why replicating research is very important.
-
-<!-- TODO: add link to repro/repli -->
-
-@coretta2023 tried something similar, but in the context of the speech sciences: they asked 30 independent analysis teams (84 signed up, 46 submitted an analysis, 30 submitted usable analyses) to answer the question **Do speakers acoustically modify utterances to signal atypical word combinations?**
-
-Incredibly, the 30 teams submitted:
-
--   **109** individual analyses. A bit more than 3 analyses per team!
--   **52** unique measurement specifications and **47** unique model specifications.
-
-> Nine teams out of the thirty (30%) reported to have found at least one statistically reliable effect (based on the inferential criteria they specified). Of the 170 critical model coefficients, 37 were claimed to show a statistically reliable effect (21.8%).
-
-—Coretta et al, 2023
-
-![](img/forking-paths.png){fig-align="center" width="300"}
+![Illustration of the analytic flexibility associated with acoustic analyses [from @coretta2023]](img/forking-paths.png){#fig-flex fig-align="center" width="500"}
 
 ## The "New Statistics"
 
-The @silberzahn2018 and @coretta2023 studies are just the tip of the iceberg. We are currently facing a "research crisis".
+The @silberzahn2018 and @coretta2023 studies are just the tip of the iceberg. We are currently facing a "research crisis". As mentioned above, we will dig deeper into this subject in @sec-res-cycle. In brief, the research crisis is a mix of problems related to how research is conducted and published. In response to the research crisis, @cumming2013 introduced a new approach to statistics, which he calls the "New Statistics". The **New Statistics** mainly addresses three problems: (1) published research is a biased selection of all (existing and possible) research; (2) data analysis and reporting are often selective and biased, (3) in many research fields, studies are rarely replicated, so false conclusions persist. To help solve those problems, the New Statistics proposes these solutions (among others): (1) promoting **research integrity**, by which researchers explicitly discuss the subjectivity and shortcomings of quantitative research, (2) shifting away from statistical significance of differences between groups to quantitative **estimation** of those differences, (3) building a **cumulative** quantitative discipline, in which phenomena are studied again and again in the same contexts and with the same conditions to ensure they are robust enough.
 
-<!-- Add link to research crises -->
+@kruschke2018 revisit the New Statistics and make a further proposal: to adopt the historically older but only recently popularised approach of Bayesian statistics. They call this the **Bayesian New Statistics**. The classical approach to statistics is the frequentist method, based on work by Fisher, Neyman and Pearson. Put simply, frequentist statistics is based on rejecting the "null hypothesis" (i.e. the hypothesis that there is no difference between groups) using *p*-values. Bayesian statistics provides researchers with more appropriate and more robust ways to answer research questions, by reallocating belief or credibility across possibilities. You will learn more about the frequentist and the Bayesian approaches in @sec-freq-bayes.
 
-@cumming2013 proposes a new approach to statistics, which he calls the "New Statistics", in response to the research crisis.
+This textbook adopts the Bayesian New Statistics approach. Note that we will not really touch upon Bayesian statistics in the strict sense until @sec-freq-bayes, just before statistical modelling will be introduced. So you should not worry too much about it for now: just try to appreciate that not only statistics is not intended to objectively separate truths from falsities, but also there are several ways to practice statistics. After all, statistics is a human activity, and like all other human activities it is embedded in the world constructed by humans and their idiosyncrasies.
 
-The New Statistics mainly addresses **three problems**:
+::: callout-note
+### Quiz 3
 
--   Published research is a biased selection of all (existing and possible) research.
+```{r}
+#| label: quiz-3
+#| results: asis
+#| echo: false
 
--   Data analysis and reporting are often selective and biased.
+opts_3 <- c(
+  "Researcher A. My team investigated the effect of emotional dysregulation on speaking rate and they found a significant effect. We have ultimately shown that people with emotional dysregulation speak faster.",
+  "Researcher B. I wanted to know if it is true that languages with morphologically rich grammars are more difficult to learn than isolating languages you speak an isolating language. We tested several measures of learning difficulty in two groups of infants, one learning a morphologically rich language and one learning an isolating language. We found that two measures were significantly higher for the morphologically rich language group than the isolating language group. Hence we have found solid evidence that morphologically rich grammars are more difficult to learn.",
+  answer = "Researcher C. We compared reaction times (RTs) of chimpanzees looking at videos of humans vs chimpanzees signing. If low-level motor perception is mostly affected by the conspecificity (human vs conspecific), we should see differences in RTs of 20-70 ms. If motor resonance is mostly affected (activation of the observer’s own motor system when seeing an action they could perform themselves), we should find differences in RTs of 80-200 ms. We found that in the conspecific condition, RTs were 74-98 ms shorter at 95% probability. This range mostly overlaps with the motor resonance hypothesis (80-200) but it also lies outside of it, somewhat close to the higher end of the low-level perception range (20-70). In sum, we could not establish which hypothesis could better explain the data."
+)
 
--   In many research fields, studies are rarely replicated, so false conclusions persist.
+cat("Three researchers meet at a coffee shop. Each of them tells the other two about their recent findings. Below, you can find what each said. Based on how they talk about the results, which one among them aligns with the New Statistics approach and recognises the shortcomings of research?", longmcq(opts_3))
+```
+:::
 
-To help solve those problems, it proposes **these solutions** (among others):
+::: callout-note
+### Summary
 
--   Promoting **research integrity**.
 
--   Shifting away from statistical significance to **estimation**.
-
--   Building a **cumulative** quantitative discipline.
-
-## The Bayesian New Statistics
-
-@kruschke2018 revisit the New Statistics and make a further proposal: to adopt the historically older but only recently popularised approach of Bayesian statistics. They call this the Bayesian New Statistics.
-
-The classical approach to statistics is the **frequentist method**, based on work by Fisher, and Neyman and Pearson. Frequentist statistics is based on rejecting the "null hypothesis" (i.e. the hypothesis that there is no difference between groups) using *p*-values.
-
-**Bayesian statistics** provides researchers with more appropriate and more robust ways to answer research questions, by reallocation of belief/credibility across possibilities.
-
-You will learn more about the frequentist and the Bayesian approaches in @sec-freq-bayes.
+:::

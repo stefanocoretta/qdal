@@ -1,4 +1,4 @@
-# Research cycle
+# Research cycle  {#sec-res-cycle}
 
 ![](https://img.shields.io/badge/Area-Research_methods-blue)
 

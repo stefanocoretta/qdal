@@ -43,7 +43,7 @@ As mentioned earlier, both qualitative and quantitative approaches are valid and
 ::: {.callout-important appearance="simple"}
 The numbers have no way of speaking for themselves. We speak for them. We imbue them with meaning.
 
-— Nate Silver, *The Signal and the Noise*
+—Nate Silver, *The Signal and the Noise*
 :::
 
 There's a lot of wisdom in that quote. Numbers do not mean anything by themselves. We need to interpret numbers, "imbue them with meaning", based on many aspects of research and beyond, including our own identity and positionality [@jafar2018; @darwinholmes2020].
