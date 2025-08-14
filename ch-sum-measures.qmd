@@ -1,6 +1,6 @@
 # Summary measures {#sec-summaries}
 
-![](https://img.shields.io/badge/Area-Statistics-red)
+![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
 
 ```{r}
 #| label: setup
@@ -14,13 +14,13 @@ library(webexercises)
 
 ![](img/data-summ.png){fig-align="center" width="500"}
 
-As you learned in @sec-quantitative, quantitative data analysis can be concieved as three activities: summarising, visualising and modeling data. In this chapter, you will learn about summarising data. When we say "summarising data" we usually mean summarising data variables, by themselves or in group. We can summarise statistical variables using **summary measures**. There are two types of summary measures.
+As you learned in @sec-quantitative, quantitative data analysis can be conceived as three activities: summarising, visualising and modelling data. In this chapter, you will learn about summarising data. When we say "summarising data" we usually mean summarising data variables, by themselves or in group. We can summarise statistical variables using **summary measures**. There are two types of summary measures.
 
 -   **Measures of central tendency** indicate the **typical or central value** of a variable.
 
 -   **Measures of dispersion** indicate the **spread or dispersion** of the variable values around the central tendency value.
 
-**Always report a measure of central tendency together with its measure of dispersion!** A central tendency mesure captures only one aspect of the "distribution" of the values and variables with the same central tendency value could have very different dispersion, and hence be very different in nature. For example, look at the density plot in @fig-same-mean (you will learn more about them in XXX). These plots are good at showing the distribution of values of numeric variables. The higher the density the curve, the more the values under that part of the curve are represented in the sample. Varible `a` and `b` have the same mean (central tendency): the mean is 0. But `a` has a standard deviation (measure of dispertion, more on this below) of 1 while `b`'s standard deviation is 3. You can appreciate how different `a` and `b` are, despite having exactly the same mean. This should show how important it is to not only report (and think about) central tendencies, like the mean, but also the dispertion of the data around the central tendency.
+**Always report a measure of central tendency together with its measure of dispersion!** A central tendency measure captures only one aspect of the "distribution" of the values and variables with the same central tendency value could have very different dispersion, and hence be very different in nature. For example, look at the density plot in @fig-same-mean (you will learn more about them in @sec-probability). These plots are good at showing the distribution of values of numeric variables. The higher the density the curve, the more the values under that part of the curve are represented in the sample. Variable `a` and `b` have the same mean (central tendency): the mean is 0. But `a` has a standard deviation (measure of dispersion, more on this below) of 1 while `b`'s standard deviation is 3. You can appreciate how different `a` and `b` are, despite having exactly the same mean. This should show how important it is to not only report (and think about) central tendencies, like the mean, but also the dispersion of the data around the central tendency.
 
 ```{r}
 #| label: fig-same-mean
@@ -54,7 +54,7 @@ $$\text{if } n \text{ is even,  } \frac{x_\frac{n}{2} + x_{\frac{n}{2}+1}}{2}$$
 
 **Mode**
 
-The most common value.
+The mode is simply the most common value.
 :::
 
 ::: callout-note
@@ -66,7 +66,7 @@ The most common value.
 
 $$ max(x) - min(x)$$
 
-The difference between the largest and smallest value.
+The range is the difference between the largest and smallest value.
 
 **Standard deviation**
 
@@ -74,6 +74,8 @@ $$\text{SD} = \sqrt{\frac{\sum_{i=1}^n (x_i - \bar{x})^2}{n-1}} = \sqrt{\frac{(x
 :::
 
 ## Measures of central tendency
+
+A measure of central tendency approximately tells you where the data is most concentrated. There are three common measures of central tendency: mean, median and mode.
 
 ### Mean
 
@@ -92,6 +94,8 @@ mean(c(0.32, 2.58, 1.5, 0.12, 1.09))
 ```
 
 ::: callout-important
+### Go deeper
+
 **Don't take the mean of proportions and percentages!**
 
 Better to calculate the proportion/percentage across the entire data, rather than take the mean of individual proportions/percentages: see [this blog post](https://www.robertoreif.com/blog/2018/1/7/why-you-should-be-careful-when-averaging-percentages). If you really really have to, use the *median*.
@@ -114,6 +118,10 @@ mean(c(6, 7))
 ```
 
 ::: callout-important
+### Go deeper
+
+There are two important characteristics of the mean and the median:
+
 -   **The mean is very sensitive to outliers.**
 
 -   The median is **not**.
@@ -151,12 +159,16 @@ table(c("red", "red", "blue", "yellow", "blue", "green", "red", "yellow"))
 The mode is the most frequent value: here it is `red`, with 3 occurrences.
 
 ::: callout-important
+### Go deeper
+
 **Likert scales are ordinal (categorical) variables, so the mean and median are not appropriate!** This is true even when Likert scales are represented with numbers, like "1, 2, 3, 4, 5" for a 5-point scale.
 
 You should use the mode (you can use the median with Likert scales if you really really need to...).
 :::
 
 ## Measures of dispersion
+
+A measure of dispersion measures how much spread the data is around the measure of central tendency.
 
 ### Minimum and maximum
 
@@ -204,7 +216,16 @@ sd(c(0.32, 2.58, 1.5, 0.12, 1.09))
 ```
 
 ::: callout-important
+### Go deeper
+
 Standard deviations are **relative** and depend on the measurement **unit/scale!**
 
 **Don't use the standard deviation with proportions and percentages!**
 :::
+
+## Summary table of summary measures
+
+To conclude, here is a table that summarises when each measure should be used, depending on the nature of the variable. You can use this table as a cheat-sheet. Green cells indicate that the measure is appropriate for the variable, red cells indicates that they are not and should not be used, and orange cells indicate you should exercise caution when using those measures with those variables. Gray cells indicate that it's mathematically impossible to apply that measure to that type of variable.
+
+![](img/measures-overview.png)
+

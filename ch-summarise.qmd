@@ -12,7 +12,7 @@ library(webexercises)
 
 ## Summarise with `summarise()`
 
-When you work with data, you always want to get summary measures for most of the variables in the data. Data reports usually include summary measures. It is also important to understand which summary measure is appropriate for which type of variable, which was covered in the previous section. Now, you will learn how to obtain summary measures using the `summarise()` function from the [dplyr](https://dplyr.tidyverse.org) tidyverse package. `summarise()` takes at least two arguments: (1) the tibble to summarise, (2) one or more summary functions applied to columns in the tibble. Let's practice with the data from @song2020 you read in @sec-read-data. We want to get a measure of central tendency and dispersion for the reaction times, in the `RT` column. In order to decide which measures to pick, think about the nature of the `RT` variable. Rection times is a numeric and continuous statistical variable, and it can only have positive values. So the mean and standard deviations are appropriate measures. Let's start with the mean of the reaction time column `RT`. First, create a new R script (or continue writing in an existing script), attach the tidyverse and read the `song2020/shallow.csv` file into a variable called `shallow`.
+Now that you have learnt about summary measures, we can talk about how to go about summarising data, rather than just vectors as we did in the previous chapter. When you work with data, you always want to get summary measures for most of the variables in the data. Data reports usually include summary measures. It is also important to understand which summary measure is appropriate for which type of variable, which was covered in the previous section. Now, you will learn how to obtain summary measures using the `summarise()` function from the [dplyr](https://dplyr.tidyverse.org) tidyverse package. `summarise()` takes at least two arguments: (1) the tibble to summarise, (2) one or more summary functions applied to columns in the tibble. Let's practice with the data from @song2020 you read in @sec-read-data. We want to get a measure of central tendency and dispersion for the reaction times, in the `RT` column. In order to decide which measures to pick, think about the nature of the `RT` variable. Reaction times is a numeric and continuous statistical variable, and it can only have positive values. So the mean and standard deviations are appropriate measures. Let's start with the mean of the reaction time column `RT`. Go to your `week-02.R` script: if you followed @sec-read-data (and you should have), the script should already have the code to attach the tidyverse and read the `song2020/shallow.csv` file into a variable called `shallow`.
 
 ```{r}
 #| label: shallow
@@ -188,10 +188,4 @@ Check the documentation of `?mean`.
 
 ## Grouping data with `group_by()`.
 
-XXX. 
-
-## Summary table of summary measures
-
-To conclude, here is a table that summarises when each measure should be used, depending on the nature of the variable. You can use this table as a cheat-sheet. Green cells indicate that the measure is appropriate for the variable, red cells indicates that they are not and should not be used, and orange cells indicate you should exercise caution when using those measures with those variables. Gray cells indicate that it's mathematically impossible to apply that measure to that type of variable.
-
-![](img/measures-overview.png)
+XXX
