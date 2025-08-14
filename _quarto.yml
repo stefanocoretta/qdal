@@ -6,7 +6,7 @@ project:
 book:
   title: Quantitative Data Analysis for Linguists in R
   author: Stefano Coretta
-  date: 25/01/2024
+  date: 2025/08/13
   page-navigation: true
   chapters:
   - index.qmd
