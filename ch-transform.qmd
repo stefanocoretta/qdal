@@ -1,1 +1,361 @@
 # Transform data
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(webexercises)
+```
+
+**Data transformation** is a fundamental aspect of data analysis. After the data you need to use is imported into R, you will often have to filter rows, create new columns, or join data frames, among many other transformation operations. In this chapter you will learn how to use `filter()` to filter the data and `mutate()` to mutate or create new columns.
+
+## Filter rows
+
+Filtering is normally used to filter rows in the data according to specific criteria: in other words, keep certain rows and drop others. Filtering data couldn't be easier with `filter()`, from the [dplyr](https://dplyr.tidyverse.org) package (one of the tidyverse core packages), Let's work with the `coretta2022/glot_status.rds` data.
+
+::: callout-warning
+### Exercise 1
+
+-   Create a new R script called `week-03.R` and save it in `code/`.
+
+-   Read the `coretta2022/glot_status.rds` data.
+:::
+
+The `glot_status` data frame contains the endangerment status for 7,845 languages from [Glottolog](https://glottolog.org). There are thousands of languages in the world, but most of them are losing speakers, and some are already no longer spoken. The column `status` contains the endangerment status of a language in the data, on a scale from `not endangered` (languages with large populations of speakers) through `threatened`, `shifting` and `nearly extinct`, to `extinct` (languages that have no living speakers left). Here's a preview.
+
+```{r}
+#| label: glot-status
+#| include: false
+
+glot_status <- readRDS("data/coretta2022/glot_status.rds")
+```
+
+```{r}
+#| label: glot-status-2
+
+glot_status
+```
+
+In the following sections we will filter the rows of the data based on the `status` column. Before we can move on onto filtering however, we first need to learn about *logical operators*.
+
+### Logical operators
+
+::: callout-tip
+#### Logical operators
+
+**Logical operators** are symbols that compare two objects and return either `TRUE` or `FALSE`.
+
+The most common logical operators are `==`, `!=`, `>`, and `<`.
+:::
+
+There are four main logical operators, each testing a specific logical statements:
+
+-   `x == y`: `x` equals `y`.
+
+-   `x != y`: `x` is not equal to `y`.
+
+-   `x > y`: `x` is greater than `y`.
+
+-   `x < y`: `x` is smaller than `y`.
+
+Logical operators return `TRUE` or `FALSE` depending on whether the statement they convey is true or false. Remember, `TRUE` and `FALSE` are logical values.
+
+Try the following code in the `Console`:
+
+```{r}
+#| label: logic
+
+# This will return FALSE
+1 == 2
+
+# FALSE
+"apples" == "oranges"
+
+# TRUE
+10 > 5
+
+# FALSE
+10 > 15
+
+# TRUE
+3 < 4
+
+```
+
+::: callout-note
+#### Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1a <- c(
+  "`3 > 1`",
+  answer = '`"a" = "a"`',
+  '`"b" != "b"`',
+  "`19 < 2`"
+)
+
+cat("a. Which of the following does not contain a logical operator?", longmcq(opts_1a))
+
+opts_1b <- c(
+  "`3 > c(1, 5)`",
+  answer = '`c("a", "b") != c("a")`',
+  '`"apple" != "apple"`'
+)
+
+cat("b. Which of the following returns `c(FALSE, TRUE)`?", longmcq(opts_1b))
+```
+:::
+
+::: {.callout-tip collapse="true"}
+#### Hint
+
+**1a.**
+
+Check for errors in the logical operators.
+
+**1b.**
+
+Run them in the console to see the output.
+:::
+
+::: {.callout-warning collapse="true"}
+#### Explanation
+
+**1a.**
+
+The logical operator `==` has TWO equal signs. A single equal sign `=` is an alternative way of writing the assignment operator `<-`, so that `a = 1` and `a <- 1` are equivalent.
+
+**1b.**
+
+Logical operators are "vectorised" (you will learn more about this below), i.e they are applied sequentially to all elements in pairs. If the number of elements on one side does not match than of the other side of the operator, the elements on the side that has the smaller number of elements will be recycled.
+:::
+
+You can use these logical operators with `filter()` to filter rows that match with `TRUE` in all the specified statements with logical operators.
+
+### The `filter()` function
+
+Filtering in R with the tidyverse is straightforward. You can use the `filter()` function. `filter()` takes one or more statements that return `TRUE` or `FALSE`. A common use case is with logical operators. The following code filters the `status` column so that only the `extinct` status is included in the new data frame `extinct`. You'll notice we are using the pipe `|>` to transfer the data into the `filter()` function (you learned about the pipe in @sec-summarise). The output of the filter function is assigned `<-` to `extinct`. The flow might seem a bit counter-intuitive but you will get used to think like this when writing R code soon enough (although see the Go Deeper box on assignment direction)!
+
+```{r}
+#| label: extinct
+
+extinct <- glot_status |>
+  filter(status == "extinct")
+
+extinct
+```
+
+Neat! `extinct` contains only those languages whose status is `extinct`. What if we want to include *all statuses except* `extinct`? Easy, we use the non-equal operator `!=`.
+
+```{r}
+#| label: not-extinct
+
+not_extinct <- glot_status |>
+  filter(status != "extinct")
+```
+
+`not_extinct` contains all languages whose status is *not* `extinct`. And if we want only non-extinct languages from `South America`? We can include multiple statements separated by a comma!
+
+```{r}
+#| label: south-america
+
+south_america <- glot_status |>
+  filter(status != "extinct", Macroarea == "South America")
+```
+
+Combining statements like this will give you only those rows where all statements return `TRUE`. You can add as many statements as you need.
+
+::: callout-important
+If you don't assign the output of `filter()` to a variable (like in `south_america <-`), the resulting tibble will be printed in the `Console` and you won't be able to do more operations on it! Always remember to assign the output of filtering to a new variable and to avoid overwriting the full tibble, use a different name.
+:::
+
+::: callout-warning
+### Exercise 2
+
+Filter the `glot_status` data so that you include only `not_endangered` languages from all macro-areas except `Eurasia`.
+:::
+
+This is all great, but what if we want to include more than one status or macro-area? To do that we need another operator: `%in%`.
+
+### The `%in%` operator
+
+::: callout-tip
+#### `%in%`
+
+The `%in%` operator is a special logical operator that returns `TRUE` if the value to the left of the operator is one of the values in the vector to its right, and `FALSE` if not.
+:::
+
+Try these in the `Console`:
+
+```{r}
+#| label: in
+
+# TRUE
+5 %in% c(1, 2, 5, 7)
+
+# FALSE
+"apples" %in% c("oranges", "bananas")
+```
+
+But `%in%` is even more powerful because the value on the left does not have to be a single value, but it can also be a vector! We say `%in%` is *vectorised* because it can work with vectors (most functions and operators in R are vectorised).
+
+```{r}
+#| label: in-vct
+
+# TRUE, TRUE
+c(1, 5) %in% c(4, 1, 7, 5, 8)
+
+stocked <- c("durian", "bananas", "grapes")
+needed <- c("durian", "apples")
+
+# TRUE, FALSE
+needed %in% stocked
+
+```
+
+Try to understand what is going on in the code above before moving on.
+
+Now we can filter `glot_status` to include only the macro-areas of the Global South and only languages that are either "threatened", "shifting", "moribund" or "nearly_extinct".
+
+::: callout-warning
+### Exercise 3
+
+Filter `glot_status` to include only the macro-areas (`Macroarea`) of the Global South and only languages that are either "threatened", "shifting", "moribund" or "nearly_extinct". I have started the code for you, you just need to write the line for filtering `status`.
+
+```{r}
+#| label: global-south-ex
+#| eval: false
+
+global_south <- glot_status |>
+  filter(
+    Macroarea %in% c("Africa", "Australia", "Papunesia", "South America"),
+    ...
+  )
+```
+
+This should not look too alien! The first statement, `Macroarea %in% c("Africa", "Australia", "Papunesia", "South America")` looks at the `Macroarea` column and, for each row, it returns `TRUE` if the current row value is in `c("Africa", "Australia", "Papunesia", "South America")`, and `FALSE` if not.
+:::
+
+::: {.callout-important collapse="true"}
+### Solution
+
+```{r}
+#| label: global-south
+#| eval: false
+
+global_south <- glot_status |>
+  filter(
+    Macroarea %in% c("Africa", "Australia", "Papunesia", "South America"),
+    status %in% c("threatened", "shifting", "moribund", "nearly_extinct")
+  )
+```
+:::
+
+## Mutate columns
+
+To change existing columns or create new columns, we can use the `mutate()` function from the [dplyr](https://dplyr.tidyverse.org) package. To learn how to use `mutate()`, we will re-create the `status` column (let's call it `Status` this time) from the `Code_ID` column in `glot_status`. The `Code_ID` column contains the status of each language in the form `aes-STATUS` where `STATUS` is one of `not_endangered`, `threatened`, `shifting`, `moribund`, `nearly_extinct` and `extinct`. You can check the labels in a column with the `unique()` function. This function is not from the tidyverse, but it is a base R function, so you need to extract the column from the tibble with `$` (the dollar-sign operator). `unique()` will list all the unique labels in the column (note that it works with numbers too).
+
+```{r}
+#| label: codes
+
+unique(glot_status$Code_ID)
+```
+
+::: callout-tip
+#### The dollar sign \`\$\`
+
+You can use the dollar sign `$` to extract a single column from a data frame as a vector.
+:::
+
+We want to create a new column called `Status` which has only the status part of the label without the `aes-` part. To remove `aes-` from the `Code_ID` column we can use the `str_remove()` function from the [stringr](https://stringr.tidyverse.org) package. Check the documentation of `?str_remove` to learn which arguments it uses.
+
+```{r}
+#| label: Status
+
+glot_status <- glot_status |>
+  mutate(
+    Status = str_remove(Code_ID, "aes-")
+  )
+```
+
+If you check `glot_status` now you will find that a new column, `Status`, has been added. This column is a character column (`chr`). You see that, as with `filter()`, you have to assign the output of `mutate()` to a variable. In the code above we are re-assigning the output to the `glot_status` variable which we started with. This means that we are *overwriting* the original `glot_status`. However, since we have added a new column, we have in practice only added the new column to the old data. If you use the name of an existing column, you will be effectively overwriting that column, so you must be careful with `mutate()`.
+
+Let's count the number of languages for each endangerment status using the new `Status` column. The dplyr package comes with a `count()` function and you can combine this with `group_by()`, as we did with `summarise()`, to get the number or rows based on the labels in one or more columns.
+
+```{r}
+#| label: count
+
+glot_status |>
+  group_by(status) |> 
+  count()
+```
+
+You might have noticed that the order of the levels of `Status` does not match the order from least to most endangered/extinct. Try `count()` now with the pre-existing `status` column (with a lower case "s"). You will get the sensible order from least to most endangered/extinct. Why? This is because `status` (the pre-existing column) is a **factor** column with a specified order of the different statuses. A factor column is a column that is based on a factor vector (note that tibble columns are vectors), i.e. a vector that contains a list of values, called *levels*, from a specified set. Factor vectors (or factors for short) allow the user to specify the order of the values. If the order is not specified, the alphabetical order is used by default. Differently from factor vector/columns, character columns (columns that are character vectors) can only use the default alphabetical order. The `Status` column we created above is a character column. Check the column type by clicking on the small white triangle in the blue circle next to the name of the tibble in the `Environment` panel (tip-right panel of RStudio). Next to the `Status` column name you will see `chr`, for character. But if you look next to `status` you will see `Factor`.
+
+::: callout-tip
+#### Factor vector
+
+A **factor vector** (or column) is a vector that contains a list of values (called *levels*) from a closed set.
+
+The levels of a factor are ordered alphabetically by default.
+:::
+
+A vector/column can be mutated into a factor column with the `as.factor()` function. In the following code, we change the existing column `Status`, in other words we overwrite it (this happens automatically, because the `Status` column already exists, so it is replaced).
+
+```{r}
+#| label: as-factor
+
+glot_status <- glot_status |>
+  mutate(
+    Status = as.factor(Status)
+  )
+
+levels(glot_status$Status)
+
+```
+
+The `levels()` functions returns the levels of a factor column in the order they are stored in the factor: as mentioned above, by default the order is alphabetical. What if we want the levels of `Status` to be ordered in a more logical manner: `not_endangered`, `threatened`, `shifting`, `moribund`, `nearly_extinct` and `extinct`? Easy! We can use the `factor()` function instead of `as.factor()` and specify the levels and their order in the `levels` argument.
+
+```{r}
+#| label: factor
+
+glot_status <- glot_status |>
+  mutate(
+    Status = factor(
+      Status,
+      levels = c("not_endangered", "threatened", "shifting", "moribund", "nearly_extinct", "extinct")
+    )
+  )
+
+levels(glot_status$Status)
+```
+
+You see that now the order of the levels returned by `levels()` is the one we specified. Transforming character columns to vector columns is helpful to specify a particular order of the levels which can then be used when summarising, counting or plotting.
+
+::: callout-warning
+### Exercise 4
+
+Use `count()` again with the new factor `Status` column.
+:::
+
+Here is a preview of data plotting in R, which you will learn in @sec-plotting, with the status in the logical order from least to most endangered and extinct.
+
+```{r}
+#| label: fig-status-bar-3
+#| fig-cap: "Number of languages by endangerment status (repeated)."
+#| code-fold: true
+
+glot_status |>
+  ggplot(aes(x = Status)) +
+  geom_bar()
+```
+
+::: {.callout-important collapse="true"}
+## Go Deeper: Assignment direction
+
+XXX
+:::
