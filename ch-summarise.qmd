@@ -191,7 +191,7 @@ cat("b. Which is the mean of `c(4, 23, NA, 5)` when `na.rm` has the default valu
 Check the documentation of `?mean`.
 :::
 
-## Grouping data with `group_by()`.
+## Grouping data with `group_by()`
 
 More often, you will want to calculate summary measures for specific subsets of the data. An elegant way of doing this is with the `group_by()` function from dplyr. This function takes a tibble, groups the data based on the specified columns, and returns another tibble with the grouping.
 
@@ -281,12 +281,6 @@ The code says:
 
 Hopefully this just makes sense, but check the Go Deeper box below if you want more details.
 
-::: {.callout-important collapse="true"}
-### Go deeper: piping
-
-XXX
-:::
-
 `group_by()` can group according to more than one column, by listing the columns separated by commas (like `group_by(Col1, Col2, Col3)`). When you list more than one column, the grouping is fully crossed: you get a group for each combination of the grouping columns. Try to group the data by `Group` and `Word_Nonword` and get summary measures.
 
 ::: callout-warning
@@ -299,4 +293,67 @@ Group `shallow` by `Group` and `Word_Nonword` and get summary measures of RTs. U
 ## Hint
 
 `group_by(Group, Word_Nonword)`
+:::
+
+::: {.callout-important collapse="true"}
+### Go Deeper: Piping
+
+With the release of **R 4.1.0**, a new feature was introduced to the base language that has significantly improved the readability and expressiveness of R code: the **native pipe operator**, written as `|>`. The native pipe allows the result of one expression to be passed automatically as the **first argument** to another function. This simple idea has a profound impact on how we write R code, particularly when we are performing a sequence of data transformations.
+
+Before the native pipe, it was common to see deeply nested function calls that could be difficult to read and reason about. For example, consider the task of computing the square root of the sum of a vector:
+
+``` r
+sqrt(sum(c(1, 2, 3, 4)))
+```
+
+While this is relatively simple, as functions become more complex and more transformations are chained together, nested calls quickly become cumbersome. The native pipe solves this by allowing you to write each operation in a **left-to-right, stepwise manner**, which mirrors the logical flow of data. The key principle of the native pipe is that the **left-hand side (LHS) is evaluated first**, and its result is automatically passed as the **first argument** to the right-hand side (RHS). This means that for a simple pipe like:
+
+``` r
+x |> f()
+```
+
+it is equivalent to writing:
+
+``` r
+f(x)
+```
+
+This principle is important because it defines the natural behavior of the pipe: whatever computation you produce on the LHS will be injected as the first input to the next function. Consider the `mtcars` dataset, which is built into R. Suppose we want to compute the average miles per gallon (`mpg`) for each number of cylinders (`cyl`). Using the native pipe in combination with `tidyverse` functions, the code is straightforward and highly readable:
+
+``` r
+library(dplyr)
+
+mtcars |>
+  group_by(cyl) |>
+  summarise(avg_mpg = mean(mpg))
+```
+
+Let's break this down:
+
+1.  The `mtcars` dataset is the left-hand side. It is evaluated first and becomes the input for the next function.
+2.  `group_by(cyl)` receives the dataset as its **first argument**, groups the data by the `cyl` column, and returns a grouped dataframe.
+3.  The grouped dataframe is then piped into `summarise(avg_mpg = mean(mpg))`, which calculates the mean `mpg` for each cylinder group.
+
+Notice that each step receives the output from the previous step as its first argument. This eliminates the need for intermediate variables and nested function calls, creating a natural, readable sequence of transformations.
+
+#### Comparison with the `magrittr` pipe (`%>%`) {.unnumbered}
+
+Before R introduced the native pipe, the `magrittr` package popularized piping with the `%>%` operator. Functionally, it achieves a very similar goal: passing the result of one expression to another function. For example, the earlier `group_by` and `summarise` operation can be written with `magrittr` as:
+
+``` r
+library(magrittr)
+
+mtcars %>%
+  group_by(cyl) %>%
+  summarise(avg_mpg = mean(mpg))
+```
+
+Some differences between the native pipe and `magrittr`:
+
+1.  The native pipe is built into base R, so no external package is required.
+2.  The native pipe always passes the LHS value to the **first argument** of the RHS function.
+3.  `magrittr` allows more flexibility via the `.` placeholder, which can inject the LHS value into **any argument**.
+4.  Performance-wise, the native pipe has minimal overhead compared to `%>%`, which is a function call.
+
+Overall, the native pipe provides a simple, consistent, and readable way to chain operations, especially when working with `tidyverse` workflows. For users already familiar with `%>%`, the transition is intuitive, with the added benefit that this feature is now a part of base R.
 :::

@@ -94,7 +94,7 @@ mean(c(0.32, 2.58, 1.5, 0.12, 1.09))
 ```
 
 ::: callout-important
-### Go deeper
+### Go Deeper
 
 **Don't take the mean of proportions and percentages!**
 
@@ -118,7 +118,7 @@ mean(c(6, 7))
 ```
 
 ::: callout-important
-### Go deeper
+### Go Deeper
 
 There are two important characteristics of the mean and the median:
 
@@ -159,7 +159,7 @@ table(c("red", "red", "blue", "yellow", "blue", "green", "red", "yellow"))
 The mode is the most frequent value: here it is `red`, with 3 occurrences.
 
 ::: callout-important
-### Go deeper
+### Go Deeper
 
 **Likert scales are ordinal (categorical) variables, so the mean and median are not appropriate!** This is true even when Likert scales are represented with numbers, like "1, 2, 3, 4, 5" for a 5-point scale.
 
@@ -216,7 +216,7 @@ sd(c(0.32, 2.58, 1.5, 0.12, 1.09))
 ```
 
 ::: callout-important
-### Go deeper
+### Go Deeper
 
 Standard deviations are **relative** and depend on the measurement **unit/scale!**
 

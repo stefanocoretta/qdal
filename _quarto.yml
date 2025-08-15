@@ -28,10 +28,11 @@ book:
     - ch-summarise.qmd
   - part: Week 3
     chapters:
-    - ch-research-cycle.qmd
+    - ch-transform.qmd
     - ch-viz-principles.qmd
     - ch-quarto.qmd
     - ch-plotting.qmd
+    - ch-research-cycle.qmd
   - part: Week 4
     chapters:
     - ch-probability.qmd

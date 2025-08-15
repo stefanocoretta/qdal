@@ -68,7 +68,7 @@ There are also variations of the comma separated values type, like **tab separat
 Of course, R can import also data that is not tabular, like map data and complex hierarchical data, including XML, HTML and json data. We will not cover these types of data, but you can check out the resources in the Extra box.
 
 ::: {.callout-important collapse="true"}
-#### Go deeper: Non-tabular data
+#### Go Deeper: Non-tabular data
 
 -   See Chapters 21-24 of [R for Data Science](https://r4ds.hadley.nz).
 
