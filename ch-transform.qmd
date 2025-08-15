@@ -8,7 +8,7 @@ library(tidyverse)
 library(webexercises)
 ```
 
-**Data transformation** is a fundamental aspect of data analysis. After the data you need to use is imported into R, you will often have to filter rows, create new columns, or join data frames, among many other transformation operations. In this chapter you will learn how to use `filter()` to filter the data and `mutate()` to mutate or create new columns.
+**Data transformation** is a fundamental aspect of data analysis. After the data you need to use is imported into R, you will often have to filter rows, create new columns, summarise data or join data frames, among many other transformation operations. In @sec-summarise you have already learned about summarising data, and in this chapter you will learn how to use `filter()` to filter the data and `mutate()` to mutate or create new columns.
 
 ## Filter rows
 

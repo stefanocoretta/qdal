@@ -496,7 +496,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><strong>Data transformation</strong> is a fundamental aspect of data analysis. After the data you need to use is imported into R, you will often have to filter rows, create new columns, or join data frames, among many other transformation operations. In this chapter you will learn how to use <code>filter()</code> to filter the data and <code>mutate()</code> to mutate or create new columns.</p>
+<p><strong>Data transformation</strong> is a fundamental aspect of data analysis. After the data you need to use is imported into R, you will often have to filter rows, create new columns, summarise data or join data frames, among many other transformation operations. In <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a> you have already learned about summarising data, and in this chapter you will learn how to use <code>filter()</code> to filter the data and <code>mutate()</code> to mutate or create new columns.</p>
 <section id="filter-rows" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="filter-rows"><span class="header-section-number">12.1</span> Filter rows</h2>
 <p>Filtering is normally used to filter rows in the data according to specific criteria: in other words, keep certain rows and drop others. Filtering data couldn’t be easier with <code>filter()</code>, from the <a href="https://dplyr.tidyverse.org">dplyr</a> package (one of the tidyverse core packages), Let’s work with the <code>coretta2022/glot_status.rds</code> data.</p>
@@ -592,12 +592,12 @@ Quiz 1
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>Which of the following does not contain a logical operator?
-<div id="radio_UMOGIHGMWE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UMOGIHGMWE" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_UMOGIHGMWE" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_UMOGIHGMWE" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_UMOGIHGMWE" value=""> <span><code>19 &lt; 2</code></span></label>
+<div id="radio_BHFHXWUJVN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BHFHXWUJVN" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_BHFHXWUJVN" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_BHFHXWUJVN" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_BHFHXWUJVN" value=""> <span><code>19 &lt; 2</code></span></label>
 </div></li>
 <li>Which of the following returns <code>c(FALSE, TRUE)</code>?
-<div id="radio_PXXGWVKLVS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PXXGWVKLVS" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_PXXGWVKLVS" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_PXXGWVKLVS" value=""> <span><code>"apple" != "apple"</code></span></label>
+<div id="radio_PKBZOZRAAV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PKBZOZRAAV" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_PKBZOZRAAV" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_PKBZOZRAAV" value=""> <span><code>"apple" != "apple"</code></span></label>
 </div></li>
 </ol>
 </div>
