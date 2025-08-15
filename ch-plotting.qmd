@@ -245,8 +245,6 @@ But `aes(y = b, x = a)` is the same as `aes(a, b)`.
 :::
 ::::
 
-### What the pipe?!
-
 The code of the latest plot can also be written this way.
 
 ```{r}
@@ -258,7 +256,7 @@ polite |>
     geom_point()
 ```
 
-Wait, what is that thing, `|>`? It's called a **pipe**. Think of a pipe as a teleporter. The pipe `|>` teleports the data `polite` into the following function as the first argument. So `polite |> ggplot()` is equivalent to `ggplot(polite)`. For now it might not make much sense using the pipe, but later in the book you will start to chain many functions one after the other using the pipe, at which point its usefulness will be more obvious. For example, you will filter the data before plotting it, like so:
+You have encountered the pipe in @sec-summarise already. You can of course stack multiple functions in the pipeline, like for example filtering the data before plotting it, like so:
 
 ```{r}
 #| label: filter-plot-pipe

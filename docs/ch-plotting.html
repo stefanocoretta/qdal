@@ -289,7 +289,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-summarise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summarise and group data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summarise data</span></span></a>
   </div>
 </li>
       </ul>
@@ -512,7 +512,6 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#lets-add-geometries" id="toc-lets-add-geometries" class="nav-link" data-scroll-target="#lets-add-geometries"><span class="header-section-number">15.1.1</span> Let’s add geometries</a></li>
   <li><a href="#function-arguments" id="toc-function-arguments" class="nav-link" data-scroll-target="#function-arguments"><span class="header-section-number">15.1.2</span> Function arguments</a></li>
-  <li><a href="#what-the-pipe" id="toc-what-the-pipe" class="nav-link" data-scroll-target="#what-the-pipe"><span class="header-section-number">15.1.3</span> What the pipe?!</a></li>
   </ul></li>
   <li><a href="#working-with-aesthetics" id="toc-working-with-aesthetics" class="nav-link" data-scroll-target="#working-with-aesthetics"><span class="header-section-number">15.2</span> Working with aesthetics</a>
   <ul class="collapse">
@@ -815,8 +814,8 @@ Quiz 3
 </div>
 <div class="callout-body-container callout-body">
 <strong>Which of the following will produce the same plot as the one above?</strong> Reason through it first without running the code, then run all of these to check whether they look the way you expected.
-<div id="radio_ZUKVKMSAIU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZUKVKMSAIU" value=""> <span><code>ggplot(polite, aes(H1H2, f0mn)) + geom_point()</code></span></label><label><input type="radio" autocomplete="off" name="radio_ZUKVKMSAIU" value="answer"> <span><code>ggplot(polite, aes(y = H1H2, x = f0mn)) + geom_point()</code></span></label><label><input type="radio" autocomplete="off" name="radio_ZUKVKMSAIU" value=""> <span><code>ggplot(polite, aes(y = f0mn, x = H1H2)) + geom_point()</code></span></label>
+<div id="radio_YOQUKTFFZK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YOQUKTFFZK" value=""> <span><code>ggplot(polite, aes(H1H2, f0mn)) + geom_point()</code></span></label><label><input type="radio" autocomplete="off" name="radio_YOQUKTFFZK" value="answer"> <span><code>ggplot(polite, aes(y = H1H2, x = f0mn)) + geom_point()</code></span></label><label><input type="radio" autocomplete="off" name="radio_YOQUKTFFZK" value=""> <span><code>ggplot(polite, aes(y = f0mn, x = H1H2)) + geom_point()</code></span></label>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
@@ -838,16 +837,13 @@ Hint
 </div>
 </div>
 </div>
-</section>
-<section id="what-the-pipe" class="level3" data-number="15.1.3">
-<h3 data-number="15.1.3" class="anchored" data-anchor-id="what-the-pipe"><span class="header-section-number">15.1.3</span> What the pipe?!</h3>
 <p>The code of the latest plot can also be written this way.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2)) <span class="sc">+</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Wait, what is that thing, <code>|&gt;</code>? It’s called a <strong>pipe</strong>. Think of a pipe as a teleporter. The pipe <code>|&gt;</code> teleports the data <code>polite</code> into the following function as the first argument. So <code>polite |&gt; ggplot()</code> is equivalent to <code>ggplot(polite)</code>. For now it might not make much sense using the pipe, but later in the book you will start to chain many functions one after the other using the pipe, at which point its usefulness will be more obvious. For example, you will filter the data before plotting it, like so:</p>
+<p>You have encountered the pipe in <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a> already. You can of course stack multiple functions in the pipeline, like for example filtering the data before plotting it, like so:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># include only rows where f0mn &lt; 300</span></span>
@@ -1116,8 +1112,6 @@ update_total_correct = function() {
   }
 }
 
-PagedTableDoc.initAll();
-
 /* webex-solution button toggling function */
 b_func = function() {
   console.log("webex: toggle hide");
@@ -1303,6 +1297,7 @@ window.onload = function() {
   }
 
   update_total_correct();
+  PagedTableDoc.initAll();
 }
 
 </script>

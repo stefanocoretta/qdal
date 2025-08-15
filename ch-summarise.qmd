@@ -1,4 +1,4 @@
-# Summarise and group data {#sec-summarise}
+# Summarise data {#sec-summarise}
 
 ![](https://img.shields.io/badge/Area-R-green)
 
@@ -12,7 +12,7 @@ library(webexercises)
 
 ## Summarise with `summarise()`
 
-Now that you have learnt about summary measures, we can talk about how to go about summarising data, rather than just vectors as we did in the previous chapter. When you work with data, you always want to get summary measures for most of the variables in the data. Data reports usually include summary measures. It is also important to understand which summary measure is appropriate for which type of variable, which was covered in the previous section. Now, you will learn how to obtain summary measures using the `summarise()` function from the [dplyr](https://dplyr.tidyverse.org) tidyverse package. `summarise()` takes at least two arguments: (1) the tibble to summarise, (2) one or more summary functions applied to columns in the tibble. Let's practice with the data from @song2020 you read in @sec-read-data. We want to get a measure of central tendency and dispersion for the reaction times, in the `RT` column. In order to decide which measures to pick, think about the nature of the `RT` variable. Reaction times is a numeric and continuous statistical variable, and it can only have positive values. So the mean and standard deviations are appropriate measures. Let's start with the mean of the reaction time column `RT`. Go to your `week-02.R` script: if you followed @sec-read-data (and you should have), the script should already have the code to attach the tidyverse and read the `song2020/shallow.csv` file into a variable called `shallow`.
+Now that you have learned about summary measures, we can talk about how to summarise data in R, rather than just vectors as we did in the previous chapter. When you work with data, you always want to get summary measures for most of the variables in the data. Data reports usually include summary measures. It is also important to understand which summary measure is appropriate for which type of variable, which was covered in the previous section. Now, you will learn how to obtain summary measures using the `summarise()` function from the [dplyr](https://dplyr.tidyverse.org) tidyverse package. Let's practice with the data from @song2020 you read in @sec-read-data. We want to get a measure of central tendency and dispersion for the reaction times, in the `RT` column. In order to decide which measures to pick, think about the nature of the `RT` variable. Reaction times is a numeric and continuous statistical variable, and it can only have positive values. So the mean and standard deviations are appropriate measures. Let's start with the mean of the reaction time column `RT`. Go to your `week-02.R` script: if you followed @sec-read-data (and you should have), the script should already have the code to attach the tidyverse and read the `song2020/shallow.csv` file into a variable called `shallow`.
 
 ```{r}
 #| label: shallow
@@ -23,7 +23,7 @@ library(tidyverse)
 shallow <- read_csv("data/song2020/shallow.csv")
 ```
 
-Now let's calculate the mean of `RT` with `summarise()`. Here is the code with its output:
+Now let's calculate the mean of `RT` with `summarise()`. The `summarise()` function takes at least two arguments: (1) the tibble to summarise, (2) one or more summary functions applied to columns in the tibble. In this case we just want the mean RTs. To get this, you write `RT_mean = mean(RT)` which tells the function to calculate the mean of the `RT` column and save the result in a new column called `RT_mean`. Yes, `summarise()` returns a tibble (a data frame)! It might seem overkill now, but you will see below that it is useful when you are grouping the data, so that for example you can get the mean of different groups in the data. Here is the code with its output:
 
 ```{r}
 #| label: mean-3
@@ -52,17 +52,18 @@ The second argument of the `round()` function sets the number of decimals to rou
 summarise(shallow, RT_mean = round(mean(RT)))
 ```
 
-What if we want also the standard deviation? Easy: we use the `sd()` function. (Round the mean and SD with the `round()` function in your code).
+What if we want also the standard deviation? Easy: we use the `sd()` function. Round the mean and SD with the `round()` function when you write the code in your `week-02.R` script.
 
 ```{r}
 #| label: sd
+#| eval: false
 
 # round the mean and SD
 summarise(shallow, RT_mean = mean(RT), RT_sd = sd(RT))
 
 ```
 
-Now we know that reaction times are on average 867 ms long and have a standard deviation of about 293 ms (rounded to the nearest integer). Let's go all the way and also get the minimum and maximum RT values with the `min()` and `max()` functions (round all the summary measures).
+Now we know that reaction times are on average 867 ms long and have a standard deviation of about 293 ms (rounded to the nearest integer). Let's go all the way and also get the minimum and maximum RT values with the `min()` and `max()` functions (again, round all the summary measures).
 
 ::: callout-warning
 ### Exercise 1
@@ -85,11 +86,13 @@ summarise(
 :::: {.callout-important collapse="true"}
 ### Solution
 
-The functions for minumum and maximum are just a few lines above! Have you tried filling the code before seeing the solution?
+The functions for minimum and maximum are just a few lines above! Have you tried it yourself before seeing the solution?
 
-::: {.callout-important collapse="true"}
-### Show me
+<details>
 
+<summary>Show me</summary>
+
+::: markdown
 ```{r}
 #| label: minmax-ex-solution
 #| eval: false
@@ -102,13 +105,15 @@ summarise(
 
 ```
 :::
+
+</details>
 ::::
 
 Fab! When writing a data report, you could write something like this.
 
 > Reaction times are on average 867 ms long (SD = 293 ms), with values ranging from 0 to 1994 ms.
 
-We won't go into the details of what standard deviations are, but you can just think of them as a relative measure of how dispersed the data are around the mean: the higher the SD, the greater the dispersion around the mean, i.e. the greater the variability in the data. When required, you can use the `median()` function to calculate the median, instead of the `mean()`. Go ahead and calculate the median reaction times in the data. Is it similar to the mean?
+Remember that standard deviations are a *relative* measure of how dispersed the data are around the mean: the higher the SD, the greater the dispersion around the mean, i.e. the greater the variability in the data. However, you won't be able to compare standard deviations across different measures: for example, you can't compare the standard deviation of reaction times and of vowel formants because the first is in milliseconds and the second in Hertz; these are two different numeric scales. When required, you can use the `median()` function to calculate the median, instead of the `mean()`. Go ahead and calculate the median reaction times in the data. Is it similar to the mean?
 
 ::: callout-warning
 ### Exercise 2
@@ -116,7 +121,7 @@ We won't go into the details of what standard deviations are, but you can just t
 Calculate the median of RTs in the `shallow` data.
 :::
 
-## `NA`s
+## `NA`: Not Available
 
 Most base R functions, like `mean()`, `sd()`, `median()` and so on, behave unexpectedly if the vector they are used on contains `NA` values. `NA` is a special object in R, that indicates that a value is **N**ot **A**vailable, meaning that that observation does not have a value (or that the value was not observed in that case). For example, in the following numeric vector, there are 5 objects:
 
@@ -154,7 +159,7 @@ sum(a, na.rm = TRUE)
 sd(a, na.rm = TRUE)
 ```
 
-:::: callout-note
+::: callout-note
 #### Quiz 1
 
 ```{r}
@@ -178,14 +183,120 @@ opts_1b <- c(
 
 cat("b. Which is the mean of `c(4, 23, NA, 5)` when `na.rm` has the default value?", longmcq(opts_1b))
 ```
+:::
 
 ::: {.callout-tip collapse="true"}
 #### Hint
 
 Check the documentation of `?mean`.
 :::
-::::
 
 ## Grouping data with `group_by()`.
 
+More often, you will want to calculate summary measures for specific subsets of the data. An elegant way of doing this is with the `group_by()` function from dplyr. This function takes a tibble, groups the data based on the specified columns, and returns another tibble with the grouping.
+
+```{r}
+#| label: group-by
+
+shallow_g <- group_by(shallow, Group)
+```
+
+It looks as if nothing happened, but now the rows in the `shallow_g` tibble are grouped depending on the value of `Group` (`L1` or `L2`). If you print out the tibble in the console (just write `shallow_g` in the Console and press enter), you will notice that the second line of the output says `Groups: Group [2]`, like in the output below. This line tells you how the tibble is grouped: here it is grouped by `Group` and there are two groups.
+
+```{r}
+#| label: group-by-print
+#| echo: false
+
+print(shallow_g)
+
+```
+
+The grouping information is stored as an "attribute" in the tibble, named `groups`. You can check this attribute with `attr()`. You get a tibble with the groupings. Hopefully now you understand that, even if nothing seems to have happened, the tibble has been grouped. Since you saved the output of `group_by()` into a new variable `shallow_g`, note that `shallow` was not affected (try running `atrr(shallow, "groups")` and you will get a `NULL`). Here's the output:
+
+```{r}
+#| label: group-by-attr
+#| echo: false
+
+print(attr(shallow_g, "groups"))
+
+```
+
+There are 2,900 rows in Group = L1 and 3,600 rows in Group = L2. Now let's take the `shallow_g` data and calculate summary measures for L1 and L2 participants separately (as per the `Group` column).
+
+::: callout-warning
+### Exercise 3
+
+Get the rounded mean, median, SD, minimum and maximum of RTs for L1 and L2 participants in `shallow_g`.
+:::
+
+:::: {.callout-important collapse="true"}
+### Solution
+
+You can do it! You've done this above but with `shallow`. Now you just need to use `shallow_g` plus get the mininimum and maximum.
+
+<details>
+
+<summary>Show me</summary>
+
+::: markdown
+```{r}
+#| label: shallow-g
+#| eval: false
+
+summarise(
+  shallow_g,
+  mean = round(mean(RT)),
+  median = round(median(RT)),
+  sd = round(sd(RT))
+)
+
+```
+:::
+
+</details>
+::::
+
+This way of grouping the data first with `group_by()` first and then using `summarise()` on the grouped tibble works, but it can become tedious if you want to get summaries for different groups and/or combinations of groups. There is a more succinct way of doing this using the pipe `|>`. Read on to learn about it.
+
+### What the pipe!?
+
+Think of a pipe `|>` as a teleporter. The pipe `|>` teleports whatever is on its left into whatever is on its right. The pipe allows you to "stack" multiple operations into a pipeline, without the need to assign each output to a variable. This means that the code is more succinct and even more readable because the way you write code follows exactly the pipeline. So we can get summary measures for each group in `Group` like so:
+
+```{r}
+#| label: pipe
+
+shallow |> 
+  group_by(Group) |> 
+  summarise(mean = round(mean(RT)))
+
+```
+
+The code says:
+
+-   Take the `shallow` data.
+
+-   Pipe it into `group_by()` and group it by `Group`.
+
+-   Summarise the grouped data with `summarise()`.
+
+Hopefully this just makes sense, but check the Go Deeper box below if you want more details.
+
+::: {.callout-important collapse="true"}
+### Go deeper: piping
+
 XXX
+:::
+
+`group_by()` can group according to more than one column, by listing the columns separated by commas (like `group_by(Col1, Col2, Col3)`). When you list more than one column, the grouping is fully crossed: you get a group for each combination of the grouping columns. Try to group the data by `Group` and `Word_Nonword` and get summary measures.
+
+::: callout-warning
+### Exercise 4
+
+Group `shallow` by `Group` and `Word_Nonword` and get summary measures of RTs. Use the pipe.
+:::
+
+::: {.callout-tip collapse="true"}
+## Hint
+
+`group_by(Group, Word_Nonword)`
+:::

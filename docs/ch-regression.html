@@ -289,7 +289,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-summarise.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summarise and group data</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summarise data</span></span></a>
   </div>
 </li>
       </ul>
@@ -880,8 +880,6 @@ update_total_correct = function() {
   }
 }
 
-PagedTableDoc.initAll();
-
 /* webex-solution button toggling function */
 b_func = function() {
   console.log("webex: toggle hide");
@@ -1067,6 +1065,7 @@ window.onload = function() {
   }
 
   update_total_correct();
+  PagedTableDoc.initAll();
 }
 
 </script>
