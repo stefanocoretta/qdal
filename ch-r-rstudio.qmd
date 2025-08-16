@@ -232,7 +232,7 @@ cat("b. `10 * 2 + 5 * 0.2` = `(10 * 2 + 5) * 0.2`", torf(FALSE), "\n\n")
 :::
 
 ::: {.callout-important collapse="true"}
-## Extra: Arithmetics
+## Spotlight: Arithmetics
 
 If you need a maths refresher, I recommend checking the following pages:
 
@@ -427,7 +427,7 @@ The `Sys.Date()` function and other functions like it don't take any arguments.
 :::
 
 ::: {.callout-important collapse="true"}
-#### Spotlight: R vs Python
+#### R Note: R vs Python
 
 If you are familiar with Python, you will soon realise that R and Python, although they share many concepts and types of objects, they can differ substantially. This is because R is a **functional** programming language (based on *functions*) while Python is an **Object Oriented** programming language (based on *methods* applied on objects).
 
@@ -574,7 +574,7 @@ class(char)
 :::::
 
 ::: {.callout-important collapse="true"}
-#### Extra: For-loops and if-else statements
+#### R Note: For-loops and if-else statements
 
 This course does not cover programming in R in the strict sense, but if you are curious here's a short primer on for-loops and if-else statements in R.
 
@@ -624,7 +624,7 @@ Here's a summary of what you learnt.
 :::
 
 ::: {.callout-important collapse="true"}
-#### Extra: Programming in R
+#### R Note: Programming in R
 
 If you are interested in learning about programming in R, I recommend you go through Chapters 26-28 of the [R4DS](https://r4ds.hadley.nz/functions) book and the [Advanced R](https://adv-r.hadley.nz) book.
 :::

@@ -179,7 +179,7 @@ For the time being, let's pretend we don't know that and we want to write a desc
 > @fig-first-plot shows a scatter plot of mean f0 on the *x*-axis and H1-H2 difference on the *y*-axis. The plot suggest an overall negative relationship between mean f0 and H1-H2 difference. In other words, increasing mean f0 corresponds to decreasing breathiness.
 
 ::: callout-important
-#### Spotlight: The Layered Grammar of Graphics
+#### R: The Layered Grammar of Graphics
 
 Note that using the `+` is a quirk of `ggplot()`. The idea behind it is that you start from a bare plot and you **add** (`+`) layers of data on top of it. This is because of the philosophy behind the package, called the [Layered Grammar of Graphics](http://vita.had.co.nz/papers/layered-grammar.html). In fact, Grammar of Graphics is where you get the GG in ggplot!
 :::
@@ -331,7 +331,7 @@ polite |>
 ```
 
 ::: {.callout-important collapse="true"}
-#### Extra: The default colour palette
+#### R Note: The default colour palette
 
 If you want to know more about the default colour palette, check this [blog post](https://www.statology.org/ggplot-default-colors/) out.
 :::

@@ -575,12 +575,12 @@ Quiz 1
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>Which of the following does not contain a logical operator?
-<div id="radio_HYUXOGEZYK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HYUXOGEZYK" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_HYUXOGEZYK" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_HYUXOGEZYK" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_HYUXOGEZYK" value=""> <span><code>19 &lt; 2</code></span></label>
+<div id="radio_JWPCRWYYCV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JWPCRWYYCV" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_JWPCRWYYCV" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_JWPCRWYYCV" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_JWPCRWYYCV" value=""> <span><code>19 &lt; 2</code></span></label>
 </div></li>
 <li>Which of the following returns <code>c(FALSE, TRUE)</code>?
-<div id="radio_VDBZXJOKMR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VDBZXJOKMR" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_VDBZXJOKMR" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_VDBZXJOKMR" value=""> <span><code>"apple" != "apple"</code></span></label>
+<div id="radio_BJNXWAHXNK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BJNXWAHXNK" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_BJNXWAHXNK" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_BJNXWAHXNK" value=""> <span><code>"apple" != "apple"</code></span></label>
 </div></li>
 </ol>
 </div>
@@ -627,7 +627,7 @@ Explanation
 </section>
 <section id="the-filter-function" class="level3" data-number="12.1.2">
 <h3 data-number="12.1.2" class="anchored" data-anchor-id="the-filter-function"><span class="header-section-number">12.1.2</span> The <code>filter()</code> function</h3>
-<p>Filtering in R with the tidyverse is straightforward. You can use the <code>filter()</code> function. <code>filter()</code> takes one or more statements that return <code>TRUE</code> or <code>FALSE</code>. A common use case is with logical operators. The following code filters the <code>status</code> column so that only the <code>extinct</code> status is included in the new data frame <code>extinct</code>. You’ll notice we are using the pipe <code>|&gt;</code> to transfer the data into the <code>filter()</code> function (you learned about the pipe in <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a>). The output of the filter function is assigned <code>&lt;-</code> to <code>extinct</code>. The flow might seem a bit counter-intuitive but you will get used to think like this when writing R code soon enough (although see the Go Deeper box on assignment direction)!</p>
+<p>Filtering in R with the tidyverse is straightforward. You can use the <code>filter()</code> function. <code>filter()</code> takes one or more statements that return <code>TRUE</code> or <code>FALSE</code>. A common use case is with logical operators. The following code filters the <code>status</code> column so that only the <code>extinct</code> status is included in the new data frame <code>extinct</code>. You’ll notice we are using the pipe <code>|&gt;</code> to transfer the data into the <code>filter()</code> function (you learned about the pipe in <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a>). The output of the filter function is assigned <code>&lt;-</code> to <code>extinct</code>. The flow might seem a bit counter-intuitive but you will get used to think like this when writing R code soon enough (although see the R Note box on assignment direction)!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>extinct <span class="ot">&lt;-</span> glot_status <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(status <span class="sc">==</span> <span class="st">"extinct"</span>)</span>
@@ -900,7 +900,7 @@ Figure&nbsp;12.1: Number of languages by endangerment status (repeated).
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Go Deeper: Assignment direction
+R Note: Assignment direction
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>

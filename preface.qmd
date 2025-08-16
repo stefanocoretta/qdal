@@ -45,9 +45,9 @@ Blue boxes contain quizzes, examples or summaries. The title in the box will spe
 :::
 
 ::: callout-important
-## Spotlight or solutions
+## R Note, Spotlight or solutions
 
-Red boxes called "Spotlight" focus on some topic briefly covered in the text which is important but doesn't quite fit in the narrative of the main text. Red boxes called "Solutions" are solutions to the exercises.
+Red boxes called "R Note" explain something about R or contain R tips that don't quite fit in the main text. Spotlight" boxes focus on statistical concepts, historical context or philosophy. Red boxes called "Solutions" are solutions to the exercises.
 :::
 
 The textbook will teach how to use R. R is a programming language, meaning that you will have to write code which is executed and the results are returned to (as output in the R Console, as plots, tables, so on). R code in-text will look like this: `"this is R code"`, while longer code chunks will look like this:

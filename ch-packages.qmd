@@ -30,7 +30,7 @@ You can check all of the currently installed packages in the bottom-right panel 
 :::
 
 ::: callout-important
-## Spotlight: Where is my R library?
+## R Note: Where is my R library?
 
 If you want to find the path of the R library on your computer, type `.libPaths()` in the Console. The function returns (i.e. outputs) the path or paths where your R library is.
 :::

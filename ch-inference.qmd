@@ -44,7 +44,7 @@ cat("d. You can collect the same sample multiple times.", torf(FALSE))
 :::
 
 ::: {.callout-important collapse="true"}
-#### Go Deeper: Science is wrong
+#### Spotlight: Science is wrong
 
 -   Check out the Scientific American article *If You Say 'Science Is Right,' You're Wrong* by Naomi Oreskes: <https://www.scientificamerican.com/article/if-you-say-science-is-right-youre-wrong/>.
 -   Learn more about uncertainty and subjectivity in research: @vasishth2021, @gelman2017.

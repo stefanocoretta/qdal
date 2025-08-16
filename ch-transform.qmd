@@ -128,7 +128,7 @@ You can use these logical operators with `filter()` to filter rows that match wi
 
 ### The `filter()` function
 
-Filtering in R with the tidyverse is straightforward. You can use the `filter()` function. `filter()` takes one or more statements that return `TRUE` or `FALSE`. A common use case is with logical operators. The following code filters the `status` column so that only the `extinct` status is included in the new data frame `extinct`. You'll notice we are using the pipe `|>` to transfer the data into the `filter()` function (you learned about the pipe in @sec-summarise). The output of the filter function is assigned `<-` to `extinct`. The flow might seem a bit counter-intuitive but you will get used to think like this when writing R code soon enough (although see the Go Deeper box on assignment direction)!
+Filtering in R with the tidyverse is straightforward. You can use the `filter()` function. `filter()` takes one or more statements that return `TRUE` or `FALSE`. A common use case is with logical operators. The following code filters the `status` column so that only the `extinct` status is included in the new data frame `extinct`. You'll notice we are using the pipe `|>` to transfer the data into the `filter()` function (you learned about the pipe in @sec-summarise). The output of the filter function is assigned `<-` to `extinct`. The flow might seem a bit counter-intuitive but you will get used to think like this when writing R code soon enough (although see the R Note box on assignment direction)!
 
 ```{r}
 #| label: extinct
@@ -345,7 +345,7 @@ glot_status |>
 ```
 
 ::: {.callout-important collapse="true"}
-## Go Deeper: Assignment direction
+## R Note: Assignment direction
 
 XXX
 :::

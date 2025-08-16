@@ -279,7 +279,7 @@ The code says:
 
 -   Summarise the grouped data with `summarise()`.
 
-Hopefully this just makes sense, but check the Go Deeper box below if you want more details.
+Hopefully this just makes sense, but check the R Note box below if you want more details.
 
 `group_by()` can group according to more than one column, by listing the columns separated by commas (like `group_by(Col1, Col2, Col3)`). When you list more than one column, the grouping is fully crossed: you get a group for each combination of the grouping columns. Try to group the data by `Group` and `Word_Nonword` and get summary measures.
 
@@ -335,7 +335,7 @@ Get the number of languages by status and `Macroarea`.
 :::
 
 ::: {.callout-important collapse="true"}
-### Go Deeper: Piping
+### R Note: Piping
 
 With the release of **R 4.1.0**, a new feature was introduced to the base language that has significantly improved the readability and expressiveness of R code: the **native pipe operator**, written as `|>`. The native pipe allows the result of one expression to be passed automatically as the **first argument** to another function. This simple idea has a profound impact on how we write R code, particularly when we are performing a sequence of data transformations.
 

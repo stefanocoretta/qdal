@@ -94,8 +94,6 @@ mean(c(0.32, 2.58, 1.5, 0.12, 1.09))
 ```
 
 ::: callout-important
-### Go Deeper
-
 **Don't take the mean of proportions and percentages!**
 
 Better to calculate the proportion/percentage across the entire data, rather than take the mean of individual proportions/percentages: see [this blog post](https://www.robertoreif.com/blog/2018/1/7/why-you-should-be-careful-when-averaging-percentages). If you really really have to, use the *median*.
@@ -118,8 +116,6 @@ mean(c(6, 7))
 ```
 
 ::: callout-important
-### Go Deeper
-
 There are two important characteristics of the mean and the median:
 
 -   **The mean is very sensitive to outliers.**
@@ -159,8 +155,6 @@ table(c("red", "red", "blue", "yellow", "blue", "green", "red", "yellow"))
 The mode is the most frequent value: here it is `red`, with 3 occurrences.
 
 ::: callout-important
-### Go Deeper
-
 **Likert scales are ordinal (categorical) variables, so the mean and median are not appropriate!** This is true even when Likert scales are represented with numbers, like "1, 2, 3, 4, 5" for a 5-point scale.
 
 You should use the mode (you can use the median with Likert scales if you really really need to...).
@@ -216,8 +210,6 @@ sd(c(0.32, 2.58, 1.5, 0.12, 1.09))
 ```
 
 ::: callout-important
-### Go Deeper
-
 Standard deviations are **relative** and depend on the measurement **unit/scale!**
 
 **Don't use the standard deviation with proportions and percentages!**
