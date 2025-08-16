@@ -448,7 +448,8 @@ div.csl-indent {
    
   <ul>
   <li><a href="#quantitative-data-analysis" id="toc-quantitative-data-analysis" class="nav-link active" data-scroll-target="#quantitative-data-analysis"><span class="header-section-number">3.1</span> Quantitative data analysis</a></li>
-  <li><a href="#numbers-have-no-meaning" id="toc-numbers-have-no-meaning" class="nav-link" data-scroll-target="#numbers-have-no-meaning"><span class="header-section-number">3.2</span> Numbers have no meaning</a></li>
+  <li><a href="#the-computational-workflow" id="toc-the-computational-workflow" class="nav-link" data-scroll-target="#the-computational-workflow"><span class="header-section-number">3.2</span> The computational workflow</a></li>
+  <li><a href="#numbers-have-no-meaning" id="toc-numbers-have-no-meaning" class="nav-link" data-scroll-target="#numbers-have-no-meaning"><span class="header-section-number">3.3</span> Numbers have no meaning</a></li>
   </ul>
 </nav>
     </div>
@@ -498,9 +499,24 @@ div.csl-indent {
 <p><strong>Plots</strong>, or graphs, are another common way to summarise data but they are based on visual representation rather than single numbers. As the saying goes, “<a href="https://en.wikipedia.org/wiki/A_picture_is_worth_a_thousand_words">a picture is worth a thousand words</a>”. The aim of plots is to make explicit certain patterns in the data. Choosing and designing plots that are effective and captivating is more of an art and you will learn the basics and heuristics of good (and bad plots) in <a href="ch-viz-principles.html" class="quarto-xref"><span>Chapter 13</span></a>.</p>
 <p><strong>Statistical models</strong> are mathematical representations of patterns and relationship in data. Statistical modelling is a powerful tool to learn from the data or to assess research hypotheses. This textbook introduces you to a specific type of statistical models: regression models. These are highly flexible model that can be used with a variety of data types. You will start learning about statistical models in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 21</span></a>.</p>
 </section>
-<section id="numbers-have-no-meaning" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="numbers-have-no-meaning"><span class="header-section-number">3.2</span> Numbers have no meaning</h2>
-<p>As mentioned earlier, both qualitative and quantitative approaches are valid and necessary to improve our understanding of things. Moreover, even a very complex quantitative analysis will always contain some qualitative aspects.</p>
+<section id="the-computational-workflow" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="the-computational-workflow"><span class="header-section-number">3.2</span> The computational workflow</h2>
+<div id="fig-whole-game" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-whole-game-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/whole-game.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-whole-game-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: An overview of the computational workflow of quantitative data analysis from <span class="citation" data-cites="wickham2023">Wickham, Çetinkaya-Rundel, and Grolemund (<a href="references.html#ref-wickham2023" role="doc-biblioref">2023</a>)</span>. CC BY-NC-ND 3.0
+</figcaption>
+</figure>
+</div>
+<p>Another way to look at quantitative data analysis is through its computational workflow. <a href="#fig-whole-game" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> shows a typical workflow <span class="citation" data-cites="wickham2023">(<a href="references.html#ref-wickham2023" role="doc-biblioref">Wickham, Çetinkaya-Rundel, and Grolemund 2023</a>)</span>: you <strong>import</strong> data, you <strong>tidy</strong> data up (i.e.&nbsp;you reshape the data so that it is easy to work with), you <strong>transform</strong> it (i.e., you filter observations, change existing columns or create new ones, obtain summary measures and join data together), <strong>visualise</strong> it, apply statistical <strong>models</strong> and the <strong>communicate</strong> what you learned. Very often, transforming, visualising and modelling data is done iteratively, that is why these steps are shown in a loop in <a href="#fig-whole-game" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>, and together they form the “understanding” part of the process. Through the transform-visualise-model cycle, you understand things about the data. All of the steps in <a href="#fig-whole-game" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> are surrounded by <strong>program</strong>: this is “computational programming”, in other words using the computer to execute those steps.</p>
+<p>You will learn the basics of how to import (aka read) data in <a href="ch-read-data.html" class="quarto-xref"><span>Chapter 9</span></a>, transform it in <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a> and <a href="ch-transform.html" class="quarto-xref"><span>Chapter 12</span></a>, visualise it in <a href="ch-viz-principles.html" class="quarto-xref"><span>Chapter 13</span></a> and <a href="ch-plotting.html" class="quarto-xref"><span>Chapter 15</span></a>, and model it from <a href="ch-gauss-model.html" class="quarto-xref"><span>Chapter 19</span></a> onwards. However, you will find bits from any of these steps in many other chapters, so that you won’t have to learn everything at once.</p>
+</section>
+<section id="numbers-have-no-meaning" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="numbers-have-no-meaning"><span class="header-section-number">3.3</span> Numbers have no meaning</h2>
+<p>Finally, I should mention a more philosophical aspect of quantitative data analysis. As said above, both qualitative and quantitative approaches are valid and necessary to improve our understanding of things. Crucially, even a very complex quantitative analysis will always contain some qualitative aspects to it.</p>
 <div class="callout callout-style-simple callout-important no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -512,15 +528,21 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>There’s a lot of wisdom in that quote. Numbers do not mean anything by themselves. We need to interpret numbers, “imbue them with meaning”, based on many aspects of research and beyond, including our own identity and positionality <span class="citation" data-cites="jafar2018 darwinholmes2020">(<a href="references.html#ref-jafar2018" role="doc-biblioref">Jafar 2018</a>; <a href="references.html#ref-darwinholmes2020" role="doc-biblioref">Darwin Holmes 2020</a>)</span>.</p>
+<p>There’s a lot of wisdom in that quote. Numbers do not mean anything by themselves. We need to interpret numbers, “imbue them with meaning”, based on many aspects of research and beyond, including our own identity and positionality <span class="citation" data-cites="jafar2018 darwinholmes2020">(<a href="references.html#ref-jafar2018" role="doc-biblioref">Jafar 2018</a>; <a href="references.html#ref-darwinholmes2020" role="doc-biblioref">Darwin Holmes 2020</a>)</span>. <span class="citation" data-cites="gelman2017">Gelman and Hennig (<a href="references.html#ref-gelman2017" role="doc-biblioref">2017</a>)</span> highlight how we should move away from concepts of “objectivity” and “subjectivity” as applied to statistics, and instead propose a broader collection of “virtues”. They say: “Instead of debating over whether a given statistical method is subjective or objective (or normatively debating the relative merits of subjectivity and objectivity in statistical practice), we can recognize attributes such as transparency and acknowledgement of multiple perspectives as complementary” <span class="citation" data-cites="gelman2017">(<a href="references.html#ref-gelman2017" role="doc-biblioref">Gelman and Hennig 2017, 973</a>)</span>. The philosophical backdrop of this textbook (and its author) very much embody this sentiment.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-darwinholmes2020" class="csl-entry" role="listitem">
 Darwin Holmes, Andrew Gary. 2020. <span>“Researcher Positionality: A Consideration of Its Influence and Place in Qualitative Research<span></span>a New Researcher Guide.”</span> <em>Shanlax International Journal of Education</em> 8 (4): 110. <a href="https://doi.org/10.34293/education.v8i4.3232">https://doi.org/10.34293/education.v8i4.3232</a>.
 </div>
+<div id="ref-gelman2017" class="csl-entry" role="listitem">
+Gelman, Andrew, and Christian Hennig. 2017. <span>“Beyond Subjective and Objective in Statistics.”</span> <em>Journal of the Royal Statistical Society: Series A (Statistics in Society)</em> 180 (4): 9671033. <a href="https://doi.org/10.1111/rssa.12276">https://doi.org/10.1111/rssa.12276</a>.
+</div>
 <div id="ref-jafar2018" class="csl-entry" role="listitem">
 Jafar, Anisa J. N. 2018. <span>“What Is Positionality and Should It Be Expressed in Quantitative Studies?”</span> <em>Emergency Medicine Journal</em>. <a href="https://doi.org/10.1136/emermed-2017-207158">https://doi.org/10.1136/emermed-2017-207158</a>.
+</div>
+<div id="ref-wickham2023" class="csl-entry" role="listitem">
+Wickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023. <em>R for Data Science (2e)</em>. Second edition. <a href="https://r4ds.hadley.nz">https://r4ds.hadley.nz</a>.
 </div>
 </div>
 </section>

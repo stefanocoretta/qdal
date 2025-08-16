@@ -36,9 +36,17 @@ Quantitative analyses are usually comprised of three parts (these are not strict
 
 **Statistical models** are mathematical representations of patterns and relationship in data. Statistical modelling is a powerful tool to learn from the data or to assess research hypotheses. This textbook introduces you to a specific type of statistical models: regression models. These are highly flexible model that can be used with a variety of data types. You will start learning about statistical models in @sec-reg-intro.
 
+## The computational workflow
+
+![An overview of the computational workflow of quantitative data analysis from @wickham2023. CC BY-NC-ND 3.0](img/whole-game.png){#fig-whole-game fig-align="center"}
+
+Another way to look at quantitative data analysis is through its computational workflow. @fig-whole-game shows a typical workflow [@wickham2023]: you **import** data, you **tidy** data up (i.e. you reshape the data so that it is easy to work with), you **transform** it (i.e., you filter observations, change existing columns or create new ones, obtain summary measures and join data together), **visualise** it, apply statistical **models** and the **communicate** what you learned. Very often, transforming, visualising and modelling data is done iteratively, that is why these steps are shown in a loop in @fig-whole-game, and together they form the "understanding" part of the process. Through the transform-visualise-model cycle, you understand things about the data. All of the steps in @fig-whole-game are surrounded by **program**: this is "computational programming", in other words using the computer to execute those steps.
+
+You will learn the basics of how to import (aka read) data in @sec-read-data, transform it in @sec-summarise and @sec-transform, visualise it in @sec-viz and @sec-plotting, and model it from @sec-gauss-model onwards. However, you will find bits from any of these steps in many other chapters, so that you won't have to learn everything at once.
+
 ## Numbers have no meaning
 
-As mentioned earlier, both qualitative and quantitative approaches are valid and necessary to improve our understanding of things. Moreover, even a very complex quantitative analysis will always contain some qualitative aspects.
+Finally, I should mention a more philosophical aspect of quantitative data analysis. As said above, both qualitative and quantitative approaches are valid and necessary to improve our understanding of things. Crucially, even a very complex quantitative analysis will always contain some qualitative aspects to it.
 
 ::: {.callout-important appearance="simple"}
 The numbers have no way of speaking for themselves. We speak for them. We imbue them with meaning.
@@ -46,4 +54,4 @@ The numbers have no way of speaking for themselves. We speak for them. We imbue 
 —Nate Silver, *The Signal and the Noise*
 :::
 
-There's a lot of wisdom in that quote. Numbers do not mean anything by themselves. We need to interpret numbers, "imbue them with meaning", based on many aspects of research and beyond, including our own identity and positionality [@jafar2018; @darwinholmes2020].
+There's a lot of wisdom in that quote. Numbers do not mean anything by themselves. We need to interpret numbers, "imbue them with meaning", based on many aspects of research and beyond, including our own identity and positionality [@jafar2018; @darwinholmes2020]. @gelman2017 highlight how we should move away from concepts of "objectivity" and "subjectivity" as applied to statistics, and instead propose a broader collection of "virtues". They say: "Instead of debating over whether a given statistical method is subjective or objective (or normatively debating the relative merits of subjectivity and objectivity in statistical practice), we can recognize attributes such as transparency and acknowledgement of multiple perspectives as complementary" [@gelman2017, p. 973]. The philosophical backdrop of this textbook (and its author) very much embody this sentiment.
