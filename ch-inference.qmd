@@ -13,7 +13,7 @@ library(webexercises)
 
 Imbuing numbers with meaning is a good characterisation of the **inference process**. Here is how it works. We have a question about something. Let's imagine that this something is the population of British Sign Language signers. We want to know whether the cultural background of the BSL signers is linked to different pragmatic uses of the sign for BROTHER. But we *can't survey the entire population* of BSL signers. So instead of surveying *all* BSL users, we take a **sample** from the BSL population. The sample is our data (the product of our study or observation). Now, how do we go from data/observation to answering our question about the use of BROTHER? We can use the inference process!
 
-::: callout-note
+::: callout-tip
 #### Inference process
 
 **Inference** is the process of understanding something about a population based on the sample (aka the data) taken from that population.
@@ -177,11 +177,11 @@ cat("Three researchers meet at a coffee shop. Each of them tells the other two a
 ::: callout-note
 ### Summary
 
-- Inference is the process of learning something about a population through a sample.
+-   Inference is the process of learning something about a population through a sample.
 
-- Uncertainty in each observation and variability across observations affect the inference process.
+-   Uncertainty in each observation and variability across observations affect the inference process.
 
-- Statistics is a tool to quantify uncertainty and variability.
+-   Statistics is a tool to quantify uncertainty and variability.
 
-- The (Bayesian) New Statistics is an approach to statistics that highlights the subjective nature of statistics and stressed the importance of estimation over statistical significance.
+-   The (Bayesian) New Statistics is an approach to statistics that highlights the subjective nature of statistics and stressed the importance of estimation over statistical significance.
 :::
