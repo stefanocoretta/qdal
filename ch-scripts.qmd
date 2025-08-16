@@ -1,4 +1,4 @@
-# R scripts  {#sec-scripts}
+# R scripts {#sec-scripts}
 
 ![](https://img.shields.io/badge/Area-R-green)
 

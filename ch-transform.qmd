@@ -12,15 +12,7 @@ library(webexercises)
 
 ## Filter rows
 
-Filtering is normally used to filter rows in the data according to specific criteria: in other words, keep certain rows and drop others. Filtering data couldn't be easier with `filter()`, from the [dplyr](https://dplyr.tidyverse.org) package (one of the tidyverse core packages), Let's work with the `coretta2022/glot_status.rds` data. Below you can find a preview of the data.
-
-::: callout-warning
-### Exercise 1
-
--   Create a new R script called `week-03.R` and save it in `code/`.
-
--   Read the `coretta2022/glot_status.rds` data.
-:::
+Filtering is normally used to filter rows in the data according to specific criteria: in other words, keep certain rows and drop others. Filtering data couldn't be easier with `filter()`, from the [dplyr](https://dplyr.tidyverse.org) package (one of the tidyverse core packages), Let's work with the `coretta2022/glot_status.rds` data. Below you can find a preview of the data. Create a new R script called `week-03.R` and save it in `code/`. Read the `coretta2022/glot_status.rds` data.
 
 ```{r}
 #| label: glot-status
@@ -172,7 +164,7 @@ If you don't assign the output of `filter()` to a variable (like in `south_ameri
 :::
 
 ::: callout-warning
-### Exercise 2
+### Exercise 1
 
 Filter the `glot_status` data so that you include only `not_endangered` languages from all macro-areas except `Eurasia`.
 :::
@@ -220,7 +212,7 @@ Try to understand what is going on in the code above before moving on.
 Now we can filter `glot_status` to include only the macro-areas of the Global South and only languages that are either "threatened", "shifting", "moribund" or "nearly_extinct".
 
 ::: callout-warning
-### Exercise 3
+### Exercise 2
 
 Filter `glot_status` to include only the macro-areas (`Macroarea`) of the Global South and only languages that are either "threatened", "shifting", "moribund" or "nearly_extinct". I have started the code for you, you just need to write the line for filtering `status`.
 
@@ -335,7 +327,7 @@ levels(glot_status$Status)
 You see that now the order of the levels returned by `levels()` is the one we specified. Transforming character columns to vector columns is helpful to specify a particular order of the levels which can then be used when summarising, counting or plotting.
 
 ::: callout-warning
-### Exercise 4
+### Exercise 3
 
 Use `count()` again with the new factor `Status` column.
 :::

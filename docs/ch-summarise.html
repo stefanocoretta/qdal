@@ -688,12 +688,12 @@ Quiz 1
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>What does the <code>na.rm</code> argument of <code>mean()</code> do?
-<div id="radio_CAJTTJBIER" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CAJTTJBIER" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_CAJTTJBIER" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_CAJTTJBIER" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
+<div id="radio_IULDIOXKAG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IULDIOXKAG" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_IULDIOXKAG" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_IULDIOXKAG" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
 </div></li>
 <li>Which is the mean of <code>c(4, 23, NA, 5)</code> when <code>na.rm</code> has the default value?
-<div id="radio_JWLOTEHDON" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JWLOTEHDON" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_JWLOTEHDON" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_JWLOTEHDON" value=""> <span><code>10.66</code>.</span></label>
+<div id="radio_XSOPLZQEUZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XSOPLZQEUZ" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_XSOPLZQEUZ" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_XSOPLZQEUZ" value=""> <span><code>10.66</code>.</span></label>
 </div></li>
 </ol>
 </div>
@@ -854,20 +854,7 @@ Hint
 </section>
 <section id="counting-observations" class="level2" data-number="11.4">
 <h2 data-number="11.4" class="anchored" data-anchor-id="counting-observations"><span class="header-section-number">11.4</span> Counting observations</h2>
-<p>If you want to count observations you can use the <code>summarise()</code> function with <code>n()</code>, another dplyr function that returns the group size. For example, let’s count the number of languages by their endangerment status. The data in <code>coretta2022/glot_status.rds</code> contains the endangerment status for 7,845 languages from <a href="https://glottolog.org">Glottolog</a>. There are thousands of languages in the world, but most of them are losing speakers, and some are already no longer spoken. The column <code>status</code> contains the endangerment status of a language in the data, on a scale from <code>not endangered</code> (languages with large populations of speakers) through <code>threatened</code>, <code>shifting</code> and <code>nearly extinct</code>, to <code>extinct</code> (languages that have no living speakers left). Read the data and check it out.</p>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Task 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Read <code>coretta2022/glot_status.rds</code>.</p>
-</div>
-</div>
+<p>If you want to count observations you can use the <code>summarise()</code> function with <code>n()</code>, another dplyr function that returns the group size. For example, let’s count the number of languages by their endangerment status. The data in <code>coretta2022/glot_status.rds</code> contains the endangerment status for 7,845 languages from <a href="https://glottolog.org">Glottolog</a>. There are thousands of languages in the world, but most of them are losing speakers, and some are already no longer spoken. The column <code>status</code> contains the endangerment status of a language in the data, on a scale from <code>not endangered</code> (languages with large populations of speakers) through <code>threatened</code>, <code>shifting</code> and <code>nearly extinct</code>, to <code>extinct</code> (languages that have no living speakers left). Read the <code>coretta2022/glot_status.rds</code> data and check it out.</p>
 <p>To count the number of languages by status, we group the data by <code>status</code> and we summarise with <code>n()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">|&gt;</span> </span>
@@ -907,7 +894,7 @@ Exercise 5
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -916,7 +903,7 @@ Go Deeper: Piping
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>With the release of <strong>R 4.1.0</strong>, a new feature was introduced to the base language that has significantly improved the readability and expressiveness of R code: the <strong>native pipe operator</strong>, written as <code>|&gt;</code>. The native pipe allows the result of one expression to be passed automatically as the <strong>first argument</strong> to another function. This simple idea has a profound impact on how we write R code, particularly when we are performing a sequence of data transformations.</p>
 <p>Before the native pipe, it was common to see deeply nested function calls that could be difficult to read and reason about. For example, consider the task of computing the square root of the sum of a vector:</p>

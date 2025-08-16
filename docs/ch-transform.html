@@ -499,23 +499,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Data transformation</strong> is a fundamental aspect of data analysis. After the data you need to use is imported into R, you will often have to filter rows, create new columns, summarise data or join data frames, among many other transformation operations. In <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a> you have already learned about summarising data, and in this chapter you will learn how to use <code>filter()</code> to filter the data and <code>mutate()</code> to mutate or create new columns.</p>
 <section id="filter-rows" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="filter-rows"><span class="header-section-number">12.1</span> Filter rows</h2>
-<p>Filtering is normally used to filter rows in the data according to specific criteria: in other words, keep certain rows and drop others. Filtering data couldn’t be easier with <code>filter()</code>, from the <a href="https://dplyr.tidyverse.org">dplyr</a> package (one of the tidyverse core packages), Let’s work with the <code>coretta2022/glot_status.rds</code> data. Below you can find a preview of the data.</p>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><p>Create a new R script called <code>week-03.R</code> and save it in <code>code/</code>.</p></li>
-<li><p>Read the <code>coretta2022/glot_status.rds</code> data.</p></li>
-</ul>
-</div>
-</div>
+<p>Filtering is normally used to filter rows in the data according to specific criteria: in other words, keep certain rows and drop others. Filtering data couldn’t be easier with <code>filter()</code>, from the <a href="https://dplyr.tidyverse.org">dplyr</a> package (one of the tidyverse core packages), Let’s work with the <code>coretta2022/glot_status.rds</code> data. Below you can find a preview of the data. Create a new R script called <code>week-03.R</code> and save it in <code>code/</code>. Read the <code>coretta2022/glot_status.rds</code> data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>glot_status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -591,18 +575,18 @@ Quiz 1
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>Which of the following does not contain a logical operator?
-<div id="radio_QUXDIGINCO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QUXDIGINCO" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_QUXDIGINCO" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_QUXDIGINCO" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_QUXDIGINCO" value=""> <span><code>19 &lt; 2</code></span></label>
+<div id="radio_HYUXOGEZYK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HYUXOGEZYK" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_HYUXOGEZYK" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_HYUXOGEZYK" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_HYUXOGEZYK" value=""> <span><code>19 &lt; 2</code></span></label>
 </div></li>
 <li>Which of the following returns <code>c(FALSE, TRUE)</code>?
-<div id="radio_EKCWHAMRAJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EKCWHAMRAJ" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_EKCWHAMRAJ" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_EKCWHAMRAJ" value=""> <span><code>"apple" != "apple"</code></span></label>
+<div id="radio_VDBZXJOKMR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VDBZXJOKMR" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_VDBZXJOKMR" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_VDBZXJOKMR" value=""> <span><code>"apple" != "apple"</code></span></label>
 </div></li>
 </ol>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -611,7 +595,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>1a.</strong></p>
 <p>Check for errors in the logical operators.</p>
@@ -621,7 +605,7 @@ Hint
 </div>
 </div>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -630,7 +614,7 @@ Explanation
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>1a.</strong></p>
 <p>The logical operator <code>==</code> has TWO equal signs. A single equal sign <code>=</code> is an alternative way of writing the assignment operator <code>&lt;-</code>, so that <code>a = 1</code> and <code>a &lt;- 1</code> are equivalent.</p>
@@ -687,7 +671,7 @@ Important
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 2
+Exercise 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -748,7 +732,7 @@ Exercise 2
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 3
+Exercise 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -764,7 +748,7 @@ Exercise 3
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -773,7 +757,7 @@ Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>global_south <span class="ot">&lt;-</span> glot_status <span class="sc">|&gt;</span></span>
@@ -882,7 +866,7 @@ Factor vector
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 4
+Exercise 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -911,7 +895,7 @@ Figure&nbsp;12.1: Number of languages by endangerment status (repeated).
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -920,7 +904,7 @@ Go Deeper: Assignment direction
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>XXX</p>
 </div>

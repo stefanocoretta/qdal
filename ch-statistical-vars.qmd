@@ -1,4 +1,4 @@
-# Statistical variables  {#sec-stat-vars}
+# Statistical variables {#sec-stat-vars}
 
 ![](https://img.shields.io/badge/Area-Statistics-red)
 
