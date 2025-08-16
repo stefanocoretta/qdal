@@ -12,7 +12,7 @@ library(webexercises)
 
 ## Filter rows
 
-Filtering is normally used to filter rows in the data according to specific criteria: in other words, keep certain rows and drop others. Filtering data couldn't be easier with `filter()`, from the [dplyr](https://dplyr.tidyverse.org) package (one of the tidyverse core packages), Let's work with the `coretta2022/glot_status.rds` data.
+Filtering is normally used to filter rows in the data according to specific criteria: in other words, keep certain rows and drop others. Filtering data couldn't be easier with `filter()`, from the [dplyr](https://dplyr.tidyverse.org) package (one of the tidyverse core packages), Let's work with the `coretta2022/glot_status.rds` data. Below you can find a preview of the data.
 
 ::: callout-warning
 ### Exercise 1
@@ -21,8 +21,6 @@ Filtering is normally used to filter rows in the data according to specific crit
 
 -   Read the `coretta2022/glot_status.rds` data.
 :::
-
-The `glot_status` data frame contains the endangerment status for 7,845 languages from [Glottolog](https://glottolog.org). There are thousands of languages in the world, but most of them are losing speakers, and some are already no longer spoken. The column `status` contains the endangerment status of a language in the data, on a scale from `not endangered` (languages with large populations of speakers) through `threatened`, `shifting` and `nearly extinct`, to `extinct` (languages that have no living speakers left). Here's a preview.
 
 ```{r}
 #| label: glot-status
@@ -284,7 +282,7 @@ glot_status <- glot_status |>
 
 If you check `glot_status` now you will find that a new column, `Status`, has been added. This column is a character column (`chr`). You see that, as with `filter()`, you have to assign the output of `mutate()` to a variable. In the code above we are re-assigning the output to the `glot_status` variable which we started with. This means that we are *overwriting* the original `glot_status`. However, since we have added a new column, we have in practice only added the new column to the old data. If you use the name of an existing column, you will be effectively overwriting that column, so you must be careful with `mutate()`.
 
-Let's count the number of languages for each endangerment status using the new `Status` column. The dplyr package comes with a `count()` function and you can combine this with `group_by()`, as we did with `summarise()`, to get the number or rows based on the labels in one or more columns.
+Let's count the number of languages for each endangerment status using the new `Status` column. You learned about the `count()` feature in @sec-summarise.
 
 ```{r}
 #| label: count

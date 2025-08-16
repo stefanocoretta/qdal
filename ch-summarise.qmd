@@ -295,6 +295,51 @@ Group `shallow` by `Group` and `Word_Nonword` and get summary measures of RTs. U
 `group_by(Group, Word_Nonword)`
 :::
 
+## Counting observations
+
+If you want to count observations you can use the `summarise()` function with `n()`, another dplyr function that returns the group size. For example, let's count the number of languages by their endangerment status. The data in `coretta2022/glot_status.rds` contains the endangerment status for 7,845 languages from [Glottolog](https://glottolog.org). There are thousands of languages in the world, but most of them are losing speakers, and some are already no longer spoken. The column `status` contains the endangerment status of a language in the data, on a scale from `not endangered` (languages with large populations of speakers) through `threatened`, `shifting` and `nearly extinct`, to `extinct` (languages that have no living speakers left). Read the data and check it out.
+
+::: callout-important
+### Exercise 5
+
+Read `coretta2022/glot_status.rds`.
+:::
+
+```{r}
+#| label: glot-status
+#| echo: false
+
+glot_status <- readRDS("data/coretta2022/glot_status.rds")
+
+```
+
+To count the number of languages by status, we group the data by `status` and we summarise with `n()`.
+
+```{r}
+#| label: glot-n
+
+glot_status |> 
+  group_by(status) |> 
+  summarise(n = n())
+
+```
+
+This approach works. However, dplyr offers a more compact way to get counts with the `count()` function! You can think of this function as a `group_by/summarise` combo. You list the columns you want to group by as arguments to `count()` and the output gives you a column `n` with the counts. It works with a single column or more than one, like `group_by()`.
+
+```{r}
+#| label: glot-count
+
+glot_status |> 
+  count(status)
+
+```
+
+::: callout-important
+### Exercise 6
+
+Get the number of languages by status and `Macroarea`.
+:::
+
 ::: {.callout-important collapse="true"}
 ### Go Deeper: Piping
 

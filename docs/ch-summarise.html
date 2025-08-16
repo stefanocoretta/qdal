@@ -490,6 +490,7 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#what-the-pipe" id="toc-what-the-pipe" class="nav-link" data-scroll-target="#what-the-pipe"><span class="header-section-number">11.3.1</span> What the pipe!?</a></li>
   </ul></li>
+  <li><a href="#counting-observations" id="toc-counting-observations" class="nav-link" data-scroll-target="#counting-observations"><span class="header-section-number">11.4</span> Counting observations</a></li>
   </ul>
 </nav>
     </div>
@@ -687,12 +688,12 @@ Quiz 1
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>What does the <code>na.rm</code> argument of <code>mean()</code> do?
-<div id="radio_TEKKHYKBML" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TEKKHYKBML" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_TEKKHYKBML" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_TEKKHYKBML" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
+<div id="radio_CQPYSOKINX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CQPYSOKINX" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_CQPYSOKINX" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_CQPYSOKINX" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
 </div></li>
 <li>Which is the mean of <code>c(4, 23, NA, 5)</code> when <code>na.rm</code> has the default value?
-<div id="radio_PPEMPKYMXG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PPEMPKYMXG" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_PPEMPKYMXG" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_PPEMPKYMXG" value=""> <span><code>10.66</code>.</span></label>
+<div id="radio_HAWAHTUDYW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HAWAHTUDYW" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_HAWAHTUDYW" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_HAWAHTUDYW" value=""> <span><code>10.66</code>.</span></label>
 </div></li>
 </ol>
 </div>
@@ -849,8 +850,64 @@ Hint
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="counting-observations" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="counting-observations"><span class="header-section-number">11.4</span> Counting observations</h2>
+<p>If you want to count observations you can use the <code>summarise()</code> function with <code>n()</code>, another dplyr function that returns the group size. For example, let’s count the number of languages by their endangerment status. The data in <code>coretta2022/glot_status.rds</code> contains the endangerment status for 7,845 languages from <a href="https://glottolog.org">Glottolog</a>. There are thousands of languages in the world, but most of them are losing speakers, and some are already no longer spoken. The column <code>status</code> contains the endangerment status of a language in the data, on a scale from <code>not endangered</code> (languages with large populations of speakers) through <code>threatened</code>, <code>shifting</code> and <code>nearly extinct</code>, to <code>extinct</code> (languages that have no living speakers left). Read the data and check it out.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Read <code>coretta2022/glot_status.rds</code>.</p>
+</div>
+</div>
+<p>To count the number of languages by status, we group the data by <code>status</code> and we summarise with <code>n()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">|&gt;</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(status) <span class="sc">|&gt;</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["status"],"name":[1],"type":["fct"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"not_endangered","2":"2956"},{"1":"threatened","2":"1537"},{"1":"shifting","2":"1837"},{"1":"moribund","2":"414"},{"1":"nearly_extinct","2":"351"},{"1":"extinct","2":"1250"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>This approach works. However, dplyr offers a more compact way to get counts with the <code>count()</code> function! You can think of this function as a <code>group_by/summarise</code> combo. You list the columns you want to group by as arguments to <code>count()</code> and the output gives you a column <code>n</code> with the counts. It works with a single column or more than one, like <code>group_by()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">|&gt;</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(status)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["status"],"name":[1],"type":["fct"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"not_endangered","2":"2956"},{"1":"threatened","2":"1537"},{"1":"shifting","2":"1837"},{"1":"moribund","2":"414"},{"1":"nearly_extinct","2":"351"},{"1":"extinct","2":"1250"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Get the number of languages by status and <code>Macroarea</code>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -859,21 +916,21 @@ Go Deeper: Piping
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>With the release of <strong>R 4.1.0</strong>, a new feature was introduced to the base language that has significantly improved the readability and expressiveness of R code: the <strong>native pipe operator</strong>, written as <code>|&gt;</code>. The native pipe allows the result of one expression to be passed automatically as the <strong>first argument</strong> to another function. This simple idea has a profound impact on how we write R code, particularly when we are performing a sequence of data transformations.</p>
 <p>Before the native pipe, it was common to see deeply nested function calls that could be difficult to read and reason about. For example, consider the task of computing the square root of the sum of a vector:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="fu">sum</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>While this is relatively simple, as functions become more complex and more transformations are chained together, nested calls quickly become cumbersome. The native pipe solves this by allowing you to write each operation in a <strong>left-to-right, stepwise manner</strong>, which mirrors the logical flow of data. The key principle of the native pipe is that the <strong>left-hand side (LHS) is evaluated first</strong>, and its result is automatically passed as the <strong>first argument</strong> to the right-hand side (RHS). This means that for a simple pipe like:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">|&gt;</span> <span class="fu">f</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">|&gt;</span> <span class="fu">f</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>it is equivalent to writing:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This principle is important because it defines the natural behavior of the pipe: whatever computation you produce on the LHS will be injected as the first input to the next function. Consider the <code>mtcars</code> dataset, which is built into R. Suppose we want to compute the average miles per gallon (<code>mpg</code>) for each number of cylinders (<code>cyl</code>). Using the native pipe in combination with <code>tidyverse</code> functions, the code is straightforward and highly readable:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">|&gt;</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_mpg =</span> <span class="fu">mean</span>(mpg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">|&gt;</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_mpg =</span> <span class="fu">mean</span>(mpg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s break this down:</p>
 <ol type="1">
 <li>The <code>mtcars</code> dataset is the left-hand side. It is evaluated first and becomes the input for the next function.</li>
@@ -884,11 +941,11 @@ Go Deeper: Piping
 <section id="comparison-with-the-magrittr-pipe" class="level4 unnumbered">
 <h4 class="unnumbered anchored" data-anchor-id="comparison-with-the-magrittr-pipe">Comparison with the <code>magrittr</code> pipe (<code>%&gt;%</code>)</h4>
 <p>Before R introduced the native pipe, the <code>magrittr</code> package popularized piping with the <code>%&gt;%</code> operator. Functionally, it achieves a very similar goal: passing the result of one expression to another function. For example, the earlier <code>group_by</code> and <code>summarise</code> operation can be written with <code>magrittr</code> as:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_mpg =</span> <span class="fu">mean</span>(mpg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(cyl) <span class="sc">%&gt;%</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_mpg =</span> <span class="fu">mean</span>(mpg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Some differences between the native pipe and <code>magrittr</code>:</p>
 <ol type="1">
 <li>The native pipe is built into base R, so no external package is required.</li>
@@ -908,7 +965,6 @@ Go Deeper: Piping
 Song, Yoonsang, Youngah Do, Arthur L. Thompson, Eileen R. Waegemaekers, and Jongbong Lee. 2020. <span>“Second Language Users Exhibit Shallow Morphological Processing.”</span> <em>Studies in Second Language Acquisition</em> 42 (5): 11211136. <a href="https://doi.org/10.1017/s0272263120000170">https://doi.org/10.1017/s0272263120000170</a>.
 </div>
 </div>
-</section>
 </section>
 
 </main> <!-- /main -->

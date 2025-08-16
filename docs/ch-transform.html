@@ -499,7 +499,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Data transformation</strong> is a fundamental aspect of data analysis. After the data you need to use is imported into R, you will often have to filter rows, create new columns, summarise data or join data frames, among many other transformation operations. In <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a> you have already learned about summarising data, and in this chapter you will learn how to use <code>filter()</code> to filter the data and <code>mutate()</code> to mutate or create new columns.</p>
 <section id="filter-rows" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="filter-rows"><span class="header-section-number">12.1</span> Filter rows</h2>
-<p>Filtering is normally used to filter rows in the data according to specific criteria: in other words, keep certain rows and drop others. Filtering data couldn’t be easier with <code>filter()</code>, from the <a href="https://dplyr.tidyverse.org">dplyr</a> package (one of the tidyverse core packages), Let’s work with the <code>coretta2022/glot_status.rds</code> data.</p>
+<p>Filtering is normally used to filter rows in the data according to specific criteria: in other words, keep certain rows and drop others. Filtering data couldn’t be easier with <code>filter()</code>, from the <a href="https://dplyr.tidyverse.org">dplyr</a> package (one of the tidyverse core packages), Let’s work with the <code>coretta2022/glot_status.rds</code> data. Below you can find a preview of the data.</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -516,7 +516,6 @@ Exercise 1
 </ul>
 </div>
 </div>
-<p>The <code>glot_status</code> data frame contains the endangerment status for 7,845 languages from <a href="https://glottolog.org">Glottolog</a>. There are thousands of languages in the world, but most of them are losing speakers, and some are already no longer spoken. The column <code>status</code> contains the endangerment status of a language in the data, on a scale from <code>not endangered</code> (languages with large populations of speakers) through <code>threatened</code>, <code>shifting</code> and <code>nearly extinct</code>, to <code>extinct</code> (languages that have no living speakers left). Here’s a preview.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>glot_status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -592,12 +591,12 @@ Quiz 1
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>Which of the following does not contain a logical operator?
-<div id="radio_BHFHXWUJVN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BHFHXWUJVN" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_BHFHXWUJVN" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_BHFHXWUJVN" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_BHFHXWUJVN" value=""> <span><code>19 &lt; 2</code></span></label>
+<div id="radio_QUXDIGINCO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QUXDIGINCO" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_QUXDIGINCO" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_QUXDIGINCO" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_QUXDIGINCO" value=""> <span><code>19 &lt; 2</code></span></label>
 </div></li>
 <li>Which of the following returns <code>c(FALSE, TRUE)</code>?
-<div id="radio_PKBZOZRAAV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PKBZOZRAAV" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_PKBZOZRAAV" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_PKBZOZRAAV" value=""> <span><code>"apple" != "apple"</code></span></label>
+<div id="radio_EKCWHAMRAJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EKCWHAMRAJ" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_EKCWHAMRAJ" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_EKCWHAMRAJ" value=""> <span><code>"apple" != "apple"</code></span></label>
 </div></li>
 </ol>
 </div>
@@ -819,7 +818,7 @@ The dollar sign `$`
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If you check <code>glot_status</code> now you will find that a new column, <code>Status</code>, has been added. This column is a character column (<code>chr</code>). You see that, as with <code>filter()</code>, you have to assign the output of <code>mutate()</code> to a variable. In the code above we are re-assigning the output to the <code>glot_status</code> variable which we started with. This means that we are <em>overwriting</em> the original <code>glot_status</code>. However, since we have added a new column, we have in practice only added the new column to the old data. If you use the name of an existing column, you will be effectively overwriting that column, so you must be careful with <code>mutate()</code>.</p>
-<p>Let’s count the number of languages for each endangerment status using the new <code>Status</code> column. The dplyr package comes with a <code>count()</code> function and you can combine this with <code>group_by()</code>, as we did with <code>summarise()</code>, to get the number or rows based on the labels in one or more columns.</p>
+<p>Let’s count the number of languages for each endangerment status using the new <code>Status</code> column. You learned about the <code>count()</code> feature in <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">|&gt;</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(status) <span class="sc">|&gt;</span> </span>
