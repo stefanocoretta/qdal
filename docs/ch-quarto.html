@@ -473,7 +473,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#how-to-add-and-run-code" id="toc-how-to-add-and-run-code" class="nav-link" data-scroll-target="#how-to-add-and-run-code"><span class="header-section-number">13.4</span> How to add and run code</a></li>
   <li><a href="#render-quarto-files-to-html" id="toc-render-quarto-files-to-html" class="nav-link" data-scroll-target="#render-quarto-files-to-html"><span class="header-section-number">13.5</span> Render Quarto files to HTML</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">13.6</span> Summary</a></li>
+  <li><a href="#render-quarto-files-to-pdf" id="toc-render-quarto-files-to-pdf" class="nav-link" data-scroll-target="#render-quarto-files-to-pdf"><span class="header-section-number">13.6</span> Render Quarto files to PDF</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">13.7</span> Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -718,7 +719,7 @@ Quarto: Code chunks
 <p><img src="./img/quarto-render-view.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
 </figure>
 </div>
-<p>Rendering Quarto files is not restricted to HTML, but also PDFs and even Word documents! This is very handy when you are writing an analysis report you need to share with others.</p>
+<p>Rendering Quarto files is not restricted to HTML, but also PDFs and even Word documents! This is very handy when you are writing an analysis report you need to share with others. You could even write your dissertation in Quarto!</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -732,25 +733,46 @@ Quarto: Rendering
 <p>Quarto files can be <strong>rendered</strong> into other formats, like HTML, PDF and Word documents.</p>
 </div>
 </div>
-<p>You could even write your dissertation in Quarto!</p>
+<p>Now that you have done all of this hard work, why don’t you try and render the Quarto file you’ve been working on to an HTML file? Click on the <code>Render</code> button and if everything works fine you should see a rendered HTML file in a second! Note that if you are enrolled in the QML course, you will be asked to render your Quarto files to PDF for the assessments, so I recommend you try this out now by completing the next section.</p>
+</section>
+<section id="render-quarto-files-to-pdf" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="render-quarto-files-to-pdf"><span class="header-section-number">13.6</span> Render Quarto files to PDF</h2>
+<p>Rendering a Quarto file to PDF is done through LaTeX, a typesetting system with it’s own programming language. You don’t really need to learn LaTeX to render to PDF, because the conversion is handles by Quarto, but since usually computers don’t come with LaTeX you will have to install it. Do this now, by <strong>running the following code in the <code>Terminal</code> in RStudio</strong>.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that you are supposed to run the code in the RStudio <strong>Terminal</strong>, not the RStudio R console! The RStudio terminal can be found next to the console in the bottom-left corner of RStudio.</p>
+</div>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> install tinytex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A LaTeX distribution will be installed. Now, add the following lines to the YAML preamble of your Quarto file and save the file.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span><span class="at"> default</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span><span class="at"> default</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will see that not there is a small arrow next to the <code>Render</code> button. If you click on it a drop-down menu will appear, with two options: “HTML” and “PDF”. This is because we have instructed Quarto that the file should be rendered in two formats in the yaml preamble with the yaml code above. Click on the PDF option now. If all is well, you should soon see your Quarto file rendered to PDF!</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 1
+Spotlight: LaTeX
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Now that you have done all of this hard work, why don’t you try and render the Quarto file you’ve been working on to an HTML file?</p>
-<p>Click on the “Render” button and if everything works fine you should see a rendered HTML file in a second!</p>
-<p>Note that you will be asked to render your Quarto files for the assessments, so I recommend you try this out now.</p>
+<p>XXX</p>
 </div>
 </div>
 </section>
-<section id="summary" class="level2" data-number="13.6">
-<h2 data-number="13.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">13.6</span> Summary</h2>
+<section id="summary" class="level2" data-number="13.7">
+<h2 data-number="13.7" class="anchored" data-anchor-id="summary"><span class="header-section-number">13.7</span> Summary</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
