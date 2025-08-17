@@ -282,14 +282,14 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-viz-principles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visualisation principles</span></span></a>
+  <a href="./ch-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  <a href="./ch-viz-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Visualisation principles</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -490,7 +490,7 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#what-the-pipe" id="toc-what-the-pipe" class="nav-link" data-scroll-target="#what-the-pipe"><span class="header-section-number">11.3.1</span> What the pipe!?</a></li>
   </ul></li>
-  <li><a href="#counting-observations" id="toc-counting-observations" class="nav-link" data-scroll-target="#counting-observations"><span class="header-section-number">11.4</span> Counting observations</a></li>
+  <li><a href="#counting-observations-with-count" id="toc-counting-observations-with-count" class="nav-link" data-scroll-target="#counting-observations-with-count"><span class="header-section-number">11.4</span> Counting observations with <code>count()</code></a></li>
   </ul>
 </nav>
     </div>
@@ -688,12 +688,12 @@ Quiz 1
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>What does the <code>na.rm</code> argument of <code>mean()</code> do?
-<div id="radio_BAJSQXGXYE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BAJSQXGXYE" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_BAJSQXGXYE" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_BAJSQXGXYE" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
+<div id="radio_TKXJVKZVGZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TKXJVKZVGZ" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_TKXJVKZVGZ" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_TKXJVKZVGZ" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
 </div></li>
 <li>Which is the mean of <code>c(4, 23, NA, 5)</code> when <code>na.rm</code> has the default value?
-<div id="radio_WGXDMCVKUY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WGXDMCVKUY" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_WGXDMCVKUY" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_WGXDMCVKUY" value=""> <span><code>10.66</code>.</span></label>
+<div id="radio_SYLZVYIPBZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SYLZVYIPBZ" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_SYLZVYIPBZ" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_SYLZVYIPBZ" value=""> <span><code>10.66</code>.</span></label>
 </div></li>
 </ol>
 </div>
@@ -852,8 +852,8 @@ Hint
 </div>
 </section>
 </section>
-<section id="counting-observations" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="counting-observations"><span class="header-section-number">11.4</span> Counting observations</h2>
+<section id="counting-observations-with-count" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="counting-observations-with-count"><span class="header-section-number">11.4</span> Counting observations with <code>count()</code></h2>
 <p>If you want to count observations you can use the <code>summarise()</code> function with <code>n()</code>, another dplyr function that returns the group size. For example, let’s count the number of languages by their endangerment status. The data in <code>coretta2022/glot_status.rds</code> contains the endangerment status for 7,845 languages from <a href="https://glottolog.org">Glottolog</a>. There are thousands of languages in the world, but most of them are losing speakers, and some are already no longer spoken. The column <code>status</code> contains the endangerment status of a language in the data, on a scale from <code>not endangered</code> (languages with large populations of speakers) through <code>threatened</code>, <code>shifting</code> and <code>nearly extinct</code>, to <code>extinct</code> (languages that have no living speakers left). Read the <code>coretta2022/glot_status.rds</code> data and check it out.</p>
 <p>To count the number of languages by status, we group the data by <code>status</code> and we summarise with <code>n()</code>.</p>
 <div class="cell">

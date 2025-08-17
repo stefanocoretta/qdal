@@ -1,0 +1,34 @@
+---
+title: "My first Quarto document"
+author: "Stefano Coretta"
+format:
+  html: default
+  pdf: default
+---
+
+## Attach packages
+
+To begin with, we should attach the tidyverse packages.
+
+```{r}
+#| label: setup
+
+library(tidyverse)
+```
+
+## Read data
+
+In the following code chunk with read a few data frames.
+
+```{r}
+#| label: gestures
+
+gestures <- read_csv("data/cameron2020/gestures.csv")
+
+glot_status <- readRDS("data/coretta2022/glot_status.rds")
+```
+
+The data frames are:
+
+- `gestures` with infant gesture data from @cameron2020.
+- `glot_status` with data on the endangerment status of languages from Glottolog.

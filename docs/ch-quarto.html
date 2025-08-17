@@ -586,14 +586,14 @@ Important
 <p>A window will open. Add a title of your choice and your name. Make sure the <code>Use visual markdown editor</code> is <strong>NOT ticked</strong>, then click <code>Create</code> (you will be free to use the visual editor later, but it is important that you first see what a Quarto document looks like under the hood first).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./img/new-quarto-window.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+<p><img src="./img/quarto-new.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
 </figure>
 </div>
 <p>A new <code>.qmd</code> file will be created and will open in the File Editor panel in RStudio.</p>
 <p><strong>Note</strong> that creating a Quarto file does not automatically save it on your computer. To do so, either use the keyboard short-cut <code>CMD+S</code>/<code>CTRL+S</code> or click on the floppy disk icon in the menu below the file tab.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./img/save-quarto.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+<p><img src="./img/quarto-save.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
 </figure>
 </div>
 <p>Save the file inside the <code>code/</code> folder with the following name: <code>week-03.qmd</code>.</p>
@@ -608,10 +608,10 @@ Important
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./img/quarto-parts.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+<p><img src="./img/quarto-full.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
 </figure>
 </div>
-<p>Each Quarto file has to start with a YAML header, but you can include as many code chunks and as much text as you wish, in any order.</p>
+<p>Each Quarto file has to start with a YAML header, but you can include as many code chunks and as much text as you wish, in any order. You can also show the document outline, marked as a dashed yellow box in the figure above. To show/hide the outline, just click on the <code>Outline</code> button. See the R Note box below for tips.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -638,6 +638,28 @@ Quarto: Code chunks
 <div class="callout-body-container callout-body">
 <p><strong>Code chunks</strong> start and end with three back-ticks <code>```</code> and they contain code.</p>
 <p><code>{r}</code> indicates that the code is R code. Settings can be specified inside the chunk with the <code>#|</code> prefix: for example <code>#| label: setup</code> sets the name of the chunk (the label) to <code>setup</code>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+R Note: Quarto outline and chunk labels
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>By default, the Quarto outline only shows the Markdown section headers. I find it very useful to also see the code chunks in the outline and if they have a label, that will be shown in italics. It makes navigating long documents very easy and clear, descriptive chunk labels sure help.</p>
+<p>To enable code labels in the outline, go to Global Options &gt; R Markdown &gt; Basic panel &gt; <code>Show in document outline: Sections and all chunks</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/sections-all-chunks.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -668,7 +690,7 @@ Quarto: Code chunks
 <p>Now we can insert a code chunk to add the code to attach the tidyverse. To insert a new code chunk, you can click on the <code>Insert a new code chunk</code> button (the little green square icon with a <code>C</code> and a plus) , or you can press <code>OPT+CMD+I/ALT+CTRL+I</code>.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./img/quarto-insert-chunk.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+<p><img src="./img/quarto-chunk.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
 </figure>
 </div>
 <p>A new R code chunk will be inserted at the text cursor position. Now go ahead and add the following lines of code <em>inside</em> the R code chunk.</p>
@@ -705,7 +727,7 @@ Quarto: Code chunks
 <p>To render a Quarto file, just click on the <code>Render</code> button and an HTML file will be created and saved in the same location of the Quarto file.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./img/quarto-render.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="400"></p>
+<p><img src="./img/quarto-render.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
 </figure>
 </div>
 <p>It may be shown in the Viewer pane (like in the picture below) or in a new browser window. There are a few ways you can set this option to whichever version you prefer. Follow the instructions that work for you—they all do the same thing.</p>
@@ -716,7 +738,7 @@ Quarto: Code chunks
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="./img/quarto-render-view.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
+<p><img src="./img/quarto-rendered.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
 </figure>
 </div>
 <p>Rendering Quarto files is not restricted to HTML, but also PDFs and even Word documents! This is very handy when you are writing an analysis report you need to share with others. You could even write your dissertation in Quarto!</p>
@@ -757,17 +779,30 @@ Important
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span><span class="at"> default</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span><span class="at"> default</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You will see that not there is a small arrow next to the <code>Render</code> button. If you click on it a drop-down menu will appear, with two options: “HTML” and “PDF”. This is because we have instructed Quarto that the file should be rendered in two formats in the yaml preamble with the yaml code above. Click on the PDF option now. If all is well, you should soon see your Quarto file rendered to PDF!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/quarto-format.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/quarto-pdf.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 Spotlight: LaTeX
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>XXX</p>
+</div>
 </div>
 </div>
 </section>
