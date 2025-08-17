@@ -18,7 +18,7 @@ library(webexercises)
 polite <- read_csv("data/winter2012/polite.csv")
 ```
 
-Keeping track of the code you use for data analysis is a very important aspect of research project managing: not only the code is there if you need to rerun it later, but it allows your data analysis to be **reproducible** (i.e., it can be reproduced by you or other people in such a way that starting with the same data and code you get to the same results).
+Before moving onto data visualisation, it is time now to step up your coding organisation skills. Keeping track of the code you use for data analysis is a very important aspect of research project managing: not only the code is there if you need to rerun it later, but it allows your data analysis to be **reproducible** (i.e., it can be reproduced by you or other people in such a way that starting with the same data and code you get to the same results).
 
 ::: callout-tip
 ### Reproducible research
@@ -26,13 +26,11 @@ Keeping track of the code you use for data analysis is a very important aspect o
 Research is **reproducible** when the same data and same code return the same results.
 :::
 
-R scripts are great for writing code, and you can even document the code (add explanations or notes) with comments (i.e. lines that start with `#`). But for longer text or complex data analysis reports, R scripts can be a bit cumbersome. A solution to this is using Quarto files (they have the `.qmd` extension).
+You will learn about reproducibility and related concepts in more details in @sec-open-research. R scripts are great for writing code, and you can even document the code (add explanations or notes) with comments (i.e. lines that start with `#`). But for longer text or complex data analysis reports, R scripts can be a bit cumbersome. A solution to this is using Quarto files (they have the `.qmd` extension).
 
 ## Code... and text!
 
-Quarto is a file format that allows you to mix code and formatted text in the same file.
-
-This means that you can write **dynamic reports** using Quarto files: dynamic reports are just like analysis reports (i.e. they include formatted text, plots, tables, code output, code, etc...) but they are **dynamic** in the sense that if, for example, data or code changes, you can just rerun the report file and all code output (plots, tables, etc...) is updated accordingly!
+Quarto is a file format that allows you to mix code and formatted text in the same file. This means that you can write **dynamic reports** using Quarto files: dynamic reports are just like analysis reports (i.e. they include formatted text, plots, tables, code output, code, etc...) but they are **dynamic** in the sense that if, for example, data or code changes, you can just rerun the report file and all code output (plots, tables, etc...) is updated accordingly!
 
 ::: callout-tip
 #### Dynamic reports in Quarto
@@ -44,7 +42,7 @@ Quarto can be used to generate **dynamic reports**: these are files that are gen
 
 ## Formatting text
 
-R comments in R scripts cannot be formatted (for example, you can't make text bold or italic). Text in Quarto files can be fully formatted using a simple but powerful **mark-up language** called [markdown](https://www.markdownguide.org). You don't have to learn markdown all in one go, so I encourage you to just learn it bit by bit, at your pace. You can look at the the [Markdown Guide](https://www.markdownguide.org/getting-started/) for an in-depth intro and/or dive in the [Markdown Tutorial](https://www.markdowntutorial.com) for a hands-on approach.
+R comments in R scripts cannot be formatted (for example, you can't make text bold or italic). Text in Quarto files can be fully formatted using a simple but powerful **mark-up language** called [Markdown](https://www.markdownguide.org). You don't have to learn markdown all in one go, so I encourage you to just learn it bit by bit, at your pace. You can look at the the [Markdown Guide](https://www.markdownguide.org/getting-started/) for an in-depth intro and/or dive in the [Markdown Tutorial](https://www.markdowntutorial.com) for a hands-on approach.
 
 A few quick pointers (you can test them in the [Markdown Live Preview](https://markdownlivepreview.com)):
 
@@ -73,11 +71,7 @@ A **mark-up language** is a text-formatting system consisting of symbols or keyw
 ::: callout-warning
 #### Important
 
-When working through these tutorials, always **make sure you are in the course Quarto Project** you created before.
-
-You know you are in a Quarto Project because you can see the name of the Project in the top-right corner of RStudio, next to the light-blue cube icon.
-
-If you see `Project (none)` in the top-right corner, that means **you are not** in the Quarto Project.
+When working through these tutorials, always **make sure you are in the course Quarto Project** you created before. You know you are in a Quarto Project because you can see the name of the Project in the top-right corner of RStudio, next to the light-blue cube icon. If you see `Project (none)` in the top-right corner, that means **you are not** in the Quarto Project.
 
 To make sure you are in the Quarto project, you can open the project by going to the project folder in File Explorer (Windows) or Finder (macOS) and double click on the `.Rproj` file.
 :::
@@ -96,7 +90,7 @@ A new `.qmd` file will be created and will open in the File Editor panel in RStu
 
 ![](/img/save-quarto.png){fig-align="center" width="500"}
 
-Save the file inside the `code/` folder with the following name: `tutorial-w04.qmd`.
+Save the file inside the `code/` folder with the following name: `week-03.qmd`.
 
 Remember that all the files of your RStudio project don't live inside RStudio but on your computer.
 
@@ -132,13 +126,7 @@ YAML headers start and end with three dashes `---`.
 
 ### Working directory
 
-When using Quarto projects, the working directory (the directory all relative paths are relative to) is the project folder.
-
-However, when running code from a Quarto file, the code is run as if the working directory were the folder in which the file is saved.
-
-This isn't an issue if the Quarto file is directly in the project folder, but in our case our Quarto files live in the `code/` folder within the project folder (and it is good practice to do so!).
-
-We can instruct R to *always* run code from the project folder (i.e. the working directory is the project folder). This is when the `_quarto.yml` file comes into play.
+When using Quarto projects, the working directory (the directory all relative paths are relative to) is the project folder. However, when running code from a Quarto file, the code is run as if the working directory were the folder in which the file is saved. This isn't an issue if the Quarto file is directly in the project folder, but in our case our Quarto files live in the `code/` folder within the project folder (and it is good practice to do so!). We can instruct R to *always* run code from the project folder (i.e. the working directory is the project folder). This is when the `_quarto.yml` file comes into play.
 
 Open the `_quarto.yml` file in RStudio (you can simply click on the file in the `Files` tab and that will open the file in the RStudio editor). Add the line `execute-dir: project` under the title. Note that indentation should be respected, so the line you write should align with `title:`, not with `project:`.
 
@@ -152,11 +140,7 @@ Now, all code in Quarto files, no matter where they are saved, will be run with 
 
 ## How to add and run code
 
-You will use the Quarto document you created to write text and code for this tutorial.
-
-**Delete everything in the Quarto document below the YAML header.** It's just example text—we're not attached to it!
-
-This is what the Quarto document should look like now (if your YAML header also contains "`format:html`, that's completely fine):
+You will use the Quarto document you created to write text and code in this chapter. **Delete everything in the Quarto document below the YAML header.** It's just example text—we're not attached to it! This is what the Quarto document should look like now (if your YAML header also contains "`format:html`, that's completely fine):
 
 ![](/img/quarto-empty.png){fig-align="center" width="500"}
 
@@ -168,9 +152,7 @@ Now we can insert a code chunk to add the code to attach the tidyverse. To inser
 
 ![](/img/quarto-insert-chunk.png){fig-align="center" width="500"}
 
-A new R code chunk will be inserted at the text cursor position.
-
-Now go ahead and add the following lines of code *inside* the R code chunk.
+A new R code chunk will be inserted at the text cursor position. Now go ahead and add the following lines of code *inside* the R code chunk.
 
 ``` r
 #| label: setup
@@ -178,28 +160,17 @@ Now go ahead and add the following lines of code *inside* the R code chunk.
 library(tidyverse)
 ```
 
-::: callout-note
-#### Running code in Quarto documents
-
 To run the code, you have two options:
 
 -   You click the small green triangle in the top-right corner of the chunk. This runs all the code in the code chunk.
 
 -   Ensure the text cursor is inside the code chunk and press `SHIFT+CMD+ENTER/SHIFT+CTRL+ENTER`. This too runs all the code in the code chunk.
 
-If you want to run line by line in the code chunk, you can place the text cursor on the line you want to run and press `CMD+ENTER/CTRL+ENTER`. The current line is run and the text cursor is moved to the next line. Just like in the .R scripts that we've been using in past weeks.
-:::
-
-Run the `setup` chunk now.
+If you want to run line by line in the code chunk, you can place the text cursor on the line you want to run and press `CMD+ENTER/CTRL+ENTER`. The current line is run and the text cursor is moved to the next line. Just like in the `.R` scripts that we've been using in past weeks. Run the `setup` chunk now.
 
 ![](/img/quarto-run-chunk.png){fig-align="center" width="500"}
 
-You will see messages printed below the code chunk, in your Quarto file (don't worry about the `Conflicts`, they just tell you that some functions from the tidyverse packages have replaced the base R functions, which is OK).
-
-::: callout-note
-#### Practice 1
-
-Try this yourself:
+You will see messages printed below the code chunk, in your Quarto file (don't worry about the `Conflicts`, they just tell you that some functions from the tidyverse packages have replaced the base R functions, which is OK). Now, complete the following tasks before moving on.
 
 -   Create a new second-level heading (with `##`) called `Read data`.
 
@@ -214,7 +185,6 @@ Try this yourself:
     -   `coretta2022/glot_status.rds`
 
 -   Run the code.
-:::
 
 ## Render Quarto files to HTML
 
@@ -232,9 +202,7 @@ It may be shown in the Viewer pane (like in the picture below) or in a new brows
 
 ![](/img/quarto-render-view.png){fig-align="center" width="700"}
 
-Rendering Quarto files is not restricted to HTML, but also PDFs and even Word documents!
-
-This is very handy when you are writing an analysis report you need to share with others.
+Rendering Quarto files is not restricted to HTML, but also PDFs and even Word documents! This is very handy when you are writing an analysis report you need to share with others.
 
 ::: callout-tip
 ### Quarto: Rendering
@@ -245,7 +213,7 @@ Quarto files can be **rendered** into other formats, like HTML, PDF and Word doc
 You could even write your dissertation in Quarto!
 
 ::: callout-warning
-## Exercise
+## Exercise 1
 
 Now that you have done all of this hard work, why don't you try and render the Quarto file you've been working on to an HTML file?
 
@@ -262,4 +230,6 @@ Note that you will be asked to render your Quarto files for the assessments, so 
 -   **Mark-up languages** are text-formatting systems that specify text formatting and structure using symbols or keywords. Markdown is the mark-up language that is used in Quarto documents.
 
 -   The main parts of a `.qmd` file are the YAML header, text and code chunks.
+
+-   You can render Quarto files into HTML, PDF, Word documents and more.
 :::

@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ch-viz-principles.html" rel="next">
+<link href="./ch-quarto.html" rel="next">
 <link href="./ch-summarise.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -262,14 +262,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-viz-principles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visualisation principles</span></span></a>
+  <a href="./ch-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  <a href="./ch-viz-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Visualisation principles</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -575,12 +575,12 @@ Quiz 1
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>Which of the following does not contain a logical operator?
-<div id="radio_DOZWRWVDUK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DOZWRWVDUK" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_DOZWRWVDUK" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_DOZWRWVDUK" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_DOZWRWVDUK" value=""> <span><code>19 &lt; 2</code></span></label>
+<div id="radio_ZYIIHHTYWQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZYIIHHTYWQ" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_ZYIIHHTYWQ" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_ZYIIHHTYWQ" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_ZYIIHHTYWQ" value=""> <span><code>19 &lt; 2</code></span></label>
 </div></li>
 <li>Which of the following returns <code>c(FALSE, TRUE)</code>?
-<div id="radio_FVEVIKHKVD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FVEVIKHKVD" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_FVEVIKHKVD" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_FVEVIKHKVD" value=""> <span><code>"apple" != "apple"</code></span></label>
+<div id="radio_EKNBPPWRYI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EKNBPPWRYI" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_EKNBPPWRYI" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_EKNBPPWRYI" value=""> <span><code>"apple" != "apple"</code></span></label>
 </div></li>
 </ol>
 </div>
@@ -906,7 +906,20 @@ R Note: Assignment direction
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>XXX</p>
+<p>R has two assignment operators: the assignment arrow <code>&lt;-</code> and <code>=</code>. Current R coding practices favour <code>&lt;-</code> over <code>=</code>, hence this book uses exclusively the former. Both have the same assignment direction: the object to the right of the operator is assigned to the variable name to the left of the operator. This is virtually how all programming languages work.</p>
+<p>It is less know, however, that the assignment arrow can be “reversed”, <code>-&gt;</code> so that assignment goes from left to right. The following are equivalent.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="ot">-&gt;</span> a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We could re-write the mutate code above like this:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Status =</span> <span class="fu">factor</span>(</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>      Status,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"not_endangered"</span>, <span class="st">"threatened"</span>, <span class="st">"shifting"</span>, <span class="st">"moribund"</span>, <span class="st">"nearly_extinct"</span>, <span class="st">"extinct"</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="ot">-&gt;</span> glot_status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The code fully follows the flow: you take <code>glot_status</code>, you pipe it into mutate, you create a new column, you assign the output to <code>glot_status</code>.</p>
+<p>However, you don’t particularly encourage this practice because it makes spotting variable assignment in your scripts more difficult, now that the variable is assigned at the end of the pipeline.</p>
 </div>
 </div>
 </div>
@@ -1535,8 +1548,8 @@ window.onload = function() {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch-viz-principles.html" class="pagination-link" aria-label="Visualisation principles">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visualisation principles</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ch-quarto.html" class="pagination-link" aria-label="Quarto">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Quarto</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

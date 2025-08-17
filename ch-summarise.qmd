@@ -295,7 +295,7 @@ Group `shallow` by `Group` and `Word_Nonword` and get summary measures of RTs. U
 `group_by(Group, Word_Nonword)`
 :::
 
-## Counting observations
+## Counting observations with `count()`
 
 If you want to count observations you can use the `summarise()` function with `n()`, another dplyr function that returns the group size. For example, let's count the number of languages by their endangerment status. The data in `coretta2022/glot_status.rds` contains the endangerment status for 7,845 languages from [Glottolog](https://glottolog.org). There are thousands of languages in the world, but most of them are losing speakers, and some are already no longer spoken. The column `status` contains the endangerment status of a language in the data, on a scale from `not endangered` (languages with large populations of speakers) through `threatened`, `shifting` and `nearly extinct`, to `extinct` (languages that have no living speakers left). Read the `coretta2022/glot_status.rds` data and check it out.
 

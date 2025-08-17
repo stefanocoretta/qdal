@@ -347,5 +347,28 @@ glot_status |>
 ::: {.callout-important collapse="true"}
 ## R Note: Assignment direction
 
-XXX
+R has two assignment operators: the assignment arrow `<-` and `=`. Current R coding practices favour `<-` over `=`, hence this book uses exclusively the former. Both have the same assignment direction: the object to the right of the operator is assigned to the variable name to the left of the operator. This is virtually how all programming languages work.
+
+It is less know, however, that the assignment arrow can be "reversed", `->` so that assignment goes from left to right. The following are equivalent.
+
+``` r
+a <- 2
+2 -> a
+```
+
+We could re-write the mutate code above like this:
+
+``` r
+glot_status |>
+  mutate(
+    Status = factor(
+      Status,
+      levels = c("not_endangered", "threatened", "shifting", "moribund", "nearly_extinct", "extinct")
+    )
+  ) -> glot_status
+```
+
+The code fully follows the flow: you take `glot_status`, you pipe it into mutate, you create a new column, you assign the output to `glot_status`.
+
+However, you don't particularly encourage this practice because it makes spotting variable assignment in your scripts more difficult, now that the variable is assigned at the end of the pipeline.
 :::

@@ -32,7 +32,7 @@ Alberto Cairo has identified four common features of good data visualisation ([S
 4.  When appropriate, it is organized in a way that **enables some exploration**.
 :::
 
-Let's see a few examples that illustrate each point.
+Let's see a few examples that illustrate each point. Since you will learn about the plotting code in the next chapter, the code is not shown by default here, but you can see it by clicking on the expandable `Code` button above each plot.
 
 ```{r}
 #| label: read-data
@@ -56,20 +56,11 @@ formants <- formants %>%
 
 ## Information is (not) reliable
 
-Let's use the `glot_status` data. You will not see the code used to create the plots because you will learn about it later.
-
-```{r}
-#| label: glot-status
-#| echo: true
-
-glot_status
-```
-
-The following plot is titled *Number of endangered languages by macroarea and status*, but the plot contains both endangered and non-endangered languages.
+Let's use the `coretta2022/glot_status` data. to create the plots because you will learn about it later. The following plot is titled *Number of endangered languages by macroarea and status*, but the plot contains both endangered and non-endangered languages.
 
 ```{r}
 #| label: status-bar-1
-#| echo: false
+#| code-fold: true
 
 glot_status %>%
   # filter(status != "extinct") %>%
@@ -86,7 +77,8 @@ We can fix that by filtering the data so that it contains only endangered langua
 
 ```{r}
 #| label: status-bar-2
-#| echo: false
+#| code-fold: true
+
 glot_status %>%
   filter(status != "extinct") %>%
   ggplot(aes(Macroarea, fill = status)) +
@@ -100,21 +92,12 @@ glot_status %>%
 
 ## Patterns are (not) noticeable
 
-The `albvot` data contains data on VOT in Albanian. It has data from 6 speakers [@coretta2022].
-
-```{r}
-#| label: albot
-#| echo: false
-
-albvot
-
-```
-
-The following plot uses a bar chart to show the VOT of different stops, but what you can't really see is that there is a lot of variability within and among stops and within and among speakers.
+The `coretta2021/albvot` data contains data on VOT in Albanian. It has data from 6 speakers [@coretta2022]. The following plot uses a bar chart to show the VOT of different stops, but what you can't really see is that there is a lot of variability within and among stops and within and among speakers.
 
 ```{r}
 #| label: alb-vot-1
-#| echo: false
+#| code-fold: true
+
 albvot %>%
   filter(consonant %in% c("p", "t", "k", "b", "d", "ɡ")) %>%
   ggplot(aes(vot, consonant)) +
@@ -128,7 +111,8 @@ We can do better. The following plot shows individual measurements of VOT for di
 
 ```{r}
 #| label: alb-vot-2
-#| echo: false
+#| code-fold: true
+
 albvot %>%
   filter(consonant %in% c("p", "t", "k", "b", "d", "\u261")) %>%
   mutate(consonant = factor(consonant, levels = rev(c("p", "t", "k", "b", "d", "\u261")))) %>%
@@ -159,27 +143,16 @@ The graph above has a lot of issues:
 3.  The shade of orange of the bars does not seem to become proportionally darker with more speakers. Look at Arabic and Hindi: they have a very similar number of speakers but one bar is darker than the other.
 4.  The three dudes speaking are just fillers. Are they really necessary? Also, they are all white men...
 
-Can you find other issues?
-
-See more examples on [Ugly Charts](https://flowingdata.com/category/visualization/ugly-visualization/).
+Can you find other issues? See more examples on [Ugly Charts](https://flowingdata.com/category/visualization/ugly-visualization/).
 
 ## (Does not) enable exploration
 
-The plot below shows the number of gestures enacted by infants of English, Bengali and Chinese background as recorded during a controlled session [@cameronfaulkner2020].
-
-```{r}
-#| label: gestures
-#| echo: false
-
-gestures
-
-```
-
-Three different types of gestures are shown: hold out and give gestures (`ho_gv`), index-finger pointing (`point`) and reach out gestures (`reach`). Moreover the plot shows the number of gestures at 10 and 12 months.
+The plot below shows the number of gestures enacted by infants of English, Bengali and Chinese background as recorded during a controlled session [@cameronfaulkner2020]. Three different types of gestures are shown: hold out and give gestures (`ho_gv`), index-finger pointing (`point`) and reach out gestures (`reach`). Moreover the plot shows the number of gestures at 10 and 12 months.
 
 ```{r}
 #| label: gest-bar
-#| echo: false
+#| code-fold: true
+
 gestures %>%
   filter(months %in% c(10, 12)) %>%
   drop_na(count) %>%
@@ -203,7 +176,8 @@ We can use a "connected point" plot: each infant is represented by a dot at 10 a
 
 ```{r}
 #| label: gest-line
-#| echo: false
+#| code-fold: true
+
 gestures %>%
   filter(months %in% c(10, 12)) %>%
   drop_na(count) %>%
@@ -221,6 +195,8 @@ gestures %>%
 You will notice that some infants don't really use more gestures and others even use slightly less gestures. You would not be able to see any of this if you used a bar chart, like we used above.
 
 ## Practical tips
+
+Here is a list of practical visualisation tips for you to think about.
 
 ::: callout-tip
 1.  Show **raw data** (e.g. individual observations, participants, items...).

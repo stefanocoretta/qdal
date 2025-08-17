@@ -29,8 +29,8 @@ book:
   - part: Week 3
     chapters:
     - ch-transform.qmd
-    - ch-viz-principles.qmd
     - ch-quarto.qmd
+    - ch-viz-principles.qmd
     - ch-plotting.qmd
     - ch-research-cycle.qmd
   - part: Week 4

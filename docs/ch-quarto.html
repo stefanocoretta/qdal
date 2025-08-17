@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>14&nbsp; Quarto – Quantitative Data Analysis for Linguists in R</title>
+<title>13&nbsp; Quarto – Quantitative Data Analysis for Linguists in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ch-plotting.html" rel="next">
-<link href="./ch-viz-principles.html" rel="prev">
+<link href="./ch-viz-principles.html" rel="next">
+<link href="./ch-transform.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -120,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-transform.html">Week 3</a></li><li class="breadcrumb-item"><a href="./ch-quarto.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Quarto</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-transform.html">Week 3</a></li><li class="breadcrumb-item"><a href="./ch-quarto.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Quarto</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -262,14 +262,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-viz-principles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visualisation principles</span></span></a>
+  <a href="./ch-quarto.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-quarto.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Quarto</span></span></a>
+  <a href="./ch-viz-principles.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Visualisation principles</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -464,25 +464,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#code-and-text" id="toc-code-and-text" class="nav-link active" data-scroll-target="#code-and-text"><span class="header-section-number">14.1</span> Code… and text!</a></li>
-  <li><a href="#formatting-text" id="toc-formatting-text" class="nav-link" data-scroll-target="#formatting-text"><span class="header-section-number">14.2</span> Formatting text</a></li>
-  <li><a href="#create-a-.qmd-file" id="toc-create-a-.qmd-file" class="nav-link" data-scroll-target="#create-a-.qmd-file"><span class="header-section-number">14.3</span> Create a <code>.qmd</code> file</a>
+  <li><a href="#code-and-text" id="toc-code-and-text" class="nav-link active" data-scroll-target="#code-and-text"><span class="header-section-number">13.1</span> Code… and text!</a></li>
+  <li><a href="#formatting-text" id="toc-formatting-text" class="nav-link" data-scroll-target="#formatting-text"><span class="header-section-number">13.2</span> Formatting text</a></li>
+  <li><a href="#create-a-.qmd-file" id="toc-create-a-.qmd-file" class="nav-link" data-scroll-target="#create-a-.qmd-file"><span class="header-section-number">13.3</span> Create a <code>.qmd</code> file</a>
   <ul class="collapse">
-  <li><a href="#parts-of-a-quarto-file" id="toc-parts-of-a-quarto-file" class="nav-link" data-scroll-target="#parts-of-a-quarto-file"><span class="header-section-number">14.3.1</span> Parts of a Quarto file</a></li>
-  <li><a href="#working-directory" id="toc-working-directory" class="nav-link" data-scroll-target="#working-directory"><span class="header-section-number">14.3.2</span> Working directory</a></li>
+  <li><a href="#parts-of-a-quarto-file" id="toc-parts-of-a-quarto-file" class="nav-link" data-scroll-target="#parts-of-a-quarto-file"><span class="header-section-number">13.3.1</span> Parts of a Quarto file</a></li>
+  <li><a href="#working-directory" id="toc-working-directory" class="nav-link" data-scroll-target="#working-directory"><span class="header-section-number">13.3.2</span> Working directory</a></li>
   </ul></li>
-  <li><a href="#how-to-add-and-run-code" id="toc-how-to-add-and-run-code" class="nav-link" data-scroll-target="#how-to-add-and-run-code"><span class="header-section-number">14.4</span> How to add and run code</a></li>
-  <li><a href="#render-quarto-files-to-html" id="toc-render-quarto-files-to-html" class="nav-link" data-scroll-target="#render-quarto-files-to-html"><span class="header-section-number">14.5</span> Render Quarto files to HTML</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">14.6</span> Summary</a></li>
+  <li><a href="#how-to-add-and-run-code" id="toc-how-to-add-and-run-code" class="nav-link" data-scroll-target="#how-to-add-and-run-code"><span class="header-section-number">13.4</span> How to add and run code</a></li>
+  <li><a href="#render-quarto-files-to-html" id="toc-render-quarto-files-to-html" class="nav-link" data-scroll-target="#render-quarto-files-to-html"><span class="header-section-number">13.5</span> Render Quarto files to HTML</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">13.6</span> Summary</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-transform.html">Week 3</a></li><li class="breadcrumb-item"><a href="./ch-quarto.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Quarto</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-transform.html">Week 3</a></li><li class="breadcrumb-item"><a href="./ch-quarto.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Quarto</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-quarto" class="quarto-section-identifier"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Quarto</span></span></h1>
+<h1 class="title"><span id="sec-quarto" class="quarto-section-identifier"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Quarto</span></span></h1>
 </div>
 
 
@@ -500,7 +500,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
-<p>Keeping track of the code you use for data analysis is a very important aspect of research project managing: not only the code is there if you need to rerun it later, but it allows your data analysis to be <strong>reproducible</strong> (i.e., it can be reproduced by you or other people in such a way that starting with the same data and code you get to the same results).</p>
+<p>Before moving onto data visualisation, it is time now to step up your coding organisation skills. Keeping track of the code you use for data analysis is a very important aspect of research project managing: not only the code is there if you need to rerun it later, but it allows your data analysis to be <strong>reproducible</strong> (i.e., it can be reproduced by you or other people in such a way that starting with the same data and code you get to the same results).</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -514,11 +514,10 @@ Reproducible research
 <p>Research is <strong>reproducible</strong> when the same data and same code return the same results.</p>
 </div>
 </div>
-<p>R scripts are great for writing code, and you can even document the code (add explanations or notes) with comments (i.e.&nbsp;lines that start with <code>#</code>). But for longer text or complex data analysis reports, R scripts can be a bit cumbersome. A solution to this is using Quarto files (they have the <code>.qmd</code> extension).</p>
-<section id="code-and-text" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="code-and-text"><span class="header-section-number">14.1</span> Code… and text!</h2>
-<p>Quarto is a file format that allows you to mix code and formatted text in the same file.</p>
-<p>This means that you can write <strong>dynamic reports</strong> using Quarto files: dynamic reports are just like analysis reports (i.e.&nbsp;they include formatted text, plots, tables, code output, code, etc…) but they are <strong>dynamic</strong> in the sense that if, for example, data or code changes, you can just rerun the report file and all code output (plots, tables, etc…) is updated accordingly!</p>
+<p>You will learn about reproducibility and related concepts in more details in <span class="quarto-unresolved-ref">?sec-open-research</span>. R scripts are great for writing code, and you can even document the code (add explanations or notes) with comments (i.e.&nbsp;lines that start with <code>#</code>). But for longer text or complex data analysis reports, R scripts can be a bit cumbersome. A solution to this is using Quarto files (they have the <code>.qmd</code> extension).</p>
+<section id="code-and-text" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="code-and-text"><span class="header-section-number">13.1</span> Code… and text!</h2>
+<p>Quarto is a file format that allows you to mix code and formatted text in the same file. This means that you can write <strong>dynamic reports</strong> using Quarto files: dynamic reports are just like analysis reports (i.e.&nbsp;they include formatted text, plots, tables, code output, code, etc…) but they are <strong>dynamic</strong> in the sense that if, for example, data or code changes, you can just rerun the report file and all code output (plots, tables, etc…) is updated accordingly!</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -534,9 +533,9 @@ Dynamic reports in Quarto
 </div>
 </div>
 </section>
-<section id="formatting-text" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="formatting-text"><span class="header-section-number">14.2</span> Formatting text</h2>
-<p>R comments in R scripts cannot be formatted (for example, you can’t make text bold or italic). Text in Quarto files can be fully formatted using a simple but powerful <strong>mark-up language</strong> called <a href="https://www.markdownguide.org">markdown</a>. You don’t have to learn markdown all in one go, so I encourage you to just learn it bit by bit, at your pace. You can look at the the <a href="https://www.markdownguide.org/getting-started/">Markdown Guide</a> for an in-depth intro and/or dive in the <a href="https://www.markdowntutorial.com">Markdown Tutorial</a> for a hands-on approach.</p>
+<section id="formatting-text" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="formatting-text"><span class="header-section-number">13.2</span> Formatting text</h2>
+<p>R comments in R scripts cannot be formatted (for example, you can’t make text bold or italic). Text in Quarto files can be fully formatted using a simple but powerful <strong>mark-up language</strong> called <a href="https://www.markdownguide.org">Markdown</a>. You don’t have to learn markdown all in one go, so I encourage you to just learn it bit by bit, at your pace. You can look at the the <a href="https://www.markdownguide.org/getting-started/">Markdown Guide</a> for an in-depth intro and/or dive in the <a href="https://www.markdowntutorial.com">Markdown Tutorial</a> for a hands-on approach.</p>
 <p>A few quick pointers (you can test them in the <a href="https://markdownlivepreview.com">Markdown Live Preview</a>):</p>
 <ul>
 <li><p>Text can be made italics by enclosing it between single stars: <code>*this text is in italics*</code>.</p></li>
@@ -561,8 +560,8 @@ Mark-up, Markdown
 </div>
 </div>
 </section>
-<section id="create-a-.qmd-file" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="create-a-.qmd-file"><span class="header-section-number">14.3</span> Create a <code>.qmd</code> file</h2>
+<section id="create-a-.qmd-file" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="create-a-.qmd-file"><span class="header-section-number">13.3</span> Create a <code>.qmd</code> file</h2>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -573,9 +572,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When working through these tutorials, always <strong>make sure you are in the course Quarto Project</strong> you created before.</p>
-<p>You know you are in a Quarto Project because you can see the name of the Project in the top-right corner of RStudio, next to the light-blue cube icon.</p>
-<p>If you see <code>Project (none)</code> in the top-right corner, that means <strong>you are not</strong> in the Quarto Project.</p>
+<p>When working through these tutorials, always <strong>make sure you are in the course Quarto Project</strong> you created before. You know you are in a Quarto Project because you can see the name of the Project in the top-right corner of RStudio, next to the light-blue cube icon. If you see <code>Project (none)</code> in the top-right corner, that means <strong>you are not</strong> in the Quarto Project.</p>
 <p>To make sure you are in the Quarto project, you can open the project by going to the project folder in File Explorer (Windows) or Finder (macOS) and double click on the <code>.Rproj</code> file.</p>
 </div>
 </div>
@@ -598,10 +595,10 @@ Important
 <p><img src="./img/save-quarto.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
 </figure>
 </div>
-<p>Save the file inside the <code>code/</code> folder with the following name: <code>tutorial-w04.qmd</code>.</p>
+<p>Save the file inside the <code>code/</code> folder with the following name: <code>week-03.qmd</code>.</p>
 <p>Remember that all the files of your RStudio project don’t live inside RStudio but on your computer.</p>
-<section id="parts-of-a-quarto-file" class="level3" data-number="14.3.1">
-<h3 data-number="14.3.1" class="anchored" data-anchor-id="parts-of-a-quarto-file"><span class="header-section-number">14.3.1</span> Parts of a Quarto file</h3>
+<section id="parts-of-a-quarto-file" class="level3" data-number="13.3.1">
+<h3 data-number="13.3.1" class="anchored" data-anchor-id="parts-of-a-quarto-file"><span class="header-section-number">13.3.1</span> Parts of a Quarto file</h3>
 <p>A Quarto file usually has three main parts:</p>
 <ul>
 <li><p>The YAML header (green in the screenshot below).</p></li>
@@ -643,12 +640,9 @@ Quarto: Code chunks
 </div>
 </div>
 </section>
-<section id="working-directory" class="level3" data-number="14.3.2">
-<h3 data-number="14.3.2" class="anchored" data-anchor-id="working-directory"><span class="header-section-number">14.3.2</span> Working directory</h3>
-<p>When using Quarto projects, the working directory (the directory all relative paths are relative to) is the project folder.</p>
-<p>However, when running code from a Quarto file, the code is run as if the working directory were the folder in which the file is saved.</p>
-<p>This isn’t an issue if the Quarto file is directly in the project folder, but in our case our Quarto files live in the <code>code/</code> folder within the project folder (and it is good practice to do so!).</p>
-<p>We can instruct R to <em>always</em> run code from the project folder (i.e.&nbsp;the working directory is the project folder). This is when the <code>_quarto.yml</code> file comes into play.</p>
+<section id="working-directory" class="level3" data-number="13.3.2">
+<h3 data-number="13.3.2" class="anchored" data-anchor-id="working-directory"><span class="header-section-number">13.3.2</span> Working directory</h3>
+<p>When using Quarto projects, the working directory (the directory all relative paths are relative to) is the project folder. However, when running code from a Quarto file, the code is run as if the working directory were the folder in which the file is saved. This isn’t an issue if the Quarto file is directly in the project folder, but in our case our Quarto files live in the <code>code/</code> folder within the project folder (and it is good practice to do so!). We can instruct R to <em>always</em> run code from the project folder (i.e.&nbsp;the working directory is the project folder). This is when the <code>_quarto.yml</code> file comes into play.</p>
 <p>Open the <code>_quarto.yml</code> file in RStudio (you can simply click on the file in the <code>Files</code> tab and that will open the file in the RStudio editor). Add the line <code>execute-dir: project</code> under the title. Note that indentation should be respected, so the line you write should align with <code>title:</code>, not with <code>project:</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"qml-2024"</span></span>
@@ -656,11 +650,9 @@ Quarto: Code chunks
 <p>Now, all code in Quarto files, no matter where they are saved, will be run with the project folder as the working directory.</p>
 </section>
 </section>
-<section id="how-to-add-and-run-code" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="how-to-add-and-run-code"><span class="header-section-number">14.4</span> How to add and run code</h2>
-<p>You will use the Quarto document you created to write text and code for this tutorial.</p>
-<p><strong>Delete everything in the Quarto document below the YAML header.</strong> It’s just example text—we’re not attached to it!</p>
-<p>This is what the Quarto document should look like now (if your YAML header also contains “<code>format:html</code>, that’s completely fine):</p>
+<section id="how-to-add-and-run-code" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="how-to-add-and-run-code"><span class="header-section-number">13.4</span> How to add and run code</h2>
+<p>You will use the Quarto document you created to write text and code in this chapter. <strong>Delete everything in the Quarto document below the YAML header.</strong> It’s just example text—we’re not attached to it! This is what the Quarto document should look like now (if your YAML header also contains “<code>format:html</code>, that’s completely fine):</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./img/quarto-empty.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
@@ -678,47 +670,22 @@ Quarto: Code chunks
 <p><img src="./img/quarto-insert-chunk.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
 </figure>
 </div>
-<p>A new R code chunk will be inserted at the text cursor position.</p>
-<p>Now go ahead and add the following lines of code <em>inside</em> the R code chunk.</p>
+<p>A new R code chunk will be inserted at the text cursor position. Now go ahead and add the following lines of code <em>inside</em> the R code chunk.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Running code in Quarto documents
-</div>
-</div>
-<div class="callout-body-container callout-body">
 <p>To run the code, you have two options:</p>
 <ul>
 <li><p>You click the small green triangle in the top-right corner of the chunk. This runs all the code in the code chunk.</p></li>
 <li><p>Ensure the text cursor is inside the code chunk and press <code>SHIFT+CMD+ENTER/SHIFT+CTRL+ENTER</code>. This too runs all the code in the code chunk.</p></li>
 </ul>
-<p>If you want to run line by line in the code chunk, you can place the text cursor on the line you want to run and press <code>CMD+ENTER/CTRL+ENTER</code>. The current line is run and the text cursor is moved to the next line. Just like in the .R scripts that we’ve been using in past weeks.</p>
-</div>
-</div>
-<p>Run the <code>setup</code> chunk now.</p>
+<p>If you want to run line by line in the code chunk, you can place the text cursor on the line you want to run and press <code>CMD+ENTER/CTRL+ENTER</code>. The current line is run and the text cursor is moved to the next line. Just like in the <code>.R</code> scripts that we’ve been using in past weeks. Run the <code>setup</code> chunk now.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./img/quarto-run-chunk.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
 </figure>
 </div>
-<p>You will see messages printed below the code chunk, in your Quarto file (don’t worry about the <code>Conflicts</code>, they just tell you that some functions from the tidyverse packages have replaced the base R functions, which is OK).</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Practice 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Try this yourself:</p>
+<p>You will see messages printed below the code chunk, in your Quarto file (don’t worry about the <code>Conflicts</code>, they just tell you that some functions from the tidyverse packages have replaced the base R functions, which is OK). Now, complete the following tasks before moving on.</p>
 <ul>
 <li><p>Create a new second-level heading (with <code>##</code>) called <code>Read data</code>.</p></li>
 <li><p>Create a new R code chunk.</p></li>
@@ -730,11 +697,9 @@ Practice 1
 </ul></li>
 <li><p>Run the code.</p></li>
 </ul>
-</div>
-</div>
 </section>
-<section id="render-quarto-files-to-html" class="level2" data-number="14.5">
-<h2 data-number="14.5" class="anchored" data-anchor-id="render-quarto-files-to-html"><span class="header-section-number">14.5</span> Render Quarto files to HTML</h2>
+<section id="render-quarto-files-to-html" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="render-quarto-files-to-html"><span class="header-section-number">13.5</span> Render Quarto files to HTML</h2>
 <p>You can render a <code>.qmd</code> file into a nicely formatted HTML file.</p>
 <p>To render a Quarto file, just click on the <code>Render</code> button and an HTML file will be created and saved in the same location of the Quarto file.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -753,8 +718,7 @@ Practice 1
 <p><img src="./img/quarto-render-view.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="700"></p>
 </figure>
 </div>
-<p>Rendering Quarto files is not restricted to HTML, but also PDFs and even Word documents!</p>
-<p>This is very handy when you are writing an analysis report you need to share with others.</p>
+<p>Rendering Quarto files is not restricted to HTML, but also PDFs and even Word documents! This is very handy when you are writing an analysis report you need to share with others.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -775,7 +739,7 @@ Quarto: Rendering
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise
+Exercise 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -785,8 +749,8 @@ Exercise
 </div>
 </div>
 </section>
-<section id="summary" class="level2" data-number="14.6">
-<h2 data-number="14.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">14.6</span> Summary</h2>
+<section id="summary" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">13.6</span> Summary</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -797,6 +761,7 @@ Exercise
 <li><p><strong>Quarto</strong> files can be used to create dynamic and reproducible reports.</p></li>
 <li><p><strong>Mark-up languages</strong> are text-formatting systems that specify text formatting and structure using symbols or keywords. Markdown is the mark-up language that is used in Quarto documents.</p></li>
 <li><p>The main parts of a <code>.qmd</code> file are the YAML header, text and code chunks.</p></li>
+<li><p>You can render Quarto files into HTML, PDF, Word documents and more.</p></li>
 </ul>
 </div>
 </div>
@@ -1421,13 +1386,13 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ch-viz-principles.html" class="pagination-link" aria-label="Visualisation principles">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Visualisation principles</span></span>
+      <a href="./ch-transform.html" class="pagination-link" aria-label="Transform data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Transform data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch-plotting.html" class="pagination-link" aria-label="Plotting">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Plotting</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ch-viz-principles.html" class="pagination-link" aria-label="Visualisation principles">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Visualisation principles</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
