@@ -30,7 +30,7 @@ You will learn about reproducibility and related concepts in more details in @se
 
 ## Code... and text!
 
-Quarto is a file format that allows you to mix code and formatted text in the same file. This means that you can write **dynamic reports** using Quarto files: dynamic reports are just like analysis reports (i.e. they include formatted text, plots, tables, code output, code, etc...) but they are **dynamic** in the sense that if, for example, data or code changes, you can just rerun the report file and all code output (plots, tables, etc...) is updated accordingly!
+[Quarto](https://quarto.org) is a file format that allows you to mix code and formatted text in the same file. This means that you can write **dynamic reports** using Quarto files: dynamic reports are just like analysis reports (i.e. they include formatted text, plots, tables, code output, code, etc...) but they are **dynamic** in the sense that if, for example, data or code changes, you can just rerun the report file and all code output (plots, tables, etc...) is updated accordingly!
 
 ::: callout-tip
 #### Dynamic reports in Quarto
