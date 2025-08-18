@@ -654,11 +654,11 @@ ggplot2 basic constituents
 <div class="callout-body-container callout-body">
 <ul>
 <li><p>The <code>data</code>: you have to specify the data frame with the data (i.e.&nbsp;columns) you want to plot.</p></li>
-<li><p>The <code>mapping</code>: the mapping tells ggplot how to map data columns to parts of the plot like the axes or groupings within the data. (For example, which variable is shown on the x axis, and which one is on the y axis? If data comes from two different groups, should each group get its own colour?) These different parts of the plot are called <em>aesthetics</em>, or <code>aes</code> for short.</p></li>
+<li><p>The <code>mapping</code>: the mapping tells ggplot how to map data columns to parts of the plot like the axes or groupings within the data. For example, which variable is shown on the x axis, and which one is on the y axis? If data comes from two different groups, should each group get its own colour? These different parts of the plot are called <em>aesthetics</em>, or <code>aes</code> for short.</p></li>
 </ul>
 </div>
 </div>
-<p>You can specify the data and mapping with the <code>data</code> and <code>mapping</code> arguments of the <code>ggplot()</code> function. Note that the <code>mapping</code> argument is always specified with <code>aes()</code>: <code>mapping = aes(…)</code>. In the following bare plot, we are just mapping <code>f0mn</code> to the <em>x</em>-axis and <code>H1H2</code> to the <em>y</em>-axis, from the <code>polite</code> data frame. From this point on I will assume you’ll be creating a new code chunk (XXX make sure you introduced Quarto), copy-paste the code and run it, without explicit instructions.</p>
+<p>You can specify the data and mapping with the <code>data</code> and <code>mapping</code> arguments of the <code>ggplot()</code> function. Note that the <code>mapping</code> argument is always specified with <code>aes()</code>: <code>mapping = aes(…)</code>. In the following bare plot, we are just mapping <code>f0mn</code> to the <em>x</em>-axis and <code>H1H2</code> to the <em>y</em>-axis, from the <code>polite</code> data frame. From this point on I will assume you’ll be creating a new code chunk, copy-paste the code and run it, without explicit instructions.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> polite,</span>
@@ -683,7 +683,7 @@ Quiz 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Is the following code correct? Justify your answer. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p>
+<p>Is the following code correct? Why? <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> polite,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mapping =</span> <span class="fu">c</span>(<span class="at">x =</span> total_duration, <span class="at">y =</span> articulation_rate)</span>
@@ -707,7 +707,7 @@ Geometries
 <p>Different geometries are added to a ggplot using one of the <code>geom_*()</code> functions.</p>
 </div>
 </div>
-<p>For this plot, you want to use <code>geom_point()</code>. This geom simply adds point to the plot based on the data in the <code>polite</code> data frame. To <em>add</em> <code>geom</code>s to a plot, you write a <code>+</code> at the end of the <code>ggplot()</code> command and include the geom on the next line.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The <code>geom_point()</code> geometry creates a <strong>scatter plot</strong>, which is a plot with two continuous axes where data is represented with points. <a href="#fig-first-plot" class="quarto-xref">Figure&nbsp;<span>15.2</span></a> is a scatter plot of mean f0 (<code>mnf0</code>) and H1-H2 difference (<code>H1H2</code>).</p>
+<p>For this plot, you want to use <code>geom_point()</code>. This geom simply adds point to the plot based on the data in the <code>polite</code> data frame. To <em>add</em> <code>geom</code>s to a plot, you write a plus sign <code>+</code> at the end of the <code>ggplot()</code> command and include the geom on the next line.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The <code>geom_point()</code> geometry creates a <strong>scatter plot</strong>, which is a plot with two continuous axes where data is represented with points. <a href="#fig-first-plot" class="quarto-xref">Figure&nbsp;<span>15.2</span></a> is a scatter plot of mean f0 (<code>mnf0</code>) and H1-H2 difference (<code>H1H2</code>).</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -741,22 +741,25 @@ Figure&nbsp;15.2: Scatter plot of mean f0 and H1-H2 difference.
 </div>
 </div>
 </div>
-<p>Look at <a href="#fig-first-plot" class="quarto-xref">Figure&nbsp;<span>15.2</span></a>: is there a relationship between mean f0 and H1-H2? A pattern can be observed: when mean f0 is low, H1-H2 is high (meaning more breathiness) and when f0 is high, H1-H2 is low (meaning less breathiness). Statistically, this is called a negative relationship. The opposite is a positive relationship, when an increase in <span class="math inline">\(x\)</span> corresponds to an increase in <span class="math inline">\(y\)</span>. Spoiler: the negative relationship in the plot is a mirage: if you look more closely, there seems to be two subgroups in the data: one up to about 175 hz and one from 175 hz up. We will see below that these two groups correspond to the speakers’ genders.</p>
+<p>Look at <a href="#fig-first-plot" class="quarto-xref">Figure&nbsp;<span>15.2</span></a>: is there a relationship between mean f0 and H1-H2? A pattern can be observed: when mean f0 is low, H1-H2 is high (meaning more breathiness) and when f0 is high, H1-H2 is low (meaning less breathiness). Statistically, this is called a negative relationship. The opposite is a positive relationship, when an increase in <span class="math inline">\(x\)</span> corresponds to an increase in <span class="math inline">\(y\)</span>. Spoiler: the negative relationship in the plot is a mirage: if you look more closely, you might spot two subgroups in the data: one up to about 175 hz and one from 175 hz up. We will see below that these two groups correspond to the speakers’ genders.</p>
 <p>For the time being, let’s pretend we don’t know that and we want to write a description of the plot and the pattern. You could describe the plot this way:</p>
 <blockquote class="blockquote">
 <p><a href="#fig-first-plot" class="quarto-xref">Figure&nbsp;<span>15.2</span></a> shows a scatter plot of mean f0 on the <em>x</em>-axis and H1-H2 difference on the <em>y</em>-axis. The plot suggest an overall negative relationship between mean f0 and H1-H2 difference. In other words, increasing mean f0 corresponds to decreasing breathiness.</p>
 </blockquote>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 R: The Layered Grammar of Graphics
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Note that using the <code>+</code> is a quirk of <code>ggplot()</code>. The idea behind it is that you start from a bare plot and you <strong>add</strong> (<code>+</code>) layers of data on top of it. This is because of the philosophy behind the package, called the <a href="http://vita.had.co.nz/papers/layered-grammar.html">Layered Grammar of Graphics</a>. In fact, Grammar of Graphics is where you get the GG in ggplot!</p>
+<p>Using the <code>+</code> is a quirk of <code>ggplot()</code>. The idea behind it is that you start from a bare plot and you <strong>add</strong> (<code>+</code>) layers of data on top of it. This is because of the philosophy behind the package, called the <a href="http://vita.had.co.nz/papers/layered-grammar.html">Layered Grammar of Graphics</a>. In fact, Grammar of Graphics is where you get the GG in ggplot!</p>
+</div>
 </div>
 </div>
 </section>
@@ -769,13 +772,6 @@ R: The Layered Grammar of Graphics
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> f0mn, <span class="at">y =</span> H1H2)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ch-plotting_files/figure-html/named-arguments-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
 </div>
 <p>In fact, you can also leave out <code>x =</code> and <code>y =</code>.</p>
 <div class="cell">
@@ -784,14 +780,29 @@ R: The Layered Grammar of Graphics
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(f0mn, H1H2)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 12 rows containing missing values or values outside the scale range
-(`geom_point()`).</code></pre>
 </div>
+<p>But we can go further. You can use the pipe <code>|&gt;</code>, which you have encountered in <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You can of course stack multiple functions in the pipeline, like for example filtering the data before plotting it, like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># include only rows where f0mn &lt; 300</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(f0mn <span class="sc">&lt;</span> <span class="dv">300</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2)) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ch-plotting_files/figure-html/named-arguments-2-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-filter-plot-pipe" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-filter-plot-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-plotting_files/figure-html/fig-filter-plot-pipe-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-filter-plot-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15.3: Scatter plot of mean f0 and H1-H2 difference (filtered).
+</figcaption>
 </figure>
 </div>
 </div>
@@ -819,12 +830,14 @@ Quiz 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<strong>Which of the following will produce the same plot as the one above?</strong> Reason through it first without running the code, then run all of these to check whether they look the way you expected.
-<div id="radio_BUCBBKQYOD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BUCBBKQYOD" value=""> <span><code>ggplot(polite, aes(H1H2, f0mn)) + geom_point()</code></span></label><label><input type="radio" autocomplete="off" name="radio_BUCBBKQYOD" value="answer"> <span><code>ggplot(polite, aes(y = H1H2, x = f0mn)) + geom_point()</code></span></label><label><input type="radio" autocomplete="off" name="radio_BUCBBKQYOD" value=""> <span><code>ggplot(polite, aes(y = f0mn, x = H1H2)) + geom_point()</code></span></label>
+<strong>Which of the following will produce the same plot as <a href="#fig-first-plot" class="quarto-xref">Figure&nbsp;<span>15.2</span></a>?</strong> Reason through it first without running the code, then run all of these to check whether they look the way you expected.
+<div id="radio_TCETXDMPSV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TCETXDMPSV" value=""> <span><code>ggplot(polite, aes(H1H2, f0mn)) + geom_point()</code></span></label><label><input type="radio" autocomplete="off" name="radio_TCETXDMPSV" value="answer"> <span><code>ggplot(polite, aes(y = H1H2, x = f0mn)) + geom_point()</code></span></label><label><input type="radio" autocomplete="off" name="radio_TCETXDMPSV" value=""> <span><code>ggplot(polite, aes(y = f0mn, x = H1H2)) + geom_point()</code></span></label>
+</div>
+</div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -833,34 +846,11 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>When specifying arguments, the order matters when not using the argument names.</p>
 <p>So <code>aes(a, b)</code> is different from <code>aes(b, a)</code>.</p>
 <p>But <code>aes(y = b, x = a)</code> is the same as <code>aes(a, b)</code>.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>The code of the latest plot can also be written this way.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2)) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>You have encountered the pipe in <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a> already. You can of course stack multiple functions in the pipeline, like for example filtering the data before plotting it, like so:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># include only rows where f0mn &lt; 300</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(f0mn <span class="sc">&lt;</span> <span class="dv">300</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2)) <span class="sc">+</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ch-plotting_files/figure-html/filter-plot-pipe-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
 </div>
 </div>
 </div>
@@ -871,11 +861,11 @@ Hint
 <p>So far, the only aesthetics you have been using were the <code>x</code> and <code>y</code> aesthetics, which correspond to the <em>x</em> and <em>y</em> axes. ggplot2 has many other aesthetics that can be employed to represent other variables in the plot: in this section you will learn about <code>colour</code> (which is used to colour geometries, like points) and <code>alpha</code> (which is used to set the transparency of geometries).</p>
 <section id="colour-aesthetic" class="level3" data-number="15.2.1">
 <h3 data-number="15.2.1" class="anchored" data-anchor-id="colour-aesthetic"><span class="header-section-number">15.2.1</span> <code>colour</code> aesthetic</h3>
-<p>As briefly mentioned earlier, there seems to be two subgroups within the data: one below about 175 Hz and one above it. These subgroups are in fact related to the <code>gender</code> of the participants. We can colour the points by gender, using the <code>colour</code> aesthetic.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <a href="#fig-polite-gender" class="quarto-xref">Figure&nbsp;<span>15.3</span></a> shows a scatter plot of mean f0 and the H1-H2 difference, with points coloured depending on the gender of the speaker. Now the two subgroups are quite visible, although we can also appreciate some overlap between the two gender subgroups (some blue points overlap with the red points and there is one red point that has a very low mean f0).</p>
+<p>As mentioned above, there seems to be two subgroups within the data: one below about 175 Hz and one above it. These subgroups are in fact related to the <code>gender</code> of the participants. We can colour the points by gender, using the <code>colour</code> aesthetic.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <a href="#fig-polite-gender" class="quarto-xref">Figure&nbsp;<span>15.4</span></a> shows a scatter plot of mean f0 and the H1-H2 difference, with points coloured depending on the gender of the speaker. Now the two subgroups are quite visible, although we can also appreciate some overlap between the two gender subgroups (some blue points overlap with the red points and there is one red point that has a very low mean f0).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2, <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2, <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-polite-gender" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -883,25 +873,25 @@ Hint
 <img src="ch-plotting_files/figure-html/fig-polite-gender-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polite-gender-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.3: Scatter plot of mean f0 and H1-H2 difference, by gender.
+Figure&nbsp;15.4: Scatter plot of mean f0 and H1-H2 difference, by gender.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Notice how <code>colour = gender</code> must be inside the <code>aes()</code> function, because we are trying to map <code>colour</code> to the values of the column <code>gender</code> (when you map values to aesthetics, the aesthetics have to be inside <code>aes()</code>. Colours are automatically assigned to each level in <code>gender</code> (here, <code>F</code> for female which gets red and <code>M</code> for male which gets blue).</p>
-<p>The default colour palette is used, but you can customise it. One way to quickly change the palette it to use one of the <code>scale_colour_*()</code> functions. The relevant function for our plot is <code>scale_colour_brewer()</code>. This function creates palettes based on <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">ColorBrewer 2.0</a>. There are three types of palettes (see the linked website for examples):</p>
+<p>Notice how <code>colour = gender</code> must be inside the <code>aes()</code> function, because we are trying to map <code>colour</code> to the values of the column <code>gender</code> (when you map values to aesthetics, the aesthetics have to be inside <code>aes()</code>). Colours are automatically assigned to each level in <code>gender</code> (here, <code>F</code> for female which gets red and <code>M</code> for male which gets blue).</p>
+<p>The default colour palette is used, but you can customise it. One way to quickly change the palette it to use one of the <code>scale_colour_*()</code> functions. A good option for our plot is <code>scale_colour_brewer()</code>. This function creates palettes based on <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">ColorBrewer 2.0</a>. There are three types of palettes (see the linked website for examples):</p>
 <ul>
 <li><p>Sequential (<code>seq</code>): a gradient sequence of hues from lighter to darker.</p></li>
 <li><p>Diverging (<code>div</code>): useful when you need a neutral middle colour and sequential colours on either side of the neutral colour.</p></li>
 <li><p>Qualitative (<code>qual</code>): useful for categorical variables.</p></li>
 </ul>
-<p>Let’s use the default qualitative palette, since <code>gender</code> is a categorical variable in the data. <a href="#fig-polite-gender-brewer" class="quarto-xref">Figure&nbsp;<span>15.4</span></a> is the same as <a href="#fig-polite-gender" class="quarto-xref">Figure&nbsp;<span>15.3</span></a>, but we are now using a qualitative ColorBrewer palette.</p>
+<p>Let’s use the default qualitative palette, since <code>gender</code> is a categorical variable in the data. <a href="#fig-polite-gender-brewer" class="quarto-xref">Figure&nbsp;<span>15.5</span></a> is the same as <a href="#fig-polite-gender" class="quarto-xref">Figure&nbsp;<span>15.4</span></a>, but we are now using a qualitative ColorBrewer palette.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2, <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2, <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-polite-gender-brewer" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -909,7 +899,7 @@ Figure&nbsp;15.3: Scatter plot of mean f0 and H1-H2 difference, by gender.
 <img src="ch-plotting_files/figure-html/fig-polite-gender-brewer-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polite-gender-brewer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.4: Scatter plot of mean f0 and H1-H2 difference, by gender.
+Figure&nbsp;15.5: Scatter plot of mean f0 and H1-H2 difference, by gender.
 </figcaption>
 </figure>
 </div>
@@ -928,12 +918,12 @@ Exercise 2
 <p>Change the <code>palette</code> argument of the <code>scale_colour_brewer()</code> function to different palettes. Check the function documentation for a list of available palettes.</p>
 </div>
 </div>
-<p>Another set of palettes is provided by <code>scale_colour_viridis_d()</code> (the <code>d</code> stands for “discrete” palette, to be used for categorical variables like <code>gender</code>). <a href="#fig-polite-gender-viridis" class="quarto-xref">Figure&nbsp;<span>15.5</span></a> uses the “B” palette from the viridis palettes.</p>
+<p>Another set of palettes is provided by <code>scale_colour_viridis_d()</code> (the <code>d</code> stands for “discrete” palette, to be used for categorical variables like <code>gender</code>). <a href="#fig-polite-gender-viridis" class="quarto-xref">Figure&nbsp;<span>15.6</span></a> uses the “B” palette from the viridis palettes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2, <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">"B"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2, <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>(<span class="at">option =</span> <span class="st">"B"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-polite-gender-viridis" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -941,7 +931,7 @@ Exercise 2
 <img src="ch-plotting_files/figure-html/fig-polite-gender-viridis-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polite-gender-viridis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.5: Scatter plot of mean f0 and H1-H2 difference, by gender.
+Figure&nbsp;15.6: Scatter plot of mean f0 and H1-H2 difference, by gender.
 </figcaption>
 </figure>
 </div>
@@ -966,24 +956,7 @@ R Note: The default colour palette
 </section>
 <section id="alpha-aesthetic" class="level3" data-number="15.2.2">
 <h3 data-number="15.2.2" class="anchored" data-anchor-id="alpha-aesthetic"><span class="header-section-number">15.2.2</span> <code>alpha</code> aesthetic</h3>
-<p>Another useful ggplot2 aesthetic is <code>alpha</code>. This aesthetic sets the transparency of the geometry: <code>0</code> means completely transparent and <code>1</code> means completely opaque. When you are setting the value of an aesthetic yourself that should apply to all instances of some geometry, rather than mapping an aesthetic to values in a specific column (like we did above with <code>colour</code>), you should add the aesthetic outside of <code>aes()</code> and usually in the <code>geom</code> function you want to set the aesthetic for.</p>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise 3
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Set <code>alpha</code> for the point geometry to <code>0.5</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2, <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(...) <span class="sc">+</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p>Another useful ggplot2 aesthetic is <code>alpha</code>. This aesthetic sets the transparency of the geometry: <code>0</code> means completely transparent and <code>1</code> means completely opaque. When you are setting the value of an aesthetic yourself that should apply to all instances of some geometry, rather than mapping an aesthetic to values in a specific column (like we did above with <code>colour</code>), you should add the aesthetic outside of <code>aes()</code> and usually in the <code>geom</code> function you want to set the aesthetic for. Set <code>alpha</code> for the point geometry to <code>0.5</code>.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -996,9 +969,7 @@ Hint
 </div>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="at">alpha =</span> ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_point</span>(<span class="at">alpha =</span> ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1007,16 +978,16 @@ Hint
 </section>
 <section id="labels" class="level2" data-number="15.3">
 <h2 data-number="15.3" class="anchored" data-anchor-id="labels"><span class="header-section-number">15.3</span> Labels</h2>
-<p>The labels of the plot, like the axes labels and the legend, are automatically included by ggplot2 based on the names of the variables/columns. If you want to change the labels to something you set yourself, you can use the <code>labs()</code> function, like in <a href="#fig-polite-gender-labs" class="quarto-xref">Figure&nbsp;<span>15.6</span></a> below.</p>
+<p>The labels of the plot, like the axes labels and the legend, are automatically included by ggplot2 based on the names of the variables/columns. If you want to change the labels to something you set yourself, you can use the <code>labs()</code> function, like in <a href="#fig-polite-gender-labs" class="quarto-xref">Figure&nbsp;<span>15.7</span></a> below.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2, <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Mean f0 (Hz)"</span>,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"H1-H2 difference (dB)"</span>,</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Gender"</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2, <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Mean f0 (Hz)"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"H1-H2 difference (dB)"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Gender"</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-polite-gender-labs" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1024,23 +995,29 @@ Hint
 <img src="ch-plotting_files/figure-html/fig-polite-gender-labs-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polite-gender-labs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;15.6: Scatter plot of mean f0 and H1-H2 difference, by gender.
+Figure&nbsp;15.7: Scatter plot of mean f0 and H1-H2 difference, by gender.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>Let’s rewrite out description of the plot from above to reflect the updates.</p>
+<blockquote class="blockquote">
+<p><a href="#fig-polite-gender-labs" class="quarto-xref">Figure&nbsp;<span>15.7</span></a> shows a scatter plot of mean f0 on the <em>x</em>-axis and H1-H2 difference on the <em>y</em>-axis, with points coloured by gender. The plot suggest an overall negative relationship between mean f0 and H1-H2 difference. However, the negative relationship appears to be an artefact of the presence of the two gender subgroups: male participants have lower mean f0 and higher H1-H2 difference (less breathiness), while female participants have higher f0 and lower H1-H2 difference (more breathiness).</p>
+</blockquote>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 4
+Exercise 3
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Add a <code>title</code> and a <code>subtitle</code> (use these two arguments within the <code>labs()</code> function).</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1057,9 +1034,6 @@ Hint
 </div>
 </div>
 </div>
-</div>
-</div>
-<p>Let’s update out description of the plot from above to</p>
 </section>
 <section id="summary" class="level2" data-number="15.4">
 <h2 data-number="15.4" class="anchored" data-anchor-id="summary"><span class="header-section-number">15.4</span> Summary</h2>

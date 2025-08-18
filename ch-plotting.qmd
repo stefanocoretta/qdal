@@ -101,10 +101,10 @@ Each ggplot2 plot has a minimum of two constituents (which correspond to two arg
 
 -   The `data`: you have to specify the data frame with the data (i.e. columns) you want to plot.
 
--   The `mapping`: the mapping tells ggplot how to map data columns to parts of the plot like the axes or groupings within the data. (For example, which variable is shown on the x axis, and which one is on the y axis? If data comes from two different groups, should each group get its own colour?) These different parts of the plot are called *aesthetics*, or `aes` for short.
+-   The `mapping`: the mapping tells ggplot how to map data columns to parts of the plot like the axes or groupings within the data. For example, which variable is shown on the x axis, and which one is on the y axis? If data comes from two different groups, should each group get its own colour? These different parts of the plot are called *aesthetics*, or `aes` for short.
 :::
 
-You can specify the data and mapping with the `data` and `mapping` arguments of the `ggplot()` function. Note that the `mapping` argument is always specified with `aes()`: `mapping = aes(…)`. In the following bare plot, we are just mapping `f0mn` to the *x*-axis and `H1H2` to the *y*-axis, from the `polite` data frame. From this point on I will assume you'll be creating a new code chunk (XXX make sure you introduced Quarto), copy-paste the code and run it, without explicit instructions.
+You can specify the data and mapping with the `data` and `mapping` arguments of the `ggplot()` function. Note that the `mapping` argument is always specified with `aes()`: `mapping = aes(…)`. In the following bare plot, we are just mapping `f0mn` to the *x*-axis and `H1H2` to the *y*-axis, from the `polite` data frame. From this point on I will assume you'll be creating a new code chunk, copy-paste the code and run it, without explicit instructions.
 
 ```{r}
 #| label: bare-plot
@@ -125,7 +125,7 @@ Not much to see here: just two axes! So where's the data? Don't worry, we didn't
 #| results: asis
 #| echo: false
 
-cat("Is the following code correct? Justify your answer.", torf(FALSE))
+cat("Is the following code correct? Why?", torf(FALSE))
 
 ```
 
@@ -149,7 +149,7 @@ Our code so far makes nice axes, but we are missing the most important part: sho
 Different geometries are added to a ggplot using one of the `geom_*()` functions.
 :::
 
-For this plot, you want to use `geom_point()`. This geom simply adds point to the plot based on the data in the `polite` data frame. To *add* `geom`s to a plot, you write a `+` at the end of the `ggplot()` command and include the geom on the next line.[^ch-plotting-1] The `geom_point()` geometry creates a **scatter plot**, which is a plot with two continuous axes where data is represented with points. @fig-first-plot is a scatter plot of mean f0 (`mnf0`) and H1-H2 difference (`H1H2`).
+For this plot, you want to use `geom_point()`. This geom simply adds point to the plot based on the data in the `polite` data frame. To *add* `geom`s to a plot, you write a plus sign `+` at the end of the `ggplot()` command and include the geom on the next line.[^ch-plotting-1] The `geom_point()` geometry creates a **scatter plot**, which is a plot with two continuous axes where data is represented with points. @fig-first-plot is a scatter plot of mean f0 (`mnf0`) and H1-H2 difference (`H1H2`).
 
 [^ch-plotting-1]: Note that going on the next line is just for reasons of code clarity and you could write the entire code for a plot on a single line.
 
@@ -173,16 +173,16 @@ ggplot(
   geom_point()
 ```
 
-Look at @fig-first-plot: is there a relationship between mean f0 and H1-H2? A pattern can be observed: when mean f0 is low, H1-H2 is high (meaning more breathiness) and when f0 is high, H1-H2 is low (meaning less breathiness). Statistically, this is called a negative relationship. The opposite is a positive relationship, when an increase in $x$ corresponds to an increase in $y$. Spoiler: the negative relationship in the plot is a mirage: if you look more closely, there seems to be two subgroups in the data: one up to about 175 hz and one from 175 hz up. We will see below that these two groups correspond to the speakers' genders.
+Look at @fig-first-plot: is there a relationship between mean f0 and H1-H2? A pattern can be observed: when mean f0 is low, H1-H2 is high (meaning more breathiness) and when f0 is high, H1-H2 is low (meaning less breathiness). Statistically, this is called a negative relationship. The opposite is a positive relationship, when an increase in $x$ corresponds to an increase in $y$. Spoiler: the negative relationship in the plot is a mirage: if you look more closely, you might spot two subgroups in the data: one up to about 175 hz and one from 175 hz up. We will see below that these two groups correspond to the speakers' genders.
 
 For the time being, let's pretend we don't know that and we want to write a description of the plot and the pattern. You could describe the plot this way:
 
 > @fig-first-plot shows a scatter plot of mean f0 on the *x*-axis and H1-H2 difference on the *y*-axis. The plot suggest an overall negative relationship between mean f0 and H1-H2 difference. In other words, increasing mean f0 corresponds to decreasing breathiness.
 
-::: callout-important
+::: {.callout-important collapse="true"}
 #### R: The Layered Grammar of Graphics
 
-Note that using the `+` is a quirk of `ggplot()`. The idea behind it is that you start from a bare plot and you **add** (`+`) layers of data on top of it. This is because of the philosophy behind the package, called the [Layered Grammar of Graphics](http://vita.had.co.nz/papers/layered-grammar.html). In fact, Grammar of Graphics is where you get the GG in ggplot!
+Using the `+` is a quirk of `ggplot()`. The idea behind it is that you start from a bare plot and you **add** (`+`) layers of data on top of it. This is because of the philosophy behind the package, called the [Layered Grammar of Graphics](http://vita.had.co.nz/papers/layered-grammar.html). In fact, Grammar of Graphics is where you get the GG in ggplot!
 :::
 
 ### Function arguments
@@ -191,7 +191,7 @@ Note that the `data` and `mapping` arguments don't have to be named explicitly (
 
 ```{r}
 #| label: named-arguments
-#| warning: false
+#| eval: false
 
 ggplot(
   polite,
@@ -204,6 +204,7 @@ In fact, you can also leave out `x =` and `y =`.
 
 ```{r}
 #| label: named-arguments-2
+#| eval: false
 
 ggplot(
   polite,
@@ -212,13 +213,37 @@ ggplot(
   geom_point()
 ```
 
+But we can go further. You can use the pipe `|>`, which you have encountered in @sec-summarise.
+
+```{r}
+#| label: plot-pipe
+#| eval: false
+
+polite |>
+  ggplot(aes(f0mn, H1H2)) +
+    geom_point()
+```
+
+You can of course stack multiple functions in the pipeline, like for example filtering the data before plotting it, like so:
+
+```{r}
+#| label: fig-filter-plot-pipe
+#| fig-cap: "Scatter plot of mean f0 and H1-H2 difference (filtered)."
+
+polite |>
+  # include only rows where f0mn < 300
+  filter(f0mn < 300) |>
+  ggplot(aes(f0mn, H1H2)) +
+    geom_point()
+```
+
 ::: callout-warning
 #### Exercise 1
 
 Run `?ggplot` in the Console and check the documentation of the function. Pay special attention to the arguments of the function and the order they appear in.
 :::
 
-:::: callout-note
+::: callout-note
 #### Quiz 3
 
 ```{r}
@@ -232,8 +257,9 @@ opts_3 <- c(
   "`ggplot(polite, aes(y = f0mn, x = H1H2)) + geom_point()`"
 )
 
-cat("**Which of the following will produce the same plot as the one above?** Reason through it first without running the code, then run all of these to check whether they look the way you expected.", longmcq(opts_3))
+cat("**Which of the following will produce the same plot as @fig-first-plot?** Reason through it first without running the code, then run all of these to check whether they look the way you expected.", longmcq(opts_3))
 ```
+:::
 
 ::: {.callout-tip collapse="true"}
 ##### Hint
@@ -244,30 +270,6 @@ So `aes(a, b)` is different from `aes(b, a)`.
 
 But `aes(y = b, x = a)` is the same as `aes(a, b)`.
 :::
-::::
-
-The code of the latest plot can also be written this way.
-
-```{r}
-#| label: plot-pipe
-#| eval: false
-
-polite |>
-  ggplot(aes(f0mn, H1H2)) +
-    geom_point()
-```
-
-You have encountered the pipe in @sec-summarise already. You can of course stack multiple functions in the pipeline, like for example filtering the data before plotting it, like so:
-
-```{r}
-#| label: filter-plot-pipe
-
-polite |>
-  # include only rows where f0mn < 300
-  filter(f0mn < 300) |>
-  ggplot(aes(f0mn, H1H2)) +
-    geom_point()
-```
 
 ## Working with aesthetics
 
@@ -275,7 +277,7 @@ So far, the only aesthetics you have been using were the `x` and `y` aesthetics,
 
 ### `colour` aesthetic
 
-As briefly mentioned earlier, there seems to be two subgroups within the data: one below about 175 Hz and one above it. These subgroups are in fact related to the `gender` of the participants. We can colour the points by gender, using the `colour` aesthetic.[^ch-plotting-2] @fig-polite-gender shows a scatter plot of mean f0 and the H1-H2 difference, with points coloured depending on the gender of the speaker. Now the two subgroups are quite visible, although we can also appreciate some overlap between the two gender subgroups (some blue points overlap with the red points and there is one red point that has a very low mean f0).
+As mentioned above, there seems to be two subgroups within the data: one below about 175 Hz and one above it. These subgroups are in fact related to the `gender` of the participants. We can colour the points by gender, using the `colour` aesthetic.[^ch-plotting-2] @fig-polite-gender shows a scatter plot of mean f0 and the H1-H2 difference, with points coloured depending on the gender of the speaker. Now the two subgroups are quite visible, although we can also appreciate some overlap between the two gender subgroups (some blue points overlap with the red points and there is one red point that has a very low mean f0).
 
 [^ch-plotting-2]: To make ggplot inclusive, it's possible to write the colour aesthetic either as the British-style *colour* or the American-style *color*! Both will get the job done.
 
@@ -289,9 +291,9 @@ polite |>
   geom_point()
 ```
 
-Notice how `colour = gender` must be inside the `aes()` function, because we are trying to map `colour` to the values of the column `gender` (when you map values to aesthetics, the aesthetics have to be inside `aes()`. Colours are automatically assigned to each level in `gender` (here, `F` for female which gets red and `M` for male which gets blue).
+Notice how `colour = gender` must be inside the `aes()` function, because we are trying to map `colour` to the values of the column `gender` (when you map values to aesthetics, the aesthetics have to be inside `aes()`). Colours are automatically assigned to each level in `gender` (here, `F` for female which gets red and `M` for male which gets blue).
 
-The default colour palette is used, but you can customise it. One way to quickly change the palette it to use one of the `scale_colour_*()` functions. The relevant function for our plot is `scale_colour_brewer()`. This function creates palettes based on [ColorBrewer 2.0](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3). There are three types of palettes (see the linked website for examples):
+The default colour palette is used, but you can customise it. One way to quickly change the palette it to use one of the `scale_colour_*()` functions. A good option for our plot is `scale_colour_brewer()`. This function creates palettes based on [ColorBrewer 2.0](https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3). There are three types of palettes (see the linked website for examples):
 
 -   Sequential (`seq`): a gradient sequence of hues from lighter to darker.
 
@@ -339,23 +341,7 @@ If you want to know more about the default colour palette, check this [blog post
 
 ### `alpha` aesthetic
 
-Another useful ggplot2 aesthetic is `alpha`. This aesthetic sets the transparency of the geometry: `0` means completely transparent and `1` means completely opaque. When you are setting the value of an aesthetic yourself that should apply to all instances of some geometry, rather than mapping an aesthetic to values in a specific column (like we did above with `colour`), you should add the aesthetic outside of `aes()` and usually in the `geom` function you want to set the aesthetic for.
-
-:::: callout-warning
-### Exercise 3
-
-Set `alpha` for the point geometry to `0.5`.
-
-```{r}
-#| label: polite-gender-alpha-ex
-#| fig-cap: "Scatter plot of mean f0 and H1-H2 difference, by gender."
-#| eval: false
-
-polite |>
-  ggplot(aes(f0mn, H1H2, colour = gender)) +
-  geom_point(...) +
-  scale_color_brewer(type = "qual")
-```
+Another useful ggplot2 aesthetic is `alpha`. This aesthetic sets the transparency of the geometry: `0` means completely transparent and `1` means completely opaque. When you are setting the value of an aesthetic yourself that should apply to all instances of some geometry, rather than mapping an aesthetic to values in a specific column (like we did above with `colour`), you should add the aesthetic outside of `aes()` and usually in the `geom` function you want to set the aesthetic for. Set `alpha` for the point geometry to `0.5`.
 
 ::: {.callout-tip collapse="true"}
 #### Hint
@@ -364,7 +350,6 @@ polite |>
 geom_point(alpha = ...)
 ```
 :::
-::::
 
 Setting a lower alpha is useful when there are a lot of points or other geometries that overlap with each other and it just looks like a blob of colour (so that, for example, you can't really see the individual points). It is not the case here, and in fact reducing the alpha makes the plot quite illegible!
 
@@ -387,19 +372,21 @@ polite |>
   )
 ```
 
-:::: callout-warning
-### Exercise 4
+Let's rewrite out description of the plot from above to reflect the updates.
+
+> @fig-polite-gender-labs shows a scatter plot of mean f0 on the *x*-axis and H1-H2 difference on the *y*-axis, with points coloured by gender. The plot suggest an overall negative relationship between mean f0 and H1-H2 difference. However, the negative relationship appears to be an artefact of the presence of the two gender subgroups: male participants have lower mean f0 and higher H1-H2 difference (less breathiness), while female participants have higher f0 and lower H1-H2 difference (more breathiness).
+
+::: callout-warning
+### Exercise 3
 
 Add a `title` and a `subtitle` (use these two arguments within the `labs()` function).
+:::
 
 ::: {.callout-tip collapse="true"}
 #### Hint
 
 For example, `labs(title = "...", ...)`.
 :::
-::::
-
-Let's update out description of the plot from above to
 
 ## Summary
 
