@@ -12,9 +12,9 @@ theme_set(theme_light())
 library(webexercises)
 ```
 
-![](img/data-viz.png){fig-align="center" width="500"}
+![](img/data-viz.png){fig-align="center" width="700"}
 
-As you learned in [Chapter 2](#0), quantitative data analysis can be concieved as three activities: summarising, visualising and modeling data. This chapter introduces you to basic principles of good data visualisation, while in @sec-plotting you will learn the basics of plotting data in R.
+As you learned in [Chapter 2](#0), quantitative data analysis can be conceived as three activities: summarising, visualising and modelling data. This chapter introduces you to basic principles of good data visualisation, while in @sec-plotting you will learn the basics of plotting data in R.
 
 ## Good data visualisation
 
@@ -145,7 +145,7 @@ The graph above has a lot of issues:
 
 Can you find other issues? See more examples on [Ugly Charts](https://flowingdata.com/category/visualization/ugly-visualization/).
 
-## (Does not) enable exploration
+## Does (not) enable exploration
 
 The plot below shows the number of gestures enacted by infants of English, Bengali and Chinese background as recorded during a controlled session [@cameronfaulkner2020]. Three different types of gestures are shown: hold out and give gestures (`ho_gv`), index-finger pointing (`point`) and reach out gestures (`reach`). Moreover the plot shows the number of gestures at 10 and 12 months.
 

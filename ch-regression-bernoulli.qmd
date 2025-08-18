@@ -59,7 +59,7 @@ Bounded probabilities are transformed into an unbounded numeric variable. The fo
 
 ## Probability and log-odds
 
-As we have just learnt probabilities are bounded between 0 and 1 but we need something that is not bounded because regression models don't work with bounded numeric variables.
+As we have just learned probabilities are bounded between 0 and 1 but we need something that is not bounded because regression models don't work with bounded numeric variables.
 
 This is where the **logit function** comes in: the logit function (from "*log*istic un*it*") is a mathematical function that transforms probabilities into log-odds.
 

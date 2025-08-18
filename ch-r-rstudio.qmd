@@ -607,7 +607,7 @@ For more, check the [For loops](https://r4ds.hadley.nz/base-r#for-loops) section
 
 You made it! You completed this chapter.
 
-Here's a summary of what you learnt.
+Here's a summary of what you learned.
 
 ::: {.callout-note appearance="minimal"}
 -   **R** is a programming language while **RStudio** is an IDE.

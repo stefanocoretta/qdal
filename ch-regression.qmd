@@ -261,7 +261,7 @@ weight |>
 
 ## What's next
 
-In this post you have learnt the very basics of Bayesian regression models. As mentioned above, regression models with brms are very flexible and you can easily fit very complex models with a variety of distribution families (for a list, see `?brmsfamily`; you can even define your own distributions!).
+In this post you have learned the very basics of Bayesian regression models. As mentioned above, regression models with brms are very flexible and you can easily fit very complex models with a variety of distribution families (for a list, see `?brmsfamily`; you can even define your own distributions!).
 
 The perk of using brms is that you can just learn the basics of one package and one approach and use it to fit a large variety of regression models.
 

@@ -2,7 +2,7 @@
 
 ![](https://img.shields.io/badge/Area-Statistics-red)
 
-In @sec-probability, you have learnt the basics of probability and how to run Gaussian models to estimate the mean and standard deviation ($\mu$ and $\sigma$) of a variable. This chapter extends the Gaussian model to what is commonly called a Gaussian **regression model**. Regression models (including the Gaussian) are models based on the equation of a straight line. They allow you to model the relationship between two or more variables. This textbook introduces you to regression models of varying complexity which can model variables frequently encountered in linguistics. Note that regression models are very powerful and flexible statistical models which can deal with a great variety of types of variables. \[TODO: Appendix of types of regression models cheatsheet\].
+In @sec-probability, you have learned the basics of probability and how to run Gaussian models to estimate the mean and standard deviation ($\mu$ and $\sigma$) of a variable. This chapter extends the Gaussian model to what is commonly called a Gaussian **regression model**. Regression models (including the Gaussian) are models based on the equation of a straight line. They allow you to model the relationship between two or more variables. This textbook introduces you to regression models of varying complexity which can model variables frequently encountered in linguistics. Note that regression models are very powerful and flexible statistical models which can deal with a great variety of types of variables. \[TODO: Appendix of types of regression models cheatsheet\].
 
 ## A straight line
 
