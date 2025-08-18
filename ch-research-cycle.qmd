@@ -1,10 +1,10 @@
-# Research cycle  {#sec-res-cycle}
+# Research cycle {#sec-res-cycle}
 
 ![](https://img.shields.io/badge/Area-Research_methods-blue)
 
 In @sec-res-meth, you learned about the research process, which includes the research context, data acquisition, data analysis and communication. A different perspective on the research process that highlights the temporal succession of the process steps is the [research cycle]{.smallcaps}, represented in an idealised form in @fig-res-cycle.
 
-![The research cycle](img/res-process-cycle.png){#fig-res-cycle fig-align="center" width="500"}
+![The research cycle](img/res-process-cycle.png){#fig-res-cycle fig-align="center" width="700"}
 
 The cycle starts with the development of **research questions and hypotheses**. This step involves a thorough literature review and the identification of the topic, research problem, goal, questions and, possibly, hypotheses (as described in @sec-res-context). Once the research questions and hypotheses have been determined, the researcher proceeds with the **design of the study** which sets out to answer the research questions and assess the research hypotheses. The study design process includes determining a large number of interconnected aspects, like materials, procedures, data management and data analysis plans, target population, sampling method and so on. At times the study design process reveals shortcomings or unforeseen aspects of the research questions/hypotheses which can be updated accordingly.
 
@@ -30,7 +30,7 @@ Consequently, a substantial body of published articles likely present overconfid
 This section contains text from @coretta2020b (CC-BY-NC) .
 :::
 
-![The research cycle and questionable research practices](img/res-process-cycle-qrps.png){#fig-res-cycle-qrps fig-align="center" width="500"}
+![The research cycle and questionable research practices](img/res-process-cycle-qrps.png){#fig-res-cycle-qrps fig-align="center" width="700"}
 
 [Questionable research practices]{.smallcaps} are practices, whether intentional or not, that undermine the robustness of research [@simmons2011; @morin2015; @flake2020]. Questionable research practices are practices that negatively affect the research enterprise, but that are employed (most of the time unintentionally) by a surprisingly high number of researchers [@john2012]. For each step in the research cycle, questionable practices are available to researchers. These are part of the researcher's degrees of freedom, introduced in the previous section. In this section, we will briefly review some of the most common questionable research practices identified in the literature.
 
