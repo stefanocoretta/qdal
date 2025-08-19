@@ -4,6 +4,7 @@
 
 ```{r}
 #| label: setup
+#| include: false
 
 library(webexercises)
 
@@ -74,3 +75,4 @@ opts_1b <- c(
 cat("**b. Which of the following is considered a Questionable Research Practice.**", longmcq(opts_1b))
 ```
 :::
+
