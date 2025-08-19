@@ -70,7 +70,11 @@ The following picture is a reconstruction of what [Galileo Galilei](https://en.w
 
 ![](img/uncertainty.png)
 
-Only six years later, telescopes were much better and Galileo could correctly identify that the flaking circles were not spheres orbiting around Saturn, but rings. The moral of the story is that at any point in history we are like Galileo in at least some of our research: we might be close to understanding something but not quite yet. So what do we do with such uncertainty and variability? We can use statistics to quantify them!
+Only six years later, telescopes were much better and Galileo could correctly identify that the flaking circles were not spheres orbiting around Saturn, but rings. The figures below show how the sketches evolved over time between first observation and publication.
+
+![](img/saturn-galileo-sketches_med_hr.jpeg){fig-align="center"}
+
+The moral of the story is that at any point in history we are like Galileo in at least some of our research: we might be close to understanding something but not quite yet. So what do we do with such uncertainty and variability? We can use statistics to quantify them!
 
 ::: callout-tip
 ## Statistics
@@ -174,9 +178,9 @@ cat("Three researchers meet at a coffee shop. Each of them tells the other two a
 ```
 :::
 
-::: callout-note
-### Summary
+## Summary
 
+::: {.callout-note appearance="minimal"}
 -   Inference is the process of learning something about a population through a sample.
 
 -   Uncertainty in each observation and variability across observations affect the inference process.
