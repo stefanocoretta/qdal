@@ -137,7 +137,7 @@ As Gollum would put it, *all that glisters is not gold*.
 #| echo: false
 
 cat("**True or false?**", "\n\n")
-cat("a. Statistics is a necessary if one wants to know the truth.", torf(FALSE), "\n\n")
+cat("a. Statistics is necessary if one wants to know the truth.", torf(FALSE), "\n\n")
 cat("b. Statistics is only relevant to objective science.", torf(FALSE), "\n\n")
 cat("c. Statistics is based on mathematics but it is also informed by philosophy.", torf(TRUE), "\n\n")
 cat("d. We can completely remove uncertainty with statistics.", torf(FALSE))
