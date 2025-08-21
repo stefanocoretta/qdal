@@ -1,4 +1,4 @@
-# Transform data  {#sec-transform}
+# Transform data {#sec-transform}
 
 ```{r}
 #| label: setup

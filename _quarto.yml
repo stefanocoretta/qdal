@@ -32,6 +32,7 @@ book:
     - ch-quarto.qmd
     - ch-viz-principles.qmd
     - ch-plotting.qmd
+    - ch-more-plotting.qmd
     - ch-research-cycle.qmd
   - part: Week 4
     chapters:
