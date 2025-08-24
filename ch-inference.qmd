@@ -8,6 +8,8 @@
 #| label: setup
 #| include: false
 
+library(tidyverse)
+library(glue)
 library(webexercises)
 ```
 
@@ -74,7 +76,54 @@ Only six years later, telescopes were much better and Galileo could correctly id
 
 ![](img/saturn-galileo-sketches_med_hr.jpeg){fig-align="center"}
 
-The moral of the story is that at any point in history we are like Galileo in at least some of our research: we might be close to understanding something but not quite yet. So what do we do with such uncertainty and variability? We can use statistics to quantify them!
+The moral of the story is that at any point in history we are like Galileo in at least some of our research: we might be close to understanding something but not quite yet.
+
+Let's start by reading the RT data from the MALD dataset [@tucker2019]. The study the data comes from used an auditory lexical decision task to elicit RTs and accuracy data. In each trial, participants would listen to a word and would have to press a button to say if the word is a real English word or not. The RT is the time lag between the offset of the auditory stimulus (the target word) and the button press. Note that to keep things more manageable, the data we will read is just a subset of the full data.
+
+```{r}
+#| label: mald
+
+mald <- readRDS("data/tucker2019/mald_1_1.rds")
+
+```
+
+```{r}
+#| label: mald-rt
+
+mald |> 
+  ggplot(aes(RT)) +
+  geom_density(fill = "purple", alpha = 0.5) +
+  geom_rug(alpha = 0.1) +
+  labs(x = "Reaction Times (ms)")
+
+```
+
+```{r}
+#| label: mald-summ
+mald |> 
+  summarise(
+    mean_RT = round(mean(RT)), sd_RT = round(sd(RT)), median_RT = round(median(RT))
+  )
+```
+
+```{r}
+#| label: rt-l
+
+set.seed(9899)
+rt_l <- list()
+for (i in 1:10) {
+  rt_l[i] <- list(rnorm(n = 20, mean = 1010, sd = 318))
+}
+rt_l[[1]]
+```
+
+```{r}
+# TODO: make into table
+cat("Mean:\n", round(unlist(lapply(rt_l, mean))), "\n")
+cat("SD:\n", round(unlist(lapply(rt_l, sd))))
+```
+
+So what do we do with such uncertainty and variability? We can use statistics to quantify them!
 
 ::: callout-tip
 ## Statistics
