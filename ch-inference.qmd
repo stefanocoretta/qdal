@@ -78,52 +78,64 @@ Only six years later, telescopes were much better and Galileo could correctly id
 
 The moral of the story is that at any point in history we are like Galileo in at least some of our research: we might be close to understanding something but not quite yet.
 
-Let's start by reading the RT data from the MALD dataset [@tucker2019]. The study the data comes from used an auditory lexical decision task to elicit RTs and accuracy data. In each trial, participants would listen to a word and would have to press a button to say if the word is a real English word or not. The RT is the time lag between the offset of the auditory stimulus (the target word) and the button press. Note that to keep things more manageable, the data we will read is just a subset of the full data.
+To give a more concrete example of how each sample is but an imperfect represetation of the population it is taken from, let's look at reaction times (RTs) data from the MALD dataset [@tucker2019]. The study the data comes from used an auditory lexical decision task to elicit RTs and accuracy data. In each trial, participants listened to a word and pressed a button to say if the word is a real English word or not. The RT is the time lag between the offset of the auditory stimulus (the target word) and the button press. Note that to keep things more manageable, the data we will read is just a subset of the full data. @fig-mald-rt shows a density plot of the data: the *x*-axis is the range of RTs (in logged milliseconds), while the *y*-axis shows the "density" of the data. Higher density means that the data contains a lot of observations in that region. Conversely, low density means that the data does not contain a lot of observations in that range. You will learn more about density plots in @sec-probability.
 
 ```{r}
-#| label: mald
+#| label: fig-mald-rt
+#| fig-cap: "Distribution of logged RT values from the MALD data set. The density is a relative measure of how many observations for particular values there are in the data."
+#| code-fold: true
 
 mald <- readRDS("data/tucker2019/mald_1_1.rds")
 
-```
-
-```{r}
-#| label: mald-rt
-
 mald |> 
-  ggplot(aes(RT)) +
+  filter(RT_log > 6) |> 
+  ggplot(aes(RT_log)) +
   geom_density(fill = "purple", alpha = 0.5) +
   geom_rug(alpha = 0.1) +
-  labs(x = "Reaction Times (ms)")
+  labs(x = "Reaction Times (logged ms)")
 
 ```
 
 ```{r}
 #| label: mald-summ
+#| include: false
+
 mald |> 
   summarise(
-    mean_RT = round(mean(RT)), sd_RT = round(sd(RT)), median_RT = round(median(RT))
+    mean_RT = round(mean(RT_log), 2), sd_RT = round(sd(RT_log), 2)
   )
 ```
 
+The mean logged RT is `{r} round(mean(mald$RT_log), 2)` and the standard deviation (a measure of dispersion around the mean, you will learn about them in @sec-summaries) is `{r} round(sd(mald$RT_log), 2)`. We might take these values as the mean and standard deviation of the population of logged RTs. But this would not be correct: these are the *sample* mean and standard deviation. To show why we cannot take these to be the mean and standard deviation of the population, we can simulate RT data based on those values (you will understand the details of this later on, when you learn about probability distributions in @sec-probability, so for now just stay for the ride).
+
 ```{r}
 #| label: rt-l
+#| code-fold: true
 
 set.seed(9899)
 rt_l <- list()
 for (i in 1:10) {
-  rt_l[i] <- list(rnorm(n = 20, mean = 1010, sd = 318))
+  rt_l[i] <- list(rlnorm(n = 20, mean(mald$RT_log), sd(mald$RT_log)))
 }
-rt_l[[1]]
 ```
+
+We sample 20 randomly generated values from a distribution with mean `{r} round(mean(mald$RT_log), 2)` and standard deviation `{r} round(sd(mald$RT_log), 2)`. We then can take the mean and SD of these generated values and compare them to the original distribution's mean and SD. But we can go further and sample 20 values 10 times. This procedure gives us 10 means and standard deviations, one for each sample of 20 values. The means and standard deviations of these 10 random samples are shown in @tbl-rt-1.
 
 ```{r}
-# TODO: make into table
-cat("Mean:\n", round(unlist(lapply(rt_l, mean))), "\n")
-cat("SD:\n", round(unlist(lapply(rt_l, sd))))
+#| label: tbl-rt-l
+#| tbl-cap: ""
+#| message: false
+#| echo: false
+
+tibble(
+  sample = 1:10,
+  mean = round(unlist(lapply(rt_l, function(x) mean(log(x)))), 2),
+  sd = round(unlist(lapply(rt_l, function(x) sd(log(x)))), 2)
+) |> 
+  knitr::kable()
 ```
 
-So what do we do with such uncertainty and variability? We can use statistics to quantify them!
+You will notice that, while all the means and SD are very close to the mean and SD we sampled from, they are not exactly the same: every sample's mean and SD are slightly different from each other and from the mean and SD we sample from. In other words, it's very very unlikely that the sample mean and standard deviation are *exactly* the population mean and standard deviation. Inference is affected by uncertainty and variability. So what do we do with such uncertainty and variability? We can use statistics to quantify them!
 
 ::: callout-tip
 ## Statistics

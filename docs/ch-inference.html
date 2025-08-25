@@ -641,64 +641,119 @@ Uncertainty and variability
 </figure>
 </div>
 <p>The moral of the story is that at any point in history we are like Galileo in at least some of our research: we might be close to understanding something but not quite yet.</p>
-<p>Let’s start by reading the RT data from the MALD dataset <span class="citation" data-cites="tucker2019">(<a href="references.html#ref-tucker2019" role="doc-biblioref">Tucker et al. 2019</a>)</span>. The study the data comes from used an auditory lexical decision task to elicit RTs and accuracy data. In each trial, participants would listen to a word and would have to press a button to say if the word is a real English word or not. The RT is the time lag between the offset of the auditory stimulus (the target word) and the button press. Note that to keep things more manageable, the data we will read is just a subset of the full data.</p>
+<p>To give a more concrete example of how each sample is but an imperfect represetation of the population it is taken from, let’s look at reaction times (RTs) data from the MALD dataset <span class="citation" data-cites="tucker2019">(<a href="references.html#ref-tucker2019" role="doc-biblioref">Tucker et al. 2019</a>)</span>. The study the data comes from used an auditory lexical decision task to elicit RTs and accuracy data. In each trial, participants listened to a word and pressed a button to say if the word is a real English word or not. The RT is the time lag between the offset of the auditory stimulus (the target word) and the button press. Note that to keep things more manageable, the data we will read is just a subset of the full data. <a href="#fig-mald-rt" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> shows a density plot of the data: the <em>x</em>-axis is the range of RTs (in logged milliseconds), while the <em>y</em>-axis shows the “density” of the data. Higher density means that the data contains a lot of observations in that region. Conversely, low density means that the data does not contain a lot of observations in that range. You will learn more about density plots in <a href="ch-probability.html" class="quarto-xref"><span>Chapter 18</span></a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mald <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/tucker2019/mald_1_1.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mald <span class="sc">|&gt;</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(RT)) <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"purple"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reaction Times (ms)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mald <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/tucker2019/mald_1_1.rds"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mald <span class="sc">|&gt;</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(RT_log <span class="sc">&gt;</span> <span class="dv">6</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(RT_log)) <span class="sc">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"purple"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reaction Times (logged ms)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ch-inference_files/figure-html/mald-rt-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-mald-rt" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mald-rt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-inference_files/figure-html/fig-mald-rt-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mald-rt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: Distribution of logged RT values from the MALD data set. The density is a relative measure of how many observations for particular values there are in the data.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>The mean logged RT is 6.88 and the standard deviation (a measure of dispersion around the mean, you will learn about them in <a href="ch-sum-measures.html" class="quarto-xref"><span>Chapter 10</span></a>) is 0.28. We might take these values as the mean and standard deviation of the population of logged RTs. But this would not be correct: these are the <em>sample</em> mean and standard deviation. To show why we cannot take these to be the mean and standard deviation of the population, we can simulate RT data based on those values (you will understand the details of this later on, when you learn about probability distributions in <a href="ch-probability.html" class="quarto-xref"><span>Chapter 18</span></a>, so for now just stay for the ride).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mald <span class="sc">|&gt;</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_RT =</span> <span class="fu">round</span>(<span class="fu">mean</span>(RT)), <span class="at">sd_RT =</span> <span class="fu">round</span>(<span class="fu">sd</span>(RT)), <span class="at">median_RT =</span> <span class="fu">round</span>(<span class="fu">median</span>(RT))</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9899</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>rt_l <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  rt_l[i] <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="fu">mean</span>(mald<span class="sc">$</span>RT_log), <span class="fu">sd</span>(mald<span class="sc">$</span>RT_log)))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We sample 20 randomly generated values from a distribution with mean 6.88 and standard deviation 0.28. We then can take the mean and SD of these generated values and compare them to the original distribution’s mean and SD. But we can go further and sample 20 values 10 times. This procedure gives us 10 means and standard deviations, one for each sample of 20 values. The means and standard deviations of these 10 random samples are shown in <a href="ch-regression-cat.html#tbl-rt-1" class="quarto-xref">Table&nbsp;<span>26.3</span></a>.</p>
+<div class="cell">
+<div id="tbl-rt-l" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-rt-l-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.1
+</figcaption>
+<div aria-describedby="tbl-rt-l-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["mean_RT"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["sd_RT"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["median_RT"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"1010","2":"318","3":"936"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<table class="do-not-create-environment caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">sample</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6.84</td>
+<td style="text-align: right;">0.24</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">7.02</td>
+<td style="text-align: right;">0.30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6.92</td>
+<td style="text-align: right;">0.19</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">6.88</td>
+<td style="text-align: right;">0.31</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6.84</td>
+<td style="text-align: right;">0.27</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6.80</td>
+<td style="text-align: right;">0.22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">6.84</td>
+<td style="text-align: right;">0.25</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">6.95</td>
+<td style="text-align: right;">0.34</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">6.99</td>
+<td style="text-align: right;">0.31</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">6.97</td>
+<td style="text-align: right;">0.32</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9899</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>rt_l <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  rt_l[i] <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="at">mean =</span> <span class="dv">1010</span>, <span class="at">sd =</span> <span class="dv">318</span>))</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>rt_l[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 1067.9821 1167.1525  928.9566  713.3736 1119.1665  887.0371  805.6991
- [8] 1547.8105  754.5677  664.0506 1051.0208  832.9883 1132.8416 1579.2453
-[15]  764.4773 1288.4485  924.1961  648.3479  605.6857  827.2246</code></pre>
+</figure>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: make into table</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Mean:</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">round</span>(<span class="fu">unlist</span>(<span class="fu">lapply</span>(rt_l, mean))), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Mean:
- 966 1177 1055 1012 971 917 972 1089 1144 1116 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"SD:</span><span class="sc">\n</span><span class="st">"</span>, <span class="fu">round</span>(<span class="fu">unlist</span>(<span class="fu">lapply</span>(rt_l, sd))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>SD:
- 278 342 220 348 303 249 281 389 353 361</code></pre>
-</div>
-</div>
-<p>So what do we do with such uncertainty and variability? We can use statistics to quantify them!</p>
+<p>You will notice that, while all the means and SD are very close to the mean and SD we sampled from, they are not exactly the same: every sample’s mean and SD are slightly different from each other and from the mean and SD we sample from. In other words, it’s very very unlikely that the sample mean and standard deviation are <em>exactly</em> the population mean and standard deviation. Inference is affected by uncertainty and variability. So what do we do with such uncertainty and variability? We can use statistics to quantify them!</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -789,14 +844,14 @@ Quiz 2
 <section id="many-analysts-one-data-set-subjectivity-exposed" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="many-analysts-one-data-set-subjectivity-exposed"><span class="header-section-number">6.3</span> Many Analysts, One Data Set: subjectivity exposed</h2>
 <p>In <span class="citation" data-cites="silberzahn2018">Silberzahn et al. (<a href="references.html#ref-silberzahn2018" role="doc-biblioref">2018</a>)</span>, a group of researchers asked 29 independent analysis teams to answer the following question based on provided data: Is there a link between player skin tone and number of red cards in soccer? Crucially, <strong>69% of the teams reported an effect of player skin tone, and 31% did not</strong>. In total, the 29 teams came up with 21 unique types of statistical analysis. These results clearly show how subjective statistics is and how even a straightforward question can lead to a multitude of answers. To put it in Silberzah et al’s words: “The observed results from analyzing a complex data set can be highly contingent on <strong>justifiable, but subjective</strong>, analytic decisions. This is why you should always be somewhat <strong>sceptical of the results of any single study</strong>: you never know what results might have been found if another research team did the study. This is a reason for why replicating research is very important. You will learn about replication and related concepts in <a href="ch-research-cycle.html" class="quarto-xref"><span>Chapter 17</span></a>.</p>
-<p><span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span> tried something similar, but in the context of the speech sciences: they asked 30 independent analysis teams (84 signed up, 46 submitted an analysis, 30 submitted usable analyses) to answer the question: Do speakers acoustically modify utterances to signal atypical word combinations? Outstandingly, the 30 teams submitted 109 individual analyses—a bit more than 3 analyses per team!—and 52 unique measurement specifications in 47 unique model specifications. <span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span> say: “<strong>Nine teams out of the thirty (30%) reported to have found at least one statistically reliable effect</strong> (based on the inferential criteria they specified). Of the 170 critical model coefficients, 37 were claimed to show a statistically reliable effect (21.8%).” <a href="#fig-flex" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> illustrates the analytic flexibility typical of acoustic analyses. (A) shows the pipeline of decision a researcher would have to do: which linguistic unit, which temporal window, which acoustic parameters and how to measure those. You can appreciate that there are potentially many combinations. (B) illustrates the fundamental frequency (f0) contour of the sentences “I can’t bear ANOTHER meeting on Zoom” and “I can’t bear another meeting on ZOOM”. In both sentences, the green shaded area marks the word “another”. Finally, in (C) you see the different parameters that can be extracted from the f0 contour of the word “another”. In sum, there are many choices a researcher is faced with and, while most of these choices might be justifiable, they are still subjective, as shows by the large variability of actual analyses carried out by the analyses teams in <span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span>.</p>
+<p><span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span> tried something similar, but in the context of the speech sciences: they asked 30 independent analysis teams (84 signed up, 46 submitted an analysis, 30 submitted usable analyses) to answer the question: Do speakers acoustically modify utterances to signal atypical word combinations? Outstandingly, the 30 teams submitted 109 individual analyses—a bit more than 3 analyses per team!—and 52 unique measurement specifications in 47 unique model specifications. <span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span> say: “<strong>Nine teams out of the thirty (30%) reported to have found at least one statistically reliable effect</strong> (based on the inferential criteria they specified). Of the 170 critical model coefficients, 37 were claimed to show a statistically reliable effect (21.8%).” <a href="#fig-flex" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> illustrates the analytic flexibility typical of acoustic analyses. (A) shows the pipeline of decision a researcher would have to do: which linguistic unit, which temporal window, which acoustic parameters and how to measure those. You can appreciate that there are potentially many combinations. (B) illustrates the fundamental frequency (f0) contour of the sentences “I can’t bear ANOTHER meeting on Zoom” and “I can’t bear another meeting on ZOOM”. In both sentences, the green shaded area marks the word “another”. Finally, in (C) you see the different parameters that can be extracted from the f0 contour of the word “another”. In sum, there are many choices a researcher is faced with and, while most of these choices might be justifiable, they are still subjective, as shows by the large variability of actual analyses carried out by the analyses teams in <span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span>.</p>
 <div id="fig-flex" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-flex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="img/forking-paths.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-flex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.1: Illustration of the analytic flexibility associated with acoustic analyses <span class="citation" data-cites="coretta2023">(from <a href="references.html#ref-coretta2023" role="doc-biblioref">Coretta et al. 2023</a>)</span>
+Figure&nbsp;6.2: Illustration of the analytic flexibility associated with acoustic analyses <span class="citation" data-cites="coretta2023">(from <a href="references.html#ref-coretta2023" role="doc-biblioref">Coretta et al. 2023</a>)</span>
 </figcaption>
 </figure>
 </div>
