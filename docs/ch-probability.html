@@ -20,7 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -466,8 +521,10 @@ window.Quarto = {
   <ul>
   <li><a href="#probabilities" id="toc-probabilities" class="nav-link active" data-scroll-target="#probabilities"><span class="header-section-number">18.1</span> Probabilities</a></li>
   <li><a href="#probability-distributions" id="toc-probability-distributions" class="nav-link" data-scroll-target="#probability-distributions"><span class="header-section-number">18.2</span> Probability distributions</a></li>
-  <li><a href="#the-gaussian-distribution" id="toc-the-gaussian-distribution" class="nav-link" data-scroll-target="#the-gaussian-distribution"><span class="header-section-number">18.3</span> The Gaussian distribution</a></li>
-  <li><a href="#intervals" id="toc-intervals" class="nav-link" data-scroll-target="#intervals"><span class="header-section-number">18.4</span> Intervals</a></li>
+  <li><a href="#probability-mass-and-density-functions" id="toc-probability-mass-and-density-functions" class="nav-link" data-scroll-target="#probability-mass-and-density-functions"><span class="header-section-number">18.3</span> Probability mass and density functions</a></li>
+  <li><a href="#density-plots" id="toc-density-plots" class="nav-link" data-scroll-target="#density-plots"><span class="header-section-number">18.4</span> Density plots</a></li>
+  <li><a href="#the-gaussian-distribution" id="toc-the-gaussian-distribution" class="nav-link" data-scroll-target="#the-gaussian-distribution"><span class="header-section-number">18.5</span> The Gaussian distribution</a></li>
+  <li><a href="#sec-intervals" id="toc-sec-intervals" class="nav-link" data-scroll-target="#sec-intervals"><span class="header-section-number">18.6</span> Intervals</a></li>
   </ul>
 </nav>
     </div>
@@ -496,8 +553,8 @@ window.Quarto = {
 <p><img src="https://img.shields.io/badge/Area-Statistics-red.png" class="img-fluid"></p>
 <section id="probabilities" class="level2" data-number="18.1">
 <h2 data-number="18.1" class="anchored" data-anchor-id="probabilities"><span class="header-section-number">18.1</span> Probabilities</h2>
-<p>Probability as a discipline is the study of chance and uncertainty. It provides a systematic way to describe and reason about events whose outcomes cannot be predicted with certainty. In everyday life, probabilities are used to talk about situations ranging from rolling dice and drawing cards to forecasting the weather or assessing risks. A probability is expressed as a number between 0 and 1, where 0 means the event is impossible, 1 means it is certain, and values in between reflect varying degrees of likelihood. Thinking in terms of probability allows us to quantify uncertainty and to make informed statements about how likely different outcomes are, even when we cannot predict exactly what will happen.</p>
-<p>The rules of probability ensure that these numbers behave consistently. The <strong>non-negativity rule</strong> states that no probability can be less than 0. The <strong>normalization rule</strong> requires that the probability of all possible outcomes of a situation must add up to exactly 1, which guarantees that something in the set of possible outcomes will happen. The <strong>addition rule</strong> tells us that if two events cannot both occur at the same time—such as rolling a 3 or rolling a 5 on a single die throw—the probability of either happening is the sum of their individual probabilities. The <strong>multiplication rule</strong> applies when two events are independent, meaning the outcome of one does not affect the other—for instance, tossing a coin and rolling a die. In that case, the probability of both occurring together is the product of their probabilities. These rules provide the logical foundation for reasoning about probabilities and will serve as the basis for describing probability distributions, which organize and model probabilities across a whole set of possible outcomes.</p>
+<p>Probability as a discipline is the study of chance and uncertainty. It provides a systematic way to describe and reason about events whose outcomes cannot be predicted with certainty. In everyday life, probabilities are used to talk about situations ranging from rolling dice and drawing cards to forecasting the weather or assessing risks. A probability is expressed as a number between 0 and 1, where 0 means the event is impossible, 1 means it is certain, and values in between reflect varying degrees of likelihood. So for example if I say the probability of rain tomorrow is 0, it means that raining tomorrow is impossible. Conversely, if I say that the probability of rain tomorrow is 1, I mean that raining tomorrow is certain: it will happen. Probabilities are also expressed as percentages: so 0 is 0% and 1 is 100% percent. An 80% probability of rain tomorrow is a high probability, but not quite certainty. Thinking in terms of probability allows us to quantify uncertainty and to make informed statements about how likely different outcomes are, even when we cannot predict exactly what will happen.</p>
+<p>The rules of probability ensure that these numbers behave consistently. The <strong>non-negativity rule</strong> states that no probability can be less than 0. The <strong>normalization rule</strong> requires that the probability of all possible outcomes of a situation must add up to exactly 1, which guarantees that something in the set of possible outcomes will happen. The <strong>addition rule</strong> tells us that if two events cannot both occur at the same time—such as rolling a 3 or rolling a 5 on a single die throw—the probability of either happening is the sum of their individual probabilities. The <strong>multiplication rule</strong> applies when two events are independent, meaning the outcome of one does not affect the other—for instance, tossing a coin and rolling a die. In that case, for example, the probability of getting heads and a 3 together is the product of their individual probabilities (i.e.&nbsp;the probability of getting heads, 1/2 or 0.5, and the probability of getting 3, 1/6 or 0.166): if we multiply 0.5 by 0.166, we get approximately 0.083. So there is an 8.3% probability of getting heads and a 3 when flipping a coin and rolling a die. These rules provide the logical foundation for reasoning about probabilities and serve as the basis for describing probability distributions, which organize and model probabilities across a whole set of possible outcomes. However, you will see that in practice you will rarely have to use them, yourself.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -520,13 +577,150 @@ Quiz 1
 </section>
 <section id="probability-distributions" class="level2" data-number="18.2">
 <h2 data-number="18.2" class="anchored" data-anchor-id="probability-distributions"><span class="header-section-number">18.2</span> Probability distributions</h2>
-<p>A probability distribution is a way of describing how probabilities are assigned to all possible outcomes of a random process. Instead of focusing on the probability of a single event, a distribution gives the full picture: it tells us the likelihood of every possible value a random variable can take. For example, when rolling a fair six-sided die, the probability distribution assigns a probability of <span class="math inline">\(1/6\)</span> to each face, reflecting that all outcomes (i.e.&nbsp;all numbers from 1 to 6) are equally likely. In other cases, probabilities may not be spread evenly, as with a biased coin or the distribution of heights in a population. By summarizing the likelihood of all outcomes at once, probability distributions allow us to see patterns in a clear and structured way.</p>
-<p>There are two broad types of probability distributions: <strong>discrete</strong> and <strong>continuous</strong>. Discrete distributions apply when the set of possible outcomes is countable, such as the result of a dice roll, the number of cars passing a junction in an hour, or the number of students present in a classroom. Here, probabilities are assigned to distinct values, and the total across all possible outcomes must equal 1. Continuous distributions, on the other hand, are used when outcomes can take on any value within a range, such as weight, temperature, or time. In these cases, probabilities are described by smooth curves rather than discrete points, and instead of assigning probability to individual values, we consider intervals: for example, the probability that a person’s height lies between 160 cm and 170 cm.</p>
-<p>Several well-known distributions serve as fundamental building blocks in probability and statistics. Among discrete distributions, the binomial distribution describes the number of successes in a fixed number of independent trials (like accuracy data from a behavioural task), while the Poisson distribution is used for counting events that occur randomly over time or space (such as number of relatives sentences in a corpus). In the continuous case, the <strong>Gaussian distribution</strong>—also called the “normal” distribution and nicknamed the “bell curve”—has many useful mathematical properties and it features prominently in any statistical textbook. Other continuous distributions are, for example, the beta distribution, for continuous variables bounded between 0 and 1, and the uniform distribution, which distributed probabilities equally across the entire range of real numbers.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/grubabilities.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>A probability distribution is a way of describing how probabilities are assigned to all possible outcomes of a random process. Conceptually, you can think of a probability distribution as a distribution of probabilities: i.e.&nbsp;a list of possible outcomes (values) and their probability. Instead of focusing on the probability of a single event (like getting a 4 on a die), a distribution gives the full picture: it tells us the likelihood of every possible value a random variable can take. For example, when rolling a fair six-sided die, the probability distribution assigns a probability of <span class="math inline">\(1/6\)</span> to each face, reflecting that all outcomes (i.e.&nbsp;all numbers from 1 to 6) are equally likely. In other cases, probabilities may not be spread evenly, as with a biased coin or the distribution of heights in a population (there are more people of mean height that very short and very tall people). By summarizing the likelihood of all outcomes at once, probability distributions allow us to see patterns in a clear and structured way.</p>
+<p>There are two broad types of probability distributions: discrete and continuousprobability distributions. <strong>Discrete probability distributions</strong> apply to discrete variables, such as the result of a dice roll, the number of words known by an infant, or the accuracy of a response (correct vs incorrect). Here, probabilities are assigned to distinct values, and the total across all possible outcomes must equal 1. So, on a six-sided die, each outcome has a <span class="math inline">\(1/6\)</span> (one in six) probability and since there are six outcomes, <span class="math inline">\(1/6 * 6 = 1\)</span>. <strong>Continuous probability distributions</strong>, on the other hand, are used when outcomes can take on any value within a range, such as height, reaction times, or phone duration. In these cases, probabilities are described by smooth curves rather than discrete points, and instead of assigning probability to individual values, we consider intervals, like for example, the probability that a person’s height lies between 160 cm and 170 cm (more on this in <a href="#sec-intervals" class="quarto-xref"><span>Section 18.6</span></a> below). <a href="#fig-distr" class="quarto-xref">Figure&nbsp;<span>18.1</span></a> shows an example of a categorical probability distribution (the probability of respondents answering “no” or “yes” in a survey) and a continuous probability distribution (the proportion of voicing during closure of a stop).</p>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>bernoulli_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="st">"No"</span>, <span class="st">"Yes"</span>),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">probability =</span> <span class="fu">c</span>(<span class="dv">1</span> <span class="sc">-</span> p, p)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bernoulli_df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(x), <span class="at">y =</span> <span class="dv">0</span> , <span class="at">yend =</span> probability)) <span class="sc">+</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">colour =</span> <span class="st">"steelblue"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">y =</span> probability), <span class="at">colour =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">element_blank</span>(), <span class="at">y =</span> <span class="st">"Probability"</span>) <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>beta_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">100</span>),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">density =</span> <span class="fu">dbeta</span>(x, alpha, beta)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(beta_df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> density)) <span class="sc">+</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"darkorange"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Proportion of voicing"</span>, <span class="at">y =</span> <span class="st">"Density"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-distr" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-distr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-distr" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-distr-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-distr-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-probability_files/figure-html/fig-distr-1.png" class="img-fluid figure-img" data-ref-parent="fig-distr" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-distr-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Categorical probability distribution.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-distr" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-distr-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-distr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-probability_files/figure-html/fig-distr-2.png" class="img-fluid figure-img" data-ref-parent="fig-distr" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-distr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Continuous probability distribution.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-distr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.1: Example of a categorical probability distributiona and a continous probability distribution.
+</figcaption>
+</figure>
+</div>
+<p>Several well-known distributions serve as fundamental building blocks in probability and statistics. Among discrete distributions, the binomial distribution describes the number of successes in a fixed number of independent trials (like accuracy data from a behavioural task), while the Poisson distribution is used for counting events that occur randomly over time or space (such as number of relatives sentences in a corpus). In the continuous case, the Gaussian distribution—also called the “normal” distribution and nicknamed the “bell curve”—has many useful mathematical properties and it features prominently in any statistical textbook. Other continuous distributions are, for example, the beta distribution, illustrated in <a href="#fig-distr-2" class="quarto-xref">Figure&nbsp;<span>18.1 (b)</span></a>, used for continuous variables bounded between 0 and 1, and the uniform distribution, which distributes probabilities equally across the entire range of real numbers (so it is a “flat” distribution, since it looks like a horizontal line).</p>
 <p>Probability distributions are more than just mathematical descriptions—they provide tools for making sense of variation and uncertainty in the world. They allow us to calculate probabilities for complex events, to compare different random processes, and to build models that reflect real-world randomness. Once the distribution of a random variable is known, we can derive useful summaries such as averages, variability, and the likelihood of extreme outcomes. In this way, probability distributions bridge the abstract rules of probability with the practical task of describing how probability operates across a whole set of possibilities.</p>
 </section>
-<section id="the-gaussian-distribution" class="level2" data-number="18.3">
-<h2 data-number="18.3" class="anchored" data-anchor-id="the-gaussian-distribution"><span class="header-section-number">18.3</span> The Gaussian distribution</h2>
+<section id="probability-mass-and-density-functions" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="probability-mass-and-density-functions"><span class="header-section-number">18.3</span> Probability mass and density functions</h2>
+<p>How is the probability of different outcomes of ranges of outcomes calculated? For discrete distributions, the probability <em>mass</em> function (PMF) is used to compute probabilities. Let’s take the Bernoulli probability distribution from figure <a href="#fig-distr-1" class="quarto-xref">Figure&nbsp;<span>18.1 (a)</span></a>: the PMF of a Bernoulli distribution is <span class="math inline">\(p\)</span> for the probability of the outcome being 1, and <span class="math inline">\(q = 1 - p\)</span> for the probability of the outcome being 0. In the figure, 1 = “Yes” and 0 = “No”. There is a probability <span class="math inline">\(p = 0.8\)</span> of getting a “Yes”, hence there is a probability <span class="math inline">\(q = 1 - p = 1- 0.8 = 0.2\)</span> of getting a “No”. Continuous probability distributions use probability <em>density</em> functions (PDFs, nothing to do with the file format): these don’t tell you the probability of a specific value, but rather the <em>probability density</em> or in other words how dense the probability is around a point. I will spare you the mathematical details of PDFs, but they are the reason for using density plots. You’ve encountered a density plot already, in <a href="#fig-distr-2" class="quarto-xref">Figure&nbsp;<span>18.1 (b)</span></a> above. The curve you see in that figure is calculated with the PDF of the beta distribution. Because we used a PDF, this is a theoretical probability distribution. In practice, you will almost never have to use PMFs and PDFs yourself, but it helps to know about them.</p>
+<p>What if we want the density of a sample from a random variable, like logged RTs from the MALD data set <span class="citation" data-cites="tucker2019">(<a href="references.html#ref-tucker2019" role="doc-biblioref">Tucker et al. 2019</a>)</span>? Obtaining the density curve of a sample is done with kernel density estimation (KDE): this is a function that creates a smooth, continuous estimate of a probability density from a finite set of data points (the sample). As with PMFs and PDFs, you will very rarely have to use KDE directly, since R applies it for you. So let’s see how to make a density plot in ggplot2.</p>
+</section>
+<section id="density-plots" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="density-plots"><span class="header-section-number">18.4</span> Density plots</h2>
+<p>You can create a density plot (i.e.&nbsp;a plot that shows the density curve as obtained from KDE) of sample values from a continuous variable with the density geometry: <code>geom_density()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First read the data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mald <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/tucker2019/mald_1_1.rds"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>mald <span class="sc">|&gt;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(RT)) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reaction Times (ms)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-density-rt" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-density-rt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-probability_files/figure-html/fig-density-rt-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-rt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.2: Density plot of reaction times.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-density-rt" class="quarto-xref">Figure&nbsp;<span>18.2</span></a> shows the density of reaction times from the MALD data set, in milliseconds. The higher the curve, the higher the density around the values below that part of the curve. In this sample of RTs, the density is high around about 900 ms. It drops quite sharply below 900 ms to about 500, while on the other side of 900 it has a more gentle slope. When a density plot looks like that, we say the distribution is <strong>right-skewed</strong> or that is has <strong>positive skew</strong>. This is because the distribution is skewed towards larger values. We can visualise this better by adding a “rug” to the plot with <code>geom_rug()</code>. This geometry adds a tick below the curve, on the <em>x</em>-axis, for each value in the sample. Look at <a href="#fig-density-rt-rug" class="quarto-xref">Figure&nbsp;<span>18.3</span></a>. Note how dense the ticks are where the density is high, and how sparse the ticks are where the density is lower. This makes sense, that’s what the density represents. Setting <code>alpha = 0.1</code> makes the ticks transparent so that the denseness is even more obvious (darker areas mean greater density because the ticks overlap, thus becoming darker). Now also notice how there are many more ticks to the right of the highest part of the density than to the left. This is the right-skewness we were talking about. This aspect will be relevant when you will learn about regression models in later chapters, but in fact we will not directly address this again until <span class="quarto-unresolved-ref">?sec-lognormal</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mald <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(RT)) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reaction Times (ms)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-density-rt-rug" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-density-rt-rug-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-probability_files/figure-html/fig-density-rt-rug-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-rt-rug-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.3: Density plot of reaction times with rug.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Density plots can also be made for different groupings, like in the following plot where we show the density of RTs depending on the lexical status of the word (real or non-real). You can use the <code>fill</code> aesthetics to fill the area under the density curve with colour by <code>IsWord</code>. <a href="#fig-density-rt-word" class="quarto-xref">Figure&nbsp;<span>18.4</span></a> shows the densities of RTs depending on lexical status. It is subtle, but we can see that the density peak for nonce words (<code>IsWord = FALSE</code>) is to the right of the peak for real words. This means that we can expect on average higher RTs for nonce words than for real words. Moreover, the curve for nonce words is overall lower than that for real words: this means that RTs with real words are more tightly concentrated around the peak, while RTs with nonce words are more spread.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mald <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(RT, <span class="at">fill =</span> IsWord)) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reaction Times (ms)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-density-rt-word" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-density-rt-word-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-probability_files/figure-html/fig-density-rt-word-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-rt-word-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18.4: Density plot of reaction times by lexical status.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-gaussian-distribution" class="level2" data-number="18.5">
+<h2 data-number="18.5" class="anchored" data-anchor-id="the-gaussian-distribution"><span class="header-section-number">18.5</span> The Gaussian distribution</h2>
 <p>In the previous section, we have seen that you can visualise probability distributions by plotting the values of the probability function applied to sampled values. For discrete variables, the probability mass function is used while the probability density function is used for continuous variables. Visualising probability distributions is more practical than listing all the possible values and their probability (especially with continuous variables—since they are continuous there is an infinite number of values!). Another convenient way to express probability distributions is by specifying the values of set of parameters, which can reconstruct the entire distribution. Different <strong>probability distribution families</strong> have a different number of parameters and different parameters. A probability family is an abstraction of specific probability distributions (i.e.&nbsp;probability distributions of observed values).</p>
 <p>A convenient probability distribution family is the <strong>Gaussian</strong> [ˈgaʊsɪən] <strong>probability distribution</strong>. The Gaussian distribution is a continuous probability distribution and it has two parameters:</p>
 <ul>
@@ -558,10 +752,15 @@ Exercise
 </div>
 </div>
 </section>
-<section id="intervals" class="level2" data-number="18.4">
-<h2 data-number="18.4" class="anchored" data-anchor-id="intervals"><span class="header-section-number">18.4</span> Intervals</h2>
+<section id="sec-intervals" class="level2" data-number="18.6">
+<h2 data-number="18.6" class="anchored" data-anchor-id="sec-intervals"><span class="header-section-number">18.6</span> Intervals</h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-tucker2019" class="csl-entry" role="listitem">
+Tucker, Benjamin V, Daniel Brenner, Kyle Danielson D, Matthew C Kelley, Filip Nenadić, and Michelle Sims. 2019. <span>“The Massive Auditory Lexical Decision (MALD) Database.”</span> <em>Behavior Research Methods</em> 51 (3): 11871204. <a href="https://doi.org/10.3758/s13428-018-1056-1">https://doi.org/10.3758/s13428-018-1056-1</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
