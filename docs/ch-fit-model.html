@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>21&nbsp; Running Gaussian models – Quantitative Data Analysis for Linguists in R</title>
+<title>22&nbsp; Running Gaussian models – Quantitative Data Analysis for Linguists in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -149,7 +149,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-fit-model.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-fit-model.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -338,20 +338,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-gaussian.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">The Gaussian distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-freq-bayes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-gauss-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Gaussian models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Gaussian models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-fit-model.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></span></a>
   </div>
 </li>
       </ul>
@@ -368,19 +374,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction to regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-draws.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span></a>
   </div>
 </li>
       </ul>
@@ -397,7 +403,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-interim-summ.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
   </div>
 </li>
       </ul>
@@ -414,25 +420,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Regression models: categorical predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Regression models: categorical predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Indexing categorical predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Indexing categorical predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
       </ul>
@@ -449,7 +455,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
   </div>
 </li>
       </ul>
@@ -466,19 +472,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: interactions using indexing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions using indexing</span></span></a>
   </div>
 </li>
       </ul>
@@ -499,19 +505,19 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#posterior-probability-distributions" id="toc-posterior-probability-distributions" class="nav-link active" data-scroll-target="#posterior-probability-distributions"><span class="header-section-number">21.1</span> Posterior probability distributions</a></li>
-  <li><a href="#plotting-the-posterior-distributions" id="toc-plotting-the-posterior-distributions" class="nav-link" data-scroll-target="#plotting-the-posterior-distributions"><span class="header-section-number">21.2</span> Plotting the posterior distributions</a></li>
-  <li><a href="#interpreting-credible-intervals" id="toc-interpreting-credible-intervals" class="nav-link" data-scroll-target="#interpreting-credible-intervals"><span class="header-section-number">21.3</span> Interpreting Credible Intervals</a></li>
-  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">21.4</span> Reporting</a></li>
+  <li><a href="#posterior-probability-distributions" id="toc-posterior-probability-distributions" class="nav-link active" data-scroll-target="#posterior-probability-distributions"><span class="header-section-number">22.1</span> Posterior probability distributions</a></li>
+  <li><a href="#plotting-the-posterior-distributions" id="toc-plotting-the-posterior-distributions" class="nav-link" data-scroll-target="#plotting-the-posterior-distributions"><span class="header-section-number">22.2</span> Plotting the posterior distributions</a></li>
+  <li><a href="#interpreting-credible-intervals" id="toc-interpreting-credible-intervals" class="nav-link" data-scroll-target="#interpreting-credible-intervals"><span class="header-section-number">22.3</span> Interpreting Credible Intervals</a></li>
+  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">22.4</span> Reporting</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-fit-model.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-fit-model.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-fit-model" class="quarto-section-identifier"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></span></h1>
+<h1 class="title"><span id="sec-fit-model" class="quarto-section-identifier"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></span></h1>
 </div>
 
 
@@ -529,7 +535,7 @@ window.Quarto = {
 
 
 <p><img src="https://img.shields.io/badge/Area-Statistics-red.png" class="img-fluid"> <img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
-<p>You can fit a Gaussian model to data using the <a href="https://paulbuerkner.com/brms/">brms</a> package (the name is an initialism of Bayesian Regression Models using Stan; Gaussian models are a special type of regression models, which will be introduced in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 22</span></a>).</p>
+<p>You can fit a Gaussian model to data using the <a href="https://paulbuerkner.com/brms/">brms</a> package (the name is an initialism of Bayesian Regression Models using Stan; Gaussian models are a special type of regression models, which will be introduced in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>).</p>
 <p>The brms package can run a variety of Bayesian (regression) models. It is a very flexible package that allows you to model a lot of different types of variables. You don’t really need to understand all of the technical details to be able to effectively use the package and interpret the results, so this textbook will focus on how to use the package in the context of research. We will cover some of the technicalities, but if you are are particularly interested in the inner workings of the package, feel free to do so (you can find materials on specific aspects by searching online). One useful thing to know is that brms is a bridge between R and the statistical programming software <a href="https://mc-stan.org">Stan</a>. Stan is a powerful piece of software that can run any type of Bayesian models. What brms does is that it allows you to write Bayesian models in R, which are translated into Stan models and run with Stan under the hood. You can safely use brms without learning Stan, but if you are interested in the computational aspects of Stan, you can check the <a href="https://mc-stan.org">Stan documentation</a>.</p>
 <p>The first thing to do is of course to attach the brms package (see code below). You can then run a regression model with the <code>brm()</code> function, short for Bayesian Regression Model (a Gaussian model is a special type of regression model). The mandatory arguments of <code>brm()</code> are a model formula, a distribution family (of the outcome variable), and the data you want to run the model with. Running a model with data is also formally known as <em>fitting the model to the data</em>. Remember the model mathematical formula from above: <span class="math inline">\(\text{RT} \sim Gaussian(\mu, \sigma)\)</span>. It would be nice if <code>brms()</code> allowed you to write the formula like that.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This would be nice, but it won't work!</span></span>
@@ -611,9 +617,9 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li><p>Then, the <code>Regression Coefficients</code> are listed as a table. They are called this way because brms fits Bayesian <em>regression</em> models and a Gaussian model is a special type of regression model (you will learn about regression models in the following chapters). In the Gaussian model we fitted now, we only have one regression coefficient, <code>Intercept,</code> which corresponds to <span class="math inline">\(\mu\)</span> from the formula above (for the reason why it is called that way, you will have to wait until regression models are introduced in the following chapter, sorry for the many promissory explanation). You will learn how to interpret the <code>Regression Coefficients</code> table below.</p></li>
 <li><p>Then <code>Further distributional parameters</code> are tabled. Here we only have <code>sigma</code> which is <span class="math inline">\(\sigma\)</span> from the formula above. The table has the same columns as the <code>Regression Coefficients</code> table.</p></li>
 </ul>
-<section id="posterior-probability-distributions" class="level2" data-number="21.1">
-<h2 data-number="21.1" class="anchored" data-anchor-id="posterior-probability-distributions"><span class="header-section-number">21.1</span> Posterior probability distributions</h2>
-<p>The main characteristic of Bayesian models is that they don’t just provide you with a single numeric estimate for the model parameters. Rather, the model estimates a <em>full probability distribution</em> for each parameter/coefficient. These probability distributions are called <strong>posterior probability distributions</strong> (or posteriors for short). They are called <em>posterior</em> because they are derived from the data and the prior probability distributions (you will learn about priors in XXX). The model we fitted has two parameters: the mean <span class="math inline">\(\mu\)</span> and the standard deviation <span class="math inline">\(\sigma\)</span>. For reasons that will become clear in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 22</span></a>, the <span class="math inline">\(\mu\)</span> parameter is called <code>Intercept</code> in the summary: you can find it in the <code>Regression Coefficients</code> table. The standard deviation <span class="math inline">\(\sigma\)</span> is in the <code>Further distributional parameters</code> table.</p>
+<section id="posterior-probability-distributions" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="posterior-probability-distributions"><span class="header-section-number">22.1</span> Posterior probability distributions</h2>
+<p>The main characteristic of Bayesian models is that they don’t just provide you with a single numeric estimate for the model parameters. Rather, the model estimates a <em>full probability distribution</em> for each parameter/coefficient. These probability distributions are called <strong>posterior probability distributions</strong> (or posteriors for short). They are called <em>posterior</em> because they are derived from the data and the prior probability distributions (you will learn about priors in XXX). The model we fitted has two parameters: the mean <span class="math inline">\(\mu\)</span> and the standard deviation <span class="math inline">\(\sigma\)</span>. For reasons that will become clear in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>, the <span class="math inline">\(\mu\)</span> parameter is called <code>Intercept</code> in the summary: you can find it in the <code>Regression Coefficients</code> table. The standard deviation <span class="math inline">\(\sigma\)</span> is in the <code>Further distributional parameters</code> table.</p>
 <p>The <code>Regression Coefficients</code> table reports for each estimated coefficient a few summary measures of the posterior distributions of the estimated coefficients. Here, we only have the summary measures of one posterior: the posterior of the model’s mean <span class="math inline">\(\mu\)</span>. The table also has three diagnostic measures, which you can ignore for now.</p>
 <p>Here’s a break down of the table’s columns:</p>
 <ul>
@@ -649,9 +655,9 @@ Spotlight: Student-t
 </div>
 </div>
 </section>
-<section id="plotting-the-posterior-distributions" class="level2" data-number="21.2">
-<h2 data-number="21.2" class="anchored" data-anchor-id="plotting-the-posterior-distributions"><span class="header-section-number">21.2</span> Plotting the posterior distributions</h2>
-<p>While the model summary reports <em>summaries</em> of the posterior distributions, it is always helpful to <em>plot</em> the posteriors. We can easily do so with the base R <code>plot()</code> function, like in <a href="#fig-rt-bm" class="quarto-xref">Figure&nbsp;<span>21.1</span></a>. The density plots of the posteriors distributions of the two parameters estimated in the model are shown on the left of the figure: <code>b_Intercept</code> which corresponds to <code>Intercept</code> from the summary and <code>sigma</code> (the reason for why it’s <code>b_Intercept</code> will become clear in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 22</span></a>).</p>
+<section id="plotting-the-posterior-distributions" class="level2" data-number="22.2">
+<h2 data-number="22.2" class="anchored" data-anchor-id="plotting-the-posterior-distributions"><span class="header-section-number">22.2</span> Plotting the posterior distributions</h2>
+<p>While the model summary reports <em>summaries</em> of the posterior distributions, it is always helpful to <em>plot</em> the posteriors. We can easily do so with the base R <code>plot()</code> function, like in <a href="#fig-rt-bm" class="quarto-xref">Figure&nbsp;<span>22.1</span></a>. The density plots of the posteriors distributions of the two parameters estimated in the model are shown on the left of the figure: <code>b_Intercept</code> which corresponds to <code>Intercept</code> from the summary and <code>sigma</code> (the reason for why it’s <code>b_Intercept</code> will become clear in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rt_bm, <span class="at">combo =</span> <span class="fu">c</span>(<span class="st">"dens"</span>, <span class="st">"trace"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -661,7 +667,7 @@ Spotlight: Student-t
 <img src="ch-fit-model_files/figure-html/fig-rt-bm-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-bm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;21.1: Posterior plots of the rt_bm Gaussian model
+Figure&nbsp;22.1: Posterior plots of the rt_bm Gaussian model
 </figcaption>
 </figure>
 </div>
@@ -671,8 +677,8 @@ Figure&nbsp;21.1: Posterior plots of the rt_bm Gaussian model
 <p>For <code>sigma</code>, i.e.&nbsp;<span class="math inline">\(\sigma\)</span>, the posterior probability covers values between 310 and 325. What is the mean of the posterior probability of <span class="math inline">\(\sigma\)</span>? The answer is in the summary, in <code>Further distributional parameters</code>. There you will also find the standard deviation of the posterior of <span class="math inline">\(\sigma\)</span>. That’s a standard deviation of a standard deviation! As before, this is because we are not estimating a simple value for <span class="math inline">\(\sigma\)</span> but a full (posterior) probability distribution and we can summarise this distribution with a mean and a standard deviation. Again, the highest peak in the distribution corresponds to the <code>Estimate</code> value.</p>
 <p>Now, looking at a full probability distribution like that is not very straightforward and summary measures can be even less straightforward. Credible Intervals (CrIs) help summarise the posterior distributions so that interpretation is more straightforward.</p>
 </section>
-<section id="interpreting-credible-intervals" class="level2" data-number="21.3">
-<h2 data-number="21.3" class="anchored" data-anchor-id="interpreting-credible-intervals"><span class="header-section-number">21.3</span> Interpreting Credible Intervals</h2>
+<section id="interpreting-credible-intervals" class="level2" data-number="22.3">
+<h2 data-number="22.3" class="anchored" data-anchor-id="interpreting-credible-intervals"><span class="header-section-number">22.3</span> Interpreting Credible Intervals</h2>
 <p>The model summary reports the Bayesian Credible Intervals (CrIs) of the posterior distributions. Another way of obtaining summaries of the coefficients is to use the <code>posterior_summary()</code> function which returns a table (technically, a matrix, another type of R objects; we print only the first two rows with <code>[1:2,]</code> because we can ignore the other ones).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(rt_bm)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -683,7 +689,7 @@ sigma        317.8845  3.171714  311.7382  324.1688</code></pre>
 </div>
 </div>
 <p>The 95% CrI of the <code>b_Intercept</code> is between 1002 and 1019. This means that there is a 95% probability, or (equivalently) that we can be 95% confident, that the <code>Intercept</code>, i.e.&nbsp;<span class="math inline">\(\mu\)</span>, is within that range. For <code>sigma</code>, i.e.&nbsp;<span class="math inline">\(\sigma\)</span>, the 95% CrI is between 311.7 and 324.2. So, again, there is a 95% probability that the <code>sigma</code> value is between those values. So, to summarise, a 95% CrI tells us that we can be 95% confident, or in other words that there is a 95% probability, that the value of the coefficient is between the values of the CrI.</p>
-<p>There is nothing special about 95% CrI and in fact it is recommended to calculate and report a few. Personally, I use 90, 80, 70 and 60% CrIs. You can get any CrI with the <code>summary()</code> and the <code>posterior_summary()</code> functions, but you will also learn an alternative way in <a href="ch-regression.html" class="quarto-xref"><span>Chapter 23</span></a>. Here is how to get an 80% CrI with <code>summary()</code>.</p>
+<p>There is nothing special about 95% CrI and in fact it is recommended to calculate and report a few. Personally, I use 90, 80, 70 and 60% CrIs. You can get any CrI with the <code>summary()</code> and the <code>posterior_summary()</code> functions, but you will also learn an alternative way in <a href="ch-regression.html" class="quarto-xref"><span>Chapter 24</span></a>. Here is how to get an 80% CrI with <code>summary()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rt_bm, <span class="at">prob =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -718,8 +724,8 @@ sigma        317.8845  3.171714  313.8399  321.8941</code></pre>
 </div>
 <p>Here you have the results from the regression model. Really, the results of the model are the full posterior probabilities, but it makes things easier to focus on the CrI.</p>
 </section>
-<section id="reporting" class="level2" data-number="21.4">
-<h2 data-number="21.4" class="anchored" data-anchor-id="reporting"><span class="header-section-number">21.4</span> Reporting</h2>
+<section id="reporting" class="level2" data-number="22.4">
+<h2 data-number="22.4" class="anchored" data-anchor-id="reporting"><span class="header-section-number">22.4</span> Reporting</h2>
 <p>What about reporting the model in writing? We could report the model and the results like this (for simplicity, we report only the 95% CrIs here. You will learn how to report multiple CrIs in tables in XXX).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <blockquote class="blockquote">
 <p>We fitted a Bayesian Gaussian model of reaction times (RTs) using the brms package (Bürkner 2017) in R (R Core Team 2024). The model estimates the mean and standard deviation of RTs.</p>
@@ -1352,12 +1358,12 @@ window.onload = function() {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./ch-gauss-model.html" class="pagination-link" aria-label="Gaussian models">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Gaussian models</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Gaussian models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ch-regression-intro.html" class="pagination-link" aria-label="Introduction to regression">
-        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to regression</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction to regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

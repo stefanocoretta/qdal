@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; R scripts – Quantitative Data Analysis for Linguists in R</title>
+<title>19&nbsp; The Gaussian distribution – Quantitative Data Analysis for Linguists in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ch-statistical-vars.html" rel="next">
-<link href="./ch-inference.html" rel="prev">
+<link href="./ch-freq-bayes.html" rel="next">
+<link href="./ch-probability.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -107,6 +107,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="include/webex.css">
 </head>
@@ -120,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-inference.html">Week 2</a></li><li class="breadcrumb-item"><a href="./ch-scripts.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R scripts</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-gaussian.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">The Gaussian distribution</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -215,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-scripts.html" class="sidebar-item-text sidebar-link active">
+  <a href="./ch-scripts.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R scripts</span></span></a>
   </div>
 </li>
@@ -309,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-gaussian.html" class="sidebar-item-text sidebar-link">
+  <a href="./ch-gaussian.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">The Gaussian distribution</span></span></a>
   </div>
 </li>
@@ -476,20 +505,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#create-an-r-script" id="toc-create-an-r-script" class="nav-link active" data-scroll-target="#create-an-r-script"><span class="header-section-number">7.1</span> Create an R script</a></li>
-  <li><a href="#write-code" id="toc-write-code" class="nav-link" data-scroll-target="#write-code"><span class="header-section-number">7.2</span> Write code</a></li>
-  <li><a href="#running-scripts" id="toc-running-scripts" class="nav-link" data-scroll-target="#running-scripts"><span class="header-section-number">7.3</span> Running scripts</a></li>
-  <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments"><span class="header-section-number">7.4</span> Comments</a></li>
-  <li><a href="#ensuring-the-script-runs" id="toc-ensuring-the-script-runs" class="nav-link" data-scroll-target="#ensuring-the-script-runs"><span class="header-section-number">7.5</span> Ensuring the script runs</a></li>
+  <li><a href="#the-gaussian-distribution" id="toc-the-gaussian-distribution" class="nav-link active" data-scroll-target="#the-gaussian-distribution"><span class="header-section-number">19.1</span> The Gaussian distribution</a></li>
+  <li><a href="#sec-intervals" id="toc-sec-intervals" class="nav-link" data-scroll-target="#sec-intervals"><span class="header-section-number">19.2</span> Intervals</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-inference.html">Week 2</a></li><li class="breadcrumb-item"><a href="./ch-scripts.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R scripts</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-gaussian.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">The Gaussian distribution</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-scripts" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R scripts</span></span></h1>
+<h1 class="title"><span id="sec-gaussian" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">The Gaussian distribution</span></span></h1>
 </div>
 
 
@@ -506,185 +532,118 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
-<p>In <a href="ch-r-rstudio.html" class="quarto-xref"><span>Chapter 4</span></a> and <a href="ch-packages.html" class="quarto-xref"><span>Chapter 5</span></a>, you’ve been writing R code in the <strong>Console</strong> and run it there. But this is not a very efficient way of using R code. Every time, you need to write the code and execute it in the right order and it quickly becomes very difficult to keep track of everything when things start getting more involved. A solution is to use <strong>R scripts</strong>.</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<p><img src="https://img.shields.io/badge/Area-Statistics-red.png" class="img-fluid"></p>
+<section id="the-gaussian-distribution" class="level2" data-number="19.1">
+<h2 data-number="19.1" class="anchored" data-anchor-id="the-gaussian-distribution"><span class="header-section-number">19.1</span> The Gaussian distribution</h2>
+<p>In the previous section, we have seen that you can visualise probability distributions by plotting the probability mass or density function for theoretical probabilities and by using kernel density estimation for sample (aka empirical) distributions. Visualising probability distributions is more practical than listing all the possible values and their probability (especially with continuous variables—since they are continuous there is an infinite number of values!). Another convenient way to express probability distributions is to specify a set of parameters, which can reconstruct the entire distribution. With theoretical distributions, the parameters allow you to reconstruct exact distributions, while empirical distributions can usually be only approximated. That’s the whole point of taking a sample: you want to reconstruct the “underlying” probability distribution that generated the sample, in other words the (theoretical) probability distribution of the population.</p>
+<p>Different <strong>probability distribution families</strong> have a different number of parameters and different parameters. A probability family is an abstraction of specific probability distributions that can be represented with the same set of parameters. An example of a probability distribution family is the <strong>Gaussian</strong> [ˈgaʊsɪən] <strong>probability distribution</strong>, also called the “normal” distribution and nick-named the “bell-curve”, because it looks like the shape of a bell. <a href="#fig-gauss" class="quarto-xref">Figure&nbsp;<span>19.1</span></a> should make this more obvious.</p>
+<div class="cell" data-fig-caption="The Gaussian probability distribution.">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">0.01</span>), <span class="at">y =</span> <span class="fu">dnorm</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="fl">0.01</span>))) <span class="sc">+</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">colour =</span> <span class="st">"sienna"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">element_blank</span>(), <span class="at">y =</span> <span class="st">"Density"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-gauss" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gauss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-gaussian_files/figure-html/fig-gauss-1.png" id="fig-gauss" class="img-fluid figure-img" width="672">
 </div>
-<div class="callout-title-container flex-fill">
-R script
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-gauss-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19.1
+</figcaption>
+</figure>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>An <strong>R script</strong> is a file with the <code>.R</code> extension that contains R code.</p>
 </div>
-</div>
-<p>From now on, you should write all code in an R script, until you will learn about Quarto documents in <a href="ch-quarto.html" class="quarto-xref"><span>Chapter 13</span></a>.</p>
-<section id="create-an-r-script" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="create-an-r-script"><span class="header-section-number">7.1</span> Create an R script</h2>
-<p>First, create a folder called <code>code</code> in your Quarto project folder. You can do so in two different ways:</p>
+<p>The Gaussian distribution is a continuous probability distribution and it has two parameters:</p>
 <ul>
-<li><p>You can click on the <code>New Folder</code> button in the <code>Files</code> panel (bottom-right) in RStudio, set the name and click <code>Ok</code>. The folder will be created within the current folder shown in the <code>Files</code> list.</p></li>
-<li><p>Since Quarto Projects are just folders on your computer, you can create a new folder as you would with any other folder from your computer File Explorer/Finder.</p></li>
+<li><p>The <strong>mean</strong>, represented with the Greek letter <span class="math inline">\(\mu\)</span> [mjuː]. This parameter is the probability’s central tendency. Values around the mean have higher probability than values further away from the mean.</p></li>
+<li><p>The <strong>standard deviation</strong>, represented with the Greek letter <span class="math inline">\(\sigma\)</span> [ˈsɪgmə]. This parameter is the probability’s dispersion around the mean. The higher <span class="math inline">\(\sigma\)</span> the greater the spread (i.e.&nbsp;the dispersion) of values around the mean.</p></li>
 </ul>
-<p>The <code>code/</code> folder will be the folder where you will save all of your R scripts and other documents.</p>
-<p>Now, to create a new R script, look at the top-left corner of RStudio: the first button to the left looks like a white sheet with a green plus sign. This is the <code>New file</code> button. Click on that and you will see a few options to create a new file.</p>
-<p>Click on <code>R Script</code>. A new empty R script will be created and will open in the File Editor window of RStudio.</p>
-<p><img src="img/new-script-button.png" class="img-fluid"></p>
-<p>Note that creating an R script does not automatically save it on your computer. To do so, either use the keyboard short-cut <code>CMD+S</code>/<code>CTRL+S</code> or click on the floppy disk icon in the menu below the file tab.</p>
-<p><img src="img/save-button.png" class="img-fluid"></p>
-<p>Save the file inside the <code>code/</code> folder with exactly the following name: <code>week-02.R</code>.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<p>You have already encountered means and standard deviations in <a href="ch-sum-measures.html" class="quarto-xref"><span>Chapter 10</span></a>. It is no coincidence that the go-to summary measures for continuous variables are the mean and the standard deviation. When you don’t know exactly what the underlying distribution of a variable is and all you want is a measure of central tendency and of dispersion, one assumes a Gaussian distribution and calculates mean and standard deviations. Note that in most cases we know a bit more than that and it fact the Gaussian distribution is very rare in nature. This is why we will call it Gaussian and not “normal”, since it is only “normal” from a statistical-theoretical perspective (it has simple mathematical properties that makes it easy to use in applied statistics).</p>
+<p><a href="#fig-gauss-msd" class="quarto-xref">Figure&nbsp;<span>19.2</span></a> shows Gaussian distributions with fixed standard deviation (2) but different means (-5, 0, 10) in <a href="#fig-gauss-msd-1" class="quarto-xref">Figure&nbsp;<span>19.2 (a)</span></a> and Gaussian distributions with fixed mean (5) but different SDs (1, 2, 4) in <a href="#fig-gauss-msd-2" class="quarto-xref">Figure&nbsp;<span>19.2 (b)</span></a>. The mean shifts the distribution horizontally (lower values to the left, higher values to the right), while the SD affects the width of the distribution: lower SDs correspond to a narrower or tighter distribution, while higher SDs correspond to a wider distribution. Since the total area under the curve has to sum to 1, if the distribution is narrower, the peak will also be relatively higher, while with a wider distribution the peak will be lower. You have seen this in <a href="ch-probability.html#fig-density-rt-word" class="quarto-xref">Figure&nbsp;<span>18.4</span></a>.</p>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">20</span>, <span class="at">length.out =</span> <span class="dv">1000</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>sd_fixed <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df_means <span class="ot">&lt;-</span> <span class="fu">crossing</span>(<span class="at">x =</span> x, <span class="at">mean =</span> means) <span class="sc">|&gt;</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mean, <span class="at">sd =</span> sd_fixed),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">factor</span>(mean)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mean, x)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_means, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> mean)) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">element_blank</span>(), <span class="at">y =</span> <span class="st">"Density"</span>, <span class="at">caption =</span> <span class="st">"SD = 2."</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>sds <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>mean_fixed <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>df_sds <span class="ot">&lt;-</span> <span class="fu">crossing</span>(<span class="at">x =</span> x, <span class="at">SD =</span> sds) <span class="sc">|&gt;</span> </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mean_fixed, <span class="at">sd =</span> SD),</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">factor</span>(SD)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(SD, x)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>sig <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_sds, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> SD)) <span class="sc">+</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="fu">element_blank</span>(), <span class="at">y =</span> <span class="st">"Density"</span>, <span class="at">caption =</span> <span class="st">"Mean = 5."</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mu)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(sig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-gauss-msd" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gauss-msd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-gauss-msd" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-gauss-msd-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-gauss-msd-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-gaussian_files/figure-html/fig-gauss-msd-1.png" class="img-fluid figure-img" data-ref-parent="fig-gauss-msd" width="672">
 </div>
-<div class="callout-title-container flex-fill">
-Important
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-gauss-msd-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Different means, same SD.
+</figcaption>
+</figure>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>Remember that all the files of your RStudio project don’t live inside RStudio but on your computer.</p>
-<p>So you can always access them from the Finder or File Explorer! <strong>However</strong>, do not open a file by double clicking on it from the Finder/File Explorer.</p>
-<p>Rather, <strong>open the Quarto project by double clicking on the <code>.Rproj</code> file</strong> and then open files from RStudio to ensure you are working within the RStudio project and the working directory is set correctly.</p>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-gauss-msd" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-gauss-msd-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-gauss-msd-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-gaussian_files/figure-html/fig-gauss-msd-2.png" class="img-fluid figure-img" data-ref-parent="fig-gauss-msd" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-gauss-msd-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Same mean, different SDs.
+</figcaption>
+</figure>
 </div>
 </div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gauss-msd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19.2: Illustrating Gaussian distributions with different means and standard deviations.
+</figcaption>
+</figure>
+</div>
+<p>In statistical notation, we write the Gaussian distribution family like this:</p>
+<p><span class="math display">\[
+Gaussian(\mu, \sigma)
+\]</span></p>
+<p>Specific types of Gaussian distributions will have specific values for the parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>: for example <span class="math inline">\(Gaussian(0, 1)\)</span>, <span class="math inline">\(Gaussian(50, 32)\)</span>, <span class="math inline">\(Gaussian(2.5, 6.25)\)</span>, and so on. All of these specific probability distributions belong to the Gaussian family. So hopefully you understand now why we say that a distribution family stands for specific families: here <span class="math inline">\(Gaussian(\mu, \sigma)\)</span> stands as the parent of all the specific Gaussian distributions (i.e.&nbsp;all of the Gaussian distributions with a specific mean and SD).</p>
 </section>
-<section id="write-code" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="write-code"><span class="header-section-number">7.2</span> Write code</h2>
-<p>Now, let’s start filling up that script! Generally, you start the script with calls to <code>library()</code> to load all the packages you need for the script. Please, get in the habit of doing this from now, so that you can keep your scripts tidy and pretty! You will learn soon about the tidyverse packages in the following chapter so for now just attach the cowsay and fortune packages.</p>
-<div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Start your R scripts with calls to <code>library()</code> and attach all of the packages that are needed to run that script.</p>
-</div>
-</div>
-<p>Go ahead, write the following code in the top of the <code>.R</code> script. (The code chunk has a convenient copy button in the top-right corner which appears when you place the cursor inside the chunk. If you click the button the code will be copied and you can then paste it in the script).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowsay)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fortunes)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">say</span>(<span class="st">"fortune"</span>, <span class="st">"monkey"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">say</span>(<span class="st">"What a lovely day for a wedding"</span>, <span class="st">"spider"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Please, don’t include <code>install.packages()</code> in your R scripts!</p>
-<p>Remember, you only have to install a package once, and you can just type it in the Console.</p>
-<p>But <strong>DO</strong> include <code>library()</code> calls at the top of your scripts.</p>
-</div>
-</div>
-</section>
-<section id="running-scripts" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="running-scripts"><span class="header-section-number">7.3</span> Running scripts</h2>
-<p>Finally, the time has come to <strong>run the script</strong>.</p>
-<p>There are several ways of doing this. The most straightforward is to click on the <code>Run</code> button. You can find this in the top-right corner of the script window. Pressing <code>Run</code> will run the line of code your text cursor is currently on. So you should place the cursor back on line one and press <code>Run</code>. The code will be executed and you will see it in the <code>Console</code>. If the code returns any output, this will be shown in the <code>Console</code> too. After the line of code is executed, the text cursor moves to the next line. You can click on <code>Run</code> again and so on to run each line one by one. You can also just select all the code (like you would when selecting text in a text editor) and click <code>Run</code>: in this case, all of the code is run, line by line, in the order they appear in the script.</p>
-<p><img src="img/run-button.png" class="img-fluid"></p>
-<p>An alternative way is to place the text cursor on the line of code you want to run and then press <code>CMD+ENTER</code>/<code>CTRL+ENTER</code>. As with clicking <code>Run</code>, this will run the line of code and move the text cursor to the next line of code. It also works with a selection, like the <code>Run</code> button. Now that you know how to use R scripts and run code in them, I will assume that you will keep writing new code in your script and run it from there.</p>
-</section>
-<section id="comments" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="comments"><span class="header-section-number">7.4</span> Comments</h2>
-<p>Sometimes we might want to add a few lines of text in our script, for example to take notes. You can add so-called <strong>comments</strong> in R scripts, simply by starting a line with <code>#</code>. You can also add trailing comments, by adding a <code>#</code> at the end of a line of R code. For example:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a comment. Let's add 6 + 3.</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 9</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">+</span> <span class="dv">6</span> <span class="co"># This is a trailing comment. 6 + 3 = 3 + 6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 9</code></pre>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Code comments
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Text that starts with a hash symbol <code>#</code> in an R script is a comment. Comments are not executed.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Quiz 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Is the following a valid line of R code? <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x <span class="sc">+</span> <span class="dv">2</span>) <span class="co"># x = 4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Explanation
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>It is a valid line of R code with a trailing comment. If you tried to run it in the <code>Console</code> and got an error it is because the variable <code>x</code> does not exist (unless you had created one earlier). If you add the line <code>x &lt;- 4</code> before <code>sum(x + 2) # x = 4</code>, the latter will work just fine.</p>
-<p>So you see there is a difference between <em>valid</em> code and <em>working</em> code.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="ensuring-the-script-runs" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="ensuring-the-script-runs"><span class="header-section-number">7.5</span> Ensuring the script runs</h2>
-<p>That’s all there is to know about using R scripts. You write code and some comments and you can run code in the script and see the output in the <code>Console</code>. However, there is an important aspect that was not explicitly mentioned above: <strong>a script is supposed to work from top (first line) to bottom (last line)</strong>, so the order of the code in the script matters. A good habit to get into is to restart the R session every now and then and re-run the entire script. To restart the R session you can either go to the <code>Session</code> menu &gt; <code>Restart R</code> or you can press <code>SHIFT+CMD/CTRL+0</code> (the last key is “zero”). Try this now. Restart the R session and run your script again.</p>
-<p>But why it is important to restart the session to verify that the script runs? A typical case of scripts that don’t run is when you call a variable in a function before having declared the variable (with <code>&lt;-</code>) or when you call a function without having attached the package the function is from. However, an R session remembers everything you run: if you try to run code with a non-declared variable (like <code>sum(a, 1)</code>, but <code>a</code> is not declared) you will get an error; if you now write the code that declares the variable (<code>a &lt;- 3</code>) but you put it after the line of code that uses the variable, the code will run because now the variable is declares and available in the session. If you keep the code this way and restart the session, the code will no longer work. This is because each line is executed in order and by the time R gets to the <code>sum(a, 1)</code> , the line <code>a &lt;- 3</code> hasn’t been executed yet so <code>a</code> is not available. This example might seem trivial (and it is) but with more complex scripts it is actually quite easy to do things like this (calling a variable on line 10 of the script while it is declared on line 1263).</p>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Create a new script and call it <code>week–02-ex7.1.R</code> (save it in <code>code/</code>). Copy the following code and try to run it. The script will not run because there are several errors: some are code errors (i.e.&nbsp;the code is wrong), others are because the code is not written in the right order. Fix the errors until the script runs correctly. Remember to restart the session!</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">libery</span>(fortunes)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">-&gt;</span> <span class="dv">3</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(a, b)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>Let<span class="st">'s print a fortune</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="st">fotrune(c)</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">c &lt;- a + b</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
+<section id="sec-intervals" class="level2" data-number="19.2">
+<h2 data-number="19.2" class="anchored" data-anchor-id="sec-intervals"><span class="header-section-number">19.2</span> Intervals</h2>
 
 
 </section>
@@ -1305,13 +1264,13 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ch-inference.html" class="pagination-link" aria-label="Inference">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inference</span></span>
+      <a href="./ch-probability.html" class="pagination-link" aria-label="Probability distributions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Probability distributions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch-statistical-vars.html" class="pagination-link" aria-label="Statistical variables">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical variables</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ch-freq-bayes.html" class="pagination-link" aria-label="Frequentist and Bayesian inference">
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>19&nbsp; Frequentist and Bayesian inference – Quantitative Data Analysis for Linguists in R</title>
+<title>20&nbsp; Frequentist and Bayesian inference – Quantitative Data Analysis for Linguists in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -51,7 +51,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./ch-gauss-model.html" rel="next">
-<link href="./ch-probability.html" rel="prev">
+<link href="./ch-gaussian.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -132,7 +132,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-freq-bayes.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-freq-bayes.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -321,20 +321,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-gaussian.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">The Gaussian distribution</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-freq-bayes.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-gauss-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Gaussian models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Gaussian models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-fit-model.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></span></a>
   </div>
 </li>
       </ul>
@@ -351,19 +357,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Introduction to regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction to regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-draws.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span></a>
   </div>
 </li>
       </ul>
@@ -380,7 +386,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-interim-summ.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
   </div>
 </li>
       </ul>
@@ -397,25 +403,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Regression models: categorical predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Regression models: categorical predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Indexing categorical predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Indexing categorical predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
       </ul>
@@ -432,7 +438,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
   </div>
 </li>
       </ul>
@@ -449,19 +455,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: interactions using indexing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions using indexing</span></span></a>
   </div>
 </li>
       </ul>
@@ -482,19 +488,19 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#frequentist-vs-bayesian-probability" id="toc-frequentist-vs-bayesian-probability" class="nav-link active" data-scroll-target="#frequentist-vs-bayesian-probability"><span class="header-section-number">19.1</span> Frequentist vs Bayesian probability</a></li>
-  <li><a href="#frequentist-inference" id="toc-frequentist-inference" class="nav-link" data-scroll-target="#frequentist-inference"><span class="header-section-number">19.2</span> Frequentist inference</a></li>
-  <li><a href="#bayesian-inference" id="toc-bayesian-inference" class="nav-link" data-scroll-target="#bayesian-inference"><span class="header-section-number">19.3</span> Bayesian inference</a></li>
-  <li><a href="#why-bayesian-inference" id="toc-why-bayesian-inference" class="nav-link" data-scroll-target="#why-bayesian-inference"><span class="header-section-number">19.4</span> Why Bayesian inference?</a></li>
+  <li><a href="#frequentist-vs-bayesian-probability" id="toc-frequentist-vs-bayesian-probability" class="nav-link active" data-scroll-target="#frequentist-vs-bayesian-probability"><span class="header-section-number">20.1</span> Frequentist vs Bayesian probability</a></li>
+  <li><a href="#frequentist-inference" id="toc-frequentist-inference" class="nav-link" data-scroll-target="#frequentist-inference"><span class="header-section-number">20.2</span> Frequentist inference</a></li>
+  <li><a href="#bayesian-inference" id="toc-bayesian-inference" class="nav-link" data-scroll-target="#bayesian-inference"><span class="header-section-number">20.3</span> Bayesian inference</a></li>
+  <li><a href="#why-bayesian-inference" id="toc-why-bayesian-inference" class="nav-link" data-scroll-target="#why-bayesian-inference"><span class="header-section-number">20.4</span> Why Bayesian inference?</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-freq-bayes.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-freq-bayes.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-freq-bayes" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></span></h1>
+<h1 class="title"><span id="sec-freq-bayes" class="quarto-section-identifier"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></span></h1>
 </div>
 
 
@@ -517,21 +523,21 @@ window.Quarto = {
 <p><img src="img/volcano-raining.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
 </figure>
 </div>
-<section id="frequentist-vs-bayesian-probability" class="level2" data-number="19.1">
-<h2 data-number="19.1" class="anchored" data-anchor-id="frequentist-vs-bayesian-probability"><span class="header-section-number">19.1</span> Frequentist vs Bayesian probability</h2>
+<section id="frequentist-vs-bayesian-probability" class="level2" data-number="20.1">
+<h2 data-number="20.1" class="anchored" data-anchor-id="frequentist-vs-bayesian-probability"><span class="header-section-number">20.1</span> Frequentist vs Bayesian probability</h2>
 <p>The two major approaches to statistical inference are the frequentist and the Bayesian approaches. The difference between these approaches is how probabilities are conceived, from a philosophical perspective if you will.</p>
 <p>Probabilities in a <strong>frequentist framework</strong> are about average occurrences of events in a hypothetical series of repetitions of those events. Imagine you observe a volcano for a long period of time. The number of times the volcano erupts within that time tells us the <strong>frequency</strong> of occurrence of the event of volcanic eruption. In other words, it tells us its (frequentist) probability.</p>
 <p>In the <strong>Bayesian framework</strong>, probabilities are about the <strong>level of (un)certainty</strong> that an event will occur at any specific time given certain conditions. This is probably the way we normally think about probabilities: like in the weather forecast, if somebody tells you tomorrow it will rain with a probability of 85%, you intuitively know that it is very likely that it will rain tomorrow although not certain.</p>
 <p>In the context of research, a frequentist probability tells you the probability of obtaining the same result again given an imaginary series of replications of the study that generated that probability. On the other hand, a Bayesian probability tells you the probability that the result of the study is the actual result you should have gotten.</p>
 </section>
-<section id="frequentist-inference" class="level2" data-number="19.2">
-<h2 data-number="19.2" class="anchored" data-anchor-id="frequentist-inference"><span class="header-section-number">19.2</span> Frequentist inference</h2>
+<section id="frequentist-inference" class="level2" data-number="20.2">
+<h2 data-number="20.2" class="anchored" data-anchor-id="frequentist-inference"><span class="header-section-number">20.2</span> Frequentist inference</h2>
 <p>Most of current research is carried out with frequentist methods. This is a historical accident, based on both a misunderstanding of Bayesian statistics (which is, by the way, older than frequentist statistics) and the fact that frequentist maths was much easier (and personal computers did not exist).</p>
 <p>The commonly accepted approach to frequentist inference is the so-called <strong>Null Hypothesis Significance Testing</strong>, or NHST. As practised by researchers, the NHST approach is a (sometimes incoherent) mix of the frequentist work of Fisher on one hand, and Neyman and Pearson on the other. The inconsistent nature of NHST as practised has led to the elaboration of the concept and label “<strong>Null Ritual</strong>” <span class="citation" data-cites="gigerenzer2004 gigerenzer2004a gigerenzer2018">(<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">Gigerenzer 2004</a>, <a href="references.html#ref-gigerenzer2018" role="doc-biblioref">2018</a>; <a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer, Krauss, and Vitouch 2004</a>)</span> and the slogan-titled paper <em>The difference between “significant” and “not significant” is not itself statistically significant</em> <span class="citation" data-cites="gelman2006a">(<a href="references.html#ref-gelman2006a" role="doc-biblioref">Gelman and Stern 2006</a>)</span>. The Null Ritual has been criticised by frequentist and Bayesian statisticians alike and has resulted in the proposal or alternative, stricter, versions of NHST, like Statistical Inference as Severe Testing <span class="citation" data-cites="mayo2018 gelman2019">(SIST, <a href="references.html#ref-mayo2018" role="doc-biblioref">Mayo 2018</a>; for a critique see <a href="references.html#ref-gelman2019" role="doc-biblioref">Gelman et al. 2019</a>)</span>.</p>
-<p>The main tenet of NHST (or better, the Null Ritual) is that you set a <strong>null hypothesis</strong> and you try to <strong>reject</strong> it. A null hypothesis is, in practice, always a <em>nil</em> hypothesis: in other words, it is the hypothesis that there is <em>no</em> difference between two estimands (these usually being means of two or more groups of interest). Using a variety of numerical techniques, one obtains a <strong><em>p</em>-value</strong>, i.e.&nbsp;a frequentist probability. The <em>p</em>-value is used for inference: if the <em>p</em>-value is smaller than a threshold, one can reject the nil hypothesis; if the <em>p</em>-value is equal to or greater than the threshold, you cannot reject the null hypothesis. <em>p</em>-values are very commonly mistaken for Bayesian probabilities <span class="citation" data-cites="cassidy2019">(<a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>)</span> and this results in various misinterpretations of reported results. You will learn about the meaning (and misunderstandings) of <em>p</em>-values in <a href="ch-null-ritual.html" class="quarto-xref"><span>Chapter 29</span></a>.</p>
+<p>The main tenet of NHST (or better, the Null Ritual) is that you set a <strong>null hypothesis</strong> and you try to <strong>reject</strong> it. A null hypothesis is, in practice, always a <em>nil</em> hypothesis: in other words, it is the hypothesis that there is <em>no</em> difference between two estimands (these usually being means of two or more groups of interest). Using a variety of numerical techniques, one obtains a <strong><em>p</em>-value</strong>, i.e.&nbsp;a frequentist probability. The <em>p</em>-value is used for inference: if the <em>p</em>-value is smaller than a threshold, one can reject the nil hypothesis; if the <em>p</em>-value is equal to or greater than the threshold, you cannot reject the null hypothesis. <em>p</em>-values are very commonly mistaken for Bayesian probabilities <span class="citation" data-cites="cassidy2019">(<a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>)</span> and this results in various misinterpretations of reported results. You will learn about the meaning (and misunderstandings) of <em>p</em>-values in <a href="ch-null-ritual.html" class="quarto-xref"><span>Chapter 30</span></a>.</p>
 </section>
-<section id="bayesian-inference" class="level2" data-number="19.3">
-<h2 data-number="19.3" class="anchored" data-anchor-id="bayesian-inference"><span class="header-section-number">19.3</span> Bayesian inference</h2>
+<section id="bayesian-inference" class="level2" data-number="20.3">
+<h2 data-number="20.3" class="anchored" data-anchor-id="bayesian-inference"><span class="header-section-number">20.3</span> Bayesian inference</h2>
 <p>Bayesian inference approaches are now gaining momentum in many fields, including linguistics. The main advantage of Bayesian inference is that it allows researchers to answer research questions in a more straightforward way, using a more intuitive take on uncertainty and probability than what frequentist methods can offer.</p>
 <p>Bayesian inference is based on the concept of <strong>updating prior beliefs in light of new data</strong>. Given a set of <strong>prior probabilities</strong> and <strong>observations</strong>, Bayesian inference allows us to revise those prior probabilities and produce <strong>posterior probabilities</strong>. This is possible through the Bayesian interpretation of probabilities in the context of <a href="https://www.mathsisfun.com/data/bayes-theorem.html">Bayes’ Theorem</a>.</p>
 <p>In simple conceptual terms, the Bayesian interpretation of Bayes’ Theorem states that the probability of a hypothesis <span class="math inline">\(h\)</span> given the observe data <span class="math inline">\(d\)</span> is proportional to the product of the prior probability of <span class="math inline">\(h\)</span> and the probability of <span class="math inline">\(d\)</span> given <span class="math inline">\(h\)</span>.</p>
@@ -541,8 +547,8 @@ P(h|d) \sim P(h) \cdot P(d|h)
 <p>The prior probability <span class="math inline">\(P(h)\)</span> represents the researcher’s beliefs towards <span class="math inline">\(h\)</span>. These beliefs can be based on expert knowledge, previous studies or mathematical principles. For a more hands-on overview, I recommend Chapter 2 of the <a href="https://discovered.ed.ac.uk/permalink/44UOE_INST/110jsec/alma9924745740602466">Statistical Rethinking</a> textbook.</p>
 <p>The following section goes through a few reasons to use Bayesian inference for research. Note that some of these reasons presuppose understanding of regression modelling, both frequentist and Bayesian, so don’t worry if they are not clear yet.</p>
 </section>
-<section id="why-bayesian-inference" class="level2" data-number="19.4">
-<h2 data-number="19.4" class="anchored" data-anchor-id="why-bayesian-inference"><span class="header-section-number">19.4</span> Why Bayesian inference?</h2>
+<section id="why-bayesian-inference" class="level2" data-number="20.4">
+<h2 data-number="20.4" class="anchored" data-anchor-id="why-bayesian-inference"><span class="header-section-number">20.4</span> Why Bayesian inference?</h2>
 <p>Here are a few practical and conceptual reasons for why you should consider switching to Bayesian statistics for your research.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1225,13 +1231,13 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ch-probability.html" class="pagination-link" aria-label="Probability distributions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Probability distributions</span></span>
+      <a href="./ch-gaussian.html" class="pagination-link" aria-label="The Gaussian distribution">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">The Gaussian distribution</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ch-gauss-model.html" class="pagination-link" aria-label="Gaussian models">
-        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Gaussian models</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Gaussian models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

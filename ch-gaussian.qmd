@@ -1,0 +1,94 @@
+# The Gaussian distribution {#sec-gaussian}
+
+![](https://img.shields.io/badge/Area-Statistics-red)
+
+## The Gaussian distribution
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+theme_set(theme_light())
+```
+
+In the previous section, we have seen that you can visualise probability distributions by plotting the probability mass or density function for theoretical probabilities and by using kernel density estimation for sample (aka empirical) distributions. Visualising probability distributions is more practical than listing all the possible values and their probability (especially with continuous variables—since they are continuous there is an infinite number of values!). Another convenient way to express probability distributions is to specify a set of parameters, which can reconstruct the entire distribution. With theoretical distributions, the parameters allow you to reconstruct exact distributions, while empirical distributions can usually be only approximated. That's the whole point of taking a sample: you want to reconstruct the "underlying" probability distribution that generated the sample, in other words the (theoretical) probability distribution of the population.
+
+Different **probability distribution families** have a different number of parameters and different parameters. A probability family is an abstraction of specific probability distributions that can be represented with the same set of parameters. An example of a probability distribution family is the **Gaussian** \[ˈgaʊsɪən\] **probability distribution**, also called the "normal" distribution and nick-named the "bell-curve", because it looks like the shape of a bell. @fig-gauss should make this more obvious.
+
+```{r}
+#| label: fig-gauss
+#| fig-caption: "The Gaussian probability distribution."
+#| code-fold: true
+
+ggplot() +
+  aes(x = seq(-4, 4, 0.01), y = dnorm(seq(-4, 4, 0.01))) +
+  geom_path(colour = "sienna", linewidth = 2) +
+  labs(
+    x = element_blank(), y = "Density"
+  )
+
+```
+
+The Gaussian distribution is a continuous probability distribution and it has two parameters:
+
+-   The **mean**, represented with the Greek letter $\mu$ \[mjuː\]. This parameter is the probability's central tendency. Values around the mean have higher probability than values further away from the mean.
+
+-   The **standard deviation**, represented with the Greek letter $\sigma$ \[ˈsɪgmə\]. This parameter is the probability's dispersion around the mean. The higher $\sigma$ the greater the spread (i.e. the dispersion) of values around the mean.
+
+You have already encountered means and standard deviations in @sec-summaries. It is no coincidence that the go-to summary measures for continuous variables are the mean and the standard deviation. When you don't know exactly what the underlying distribution of a variable is and all you want is a measure of central tendency and of dispersion, one assumes a Gaussian distribution and calculates mean and standard deviations. Note that in most cases we know a bit more than that and it fact the Gaussian distribution is very rare in nature. This is why we will call it Gaussian and not "normal", since it is only "normal" from a statistical-theoretical perspective (it has simple mathematical properties that makes it easy to use in applied statistics).
+
+@fig-gauss-msd shows Gaussian distributions with fixed standard deviation (2) but different means (-5, 0, 10) in @fig-gauss-msd-1 and Gaussian distributions with fixed mean (5) but different SDs (1, 2, 4) in @fig-gauss-msd-2. The mean shifts the distribution horizontally (lower values to the left, higher values to the right), while the SD affects the width of the distribution: lower SDs correspond to a narrower or tighter distribution, while higher SDs correspond to a wider distribution. Since the total area under the curve has to sum to 1, if the distribution is narrower, the peak will also be relatively higher, while with a wider distribution the peak will be lower. You have seen this in @fig-density-rt-word.
+
+```{r}
+#| label: fig-gauss-msd
+#| layout-ncol: 2
+#| fig-cap: "Illustrating Gaussian distributions with different means and standard deviations."
+#| fig-subcap: 
+#|   - "Different means, same SD."
+#|   - "Same mean, different SDs."
+#| code-fold: true
+
+x <- seq(-10, 20, length.out = 1000)
+means <- c(0, -5, 10)
+sd_fixed <- 2
+
+df_means <- crossing(x = x, mean = means) |> 
+  mutate(
+    y = dnorm(x, mean = mean, sd = sd_fixed),
+    mean = factor(mean)
+  ) |> 
+  arrange(mean, x)
+
+mu <- ggplot(df_means, aes(x = x, y = y, color = mean)) +
+  geom_line(linewidth = 1) +
+  labs(x = element_blank(), y = "Density", caption = "SD = 2.")
+
+sds <- c(1, 2, 4)
+mean_fixed <- 5
+
+df_sds <- crossing(x = x, SD = sds) |> 
+  mutate(
+    y = dnorm(x, mean = mean_fixed, sd = SD),
+    SD = factor(SD)
+  ) |> 
+  arrange(SD, x)
+
+sig <- ggplot(df_sds, aes(x = x, y = y, color = SD)) +
+  geom_line(linewidth = 1) +
+  labs(x = element_blank(), y = "Density", caption = "Mean = 5.")
+
+plot(mu)
+plot(sig)
+
+```
+
+In statistical notation, we write the Gaussian distribution family like this:
+
+$$
+Gaussian(\mu, \sigma)
+$$
+
+Specific types of Gaussian distributions will have specific values for the parameters $\mu$ and $\sigma$: for example $Gaussian(0, 1)$, $Gaussian(50, 32)$, $Gaussian(2.5, 6.25)$, and so on. All of these specific probability distributions belong to the Gaussian family. So hopefully you understand now why we say that a distribution family stands for specific families: here $Gaussian(\mu, \sigma)$ stands as the parent of all the specific Gaussian distributions (i.e. all of the Gaussian distributions with a specific mean and SD).
+
+## Intervals {#sec-intervals}
