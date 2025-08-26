@@ -1,6 +1,6 @@
-# The Gaussian distribution {#sec-gaussian}
+# Working with distributions {#sec-gaussian}
 
-![](https://img.shields.io/badge/Area-Statistics-red)
+![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
 
 ## The Gaussian distribution
 
@@ -37,6 +37,16 @@ The Gaussian distribution is a continuous probability distribution and it has tw
 -   The **standard deviation**, represented with the Greek letter $\sigma$ \[ˈsɪgmə\]. This parameter is the probability's dispersion around the mean. The higher $\sigma$ the greater the spread (i.e. the dispersion) of values around the mean.
 
 You have already encountered means and standard deviations in @sec-summaries. It is no coincidence that the go-to summary measures for continuous variables are the mean and the standard deviation. When you don't know exactly what the underlying distribution of a variable is and all you want is a measure of central tendency and of dispersion, one assumes a Gaussian distribution and calculates mean and standard deviations. Note that in most cases we know a bit more than that and it fact the Gaussian distribution is very rare in nature. This is why we will call it Gaussian and not "normal", since it is only "normal" from a statistical-theoretical perspective (it has simple mathematical properties that makes it easy to use in applied statistics).
+
+::: callout-tip
+### Gaussian distribution
+
+The Gaussian distribution (also called "normal" and nick-named the "bell curve") is a continuous probability distribution family defined by a mean $\mu$ and a standard deviation $\sigma$.
+
+$$
+Gaussian(\mu, \sigma)
+$$
+:::
 
 @fig-gauss-msd shows Gaussian distributions with fixed standard deviation (2) but different means (-5, 0, 10) in @fig-gauss-msd-1 and Gaussian distributions with fixed mean (5) but different SDs (1, 2, 4) in @fig-gauss-msd-2. The mean shifts the distribution horizontally (lower values to the left, higher values to the right), while the SD affects the width of the distribution: lower SDs correspond to a narrower or tighter distribution, while higher SDs correspond to a wider distribution. Since the total area under the curve has to sum to 1, if the distribution is narrower, the peak will also be relatively higher, while with a wider distribution the peak will be lower. You have seen this in @fig-density-rt-word.
 
@@ -91,4 +101,236 @@ $$
 
 Specific types of Gaussian distributions will have specific values for the parameters $\mu$ and $\sigma$: for example $Gaussian(0, 1)$, $Gaussian(50, 32)$, $Gaussian(2.5, 6.25)$, and so on. All of these specific probability distributions belong to the Gaussian family. So hopefully you understand now why we say that a distribution family stands for specific families: here $Gaussian(\mu, \sigma)$ stands as the parent of all the specific Gaussian distributions (i.e. all of the Gaussian distributions with a specific mean and SD).
 
-## Intervals {#sec-intervals}
+## Cumulative distribution function (CDF) {#sec-intervals}
+
+A usueful way to investigate probability distributions is to ask what is the probability that the random variable the probability represents is less than or equal to a certain value. For example, for a distribution $Gaussian(0, 1)$ of the random variable $X$, what is the probability that $X$ is -1 or less? \@fig-p gives us a visual explanation: the size of the shaded area under the density curve is the probability that $X \leq -1$. This works because the area under the density curve must add to 1, so that the entire area under the curve covers 100% of the probability distribution.
+
+```{r}
+#| label: fig-p
+#| fig-cap: "Illustration of the lower-tail probability with Gaussian(0, 1)."
+#| code-fold: true
+
+q <- -1
+p <- pnorm(q)
+lbl <- sprintf("P(X \u2264 %.0f) = %.4f", q, p)
+
+df <- tibble(x = seq(-4, 4, length.out = 2000)) |>
+  mutate(dens = dnorm(x))
+
+df_shade <- df |> filter(x <= q)
+
+ggplot(df, aes(x, dens)) +
+  geom_line(linewidth = 1) +
+  geom_area(data = df_shade, aes(y = dens), alpha = 0.4) +
+  geom_vline(xintercept = q, linetype = "dashed") +
+  annotate("text", x = q - 3, y = dnorm(0) * 0.4, label = lbl, hjust = 0) +
+  labs(
+    y = "Density", x = "X"
+  )
+```
+
+The mathematical function that calculates the probability that a variable is less than or equal to a value is the **cumulative distribution function** (CDF). In R, you can get the CDF value of a Gaussian distribution (i.e. the probability that $X$ is less than or equal to any value $x$) with the `pnorm()` function (`p` for probability and `norm` for normal or Gaussian). The function takes three arguments: the $x$ value, the mean and the SD of the Gaussian distribution (the default are mean = 0 and SD = 1).
+
+```{r}
+#| label: pnorm
+
+pnorm(q = -1, mean = 0, sd = 1)
+# or
+pnorm(-1, 0, 1)
+# or
+pnorm(-1)
+
+```
+
+::: callout-tip
+### Cumulative Distribution Function
+
+The **Cumulative Distribution Function** (CDF) is a function that gives, for any value $x$, the probability that the random variable $X$ takes a value less than or equal to $x$.
+:::
+
+::: callout-warning
+## Exercise 1
+
+Calculate the probability that $X$ is:
+
+-   less or equal than -2 with $Gaussian(0, 1)$
+
+-   less or equal than +1.75 with $Gaussian(0, 1)$.
+
+-   less or equal than 700 with $Gaussian(900, 200)$.
+:::
+
+By default, `pnorm()` uses the lower-tail CDF: this returns the "less than or equal to" probability. It's on the "lower" tail of the distribution, or the tail to the left of the density peak. But we can also compute the upper-tail probability. @fig-quant-up shows an upper-tail probability with $X \geq -1$ with $Gaussian(0, 1)$. To obtain the upper-tail probability with `pnorm()`, rather than the lower-tail probability, set `lower.tail` to `FALSE`.
+
+```{r}
+#| label: pnorm-up
+
+pnorm(-1, lower.tail = FALSE)
+```
+
+```{r}
+#| label: fig-quant-up
+#| fig-cap: "Illustration of an upper-tail probability with Gaussian(0, 1)."
+#| code-fold: true
+
+q <- -1
+p <- pnorm(q, lower.tail = FALSE)
+lbl <- sprintf("P(X \u2265 %.0f) = %.4f", q, p)
+
+df <- tibble(x = seq(-4, 4, length.out = 2000)) |>
+  mutate(dens = dnorm(x))
+
+df_shade <- df |> filter(x >= q)
+
+ggplot(df, aes(x, dens)) +
+  geom_line(linewidth = 1) +
+  geom_area(data = df_shade, aes(y = dens), alpha = 0.4) +
+  geom_vline(xintercept = q, linetype = "dashed") +
+  annotate("text", x = q + 3, y = dnorm(0) * 0.4, label = lbl, hjust = 0) +
+  labs(
+    y = "Density", x = "X"
+  )
+```
+
+## Intervals
+
+Probability intervals provide a further way of locating and interpreting values within a probability distribution. They partition the distribution into regions associated with specified probability levels. A **quantile** is a value below which a given proportion of the distribution lies. You can think of this as the opposite of finding the probability given $x$: given the probability $q$, which is $x$? For a continuous distribution like the Gaussian, the *q*-th quantile (denoted $Q(q)$) is defined as the value $x$ such that:
+
+$$
+P(X \leq x) = q, 0 \leq q \leq 1
+$$
+
+which is, $q$ is the probability that the outcome $X$ is less than or equal to $x$. So for example, given a Gaussian distribution with mean 0 and SD 1, which is the 0.15th quantile? The answer is shown in @fig-quant. The 0.15th quantile is approximately -1.04.
+
+```{r}
+#| label: fig-quant
+#| fig-cap: "The 0.15th quantile of Gaussian(0, 1)."
+#| code-fold: true
+
+p <- 0.15
+q <- qnorm(p)
+lbl <- sprintf("Q(%.2f) = %.4f", p, q)
+
+df <- tibble(x = seq(-4, 4, length.out = 2000)) |>
+  mutate(dens = dnorm(x))
+
+df_shade <- df |> filter(x <= q)
+
+ggplot(df, aes(x, dens)) +
+  geom_line(linewidth = 1) +
+  geom_area(data = df_shade, aes(y = dens), alpha = 0.4) +
+  geom_vline(xintercept = q, linetype = "dashed") +
+  annotate("text", x = q - 2.5, y = dnorm(0) * 0.4, label = lbl, hjust = 0) +
+  labs(
+    title = "Standard Normal Distribution",
+    y = "Density", x = "X"
+  ) +
+  theme_minimal(base_size = 13)
+
+```
+
+::: callout-tip
+### Quantile
+
+A **quantile** is a value below which a given proportion of a probability distribution lies.
+:::
+
+In R, `qnorm()` returns quantiles using the quantile function (think of it as the inverse of the CDF). It takes three arguments: the probability, and the mean and SD of the Gaussian distribution (again, by default 0 and 1 respectively). As with `pnorm()`, you can obtain the upper-tail quantile with `lower.tail = FALSE`. With a Gaussian distribution with mean 0 and SD 1, the upper-tail quantile value is the same the lower-tail but with opposite sign. The following code shows how to use `qnorm()` (the values are rounded to the second digit with `round(2)`).
+
+```{r}
+#| label: qnorm
+
+# Lower-tail quantile with Gaussian(0, 1)
+qnorm(0.15) |> round(2)
+
+# Upper-tail quantile with Gaussian(0, 1)
+qnorm(0.15, lower.tail = FALSE) |> round(2)
+
+# Lower-tail quantile with Gaussian(10, 2)
+qnorm(0.15, 10, 2) |> round(2)
+
+# Upper-tail quantile with Gaussian(10, 2)
+qnorm(0.15, 10, 2, lower.tail = FALSE) |> round(2)
+```
+
+### Quartiles
+
+**Quartiles** are quantiles that split the distribution into four quarters, each holding 25% of the probability mass. With a Gaussian probability, the first quartile marks the point below which 25% of the area lies, the second quartile, also called the median (which you encountered in @sec-summaries), splits it at 50%, and the third quartile leaves 25% above it, so that it covers 75% of the area. Because of the symmetry of the Gaussian, the first and third quartiles are equidistant from the mean. @fig-quartiles shows quartiles on a Gaussian distribution with mean 0 and SD 1. Note how the second quartile (Q2) splits the distribution in half: 50% of the distribution is to the left of Q2 and the other 50% is to the right of it. The interval between the first (Q1) and third quartile (Q3) is called the inter-quartile range (IQR), which indicates the middle 50% of the probability distribution.
+
+```{r}
+#| label: fig-quartiles
+#| fig-cap: "Quartiles of a Gaussian distribution."
+#| code-fold: true
+
+quartiles <- qnorm(c(0, 0.25, 0.5, 0.75, 1))
+quart_labels <- c("Q1", "Q2 (median)", "Q3")
+
+df <- tibble(x = seq(-4, 4, length.out = 2000)) |>
+  mutate(dens = dnorm(x))
+
+df <- df |> mutate(
+  quartile = case_when(
+    x <= quartiles[2] ~ "Q1",
+    x <= quartiles[3] ~ "Q2",
+    x <= quartiles[4] ~ "Q3",
+    TRUE ~ "Q4"
+  )
+)
+
+ggplot(df, aes(x, dens, fill = quartile)) +
+  geom_area(alpha = 0.5) +
+  geom_line(linewidth = 1) +
+  scale_fill_brewer(type = "seq", direction = -1) +
+  geom_vline(xintercept = quartiles[2:4], linetype = "dashed", alpha = 0.5) +
+  annotate(
+    "label",
+    x = quartiles[2:4],
+    y = 0.2,
+    label = c("Q1", "Q2", "Q3")
+  ) +
+  annotate(
+    "text",
+    x = c(-1.3, -0.35, 0.35, 1.3),
+    y = 0.05,
+    label = c("25%", "25%", "25%", "25%")
+  ) +
+  annotate(
+    "errorbar",
+    xmin = quartiles[2], xmax = quartiles[4],
+    y = 0.1,
+    colour = "purple", linewidth = 1, width = 0.025
+  ) +
+  annotate(
+    "text",
+    x = 0, y = 0.12,
+    label = "IQR"
+  ) +
+  labs(
+    y = "Density", x = element_blank()
+  ) +
+  theme(legend.position = "none")
+
+```
+
+To get the quartiles of a Gaussian distribution you can use the `qnorm()` function: a quartile is just a type of quantile. Q1 corresponds to the 0.25th quantile, Q2 to the 0.5th and Q3 to the 0.75th quantile.
+
+```{r}
+#| label: quart
+
+qnorm(c(0.25, 0.5, 0.75)) |> round(2)
+
+```
+
+::: callout-warning
+#### Exercise 2
+
+Calculate the quartiles of the following Gaussian distributions.
+
+-   $Gaussian(10, 2)$.
+
+-   $Gaussian(900, 200)$.
+
+-   $Gaussian(-30, 10)$.
+:::
+
+### Percentiles

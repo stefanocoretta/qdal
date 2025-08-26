@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>19&nbsp; The Gaussian distribution – Quantitative Data Analysis for Linguists in R</title>
+<title>19&nbsp; Working with distributions – Quantitative Data Analysis for Linguists in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -149,7 +149,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-gaussian.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">The Gaussian distribution</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-gaussian.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Working with distributions</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -339,7 +339,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-gaussian.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">The Gaussian distribution</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Working with distributions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -506,16 +506,21 @@ window.Quarto = {
    
   <ul>
   <li><a href="#the-gaussian-distribution" id="toc-the-gaussian-distribution" class="nav-link active" data-scroll-target="#the-gaussian-distribution"><span class="header-section-number">19.1</span> The Gaussian distribution</a></li>
-  <li><a href="#sec-intervals" id="toc-sec-intervals" class="nav-link" data-scroll-target="#sec-intervals"><span class="header-section-number">19.2</span> Intervals</a></li>
+  <li><a href="#sec-intervals" id="toc-sec-intervals" class="nav-link" data-scroll-target="#sec-intervals"><span class="header-section-number">19.2</span> Cumulative distribution function (CDF)</a></li>
+  <li><a href="#intervals" id="toc-intervals" class="nav-link" data-scroll-target="#intervals"><span class="header-section-number">19.3</span> Intervals</a>
+  <ul class="collapse">
+  <li><a href="#quartiles" id="toc-quartiles" class="nav-link" data-scroll-target="#quartiles"><span class="header-section-number">19.3.1</span> Quartiles</a></li>
+  <li><a href="#percentiles" id="toc-percentiles" class="nav-link" data-scroll-target="#percentiles"><span class="header-section-number">19.3.2</span> Percentiles</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-gaussian.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">The Gaussian distribution</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-gaussian.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Working with distributions</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-gaussian" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">The Gaussian distribution</span></span></h1>
+<h1 class="title"><span id="sec-gaussian" class="quarto-section-identifier"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Working with distributions</span></span></h1>
 </div>
 
 
@@ -532,7 +537,7 @@ window.Quarto = {
 </header>
 
 
-<p><img src="https://img.shields.io/badge/Area-Statistics-red.png" class="img-fluid"></p>
+<p><img src="https://img.shields.io/badge/Area-Statistics-red.png" class="img-fluid"> <img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
 <section id="the-gaussian-distribution" class="level2" data-number="19.1">
 <h2 data-number="19.1" class="anchored" data-anchor-id="the-gaussian-distribution"><span class="header-section-number">19.1</span> The Gaussian distribution</h2>
 <p>In the previous section, we have seen that you can visualise probability distributions by plotting the probability mass or density function for theoretical probabilities and by using kernel density estimation for sample (aka empirical) distributions. Visualising probability distributions is more practical than listing all the possible values and their probability (especially with continuous variables—since they are continuous there is an infinite number of values!). Another convenient way to express probability distributions is to specify a set of parameters, which can reconstruct the entire distribution. With theoretical distributions, the parameters allow you to reconstruct exact distributions, while empirical distributions can usually be only approximated. That’s the whole point of taking a sample: you want to reconstruct the “underlying” probability distribution that generated the sample, in other words the (theoretical) probability distribution of the population.</p>
@@ -566,6 +571,22 @@ Figure&nbsp;19.1
 <li><p>The <strong>standard deviation</strong>, represented with the Greek letter <span class="math inline">\(\sigma\)</span> [ˈsɪgmə]. This parameter is the probability’s dispersion around the mean. The higher <span class="math inline">\(\sigma\)</span> the greater the spread (i.e.&nbsp;the dispersion) of values around the mean.</p></li>
 </ul>
 <p>You have already encountered means and standard deviations in <a href="ch-sum-measures.html" class="quarto-xref"><span>Chapter 10</span></a>. It is no coincidence that the go-to summary measures for continuous variables are the mean and the standard deviation. When you don’t know exactly what the underlying distribution of a variable is and all you want is a measure of central tendency and of dispersion, one assumes a Gaussian distribution and calculates mean and standard deviations. Note that in most cases we know a bit more than that and it fact the Gaussian distribution is very rare in nature. This is why we will call it Gaussian and not “normal”, since it is only “normal” from a statistical-theoretical perspective (it has simple mathematical properties that makes it easy to use in applied statistics).</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Gaussian distribution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Gaussian distribution (also called “normal” and nick-named the “bell curve”) is a continuous probability distribution family defined by a mean <span class="math inline">\(\mu\)</span> and a standard deviation <span class="math inline">\(\sigma\)</span>.</p>
+<p><span class="math display">\[
+Gaussian(\mu, \sigma)
+\]</span></p>
+</div>
+</div>
 <p><a href="#fig-gauss-msd" class="quarto-xref">Figure&nbsp;<span>19.2</span></a> shows Gaussian distributions with fixed standard deviation (2) but different means (-5, 0, 10) in <a href="#fig-gauss-msd-1" class="quarto-xref">Figure&nbsp;<span>19.2 (a)</span></a> and Gaussian distributions with fixed mean (5) but different SDs (1, 2, 4) in <a href="#fig-gauss-msd-2" class="quarto-xref">Figure&nbsp;<span>19.2 (b)</span></a>. The mean shifts the distribution horizontally (lower values to the left, higher values to the right), while the SD affects the width of the distribution: lower SDs correspond to a narrower or tighter distribution, while higher SDs correspond to a wider distribution. Since the total area under the curve has to sum to 1, if the distribution is narrower, the peak will also be relatively higher, while with a wider distribution the peak will be lower. You have seen this in <a href="ch-probability.html#fig-density-rt-word" class="quarto-xref">Figure&nbsp;<span>18.4</span></a>.</p>
 <details class="code-fold">
 <summary>Code</summary>
@@ -643,9 +664,309 @@ Gaussian(\mu, \sigma)
 <p>Specific types of Gaussian distributions will have specific values for the parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>: for example <span class="math inline">\(Gaussian(0, 1)\)</span>, <span class="math inline">\(Gaussian(50, 32)\)</span>, <span class="math inline">\(Gaussian(2.5, 6.25)\)</span>, and so on. All of these specific probability distributions belong to the Gaussian family. So hopefully you understand now why we say that a distribution family stands for specific families: here <span class="math inline">\(Gaussian(\mu, \sigma)\)</span> stands as the parent of all the specific Gaussian distributions (i.e.&nbsp;all of the Gaussian distributions with a specific mean and SD).</p>
 </section>
 <section id="sec-intervals" class="level2" data-number="19.2">
-<h2 data-number="19.2" class="anchored" data-anchor-id="sec-intervals"><span class="header-section-number">19.2</span> Intervals</h2>
+<h2 data-number="19.2" class="anchored" data-anchor-id="sec-intervals"><span class="header-section-number">19.2</span> Cumulative distribution function (CDF)</h2>
+<p>A usueful way to investigate probability distributions is to ask what is the probability that the random variable the probability represents is less than or equal to a certain value. For example, for a distribution <span class="math inline">\(Gaussian(0, 1)\)</span> of the random variable <span class="math inline">\(X\)</span>, what is the probability that <span class="math inline">\(X\)</span> is -1 or less? @fig-p gives us a visual explanation: the size of the shaded area under the density curve is the probability that <span class="math inline">\(X \leq -1\)</span>. This works because the area under the density curve must add to 1, so that the entire area under the curve covers 100% of the probability distribution.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(q)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>lbl <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"P(X \u2264 %.0f) = %.4f"</span>, q, p)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">2000</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dens =</span> <span class="fu">dnorm</span>(x))</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df_shade <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">filter</span>(x <span class="sc">&lt;=</span> q)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, dens)) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> df_shade, <span class="fu">aes</span>(<span class="at">y =</span> dens), <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> q, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> q <span class="sc">-</span> <span class="dv">3</span>, <span class="at">y =</span> <span class="fu">dnorm</span>(<span class="dv">0</span>) <span class="sc">*</span> <span class="fl">0.4</span>, <span class="at">label =</span> lbl, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span>, <span class="at">x =</span> <span class="st">"X"</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-p" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-p-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-gaussian_files/figure-html/fig-p-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-p-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19.3: Illustration of the lower-tail probability with Gaussian(0, 1).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The mathematical function that calculates the probability that a variable is less than or equal to a value is the <strong>cumulative distribution function</strong> (CDF). In R, you can get the CDF value of a Gaussian distribution (i.e.&nbsp;the probability that <span class="math inline">\(X\)</span> is less than or equal to any value <span class="math inline">\(x\)</span>) with the <code>pnorm()</code> function (<code>p</code> for probability and <code>norm</code> for normal or Gaussian). The function takes three arguments: the <span class="math inline">\(x\)</span> value, the mean and the SD of the Gaussian distribution (the default are mean = 0 and SD = 1).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="at">q =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1586553</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1586553</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1586553</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Cumulative Distribution Function
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <strong>Cumulative Distribution Function</strong> (CDF) is a function that gives, for any value <span class="math inline">\(x\)</span>, the probability that the random variable <span class="math inline">\(X\)</span> takes a value less than or equal to <span class="math inline">\(x\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Calculate the probability that <span class="math inline">\(X\)</span> is:</p>
+<ul>
+<li><p>less or equal than -2 with <span class="math inline">\(Gaussian(0, 1)\)</span></p></li>
+<li><p>less or equal than +1.75 with <span class="math inline">\(Gaussian(0, 1)\)</span>.</p></li>
+<li><p>less or equal than 700 with <span class="math inline">\(Gaussian(900, 200)\)</span>.</p></li>
+</ul>
+</div>
+</div>
+<p>By default, <code>pnorm()</code> uses the lower-tail CDF: this returns the “less than or equal to” probability. It’s on the “lower” tail of the distribution, or the tail to the left of the density peak. But we can also compute the upper-tail probability. <a href="#fig-quant-up" class="quarto-xref">Figure&nbsp;<span>19.4</span></a> shows an upper-tail probability with <span class="math inline">\(X \geq -1\)</span> with <span class="math inline">\(Gaussian(0, 1)\)</span>. To obtain the upper-tail probability with <code>pnorm()</code>, rather than the lower-tail probability, set <code>lower.tail</code> to <code>FALSE</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8413447</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(q, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>lbl <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"P(X \u2265 %.0f) = %.4f"</span>, q, p)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">2000</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dens =</span> <span class="fu">dnorm</span>(x))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>df_shade <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">filter</span>(x <span class="sc">&gt;=</span> q)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, dens)) <span class="sc">+</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> df_shade, <span class="fu">aes</span>(<span class="at">y =</span> dens), <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> q, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> q <span class="sc">+</span> <span class="dv">3</span>, <span class="at">y =</span> <span class="fu">dnorm</span>(<span class="dv">0</span>) <span class="sc">*</span> <span class="fl">0.4</span>, <span class="at">label =</span> lbl, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span>, <span class="at">x =</span> <span class="st">"X"</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-quant-up" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quant-up-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-gaussian_files/figure-html/fig-quant-up-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quant-up-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19.4: Illustration of an upper-tail probability with Gaussian(0, 1).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="intervals" class="level2" data-number="19.3">
+<h2 data-number="19.3" class="anchored" data-anchor-id="intervals"><span class="header-section-number">19.3</span> Intervals</h2>
+<p>Probability intervals provide a further way of locating and interpreting values within a probability distribution. They partition the distribution into regions associated with specified probability levels. A <strong>quantile</strong> is a value below which a given proportion of the distribution lies. You can think of this as the opposite of finding the probability given <span class="math inline">\(x\)</span>: given the probability <span class="math inline">\(q\)</span>, which is <span class="math inline">\(x\)</span>? For a continuous distribution like the Gaussian, the <em>q</em>-th quantile (denoted <span class="math inline">\(Q(q)\)</span>) is defined as the value <span class="math inline">\(x\)</span> such that:</p>
+<p><span class="math display">\[
+P(X \leq x) = q, 0 \leq q \leq 1
+\]</span></p>
+<p>which is, <span class="math inline">\(q\)</span> is the probability that the outcome <span class="math inline">\(X\)</span> is less than or equal to <span class="math inline">\(x\)</span>. So for example, given a Gaussian distribution with mean 0 and SD 1, which is the 0.15th quantile? The answer is shown in <a href="#fig-quant" class="quarto-xref">Figure&nbsp;<span>19.5</span></a>. The 0.15th quantile is approximately -1.04.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.15</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(p)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>lbl <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(<span class="st">"Q(%.2f) = %.4f"</span>, p, q)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">2000</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dens =</span> <span class="fu">dnorm</span>(x))</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>df_shade <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">filter</span>(x <span class="sc">&lt;=</span> q)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, dens)) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> df_shade, <span class="fu">aes</span>(<span class="at">y =</span> dens), <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> q, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> q <span class="sc">-</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">dnorm</span>(<span class="dv">0</span>) <span class="sc">*</span> <span class="fl">0.4</span>, <span class="at">label =</span> lbl, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Standard Normal Distribution"</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span>, <span class="at">x =</span> <span class="st">"X"</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-quant" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-gaussian_files/figure-html/fig-quant-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19.5: The 0.15th quantile of Gaussian(0, 1).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quantile
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>quantile</strong> is a value below which a given proportion of a probability distribution lies.</p>
+</div>
+</div>
+<p>In R, <code>qnorm()</code> returns quantiles using the quantile function (think of it as the inverse of the CDF). It takes three arguments: the probability, and the mean and SD of the Gaussian distribution (again, by default 0 and 1 respectively). As with <code>pnorm()</code>, you can obtain the upper-tail quantile with <code>lower.tail = FALSE</code>. With a Gaussian distribution with mean 0 and SD 1, the upper-tail quantile value is the same the lower-tail but with opposite sign. The following code shows how to use <code>qnorm()</code> (the values are rounded to the second digit with <code>round(2)</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lower-tail quantile with Gaussian(0, 1)</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.15</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.04</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Upper-tail quantile with Gaussian(0, 1)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.15</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.04</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lower-tail quantile with Gaussian(10, 2)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.15</span>, <span class="dv">10</span>, <span class="dv">2</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.93</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Upper-tail quantile with Gaussian(10, 2)</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.15</span>, <span class="dv">10</span>, <span class="dv">2</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12.07</code></pre>
+</div>
+</div>
+<section id="quartiles" class="level3" data-number="19.3.1">
+<h3 data-number="19.3.1" class="anchored" data-anchor-id="quartiles"><span class="header-section-number">19.3.1</span> Quartiles</h3>
+<p><strong>Quartiles</strong> are quantiles that split the distribution into four quarters, each holding 25% of the probability mass. With a Gaussian probability, the first quartile marks the point below which 25% of the area lies, the second quartile, also called the median (which you encountered in <a href="ch-sum-measures.html" class="quarto-xref"><span>Chapter 10</span></a>), splits it at 50%, and the third quartile leaves 25% above it, so that it covers 75% of the area. Because of the symmetry of the Gaussian, the first and third quartiles are equidistant from the mean. <a href="#fig-quartiles" class="quarto-xref">Figure&nbsp;<span>19.6</span></a> shows quartiles on a Gaussian distribution with mean 0 and SD 1. Note how the second quartile (Q2) splits the distribution in half: 50% of the distribution is to the left of Q2 and the other 50% is to the right of it. The interval between the first (Q1) and third quartile (Q3) is called the inter-quartile range (IQR), which indicates the middle 50% of the probability distribution.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>quartiles <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>quart_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Q1"</span>, <span class="st">"Q2 (median)"</span>, <span class="st">"Q3"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">2000</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dens =</span> <span class="fu">dnorm</span>(x))</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">mutate</span>(</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">quartile =</span> <span class="fu">case_when</span>(</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">&lt;=</span> quartiles[<span class="dv">2</span>] <span class="sc">~</span> <span class="st">"Q1"</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">&lt;=</span> quartiles[<span class="dv">3</span>] <span class="sc">~</span> <span class="st">"Q2"</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    x <span class="sc">&lt;=</span> quartiles[<span class="dv">4</span>] <span class="sc">~</span> <span class="st">"Q3"</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Q4"</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, dens, <span class="at">fill =</span> quartile)) <span class="sc">+</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">type =</span> <span class="st">"seq"</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> quartiles[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>], <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"label"</span>,</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> quartiles[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>],</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">0.2</span>,</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">c</span>(<span class="st">"Q1"</span>, <span class="st">"Q2"</span>, <span class="st">"Q3"</span>)</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.3</span>, <span class="sc">-</span><span class="fl">0.35</span>, <span class="fl">0.35</span>, <span class="fl">1.3</span>),</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">0.05</span>,</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">c</span>(<span class="st">"25%"</span>, <span class="st">"25%"</span>, <span class="st">"25%"</span>, <span class="st">"25%"</span>)</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"errorbar"</span>,</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">xmin =</span> quartiles[<span class="dv">2</span>], <span class="at">xmax =</span> quartiles[<span class="dv">4</span>],</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fl">0.1</span>,</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"purple"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">width =</span> <span class="fl">0.025</span></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="fl">0.12</span>,</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"IQR"</span></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span>, <span class="at">x =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-quartiles" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quartiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-gaussian_files/figure-html/fig-quartiles-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quartiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19.6: Quartiles of a Gaussian distribution.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>To get the quartiles of a Gaussian distribution you can use the <code>qnorm()</code> function: a quartile is just a type of quantile. Q1 corresponds to the 0.25th quantile, Q2 to the 0.5th and Q3 to the 0.75th quantile.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.67  0.00  0.67</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Calculate the quartiles of the following Gaussian distributions.</p>
+<ul>
+<li><p><span class="math inline">\(Gaussian(10, 2)\)</span>.</p></li>
+<li><p><span class="math inline">\(Gaussian(900, 200)\)</span>.</p></li>
+<li><p><span class="math inline">\(Gaussian(-30, 10)\)</span>.</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="percentiles" class="level3" data-number="19.3.2">
+<h3 data-number="19.3.2" class="anchored" data-anchor-id="percentiles"><span class="header-section-number">19.3.2</span> Percentiles</h3>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
