@@ -222,10 +222,8 @@ ggplot(df, aes(x, dens)) +
   geom_vline(xintercept = q, linetype = "dashed") +
   annotate("text", x = q - 2.5, y = dnorm(0) * 0.4, label = lbl, hjust = 0) +
   labs(
-    title = "Standard Normal Distribution",
     y = "Density", x = "X"
-  ) +
-  theme_minimal(base_size = 13)
+  )
 
 ```
 
@@ -321,6 +319,12 @@ qnorm(c(0.25, 0.5, 0.75)) |> round(2)
 
 ```
 
+::: callout-tip
+## Quartiles
+
+**Quartiles** are quantiles that split the distribution into four quarters, each holding 25% of the probability mass
+:::
+
 ::: callout-warning
 #### Exercise 2
 
@@ -334,3 +338,77 @@ Calculate the quartiles of the following Gaussian distributions.
 :::
 
 ### Percentiles
+
+Another type of quantile are **percentiles**. These split the probability in 100 percentiles, each holding 1% of the probability mass. Percentiles are used to define central probability intervals, i.e. probability intervals that leave equal probability in both tails of the distribution. It is usually implied that you mean a central interval, so you don't really have to say "central" every time. A (central) 95% interval is defined as the interval between 2.5th and the 97.5th percentile of the distribution. @fig-ninetyfive illustrates the 95% interval of $Gaussian(0, 1)$. The shaded are is the 95% interval, while the two white areas at the tails hold each 2.5% of the distribution, thus making the rest 5% of the distribution not included in the 95% interval. Remember, probability intervals leave equal probability on both tails.
+
+```{r}
+#| label: fig-ninetyfive
+#| fig-cap: "The 95% interval of Gaussian(0, 1)."
+#| code-fold: true
+
+p <- 0.15
+
+df <- tibble(x = seq(-4, 4, length.out = 2000)) |>
+  mutate(dens = dnorm(x))
+
+df_shade <- df |> filter(x >= qnorm(0.025) & x <= qnorm(0.975))
+
+ggplot(df, aes(x, dens)) +
+  geom_area(data = df_shade, aes(y = dens), alpha = 0.4) +
+  geom_line(linewidth = 1) +
+  annotate(
+    "label", x = 0, y = 0.15, label = "95% interval"
+  ) +
+  annotate(
+    "text",
+    x = c(qnorm(0.025) - 0.1, qnorm(0.975) + 0.15), y = 0.1,
+    label = c("2.5th", "97.5th")
+  ) +
+  labs(
+    y = "Density", x = "X"
+  )
+```
+
+::: callout-tip
+## Central probability intervals
+
+Central **probability intervals** are intervals that leave equal probability in both tails of the distribution.
+
+A 95% interval is defined as the interval between the 2.5th and the 97.5th percentile.
+:::
+
+::: callout-note
+## Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1a <- c(
+  answer = '(0.1, 0.9)',
+  '(0.2, 0.8)',
+  '(0.05, 0.95)'
+)
+
+cat("a. Which of the following percentiles define an 80% interval?", longmcq(opts_1a))
+
+opts_1b <- c(
+  '(0.075, 0.925)',
+  answer = '(0.1, 0.95)',
+  '(0.05, 0.95)',
+  '(0.15, 0.85)'
+)
+
+cat("b. Which of the following percentiles define a *non*-central 85% interval?", longmcq(opts_1b))
+
+opts_1c <- c(
+  'A 60% central interval.',
+  'A 20% non-central interval.',
+  'A 40% non-central interval.',
+  answer = 'A 20% central interval.'
+)
+
+cat("b. Which interval do the 40th and 60th percentile define?", longmcq(opts_1c))
+```
+:::

@@ -815,10 +815,8 @@ P(X \leq x) = q, 0 \leq q \leq 1
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> q, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> q <span class="sc">-</span> <span class="fl">2.5</span>, <span class="at">y =</span> <span class="fu">dnorm</span>(<span class="dv">0</span>) <span class="sc">*</span> <span class="fl">0.4</span>, <span class="at">label =</span> lbl, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Standard Normal Distribution"</span>,</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span>, <span class="at">x =</span> <span class="st">"X"</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">13</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span>, <span class="at">x =</span> <span class="st">"X"</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-quant" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -943,6 +941,19 @@ Figure&nbsp;19.6: Quartiles of a Gaussian distribution.
 <pre><code>[1] -0.67  0.00  0.67</code></pre>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quartiles
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Quartiles</strong> are quantiles that split the distribution into four quarters, each holding 25% of the probability mass</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -964,6 +975,85 @@ Exercise 2
 </section>
 <section id="percentiles" class="level3" data-number="19.3.2">
 <h3 data-number="19.3.2" class="anchored" data-anchor-id="percentiles"><span class="header-section-number">19.3.2</span> Percentiles</h3>
+<p>Another type of quantile are <strong>percentiles</strong>. These split the probability in 100 percentiles, each holding 1% of the probability mass. Percentiles are used to define central probability intervals, i.e.&nbsp;probability intervals that leave equal probability in both tails of the distribution. It is usually implied that you mean a central interval, so you don’t really have to say “central” every time. A (central) 95% interval is defined as the interval between 2.5th and the 97.5th percentile of the distribution. <a href="#fig-ninetyfive" class="quarto-xref">Figure&nbsp;<span>19.7</span></a> illustrates the 95% interval of <span class="math inline">\(Gaussian(0, 1)\)</span>. The shaded are is the 95% interval, while the two white areas at the tails hold each 2.5% of the distribution, thus making the rest 5% of the distribution not included in the 95% interval. Remember, probability intervals leave equal probability on both tails.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.15</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">2000</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dens =</span> <span class="fu">dnorm</span>(x))</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>df_shade <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> <span class="fu">filter</span>(x <span class="sc">&gt;=</span> <span class="fu">qnorm</span>(<span class="fl">0.025</span>) <span class="sc">&amp;</span> x <span class="sc">&lt;=</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>))</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, dens)) <span class="sc">+</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">data =</span> df_shade, <span class="fu">aes</span>(<span class="at">y =</span> dens), <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"label"</span>, <span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="fl">0.15</span>, <span class="at">label =</span> <span class="st">"95% interval"</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>,</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">c</span>(<span class="fu">qnorm</span>(<span class="fl">0.025</span>) <span class="sc">-</span> <span class="fl">0.1</span>, <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">+</span> <span class="fl">0.15</span>), <span class="at">y =</span> <span class="fl">0.1</span>,</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">c</span>(<span class="st">"2.5th"</span>, <span class="st">"97.5th"</span>)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span>, <span class="at">x =</span> <span class="st">"X"</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-ninetyfive" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ninetyfive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-gaussian_files/figure-html/fig-ninetyfive-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ninetyfive-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;19.7: The 95% interval of Gaussian(0, 1).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Central probability intervals
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Central <strong>probability intervals</strong> are intervals that leave equal probability in both tails of the distribution.</p>
+<p>A 95% interval is defined as the interval between the 2.5th and the 97.5th percentile.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quiz 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li>Which of the following percentiles define an 80% interval?
+<div id="radio_KEDBPJHRYP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KEDBPJHRYP" value="answer"> <span>(0.1, 0.9)</span></label><label><input type="radio" autocomplete="off" name="radio_KEDBPJHRYP" value=""> <span>(0.2, 0.8)</span></label><label><input type="radio" autocomplete="off" name="radio_KEDBPJHRYP" value=""> <span>(0.05, 0.95)</span></label>
+</div></li>
+<li>Which of the following percentiles define a <em>non</em>-central 85% interval?
+<div id="radio_TWSZGNSEHI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TWSZGNSEHI" value=""> <span>(0.075, 0.925)</span></label><label><input type="radio" autocomplete="off" name="radio_TWSZGNSEHI" value="answer"> <span>(0.1, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_TWSZGNSEHI" value=""> <span>(0.05, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_TWSZGNSEHI" value=""> <span>(0.15, 0.85)</span></label>
+</div></li>
+<li>Which interval do the 40th and 60th percentile define?
+<div id="radio_FTZBUZXUBW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FTZBUZXUBW" value=""> <span>A 60% central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_FTZBUZXUBW" value=""> <span>A 20% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_FTZBUZXUBW" value=""> <span>A 40% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_FTZBUZXUBW" value="answer"> <span>A 20% central interval.</span></label>
+</div></li>
+</ol>
+</div>
+</div>
 
 
 </section>
