@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -73,7 +73,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-485d01fc63b59abcd3ee1bf1e8e2748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -665,7 +665,7 @@ Gaussian(\mu, \sigma)
 </section>
 <section id="sec-intervals" class="level2" data-number="19.2">
 <h2 data-number="19.2" class="anchored" data-anchor-id="sec-intervals"><span class="header-section-number">19.2</span> Cumulative distribution function (CDF)</h2>
-<p>A usueful way to investigate probability distributions is to ask what is the probability that the random variable the probability represents is less than or equal to a certain value. For example, for a distribution <span class="math inline">\(Gaussian(0, 1)\)</span> of the random variable <span class="math inline">\(X\)</span>, what is the probability that <span class="math inline">\(X\)</span> is -1 or less? @fig-p gives us a visual explanation: the size of the shaded area under the density curve is the probability that <span class="math inline">\(X \leq -1\)</span>. This works because the area under the density curve must add to 1, so that the entire area under the curve covers 100% of the probability distribution.</p>
+<p>A useful way to investigate probability distributions is to ask what is the probability that the random variable the probability represents is less than or equal to a certain value. For example, for a distribution <span class="math inline">\(Gaussian(0, 1)\)</span> of the random variable <span class="math inline">\(X\)</span>, what is the probability that <span class="math inline">\(X\)</span> is -1 or less? <a href="#fig-pnorm" class="quarto-xref">Figure&nbsp;<span>19.3</span></a> gives us a visual explanation: the size of the shaded area under the density curve is the probability that <span class="math inline">\(X \leq -1\)</span>. This works because the area under the density curve must add to 1, so that the entire area under the curve covers 100% of the probability distribution.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -688,19 +688,19 @@ Gaussian(\mu, \sigma)
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-p" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-pnorm" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-p-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-gaussian_files/figure-html/fig-p-1.png" class="img-fluid figure-img" width="672">
+<div aria-describedby="fig-pnorm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-gaussian_files/figure-html/fig-pnorm-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-p-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pnorm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;19.3: Illustration of the lower-tail probability with Gaussian(0, 1).
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The mathematical function that calculates the probability that a variable is less than or equal to a value is the <strong>cumulative distribution function</strong> (CDF). In R, you can get the CDF value of a Gaussian distribution (i.e.&nbsp;the probability that <span class="math inline">\(X\)</span> is less than or equal to any value <span class="math inline">\(x\)</span>) with the <code>pnorm()</code> function (<code>p</code> for probability and <code>norm</code> for normal or Gaussian). The function takes three arguments: the <span class="math inline">\(x\)</span> value, the mean and the SD of the Gaussian distribution (the default are mean = 0 and SD = 1).</p>
+<p>The mathematical function that calculates the probability that a variable is less than or equal to a value is the <strong>cumulative distribution function</strong> (CDF). In R, you can get the CDF value of a Gaussian distribution (i.e.&nbsp;the probability that <span class="math inline">\(X\)</span> is less than or equal to any value <span class="math inline">\(x\)</span>) with the <code>pnorm()</code> function (<code>p</code> for probability and <code>norm</code> for normal or Gaussian). The function takes three arguments: the <span class="math inline">\(x\)</span> value represented by the <code>q</code> argument, the mean and the SD of the Gaussian distribution (the default are mean = 0 and SD = 1).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="at">q =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1040,16 +1040,16 @@ Quiz 1
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>Which of the following percentiles define an 80% interval?
-<div id="radio_KEDBPJHRYP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KEDBPJHRYP" value="answer"> <span>(0.1, 0.9)</span></label><label><input type="radio" autocomplete="off" name="radio_KEDBPJHRYP" value=""> <span>(0.2, 0.8)</span></label><label><input type="radio" autocomplete="off" name="radio_KEDBPJHRYP" value=""> <span>(0.05, 0.95)</span></label>
+<div id="radio_FUDXDOBOII" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FUDXDOBOII" value="answer"> <span>(0.1, 0.9)</span></label><label><input type="radio" autocomplete="off" name="radio_FUDXDOBOII" value=""> <span>(0.2, 0.8)</span></label><label><input type="radio" autocomplete="off" name="radio_FUDXDOBOII" value=""> <span>(0.05, 0.95)</span></label>
 </div></li>
 <li>Which of the following percentiles define a <em>non</em>-central 85% interval?
-<div id="radio_TWSZGNSEHI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_TWSZGNSEHI" value=""> <span>(0.075, 0.925)</span></label><label><input type="radio" autocomplete="off" name="radio_TWSZGNSEHI" value="answer"> <span>(0.1, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_TWSZGNSEHI" value=""> <span>(0.05, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_TWSZGNSEHI" value=""> <span>(0.15, 0.85)</span></label>
+<div id="radio_NSZUSNSTLH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NSZUSNSTLH" value=""> <span>(0.075, 0.925)</span></label><label><input type="radio" autocomplete="off" name="radio_NSZUSNSTLH" value="answer"> <span>(0.1, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_NSZUSNSTLH" value=""> <span>(0.05, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_NSZUSNSTLH" value=""> <span>(0.15, 0.85)</span></label>
 </div></li>
 <li>Which interval do the 40th and 60th percentile define?
-<div id="radio_FTZBUZXUBW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FTZBUZXUBW" value=""> <span>A 60% central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_FTZBUZXUBW" value=""> <span>A 20% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_FTZBUZXUBW" value=""> <span>A 40% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_FTZBUZXUBW" value="answer"> <span>A 20% central interval.</span></label>
+<div id="radio_YYVUXDBALK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YYVUXDBALK" value=""> <span>A 60% central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_YYVUXDBALK" value=""> <span>A 20% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_YYVUXDBALK" value=""> <span>A 40% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_YYVUXDBALK" value="answer"> <span>A 20% central interval.</span></label>
 </div></li>
 </ol>
 </div>

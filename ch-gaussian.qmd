@@ -103,10 +103,10 @@ Specific types of Gaussian distributions will have specific values for the param
 
 ## Cumulative distribution function (CDF) {#sec-intervals}
 
-A usueful way to investigate probability distributions is to ask what is the probability that the random variable the probability represents is less than or equal to a certain value. For example, for a distribution $Gaussian(0, 1)$ of the random variable $X$, what is the probability that $X$ is -1 or less? \@fig-p gives us a visual explanation: the size of the shaded area under the density curve is the probability that $X \leq -1$. This works because the area under the density curve must add to 1, so that the entire area under the curve covers 100% of the probability distribution.
+A useful way to investigate probability distributions is to ask what is the probability that the random variable the probability represents is less than or equal to a certain value. For example, for a distribution $Gaussian(0, 1)$ of the random variable $X$, what is the probability that $X$ is -1 or less? @fig-pnorm gives us a visual explanation: the size of the shaded area under the density curve is the probability that $X \leq -1$. This works because the area under the density curve must add to 1, so that the entire area under the curve covers 100% of the probability distribution.
 
 ```{r}
-#| label: fig-p
+#| label: fig-pnorm
 #| fig-cap: "Illustration of the lower-tail probability with Gaussian(0, 1)."
 #| code-fold: true
 
@@ -129,7 +129,7 @@ ggplot(df, aes(x, dens)) +
   )
 ```
 
-The mathematical function that calculates the probability that a variable is less than or equal to a value is the **cumulative distribution function** (CDF). In R, you can get the CDF value of a Gaussian distribution (i.e. the probability that $X$ is less than or equal to any value $x$) with the `pnorm()` function (`p` for probability and `norm` for normal or Gaussian). The function takes three arguments: the $x$ value, the mean and the SD of the Gaussian distribution (the default are mean = 0 and SD = 1).
+The mathematical function that calculates the probability that a variable is less than or equal to a value is the **cumulative distribution function** (CDF). In R, you can get the CDF value of a Gaussian distribution (i.e. the probability that $X$ is less than or equal to any value $x$) with the `pnorm()` function (`p` for probability and `norm` for normal or Gaussian). The function takes three arguments: the $x$ value represented by the `q` argument, the mean and the SD of the Gaussian distribution (the default are mean = 0 and SD = 1).
 
 ```{r}
 #| label: pnorm
@@ -320,7 +320,7 @@ qnorm(c(0.25, 0.5, 0.75)) |> round(2)
 ```
 
 ::: callout-tip
-## Quartiles
+#### Quartiles
 
 **Quartiles** are quantiles that split the distribution into four quarters, each holding 25% of the probability mass
 :::
@@ -370,7 +370,7 @@ ggplot(df, aes(x, dens)) +
 ```
 
 ::: callout-tip
-## Central probability intervals
+#### Central probability intervals
 
 Central **probability intervals** are intervals that leave equal probability in both tails of the distribution.
 
@@ -378,7 +378,7 @@ A 95% interval is defined as the interval between the 2.5th and the 97.5th perce
 :::
 
 ::: callout-note
-## Quiz 1
+#### Quiz 1
 
 ```{r}
 #| label: quiz-1
