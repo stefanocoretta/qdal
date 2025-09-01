@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -89,6 +124,8 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -523,28 +560,82 @@ window.Quarto = {
 <p><img src="img/volcano-raining.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
 </figure>
 </div>
+<p>In <a href="ch-probability.html" class="quarto-xref"><span>Chapter 18</span></a> and <a href="ch-gaussian.html" class="quarto-xref"><span>Chapter 19</span></a> you learned about probabilities, probability distributions and probability intervals. Statistical inference (<a href="ch-inference.html" class="quarto-xref"><span>Chapter 6</span></a>) is built on probability, but, while probabilities and distributions are precise mathematical concepts, their more philosophical interpretation varies depending on which stance one adopts. Among the two most common approaches to interpreting probability there are the frequentist and the Bayesian approach. This chapter introduces these views and concludes with practical and conceptual reason for why the Bayesian view of probability is more helpful to researchers, despite the frequentist approach still being the more wide-spread.</p>
 <section id="frequentist-vs-bayesian-probability" class="level2" data-number="20.1">
 <h2 data-number="20.1" class="anchored" data-anchor-id="frequentist-vs-bayesian-probability"><span class="header-section-number">20.1</span> Frequentist vs Bayesian probability</h2>
-<p>The two major approaches to statistical inference are the frequentist and the Bayesian approaches. The difference between these approaches is how probabilities are conceived, from a philosophical perspective if you will.</p>
-<p>Probabilities in a <strong>frequentist framework</strong> are about average occurrences of events in a hypothetical series of repetitions of those events. Imagine you observe a volcano for a long period of time. The number of times the volcano erupts within that time tells us the <strong>frequency</strong> of occurrence of the event of volcanic eruption. In other words, it tells us its (frequentist) probability.</p>
-<p>In the <strong>Bayesian framework</strong>, probabilities are about the <strong>level of (un)certainty</strong> that an event will occur at any specific time given certain conditions. This is probably the way we normally think about probabilities: like in the weather forecast, if somebody tells you tomorrow it will rain with a probability of 85%, you intuitively know that it is very likely that it will rain tomorrow although not certain.</p>
-<p>In the context of research, a frequentist probability tells you the probability of obtaining the same result again given an imaginary series of replications of the study that generated that probability. On the other hand, a Bayesian probability tells you the probability that the result of the study is the actual result you should have gotten.</p>
+<p>Probabilities in a <strong>frequentist framework</strong> are about average occurrences of events in a hypothetical series of repetitions of those events. Imagine you observe a volcano for a long period of time. The number of times the volcano erupts within that time tells us the <strong>frequency</strong> of occurrence of the event of volcanic eruption. In other words, it tells us its (frequentist) probability. In the <strong>Bayesian framework</strong>, probabilities are about the <strong>level of (un)certainty</strong> that an event will occur at any specific time given certain conditions. This is probably the way we normally think about probabilities: like in the weather forecast, if somebody tells you tomorrow it will rain with a probability of 85%, you intuitively know that it is very likely that it will rain tomorrow although it is not certain.</p>
+<p>In the context of research, a frequentist probability tells you the probability of obtaining the same result again given an imaginary series of replications of the study that generated that probability. On the other hand, a Bayesian probability tells you the probability of your hypothesis given the results of your study and your prior beliefs.</p>
 </section>
 <section id="frequentist-inference" class="level2" data-number="20.2">
 <h2 data-number="20.2" class="anchored" data-anchor-id="frequentist-inference"><span class="header-section-number">20.2</span> Frequentist inference</h2>
-<p>Most of current research is carried out with frequentist methods. This is a historical accident, based on both a misunderstanding of Bayesian statistics (which is, by the way, older than frequentist statistics) and the fact that frequentist maths was much easier (and personal computers did not exist).</p>
-<p>The commonly accepted approach to frequentist inference is the so-called <strong>Null Hypothesis Significance Testing</strong>, or NHST. As practised by researchers, the NHST approach is a (sometimes incoherent) mix of the frequentist work of Fisher on one hand, and Neyman and Pearson on the other. The inconsistent nature of NHST as practised has led to the elaboration of the concept and label “<strong>Null Ritual</strong>” <span class="citation" data-cites="gigerenzer2004 gigerenzer2004a gigerenzer2018">(<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">Gigerenzer 2004</a>, <a href="references.html#ref-gigerenzer2018" role="doc-biblioref">2018</a>; <a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer, Krauss, and Vitouch 2004</a>)</span> and the slogan-titled paper <em>The difference between “significant” and “not significant” is not itself statistically significant</em> <span class="citation" data-cites="gelman2006a">(<a href="references.html#ref-gelman2006a" role="doc-biblioref">Gelman and Stern 2006</a>)</span>. The Null Ritual has been criticised by frequentist and Bayesian statisticians alike and has resulted in the proposal or alternative, stricter, versions of NHST, like Statistical Inference as Severe Testing <span class="citation" data-cites="mayo2018 gelman2019">(SIST, <a href="references.html#ref-mayo2018" role="doc-biblioref">Mayo 2018</a>; for a critique see <a href="references.html#ref-gelman2019" role="doc-biblioref">Gelman et al. 2019</a>)</span>.</p>
-<p>The main tenet of NHST (or better, the Null Ritual) is that you set a <strong>null hypothesis</strong> and you try to <strong>reject</strong> it. A null hypothesis is, in practice, always a <em>nil</em> hypothesis: in other words, it is the hypothesis that there is <em>no</em> difference between two estimands (these usually being means of two or more groups of interest). Using a variety of numerical techniques, one obtains a <strong><em>p</em>-value</strong>, i.e.&nbsp;a frequentist probability. The <em>p</em>-value is used for inference: if the <em>p</em>-value is smaller than a threshold, one can reject the nil hypothesis; if the <em>p</em>-value is equal to or greater than the threshold, you cannot reject the null hypothesis. <em>p</em>-values are very commonly mistaken for Bayesian probabilities <span class="citation" data-cites="cassidy2019">(<a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>)</span> and this results in various misinterpretations of reported results. You will learn about the meaning (and misunderstandings) of <em>p</em>-values in <a href="ch-null-ritual.html" class="quarto-xref"><span>Chapter 30</span></a>.</p>
+<p>Most of current research is carried out with frequentist methods. This is a historical accident, based on both an initial misunderstanding of Bayesian statistics (which is, by the way, older than frequentist statistics) and the fact that frequentist maths was much easier (and personal computers did not exist).</p>
+<p>The commonly accepted approach to frequentist inference is the so-called <strong>Null Hypothesis Significance Testing</strong>, or NHST. As practised by researchers, the NHST approach is a (sometimes incoherent) mix of the frequentist work of Fisher on one hand, and Neyman and Pearson on the other. The inconsistent nature of NHST as practised by researchers today has led to the elaboration of the concept and label “<strong>Null Ritual</strong>” <span class="citation" data-cites="gigerenzer2004 gigerenzer2004a gigerenzer2018">(<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">Gigerenzer 2004</a>, <a href="references.html#ref-gigerenzer2018" role="doc-biblioref">2018</a>; <a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer, Krauss, and Vitouch 2004</a>)</span> and the slogan-titled paper <em>The difference between “significant” and “not significant” is not itself statistically significant</em> <span class="citation" data-cites="gelman2006a">(<a href="references.html#ref-gelman2006a" role="doc-biblioref">Gelman and Stern 2006</a>)</span>. The Null Ritual has been criticised by frequentist and Bayesian statisticians alike and has resulted in the proposal of alternative, stricter, versions of NHST, like Statistical Inference as Severe Testing <span class="citation" data-cites="mayo2018 gelman2019">(SIST, <a href="references.html#ref-mayo2018" role="doc-biblioref">Mayo 2018</a>; for a critique see <a href="references.html#ref-gelman2019" role="doc-biblioref">Gelman et al. 2019</a>)</span>.</p>
+<p>The main tenet of the Null Ritual is that you set a <strong>null hypothesis</strong> and you try to <strong>reject</strong> it. A null hypothesis is, in practice, always a <em>nil</em> hypothesis: in other words, it is the hypothesis that there is <em>no</em> difference between two estimands (these usually being means of two or more groups of interest). Using a variety of numerical techniques, one obtains a <strong><em>p</em>-value</strong>, i.e.&nbsp;a frequentist probability. The <em>p</em>-value is used for inference: if the <em>p</em>-value is smaller than a threshold, one can reject the nil hypothesis; if the <em>p</em>-value is equal to or greater than the threshold, you cannot reject the null hypothesis. <em>p</em>-values are very commonly mistaken for Bayesian probabilities <span class="citation" data-cites="cassidy2019">(<a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>)</span> and this results in various misinterpretations of reported results. You will learn about the meaning and misunderstandings of <em>p</em>-values in <a href="ch-null-ritual.html" class="quarto-xref"><span>Chapter 30</span></a>.</p>
 </section>
 <section id="bayesian-inference" class="level2" data-number="20.3">
 <h2 data-number="20.3" class="anchored" data-anchor-id="bayesian-inference"><span class="header-section-number">20.3</span> Bayesian inference</h2>
-<p>Bayesian inference approaches are now gaining momentum in many fields, including linguistics. The main advantage of Bayesian inference is that it allows researchers to answer research questions in a more straightforward way, using a more intuitive take on uncertainty and probability than what frequentist methods can offer.</p>
-<p>Bayesian inference is based on the concept of <strong>updating prior beliefs in light of new data</strong>. Given a set of <strong>prior probabilities</strong> and <strong>observations</strong>, Bayesian inference allows us to revise those prior probabilities and produce <strong>posterior probabilities</strong>. This is possible through the Bayesian interpretation of probabilities in the context of <a href="https://www.mathsisfun.com/data/bayes-theorem.html">Bayes’ Theorem</a>.</p>
+<p>Bayesian inference approaches are now gaining momentum in many fields, including linguistics. The main advantage of Bayesian inference is that it allows researchers to answer research questions in a more straightforward way, using a more intuitive take on uncertainty and probability than what frequentist methods can offer. Bayesian inference is based on the concept of <strong>updating prior beliefs in light of new data</strong>. Given a set of <strong>prior probabilities</strong> and <strong>observations</strong>, Bayesian inference allows us to revise those prior probabilities and produce <strong>posterior probabilities</strong>. This is possible through the Bayesian interpretation of probabilities in the context of <a href="https://www.mathsisfun.com/data/bayes-theorem.html">Bayes’ Theorem</a>.</p>
 <p>In simple conceptual terms, the Bayesian interpretation of Bayes’ Theorem states that the probability of a hypothesis <span class="math inline">\(h\)</span> given the observe data <span class="math inline">\(d\)</span> is proportional to the product of the prior probability of <span class="math inline">\(h\)</span> and the probability of <span class="math inline">\(d\)</span> given <span class="math inline">\(h\)</span>.</p>
 <p><span class="math display">\[
 P(h|d) \sim P(h) \cdot P(d|h)
 \]</span></p>
-<p>The prior probability <span class="math inline">\(P(h)\)</span> represents the researcher’s beliefs towards <span class="math inline">\(h\)</span>. These beliefs can be based on expert knowledge, previous studies or mathematical principles. For a more hands-on overview, I recommend Chapter 2 of the <a href="https://discovered.ed.ac.uk/permalink/44UOE_INST/110jsec/alma9924745740602466">Statistical Rethinking</a> textbook.</p>
+<p>The prior probability <span class="math inline">\(P(h)\)</span> represents the researcher’s beliefs towards <span class="math inline">\(h\)</span>. These beliefs can be based on expert knowledge, previous studies or mathematical principles.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>sequence_length <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">toss =</span> <span class="fu">c</span>(<span class="st">"w"</span>, <span class="st">"l"</span>, <span class="st">"w"</span>, <span class="st">"w"</span>, <span class="st">"w"</span>, <span class="st">"l"</span>, <span class="st">"w"</span>, <span class="st">"l"</span>, <span class="st">"w"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_trials  =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_success =</span> <span class="fu">cumsum</span>(toss <span class="sc">==</span> <span class="st">"w"</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">expand_grid</span>(<span class="at">p_water =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> sequence_length)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(p_water) <span class="sc">|&gt;</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># to learn more about lagging, go to:</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/lag</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># https://dplyr.tidyverse.org/reference/lead-lag.html</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lagged_n_trials  =</span> <span class="fu">lag</span>(n_trials),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">lagged_n_success =</span> <span class="fu">lag</span>(n_success)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prior      =</span> <span class="fu">ifelse</span>(n_trials <span class="sc">==</span> <span class="dv">1</span>, .<span class="dv">5</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">dbinom</span>(<span class="at">x    =</span> lagged_n_success, </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">size =</span> lagged_n_trials, </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">prob =</span> p_water)),</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">likelihood =</span> <span class="fu">dbinom</span>(<span class="at">x    =</span> n_success, </span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                             <span class="at">size =</span> n_trials, </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                             <span class="at">prob =</span> p_water),</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">strip      =</span> <span class="fu">str_c</span>(<span class="st">"n = "</span>, n_trials)) <span class="sc">|&gt;</span> </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># the next three lines allow us to normalize the prior and the likelihood, </span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># putting them both in a probability metric </span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(n_trials) <span class="sc">|&gt;</span> </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prior      =</span> prior <span class="sc">/</span> <span class="fu">sum</span>(prior),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">likelihood =</span> likelihood <span class="sc">/</span> <span class="fu">sum</span>(likelihood)) <span class="sc">|&gt;</span>   </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot!</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> p_water)) <span class="sc">+</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> prior), </span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> likelihood)) <span class="sc">+</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="st">"proportion water"</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, .<span class="dv">5</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="st">"plausibility"</span>, <span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> strip, <span class="at">scales =</span> <span class="st">"free_y"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-prior-update" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-prior-update-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-freq-bayes_files/figure-html/fig-prior-update-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prior-update-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;20.1: Bayesian updating of a prior based on observations. From <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span> and <span class="citation" data-cites="kurtz2023">Kurtz (<a href="references.html#ref-kurtz2023" role="doc-biblioref">2023</a>)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Chapter 2 of <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span> goes into much more details and I recommend you read that at some point if you feel this section is a bit too abstract.</p>
 <p>The following section goes through a few reasons to use Bayesian inference for research. Note that some of these reasons presuppose understanding of regression modelling, both frequentist and Bayesian, so don’t worry if they are not clear yet.</p>
 </section>
 <section id="why-bayesian-inference" class="level2" data-number="20.4">
@@ -609,8 +700,14 @@ Gigerenzer, Gerd. 2004. <span>“Mindless Statistics.”</span> <em>The Journal 
 <div id="ref-gigerenzer2004a" class="csl-entry" role="listitem">
 Gigerenzer, Gerd, Stefan Krauss, and Oliver Vitouch. 2004. <span>“The Null Ritual. What You Always Wanted to Know about Signi<span>fi</span>cance Testing but Were Afraid to Ask.”</span> In, 391408.
 </div>
+<div id="ref-kurtz2023" class="csl-entry" role="listitem">
+Kurtz, Solomon. 2023. <em>Statistical Rethinking with Brms, Ggplot2, and the Tidyverse: Second Edition</em>. Version 0.4.0. <a href="https://bookdown.org/content/4857/">https://bookdown.org/content/4857/</a>.
+</div>
 <div id="ref-mayo2018" class="csl-entry" role="listitem">
 Mayo, Deborah G. 2018. <em>Statistical Inference as Severe Testing: How to Get Beyond the Statistics Wars</em>. 1st ed. Cambridge University Press. <a href="https://doi.org/10.1017/9781107286184">https://doi.org/10.1017/9781107286184</a>.
+</div>
+<div id="ref-mcelreath2020" class="csl-entry" role="listitem">
+McElreath, Richard. 2020. <em>Statistical Rethinking: A Bayesian Course with Examples in R and Stan</em>. Second edition. Chapman &amp; Hall/CRC Texts in Statistical Science Series. Boca Raton: CRC Press.
 </div>
 </div>
 </section>
