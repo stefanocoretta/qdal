@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>22&nbsp; Running Gaussian models – Quantitative Data Analysis for Linguists in R</title>
+<title>22&nbsp; Fitting Gaussian models with brms – Quantitative Data Analysis for Linguists in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -149,7 +169,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-fit-model.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-fit-model.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fitting Gaussian models with brms</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -357,7 +377,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-fit-model.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fitting Gaussian models with brms</span></span></a>
   </div>
 </li>
       </ul>
@@ -515,9 +535,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-fit-model.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-fit-model.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fitting Gaussian models with brms</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-fit-model" class="quarto-section-identifier"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Running Gaussian models</span></span></h1>
+<h1 class="title"><span id="sec-fit-model" class="quarto-section-identifier"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fitting Gaussian models with brms</span></span></h1>
 </div>
 
 
@@ -535,9 +555,13 @@ window.Quarto = {
 
 
 <p><img src="https://img.shields.io/badge/Area-Statistics-red.png" class="img-fluid"> <img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
-<p>You can fit a Gaussian model to data using the <a href="https://paulbuerkner.com/brms/">brms</a> package (the name is an initialism of Bayesian Regression Models using Stan; Gaussian models are a special type of regression models, which will be introduced in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>).</p>
-<p>The brms package can run a variety of Bayesian (regression) models. It is a very flexible package that allows you to model a lot of different types of variables. You don’t really need to understand all of the technical details to be able to effectively use the package and interpret the results, so this textbook will focus on how to use the package in the context of research. We will cover some of the technicalities, but if you are are particularly interested in the inner workings of the package, feel free to do so (you can find materials on specific aspects by searching online). One useful thing to know is that brms is a bridge between R and the statistical programming software <a href="https://mc-stan.org">Stan</a>. Stan is a powerful piece of software that can run any type of Bayesian models. What brms does is that it allows you to write Bayesian models in R, which are translated into Stan models and run with Stan under the hood. You can safely use brms without learning Stan, but if you are interested in the computational aspects of Stan, you can check the <a href="https://mc-stan.org">Stan documentation</a>.</p>
-<p>The first thing to do is of course to attach the brms package (see code below). You can then run a regression model with the <code>brm()</code> function, short for Bayesian Regression Model (a Gaussian model is a special type of regression model). The mandatory arguments of <code>brm()</code> are a model formula, a distribution family (of the outcome variable), and the data you want to run the model with. Running a model with data is also formally known as <em>fitting the model to the data</em>. Remember the model mathematical formula from above: <span class="math inline">\(\text{RT} \sim Gaussian(\mu, \sigma)\)</span>. It would be nice if <code>brms()</code> allowed you to write the formula like that.</p>
+<p>In the previous chapter, I have introduced the theory behind Bayesian Gaussian models. In this chapter, you will learn how to fit Gaussian models in R. You can fit a Gaussian model to data in R using the <a href="https://paulbuerkner.com/brms/">brms</a> package (the name is an initialism of “Bayesian Regression Models using Stan”; Gaussian models are a special type of regression models, which will be introduced in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>).</p>
+<p>The brms package can run a variety of Bayesian (regression) models. It is a very flexible package that allows you to model a lot of different types of variables. You don’t really need to understand all of the technical details to be able to effectively use the package and interpret the results, so this textbook will focus on how to use the package in the context of research. We will cover some of the technicalities, but if you are are particularly interested in the inner workings of the package, feel free to find materials on specific aspects by searching online. One useful thing to know is that brms is a bridge between R and the statistical programming software <a href="https://mc-stan.org">Stan</a>. Stan is a powerful piece of software that can run any type of Bayesian model, not just regressions. What brms does is that it allows you to write Bayesian models in R, which are translated into Stan models and run with Stan under the hood. You can safely use brms without learning Stan, but if you are interested, you can check <a href="https://bruno.nicenboim.me/bayescogsci/ch-introstan.html#ch-introstan">Ch 8-10</a> of <span class="citation" data-cites="nicenboim2025">Nicenboim, Schad, and Vasishth (<a href="references.html#ref-nicenboim2025" role="doc-biblioref">2025</a>)</span> and the <a href="https://mc-stan.org">Stan documentation</a>.</p>
+<p>You can run a Bayesian Gaussian model with the <code>brm()</code> function, short for “Bayesian Regression Model” (a Gaussian model is a special type of regression model). The mandatory arguments of <code>brm()</code> are a model formula, a distribution family (of the outcome variable), and the data you want to run the model with. Running a model with data is also formally known as <em>fitting the model to the data</em>. We want to fit a Gaussian model to reaction times from <span class="citation" data-cites="tucker2019">Tucker et al. (<a href="references.html#ref-tucker2019" role="doc-biblioref">2019</a>)</span>. Let’s revisit the mathematical formula of the model from <a href="ch-gauss-model.html" class="quarto-xref"><span>Chapter 21</span></a> (let’s discard the priors):</p>
+<p><span class="math display">\[
+\text{RT} \sim Gaussian(\mu, \sigma)
+\]</span></p>
+<p>It would be nice if <code>brms()</code> allowed you to write the formula like that.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This would be nice, but it won't work!</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">brm</span>(</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  RT <span class="sc">~</span> <span class="fu">Gaussian</span>(mu, sigma),</span>
@@ -553,7 +577,7 @@ window.Quarto = {
 <li><code>RT ~ 1</code> and <code>family = gaussian</code> simply tell brms to model RT using a Gaussian distribution. This means that the probability distribution of the mean and the standard deviation of the Gaussian distribution of RTs will be estimated from the data. <code>RT ~ 1</code> might look very weird to you right now, but it will become clear in the next couple of chapters why it is that way. For now, just accept that that is the way you write a Gaussian model in R.</li>
 <li>We specify the data with <code>data = height</code>.</li>
 </ul>
-<p>As with other R functions, we want to save the output of <code>brm()</code> to a variable, here <code>rt_bm</code>. We will then be able to inspect the output in <code>rt_bm</code>. Now run the Gaussian model of RTs (don’t forget to attach the brms package, like in the following code).</p>
+<p>As with other R functions, we want to assign the output of <code>brm()</code> to a variable, here <code>rt_bm</code>. We will then be able to inspect the output in <code>rt_bm</code>. Now run the Gaussian model of RTs (don’t forget to attach the brms package and read the data, like in the following code).</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>mald <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/tucker2019/mald_1_1.rds"</span>)</span>
@@ -563,7 +587,7 @@ window.Quarto = {
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> gaussian,</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mald</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>When you run the code, text will be printed in the R Console or below the code if you are using a Quarto document (you should!). This is what it looks like.</p>
+<p>When you run the code, some text will be printed below the code in your Quarto document. This is what it looks like.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Compiling Stan program...</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>Start sampling</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -579,8 +603,8 @@ window.Quarto = {
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>Chain <span class="dv">1</span><span class="sc">:</span> Iteration<span class="sc">:</span>  <span class="dv">400</span> <span class="sc">/</span> <span class="dv">2000</span> [ <span class="dv">20</span>%]  (Warmup)</span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span>more text omitted<span class="sc">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The messages in the text are related to Stan and the statistical algorithm used by Stan to estimate the parameters of the model (in this model, these are the mean and the standard deviation of height). <code>Compiling Stan program...</code> tells you that brms has instructed Stan to compile the model specified in R and that Stan is now compiling the model to be run on the data (don’t worry if this does not make sense). <code>Start sampling</code> tells us that the statistical algorithm used for estimation has started. This algorithm is the Markov Chain Monte Carlo algorithm, or MCMC for short. The algorithm is run by default four times; in technical terms, <em>four MCMC chains</em> are run. Hence why you will see information on Chain 1, 2, 3, and 4. If you want to learn more about the MCMC algorithm, check <a href="https://elizabethpankratz.github.io/bayes_stat/day1/mcmc.html">Finding posteriors through sampling</a> by Elizabeth Pankratz and the resources linked there.</p>
-<p>Now that the model has finished running and that the output has been saved in <code>rt_bm</code>, we can inspect it with the <code>summary()</code> function (note that this is difference from <code>summarise()</code>!).</p>
+<p>The messages in the text are related to Stan and the statistical algorithm used by Stan to estimate the parameters of the model (in this model, these are the mean and the standard deviation of RTs). <code>Compiling Stan program...</code> tells you that brms has instructed Stan to compile the model specified in R and that Stan is now compiling the model to be run on the data (don’t worry if this does not make sense). <code>Start sampling</code> tells us that the statistical algorithm used for estimation has started. This algorithm is the Markov Chain Monte Carlo algorithm, or MCMC for short. The algorithm is run by default four times; in technical terms, <em>four MCMC chains</em> are run. This is why information on Chain 1, 2, 3, and 4 is printed. We will treat MCMC in more details in <a href="ch-regression-draws.html" class="quarto-xref"><span>Chapter 25</span></a>.</p>
+<p>Now that the model has finished running and that the output has been saved in <code>rt_bm</code>, we can inspect it with the <code>summary()</code> function (note that this is different from <code>summarise()</code>!).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rt_bm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -608,49 +632,62 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <ul>
 <li><p>The first few lines are a reminder of the model we fitted:</p>
 <ul>
-<li><p><code>Family</code> is the chosen distribution for the outcome variable (here <code>RT</code>), here a Gaussian distribution.</p></li>
+<li><p><code>Family</code> is the chosen distribution for the outcome variable (<code>RT</code> in our model), here a Gaussian distribution.</p></li>
 <li><p><code>Links</code> lists the link functions. You don’t need to worry about these now.</p></li>
 <li><p><code>Formula</code> is the model formula.</p></li>
 <li><p><code>Data</code> reports the name of the data and the number of observations.</p></li>
-<li><p>Finally, <code>Draws</code> has information about the MCMC draws.</p></li>
+<li><p>Finally, <code>Draws</code> has information about the MCMC algorithm. Again, you can discard those for now.</p></li>
 </ul></li>
-<li><p>Then, the <code>Regression Coefficients</code> are listed as a table. They are called this way because brms fits Bayesian <em>regression</em> models and a Gaussian model is a special type of regression model (you will learn about regression models in the following chapters). In the Gaussian model we fitted now, we only have one regression coefficient, <code>Intercept,</code> which corresponds to <span class="math inline">\(\mu\)</span> from the formula above (for the reason why it is called that way, you will have to wait until regression models are introduced in the following chapter, sorry for the many promissory explanation). You will learn how to interpret the <code>Regression Coefficients</code> table below.</p></li>
-<li><p>Then <code>Further distributional parameters</code> are tabled. Here we only have <code>sigma</code> which is <span class="math inline">\(\sigma\)</span> from the formula above. The table has the same columns as the <code>Regression Coefficients</code> table.</p></li>
+<li><p>Then, the <code>Regression Coefficients</code> are listed as a table. They are called regression coefficients because brms fits Bayesian <em>regression</em> models and a Gaussian model is a special type of regression model (you will learn about regression models in later chapters). In the Gaussian model we fitted now, we only have one regression coefficient, <code>Intercept</code>, which corresponds to <span class="math inline">\(\mu\)</span> from the formula above (for the reason why it is called that way, you will have to wait until regression models are introduced in the following chapter, I apologise for the many promissory explanations…). You will learn how to interpret the <code>Regression Coefficients</code> table below.</p></li>
+<li><p>Then <code>Further distributional parameters</code> are also in the form of a table. Here we only have <code>sigma</code> which is <span class="math inline">\(\sigma\)</span> from the formula above. The table has the same columns as the <code>Regression Coefficients</code> table.</p></li>
 </ul>
 <section id="posterior-probability-distributions" class="level2" data-number="22.1">
 <h2 data-number="22.1" class="anchored" data-anchor-id="posterior-probability-distributions"><span class="header-section-number">22.1</span> Posterior probability distributions</h2>
-<p>The main characteristic of Bayesian models is that they don’t just provide you with a single numeric estimate for the model parameters. Rather, the model estimates a <em>full probability distribution</em> for each parameter/coefficient. These probability distributions are called <strong>posterior probability distributions</strong> (or posteriors for short). They are called <em>posterior</em> because they are derived from the data and the prior probability distributions (you will learn about priors in XXX). The model we fitted has two parameters: the mean <span class="math inline">\(\mu\)</span> and the standard deviation <span class="math inline">\(\sigma\)</span>. For reasons that will become clear in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>, the <span class="math inline">\(\mu\)</span> parameter is called <code>Intercept</code> in the summary: you can find it in the <code>Regression Coefficients</code> table. The standard deviation <span class="math inline">\(\sigma\)</span> is in the <code>Further distributional parameters</code> table.</p>
-<p>The <code>Regression Coefficients</code> table reports for each estimated coefficient a few summary measures of the posterior distributions of the estimated coefficients. Here, we only have the summary measures of one posterior: the posterior of the model’s mean <span class="math inline">\(\mu\)</span>. The table also has three diagnostic measures, which you can ignore for now.</p>
-<p>Here’s a break down of the table’s columns:</p>
+<p>The main characteristic of Bayesian models is that they don’t just provide you with a single numeric estimate for the model parameters. As mentioned in <a href="ch-gauss-model.html" class="quarto-xref"><span>Chapter 21</span></a>, the model estimates a <em>full probability distribution</em> for each parameter/coefficient. These probability distributions are called <strong>posterior probability distributions</strong> (or posteriors for short). They are called <em>posterior</em> because they are derived from the data and the prior probability distributions. The model we fitted has two parameters: the mean <span class="math inline">\(\mu\)</span> and the standard deviation <span class="math inline">\(\sigma\)</span>. For reasons that will become clear in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>, the <span class="math inline">\(\mu\)</span> parameter is called <code>Intercept</code> in the summary: you can find it in the <code>Regression Coefficients</code> table. The standard deviation <span class="math inline">\(\sigma\)</span> is in the <code>Further distributional parameters</code> table.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Posterior probability distribution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>posterior probability distribution</strong> is a probability distribution of a model parameter estimated by a Bayesian model from the prior probability distribution and the data.</p>
+</div>
+</div>
+<p>The <code>Regression Coefficients</code> table reports, for each estimated coefficient, a few summary measures of the posterior distributions of the estimated coefficients. Here, we only have the summary measures of one posterior: the posterior of the model’s mean <span class="math inline">\(\mu\)</span>. The table also has three diagnostic measures, which you can ignore for now.</p>
+<p>Here’s a breakdown of the table’s columns:</p>
 <ul>
-<li><p><code>Estimate</code>, the mean estimate of the coefficient (i.e.&nbsp;the mean of the posterior distribution of the coefficient). In our model, this is the mean of the posterior distribution of the mean <span class="math inline">\(\mu\)</span> (<code>Intercept</code>). Yes, you read right: the mean of the mean! Remember, Bayesian models estimate a full probability distribution and this can be summarised with a mean and a standard deviation. In this model, the posterior mean (short for mean of the posterior probability distribution) of <span class="math inline">\(\mu\)</span> is 1010.5 ms.</p></li>
-<li><p><code>Est.error</code>, the error of the mean estimate, or <em>est</em>imate <em>error</em>. The estimate error is the standard deviation of the posterior distribution of the coefficient (here the mean <span class="math inline">\(\mu\)</span>). Yes, the standard deviation of the mean! Again, since we are estimating a full probability distribution for <span class="math inline">\(\mu\)</span>, we can summarise it with a mean and SD as we do for any Gaussian distribution. In this model, the posterior SD of <span class="math inline">\(\mu\)</span> is 4.45 ms.</p></li>
+<li><p><code>Estimate</code>, the mean estimate of the coefficient (i.e.&nbsp;the mean of the posterior distribution of the coefficient). In our model, this is the mean of the posterior distribution of the mean <span class="math inline">\(\mu\)</span> (<code>Intercept</code>). Yes, you read correctly: the mean of the mean! Remember, Bayesian models estimate a full posterior probability distribution and the posterior can be summarised by a mean and a standard deviation. In this model, the posterior mean (short for mean of the posterior probability distribution) of <span class="math inline">\(\mu\)</span> is 1010.5 ms.</p></li>
+<li><p><code>Est.error</code>, the error of the mean estimate, or <em>est</em>imate <em>error</em>. The estimate error is the standard deviation of the posterior distribution of the coefficient (here the mean <span class="math inline">\(\mu\)</span>). Yes, the standard deviation of the mean! Again, since we are estimating a full probability distribution for <span class="math inline">\(\mu\)</span>, we can summarise it with a mean and SD as we do for any Gaussian distribution. In this model, the posterior SD of <span class="math inline">\(\mu\)</span> is 4.45 ms. Be careful: this SD is <em>not</em> <span class="math inline">\(\sigma\)</span>. It is the standard deviation of the posterior distribution of the mean <span class="math inline">\(\mu\)</span>.</p></li>
 <li><p><code>l-95% CI</code> and <code>u-95% CI</code>, the lower and upper limits of the 95% Bayesian Credible Interval (more on these below).</p></li>
-<li><p>Finally, <code>Rhat</code>, <code>Bulk_ESS</code>, <code>Tail_ESS</code> are diagnostics of the MCMC chains. We will treat model diagnostics in XXX.</p></li>
+<li><p>Finally, <code>Rhat</code>, <code>Bulk_ESS</code>, <code>Tail_ESS</code> are diagnostics of the MCMC chains, which you can ignore for now.</p></li>
 </ul>
 <p>The <code>Further distributional parameters</code> table has the same structure. In this model, the posterior mean of <span class="math inline">\(\sigma\)</span> is 317.88 ms and the posterior SD of <span class="math inline">\(\sigma\)</span> is 3.17 ms.</p>
 <p>Putting all this together in mathematical notation:</p>
 <p><span class="math display">\[
 \begin{align}
 \text{RT} &amp; \sim Gaussian(\mu, \sigma)\\
-\mu &amp; \sim Gaussian(1010.5, 4.45)\\
-\sigma &amp; \sim Gaussian(317.88, 3.17)
+\mu &amp; \sim P(1010.5, 4.45)\\
+\sigma &amp; \sim P(317.88, 3.17)
 \end{align}
 \]</span></p>
-<p>In other words, according to the model and data, the mean or RTs is a value from the distribution <span class="math inline">\(Gaussian(1010.5, 4.45)\)</span> and the SD of RTs is a value from the distribution <span class="math inline">\(Gaussian(317.88, 3.17)\)</span>. The model has quantified the uncertainty around the value of the <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> parameters and this uncertainty is reflected by the fact that we get a full posterior probability distribution (summarised by its mean and SD) for each of the parameters. We don’t know <em>exactly</em> the values of the parameters of the Gaussian distribution assumed to have generated the sampled RTs.</p>
+<p>In other words, according to the model and data, the mean or RTs is a value from the distribution <span class="math inline">\(P(1010.5, 4.45)\)</span> and the SD of RTs is a value from the distribution <span class="math inline">\(P(317.88, 3.17)\)</span>. Here, <span class="math inline">\(P()\)</span> stands for a generic posterior probability distribution. The model has quantified the uncertainty around the value of the <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> parameters and this uncertainty is reflected by the fact that we get a full posterior probability distribution (summarised by its mean and SD) for each of the parameters. We don’t know <em>exactly</em> the values of the parameters of the Gaussian distribution assumed to have generated the sampled RTs.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Spotlight: Student-t
+R Note: Default priors in brms
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-
+<p>XXX</p>
 </div>
 </div>
 </div>
@@ -673,13 +710,13 @@ Figure&nbsp;22.1: Posterior plots of the rt_bm Gaussian model
 </div>
 </div>
 </div>
-<p>For the <code>b_Intercept</code> coefficient, i.e.&nbsp;the mean <span class="math inline">\(\mu\)</span>, the posterior probability encompasses values between 1000 and 1020 ms, approximately. But some values are more probable then others: the values in the centre of the distribution have a higher probability density then the values on the sides. The mean of that posterior probability distribution is the <code>Estimate</code> value in the model summary: 1010.5 ms. Its standard deviation is the <code>Est.error</code>: 4.45 ms. The mean indicates the value with the highest probability density, which corresponds to the value on the horizontal axis of the density plot below the highest peak of the density curve. Based on these properties, values around 1010.5 ms are more probable than values further away from it.</p>
+<p>For the <code>b_Intercept</code> coefficient, i.e.&nbsp;the mean <span class="math inline">\(\mu\)</span>, the posterior probability encompasses values between 1000 and 1020 ms, approximately. But some values are more probable than others: the values in the centre of the distribution have a higher probability density then the values on the sides. The mean of that posterior probability distribution is the <code>Estimate</code> value in the model summary: 1010.5 ms. Its standard deviation is the <code>Est.error</code>: 4.45 ms. The mean indicates the value with the highest probability density, which corresponds to the value on the horizontal axis of the density plot below the highest peak of the density curve. Based on these properties, values around 1010.5 ms are more probable than values further away from it.</p>
 <p>For <code>sigma</code>, i.e.&nbsp;<span class="math inline">\(\sigma\)</span>, the posterior probability covers values between 310 and 325. What is the mean of the posterior probability of <span class="math inline">\(\sigma\)</span>? The answer is in the summary, in <code>Further distributional parameters</code>. There you will also find the standard deviation of the posterior of <span class="math inline">\(\sigma\)</span>. That’s a standard deviation of a standard deviation! As before, this is because we are not estimating a simple value for <span class="math inline">\(\sigma\)</span> but a full (posterior) probability distribution and we can summarise this distribution with a mean and a standard deviation. Again, the highest peak in the distribution corresponds to the <code>Estimate</code> value.</p>
 <p>Now, looking at a full probability distribution like that is not very straightforward and summary measures can be even less straightforward. Credible Intervals (CrIs) help summarise the posterior distributions so that interpretation is more straightforward.</p>
 </section>
 <section id="interpreting-credible-intervals" class="level2" data-number="22.3">
 <h2 data-number="22.3" class="anchored" data-anchor-id="interpreting-credible-intervals"><span class="header-section-number">22.3</span> Interpreting Credible Intervals</h2>
-<p>The model summary reports the Bayesian Credible Intervals (CrIs) of the posterior distributions. Another way of obtaining summaries of the coefficients is to use the <code>posterior_summary()</code> function which returns a table (technically, a matrix, another type of R objects; we print only the first two rows with <code>[1:2,]</code> because we can ignore the other ones).</p>
+<p>The model summary reports the Bayesian Credible Intervals (CrIs) of the posterior distributions. Another way of returning summaries of the coefficients is to use the <code>posterior_summary()</code> function which returns a table (technically, a matrix, another type of R objects; we print only the first two rows with <code>[1:2,]</code> because we can ignore the other ones).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(rt_bm)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -688,8 +725,8 @@ b_Intercept 1010.5015  4.452312 1001.6555 1019.2559
 sigma        317.8845  3.171714  311.7382  324.1688</code></pre>
 </div>
 </div>
-<p>The 95% CrI of the <code>b_Intercept</code> is between 1002 and 1019. This means that there is a 95% probability, or (equivalently) that we can be 95% confident, that the <code>Intercept</code>, i.e.&nbsp;<span class="math inline">\(\mu\)</span>, is within that range. For <code>sigma</code>, i.e.&nbsp;<span class="math inline">\(\sigma\)</span>, the 95% CrI is between 311.7 and 324.2. So, again, there is a 95% probability that the <code>sigma</code> value is between those values. So, to summarise, a 95% CrI tells us that we can be 95% confident, or in other words that there is a 95% probability, that the value of the coefficient is between the values of the CrI.</p>
-<p>There is nothing special about 95% CrI and in fact it is recommended to calculate and report a few. Personally, I use 90, 80, 70 and 60% CrIs. You can get any CrI with the <code>summary()</code> and the <code>posterior_summary()</code> functions, but you will also learn an alternative way in <a href="ch-regression.html" class="quarto-xref"><span>Chapter 24</span></a>. Here is how to get an 80% CrI with <code>summary()</code>.</p>
+<p>A Bayesian CrI is simply the central probability interval of a posterior probability distribution. You have encountered intervals in <a href="ch-gaussian.html" class="quarto-xref"><span>Chapter 19</span></a>. By default, brms prints the 95% CrIs: these are the 95% central probability intervals of the posterior probability of each coefficient. The 95% CrI of the <code>b_Intercept</code> is between 1002 and 1019. This means that there is a 95% probability, or (equivalently) that we can be 95% confident, that the <code>Intercept</code>, i.e.&nbsp;<span class="math inline">\(\mu\)</span>, is within that range, given the model and data. For <code>sigma</code>, i.e.&nbsp;<span class="math inline">\(\sigma\)</span>, the 95% CrI is between 312 and 324. So, again, there is a 95% probability that the <code>sigma</code> value is between those values, given the model and data. So, to summarise, a 95% CrI tells us that we can be 95% confident, or in other words that there is a 95% probability, that the value of the coefficient is between the values of the CrI.</p>
+<p>There is nothing special about 95% CrI and in fact it is recommended to calculate and report a few of them. Personally, I use 90, 80, 70 and 60% CrIs. You can get any CrI with the <code>summary()</code> and the <code>posterior_summary()</code> functions, but you will also learn an alternative and more succinct way in <a href="ch-regression.html" class="quarto-xref"><span>Chapter 24</span></a>. Here is how to get an 80% CrI with <code>summary()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rt_bm, <span class="at">prob =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -713,7 +750,7 @@ and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
-<p>For <code>posterior_summary()</code>, you specify the quantiles rather than the probability level.</p>
+<p>For <code>posterior_summary()</code>, you specify the percentiles rather than the probability level.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(rt_bm, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -722,7 +759,7 @@ b_Intercept 1010.5015  4.452312 1004.7400 1016.1351
 sigma        317.8845  3.171714  313.8399  321.8941</code></pre>
 </div>
 </div>
-<p>Here you have the results from the regression model. Really, the results of the model are the full posterior probabilities, but it makes things easier to focus on the CrI.</p>
+<p>Here you have the results from the regression model. Really, the results of the model are the full posterior probabilities, but it makes things easier to focus on the CrIs. If you are used to frequentist statistics (either from learning how to run them or from reading frequentist analyses in academic papers) this might seem a bit underwhelming. But this is the core thinking of Bayesian statistics: inference is based on full probability distributions for the model’s parameters, rather than on a single value (like a <em>p</em>-value).</p>
 </section>
 <section id="reporting" class="level2" data-number="22.4">
 <h2 data-number="22.4" class="anchored" data-anchor-id="reporting"><span class="header-section-number">22.4</span> Reporting</h2>
@@ -731,8 +768,17 @@ sigma        317.8845  3.171714  313.8399  321.8941</code></pre>
 <p>We fitted a Bayesian Gaussian model of reaction times (RTs) using the brms package (Bürkner 2017) in R (R Core Team 2024). The model estimates the mean and standard deviation of RTs.</p>
 <p>Based on the model results, there is a 95% probability that the mean is between 1002 and 1019 ms (mean = 1011, SD = 4) and that the standard deviation is between 312 and 324 ms (mean = 318, SD = 3).</p>
 </blockquote>
+<p>The example used in this chapter is quite trivial: we are just estimating a mean and SD from the data, but in order to understand how to answer more involved questions it is fundamental that you understand what was covered in this chapter. So make sure to have grasped the basics of Gaussian models before moving onto regressions in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>. On the other hand, if you will ever be asked what we can expect RTs in a auditory lexical decision task to look like you might be able to say that, based on the model and data in this chapter, we can be quite confident that they will have a mean of about 1010 ms and an SD of about 320 ms. You might think this was a lot of work to just learn about what we knew directly from the sample, and it is, but be reassured that in normal research contexts things are always much more complex than this, so it is indeed worth the effort.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-nicenboim2025" class="csl-entry" role="listitem">
+Nicenboim, Bruno, Daniel J. Schad, and Shravan Vasishth. 2025. <em>Introduction to Bayesian Data Analysis for Cognitive Science</em>. <a href="https://bruno.nicenboim.me/bayescogsci/">https://bruno.nicenboim.me/bayescogsci/</a>.
+</div>
+<div id="ref-tucker2019" class="csl-entry" role="listitem">
+Tucker, Benjamin V, Daniel Brenner, Kyle Danielson D, Matthew C Kelley, Filip Nenadić, and Michelle Sims. 2019. <span>“The Massive Auditory Lexical Decision (MALD) Database.”</span> <em>Behavior Research Methods</em> 51 (3): 11871204. <a href="https://doi.org/10.3758/s13428-018-1056-1">https://doi.org/10.3758/s13428-018-1056-1</a>.
+</div>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
