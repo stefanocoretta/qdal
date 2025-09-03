@@ -41,7 +41,7 @@ You have already encountered means and standard deviations in @sec-summaries. It
 ::: callout-tip
 ### Gaussian distribution
 
-The Gaussian distribution (also called "normal" and nick-named the "bell curve") is a continuous probability distribution family defined by a mean $\mu$ and a standard deviation $\sigma$.
+The **Gaussian distribution** (also called "normal" and nick-named the "bell curve") is a continuous probability distribution family defined by a mean $\mu$ and a standard deviation $\sigma$.
 
 $$
 Gaussian(\mu, \sigma)
@@ -103,7 +103,7 @@ Specific types of Gaussian distributions will have specific values for the param
 
 ## Cumulative distribution function (CDF) {#sec-intervals}
 
-A useful way to investigate probability distributions is to ask what is the probability that the random variable the probability represents is less than or equal to a certain value. For example, for a distribution $Gaussian(0, 1)$ of the random variable $X$, what is the probability that $X$ is -1 or less? @fig-pnorm gives us a visual explanation: the size of the shaded area under the density curve is the probability that $X \leq -1$. This works because the area under the density curve must add to 1, so that the entire area under the curve covers 100% of the probability distribution.
+A useful way to investigate theoretical probability distributions is to ask what is the probability that the random variable the probability represents is less than or equal to a certain value. For example, for a distribution $Gaussian(0, 1)$ of the random variable $X$, what is the probability that $X$ is -1 or less? @fig-pnorm gives us a visual explanation: the size of the shaded area under the density curve is the probability that $X \leq -1$. This works because the area under the density curve must add to 1, so that the entire area under the curve covers 100% of the probability distribution.
 
 ```{r}
 #| label: fig-pnorm
@@ -200,7 +200,7 @@ $$
 P(X \leq x) = q, 0 \leq q \leq 1
 $$
 
-which is, $q$ is the probability that the outcome $X$ is less than or equal to $x$. So for example, given a Gaussian distribution with mean 0 and SD 1, which is the 0.15th quantile? The answer is shown in @fig-quant. The 0.15th quantile is approximately -1.04.
+which is, $q$ is the probability that the outcome $X$ is less than or equal to $x$. So for example, given a Gaussian distribution with mean 0 and SD 1, which is the 0.15th quantile? To calculate a quantile, the **quantile function** is used. This is the inverse of the CDF. @fig-quant shows that the 0.15th quantile of a $Gaussian(0, 1)$ distribution is approximately -1.04.
 
 ```{r}
 #| label: fig-quant
@@ -233,7 +233,37 @@ ggplot(df, aes(x, dens)) +
 A **quantile** is a value below which a given proportion of a probability distribution lies.
 :::
 
-In R, `qnorm()` returns quantiles using the quantile function (think of it as the inverse of the CDF). It takes three arguments: the probability, and the mean and SD of the Gaussian distribution (again, by default 0 and 1 respectively). As with `pnorm()`, you can obtain the upper-tail quantile with `lower.tail = FALSE`. With a Gaussian distribution with mean 0 and SD 1, the upper-tail quantile value is the same the lower-tail but with opposite sign. The following code shows how to use `qnorm()` (the values are rounded to the second digit with `round(2)`).
+::: callout-tip
+## Quantile function
+
+The quantile function is the inverse of the Cumulative Distribution Function (CDF) and returns a quantile.
+:::
+
+::: {.callout-important collapse="true"}
+### Spotlight: PDF, CDF and quantile function of Gaussian distributions
+
+You don't really have to know the actual mathematical formulae of the PDF, CDF and quantile function of a distribution, because the computation is done for you by the respective R functions, but if you are mathematically inclined, here are the PDF, CDF and quantile function of a Gaussian distribution.
+
+**PDF**
+
+$$
+f(x) = \frac{1}{\sqrt{2\pi\sigma^{2}}} \exp\!\left(-\frac{(x-\mu)^{2}}{2\sigma^{2}}\right)
+$$
+
+**CDF**
+
+$$
+F(x) = \frac{1}{2}\left[1 + \operatorname{erf}\!\left(\frac{x-\mu}{\sigma \sqrt{2}}\right)\right]
+$$
+
+**Quantile function** (inverse CDF)
+
+$$
+Q(p) = \mu + \sigma \sqrt{2}\,\operatorname{erf}^{-1}(2p-1), \quad 0<p<1
+$$
+:::
+
+In R, `qnorm()` returns quantiles using the quantile function. `qnorm()` takes three arguments: the probability, and the mean and SD of the Gaussian distribution (again, by default 0 and 1 respectively). As with `pnorm()`, you can obtain the upper-tail quantile with `lower.tail = FALSE`. With a Gaussian distribution with mean 0 and SD 1, the upper-tail quantile value is the same the lower-tail but with opposite sign. The following code shows how to use `qnorm()` (the values are rounded to the second digit with `round(2)`).
 
 ```{r}
 #| label: qnorm
@@ -322,7 +352,7 @@ qnorm(c(0.25, 0.5, 0.75)) |> round(2)
 ::: callout-tip
 #### Quartiles
 
-**Quartiles** are quantiles that split the distribution into four quarters, each holding 25% of the probability mass
+**Quartiles** are quantiles that split the distribution into four quarters, each holding 25% of the probability mass.
 :::
 
 ::: callout-warning
@@ -368,6 +398,12 @@ ggplot(df, aes(x, dens)) +
     y = "Density", x = "X"
   )
 ```
+
+::: callout-tip
+## Percentiles
+
+Percentiles are quantiles that split the distribution into 100 quantiles, each holding 1% of the probability mass.
+:::
 
 ::: callout-tip
 #### Central probability intervals

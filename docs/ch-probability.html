@@ -648,13 +648,53 @@ Figure&nbsp;18.1: Example of a categorical probability distributiona and a conti
 </figcaption>
 </figure>
 </div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Probability distributions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>probability distribution</strong> describes how probabilities are distributed across outcomes of a random variable.</p>
+<p>There are two main types: <strong>discrete</strong> probability distributions and <strong>continuous</strong> probability distributions.</p>
+</div>
+</div>
 <p>Several well-known distributions serve as fundamental building blocks in probability and statistics. Among discrete distributions, the binomial distribution describes the number of successes in a fixed number of independent trials (like accuracy data from a behavioural task), while the Poisson distribution is used for counting events that occur randomly over time or space (such as number of relatives sentences in a corpus). In the continuous case, the Gaussian distribution (which we will explore below) has many useful mathematical properties and it features prominently in any statistical textbook. Other continuous distributions are, for example, the beta distribution, illustrated in <a href="#fig-distr-2" class="quarto-xref">Figure&nbsp;<span>18.1 (b)</span></a>, used for continuous variables bounded between 0 and 1, and the uniform distribution, which distributes probabilities equally across the entire range of real numbers (so it is a “flat” distribution, since it looks like a horizontal line).</p>
 <p>Probability distributions are more than just mathematical descriptions—they provide tools for making sense of variation and uncertainty in the world. They allow us to calculate probabilities for complex events, to compare different random processes, and to build models that reflect real-world randomness. Once the distribution of a random variable is known, we can derive useful summaries such as averages, variability, and the probability of extreme outcomes. In this way, probability distributions bridge the abstract rules of probability with the practical task of describing how probability operates across a whole set of possibilities.</p>
 </section>
 <section id="probability-mass-and-density-functions" class="level2" data-number="18.3">
 <h2 data-number="18.3" class="anchored" data-anchor-id="probability-mass-and-density-functions"><span class="header-section-number">18.3</span> Probability mass and density functions</h2>
-<p>How is the probability of different outcomes of ranges of outcomes calculated? For discrete distributions, the probability <em>mass</em> function (PMF) is used to compute probabilities. Let’s take the Bernoulli probability distribution from figure <a href="#fig-distr-1" class="quarto-xref">Figure&nbsp;<span>18.1 (a)</span></a>: the PMF of a Bernoulli distribution is <span class="math inline">\(p\)</span> for the probability of the outcome being 1, and <span class="math inline">\(q = 1 - p\)</span> for the probability of the outcome being 0. In the figure, 1 = “Yes” and 0 = “No”. There is a probability <span class="math inline">\(p = 0.8\)</span> of getting a “Yes”, hence there is a probability <span class="math inline">\(q = 1 - p = 1- 0.8 = 0.2\)</span> of getting a “No”. Continuous probability distributions use probability <em>density</em> functions (PDFs, nothing to do with the file format): these don’t tell you the probability of a specific value, but rather the <em>probability density</em> or in other words how dense the probability is around a point. I will spare you the mathematical details of PDFs, but they are the reason for using density plots. You’ve encountered a density plot already, in <a href="#fig-distr-2" class="quarto-xref">Figure&nbsp;<span>18.1 (b)</span></a> above. The curve you see in that figure is calculated with the PDF of the beta distribution. Because we used a PDF, this is a theoretical probability distribution. In practice, you will almost never have to use PMFs and PDFs yourself, but it helps to know about them.</p>
-<p>What if we want the density of a sample from a random variable, like logged RTs from the MALD data set <span class="citation" data-cites="tucker2019">(<a href="references.html#ref-tucker2019" role="doc-biblioref">Tucker et al. 2019</a>)</span>? Obtaining the density curve of a sample is done with kernel density estimation (KDE): this is a function that creates a smooth, continuous estimate of a probability density from a finite set of data points (the sample). As with PMFs and PDFs, you will very rarely have to use KDE directly, since R applies it for you. So let’s see how to make a density plot in ggplot2.</p>
+<p>How is the probability of different outcomes of ranges of outcomes calculated? For discrete distributions, the <strong>probability <em>mass</em> function</strong> (PMF) is used to compute probabilities. Let’s take the Bernoulli probability distribution from figure <a href="#fig-distr-1" class="quarto-xref">Figure&nbsp;<span>18.1 (a)</span></a>: the PMF of a Bernoulli distribution is <span class="math inline">\(p\)</span> for the probability of the outcome being 1, and <span class="math inline">\(q = 1 - p\)</span> for the probability of the outcome being 0. In the figure, 1 = “Yes” and 0 = “No”. There is a probability <span class="math inline">\(p = 0.8\)</span> of getting a “Yes”, hence there is a probability <span class="math inline">\(q = 1 - p = 1- 0.8 = 0.2\)</span> of getting a “No”. Continuous probability distributions use <strong>probability <em>density</em> function</strong>s (PDFs, nothing to do with the file format): these don’t tell you the probability of a specific value, but rather the <em>probability density</em> or in other words how dense the probability is around a point. I will spare you the mathematical details of PDFs, but they are the reason for using density plots. You’ve encountered a density plot already, in <a href="#fig-distr-2" class="quarto-xref">Figure&nbsp;<span>18.1 (b)</span></a> above. The curve you see in that figure is calculated with the PDF of the beta distribution. Because we used a PDF, this is a theoretical probability distribution. In practice, you will almost never have to use PMFs and PDFs yourself, but it helps to know about them.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+PMF and PDF
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <strong>Probability Mass Function</strong> (PMF) and the <strong>Probability Density Function</strong> (PDF) are mathematical functions used to compute theoretical probability distributions.</p>
+</div>
+</div>
+<p>What if we want the density of a sample from a random variable, like logged RTs from the MALD data set <span class="citation" data-cites="tucker2019">(<a href="references.html#ref-tucker2019" role="doc-biblioref">Tucker et al. 2019</a>)</span>? Obtaining the density curve of a sample is done with <strong>Kernel Density Estimation</strong> (KDE): this is a function that creates a smooth, continuous estimate of a probability density from a finite set of data points (the sample). As with PMFs and PDFs, you will very rarely have to use KDE directly, since R applies it for you. So let’s see how to make a density plot in ggplot2.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Kernel Density Estimation (KDE)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Kernel Density Estimation</strong> is a function that creates a smooth estimate of a probability density from a finite set of data points. It returns an empirical probability distribution.</p>
+</div>
+</div>
 </section>
 <section id="density-plots" class="level2" data-number="18.4">
 <h2 data-number="18.4" class="anchored" data-anchor-id="density-plots"><span class="header-section-number">18.4</span> Density plots</h2>
@@ -743,7 +783,7 @@ Exercise 1
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -752,7 +792,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><p>To remove an element of a geometry, like the line of density, you set <code>colour</code> to <code>NA</code>.</p></li>
@@ -762,7 +802,7 @@ Hint
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -771,7 +811,7 @@ Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>I got you! No solution for this exercise, just do a little internet research if necessary.</p>
 </div>

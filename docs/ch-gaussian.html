@@ -581,7 +581,7 @@ Gaussian distribution
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The Gaussian distribution (also called “normal” and nick-named the “bell curve”) is a continuous probability distribution family defined by a mean <span class="math inline">\(\mu\)</span> and a standard deviation <span class="math inline">\(\sigma\)</span>.</p>
+<p>The <strong>Gaussian distribution</strong> (also called “normal” and nick-named the “bell curve”) is a continuous probability distribution family defined by a mean <span class="math inline">\(\mu\)</span> and a standard deviation <span class="math inline">\(\sigma\)</span>.</p>
 <p><span class="math display">\[
 Gaussian(\mu, \sigma)
 \]</span></p>
@@ -665,7 +665,7 @@ Gaussian(\mu, \sigma)
 </section>
 <section id="sec-intervals" class="level2" data-number="19.2">
 <h2 data-number="19.2" class="anchored" data-anchor-id="sec-intervals"><span class="header-section-number">19.2</span> Cumulative distribution function (CDF)</h2>
-<p>A useful way to investigate probability distributions is to ask what is the probability that the random variable the probability represents is less than or equal to a certain value. For example, for a distribution <span class="math inline">\(Gaussian(0, 1)\)</span> of the random variable <span class="math inline">\(X\)</span>, what is the probability that <span class="math inline">\(X\)</span> is -1 or less? <a href="#fig-pnorm" class="quarto-xref">Figure&nbsp;<span>19.3</span></a> gives us a visual explanation: the size of the shaded area under the density curve is the probability that <span class="math inline">\(X \leq -1\)</span>. This works because the area under the density curve must add to 1, so that the entire area under the curve covers 100% of the probability distribution.</p>
+<p>A useful way to investigate theoretical probability distributions is to ask what is the probability that the random variable the probability represents is less than or equal to a certain value. For example, for a distribution <span class="math inline">\(Gaussian(0, 1)\)</span> of the random variable <span class="math inline">\(X\)</span>, what is the probability that <span class="math inline">\(X\)</span> is -1 or less? <a href="#fig-pnorm" class="quarto-xref">Figure&nbsp;<span>19.3</span></a> gives us a visual explanation: the size of the shaded area under the density curve is the probability that <span class="math inline">\(X \leq -1\)</span>. This works because the area under the density curve must add to 1, so that the entire area under the curve covers 100% of the probability distribution.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -796,7 +796,7 @@ Figure&nbsp;19.4: Illustration of an upper-tail probability with Gaussian(0, 1).
 <p><span class="math display">\[
 P(X \leq x) = q, 0 \leq q \leq 1
 \]</span></p>
-<p>which is, <span class="math inline">\(q\)</span> is the probability that the outcome <span class="math inline">\(X\)</span> is less than or equal to <span class="math inline">\(x\)</span>. So for example, given a Gaussian distribution with mean 0 and SD 1, which is the 0.15th quantile? The answer is shown in <a href="#fig-quant" class="quarto-xref">Figure&nbsp;<span>19.5</span></a>. The 0.15th quantile is approximately -1.04.</p>
+<p>which is, <span class="math inline">\(q\)</span> is the probability that the outcome <span class="math inline">\(X\)</span> is less than or equal to <span class="math inline">\(x\)</span>. So for example, given a Gaussian distribution with mean 0 and SD 1, which is the 0.15th quantile? To calculate a quantile, the <strong>quantile function</strong> is used. This is the inverse of the CDF. <a href="#fig-quant" class="quarto-xref">Figure&nbsp;<span>19.5</span></a> shows that the 0.15th quantile of a <span class="math inline">\(Gaussian(0, 1)\)</span> distribution is approximately -1.04.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -844,7 +844,48 @@ Quantile
 <p>A <strong>quantile</strong> is a value below which a given proportion of a probability distribution lies.</p>
 </div>
 </div>
-<p>In R, <code>qnorm()</code> returns quantiles using the quantile function (think of it as the inverse of the CDF). It takes three arguments: the probability, and the mean and SD of the Gaussian distribution (again, by default 0 and 1 respectively). As with <code>pnorm()</code>, you can obtain the upper-tail quantile with <code>lower.tail = FALSE</code>. With a Gaussian distribution with mean 0 and SD 1, the upper-tail quantile value is the same the lower-tail but with opposite sign. The following code shows how to use <code>qnorm()</code> (the values are rounded to the second digit with <code>round(2)</code>).</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quantile function
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The quantile function is the inverse of the Cumulative Distribution Function (CDF) and returns a quantile.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Spotlight: PDF, CDF and quantile function of Gaussian distributions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You don’t really have to know the actual mathematical formulae of the PDF, CDF and quantile function of a distribution, because the computation is done for you by the respective R functions, but if you are mathematically inclined, here are the PDF, CDF and quantile function of a Gaussian distribution.</p>
+<p><strong>PDF</strong></p>
+<p><span class="math display">\[
+f(x) = \frac{1}{\sqrt{2\pi\sigma^{2}}} \exp\!\left(-\frac{(x-\mu)^{2}}{2\sigma^{2}}\right)
+\]</span></p>
+<p><strong>CDF</strong></p>
+<p><span class="math display">\[
+F(x) = \frac{1}{2}\left[1 + \operatorname{erf}\!\left(\frac{x-\mu}{\sigma \sqrt{2}}\right)\right]
+\]</span></p>
+<p><strong>Quantile function</strong> (inverse CDF)</p>
+<p><span class="math display">\[
+Q(p) = \mu + \sigma \sqrt{2}\,\operatorname{erf}^{-1}(2p-1), \quad 0&lt;p&lt;1
+\]</span></p>
+</div>
+</div>
+</div>
+<p>In R, <code>qnorm()</code> returns quantiles using the quantile function. <code>qnorm()</code> takes three arguments: the probability, and the mean and SD of the Gaussian distribution (again, by default 0 and 1 respectively). As with <code>pnorm()</code>, you can obtain the upper-tail quantile with <code>lower.tail = FALSE</code>. With a Gaussian distribution with mean 0 and SD 1, the upper-tail quantile value is the same the lower-tail but with opposite sign. The following code shows how to use <code>qnorm()</code> (the values are rounded to the second digit with <code>round(2)</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lower-tail quantile with Gaussian(0, 1)</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.15</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -951,7 +992,7 @@ Quartiles
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Quartiles</strong> are quantiles that split the distribution into four quarters, each holding 25% of the probability mass</p>
+<p><strong>Quartiles</strong> are quantiles that split the distribution into four quarters, each holding 25% of the probability mass.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
@@ -1020,6 +1061,19 @@ Figure&nbsp;19.7: The 95% interval of Gaussian(0, 1).
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
+Percentiles
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Percentiles are quantiles that split the distribution into 100 quantiles, each holding 1% of the probability mass.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
 Central probability intervals
 </div>
 </div>
@@ -1040,16 +1094,16 @@ Quiz 1
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>Which of the following percentiles define an 80% interval?
-<div id="radio_FUDXDOBOII" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FUDXDOBOII" value="answer"> <span>(0.1, 0.9)</span></label><label><input type="radio" autocomplete="off" name="radio_FUDXDOBOII" value=""> <span>(0.2, 0.8)</span></label><label><input type="radio" autocomplete="off" name="radio_FUDXDOBOII" value=""> <span>(0.05, 0.95)</span></label>
+<div id="radio_XAIDFMVEVY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XAIDFMVEVY" value="answer"> <span>(0.1, 0.9)</span></label><label><input type="radio" autocomplete="off" name="radio_XAIDFMVEVY" value=""> <span>(0.2, 0.8)</span></label><label><input type="radio" autocomplete="off" name="radio_XAIDFMVEVY" value=""> <span>(0.05, 0.95)</span></label>
 </div></li>
 <li>Which of the following percentiles define a <em>non</em>-central 85% interval?
-<div id="radio_NSZUSNSTLH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NSZUSNSTLH" value=""> <span>(0.075, 0.925)</span></label><label><input type="radio" autocomplete="off" name="radio_NSZUSNSTLH" value="answer"> <span>(0.1, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_NSZUSNSTLH" value=""> <span>(0.05, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_NSZUSNSTLH" value=""> <span>(0.15, 0.85)</span></label>
+<div id="radio_SLWFYKIVXZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SLWFYKIVXZ" value=""> <span>(0.075, 0.925)</span></label><label><input type="radio" autocomplete="off" name="radio_SLWFYKIVXZ" value="answer"> <span>(0.1, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_SLWFYKIVXZ" value=""> <span>(0.05, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_SLWFYKIVXZ" value=""> <span>(0.15, 0.85)</span></label>
 </div></li>
 <li>Which interval do the 40th and 60th percentile define?
-<div id="radio_YYVUXDBALK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YYVUXDBALK" value=""> <span>A 60% central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_YYVUXDBALK" value=""> <span>A 20% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_YYVUXDBALK" value=""> <span>A 40% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_YYVUXDBALK" value="answer"> <span>A 20% central interval.</span></label>
+<div id="radio_MSPDPOYNMY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MSPDPOYNMY" value=""> <span>A 60% central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_MSPDPOYNMY" value=""> <span>A 20% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_MSPDPOYNMY" value=""> <span>A 40% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_MSPDPOYNMY" value="answer"> <span>A 20% central interval.</span></label>
 </div></li>
 </ol>
 </div>

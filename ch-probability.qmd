@@ -76,15 +76,35 @@ ggplot(beta_df, aes(x = x, y = density)) +
 
 ```
 
+::: callout-tip
+### Probability distributions
+
+A **probability distribution** describes how probabilities are distributed across outcomes of a random variable.
+
+There are two main types: **discrete** probability distributions and **continuous** probability distributions.
+:::
+
 Several well-known distributions serve as fundamental building blocks in probability and statistics. Among discrete distributions, the binomial distribution describes the number of successes in a fixed number of independent trials (like accuracy data from a behavioural task), while the Poisson distribution is used for counting events that occur randomly over time or space (such as number of relatives sentences in a corpus). In the continuous case, the Gaussian distribution (which we will explore below) has many useful mathematical properties and it features prominently in any statistical textbook. Other continuous distributions are, for example, the beta distribution, illustrated in @fig-distr-2, used for continuous variables bounded between 0 and 1, and the uniform distribution, which distributes probabilities equally across the entire range of real numbers (so it is a "flat" distribution, since it looks like a horizontal line).
 
 Probability distributions are more than just mathematical descriptions---they provide tools for making sense of variation and uncertainty in the world. They allow us to calculate probabilities for complex events, to compare different random processes, and to build models that reflect real-world randomness. Once the distribution of a random variable is known, we can derive useful summaries such as averages, variability, and the probability of extreme outcomes. In this way, probability distributions bridge the abstract rules of probability with the practical task of describing how probability operates across a whole set of possibilities.
 
 ## Probability mass and density functions
 
-How is the probability of different outcomes of ranges of outcomes calculated? For discrete distributions, the probability *mass* function (PMF) is used to compute probabilities. Let's take the Bernoulli probability distribution from figure @fig-distr-1: the PMF of a Bernoulli distribution is $p$ for the probability of the outcome being 1, and $q = 1 - p$ for the probability of the outcome being 0. In the figure, 1 = "Yes" and 0 = "No". There is a probability $p = 0.8$ of getting a "Yes", hence there is a probability $q = 1 - p = 1- 0.8 = 0.2$ of getting a "No". Continuous probability distributions use probability *density* functions (PDFs, nothing to do with the file format): these don't tell you the probability of a specific value, but rather the *probability density* or in other words how dense the probability is around a point. I will spare you the mathematical details of PDFs, but they are the reason for using density plots. You've encountered a density plot already, in @fig-distr-2 above. The curve you see in that figure is calculated with the PDF of the beta distribution. Because we used a PDF, this is a theoretical probability distribution. In practice, you will almost never have to use PMFs and PDFs yourself, but it helps to know about them.
+How is the probability of different outcomes of ranges of outcomes calculated? For discrete distributions, the **probability *mass* function** (PMF) is used to compute probabilities. Let's take the Bernoulli probability distribution from figure @fig-distr-1: the PMF of a Bernoulli distribution is $p$ for the probability of the outcome being 1, and $q = 1 - p$ for the probability of the outcome being 0. In the figure, 1 = "Yes" and 0 = "No". There is a probability $p = 0.8$ of getting a "Yes", hence there is a probability $q = 1 - p = 1- 0.8 = 0.2$ of getting a "No". Continuous probability distributions use **probability *density* function**s (PDFs, nothing to do with the file format): these don't tell you the probability of a specific value, but rather the *probability density* or in other words how dense the probability is around a point. I will spare you the mathematical details of PDFs, but they are the reason for using density plots. You've encountered a density plot already, in @fig-distr-2 above. The curve you see in that figure is calculated with the PDF of the beta distribution. Because we used a PDF, this is a theoretical probability distribution. In practice, you will almost never have to use PMFs and PDFs yourself, but it helps to know about them.
 
-What if we want the density of a sample from a random variable, like logged RTs from the MALD data set [@tucker2019]? Obtaining the density curve of a sample is done with kernel density estimation (KDE): this is a function that creates a smooth, continuous estimate of a probability density from a finite set of data points (the sample). As with PMFs and PDFs, you will very rarely have to use KDE directly, since R applies it for you. So let's see how to make a density plot in ggplot2.
+::: callout-tip
+### PMF and PDF
+
+The **Probability Mass Function** (PMF) and the **Probability Density Function** (PDF) are mathematical functions used to compute theoretical probability distributions.
+:::
+
+What if we want the density of a sample from a random variable, like logged RTs from the MALD data set [@tucker2019]? Obtaining the density curve of a sample is done with **Kernel Density Estimation** (KDE): this is a function that creates a smooth, continuous estimate of a probability density from a finite set of data points (the sample). As with PMFs and PDFs, you will very rarely have to use KDE directly, since R applies it for you. So let's see how to make a density plot in ggplot2.
+
+::: callout-tip
+## Kernel Density Estimation (KDE)
+
+**Kernel Density Estimation** is a function that creates a smooth estimate of a probability density from a finite set of data points. It returns an empirical probability distribution.
+:::
 
 ## Density plots
 

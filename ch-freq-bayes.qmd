@@ -40,10 +40,16 @@ $$
 
 The prior probability $P(h)$ represents the researcher's beliefs towards $h$. These beliefs can be based on expert knowledge, previous studies or mathematical principles.
 
+Let's see a practical example of Bayesian updating based on the "globe-tossing" scenario described in @mcelreath2020, Ch 2 (originally from @gelman2011). Imagine holding a small globe that represents Earth. You want to know what fraction of its surface is covered by water. To estimate this, you adopt a simple method: toss the globe into the air, and when you catch it, note whether the spot under your right index finger is water (W) or land (L). Then toss it again and repeat. This process produces a sequence of observations. For example, the first nine outcomes might be: WLWWWLWLW. In this sequence, six outcomes are water and three are land. We call this sequence the data, i.e. $d$. What we are trying to estimate here is the true proportion of water.
+
+So what about our prior beliefs about the true proportion of water, i.e. $P(h)$? Let's say that our prior belief (assuming complete ignorance about the true proportion of water) is that all proportions are equally probable. This is called a **uniform prior**, or a **flat** prior. You can see why in @fig-prior-update. If you look at the top-right panel (the one with "n = 1"), the dashed line represents our prior belief: all proportions of water (on the *x*-axis) are equally probable, so that the prior probability distribution is flat. Note that a probability of 0 means Earth is all land, and a probability of 1 means Earth is all water. Now, let's update the flat prior distribution with the first observation in the globe-tossing exercise: the first outcome was W, water. This observations corresponds to a distribution in which 1 has the greatest probability and values below it have decreasing probability. This is represented in the top-right panel of @fig-prior-update as the solid slanted line. This is $P(d | h)$. If we combine the flat prior and the probability of the data we get the dashed line in the second top panel (with "n = 2"). That is the posterior probability distribution resulting from the Bayesian update at step "n = 1". This becomes the prior probability distribution at step "n = 2".
+
 ```{r}
 #| label: fig-prior-update
 #| fig-cap: "Bayesian updating of a prior based on observations. From @mcelreath2020 and @kurtz2023."
 #| code-fold: true
+
+# Code adapted from: https://bookdown.org/content/4857/small-worlds-and-large-worlds.html#bayesian-updating.
 
 sequence_length <- 50
 
@@ -85,13 +91,13 @@ d |>
   facet_wrap(~ strip, scales = "free_y")
 ```
 
-Chapter 2 of @mcelreath2020 goes into much more details and I recommend you read that at some point if you feel this section is a bit too abstract.
+Now let's update our latest prior with the probability taken from the second observation: this was L, land. The solid line in the second panel is the probability of getting a W and L: the probability indicates that a proportion of 0.5 is the most probable. This makes sense: if in two tosses you got one W and one L, then the most probable hypothesis is that there is 50% of water and 50% of land. We combine again our prior (dashed line) with the data (solid line) to obtain the dashed line in the third top panel. This is our new prior. The rest of the figure shows how the prior gets updated at each new observation of W or L. You see that the highest density of the dashed lines quickly moves to the right. They are now suggesting that the globe has a higher proportion of water than land. Chapter 2 of @mcelreath2020 goes into much more details and I recommend you read that at some point if you feel this section felt a bit too abstract.
 
-The following section goes through a few reasons to use Bayesian inference for research. Note that some of these reasons presuppose understanding of regression modelling, both frequentist and Bayesian, so don't worry if they are not clear yet.
+Hopefully you can appreciate how different the frequentist and Bayesian approaches are: while frequentist statistics focusses on the rejection of a null/nil hypothesis based on the probability of the data given the hypothesis, or $P(d|h)$, Bayesian statistics is about obtaining the probability of any hypothesis given the data, or $P(h|d)$. You might also realise now that $P(d|h)$ appears in Bayes' Theorem. But the theorem also include the prior, $P(h)$. This is totally missing in the frequentist approach. The following section goes through a few reasons to prefer Bayesian inference over frequentist for research.
 
 ## Why Bayesian inference?
 
-Here are a few practical and conceptual reasons for why you should consider switching to Bayesian statistics for your research.
+Here are a few practical and conceptual reasons for why Bayesian statistics might be more appropriate in most research contexts. Note that some of these reasons presuppose understanding of regression modelling, both frequentist and Bayesian, so don't worry if they are not clear yet. You can come back to them after you gained familiarity with regression models in later chapters.
 
 ::: callout-tip
 ### Practical reasons
