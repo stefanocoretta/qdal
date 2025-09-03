@@ -365,7 +365,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-freq-bayes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Frequentist and Bayesian inference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Bayesian inference</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -525,8 +525,11 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-p-value" id="toc-the-p-value" class="nav-link active" data-scroll-target="#the-p-value"><span class="header-section-number">30.1</span> The <em>p</em>-value</a></li>
-  <li><a href="#the-null-ritual" id="toc-the-null-ritual" class="nav-link" data-scroll-target="#the-null-ritual"><span class="header-section-number">30.2</span> The “Null Ritual”</a></li>
+  <li><a href="#frequentist-vs-bayesian-probability" id="toc-frequentist-vs-bayesian-probability" class="nav-link active" data-scroll-target="#frequentist-vs-bayesian-probability"><span class="header-section-number">30.1</span> Frequentist vs Bayesian probability</a></li>
+  <li><a href="#frequentist-inference" id="toc-frequentist-inference" class="nav-link" data-scroll-target="#frequentist-inference"><span class="header-section-number">30.2</span> Frequentist inference</a></li>
+  <li><a href="#the-p-value" id="toc-the-p-value" class="nav-link" data-scroll-target="#the-p-value"><span class="header-section-number">30.3</span> The <em>p</em>-value</a></li>
+  <li><a href="#the-null-ritual" id="toc-the-null-ritual" class="nav-link" data-scroll-target="#the-null-ritual"><span class="header-section-number">30.4</span> The “Null Ritual”</a></li>
+  <li><a href="#why-prefer-bayesian-inference" id="toc-why-prefer-bayesian-inference" class="nav-link" data-scroll-target="#why-prefer-bayesian-inference"><span class="header-section-number">30.5</span> Why prefer Bayesian inference?</a></li>
   </ul>
 </nav>
     </div>
@@ -554,8 +557,20 @@ window.Quarto = {
 
 <p><img src="https://img.shields.io/badge/Area-Research_methods-blue.png" class="img-fluid"> <img src="https://img.shields.io/badge/Area-Statistics-red.png" class="img-fluid"></p>
 <p>In <a href="ch-freq-bayes.html" class="quarto-xref"><span>Chapter 20</span></a>, you were introduced to two approaches to inference: frequentist and Bayesian statistics. You have encountered the <em>p</em>-value. It is very likely that you had heard of <em>p</em>-values before, especially when reading research literature. You will have also heard of “statistical significance”, which is based on the <em>p</em>-value obtained in a statistical test performed on data. This section will explain what <em>p</em>-values are, how they are often misinterpreted and misused <span class="citation" data-cites="cassidy2019 gigerenzer2004">(<a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>; <a href="references.html#ref-gigerenzer2004" role="doc-biblioref">Gigerenzer 2004</a>)</span> , and how the “Null Ritual”, a degenerate form of statistics derived from different frequentist frameworks (yes, you can frequentist statistics in different ways!) that has become the standard in research, despite not being a coherent way of doing frequentist statistics <span class="citation" data-cites="gigerenzer2004a">(<a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer, Krauss, and Vitouch 2004</a>)</span>.</p>
-<section id="the-p-value" class="level2" data-number="30.1">
-<h2 data-number="30.1" class="anchored" data-anchor-id="the-p-value"><span class="header-section-number">30.1</span> The <em>p</em>-value</h2>
+<!--# TODO: fix with text from Bayesian inference chapter. -->
+<section id="frequentist-vs-bayesian-probability" class="level2" data-number="30.1">
+<h2 data-number="30.1" class="anchored" data-anchor-id="frequentist-vs-bayesian-probability"><span class="header-section-number">30.1</span> Frequentist vs Bayesian probability</h2>
+<p>Probabilities in a <strong>frequentist framework</strong> are about average occurrences of events in a hypothetical series of repetitions of those events. Imagine you observe a volcano for a long period of time. The number of times the volcano erupts within that time tells us the <strong>frequency</strong> of occurrence of the event of volcanic eruption. In other words, it tells us its (frequentist) probability. In the <strong>Bayesian framework</strong>, probabilities are about the <strong>level of (un)certainty</strong> that an event will occur at any specific time given certain conditions. This is probably the way we normally think about probabilities: like in the weather forecast, if somebody tells you tomorrow it will rain with a probability of 85%, you intuitively know that it is very likely that it will rain tomorrow although it is not certain.</p>
+<p>In the context of research, a frequentist probability tells you the probability of obtaining the same result again given an imaginary series of replications of the study that generated that probability. On the other hand, a Bayesian probability tells you the probability of your hypothesis given the results of your study and your prior beliefs.</p>
+</section>
+<section id="frequentist-inference" class="level2" data-number="30.2">
+<h2 data-number="30.2" class="anchored" data-anchor-id="frequentist-inference"><span class="header-section-number">30.2</span> Frequentist inference</h2>
+<p>Most of current research is carried out with frequentist methods. This is a historical accident, based on both an initial misunderstanding of Bayesian statistics (which is, by the way, older than frequentist statistics) and the fact that frequentist maths was much easier (and personal computers did not exist).</p>
+<p>The commonly accepted approach to frequentist inference is the so-called <strong>Null Hypothesis Significance Testing</strong>, or NHST. As practised by researchers, the NHST approach is a (sometimes incoherent) mix of the frequentist work of Fisher on one hand, and Neyman and Pearson on the other. The inconsistent nature of NHST as practised by researchers today has led to the elaboration of the concept and label “<strong>Null Ritual</strong>” <span class="citation" data-cites="gigerenzer2004 gigerenzer2004a gigerenzer2018">(<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">Gigerenzer 2004</a>, <a href="references.html#ref-gigerenzer2018" role="doc-biblioref">2018</a>; <a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer, Krauss, and Vitouch 2004</a>)</span> and the slogan-titled paper <em>The difference between “significant” and “not significant” is not itself statistically significant</em> <span class="citation" data-cites="gelman2006a">(<a href="references.html#ref-gelman2006a" role="doc-biblioref">Gelman and Stern 2006</a>)</span>. The Null Ritual has been criticised by frequentist and Bayesian statisticians alike and has resulted in the proposal of alternative, stricter, versions of NHST, like Statistical Inference as Severe Testing <span class="citation" data-cites="mayo2018 gelman2019">(SIST, <a href="references.html#ref-mayo2018" role="doc-biblioref">Mayo 2018</a>; for a critique see <a href="references.html#ref-gelman2019" role="doc-biblioref">Gelman et al. 2019</a>)</span>.</p>
+<p>The main tenet of the Null Ritual is that you set a <strong>null hypothesis</strong> and you try to <strong>reject</strong> it. A null hypothesis is, in practice, always a <em>nil</em> hypothesis: in other words, it is the hypothesis that there is <em>no</em> difference between two estimands (these usually being means of two or more groups of interest). Using a variety of numerical techniques, one obtains a <strong><em>p</em>-value</strong>, i.e.&nbsp;a frequentist probability. The <em>p</em>-value is used for inference: if the <em>p</em>-value is smaller than a threshold, one can reject the nil hypothesis; if the <em>p</em>-value is equal to or greater than the threshold, you cannot reject the null hypothesis. <em>p</em>-values are very commonly mistaken for Bayesian probabilities <span class="citation" data-cites="cassidy2019">(<a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>)</span> and this results in various misinterpretations of reported results. You will learn about the meaning and misunderstandings of <em>p</em>-values in <a href="#sec-pvalues" class="quarto-xref"><span>Chapter 30</span></a>.</p>
+</section>
+<section id="the-p-value" class="level2" data-number="30.3">
+<h2 data-number="30.3" class="anchored" data-anchor-id="the-p-value"><span class="header-section-number">30.3</span> The <em>p</em>-value</h2>
 <p>To illustrate <em>p</em>-values, we will compare simulated durations of vowels when followed by voiceless consonants vs voiced consonants. It is a well-known phenomenon that vowels followed by voiced consonants tend to be longer than vowels followed by voiceless ones <span class="citation" data-cites="coretta2019">(see review in <a href="references.html#ref-coretta2019" role="doc-biblioref">Coretta 2019</a>)</span>. Let’s simulate some vowel duration observations: we do so with the <code>rnorm()</code> function, which takes three arguments: the number of observations to sample and the mean and standard deviation of the Gaussian distribution to sample observations from. We use a <span class="math inline">\(Gaussian(80, 10)\)</span> for durations before voiceless consonants, and a <span class="math inline">\(Gaussian(90, 10)\)</span> for durations before voiced consonants. In other word, there is a difference of 10 milliseconds between the two means. Since the <code>rnorm()</code> function <em>randomly</em> samples from the given distribution, we have set a “seed” so that the code will return the same numbers every time it is run, for reproducibility.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2953</span>)</span>
@@ -705,8 +720,51 @@ Figure&nbsp;30.2: Standard <em>t</em>-distribution and obtained <em>t</em>-stati
 <p>In other words, assuming <span class="math inline">\(H_0\)</span> is true and there is not difference between the two groups of vowel duration, the probability of obtaining a <em>t</em>-statistic greater or equal to 2.4374424 is approximately 0.01. In other words, there is approximately a 1% probability that the difference between durations of vowels followed by voiced or voiceless consonants is 7.4399103 or larger. Of course, we want the <em>p</em>-value to be as small as possible: if <span class="math inline">\(H_0\)</span> is true and the true difference is 0, finding a large difference should be very unlikely (think about the <em>t</em>-distribution: values away from 0 are less likely than 0 and values closer to 0).</p>
 <p>But how do we decide how small is small enough? Is 1% small enough? What about 0.5%? 5%?, maybe 10%? This is the so-called <span class="math inline">\(\alpha\)</span>-level (read “alpha level”, from the Greek letter <span class="math inline">\(\alpha\)</span>). We will get back to the issue of setting an <span class="math inline">\(\alpha\)</span>-level in the next section, but for now now that in social research it has become standard to set it to 0.05. In other words, if the <em>p</em>-value is lower than <span class="math inline">\(\alpha = 0.05\)</span> then we take the <em>p</em>-value to be small enough, otherwise we don’t. When the <em>p</em>-value is smaller than 0.05, we say we found a <em>statistically significant difference</em>, when it is equal or greater than 0.05, we say we found a <em>statistically non-significant difference</em>. When we find a statistical significant difference, the frequentist story goes, we say that we <em>reject</em> the null hypothesis <span class="math inline">\(H_0\)</span>. In our simulated example of vowel duration, the <em>p</em>-value is smaller than 0.05, so we say the mean vowel durations before voiced vs voiceless consonants are (statistically) significantly different from each other.</p>
 </section>
-<section id="the-null-ritual" class="level2" data-number="30.2">
-<h2 data-number="30.2" class="anchored" data-anchor-id="the-null-ritual"><span class="header-section-number">30.2</span> The “Null Ritual”</h2>
+<section id="the-null-ritual" class="level2" data-number="30.4">
+<h2 data-number="30.4" class="anchored" data-anchor-id="the-null-ritual"><span class="header-section-number">30.4</span> The “Null Ritual”</h2>
+<p>XXX</p>
+</section>
+<section id="why-prefer-bayesian-inference" class="level2" data-number="30.5">
+<h2 data-number="30.5" class="anchored" data-anchor-id="why-prefer-bayesian-inference"><span class="header-section-number">30.5</span> Why prefer Bayesian inference?</h2>
+<p>Here are a few practical and conceptual reasons for why Bayesian statistics might be more appropriate in most research contexts.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practical reasons
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Fitting frequentist models can lead to anti-conservative <em>p</em>-values (i.e.&nbsp;increased false positive rates, Type-I error rates: there is no effect but yet you got a significant <em>p</em>-value). An interesting example of this for the non-technically inclined reader can be found <a href="https://365datascience.com/bayesian-vs-frequentist-approach/">here</a>. LMER tends to be more sensitive to small sample sizes than Bayesian models (with small sample sizes, Bayesian models return estimates with greater uncertainty, which is a more conservative approach).</p></li>
+<li><p>While very simple models will return very similar estimates in frequentist and Bayesian statistics, in most cases more complex models won’t fit if run with frequentist packages like lme4, especially without adequate enough sample sizes. Bayesian regression models always converge, while frequentist ones don’t always do.</p></li>
+<li><p>Frequentist regression models require as much work as Bayesian ones, although it is common practice to skip necessary steps when fitting the former, which gives the impression of it being a quicker process. Factoring out the time needed to run <a href="./ch-regression-draws.html">Markov Chain Monte Carlo</a> chains in Bayesian regressions, in frequentist regressions you still have to perform robust perspective power analyses and post-hoc model checks.</p></li>
+<li><p>With Bayesian models, you can reuse posterior distributions from previous work and include that knowledge as priors into your Bayesian analysis. This feature effectively speeds up the discovery process (getting to the real value estimate of interest faster). You can embed previous knowledge in Bayesian models while you can’t in frequentist ones.</p></li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Conceptual reasons
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Frequentist regression models cannot provide evidence for a difference between groups, only evidence to reject the null (i.e.&nbsp;nil) hypothesis.</p></li>
+<li><p>A frequentist Confidence Interval (CI) can only tell us that, if we run the same study multiple times, <em>n</em> percent of the time the CI will include the real value (but we don’t know whether the CI we got in our study is one from the 100-<em>n</em> percent of CIs that DO NOT CONTAIN the real value). On the other hand, a Bayesian Credible Interval (CrI) ALWAYS tells us that the real value is within a certain range at <em>n</em> percent probability. (Of course all conditional on model and data, which is true both for frequentist and Bayesian models alike). So, frequentist models really just gives you a point estimate, while Bayesian models give a range of values.</p></li>
+<li><p>With Bayesian regressions you can compare any hypothesis, not just null vs alternative. (Although you can use information criteria with frequentist models).</p></li>
+<li><p>Frequentist regression models are based on an imaginary set of experiments that you never actually carry out.</p></li>
+<li><p>Bayesian regression models will converge towards the true value in the long run. Frequentist models do not.</p></li>
+</ul>
+</div>
+</div>
+<p>Of course, there are merits in fitting frequentist models, for example in corporate decisions, but you’ll still have to do a lot of work. The main conceptual difference then is that frequentist and Bayesian regression models answer very different questions and as (basic) researchers we are generally interested in questions that the latter can answer and the former cannot.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -716,11 +774,23 @@ Cassidy, Scott A., Ralitza Dimova, Benjamin Giguère, Jeffrey R. Spence, and Dav
 <div id="ref-coretta2019" class="csl-entry" role="listitem">
 Coretta, Stefano. 2019. <span>“An Exploratory Study of Voicing-Related Differences in Vowel Duration as Compensatory Temporal Adjustment in Italian and Polish.”</span> <em>Glossa: A Journal of General Linguistics</em> 4 (1): 1–25. <a href="https://doi.org/10.5334/gjgl.869">https://doi.org/10.5334/gjgl.869</a>.
 </div>
+<div id="ref-gelman2019" class="csl-entry" role="listitem">
+Gelman, Andrew, Daniel Lakeland, Brian Haig, Christian Hennig, Art Owen, Robert Cousins, Stan Young, et al. 2019. <span>“Many Perspectives on Deborah Mayo’s <span>“</span>Statistical Inference as Severe Testing: How to Get Beyond the Statistics Wars<span>”</span>.”</span> <a href="https://doi.org/10.48550/arXiv.1905.08876">https://doi.org/10.48550/arXiv.1905.08876</a>.
+</div>
+<div id="ref-gelman2006a" class="csl-entry" role="listitem">
+Gelman, Andrew, and Hal Stern. 2006. <span>“The Difference Between <span>“</span>Significant<span>”</span> and <span>“</span>Not Significant<span>”</span> Is Not Itself Statistically Significant.”</span> <em>The American Statistician</em> 60 (4): 328331. <a href="https://doi.org/10.1198/000313006X152649">https://doi.org/10.1198/000313006X152649</a>.
+</div>
 <div id="ref-gigerenzer2004" class="csl-entry" role="listitem">
 Gigerenzer, Gerd. 2004. <span>“Mindless Statistics.”</span> <em>The Journal of Socio-Economics</em> 33 (5): 587606. <a href="https://doi.org/10.1016/j.socec.2004.09.033">https://doi.org/10.1016/j.socec.2004.09.033</a>.
 </div>
+<div id="ref-gigerenzer2018" class="csl-entry" role="listitem">
+———. 2018. <span>“Statistical Rituals: The Replication Delusion and How We Got There.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 1 (2): 198218. <a href="https://doi.org/10.1177/2515245918771329">https://doi.org/10.1177/2515245918771329</a>.
+</div>
 <div id="ref-gigerenzer2004a" class="csl-entry" role="listitem">
 Gigerenzer, Gerd, Stefan Krauss, and Oliver Vitouch. 2004. <span>“The Null Ritual. What You Always Wanted to Know about Signi<span>fi</span>cance Testing but Were Afraid to Ask.”</span> In, 391408.
+</div>
+<div id="ref-mayo2018" class="csl-entry" role="listitem">
+Mayo, Deborah G. 2018. <em>Statistical Inference as Severe Testing: How to Get Beyond the Statistics Wars</em>. 1st ed. Cambridge University Press. <a href="https://doi.org/10.1017/9781107286184">https://doi.org/10.1017/9781107286184</a>.
 </div>
 </div>
 </section>
