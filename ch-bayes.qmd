@@ -1,4 +1,4 @@
-# Bayesian inference {#sec-freq-bayes}
+# Bayesian inference {#sec-bayes}
 
 ![](https://img.shields.io/badge/Area-Statistics-red)
 

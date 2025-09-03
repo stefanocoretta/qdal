@@ -38,7 +38,7 @@ book:
     chapters:
     - ch-probability.qmd
     - ch-gaussian.qmd
-    - ch-freq-bayes.qmd
+    - ch-bayes.qmd
     - ch-gauss-model.qmd
     - ch-fit-model.qmd
   - part: Week 5

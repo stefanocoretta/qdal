@@ -11,7 +11,7 @@ theme_set(theme_light())
 
 ```
 
-In @sec-freq-bayes, you were introduced to two approaches to inference: frequentist and Bayesian statistics. You have encountered the *p*-value. It is very likely that you had heard of *p*-values before, especially when reading research literature. You will have also heard of "statistical significance", which is based on the *p*-value obtained in a statistical test performed on data. This section will explain what *p*-values are, how they are often misinterpreted and misused [@cassidy2019; @gigerenzer2004] , and how the "Null Ritual", a degenerate form of statistics derived from different frequentist frameworks (yes, you can frequentist statistics in different ways!) that has become the standard in research, despite not being a coherent way of doing frequentist statistics [@gigerenzer2004a].
+In @sec-bayes, you were introduced to two approaches to inference: frequentist and Bayesian statistics. You have encountered the *p*-value. It is very likely that you had heard of *p*-values before, especially when reading research literature. You will have also heard of "statistical significance", which is based on the *p*-value obtained in a statistical test performed on data. This section will explain what *p*-values are, how they are often misinterpreted and misused [@cassidy2019; @gigerenzer2004] , and how the "Null Ritual", a degenerate form of statistics derived from different frequentist frameworks (yes, you can frequentist statistics in different ways!) that has become the standard in research, despite not being a coherent way of doing frequentist statistics [@gigerenzer2004a].
 
 <!--# TODO: fix with text from Bayesian inference chapter. -->
 
