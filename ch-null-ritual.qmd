@@ -1,4 +1,4 @@
-# Frequentist statistics, the Null Ritual and *p*-values {#sec-pvalues}
+# Frequentist statistics, the Null Ritual and *p*-values {#sec-null-ritual}
 
 ![](https://img.shields.io/badge/Area-Research_methods-blue) ![](https://img.shields.io/badge/Area-Statistics-red)
 
