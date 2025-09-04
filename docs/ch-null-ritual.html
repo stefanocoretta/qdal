@@ -96,7 +96,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-485d01fc63b59abcd3ee1bf1e8e2748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-4824bc4fcff8d7c1e04965ee072d4f81.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -160,7 +160,7 @@ window.Quarto = {
 <link rel="stylesheet" href="include/webex.css">
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar docked quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -181,10 +181,13 @@ window.Quarto = {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -529,7 +532,7 @@ window.Quarto = {
   <li><a href="#the-null-ritual" id="toc-the-null-ritual" class="nav-link" data-scroll-target="#the-null-ritual"><span class="header-section-number">30.2</span> The “Null Ritual”</a></li>
   <li><a href="#why-prefer-bayesian-inference" id="toc-why-prefer-bayesian-inference" class="nav-link" data-scroll-target="#why-prefer-bayesian-inference"><span class="header-section-number">30.3</span> Why prefer Bayesian inference?</a></li>
   </ul>
-</nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-null-ritual.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -558,7 +561,7 @@ window.Quarto = {
 <!--# TODO: fix with text from Bayesian inference chapter. -->
 <p>Most of current research is carried out with frequentist methods. This is a historical accident, based on both an initial misunderstanding of Bayesian statistics (which is, by the way, older than frequentist statistics) and the fact that frequentist maths was much easier (and personal computers did not exist).</p>
 <p>The commonly accepted approach to frequentist inference is the so-called <strong>Null Hypothesis Significance Testing</strong>, or NHST. As practised by researchers, the NHST approach is a (sometimes incoherent) mix of the frequentist work of Fisher on one hand, and Neyman and Pearson on the other. The inconsistent nature of NHST as practised by researchers today has led to the elaboration of the concept and label “<strong>Null Ritual</strong>” <span class="citation" data-cites="gigerenzer2004 gigerenzer2004a gigerenzer2018">(<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">Gigerenzer 2004</a>, <a href="references.html#ref-gigerenzer2018" role="doc-biblioref">2018</a>; <a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer, Krauss, and Vitouch 2004</a>)</span> and the slogan-titled paper <em>The difference between “significant” and “not significant” is not itself statistically significant</em> <span class="citation" data-cites="gelman2006a">(<a href="references.html#ref-gelman2006a" role="doc-biblioref">Gelman and Stern 2006</a>)</span>. The Null Ritual has been criticised by frequentist and Bayesian statisticians alike and has resulted in the proposal of alternative, stricter, versions of NHST, like Statistical Inference as Severe Testing <span class="citation" data-cites="mayo2018 gelman2019">(SIST, <a href="references.html#ref-mayo2018" role="doc-biblioref">Mayo 2018</a>; for a critique see <a href="references.html#ref-gelman2019" role="doc-biblioref">Gelman et al. 2019</a>)</span>.</p>
-<p>The main tenet of the Null Ritual is that you set a <strong>null hypothesis</strong> and you try to <strong>reject</strong> it. A null hypothesis is, in practice, always a <em>nil</em> hypothesis: in other words, it is the hypothesis that there is <em>no</em> difference between two estimands (these usually being means of two or more groups of interest). Using a variety of numerical techniques, one obtains a <strong><em>p</em>-value</strong>, i.e.&nbsp;a frequentist probability. The <em>p</em>-value is used for inference: if the <em>p</em>-value is smaller than a threshold, one can reject the nil hypothesis; if the <em>p</em>-value is equal to or greater than the threshold, you cannot reject the null hypothesis. <em>p</em>-values are very commonly mistaken for Bayesian probabilities <span class="citation" data-cites="cassidy2019">(<a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>)</span> and this results in various misinterpretations of reported results. You will learn about the meaning and misunderstandings of <em>p</em>-values in <span class="quarto-unresolved-ref">?sec-pvalues</span>.</p>
+<p>The main tenet of the Null Ritual is that you set a <strong>null hypothesis</strong> and you try to <strong>reject</strong> it. A null hypothesis is, in practice, always a <em>nil</em> hypothesis: in other words, it is the hypothesis that there is <em>no</em> difference between two estimands (these usually being means of two or more groups of interest). Using a variety of numerical techniques, one obtains a <strong><em>p</em>-value</strong>, i.e.&nbsp;a frequentist probability. The <em>p</em>-value is used for inference: if the <em>p</em>-value is smaller than a threshold, one can reject the nil hypothesis; if the <em>p</em>-value is equal to or greater than the threshold, you cannot reject the null hypothesis. <em>p</em>-values are very commonly mistaken for Bayesian probabilities <span class="citation" data-cites="cassidy2019">(<a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>)</span> and this results in various misinterpretations of reported results.</p>
 <section id="the-p-value" class="level2" data-number="30.1">
 <h2 data-number="30.1" class="anchored" data-anchor-id="the-p-value"><span class="header-section-number">30.1</span> The <em>p</em>-value</h2>
 <p>To illustrate <em>p</em>-values, we will compare simulated durations of vowels when followed by voiceless consonants vs voiced consonants. It is a well-known phenomenon that vowels followed by voiced consonants tend to be longer than vowels followed by voiceless ones <span class="citation" data-cites="coretta2019">(see review in <a href="references.html#ref-coretta2019" role="doc-biblioref">Coretta 2019</a>)</span>. Let’s simulate some vowel duration observations: we do so with the <code>rnorm()</code> function, which takes three arguments: the number of observations to sample and the mean and standard deviation of the Gaussian distribution to sample observations from. We use a <span class="math inline">\(Gaussian(80, 10)\)</span> for durations before voiceless consonants, and a <span class="math inline">\(Gaussian(90, 10)\)</span> for durations before voiced consonants. In other word, there is a difference of 10 milliseconds between the two means. Since the <code>rnorm()</code> function <em>randomly</em> samples from the given distribution, we have set a “seed” so that the code will return the same numbers every time it is run, for reproducibility.</p>
@@ -1416,4 +1419,4 @@ window.onload = function() {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-null-ritual.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

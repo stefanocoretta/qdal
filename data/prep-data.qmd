@@ -8,6 +8,31 @@ editor: visual
 #| label: setup
 
 library(tidyverse)
+library(data.table)
+```
+
+## Berzak 2025
+
+Data from [OneStop: A 360-Participant English Eye Tracking Dataset with Different Reading Regimes](https://lacclab.github.io/OneStop-Eye-Movements/index.html?utm_source=chatgpt.com#).
+
+```{r}
+#| label: fix-dur
+
+fix_dur_file <- "data/berzak2025/fix-dur.csv"
+
+if (!file.exists(fix_dur_file)) {
+  fix_full <- fread("bdata/berzak2025/fixations_Paragraph_ordinary.csv")
+
+  fix_dur <- fix_full |> 
+    filter(
+      article_batch == 1,
+      trial_index == 1
+    ) |> 
+    select(participant_id, trial_index, article_batch, CURRENT_FIX_DURATION, word_length)
+  
+  write_csv(fix_dur, fix_dur_file)
+}
+
 ```
 
 ## Brentari 2024
@@ -88,6 +113,17 @@ saveRDS(glot_status, "./data/coretta2022/glot_status.rds")
 #   filter(Parameter_ID == "med") |>
 #   mutate(MED = str_remove(Code_ID, "med-")) |>
 #   left_join(y = languages, by = c("Language_ID" = "ID"))
+```
+
+## Egurtzegi 2020
+
+```{r}
+#| label: eu-vot
+
+eu_vot <- read_csv("https://osf.io/download/hnezg/")
+
+dir.create("data/egurtzegi2020/", showWarnings = FALSE)
+write_csv(eu_vot, "data/egurtzegi2020/eu_vot.csv")
 ```
 
 ## Iosad 2020
