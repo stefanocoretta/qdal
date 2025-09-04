@@ -90,3 +90,6 @@ callout-icon: false
 
 execute:
   freeze: auto
+
+comments:
+  hypothesis: true

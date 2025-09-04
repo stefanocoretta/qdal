@@ -1,3 +1,7 @@
+---
+comments: false
+---
+
 # Welcome! {.unnumbered}
 
 Hello! Welcome to the *Quantitative Data Analysis for Linguists in R* textbook! This is the textbook for the [Quantitative Methods in Linguistics and English Language](https://uoelel.github.io/qml/) course at the University of Edinburgh, but the textbook is open to all. Please, read the [Preface](preface.qmd) to familiarise yourself with the pedagogical background and structure of the book.
