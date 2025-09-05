@@ -4,7 +4,7 @@ editor:
     wrap: sentence
 ---
 
-# Regression models cheat sheet
+# Regression models cheat sheet  {#sec-reg-cheat-sheet}
 
 **Regression models**, aka linear regression models or linear models, are a group of statistical models based on the simple idea that we can predict an outcome variable $Y$ based on a function $f(X)$.
 The "simplest" regression model is the formula of a line:[^app-reg-cheat-sheet-1]

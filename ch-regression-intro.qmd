@@ -2,7 +2,7 @@
 
 ![](https://img.shields.io/badge/Area-Statistics-red)
 
-In @sec-probability, you have learned the basics of probability and how to run Gaussian models to estimate the mean and standard deviation ($\mu$ and $\sigma$) of a variable. This chapter extends the Gaussian model to what is commonly called a Gaussian **regression model**. Regression models (including the Gaussian) are models based on the equation of a straight line. They allow you to model the relationship between two or more variables. This textbook introduces you to regression models of varying complexity which can model variables frequently encountered in linguistics. Note that regression models are very powerful and flexible statistical models which can deal with a great variety of types of variables. \[TODO: Appendix of types of regression models cheatsheet\].
+In the previous chapters, you have learned the basics of probability and how to run Gaussian models to estimate the mean and standard deviation ($\mu$ and $\sigma$) of a variable. This chapter extends the Gaussian model to what is commonly called a Gaussian **regression model** (or simply regression model). Regression models (including the Gaussian) are models based on the equation of a straight line. This is why regression models are also called linear models. Regression models allow you to model the relationship between two or more variables. This textbook introduces you to regression models of increasing complexity which can model variables frequently encountered in linguistics. Note that regression models are very powerful and flexible statistical models which can deal with a great variety of types of variables. @sec-reg-cheat-sheet has a regression cheat sheet which you will be able to consult, after completing this course, as a guide for building a regression model based on a set of questions. For now, let's dive into the basics of a regression model.
 
 ## A straight line
 
@@ -26,7 +26,7 @@ $$
 y = \beta_0 + \beta_1 x
 $$
 
-Where $\beta_0$ is $c$ and $\beta_1$ is $m$ in the first notation. We will use the second notation (with $\beta_0$ and $beta_1$) in this book, since using $\beta$'s with subscript indexes will help understand the process of extracting information from regression models later.[^ch-regression-intro-1]
+$\beta$ is the Greek letter beta \[ˈbiːtə\]: you can read $\beta_0$ as "beta zero" and $\beta_1$ "beta one". In this formula, $\beta_0$ corresponds to $c$ and $\beta_1$ to $m$ in the first notation. We will use the second notation (with $\beta_0$ and $\beta_1$) in this book, since using $\beta$'s with subscript indexes will help understand the process of extracting information from regression models later.[^ch-regression-intro-1]
 
 [^ch-regression-intro-1]: Yet other notations are $y = a + bx$ and $y = \alpha + \beta x$.
 
@@ -61,8 +61,8 @@ Using the provided formula, we are able to find the values of $y$. Note that in 
 
 $$
 \begin{align}
-y & = 3 + 2 * x\\
-& = 3 + 2 * 0\\
+y & = 3 + 2 x\\
+& = 3 + 2 \cdot 0\\
 & = 3\\
 \end{align}
 $$
@@ -73,9 +73,9 @@ And $\beta_1$ is the number to add to the intercept for each **unit increase of*
 
 $$
 \begin{align}
-y = 3 + 2x = 3 + 2 * 1 = 3 + 2 = 5\\
-y = 3 + 2 * 2 = 3 + (2 + 2) = 7\\
-y = 3 + 2 * 3 = 3 + (2 + 2 + 2) = 9\\
+y & = 3 + 2x & = 3 + 2 \cdot 1 = 3 + 2 & = 5\\
+y & = 3 + 2 \cdot 2 & = 3 + (2 + 2) & = 7\\
+y & = 3 + 2 \cdot 3 & = 3 + (2 + 2 + 2) & = 9\\
 \end{align}
 $$
 
@@ -104,7 +104,17 @@ ggplot(line, aes(x, y)) +
   labs(title = bquote(italic(y) == 3 + 2 * italic(x)))
 ```
 
-Now, in the context of research, you usually start with a sample of measures (values) of $x$ (the predictor variable) and $y$ (the outcome variable). Then you have to **estimate** (i.e. to find the values of) $\beta_0$ and $\beta_1$ from the formula. This is what regression models are for: given the sampled values of $y$ and $x$, the model estimates $\beta_0$ and $\beta_1$.
+::: callout-tip
+### Equation of a line
+
+$$
+y = \beta_0 + \beta_1 x
+$$
+
+where $\beta_0$ is the line intercept and $\beta_1$ is the line slope.
+:::
+
+Now, in the context of research, you usually start with a sample of measures (values) of $x$ (the predictor variable) and $y$ (the outcome variable), rather than having to calculate $y$. Then you have to **estimate** (i.e. to find the values of) $\beta_0$ and $\beta_1$ of the model formula $y = \beta_0 + \beta_1 x$ . This is what regression models are for: given the sampled values of $y$ and $x$, the model estimates $\beta_0$ and $\beta_1$.
 
 ::: callout-warning
 ### Exercise
@@ -113,12 +123,51 @@ Now, in the context of research, you usually start with a sample of measures (va
 
 -   In the first tab, "Continuous", you will find instructions on the left and a plot on the right. The plot on the right is the plot resulting from the parameters specified to the left.
 
--   Play around with the intercept and slope parameters to see what happens to the line with different values of $\beta_0$ and $\beta_1$.
+-   Play around with the intercept and slope parameters to see what happens to the line with different values of the intercept $\beta_0$ and the slope $\beta_1$.
+:::
+
+::: callout-note
+### Quiz 1
+
+Use the [Linear Models Illustrated](https://stefanocoretta.shinyapps.io/lines/) app to answer the following questions.
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1a <- c(
+  'The whole line shifts downwards.',
+  'The line becomes steeper.',
+  answer = 'The whole line shifts upwards.',
+  "The line becomes flat."
+)
+
+cat("a. What happens to the line when you increase the intercept $\\beta_0$?", longmcq(opts_1a))
+
+opts_1b <- c(
+  answer = 'The line decreases from left to right.',
+  'The whole line becomes flat.',
+  'The whole line shifts downwards.',
+  "The line increases from left to right."
+)
+
+cat("b. What happens to the line when you set the slope $\\beta_1$ to a negative number?", longmcq(opts_1b))
+
+opts_1c <- c(
+  'The whole line shifts downwards.',
+  'The line decreases from left to right.',
+  'The line becomes steeper.',
+  answer = 'The line becomes flat.'
+)
+
+cat("b. What happens to the line when you set the slope $\\beta_1$ to `0` zero?", longmcq(opts_1c))
+```
 :::
 
 ## Add error
 
-Measurements are **noisy**: they usually contain errors. Error can have many different causes (for example, measurement error due to technical limitations or variability in human behaviour), but we are usually not that interested in learning about those causes. Rather, we just want our model to be able to deal with error. Let's see what errors looks like. @fig-error shows values of $y$ simulated with the equation $y = 1 + 1.5x$ (with $x$ equal 1 to 10), to which the random error $\epsilon$ was added. Due to the added error, the points are almost on the straight line defined by $y = 1 + 1.5x$, but not quite. The vertical distance between the observed points and the expected line, called the **regression line**, is the **residual error** (red lines in the plot).
+Measurements are **noisy**: they usually contain errors. Error can have many different causes (for example, measurement error due to technical limitations or variability in human behaviour), but we are usually not that interested in learning about what causes the error. Rather, we just want our model to be able to deal with error. Let's see what errors looks like. @fig-error shows values of $y$ simulated with the equation $y = 1 + 1.5x$ (with $x$ equal 1 to 10), to which the random error $\epsilon$ (the Greek letter epsilon \[ˈɛpsɪlɒn\]) was added. Due to the added error, the points are almost on the straight line defined by $y = 1 + 1.5x$, but not quite. The vertical distance between the observed points and the expected line, called the **regression line**, is the **residual error** (red lines in the plot).
 
 ```{r}
 #| label: fig-error
@@ -148,25 +197,40 @@ ggplot(line, aes(x, y)) +
 When taking into account error, the equation of a regression model becomes the following:
 
 $$
-y = \beta_0 + \beta_1 * x + \epsilon
+y = \beta_0 + \beta_1 x + \epsilon
 $$
 
-where $\epsilon$ is the error. In other words, $y$ is the sum of $\beta_0$, $\beta_1 * x$ and some error. In regression modelling, the error $\epsilon$ is assumed to come from a Gaussian distribution with mean 0 and standard deviation $\sigma$ when $y$ is assumed to be generated by a Gaussian distribution: $Gaussian(\mu = 0, \sigma)$.
+where $\epsilon$ is the error. In other words, $y$ is the sum of $\beta_0$, $\beta_1 x$ and some error. In regression modelling, the error $\epsilon$ is assumed to come from a Gaussian distribution with mean 0 and standard deviation $\sigma$ when $y$ is assumed to be generated by a Gaussian distribution: $\epsilon \sim Gaussian(\mu = 0, \sigma)$. We can substitute $\epsilon$ for the distribution.
 
 $$
-y = \beta_0 + \beta_1 * x + Gaussian(0, \sigma)
+y = \beta_0 + \beta_1 x + Gaussian(0, \sigma)
 $$
 
-This equation can be rewritten like so (since the mean of the Gaussian error is 0):
+Furthermore, this equation can be rewritten like so (since the mean of the Gaussian error is 0):
 
 $$
 \begin{align}
 y & \sim Gaussian(\mu, \sigma)\\
-\mu & = \beta_0 + \beta_1 * x\\
+\mu & = \beta_0 + \beta_1 x\\
 \end{align}
 $$
 
-You can read those formulae like so: "The variable $y$ is distributed according to a Gaussian distribution with mean $\mu$ and standard deviation $\sigma$. The mean $\mu$ is equal to the intercept $\beta_0$ plus the slope $\beta_1$ times the variable $x$." This is a Gaussian regression model, because the assumed family of the outcome $y$ is Gaussian. Now, the goal of a (Gaussian) regression model is to estimate $\beta_0$, $\beta_1$ and $\sigma$ from the data (i.e. from the values of $x$ and $y$). Of course, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family (the other most common families are Bernoulli, Poisson, beta and cumulative). In the following chapters, you will learn how to fit regression models to a variety of data to answer linguistic research questions.
+You can read those formulae like so: "The variable $y$ is distributed according to a Gaussian distribution with mean $\mu$ and standard deviation $\sigma$. The mean $\mu$ is equal to the intercept $\beta_0$ plus the slope $\beta_1$ times the variable $x$." This is a Gaussian regression model, because the assumed family of the outcome $y$ is Gaussian. Now, the goal of a (Gaussian) regression model is to estimate $\beta_0$, $\beta_1$ and $\sigma$ from the data (i.e. from the values of $x$ and $y$). In other words, regression models find the regression line based on the observations of $y$ and $x$. We do not know what is the true regression line that has generated $y$ and $x$, we just have $y$ and $x$ values.
+
+The $y \sim Gaussian(\mu, \sigma)$ line in the formulae above is exactly the formula you saw in @sec-gauss-model. It is no coincidence: this is *Gaussian* regression model. The outcome variable $y$ is assumed to be Gaussian. The new building block we have added now is that $\mu$ depends on $x$: this is because $x$ appears in the formula of $\mu$. In other words, we are allowing the mean $\mu$ to vary with $x$. This is expressed by the so-called **regression equation**: $\mu = \beta_0 + \beta_1 x$. This is the core concept of regression models.
+
+::: callout-tip
+### Regression model
+
+$$
+\begin{align}
+y & \sim Gaussian(\mu, \sigma) & \text{[Distribution of y]}\\
+\mu & = \beta_0 + \beta_1 x & \text{[Regression equation]}\\
+\end{align}
+$$
+:::
+
+You perhaps realised this by now, but the regression equation implies that both $y$ and $x$ are *numeric variables*. However, regression models can also be used with variables that are categorical. You will learn how to use categorical predictors (categorical $x$'s) in regression models in Week 7's chapters. Moreover, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family. The chapters of Week 8 will teach you how to fit two other useful distribution families: the log-normal family and the Bernoulli family. You will be able to learn about other families by checking the resources linked in @sec-reg-cheat-sheet.
 
 ::: {.callout-important collapse="true"}
 ## Spotlight: Regression, eugenics and racism
