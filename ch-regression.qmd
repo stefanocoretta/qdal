@@ -7,7 +7,8 @@
 #| include: false
 
 library(tidyverse)
-
+library(brms)
+library(bayesplot)
 ```
 
 In @sec-reg-intro you were introduced to regression models. Regression is a statistical model based on the equation of a straight line, with added error.
@@ -31,7 +32,9 @@ The goal of the Gaussian regression model expressed in the formulae above is to 
 
 ## Vowel duration in Italian: the data
 
-We will analyse the duration of vowels in Italian from @coretta2019k and how speech rate affects vowel duration. An expectation we might have is that vowels get shorter with increasing speech rate. You will notice how this is a very vague hypothesis: how shorter do they get? Is the shortening the same across all speech rates, or does it get weaker with higher speech rates? Our expectation/hypothesis simply states that vowels get shorter with increasing speech rate. Maybe we could do better and use what we know from speech production and come up with something more precise, but this type of vague hypothesis are very common, if not standard, in linguistic research, so we will stick to it for practical and pedagogical reasons. Remember, however, that robust research should strive for precision.
+We will analyse the duration of vowels in Italian from @coretta2019k and how speech rate affects vowel duration. Vowel duration should be pretty strightforward, and speech rate is simply the number of syllables per second, calculated from the frame sentence the vowel was uttered in. An expectation we might have is that vowels get shorter with increasing speech rate. You will notice how this is a very vague hypothesis: how shorter do they get? Is the shortening the same across all speech rates, or does it get weaker with higher speech rates? Our expectation/hypothesis simply states that vowels get shorter with increasing speech rate. Maybe we could do better and use what we know from speech production and come up with something more precise, but this type of vague hypothesis are very common, if not standard, in linguistic research, so we will stick to it for practical and pedagogical reasons. Remember, however, that robust research should strive for precision. In short, we will try to answer the following research question:
+
+> What is the relationship between vowel duration and speech rate?
 
 Let's load the R data file `coretta2018a/ita_egg.rda`. It contains several phonetic measurements obtained from audio and electroglottographic recordings. You can find the information on the data in the related entry on the QM Data website: [Electroglottographic data on Italian](https://uoelel.github.io/qml-data/data/coretta2018a/ita_egg.html).
 
@@ -67,7 +70,7 @@ ita_egg_clean <- ita_egg |>
   drop_na(v1_duration)
 ```
 
-We will use `ita_egg_clean` for the rest of the tutorial. Let's reproduce the plot, but let's add a **regression line**. This is the straight line we have been talking about, the line that is reconstructed by regression models. It is sometimes useful to add the regression line to the scatter plots to show the linear relationship of the two variables in the plot. We can quickly add regression lines to scatter plots with the smooth geometry: `geom_smooth(method = "lm")`. The `method` argument lets us pick the type of method to create the "smooth": here, we want a regression line so we choose `lm` for linear model (remember, linear model is another term for regression model). Under the hood, `geom_smooth()` fits a regression model to estimate the regression line and plots it. We will fit our own regression model below, so for now the regression line is just for show. @fig-vow-rate-lm shows the scatter plot with the regression line. You can ignore the message about the formula for now.
+We will use `ita_egg_clean` for the rest of the tutorial. Let's reproduce the plot, but let's add a **regression line**. This is the straight line we have been talking about, the line that is reconstructed by regression models. It is sometimes useful to add the regression line to the scatter plots to show the linear relationship of the two variables in the plot. We can quickly add regression lines to scatter plots with the smooth geometry: `geom_smooth(method = "lm")`. The `method` argument lets us pick the type of method to create the "smooth": here, we want a regression line so we choose `lm` for linear model (remember, linear model is another term for regression model). Under the hood, `geom_smooth()` fits a regression model to estimate the regression line and plots it. We will fit our own regression model below, so for now the regression line is just for show. @fig-vow-rate-lm shows the scatter plot with the regression line. You can ignore the message about the formula.
 
 ```{r}
 #| label: fig-vow-rate-lm
@@ -86,7 +89,7 @@ ita_egg_clean |>
 By glancing at the individual points, we can see a negative relationship between speech rate and vowel duration: vowels get shorter with greater speech rate. This is reflected by the regression line too, which has a *negative* slope. A negative slope means that when the values on the *x*-axis increase, the values on the *y*-axis decrease. When the opposite is true, i.e. when with increasing *x*-axis values you observe increasing *y*-axis values, we say the regression line has *positive* slope. Positive and negative slope correspond to what some call a *direct* and *inverse* relationship. In terms of the equation of the line $y = \beta_0 + \beta_1 x$, a *positive slope* means $\beta_1$ is a *positive* number and, conversely, a *negative slope* means $\beta_1$ is a *negative* number. When $\beta_0$ is zero, then the regression line is flat and we say that the two variables are independent: changing one, does not systematically change the other. You explored these features of the regression slope in @sec-reg-intro, when playing around with the [Linear Models Illustrated](https://stefanocoretta.shinyapps.io/lines/) app and when answering the quiz.
 
 ::: callout-tip
-## Direct/positive and inverse/negative relationship
+### Direct/positive and inverse/negative relationship
 
 When the slope $\beta_1$ is positive, the regression line has **positive slope** and $x$ and $y$ have a **direct relationship**.
 
@@ -99,7 +102,7 @@ When the slope $\beta_0$ is `0` zero, the regression line is flat and $x$ and $y
 
 ### The model
 
-Let's move on onto fitting a Gaussian regression model to vowel duration as the outcome variable and speech rate as the predictor. We are assuming that vowel duration follows a Gaussian distribution (although as mentioned above this is not the case, but it will do for now). Here is the model we will fit in mathematical notation.
+Let's move on onto fitting a Gaussian regression model to vowel duration as the outcome variable and speech rate as the predictor. We are assuming that vowel duration follows a Gaussian distribution (although as mentioned at the beginning of this chapter, this is not the case, but it will do for now). Here is the model we will fit, in mathematical notation.
 
 $$
 \begin{align}
@@ -108,17 +111,21 @@ $$
 \end{align}
 $$
 
+You can read that as:
+
 -   Vowel duration ($\text{vdur}$) is distributed ($\sim$) according to a Gaussian distribution ($Gaussian(\mu, \sigma)$).
 
--   The mean $\mu$ is equal to the sum of $\beta_0$ (the intercept) and the product of $\beta_1$ and speech rate ($\beta_1 \cdot \text{sr}$). The formula of $\mu$ is the equation of a straight line, aka the *linear equation*. This is why regression models are also called linear models.
+-   The mean $\mu$ is equal to the sum of $\beta_0$ (the intercept) and the product of $\beta_1$ and speech rate ($\beta_1 \cdot \text{sr}$). The formula of $\mu$ is regression equation of the model.
 
-The regression model estimates the parameters in the mathematical formulae: parameters to be estimated in regression models are usually represented with Greek letters (hence why we adopted this notation for the linear equation). Since $\mu$ is the sum of terms with parameters, the model estimates those parameters directly. So in total, the regression model represented in the formulae above has to estimate the following three parameters:
+The regression model estimates the parameters in the mathematical formulae: the parameters to be estimated in regression models are usually represented with Greek letters (hence why we adopted this notation for the linear equation). The regression model in the formulae above has to estimate the following three parameters:
 
 -   The *regression coefficients* $\beta_0$ and $\beta_1$.
 
 -   The standard deviation of the Gaussian distribution, $\sigma$.
 
-To instruct R to model vowel duration as a function of the numeric predictor speech rate you simply *add* it to the `1` we have used in the right-hand side of the tilde in @sec-fit-model (i.e. `v1_duration ~ 1`): so `v1_duration ~ 1 + speech_rate`. Now it should be clear what the `1` is for: it stands for the intercept, $\beta_0$. You can also think about it as the $1$ in the revised formula below:
+$\beta_0$ and $\beta_1$ are called the **regression coefficients** because they are coefficients of the regression equation. In maths, a coefficient is simply a constant value that multiplies a "basis" in the equation, like the variable $x$. In the regression equation of the model, $\beta_1$ is a multiplier of the variable $x$, but what about $\beta_0$? Well, it is implied that $\beta_0$ is a multiplier of the constant basis `1`, because $\beta_0 \cdot 1 = \beta_0$. Knowing this should now reveal the reason behind the strange formula that R uses in Gaussian models like the ones we fitted in @sec-fit-model: the `1` in the formula stands for the constant basis of the intercept, meaning that the model estimates the coefficient of the intercept, $\beta_0$. Gaussian models without predictors are in fact also called intercept-only regression models, because only an intercept is estimated. There is no slope in the model because there is not variable $x$ to multiply the slope with.
+
+Going back to our regression model of vowel duration and speech rate, we can rewrite the model formula to make the constant basis `1` explicit, thus:
 
 $$
 \begin{align}
@@ -127,9 +134,9 @@ $$
 \end{align}
 $$
 
-Of course, $\beta_0 \cdot 1$ is the same as $\beta_0$. The R formula is based on what you multiply the coefficients with in the mathematical formula: $1$ and $sr$. While the predictor $sr$ can take different values, the $1$ is constant so it is also called the **constant term**, or the **intercept term**. In the R formula, you don't need to explicitly include the coefficients $\beta_0$ and $\beta_1$. Put all this together and you get `1 + speech_rate`. There is more: in R, since the $1$ is constant you can omit it! So `v1_duration ~ 1 + speech_rate` can also be written as `v1_duration ~ speech_rate`. They are equivalent.
+To instruct R to model vowel duration as a function of the numeric predictor speech rate you simply *add* it to the `1` we have used in the right-hand side of the tilde in @sec-fit-model (i.e. `v1_duration ~ 1`): so `v1_duration ~ 1 + speech_rate`. The R formula is based on the bases you multiply the coefficients with in the mathematical formula: $1$ and $sr$. In R parlance, the `1` and `sr` in the R formula are called predictor terms, or terms for short. While the predictor $sr$ can take different values, the $1$ is constant so it is also called the **constant term**, or the **intercept term** (because it is the basis of the intercept $\beta_0$). In the R formula, you don't explicitly include the coefficients $\beta_0$ and $\beta_1$, just the bases. Put all this together and you get the `1 + speech_rate` part of the formula. There is more: in R, since the $1$ is a constant, you can omit it! So `v1_duration ~ 1 + speech_rate` can also be written as `v1_duration ~ speech_rate`. They are equivalent.
 
-Now that we have clarified how the R formula is set up, here is the full code to fit a Gaussian regression model of vowel duration with brms.
+That was probably a lot! But now that we have clarified how the R formula is set up, we can now proceed and fit the model. Here is the full code to fit a Gaussian regression model of vowel duration with brms.
 
 ```{r}
 #| label: vow-bm
@@ -175,7 +182,7 @@ XXX
 
 ## Interpret the model summary
 
-To obtain a summary of the model, use the `summary()` function.
+As we has seen in @sec-fit-model, to obtain a summary of the model, we use the `summary()` function.
 
 ```{r}
 #| label: vow-bm-summary
@@ -183,45 +190,39 @@ To obtain a summary of the model, use the `summary()` function.
 summary(vow_bm)
 ```
 
-Let's focus on the "Regression Coefficients" table of the summary. To understand what they are, just remember the equation of line and the model formula above.
+Let's focus on the `Regression Coefficients` table of the summary. Now it should also be clear why in the summary of the model in @sec-fit-model, the summaries for the mean $\mu$ (i.e. $\beta_0$) were in the regression coefficients table. The table the regression model we just fit has two coefficients. To understand what they are, just remember the equation of line and the model formula above.
 
 -   `Intercept` is $\beta_0$: this is the mean vowel duration, **when speech rate is 0**.
 
 -   `speech_rate` is $\beta_1$: this is the change in vowel duration **for each unit increase of speech rate**.
 
-This should make sense, if you understand the equation of a line: $y = \beta_0 + \beta_1 x$. If you are still uncertain, play around with the [web app](https://stefanocoretta.shinyapps.io/lines/).
-
-Recall that the `Estimate` and `Est.Error` column are simply the **mean and standard deviation of the posterior probability distributions** of the estimate of `Intercept` and `speech_rate` respectively.
-
-Looking at the 95% Credible Intervals (CrIs), we can say that based on the model and data:
+This should make sense, if you understand the equation of a line: $y = \beta_0 + \beta_1 x$. Remember, the intercept $\beta_0$ is the $y$ value when $x$ is 0. In our regression model, $y$ is vowel duration and $x$ is speech rate. So the `Intercept` is the mean vowel duration when speech rate is 0. Recall that the `Estimate` and `Est.Error` column are simply the **mean and standard deviation of the posterior probability distributions** of the estimate of `Intercept` and `speech_rate` respectively. In this model we just have two coefficients instead of one. Looking at the 95% Credible Intervals (CrIs), we can say that based on the model and data:
 
 -   The mean vowel duration, when speech rate is 0 syl/s, is between 192 and 205 ms, at 95% confidence.
 
 -   We can be 95% confident that, for each unit increase of speech rate (i.e. for each increase of one syllable per second), the duration of the vowel decreases by 20.5-23 ms.
 
-To see what the posterior probability densities of `\beta_0`, `\beta_1` and `\sigma` look like, you can quickly plot them with the `plot()` function.
+To answer our research question (what is the relationship between vowel duration and speech rate?) we can now say that with increasing speech rate, vowel duration decreases. We can be more precise than that and say that for each increase of one syllable per second, the vowel becomes 20.5 to 23 ms shorter, at 95% confidence (that is our 95% CrI).
+
+To see what the posterior probability densities of $\beta_0$, $\beta_1$ and $\sigma$ look like, you can quickly plot them with the `plot()` function, as we did in @sec-fit-model. There is also another way: we can use the `mcmc_dens()` function from the [bayesplot](https://mc-stan.org/bayesplot/) package (why it's `mcmc_dens()` will become clear in @sec-regression-draws). By default the function plots the posterior densities of all parameters in the model, plus other internal parameters that we usually don't care about. We can conveniently specify which parameters to plot with the `pars` argument, which takes a character vector. The names of the parameters for the regression coefficients are slightly different than what you see in the summary: `b_Intercept` and `b_speech_rate`. These are just the names you see in the summary, with a prefixed `b_`. The `b_` stands for beta coefficient, which makes sense, since these are the $\beta_0$ and $\beta_1$ coefficients. @fig-vow-bm shows the output of the `mcmc_dens()` function.
 
 ```{r}
-#| label: vow-bm-plot
+#| label: fig-vow-bm
+#| fig-cap: "Posterior density plots of a regression model fitted to vowel duration."
+#| fig-asp: 0.4
 
-plot(vow_bm)
+library(bayesplot)
+
+mcmc_dens(vow_bm, pars = c("b_Intercept", "b_speech_rate", "sigma"))
 ```
 
-If you prefer to see density plots instead of histograms, you can specify the `combo` argument.
+These are the results of the regression model: the full posterior probability distributions of the three parameters $\beta_0$, $\beta_1$, $\sigma$. The posteriors can be described, as with any other probability distribution, by the values of their parameters. It is common to use the mean and standard deviation, the parameters of the Gaussian distribution. This is independent from the fact that we fitted a Gaussian distribution: posterior distributions tend to be bell-shaped, i.e. Gaussian. This is why the `Regression Coefficients` table of the summary reports mean and SD, i.e. `Estimate` and `Est.Err`, as mentioned earlier.
+
+You should always also plot the model predictions, i.e. the predicted values of vowel duration based on the model predictors (here just `speech_rate`). You will learn more advanced methods later on, but for now you can use `conditional_effects()` from the brms package.
 
 ```{r}
-#| label: vow-bm-plot-2
-plot(vow_bm, combo = c("dens", "trace"))
-```
-
-## Plot the model predictions
-
-You should always also plot the model predictions, i.e. the predicted values of vowel duration based on the model predictors (here just `speech_rate`).
-
-You will learn more advanced methods later on, but for now you can use `conditional_effects()` from the brms package.
-
-```{r}
-#| label: vow-bm-cond
+#| label: fig-vow-bm-cond
+#| fig-cap: "Posterior predictions of vowel duration based on speech rate from a regression model."
 
 conditional_effects(vow_bm, effects = "speech_rate")
 ```
@@ -229,10 +230,19 @@ conditional_effects(vow_bm, effects = "speech_rate")
 If you wish to include the raw data in the plot, you can wrap `conditional_effects()` in `plot()` and specify `points = TRUE`. Any argument that needs to be passed to `geom_point()` (these are all ggplot2 plots!) can be specified in a list as the argument `point_args`. Here we are making the points transparent.
 
 ```{r}
-#| label: vow-bm-cond-1
+#| label: fig-vow-bm-cond-1
+#| fig-cap: "Posterior predictions of vowel duration based on speech rate from a regression model (repr.)."
 
-plot(conditional_effects(vow_bm, effects = "speech_rate"), points = TRUE, point_args = list(alpha = 0.1))
+plot(
+  conditional_effects(vow_bm, effects = "speech_rate"),
+  points = TRUE,
+  point_args = list(alpha = 0.1)
+)
 ```
+
+This plot looks basically the same as @fig-vow-rate-lm. Indeed, in @fig-vow-rate-lm we used `geom_smooth()` to add a regression line from a regression model. A warning told us that this formula was used: `y ~ x`. In the context of that plot, that means the smooth function fitted a regression model with speech rate as `x` and vowel duration as `y`. This is because the aesthetics are exactly `aes(x = speech_rate, y = v1_duration)` (we didn't write the `x =` and `y =` because they are implied). So `geom_smooth()` has fitted exactly the same model we have fitted with brms. It might look trivial to fit a full model when you can just look at the regression line of `geom_smooth()`. This is not the case for two reasons: first, you just see a regression line, but you don't know what the posterior distributions of the parameters are; second, with more complex scenarios, `geom_smooth()` falls short and can only produce regression lines based on very simple formulae like `y ~ x`.[^ch-regression-1]
+
+[^ch-regression-1]: Technically, `geom_smooth()` uses `lm()` under the hood. This is a base R function that fits regression models using [maximum likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation) (MLE). This way of estimating regression coefficients is common in frequentist approaches to regression modelling and we will not treat it here. If you are interested about `lm()` and MLE, you can learn about these in @winter2020.
 
 ## Reproducible model fit
 
@@ -243,59 +253,6 @@ The model will be fitted and saved in `cache/` with the file name `vow_bm.rds`. 
 ::: callout-important
 When you save the model fit to a file, R does not keep track of changes in the model specification, so if you make changes to the formula or data, you need to **delete the saved model file** before re-running the code for the changes to have effect!
 :::
-
-## Simulating Gaussian data
-
-To make things a little bit more worldly, we will simulate data of human adult weight and height. We assume that height is distributed according to a Gaussian distribution with $\mu = 165$ cm and $\sigma = 8$. Based on height, we simulate weight as $0.4 * height$ plus Gaussian error with mean 0 and standard deviation 2.
-
-$$
-\begin{align}
-w & \sim Gaussian(\mu, \sigma)\\
-\mu & = 0.4 * h\\
-\sigma & = 2
-\end{align}
-$$
-
-```{r}
-#| label: weight
-#| message: false
-
-library(tidyverse)
-
-set.seed(62854)
-
-h <- round(rnorm(200, 165, 8))
-w <- 0.4 * h + rnorm(200, 0, 2)
-
-weight <- tibble(h, w)
-```
-
-The code uses the `rnorm()` function which generates a random sample of values from a Gaussian distribution. The function takes three arguments:
-
--   The number of values to sample, here 200.
--   The mean of the Gaussian distribution, here 165.
--   The standard deviation of the Gaussian distribution, here 8.
-
-::: callout-note
-The name of the `rnorm()` function is composed of:
-
--   `r` for random.
--   `norm` for "normal", the Gaussian distribution.
-:::
-
-We use the `round()` function to round the values generated by `rnorm()` to the nearest integer.
-
-The following plot shows the density curve of the simulated height data. The purple vertical line is the mean.
-
-```{r}
-#| label: height-plot
-
-weight |> 
-  ggplot(aes(h)) +
-  geom_density(fill = "darkgreen", alpha = 0.2) +
-  geom_rug() +
-  geom_vline(aes(xintercept = mean(h)), colour = "purple", linewidth = 1)
-```
 
 ## What's next
 
