@@ -965,7 +965,7 @@ Quarto: Rendering
 </section>
 <section id="render-quarto-files-to-pdf" class="level2" data-number="13.6">
 <h2 data-number="13.6" class="anchored" data-anchor-id="render-quarto-files-to-pdf"><span class="header-section-number">13.6</span> Render Quarto files to PDF</h2>
-<p>Rendering a Quarto file to PDF is done through LaTeX, a typesetting system with it’s own programming language. You don’t really need to learn LaTeX to render to PDF, because the conversion is handles by Quarto, but since usually computers don’t come with LaTeX you will have to install it. Do this now, by <strong>running the following code in the <code>Terminal</code> in RStudio</strong>.</p>
+<p>Rendering a Quarto file to PDF is done through LaTeX, a typesetting system with it’s own programming language. You don’t really need to learn LaTeX to render to PDF, because the conversion is handles by Quarto, but since usually computers don’t come with LaTeX you will have to install it (you can learn more about LaTeX in the Spotlight box below). Do this now, by <strong>running the following code in the <code>Terminal</code> in RStudio</strong>.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -995,7 +995,7 @@ Important
 <p><img src="img/quarto-pdf.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
 </figure>
 </div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout callout-style-default callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -1007,7 +1007,27 @@ Spotlight: LaTeX
 </div>
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>XXX</p>
+<p>LaTeX is a mark-up language for writing beautifully typeset documents, like academic articles and books. It is very popular in disciplines that make heavy use of maths or statistics and it has been adopted by a lot of researchers working in linguistics, although adoption rates vary by sub-field.</p>
+<p>LaTeX documents are rendered (compiled) to PDF. In other words, you write a document with extension <code>.tex</code> using LaTeX syntax and the document can be compiled to a PDF. Typesetting is dealt with by LaTeX so you just need to specify what you want, like sections, bullet points and so on. This is in the same spirit as Markdown and Quarto. In computing, this approach is called <a href="https://en.wikipedia.org/wiki/WYSIWYM">What You See Is What You Mean</a> (WYSIWYM). This contrasts with text editors like MS Office Word which are <a href="https://en.wikipedia.org/wiki/WYSIWYG">What You See Is What You Get</a> (WYSIWYG).</p>
+<p>You can learn the basics of LaTeX in 30 minutes by following the tutorial <a href="https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes">Learn LaTeX in 30 minutes</a> on Overleaf. Overleaf is an online LaTeX editor service, where you can write and compile LaTeX documents and even collaborate live with other people.</p>
+<p>Here is a tiny example of what a LaTeX document looks like.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode latex code-with-copy"><code class="sourceCode latex"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">\documentclass</span>{<span class="ex">article</span>}</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">\begin</span>{<span class="ex">document</span>}</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">\section</span>{My first LaTeX document}</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>This is my first LaTeX document. How exciting!</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">\end</span>{<span class="ex">document</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This LaTeX document produces the following PDF. Nothing too exciting, but with LaTeX you can put together professional-looking and highly technical documents.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/latex.png" class="img-fluid figure-img" width="300"></p>
+<figcaption>A PDF document generated with LaTeX.</figcaption>
+</figure>
+</div>
+<p>If you use Quarto to produce a PDF, you don’t really have to be very proficient in LaTeX but it helps to know about it, in case something goes wrong with the conversion from Quarto to PDF.</p>
 </div>
 </div>
 </div>

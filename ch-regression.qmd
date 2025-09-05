@@ -130,7 +130,9 @@ vow_bm <- brm(
 ```
 
 ::: {.callout-important collapse="true"}
-## R Note: The rethinking package
+### R Note: The rethinking package
+
+<!--# TODO: rethinking package box -->
 
 XXX
 :::

@@ -13,9 +13,9 @@ library(brms)
 
 ## MCMC what?
 
-<!--# Use mald reaction times from chapter 23 -->
+<!--# TODO: Use mald reaction times from chapter 23 -->
 
-<!--# Split this chapter: take out difference of difference because for that you need interactions which we haven't done yet -->
+<!--# TODO: Split this chapter: take out difference of difference because for that you need interactions which we haven't done yet -->
 
 Bayesian regression models fitted with brms/Stan use the Markov Chain Monte Carlo (MCMC) sampling algorithm to estimate the probability distributions of the model's coefficient. You have first encountered MCMC in @sec-fit-model. The MCMC algorithm does two things: first it finds a probability area that is the most compatible with the prior probabilities and the probability of the data given the priors; then, it sample values (called *draws*) from this high-probability area to reconstruct the posterior distribution. Since the high-probability area is assumed to be representative of the posterior distribution (that's why we sample from it), the MCMC draws are also called *posterior draws*. Elizabeth Pankratz has written a nice short introduction to MCMC algorithms here: [Finding posteriors through sampling](https://elizabethpankratz.github.io/bayes_stat/day1/mcmc.html). I strongly recommend that you read that before proceeding (if you want to further your understanding of MCMC, the resources linked on that page are an excellent starting point). Note that to be a proficient user of brms and Bayesian regression models, you don't need to fully understand the mathematics behind MCMC algorithms, as long as you understand them conceptually.
 

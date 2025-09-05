@@ -15,7 +15,7 @@ In the previous chapter, I have introduced the theory behind Bayesian Gaussian m
 
 The brms package can run a variety of Bayesian (regression) models. It is a very flexible package that allows you to model a lot of different types of variables. You don't really need to understand all of the technical details to be able to effectively use the package and interpret the results, so this textbook will focus on how to use the package in the context of research. We will cover some of the technicalities, but if you are are particularly interested in the inner workings of the package, feel free to find materials on specific aspects by searching online. One useful thing to know is that brms is a bridge between R and the statistical programming software [Stan](https://mc-stan.org). Stan is a powerful piece of software that can run any type of Bayesian model, not just regressions. What brms does is that it allows you to write Bayesian models in R, which are translated into Stan models and run with Stan under the hood. You can safely use brms without learning Stan, but if you are interested, you can check [Ch 8-10](https://bruno.nicenboim.me/bayescogsci/ch-introstan.html#ch-introstan) of @nicenboim2025 and the [Stan documentation](https://mc-stan.org).
 
-You can run a Bayesian Gaussian model with the `brm()` function, short for "Bayesian Regression Model" (a Gaussian model is a special type of regression model). The mandatory arguments of `brm()` are a model formula, a distribution family (of the outcome variable), and the data you want to run the model with. Running a model with data is also formally known as *fitting the model to the data*. We want to fit a Gaussian model to reaction times from @tucker2019. Let's revisit the mathematical formula of the model from @sec-gauss-model (let's discard the priors):
+You can run a Bayesian Gaussian model with the `brm()` function, short for "Bayesian Regression Model" (a Gaussian model is a special type of regression model). The mandatory arguments of `brm()` are a model formula, a distribution family (of the outcome variable), and the data you want to run the model with. Running a model with data is also formally known as *fitting the model to the data*. We want to fit a Gaussian model to reaction times from @tucker2019. Let's revisit the mathematical formula of the model from @sec-gauss-model (let's discard the priors; see the R Note box below):
 
 $$
 \text{RT} \sim Gaussian(\mu, \sigma)
@@ -160,9 +160,59 @@ $$
 In other words, according to the model and data, the mean or RTs is a value from the distribution $P(1010.5, 4.45)$ and the SD of RTs is a value from the distribution $P(317.88, 3.17)$. Here, $P()$ stands for a generic posterior probability distribution. The model has quantified the uncertainty around the value of the $\mu$ and $\sigma$ parameters and this uncertainty is reflected by the fact that we get a full posterior probability distribution (summarised by its mean and SD) for each of the parameters. We don't know *exactly* the values of the parameters of the Gaussian distribution assumed to have generated the sampled RTs.
 
 ::: {.callout-important collapse="true"}
-## R Note: Default priors in brms
+### R Note: Default priors in brms
 
-XXX
+One major aspect of Bayesian modelling is the combination of prior knowledge with evidence from the observed data. As introduced in @sec-gauss-model, choosing priors is an important step in conducting Bayesian analyses. However, in this textbook we will not deal with prior specification given the quite tight schedule of the course.
+
+If prior specification is a necessary step, how come we are not doing that? When fitting Bayesian models with brms, you are in fact using brms **default priors**. These are generic priors that work in most circumstances and they are equivalent to prior probability distributions that are almost flat (like in the first prior of @fig-prior-update). In other words, they are so generic that they have very little influence on the posterior distribution, but still they help with the computational aspects of model fitting (which you will learn more about in @sec-regression-draws).
+
+If you want to inspect brms default priors, you can use the `get_prior()` function. Let's do this for the model we fitted above. The function requires the model formula, the family and the data, much like the `brm()` function. It returns a data frame with one prior per row. The columns of interest are `prior` and `class`.
+
+```{r}
+#| label: get-prior
+
+get_prior(
+  RT ~ 1,
+  family = gaussian,
+  data = mald
+)
+
+```
+
+There are two priors, one for the intercept ($\mu$) and one for $\sigma$ (see `class` column). For both $\mu$ and $\sigma$, brms sets a Student-*t* prior probability distribution. The Student-*t* distribution is a continuous probability distribution with three parameters: the degrees of freedom, the mean and the standard deviation. You will encounter the Student-*t* distribution in @sec-null-ritual, where you will learn about frequentist *p*-values. For now, it will suffice to say that a Student-*t* distribution (also simply called a *t*-distribution) is similar to a Gaussian distribution (hence the two parameters, mean and SD).
+
+Normally, you would choose priors *before* collecting/seeing the data. Here, brms actually uses the data to come up with generic priors that cover a wide range of values without including very unlikely values. Yet, the priors set by brms are so generic that, as said above, they bear very little effect on the posterior. So they are safe to use, even if they are based on the data itself. Just remember, thought, that if you do want to specify your own priors, you must do so independent of the data (ideally, even before you have access to the data, whether you collect it yourself or whether it is pre-existing).
+
+For this model and data, brms sets a *t-*distribution for the prior of the mean $\mu$, with mean 935.5 and SD 220.2, and a *t*-distribution for the SD $\sigma$, with mean 0 and SD 220.2. You will notice that the SDs of both priors are the same. The following figures illustrate the density curve of the priors.
+
+```{r}
+#| label: fig-default-priors
+#| fig-cap: "Default brms priors for this chapter's model and data."
+#| fig-subcap: 
+#|   - "Prior probability distribution for the mean."
+#|   - "Prior probability distribution for the SD."
+#| layout-ncol: 2
+
+x_mu <- seq(0, 2000)
+
+ggplot() +
+  aes(x = x_mu, y = extraDistr::dlst(x_mu, 3, 935.5, 220.2)) +
+  geom_path(linewidth = 1) +
+  labs(
+    x = element_blank(), y = "Density"
+  )
+
+x_sigma <- seq(0, 1500)
+
+ggplot() +
+  aes(x = x_sigma, y = extraDistr::dlst(x_sigma, 3, 0, 220.2)) +
+  geom_path(linewidth = 1) +
+  labs(
+    x = element_blank(), y = "Density"
+  )
+
+
+```
 :::
 
 ## Plotting the posterior distributions
@@ -215,7 +265,9 @@ Here you have the results from the regression model. Really, the results of the 
 
 ## Reporting
 
-What about reporting the model in writing? We could report the model and the results like this (for simplicity, we report only the 95% CrIs here. You will learn how to report multiple CrIs in tables in XXX).[^ch-fit-model-1]
+<!--# TODO: Link to chapter where they learn how to report multiple CrIs once you have written that. -->
+
+What about reporting the model in writing? We could report the model and the results like this (for simplicity, we report only the 95% CrIs here. You will learn how to report multiple CrIs in tables later).[^ch-fit-model-1]
 
 [^ch-fit-model-1]: To know how to add a citation for any R package, simply run `citation("package")` in the R Console, where `"package"` is the package name between double quotes.
 

@@ -71,6 +71,8 @@ ggplot(data = tibble(x = 0:300), aes(x)) +
   )
 ```
 
+## Gaussian models
+
 A statistical tool we can use to obtain an estimate of $\mu$ and $\sigma$ is a Gaussian model. A Gaussian model is a statistical model that estimates the values of the parameters of a (theoretical) Gaussian distribution, i.e. $\mu$ and $\sigma$. We can provisionally describe the model using formulae, like this:
 
 $$

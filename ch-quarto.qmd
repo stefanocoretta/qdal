@@ -125,7 +125,7 @@ YAML headers start and end with three dashes `---`.
 :::
 
 ::: {.callout-important collapse="true"}
-## R Note: Quarto outline and chunk labels
+#### R Note: Quarto outline and chunk labels
 
 By default, the Quarto outline only shows the Markdown section headers. I find it very useful to also see the code chunks in the outline and if they have a label, that will be shown in italics. It makes navigating long documents very easy and clear, descriptive chunk labels sure help.
 
@@ -224,7 +224,7 @@ Now that you have done all of this hard work, why don't you try and render the Q
 
 ## Render Quarto files to PDF
 
-Rendering a Quarto file to PDF is done through LaTeX, a typesetting system with it's own programming language. You don't really need to learn LaTeX to render to PDF, because the conversion is handles by Quarto, but since usually computers don't come with LaTeX you will have to install it. Do this now, by **running the following code in the `Terminal` in RStudio**.
+Rendering a Quarto file to PDF is done through LaTeX, a typesetting system with it's own programming language. You don't really need to learn LaTeX to render to PDF, because the conversion is handles by Quarto, but since usually computers don't come with LaTeX you will have to install it (you can learn more about LaTeX in the Spotlight box below). Do this now, by **running the following code in the `Terminal` in RStudio**.
 
 ::: callout-important
 Note that you are supposed to run the code in the RStudio **Terminal**, not the RStudio R console! The RStudio terminal can be found next to the console in the bottom-left corner of RStudio.
@@ -248,10 +248,34 @@ You will see that not there is a small arrow next to the `Render` button. If you
 
 ![](img/quarto-pdf.png){fig-align="center" width="500"}
 
-::: {.callout-warning collapse="true"}
-## Spotlight: LaTeX
+::: {.callout-important collapse="true"}
+### Spotlight: LaTeX
 
-XXX
+LaTeX is a mark-up language for writing beautifully typeset documents, like academic articles and books. It is very popular in disciplines that make heavy use of maths or statistics and it has been adopted by a lot of researchers working in linguistics, although adoption rates vary by sub-field.
+
+LaTeX documents are rendered (compiled) to PDF. In other words, you write a document with extension `.tex` using LaTeX syntax and the document can be compiled to a PDF. Typesetting is dealt with by LaTeX so you just need to specify what you want, like sections, bullet points and so on. This is in the same spirit as Markdown and Quarto. In computing, this approach is called [What You See Is What You Mean](https://en.wikipedia.org/wiki/WYSIWYM) (WYSIWYM). This contrasts with text editors like MS Office Word which are [What You See Is What You Get](https://en.wikipedia.org/wiki/WYSIWYG) (WYSIWYG).
+
+You can learn the basics of LaTeX in 30 minutes by following the tutorial [Learn LaTeX in 30 minutes](https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes) on Overleaf. Overleaf is an online LaTeX editor service, where you can write and compile LaTeX documents and even collaborate live with other people.
+
+Here is a tiny example of what a LaTeX document looks like.
+
+``` latex
+\documentclass{article}
+
+\begin{document}
+
+\section{My first LaTeX document}
+
+This is my first LaTeX document. How exciting!
+
+\end{document}
+```
+
+This LaTeX document produces the following PDF. Nothing too exciting, but with LaTeX you can put together professional-looking and highly technical documents.
+
+![A PDF document generated with LaTeX.](img/latex.png){fig-align="center" width="300"}
+
+If you use Quarto to produce a PDF, you don't really have to be very proficient in LaTeX but it helps to know about it, in case something goes wrong with the conversion from Quarto to PDF.
 :::
 
 ## Summary
