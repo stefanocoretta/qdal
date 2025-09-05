@@ -244,6 +244,18 @@ This plot looks basically the same as @fig-vow-rate-lm. Indeed, in @fig-vow-rate
 
 [^ch-regression-1]: Technically, `geom_smooth()` uses `lm()` under the hood. This is a base R function that fits regression models using [maximum likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation) (MLE). This way of estimating regression coefficients is common in frequentist approaches to regression modelling and we will not treat it here. If you are interested about `lm()` and MLE, you can learn about these in @winter2020.
 
+## Reporting
+
+You have seen an example of reporting in @sec-fit-model. We can use that as a template for reporting a regression model, by reworking a few parts and adding information related to the numeric predictor in the regression. You could report the vowel duration regression model like so:
+
+> We fitted a Bayesian regression model using the brms package [@burkner2017] in R [@rcoreteam2025]. We used a Gaussian distribution for the outcome variable, vowel duration (in milliseconds). We included speech rate (measured as syllables per second) as the regression predictor.
+>
+> Based on the model results, there is a 95% probability that the mean vowel duration, when speech rate is 0, is between `{r} round(brms::fixef(vow_bm)[1, 3])` and `{r} round(brms::fixef(vow_bm)[1, 4])` ms (mean = `{r} round(brms::fixef(vow_bm)[1, 1])`, SD = `{r} round(brms::fixef(vow_bm)[1, 2])`). For each unit increase of speech rate (i.e. for each one syllable per second added), vowel duration decreases by `{r} -round(brms::fixef(vow_bm)[2, 4])` to `{r} -round(brms::fixef(vow_bm)[2, 3])` ms (mean = `{r} round(brms::fixef(vow_bm)[2, 1])`, SD = `{r} round(brms::fixef(vow_bm)[2, 2])`). The residual standard deviation is between `{r} round(brms::posterior_summary(vow_bm)["sigma", "Q2.5"])` and `{r} round(brms::posterior_summary(vow_bm)["sigma", "Q97.5"])` ms (mean = `{r} round(brms::posterior_summary(vow_bm)["sigma", "Estimate"])`, SD = `{r} round(brms::posterior_summary(vow_bm)["sigma", "Est.Error"])`).
+
+Note the wording of the speech rate coefficient: "vowel duration decreases by `{r} -round(brms::fixef(vow_bm)[2, 4])` to `{r} -round(brms::fixef(vow_bm)[2, 3])` ms". The speech rate coefficient 95% CrI is fully negative (i.e. both lower and upper limit are negative) so we can say that vowel duration *decreases*. Furthermore, since we say "decreases" then we should report the CrI limits as positive numbers. Think about it: we say "decrease X by 2" to mean "X - 2", rather than "decrease X by -2". Finally, given we flipped the signs of the CrI limits, it is clearer to write "`{r} -round(brms::fixef(vow_bm)[2, 4])` to `{r} -round(brms::fixef(vow_bm)[2, 3])` ms", rather than the other way round as you would if you reported the interval as is: 95% CrI \[`{r} round(brms::fixef(vow_bm)[2, 3])`, `{r} round(brms::fixef(vow_bm)[2, 4])`\].
+
+Another point to note is that in the reporting style I am using in this book, we place more emphasis on the posterior CrI than on the posterior mean and SD. So the CrI is in the main text, while mean and SD are between parentheses. Other researchers might in fact do it the other way round. Whatever you decide to do, be consistent. Finally, it is unusual to report the coefficients of $\sigma$: I have done it here for completeness, since it doesn't hurt to do so.
+
 ## Reproducible model fit
 
 XXX Before you fit the model, create a folder called `cache/` folder in the RStudio project folder. We will use this folder to save the output of model fitting so that you don't have to refit the model every time. This is useful because as models get more and more complex, they can take quite a while to fit.
