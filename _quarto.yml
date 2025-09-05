@@ -69,6 +69,8 @@ book:
       - ch-regression-interaction.qmd
       - ch-regression-interaction-index.qmd
   - references.qmd
+  appendices:
+    - app-reg-cheat-sheet.qmd
 
 bibliography: references.bib
 
