@@ -841,6 +841,22 @@ Figure&nbsp;23.1: Illustration of the meaning of the slope: with a slope of 2, f
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Equation of a line
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+y = \beta_0 + \beta_1 x
+\]</span></p>
+<p>where <span class="math inline">\(\beta_0\)</span> is the line intercept and <span class="math inline">\(\beta_1\)</span> is the line slope.</p>
+</div>
+</div>
 <p>Now, in the context of research, you usually start with a sample of measures (values) of <span class="math inline">\(x\)</span> (the predictor variable) and <span class="math inline">\(y\)</span> (the outcome variable), rather than having to calculate <span class="math inline">\(y\)</span>. Then you have to <strong>estimate</strong> (i.e.&nbsp;to find the values of) <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> of the model formula <span class="math inline">\(y = \beta_0 + \beta_1 x\)</span> . This is what regression models are for: given the sampled values of <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>, the model estimates <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -855,8 +871,35 @@ Exercise
 <ul>
 <li><p>Go to the web app <a href="https://stefanocoretta.shinyapps.io/lines/">Linear Models Illustrated</a>.</p></li>
 <li><p>In the first tab, “Continuous”, you will find instructions on the left and a plot on the right. The plot on the right is the plot resulting from the parameters specified to the left.</p></li>
-<li><p>Play around with the intercept and slope parameters to see what happens to the line with different values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p></li>
+<li><p>Play around with the intercept and slope parameters to see what happens to the line with different values of the intercept <span class="math inline">\(\beta_0\)</span> and the slope <span class="math inline">\(\beta_1\)</span>.</p></li>
 </ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quiz 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use the <a href="https://stefanocoretta.shinyapps.io/lines/">Linear Models Illustrated</a> app to answer the following questions.</p>
+<ol type="a">
+<li>What happens to the line when you increase the intercept <span class="math inline">\(\beta_0\)</span>?
+<div id="radio_XAERJTMQGN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XAERJTMQGN" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_XAERJTMQGN" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_XAERJTMQGN" value="answer"> <span>The whole line shifts upwards.</span></label><label><input type="radio" autocomplete="off" name="radio_XAERJTMQGN" value=""> <span>The line becomes flat.</span></label>
+</div></li>
+<li>What happens to the line when you set the slope <span class="math inline">\(\beta_1\)</span> to a negative number?
+<div id="radio_WBQBOMFSXS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WBQBOMFSXS" value="answer"> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_WBQBOMFSXS" value=""> <span>The whole line becomes flat.</span></label><label><input type="radio" autocomplete="off" name="radio_WBQBOMFSXS" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_WBQBOMFSXS" value=""> <span>The line increases from left to right.</span></label>
+</div></li>
+<li>What happens to the line when you set the slope <span class="math inline">\(\beta_1\)</span> to <code>0</code> zero?
+<div id="radio_DNOQXHMXGN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DNOQXHMXGN" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_DNOQXHMXGN" value=""> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_DNOQXHMXGN" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_DNOQXHMXGN" value="answer"> <span>The line becomes flat.</span></label>
+</div></li>
+</ol>
 </div>
 </div>
 </section>
@@ -913,10 +956,29 @@ y &amp; \sim Gaussian(\mu, \sigma)\\
 \mu &amp; = \beta_0 + \beta_1 x\\
 \end{align}
 \]</span></p>
-<p>You can read those formulae like so: “The variable <span class="math inline">\(y\)</span> is distributed according to a Gaussian distribution with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>. The mean <span class="math inline">\(\mu\)</span> is equal to the intercept <span class="math inline">\(\beta_0\)</span> plus the slope <span class="math inline">\(\beta_1\)</span> times the variable <span class="math inline">\(x\)</span>.” This is a Gaussian regression model, because the assumed family of the outcome <span class="math inline">\(y\)</span> is Gaussian. Now, the goal of a (Gaussian) regression model is to estimate <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma\)</span> from the data (i.e.&nbsp;from the values of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>). The last set of equations should be reminiscent of the equations you saw in <a href="ch-gauss-model.html" class="quarto-xref"><span>Chapter 21</span></a>. It is no coincidence: this is <em>Gaussian</em> regression model. The outcome variable <span class="math inline">\(y\)</span> is assumed to be Gaussian. The new building block we have added now is that <span class="math inline">\(\mu\)</span> depends on <span class="math inline">\(x\)</span>: this is because <span class="math inline">\(x\)</span> appears in the formula of <span class="math inline">\(\mu\)</span>. In other words, we are allowing the mean <span class="math inline">\(\mu\)</span> to vary with <span class="math inline">\(x\)</span>. This is the core concept of regression models.</p>
-<p>Of course, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family. The chapters of Week 8 will teach you how to fit two other useful distribution families: the log-normal family and the Bernoulli family. You will be able to learn about other families by checking the resources linked in <a href="app-reg-cheat-sheet.html" class="quarto-xref"><span>Appendix A</span></a>.</p>
+<p>You can read those formulae like so: “The variable <span class="math inline">\(y\)</span> is distributed according to a Gaussian distribution with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>. The mean <span class="math inline">\(\mu\)</span> is equal to the intercept <span class="math inline">\(\beta_0\)</span> plus the slope <span class="math inline">\(\beta_1\)</span> times the variable <span class="math inline">\(x\)</span>.” This is a Gaussian regression model, because the assumed family of the outcome <span class="math inline">\(y\)</span> is Gaussian. Now, the goal of a (Gaussian) regression model is to estimate <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma\)</span> from the data (i.e.&nbsp;from the values of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>). In other words, regression models find the regression line based on the observations of <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>. We do not know what is the true regression line that has generated <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>, we just have <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> values.</p>
+<p>The <span class="math inline">\(y \sim Gaussian(\mu, \sigma)\)</span> line in the formulae above is exactly the formula you saw in <a href="ch-gauss-model.html" class="quarto-xref"><span>Chapter 21</span></a>. It is no coincidence: this is <em>Gaussian</em> regression model. The outcome variable <span class="math inline">\(y\)</span> is assumed to be Gaussian. The new building block we have added now is that <span class="math inline">\(\mu\)</span> depends on <span class="math inline">\(x\)</span>: this is because <span class="math inline">\(x\)</span> appears in the formula of <span class="math inline">\(\mu\)</span>. In other words, we are allowing the mean <span class="math inline">\(\mu\)</span> to vary with <span class="math inline">\(x\)</span>. This is expressed by the so-called <strong>regression equation</strong> (also linear equation): <span class="math inline">\(\mu = \beta_0 + \beta_1 x\)</span>. This is the core concept of regression models.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Regression model
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[
+\begin{align}
+y &amp; \sim Gaussian(\mu, \sigma) &amp; \text{[Distribution of y]}\\
+\mu &amp; = \beta_0 + \beta_1 x &amp; \text{[Regression equation]}\\
+\end{align}
+\]</span></p>
+</div>
+</div>
+<p>You perhaps realised this by now, but the regression equation implies that both <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are <em>numeric variables</em>. However, regression models can also be used with variables that are categorical. You will learn how to use categorical predictors (categorical <span class="math inline">\(x\)</span>’s) in regression models in Week 7’s chapters. Moreover, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family. The chapters of Week 8 will teach you how to fit two other useful distribution families: the log-normal family and the Bernoulli family. You will be able to learn about other families by checking the resources linked in <a href="app-reg-cheat-sheet.html" class="quarto-xref"><span>Appendix A</span></a>.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -925,7 +987,7 @@ Spotlight: Regression, eugenics and racism
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><strong>Galton and regression</strong></p>
 <p>The basic logic of regression models is attributed to Francis Galton (1822–1911). Galton studied the relationship between the heights of parents and their children <span class="citation" data-cites="galton1980 galton1886">(<a href="references.html#ref-galton1980" role="doc-biblioref">Galton 1980</a>, <a href="references.html#ref-galton1886" role="doc-biblioref">1886</a>)</span>. He noticed that while tall parents tended to have tall children, the children’s heights were often closer to the average height of the population. This phenomenon, which he called “regression toward mediocrity” (now known as “regression to the mean”), showed that extreme values (e.g., very tall or very short parents) were less likely to be perfectly transmitted to the next generation.</p>
