@@ -9,20 +9,11 @@
 library(tidyverse)
 theme_set(theme_light())
 library(brms)
+library(tidybayes)
+library(posterior)
 ```
 
 ## MCMC what?
-
-```{r}
-#| label: setup
-#| include: false
-
-library(tidyverse)
-library(brms)
-
-```
-
-<!--# TODO: Split this chapter: take out difference of difference because for that you need interactions which we haven't done yet -->
 
 Bayesian regression models fitted with brms/Stan use the Markov Chain Monte Carlo (MCMC) sampling algorithm to estimate the probability distributions of the model's parameters. You have first encountered MCMC in @sec-fit-model: the text printed when running `brm()` is about the MCMC. Bayesian models reconstruct the posterior probability distribution of a set of parameters. More precisely, they reconstruct (i.e. estimate) the *joint* probability distribution of the parameters. In other words, all parameters are estimated at the same time: think of this as a multidimensional space of probability, with one dimension per paramter. With two parameters, like intercept and slope, this is a 3-dimensional space, something we can imagine: think of a landscape with hills and valleys, where the *x*-axis are values for the intercept, the *y*-axis are values for the slope and the *z*-axis (the vertical axis) are probability densities. The hills represent high probability areas and valleys represent low probability areas. This landscape of hills and valleys is determined by the two components of the Bayes' Theorem: the prior probability distribution $P(h)$ and the probability of the data given the prior, $P(d | h)$.
 
@@ -41,6 +32,9 @@ Before we move to the model, it is worth making a couple practical consideration
 #| include: false
 
 load("data/coretta2018a/ita_egg.rda")
+
+ita_egg_clean <- ita_egg |> 
+  drop_na(v1_duration)
 ```
 
 ```{r}
@@ -67,106 +61,125 @@ When you save the model fit to a file, R does not keep track of changes in the m
 
 ## Extract MCMC posterior draws
 
-There are different ways to extract the MCMC posterior draws from a fitted model. In this book, we will use the `as_draws_df()` function from the [posterior](https://mc-stan.org/posterior/) package. The function extracts the draws from a Bayesian regression model and outputs them as a data frame. Let's take the `rt_bm_1` model from @sec-regression-cat and extract the draws. Let's first read the `tucker2019/mald_1_1.rds` data again.
+There are different ways to extract the MCMC posterior draws from a fitted model. In this book, we will use the `as_draws_df()` function from the [posterior](https://mc-stan.org/posterior/) package. The function extracts the draws from a Bayesian regression model and outputs them as a data frame. Before we extract the draws from the `vow_bm` model, let's revisit the summary.
 
 ```{r}
-#| label: mald
+#| label: vow-bm-summary
 
-library(tidyverse)
-
-mald <- readRDS("data/tucker2019/mald_1_1.rds")
+summary(vow_bm)
 ```
 
-Now we reload the Bayesian regression model from @sec-regression-cat. We simply use the same code we used in that chapter. If you run the code now, the file with the model will be loaded into R, so the model will not be fitted from scratch. This is both convenient and it ensure the code is reproducible.
+The `Draws` information in the summary are exactly that: information on the MCMC draws of the model. It says 4 chains were run each with 2000 iterations of which 1000 used for warm-up. `thin = 1` just tells brms to keep all the post-warm up draws, and it's fine as is so you can just ignore it. Then the summary tells us that there are 4000 total post-warm-up draws. We are good to go! We can extract the MCMC draws from the model using the `as_draws_df()` function. This function returns a data frame (more specifically a tidyverse tibble with class `draws_df`) with values from each draw of the MCMC algorithm. Since there are 4000 post-warm-up draws, the tibble has 4000 rows.
 
 ```{r}
-#| label: rt-bm-1
+#| label: vot-bm-draws
 
-library(brms)
-
-rt_bm_1 <- brm(
-  RT ~ IsWord,
-  family = gaussian,
-  data = mald,
-  seed = 6725,
-  file = "cache/ch-regression-cat-rt_bm_1"
-)
+vow_bm_draws <- as_draws_df(vow_bm)
+vow_bm_draws
 ```
 
-Let's review the model summary.
-
-```{r}
-#| label: rt-bm-1-summ
-
-summary(rt_bm_1)
-```
-
-The `Regression Coefficients` table includes `Intercept` and `IsWordFALSE` which is what we expect from the model formula and data. We are good to go! Now we can extract the MCMC draws from the model using the `as_draws_df()` function. This function from the posterior package returns a tibble with values obtained in each draw of the MCMC algorithm. Since we fitted the model with 4 MCMC chains and 1000 sampling draws per chain, there is a total of 4000 drawn values (i.e. 4000 rows in the data frame).
-
-```{r}
-#| label: rt-bm-1-draws
-
-rt_bm_1_draws <- as_draws_df(rt_bm_1)
-rt_bm_1_draws
-```
-
-Don't worry about the `Intercept`, `lprior` and `lp__` columns. Open the data frame in the RStudio viewer. You will see three extra column: `.chain`, `.iteration` and `.draw`. They indicate:
+Ignore the `Intercept`, `lprior` and `lp__` columns, they are for internal safekeeping. Open the data frame in the RStudio viewer. You will see three extra column: `.chain`, `.iteration` and `.draw` (which are mentioned in the message printed with the tibble). They indicate:
 
 -   `.chain`: The MCMC chain number (1 to 4).
 -   `.iteration`: The iteration number within chain (1 to 1000).
 -   `.draw`: The draw number across all chains (1 to 4000).
 
-Make sure that you understand these columns in light of the MCMC algorithm. The following columns contain the drawn values at each draw for three parameters of the model: `b_Intercept`, `b_IsWordFALSE` and `sigma`. To remind yourself what these mean, let's have a look at the mathematical formula of the model.
+Make sure that you understand these columns in light of the MCMC algorithm. The following columns contain the drawn values at each draw for three parameters of the model: `b_Intercept`, `b_speech_rate` and `sigma`. To remind yourself what these mean, let's have a look at the mathematical formula of the model.
 
 $$
 \begin{align}
-RT_i & \sim Gaussian(\mu_i, \sigma) \\
-\mu_i        & = \beta_0 + \beta_1 \cdot w_i \\
+vdur & \sim Gaussian(\mu, \sigma) \\
+\mu        & = \beta_0 + \beta_1 \cdot sr \\
 \end{align}
 $$
 
 So:
 
--   `b_Intercept` is $\beta_0$. This is the mean RT when the the word is a real word.
--   `b_IsWordFALSE` is $\beta_1$. This is the *difference* in RT between nonce words and real words.
--   `sigma` is $\sigma$. This is the overall standard deviation of the RTs.
+-   `b_Intercept` is $\beta_0$. This is the mean vowel duration when speech rate is zero.
+-   `b_speech_rate` is $\beta_1$. This is the *change* in vowel duration for each unit increase of speech rate.
+-   `sigma` is $\sigma$. This is the overall standard deviation of vowel duration (the standard deviation of the residual error).
 
-Any inference made on the basis of the model are inferences derived from the draws. One could say that the model "results" are, to put it simply, these draws and that the draws can be used to make inferences about the population one is investigating (if one is interested in inference, in the first place).
+Any inference made on the basis of the model are inferences derived from the draws. One could say that the model "results" are, to put it simply, these draws and that the draws can be used to make inferences about the population one is investigating.
 
 ## Summary measures of the posterior draws
 
-The `Regression Coefficients` table from the `summary()` of the model reports summary measures calculated from the drawn values of `b_Intercept` and `b_IsWordFALSE`. These summary measures are the mean (`Estimate`), the standard deviation (`Est.error`) and the lower and upper limits of the 95% Credible Interval (CrI). Since we have now the draws, we can of course obtain those same measures ourselves from the data frame with the draws! We will use the `quantile2()` function from the posterior package to obtain 95% and 80% CrIs.
+The `Regression Coefficients` table from the `summary()` of the model reports summary measures calculated from the drawn values of `b_Intercept` and `b_speech_rate`. These summary measures are the mean (`Estimate`), the standard deviation (`Est.error`) of the draws and the lower and upper limits of the 95% Credible Interval (CrI). We can obtain those same measures ourselves from the data frame with the draws. Let's calculate the mean and SD of `b_Intercept` and `b_speech_rate` (we round to the second digit with `round(2)`).
 
 ```{r}
-#| label: rt-bm-1-draws-summ
+#| label: vow-bm-draws-summ-1
+
+# Intercept
+mean(vow_bm_draws$b_Intercept) |> round(2)
+sd(vow_bm_draws$b_Intercept) |> round(2)
+
+# Speech rate
+mean(vow_bm_draws$b_speech_rate) |> round(2)
+sd(vow_bm_draws$b_speech_rate) |> round(2)
+
+```
+
+Compare the values obtained now with the values in the model summary above. They are the same, because the summary measures in the model summary are simply summary measures of the draws. What if we want to calculate the Credible Intervals (CrIs)? In @sec-gaussian, you learned about the quantile function (the inverse CDF) to calculate intervals from *theoretical* distributions. However, here we need to calculate intervals from a sample of posterior draws: the MCMC draws. Note that central probability intervals of posterior draws are called Credible Intervals in Bayesian statistics, so CrI is just a specific type of interval. To obtain intervals from samples we can use the `quantile2()` function from the posterior package. This function takes two arguments: `x`, a vector of values to calculate the interval of, and `probs`, a vector of probabilities, like `qnorm()`. By default, `probs = c(0.05, 0.95)`. This gives you a 90% CrI interval, but the model summary returns by default a 95% CrI. For a 95% CrI, we need the 2.5th percentile and the 97.5th percentile: `c(0.025, 0.975)`. Here's the code:
+
+```{r}
+#| label: vow-bm-draws-summ-2
 
 library(posterior)
 
-rt_b1_summaries <- rt_bm_1_draws |> 
-  summarise(
-    intercept_mean = mean(b_Intercept), intercept_sd = sd(b_Intercept),
-    intercept_lo_95 = quantile2(b_Intercept, 0.025), intercept_up_95 = quantile2(b_Intercept, 0.975),
-    IsWordFALSE_mean = mean(b_IsWordFALSE), IsWordFALSE_sd = sd(b_IsWordFALSE),
-    IsWordFALSE_lo_95 = quantile2(b_IsWordFALSE, 0.025), IsWordFALSE_up_95 = quantile2(b_IsWordFALSE, 0.975),
-  ) |> 
-  # fancy way of mutating multiple columns
-  mutate(
-    across(everything(), ~round(., 2))
-  )
-rt_b1_summaries
+# Intercept
+quantile2(vow_bm_draws$b_Intercept, c(0.025, 0.975)) |> round(2)
+
+# Speech rate
+quantile2(vow_bm_draws$b_speech_rate, c(0.025, 0.975)) |> round(2)
+
 ```
 
-Compare the values obtained now with the values in the model summary above. They are the same, because the summary measures in the model summary are simply summary measures of the draws. Hopefully now it is clear where the values in the `Regression Coefficient` table come from and how these are related to the MCMC draws.
+Compare these values with the ones in summary: again they are the same. Remember: a 95% CrI tells us that there is a 95% probability, given the model and data, that the value of the parameters is between the lower and upper limit of the interval. So a 90% CrI tells us that there is an 90% probability that the value is between the lower and upper limit, a 60% interval that there is a 60% probability and so on. We can also say that we are 95% confident that the value lies between the limits. Intervals at lower level of probability are narrower (they span a smaller range of values) than intervals at higher level of probability: so a 95% CrI is always wider than an 80% CrI, which is wider than a 60% CrI and so on. A narrower CrI means more *precision*: we have a more precise expectation of which range the parameter lies in. But with more precision comes more uncertainty: a 60% CrI is more precise than a 95% CrI because it is narrower, but it is also more uncertain because we go from a 95% probability to a 60% probability. This is the precision/confidence trade-off that we have to live with when doing research. @vasishth2021 say (in the context of frequentist statistics): "\[we have to learn\] to accept the fact that—in almost all practical data analysis situations—we can only draw uncertain conclusions from data."
+
+::: callout-warning
+### Exercise 1
+
+Calculate the 90%, 80% and 60% CrIs of `b_Intecept` and `b_speech_rate`.
+:::
+
+With the model `vow_bm`, getting all of these CrIs might look trivial: the 95% CrI is already quite narrow, giving us quite a precise range of values for both the intercept and the coefficient of speech rate. This is because there is quite a lot of data and the model is quite simple, there is only one predictor. With more complex model and smaller data sets, uncertainty is greater and the intervals will span a large range of values. We will see examples later in the book. In those cases, it is helpful to be able to discuss CrIs at different levels of probability, since a lower-probability CrI might tells us something clearer about what we are investigating, while warning us of the increased uncertainty that comes with it.
 
 ## Plotting posterior draws
 
-Plotting posterior draws is as straightforward as plotting any data. You already have all of the tools to understand plotting draws with ggplot2. To plot the reconstructed posterior probability distribution of any parameter, we plot the probability density (with `geom_density()`) of the draws of that parameter. Let's plot `b_IsWordFALSE`. This will be the posterior probability density of the difference in RTs between nonce (`IsWord` is `FALSE`) and real words (`IsWord` is `TRUE`).
+Plotting posterior draws is as straightforward as plotting any data. You already have all of the tools to understand plotting draws with ggplot2. To plot the reconstructed posterior probability distribution of any parameter, we plot the probability density (with `geom_density()`) of the draws of that parameter. Let's plot `b_speech_rate`. This will be the posterior probability density of the change in vowel duration for each increase of one syllable per second. @fig-vow-bm-sr shows the posterior probability density of `b_speech_rate`. If you compare this plot with the central panel of @fig-vow-bm, the density curves are identical.
 
 ```{r}
-#| label: rt-bm-1-draws-plot
+#| label: fig-vow-bm-sr
+#| fig-cap: "Posterior probability distribution of `b_speech_rate`."
 
-rt_bm_1_draws |>
-  ggplot(aes(b_IsWordFALSE)) +
+vow_bm_draws |>
+  ggplot(aes(b_speech_rate)) +
   geom_density() +
   geom_rug(alpha = 0.2)
 ```
+
+The [ggdist](https://mjskay.github.io/ggdist/index.html) package has some convenience ggplot geometries and stats for plotting posterior densities with CrIs. The `stat_halfeye()` can shade the area under the curve depending on the specified interval levels, like in the code for @fig-vow-bm-sr-cris below, which shows 50%, 80% and 95% CrIs. Below the density curve there are error bars of increasing thickness, each corresponding to a CrI. The large dot represents the *median* of the draws (rather than the mean, like in the model summary). The median is another acceptable summary measure for posteriors.
+
+```{r}
+#| label: fig-vow-bm-sr-cris
+#| fig-cap: "Posterior probability distribution of `b_speech_rate` with credible intervals."
+#| warning: false
+
+library(ggdist)
+
+vow_bm_draws |>
+  ggplot(aes(x = b_speech_rate)) +
+  stat_halfeye(
+    .width = c(0.5, 0.8, 0.95),
+    aes(fill = after_stat(level))
+  ) +
+  scale_fill_brewer(na.translate = FALSE) +
+  geom_rug(alpha = 0.2)
+```
+
+The `aes(fill = after_stat(level))` requires a bit of explanation. We are using `aes()` because we are mapping the fill of the shaded areas to some data, i.e. the level of the CrIs: 0.5, 0.8, 0.95. These are specified in the `.width` argument. The CrI are calculated by `stat_halfeye()` from the supplied `vow_bm_draws`, and the function creates, under the hood, a data frame with the interval limits and a column `level` which specifies the interval level. So `after_stat(level)` is simply telling ggplot to use the `level` column for the fill from the data frame that is available *after* the stat (the halfeye) has been computed (if you want to know more, you can check the [aes_eval](https://ggplot2.tidyverse.org/reference/aes_eval.html) documentation from ggplot2). You can learn more about ggdist visualisation tools on the [ggdist](https://mjskay.github.io/ggdist/index.html) website.
+
+::: callout-warning
+### Exercise 2
+
+Plot the half-eyes of `b_Intercept` and `sigma`.
+:::

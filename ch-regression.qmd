@@ -106,8 +106,8 @@ Let's move on onto fitting a Gaussian regression model to vowel duration as the 
 
 $$
 \begin{align}
-\text{vdur} & \sim Gaussian(\mu, \sigma)\\
-\mu & = \beta_0 + \beta_1 \cdot \text{sr}\\
+vdur & \sim Gaussian(\mu, \sigma)\\
+\mu & = \beta_0 + \beta_1 \cdot sr\\
 \end{align}
 $$
 
@@ -129,8 +129,8 @@ Going back to our regression model of vowel duration and speech rate, we can rew
 
 $$
 \begin{align}
-\text{vdur} & \sim Gaussian(\mu, \sigma)\\
-\mu & = \beta_0 \cdot 1 + \beta_1 \cdot \text{sr}\\
+vdur & \sim Gaussian(\mu, \sigma)\\
+\mu & = \beta_0 \cdot 1 + \beta_1 \cdot sr\\
 \end{align}
 $$
 

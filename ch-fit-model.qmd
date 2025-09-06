@@ -18,7 +18,7 @@ The brms package can run a variety of Bayesian (regression) models. It is a very
 You can run a Bayesian Gaussian model with the `brm()` function, short for "Bayesian Regression Model" (a Gaussian model is a special type of regression model). The mandatory arguments of `brm()` are a model formula, a distribution family (of the outcome variable), and the data you want to run the model with. Running a model with data is also formally known as *fitting the model to the data*. We want to fit a Gaussian model to reaction times from @tucker2019. Let's revisit the mathematical formula of the model from @sec-gauss-model (let's discard the priors; see the R Note box below):
 
 $$
-\text{RT} \sim Gaussian(\mu, \sigma)
+RT \sim Gaussian(\mu, \sigma)
 $$
 
 It would be nice if `brms()` allowed you to write the formula like that.
@@ -151,7 +151,7 @@ Putting all this together in mathematical notation:
 
 $$
 \begin{align}
-\text{RT} & \sim Gaussian(\mu, \sigma)\\
+RT & \sim Gaussian(\mu, \sigma)\\
 \mu & \sim P(1010.5, 4.45)\\
 \sigma & \sim P(317.88, 3.17)
 \end{align}

@@ -724,8 +724,8 @@ window.Quarto = {
   </ul></li>
   <li><a href="#interpret-the-model-summary" id="toc-interpret-the-model-summary" class="nav-link" data-scroll-target="#interpret-the-model-summary"><span class="header-section-number">24.2</span> Interpret the model summary</a></li>
   <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">24.3</span> Reporting</a></li>
-  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next"><span class="header-section-number">24.4</span> What’s next</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">24.5</span> Summary</a></li>
+  <li><a href="#reproducible-model-fit" id="toc-reproducible-model-fit" class="nav-link" data-scroll-target="#reproducible-model-fit"><span class="header-section-number">24.4</span> Reproducible model fit</a></li>
+  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next"><span class="header-section-number">24.5</span> What’s next</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -768,7 +768,7 @@ y &amp; \sim Gaussian(\mu, \sigma)\\
 <p>The goal of the Gaussian regression model expressed in the formulae above is to estimate <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma\)</span> from observed data. Now, since truly Gaussian data is difficult to come by, especially in linguistics, for the sake of pedagogical simplicity we will start the learning journey on fitting regression models using data, vowel durations, for which a Gaussian regression is generally not appropriate. You will learn in Week 8 more appropriate distribution families for this type of data.</p>
 <section id="vowel-duration-in-italian-the-data" class="level2" data-number="24.1">
 <h2 data-number="24.1" class="anchored" data-anchor-id="vowel-duration-in-italian-the-data"><span class="header-section-number">24.1</span> Vowel duration in Italian: the data</h2>
-<p>We will analyse the duration of vowels in Italian from <span class="citation" data-cites="coretta2019k">Coretta (<a href="references.html#ref-coretta2019k" role="doc-biblioref">2019</a>)</span> and how speech rate affects vowel duration. Vowel duration should be pretty straightforward, and speech rate is simply the number of syllables per second, calculated from the frame sentence the vowel was uttered in. An expectation we might have is that vowels get shorter with increasing speech rate. You will notice how this is a very vague hypothesis: how shorter do they get? Is the shortening the same across all speech rates, or does it get weaker with higher speech rates? Our expectation/hypothesis simply states that vowels get shorter with increasing speech rate. Maybe we could do better and use what we know from speech production and come up with something more precise, but this type of vague hypothesis are very common, if not standard, in linguistic research, so we will stick to it for practical and pedagogical reasons. Remember, however, that robust research should strive for precision. In short, we will try to answer the following research question:</p>
+<p>We will analyse the duration of vowels in Italian from <span class="citation" data-cites="coretta2019k">Coretta (<a href="references.html#ref-coretta2019k" role="doc-biblioref">2019</a>)</span> and how speech rate affects vowel duration. Vowel duration should be pretty strightforward, and speech rate is simply the number of syllables per second, calculated from the frame sentence the vowel was uttered in. An expectation we might have is that vowels get shorter with increasing speech rate. You will notice how this is a very vague hypothesis: how shorter do they get? Is the shortening the same across all speech rates, or does it get weaker with higher speech rates? Our expectation/hypothesis simply states that vowels get shorter with increasing speech rate. Maybe we could do better and use what we know from speech production and come up with something more precise, but this type of vague hypothesis are very common, if not standard, in linguistic research, so we will stick to it for practical and pedagogical reasons. Remember, however, that robust research should strive for precision. In short, we will try to answer the following research question:</p>
 <blockquote class="blockquote">
 <p>What is the relationship between vowel duration and speech rate?</p>
 </blockquote>
@@ -887,7 +887,7 @@ Direct/positive and inverse/negative relationship
 \end{align}
 \]</span></p>
 <p>To instruct R to model vowel duration as a function of the numeric predictor speech rate you simply <em>add</em> it to the <code>1</code> we have used in the right-hand side of the tilde in <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a> (i.e.&nbsp;<code>v1_duration ~ 1</code>): so <code>v1_duration ~ 1 + speech_rate</code>. The R formula is based on the bases you multiply the coefficients with in the mathematical formula: <span class="math inline">\(1\)</span> and <span class="math inline">\(sr\)</span>. In R parlance, the <code>1</code> and <code>sr</code> in the R formula are called predictor terms, or terms for short. While the predictor <span class="math inline">\(sr\)</span> can take different values, the <span class="math inline">\(1\)</span> is constant so it is also called the <strong>constant term</strong>, or the <strong>intercept term</strong> (because it is the basis of the intercept <span class="math inline">\(\beta_0\)</span>). In the R formula, you don’t explicitly include the coefficients <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, just the bases. Put all this together and you get the <code>1 + speech_rate</code> part of the formula. There is more: in R, since the <span class="math inline">\(1\)</span> is a constant, you can omit it! So <code>v1_duration ~ 1 + speech_rate</code> can also be written as <code>v1_duration ~ speech_rate</code>. They are equivalent.</p>
-<p>That was probably a lot! But now that we have clarified how the R formula is set up, we can proceed and fit the model. Here is the full code to fit a Gaussian regression model of vowel duration with brms.</p>
+<p>That was probably a lot! But now that we have clarified how the R formula is set up, we can now proceed and fit the model. Here is the full code to fit a Gaussian regression model of vowel duration with brms.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -945,7 +945,7 @@ and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
-<p>Let’s focus on the <code>Regression Coefficients</code> table of the summary. It should now be clear why in the summary of the model in <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>, the summaries for the mean <span class="math inline">\(\mu\)</span> (i.e.&nbsp;<span class="math inline">\(\beta_0\)</span>) were in the regression coefficients table. The table of the regression model we just fit has two coefficients. To understand what they are, just remember the equation of the line and the model formula above.</p>
+<p>Let’s focus on the <code>Regression Coefficients</code> table of the summary. Now it should also be clear why in the summary of the model in <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>, the summaries for the mean <span class="math inline">\(\mu\)</span> (i.e.&nbsp;<span class="math inline">\(\beta_0\)</span>) were in the regression coefficients table. The table the regression model we just fit has two coefficients. To understand what they are, just remember the equation of line and the model formula above.</p>
 <ul>
 <li><p><code>Intercept</code> is <span class="math inline">\(\beta_0\)</span>: this is the mean vowel duration, <strong>when speech rate is 0</strong>.</p></li>
 <li><p><code>speech_rate</code> is <span class="math inline">\(\beta_1\)</span>: this is the change in vowel duration <strong>for each unit increase of speech rate</strong>.</p></li>
@@ -955,7 +955,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li><p>The mean vowel duration, when speech rate is 0 syl/s, is between 192 and 205 ms, at 95% confidence.</p></li>
 <li><p>We can be 95% confident that, for each unit increase of speech rate (i.e.&nbsp;for each increase of one syllable per second), the duration of the vowel decreases by 20.5-23 ms.</p></li>
 </ul>
-<p>To answer our research question (what is the relationship between vowel duration and speech rate?) we can say that with increasing speech rate, vowel duration decreases. We can be more precise than that and say that for each increase of one syllable per second, the vowel becomes 20.5 to 23 ms shorter, at 95% confidence (that is our 95% CrI).</p>
+<p>To answer our research question (what is the relationship between vowel duration and speech rate?) we can now say that with increasing speech rate, vowel duration decreases. We can be more precise than that and say that for each increase of one syllable per second, the vowel becomes 20.5 to 23 ms shorter, at 95% confidence (that is our 95% CrI).</p>
 <p>To see what the posterior probability densities of <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma\)</span> look like, you can quickly plot them with the <code>plot()</code> function, as we did in <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>. There is also another way: we can use the <code>mcmc_dens()</code> function from the <a href="https://mc-stan.org/bayesplot/">bayesplot</a> package (why it’s <code>mcmc_dens()</code> will become clear in <a href="ch-regression-draws.html" class="quarto-xref"><span>Chapter 25</span></a>). By default the function plots the posterior densities of all parameters in the model, plus other internal parameters that we usually don’t care about. We can conveniently specify which parameters to plot with the <code>pars</code> argument, which takes a character vector. The names of the parameters for the regression coefficients are slightly different than what you see in the summary: <code>b_Intercept</code> and <code>b_speech_rate</code>. These are just the names you see in the summary, with a prefixed <code>b_</code>. The <code>b_</code> stands for beta coefficient, which makes sense, since these are the <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> coefficients. <a href="#fig-vow-bm" class="quarto-xref">Figure&nbsp;<span>24.3</span></a> shows the output of the <code>mcmc_dens()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
@@ -1017,53 +1017,40 @@ Figure&nbsp;24.5: Posterior predictions of vowel duration based on speech rate f
 <h2 data-number="24.3" class="anchored" data-anchor-id="reporting"><span class="header-section-number">24.3</span> Reporting</h2>
 <p>You have seen an example of reporting in <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>. We can use that as a template for reporting a regression model, by reworking a few parts and adding information related to the numeric predictor in the regression. You could report the vowel duration regression model like so:</p>
 <blockquote class="blockquote">
-<p>We fitted a Bayesian regression model using the brms package <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. We used a Gaussian distribution for the outcome variable, vowel duration (in milliseconds). We included speech rate (measured as syllables per second) as the regression predictor.</p>
+<p>We fitted a Bayesian regression model using the brms package (Bürkner 2017) in R (R Core Team 2024). We used a Gaussian distribution for the outcome variable, vowel duration (in milliseconds). We included speech rate (measured as syllables per second) as the predictor.</p>
 <p>Based on the model results, there is a 95% probability that the mean vowel duration, when speech rate is 0, is between 192 and 205 ms (mean = 198, SD = 3). For each unit increase of speech rate (i.e.&nbsp;for each one syllable per second added), vowel duration decreases by 20 to 23 ms (mean = -22, SD = 1). The residual standard deviation is between 21 and 22 ms (mean = 22, SD = 0).</p>
 </blockquote>
-<p>Note the wording of the speech rate coefficient: “vowel duration decreases by 20 to 23 ms”. The speech rate coefficient 95% CrI is fully negative (i.e.&nbsp;both lower and upper limit are negative) so we can say that vowel duration <em>decreases</em>. Furthermore, since we say “decreases” then we should report the CrI limits as positive numbers. Think about it: we say “decrease X by 2” to mean “X - 2”, rather than “decrease X by -2”. Finally, given we flipped the signs of the CrI limits, it is clearer to write “20 to 23 ms”, rather than the other way round as you would if you reported the interval as is: 95% CrI [-23, -20].</p>
-<p>Another point to note is that in the reporting style I am using in this book, we place more emphasis on the posterior CrI than on the posterior mean and SD. So the CrI is in the main text, while mean and SD are between parentheses. Other researchers might in fact do it the other way round. Whatever you decide to do, be consistent. Finally, it is unusual to report the coefficients of <span class="math inline">\(\sigma\)</span>: I have done it here for completeness, since it doesn’t hurt to do so.</p>
 </section>
-<section id="whats-next" class="level2" data-number="24.4">
-<h2 data-number="24.4" class="anchored" data-anchor-id="whats-next"><span class="header-section-number">24.4</span> What’s next</h2>
-<p>In this chapter you have learned the very basics of Bayesian regression models. As mentioned above, regression models with brms are very flexible and you can easily fit very complex models with a variety of distribution families (for a list of available families, see <code>?brmsfamily</code>; you can even define your own distributions!). The perk of using brms is that you can just learn the basics of one package and one approach and use it to fit a large variety of regression models. This is different from the standard frequentist approach, where different models require different packages or functions, with their different syntax and quirks. In the following weeks, you will build your understanding of Bayesian regression models, which will enable you to approach even the most complex models! However, due to time limits you won’t learn everything there is to learn in this course. Developing conceptual and practical skills in quantitative methods is a long-term process and unfortunately one semester will not be enough. So be prepared to continue your learning journey for years to come!</p>
-</section>
-<section id="summary" class="level2" data-number="24.5">
-<h2 data-number="24.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">24.5</span> Summary</h2>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
+<section id="reproducible-model-fit" class="level2" data-number="24.4">
+<h2 data-number="24.4" class="anchored" data-anchor-id="reproducible-model-fit"><span class="header-section-number">24.4</span> Reproducible model fit</h2>
+<p>XXX Before you fit the model, create a folder called <code>cache/</code> folder in the RStudio project folder. We will use this folder to save the output of model fitting so that you don’t have to refit the model every time. This is useful because as models get more and more complex, they can take quite a while to fit.</p>
+<p>The model will be fitted and saved in <code>cache/</code> with the file name <code>vow_bm.rds</code>. If you now re-run the same code again, you will notice that <code>brm()</code> does not fit the model again, but rather reads it from the file (no output is shown, but trust me, it works! Check the contents of <code>cache/</code> to see for yourself.).</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
-<div class="callout-body-container">
-<ul>
-<li>Gaussian regression models have the following mathematical form:</li>
-</ul>
-<p><span class="math display">\[
-\begin{align}
-y &amp; \sim Gaussian(\mu, \sigma)\\
-\mu &amp; = \beta_0 + \beta_1 x\\
-\end{align}
-\]</span></p>
-<ul>
-<li><p>A regression model estimates an intercept <span class="math inline">\(\beta_0\)</span> and a slope <span class="math inline">\(\beta_1\)</span> from the data (<span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>).</p></li>
-<li><p>Regression models in brms are fit with the R formula <code>y ~ 1 + x</code>. We can omit the constant/intercept term: <code>y ~ x</code>.</p></li>
-<li><p>The intercept <span class="math inline">\(\beta_0\)</span> is the mean <span class="math inline">\(y\)</span> when <span class="math inline">\(x\)</span> is <code>0</code> zero.</p></li>
-<li><p>The slope <span class="math inline">\(\beta_1\)</span> is the change in <span class="math inline">\(y\)</span> for every unit increase of <span class="math inline">\(x\)</span>.</p></li>
-</ul>
+<div class="callout-title-container flex-fill">
+Important
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>When you save the model fit to a file, R does not keep track of changes in the model specification, so if you make changes to the formula or data, you need to <strong>delete the saved model file</strong> before re-running the code for the changes to have effect!</p>
 </div>
+</div>
+</section>
+<section id="whats-next" class="level2" data-number="24.5">
+<h2 data-number="24.5" class="anchored" data-anchor-id="whats-next"><span class="header-section-number">24.5</span> What’s next</h2>
+<p>In this post you have learned the very basics of Bayesian regression models. As mentioned above, regression models with brms are very flexible and you can easily fit very complex models with a variety of distribution families (for a list, see <code>?brmsfamily</code>; you can even define your own distributions!).</p>
+<p>The perk of using brms is that you can just learn the basics of one package and one approach and use it to fit a large variety of regression models.</p>
+<p>This is different from the standard frequentist approach, where different models require different packages or functions, with their different syntax and quirks.</p>
+<p>In the following posts, you will build your understanding of Bayesian regression models, which will enable you to approach even the most complex models! However, due to time limits you won’t learn everything there is to learn.</p>
+<p>Developing conceptual and practical skills in quantitative methods is a long-term process and unfortunately one semester will not be enough. So be prepared to continue your learning journey for years to come!</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-burkner2017" class="csl-entry" role="listitem">
-Bürkner, Paul-Christian. 2017. <span>“Brms: An r Package for Bayesian Multilevel Models Using Stan.”</span> <em>Journal of Statistical Software</em> 80 (1): 128. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>.
-</div>
 <div id="ref-coretta2019k" class="csl-entry" role="listitem">
 Coretta, Stefano. 2019. <span>“Vowel Duration, Voicing Duration, and Vowel Height: Acoustic and Articulatory Data from Italian [Research Compendium].”</span> <a href="https://doi.org/10.17605/OSF.IO/XDGFZ">https://doi.org/10.17605/OSF.IO/XDGFZ</a>.
-</div>
-<div id="ref-rcoreteam2025" class="csl-entry" role="listitem">
-R Core Team. 2025. <em>R: A Language and Environment for Statistical Computing [Version 4.5.0]</em>.
 </div>
 <div id="ref-winter2020" class="csl-entry" role="listitem">
 Winter, Bodo. 2020. <em>Statistics for Linguists: An Introduction Using r</em>. Routledge.
