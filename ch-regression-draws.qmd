@@ -23,6 +23,16 @@ When you run a model with brms, the draws (i.e. the sampled values) are stored i
 
 The rest of the post will teach you how to extract and manipulate the model's draws. We will first revisit the model fitted in @sec-regression-cat.
 
+## Reproducible model fit
+
+Fitting simple models with brms is relatively quick. However, more complex model using larger data sets can take some time (even hours!). It is useful to save the model fit to a file so that, once the model is fit once, you don't have to fit it again. Before you fit the model, create a folder called `cache/` folder in the RStudio project folder. We will use this folder to save the output of model fitting so that you don't have to refit the model every time. This is useful because as models get more and more complex, they can take quite a while to fit.
+
+The model will be fitted and saved in `cache/` with the file name `vow_bm.rds`. If you now re-run the same code again, you will notice that `brm()` does not fit the model again, but rather reads it from the file (no output is shown, but trust me, it works! Check the contents of `cache/` to see for yourself.).
+
+::: callout-important
+When you save the model fit to a file, R does not keep track of changes in the model specification, so if you make changes to the formula or data, you need to **delete the saved model file** before re-running the code for the changes to have effect!
+:::
+
 ## Extract MCMC posterior draws
 
 There are different ways to extract the MCMC posterior draws from a fitted model. In this book, we will use the `as_draws_df()` function from the posterior package. The function extracts the draws from a Bayesian regression model and outputs them as a data frame. Let's take the `rt_bm_1` model from @sec-regression-cat and extract the draws. Let's first read the `tucker2019/mald_1_1.rds` data again.
