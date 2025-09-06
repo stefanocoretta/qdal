@@ -13,29 +13,61 @@ library(brms)
 
 ## MCMC what?
 
-<!--# TODO: Use mald reaction times from chapter 23 -->
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+library(brms)
+
+```
 
 <!--# TODO: Split this chapter: take out difference of difference because for that you need interactions which we haven't done yet -->
 
-Bayesian regression models fitted with brms/Stan use the Markov Chain Monte Carlo (MCMC) sampling algorithm to estimate the probability distributions of the model's coefficient. You have first encountered MCMC in @sec-fit-model. The MCMC algorithm does two things: first it finds a probability area that is the most compatible with the prior probabilities and the probability of the data given the priors; then, it sample values (called *draws*) from this high-probability area to reconstruct the posterior distribution. Since the high-probability area is assumed to be representative of the posterior distribution (that's why we sample from it), the MCMC draws are also called *posterior draws*. Elizabeth Pankratz has written a nice short introduction to MCMC algorithms here: [Finding posteriors through sampling](https://elizabethpankratz.github.io/bayes_stat/day1/mcmc.html). I strongly recommend that you read that before proceeding (if you want to further your understanding of MCMC, the resources linked on that page are an excellent starting point). Note that to be a proficient user of brms and Bayesian regression models, you don't need to fully understand the mathematics behind MCMC algorithms, as long as you understand them conceptually.
+Bayesian regression models fitted with brms/Stan use the Markov Chain Monte Carlo (MCMC) sampling algorithm to estimate the probability distributions of the model's parameters. You have first encountered MCMC in @sec-fit-model: the text printed when running `brm()` is about the MCMC. Bayesian models reconstruct the posterior probability distribution of a set of parameters. More precisely, they reconstruct (i.e. estimate) the *joint* probability distribution of the parameters. In other words, all parameters are estimated at the same time: think of this as a multidimensional space of probability, with one dimension per paramter. With two parameters, like intercept and slope, this is a 3-dimensional space, something we can imagine: think of a landscape with hills and valleys, where the *x*-axis are values for the intercept, the *y*-axis are values for the slope and the *z*-axis (the vertical axis) are probability densities. The hills represent high probability areas and valleys represent low probability areas. This landscape of hills and valleys is determined by the two components of the Bayes' Theorem: the prior probability distribution $P(h)$ and the probability of the data given the prior, $P(d | h)$.
 
-When you run a model with brms, the draws (i.e. the sampled values) are stored in the model object. All operations on a model, like obtaining the `summary()`, are actually operations on those draws. We normally fit regression models with four MCMC chains. The sampling algorithm within each chain runs for 2000 iterations by default. The first half (1000 iterations) are used to "warm up" the algorithm (i.e. find the high-probability area) while the second half (1000 iterations) are the ones that sample from the high-probability area to reconstruct the posterior distribution. For four chains ran with 2000 iterations of which 1000 for warm up, we end up with 4000 iterations we can use to learn details about the posterior.
+Constructing the landscape from the prior and data analytically (i.e. solving the mathematical equation of Bayes' Theorem) is very often very hard or even impossible. The MCMC algorithm allows us to sample points in the landscape without actually mathematically reconstruct the landscape. In the Stan software, which brms uses to fit Bayesian models, the MCMC algorithm uses a specific implementation called Hamiltonian Monte Carlo (HMC). The HMC version of MCMC simulates physical particles rolling through the posterior landscape, using equations from physical mechanics. At each iteration, the algorithm "flicks" a particle (like a pinball ball) and then stops it in its tracks: the place on the posterior landscape where the particle stops is taken as a "draw". In the 3-dimensional landscape of intercept and slope, the intercept and slope values corresponding to the spot the particle was stopped are recorded. So the draw from one iteration holds one value for the intercept and one for the slope. The algorithm proceeds for several iterations, thus creating a list of draws. These draws can be used to plot and summaries the posterior distributions of the parameters. The draws are called **posterior draws**, because they come from the posterior probability distribution.
 
-The rest of the post will teach you how to extract and manipulate the model's draws. We will first revisit the model fitted in @sec-regression-cat.
+This is a bit abstract and if you want to learn more about MCMC, I recommend @mcelreath2020, Ch 9 and @nicenboim2025, Ch 3. Note that to be a proficient user of brms and Bayesian regression models, you don't need to fully understand the mathematics behind MCMC algorithms, as long as you understand them conceptually.
+
+When you run a model with brms, the draws (i.e. the sampled values) are stored in the model object. All operations on a model, like obtaining the `summary()`, are actually operations on those draws. We normally fit regression models with four MCMC chains. The sampling algorithm within each chain runs for 2000 iterations by default. The first half (1000 iterations) are used to "warm up" the algorithm (i.e. tune certain parameters related to the mechanics equations that make the particles move) while the second half (1000 iterations) are the ones included in the actual posterior draws. Since four chains run with 2000 iterations of which 1000 are kept as posterior draws, we end up with 4000 draws we can use to learn details about the posterior. The rest of this chapter will teach you how to extract and manipulate the model's draws. We will do so by revisiting the model fitted in @sec-regression.
 
 ## Reproducible model fit
 
-Fitting simple models with brms is relatively quick. However, more complex model using larger data sets can take some time (even hours!). It is useful to save the model fit to a file so that, once the model is fit once, you don't have to fit it again. Before you fit the model, create a folder called `cache/` folder in the RStudio project folder. We will use this folder to save the output of model fitting so that you don't have to refit the model every time. This is useful because as models get more and more complex, they can take quite a while to fit.
+Before we move to the model, it is worth making a couple practical considerations. Fitting simple models with brms is relatively quick. However, more complex model using larger data sets can take some time for the MCMC to efficiently sample the posterior distribution (sometimes even hours!). It is useful to save the model fit to a file so that, once the model is fit once, you don't have to fit it again. This can be done by specifying a file path in the `file` argument in the `brm()` function. I suggest developing the habit of having a dedicated `cache/` in your Quarto project to save all of the brms model objects in. Go ahead and create a `cache/` folder in you project. Then, in your `week-05.qmd` document, rewrite the model from the previous chapter like so:
 
-The model will be fitted and saved in `cache/` with the file name `vow_bm.rds`. If you now re-run the same code again, you will notice that `brm()` does not fit the model again, but rather reads it from the file (no output is shown, but trust me, it works! Check the contents of `cache/` to see for yourself.).
+```{r}
+#| label: ita-egg
+#| include: false
+
+load("data/coretta2018a/ita_egg.rda")
+```
+
+```{r}
+#| label: vow-bm-file
+
+vow_bm <- brm(
+  # `1 +` can be omitted.
+  v1_duration ~ speech_rate,
+  family = gaussian,
+  data = ita_egg_clean,
+  cores = 4,
+  seed = 20912,
+  file = "cache/vow_bm"
+)
+```
+
+The `file` argument tells brms to save the model output to the `cache/` folder in a file called `vow_bm.rds`. The extension `.rds` is appended automatically (this is the same file type you encountered where reading data, like `glot_status.rds`). What about `cores` and `seed`? When the model is fit, four MCMC chains are run. By default, these are run sequentially: the first chain, then the second, then the third and finally the fourth. But we can speed things up a bit by running them in parallel on separate computer cores. Virtually all computers today have at least four cores, so we can run the four chains using four cores. This is what `cores = 4` does: it tells brms to run each chain on one core so they are run in parallel. Since the MCMC algorithm contains a random component (physical particles are randomly flicked across the landscape), every time you refit the model, a different set of draws are drawn (because the particles stop at random places in the landscape). One way to make the model reproducible (meaning, obtaining exactly the same draws every time) is to set a "seed". In computing, a seed is a number used for random number generation: when set, the same list of "random" numbers is produced. The MCMC algorithm uses random number generation to run itself, so by setting the seed we are in fact "fixing" the randomness of the algorithm. The seed number can be any number: here I set it to `20912`.
+
+Now run the model. The model will be fitted and the model object will be saved in `cache/` with the file name `vow_bm.rds`. If you now re-run the same code again, you will notice that `brm()` does not fit the model again, but rather reads it from the file (no output is shown, but trust me, it works!). This saves time: you fit the model once but you can read the output multiple times. This is also good for reproducibility: an independent researcher with access to your code and the cache folder can run your code and get exactly the same results as yours.
 
 ::: callout-important
-When you save the model fit to a file, R does not keep track of changes in the model specification, so if you make changes to the formula or data, you need to **delete the saved model file** before re-running the code for the changes to have effect!
+When you save the model fit to a file, R does not keep track of changes in the model specification (like changes in formula or data and so on), so if you make changes to model, you need to **delete the saved model file** before re-running the code for the changes to have effect!
 :::
 
 ## Extract MCMC posterior draws
 
-There are different ways to extract the MCMC posterior draws from a fitted model. In this book, we will use the `as_draws_df()` function from the posterior package. The function extracts the draws from a Bayesian regression model and outputs them as a data frame. Let's take the `rt_bm_1` model from @sec-regression-cat and extract the draws. Let's first read the `tucker2019/mald_1_1.rds` data again.
+There are different ways to extract the MCMC posterior draws from a fitted model. In this book, we will use the `as_draws_df()` function from the [posterior](https://mc-stan.org/posterior/) package. The function extracts the draws from a Bayesian regression model and outputs them as a data frame. Let's take the `rt_bm_1` model from @sec-regression-cat and extract the draws. Let's first read the `tucker2019/mald_1_1.rds` data again.
 
 ```{r}
 #| label: mald
@@ -138,109 +170,3 @@ rt_bm_1_draws |>
   geom_density() +
   geom_rug(alpha = 0.2)
 ```
-
-## Calculate posterior predictions from the draws
-
-In @sec-regression-index, you learned how to use indexing of categorical predictors to estimate the mean of the outcome variable for each level in the categorical predictor. You might be wondering: with contrasts you get the mean of the reference level and the difference between the second level and the reference level; with indexing you get the mean at each level; however, all of these estimands (the mean of all levels and the difference between the levels) are important for inference. So, should you fit the model twice to obtain all estimands? Of course, that is not necessary because independent from the way you code categorical predictors, the model will have all the information needed to calculate all of the estimands of interest. This information is in the MCMC draws. In this section, you will learn how to obtain the estimated mean RT when the word is a nonce word from the model that used contrasts.
-
-Let's revise the formula of the mean $\mu$ from the model formula above: $\mu_i = \beta_0 + \beta_1 \cdot w_i$. The mean depends on the value of $w$ (that's what the subscript $i$ is for). We can substitute $w_i$ with 0 for `IsWord` = `TRUE` and with 1 for `IsWord` = `FALSE`. So we get $\mu_T = \beta_0$ for `TRUE` and $\mu_F = \beta_0 + \beta_1$. Look again at `rt_bm_1_draws`. Recall that `b_Intercept` is $\beta_0$ and `b_IsWordFALSE` is $\beta_1$. Can you figure out what you need to do to get the posterior probability distribution of $\mu_F$ (i.e. the mean RT when `IsWord` is `FALSE`)? You *sum* the columns `b_Intercept` and `b_IsWordFALSE`! It goes without saying that the posterior probability distribution of the mean RT when `IsWord` is `TRUE` is the probability density of `b_Intercept`.
-
-```{r}
-#| label: hnr-bm-draws-draws
-
-rt_bm_1_draws <- rt_bm_1_draws |> 
-  mutate(
-    # predicted RT for real words
-    real = b_Intercept,
-    # predicted HNR for polite attitude
-    nonce = b_Intercept + b_IsWordFALSE
-  )
-
-rt_bm_1_draws |> select(real, nonce)
-```
-
-The sum operation for `nonce` is applied row-wise, to each draw (remember, each row in the draw tibble is the draw from one iteration of the MCMC chains). So, for `nonce`, the value of `b_Intercept` at draw 1 is added to the value of `b_IsWordFALSE` at draw 1, and so on. You end up with a list of sums that has the same length as the initial draws (here, 4000, i.e. 1000 per chain!). Then you can summarise and plot this new list as you did with the `b_` coefficients earlier. To make further processing of the draws easier, we can reshape the tibble so that instead of having two columns `real` and `nonce` with the drawn values in them, we end up with a tibble with one column `IsWord` (where we store the value `real` or `nonce`) and a column named `value` with the drawn value. Reshaping tibbles is called *pivoting* in tidyverse parlance. We won't go into the details of all pivoting operations, so I strongly recommend you to look through the [vignette on pivoting](https://tidyr.tidyverse.org/articles/pivot.html) (a vignette is a short tutorial that some R packages provide for users to learn basic operations with the functions in the package). The operation we need to get the shape we want is pivoting from a "wider" format to a "longer" format: this is achieved with `pivot_longer()` from tidyr. Make sure you read the section on `pivot_longer()` in the vignette to understand what the following code does.
-
-```{r}
-#| label: rt-bm-1-draws-long
-
-rt_bm_1_draws_long <- rt_bm_1_draws |> 
-  select(.chain, .iteration, .draw, real, nonce) |> 
-  pivot_longer(real:nonce, names_to = "IsWord", values_to = "value")
-
-rt_bm_1_draws_long
-```
-
-Check the resulting `rt_bm_1_draws_long` tibble. The first two rows are draw 1 of chain 1: one row is for the case when the word is a real word, and the other row is for the case when the word is a nonce word. There are a total of 8000 rows: 4000 draws (1000 draws times 4 chains) times 2 (two levels of `IsWord`). Now let's make a violin plot of the predicted HNR in informal and polite attitude!
-
-```{r}
-#| label: fig-rt-bm-pred-dens
-#| fig-cap: "Density plot of predicted mean RT for real and nonce words."
-#| echo: false
-
-rt_bm_1_draws_long |> 
-  ggplot(aes(IsWord, value)) +
-  geom_violin(width = 0.2) +
-  labs(
-    x = "Word type", y = "Predicted RT (ms)"
-  )
-```
-
-We can use the ggdist package to plot something a bit fancier, for example a "half eye" geometry (which can be obtained with the "halfeye" statistic, `stat_halfeye()`). Check the `?stat_halfeye` documentation to learn about it.
-
-```{r}
-#| label: fig-rt-bm-pred-halfeye
-#| fig-cap: "Half-eye plot of predicted mean RT for real and nonce words."
-
-library(ggdist)
-
-rt_bm_1_draws_long |> 
-  ggplot(aes(value, IsWord)) +
-  stat_halfeye() +
-  labs(x = "Predicted RT (ms)", y = "Word type")
-```
-
-Another useful ggplot2 statistic is `stat_interval()`.
-
-```{r}
-#| label: fig-rt-bm-pred-interval
-#| fig-cap: "Credible Intervals of predicted mean RT for real and nonce words."
-
-rt_bm_1_draws_long |> 
-  ggplot(aes(IsWord, value)) +
-  stat_interval() +
-  labs(
-    x = "Word type", y = "Predicted RT (ms)"
-  )
-```
-
-When reporting the results, it is recommended to report the CrIs of the predicted outcome for each level in the categorical predictor. It is useful to include tables like @tbl-rt-cris. To make the generation of the table more straightforward, we can use a couple of tricks when creating the `rt_bm_cris` below. The `glue()` function from the tidyverse package [glue](https://glue.tidyverse.org) allows you to specify strings based on the output of R code computation. Code is included between curly braces `{}`.
-
-```{r}
-#| label: rt-bm-1-pred-summ
-
-library(glue)
-
-rt_bm_1_cris <- rt_bm_1_draws_long |> 
-  mutate(IsWord = factor(IsWord, levels = c("real", "nonce"))) |> 
-  group_by(IsWord) |> 
-  summarise(
-    mean = mean(value), sd = sd(value),
-    ci_90 = glue("[{round(quantile2(value, 0.05))}, {round(quantile2(value, 0.95))}]"),
-    ci_80 = glue("[{round(quantile2(value, 0.1))}, {round(quantile2(value, 0.9))}]"),
-    ci_60 = glue("[{round(quantile2(value, 0.2))}, {round(quantile2(value, 0.8))}]"),
-  )
-  
-```
-
-```{r}
-#| label: tbl-rt-cris
-#| tbl-cap: "Summary measures of predicted RTs by word type (in milliseconds)."
-#| 
-knitr::kable(rt_bm_1_cris, col.names = c("Type", "Mean RT", "SD", "90% CrI", "80% CrI", "60% CrI"), digits = 0)
-  
-```
-
-In the main text, you could report the results like so:
-
-> According to the model, the predicted RTs when the word is real word is between 1059 and 1080 ms at 90% confidence ($\beta$ = 1069, SD = 6). When the word is a nonce word, the predicted RTs are between 943 and 963 ms ($\beta$ = 953, SD = 6).
