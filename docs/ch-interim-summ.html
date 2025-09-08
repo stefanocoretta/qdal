@@ -80,6 +80,35 @@ ul.task-list li input[type="checkbox"] {
   });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="include/webex.css">
 </head>
@@ -653,6 +682,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Week 6 of the QML course is “catch-up” week. There are no classes and no new contents are introduced, for you to be able to catch up with things if you need to and/or revise the contents of Week 1 to 5.</p>
+<p>If you look back at what you knew when starting in Week 1 and what you have learned up until now, especially if you were a beginner, you should me very proud of yourself! We have covered a lot of concepts and skills in a very short period of time. You have learned about research methods, research questions and research hypotheses, the perils of the research cycle and questionable research practices, Bayesian inference, the basics of R, how to read, summarise and plot data, and how to fit and interpret simple Gaussian models, including regression models like <span class="math inline">\(y \sim x\)</span>.</p>
+<p>The contents of Week 1 to 5 are really the bare minimum one needs to know to be able to work towards being proficient in quantitative methods, but the road to proficiency is a long one. Week 7 to 10 continue the learning journey of regression models and it will provide you with background knowledge in frequentist inference, another approach to statistical inference. We will scratch the surface of regression modelling, and to really become functional you will need to learn beyond this course. There is so much we can fit in a one-semester course and to be able to get to a point where you can confidently navigate all there is to quantitative methods will take years. This is no different from studying linguistics: you don’t just do one semester-long course in linguistics and then you can write a full dissertation.</p>
+<p>Hopefully you enjoyed the learning process so far and you look forward for the second part!</p>
 
 
 
