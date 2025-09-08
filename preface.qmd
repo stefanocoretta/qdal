@@ -108,3 +108,9 @@ ggplot(data = tibble(x = 0:300), aes(x)) +
     x = "RT (ms)", y = "Relative probability (density)"
   )
 ```
+
+## Highlighting and notes
+
+Highlighting and notes are enabled in this book, thanks to the Hypothesis plugin. You can access the Hypothesis sidebar from the right side of the textbook (click on the `<` button, above the eye button in the right-end side of the website). Highlighting and comments are private by default. Please do not make public highlights and notes.
+
+![](img/hypothesis.gif){fig-align="center"}
