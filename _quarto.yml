@@ -57,7 +57,6 @@ book:
   - part: Week 7
     chapters:
     - ch-regression-cat.qmd
-    - ch-regression-index.qmd
     - ch-regression-more.qmd
     - ch-null-ritual.qmd
   - part: Week 8
@@ -67,7 +66,6 @@ book:
     chapters:
       - ch-regression-cat-cat.qmd
       - ch-regression-interaction.qmd
-      - ch-regression-interaction-index.qmd
   - references.qmd
   appendices:
     - app-reg-cheat-sheet.qmd

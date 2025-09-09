@@ -9,7 +9,7 @@
 <meta name="author" content="Stefano Coretta">
 <meta name="author" content="Elizabeth Pankratz">
 
-<title>31&nbsp; Binary outcomes – Quantitative Data Analysis for Linguists in R</title>
+<title>30&nbsp; Binary outcomes – Quantitative Data Analysis for Linguists in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -323,7 +323,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html">Week 8</a></li><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Binary outcomes</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html">Week 8</a></li><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -603,20 +603,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Indexing categorical predictors</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
       </ul>
@@ -633,7 +627,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
   </div>
 </li>
       </ul>
@@ -650,19 +644,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-interaction-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions using indexing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -700,12 +688,12 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#binary-outcomes-and-the-bernoulli-family" id="toc-binary-outcomes-and-the-bernoulli-family" class="nav-link active" data-scroll-target="#binary-outcomes-and-the-bernoulli-family"><span class="header-section-number">31.1</span> Binary outcomes and the Bernoulli family</a></li>
-  <li><a href="#probability-and-log-odds" id="toc-probability-and-log-odds" class="nav-link" data-scroll-target="#probability-and-log-odds"><span class="header-section-number">31.2</span> Probability and log-odds</a></li>
-  <li><a href="#fitting-a-bernoulli-model" id="toc-fitting-a-bernoulli-model" class="nav-link" data-scroll-target="#fitting-a-bernoulli-model"><span class="header-section-number">31.3</span> Fitting a Bernoulli model</a>
+  <li><a href="#binary-outcomes-and-the-bernoulli-family" id="toc-binary-outcomes-and-the-bernoulli-family" class="nav-link active" data-scroll-target="#binary-outcomes-and-the-bernoulli-family"><span class="header-section-number">30.1</span> Binary outcomes and the Bernoulli family</a></li>
+  <li><a href="#probability-and-log-odds" id="toc-probability-and-log-odds" class="nav-link" data-scroll-target="#probability-and-log-odds"><span class="header-section-number">30.2</span> Probability and log-odds</a></li>
+  <li><a href="#fitting-a-bernoulli-model" id="toc-fitting-a-bernoulli-model" class="nav-link" data-scroll-target="#fitting-a-bernoulli-model"><span class="header-section-number">30.3</span> Fitting a Bernoulli model</a>
   <ul class="collapse">
-  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="header-section-number">31.3.1</span> The data</a></li>
-  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model"><span class="header-section-number">31.3.2</span> The model</a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><span class="header-section-number">30.3.1</span> The data</a></li>
+  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model"><span class="header-section-number">30.3.2</span> The model</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-bernoulli.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -714,9 +702,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html">Week 8</a></li><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Binary outcomes</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html">Week 8</a></li><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-regression-bernoulli" class="quarto-section-identifier"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></h1>
+<h1 class="title"><span id="sec-regression-bernoulli" class="quarto-section-identifier"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></h1>
 </div>
 
 
@@ -741,8 +729,8 @@ window.Quarto = {
 
 
 <p><img src="https://img.shields.io/badge/Area-Statistics-red.png" class="img-fluid"> <img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
-<section id="binary-outcomes-and-the-bernoulli-family" class="level2" data-number="31.1">
-<h2 data-number="31.1" class="anchored" data-anchor-id="binary-outcomes-and-the-bernoulli-family"><span class="header-section-number">31.1</span> Binary outcomes and the Bernoulli family</h2>
+<section id="binary-outcomes-and-the-bernoulli-family" class="level2" data-number="30.1">
+<h2 data-number="30.1" class="anchored" data-anchor-id="binary-outcomes-and-the-bernoulli-family"><span class="header-section-number">30.1</span> Binary outcomes and the Bernoulli family</h2>
 <p><strong>Binary outcome variables</strong> are very common in linguistics. These are categorical variable that have <strong>two levels</strong>, e.g.:</p>
 <ul>
 <li>yes / no</li>
@@ -775,8 +763,8 @@ p &amp; = 0.8
 <p>Now, what we are trying to do when modelling binary outcome variables is to estimate the probability <span class="math inline">\(p\)</span> from the data. But there is a catch: probabilities are bounded between 0 and 1 and regression models don’t work with bounded variables out of the box!</p>
 <p>Bounded probabilities are transformed into an unbounded numeric variable. The following section explains how.</p>
 </section>
-<section id="probability-and-log-odds" class="level2" data-number="31.2">
-<h2 data-number="31.2" class="anchored" data-anchor-id="probability-and-log-odds"><span class="header-section-number">31.2</span> Probability and log-odds</h2>
+<section id="probability-and-log-odds" class="level2" data-number="30.2">
+<h2 data-number="30.2" class="anchored" data-anchor-id="probability-and-log-odds"><span class="header-section-number">30.2</span> Probability and log-odds</h2>
 <p>As we have just learned probabilities are bounded between 0 and 1 but we need something that is not bounded because regression models don’t work with bounded numeric variables.</p>
 <p>This is where the <strong>logit function</strong> comes in: the logit function (from “<em>log</em>istic un<em>it</em>”) is a mathematical function that transforms probabilities into log-odds.</p>
 <p>The plot below shows the correspondence of probabilities (on the <em>y</em>-axis) and log-odds (on the <em>x</em>-axis), as marked by the black S-shaped line. Since probabilities can’t be smaller than 0 and greater than 1, the black line slopes in either direction and it approaches 0 and 1 on the <em>y</em>-axis without ever reaching them (in mathematical terms, it’s an <em>asymptotic</em> line). It is helpful to just memorise that probability 0.5 corresponds to log-odds 0.</p>
@@ -807,8 +795,8 @@ p &amp; = 0.8
 </div>
 <p>That is all you have to understand for now to be able to fit and interpret a Bernoulli regression!</p>
 </section>
-<section id="fitting-a-bernoulli-model" class="level2" data-number="31.3">
-<h2 data-number="31.3" class="anchored" data-anchor-id="fitting-a-bernoulli-model"><span class="header-section-number">31.3</span> Fitting a Bernoulli model</h2>
+<section id="fitting-a-bernoulli-model" class="level2" data-number="30.3">
+<h2 data-number="30.3" class="anchored" data-anchor-id="fitting-a-bernoulli-model"><span class="header-section-number">30.3</span> Fitting a Bernoulli model</h2>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -826,8 +814,8 @@ Bernoulli, binomial and logistic regression
 </div>
 </div>
 </div>
-<section id="the-data" class="level3" data-number="31.3.1">
-<h3 data-number="31.3.1" class="anchored" data-anchor-id="the-data"><span class="header-section-number">31.3.1</span> The data</h3>
+<section id="the-data" class="level3" data-number="30.3.1">
+<h3 data-number="30.3.1" class="anchored" data-anchor-id="the-data"><span class="header-section-number">30.3.1</span> The data</h3>
 <p>To illustrate how to fit a Bernoulli model, we will use data from <a href="https://uoelel.github.io/qml-data/data/brentari2024/verb_org.html">Brentari 2024</a> on the emergent Nicaraguan Sign Language (<em>Lengua de Señas Nicaragüense</em>, NSL).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>verb_org <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/brentari2024/verb_org.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -871,8 +859,8 @@ dbl (1): Participant
 <p>If you reproduce the plot above you will see now that the order of <code>Num_Predicates</code> in the legend is “single” then “multiple” and that the order of the proportions in the bar chart have flipped.</p>
 <p>Now we can move on onto modelling.</p>
 </section>
-<section id="the-model" class="level3" data-number="31.3.2">
-<h3 data-number="31.3.2" class="anchored" data-anchor-id="the-model"><span class="header-section-number">31.3.2</span> The model</h3>
+<section id="the-model" class="level3" data-number="30.3.2">
+<h3 data-number="30.3.2" class="anchored" data-anchor-id="the-model"><span class="header-section-number">30.3.2</span> The model</h3>
 <p><span class="math display">\[
 \begin{align}
 \text{Num\_Preds}_{MVP} &amp; \sim Bernoulli(p_i) \\
@@ -1583,12 +1571,12 @@ window.onload = function() {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./ch-null-ritual.html" class="pagination-link" aria-label="Frequentist statistics, the Null Ritual and *p*-values">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ch-regression-cat-cat.html" class="pagination-link" aria-label="Regression models: multiple predictors">
-        <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

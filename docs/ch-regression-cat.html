@@ -85,7 +85,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ch-regression-index.html" rel="next">
+<link href="./ch-regression-more.html" rel="next">
 <link href="./ch-interim-summ.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -621,20 +621,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Indexing categorical predictors</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
       </ul>
@@ -651,7 +645,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
   </div>
 </li>
       </ul>
@@ -668,19 +662,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-interaction-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions using indexing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -756,7 +744,7 @@ y &amp; \sim Gaussian(\mu, \sigma)\\
 \end{align}
 \]</span></p>
 <p>In these models, <span class="math inline">\(x\)</span> was a numeric predictor, like speech rate. Numeric predictors are not the only type of predictors that a regression model can handle. Regression predictors can also be categorical: gender, age group, place of articulation, mono- vs bi-lingual, etc. However, regression model cannot handle categorical predictors directly: think about it, what would it mean to multiply <span class="math inline">\(\beta_1\)</span> by “female” or by “old”. Categorical predictors have to be re-coded as numbers.</p>
-<p>In this chapter and the next we will revisit the MALD reaction times (RTs) data from <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>, this time modelling RTs depending on the lexical status of the target work (real vs nonce word). This chapter will teach you the default way of including categorical predictors in regression models: numerical coding with treatment contrasts; while in <a href="ch-regression-index.html" class="quarto-xref"><span>Chapter 28</span></a> you will learn about an alternative way: indexing.</p>
+<p>In this chapter and the next we will revisit the MALD reaction times (RTs) data from <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>, this time modelling RTs depending on the lexical status of the target work (real vs nonce word). This chapter will teach you the default way of including categorical predictors in regression models: numerical coding with treatment contrasts; while in <span class="quarto-unresolved-ref">?sec-regression-index</span> you will learn about an alternative way: indexing.</p>
 <section id="revisiting-reaction-times" class="level2" data-number="27.1">
 <h2 data-number="27.1" class="anchored" data-anchor-id="revisiting-reaction-times"><span class="header-section-number">27.1</span> Revisiting reaction times</h2>
 <p>Let’s read the MALD data <span class="citation" data-cites="tucker2019">(<a href="references.html#ref-tucker2019" role="doc-biblioref">Tucker et al. 2019</a>)</span>.</p>
@@ -1780,8 +1768,8 @@ window.onload = function() {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch-regression-index.html" class="pagination-link" aria-label="Indexing categorical predictors">
-        <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Indexing categorical predictors</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ch-regression-more.html" class="pagination-link" aria-label="More than two levels">
+        <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>30&nbsp; Frequentist statistics, the Null Ritual and p-values – Quantitative Data Analysis for Linguists in R</title>
+<title>29&nbsp; Frequentist statistics, the Null Ritual and p-values – Quantitative Data Analysis for Linguists in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -341,7 +341,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-cat.html">Week 7</a></li><li class="breadcrumb-item"><a href="./ch-null-ritual.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-cat.html">Week 7</a></li><li class="breadcrumb-item"><a href="./ch-null-ritual.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -621,20 +621,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Indexing categorical predictors</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
       </ul>
@@ -651,7 +645,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
   </div>
 </li>
       </ul>
@@ -668,19 +662,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-interaction-index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions using indexing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -718,9 +706,9 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-p-value" id="toc-the-p-value" class="nav-link active" data-scroll-target="#the-p-value"><span class="header-section-number">30.1</span> The <em>p</em>-value</a></li>
-  <li><a href="#the-null-ritual" id="toc-the-null-ritual" class="nav-link" data-scroll-target="#the-null-ritual"><span class="header-section-number">30.2</span> The “Null Ritual”</a></li>
-  <li><a href="#why-prefer-bayesian-inference" id="toc-why-prefer-bayesian-inference" class="nav-link" data-scroll-target="#why-prefer-bayesian-inference"><span class="header-section-number">30.3</span> Why prefer Bayesian inference?</a></li>
+  <li><a href="#the-p-value" id="toc-the-p-value" class="nav-link active" data-scroll-target="#the-p-value"><span class="header-section-number">29.1</span> The <em>p</em>-value</a></li>
+  <li><a href="#the-null-ritual" id="toc-the-null-ritual" class="nav-link" data-scroll-target="#the-null-ritual"><span class="header-section-number">29.2</span> The “Null Ritual”</a></li>
+  <li><a href="#why-prefer-bayesian-inference" id="toc-why-prefer-bayesian-inference" class="nav-link" data-scroll-target="#why-prefer-bayesian-inference"><span class="header-section-number">29.3</span> Why prefer Bayesian inference?</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-null-ritual.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -728,9 +716,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-cat.html">Week 7</a></li><li class="breadcrumb-item"><a href="./ch-null-ritual.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-cat.html">Week 7</a></li><li class="breadcrumb-item"><a href="./ch-null-ritual.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-null-ritual" class="quarto-section-identifier"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></h1>
+<h1 class="title"><span id="sec-null-ritual" class="quarto-section-identifier"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></h1>
 </div>
 
 
@@ -753,8 +741,8 @@ window.Quarto = {
 <p>Most of current research is carried out with frequentist methods. This is a historical accident, based on both an initial misunderstanding of Bayesian statistics (which is, by the way, older than frequentist statistics) and the fact that frequentist maths was much easier (and personal computers did not exist).</p>
 <p>The commonly accepted approach to frequentist inference is the so-called <strong>Null Hypothesis Significance Testing</strong>, or NHST. As practised by researchers, the NHST approach is a (sometimes incoherent) mix of the frequentist work of Fisher on one hand, and Neyman and Pearson on the other. The inconsistent nature of NHST as practised by researchers today has led to the elaboration of the concept and label “<strong>Null Ritual</strong>” <span class="citation" data-cites="gigerenzer2004 gigerenzer2004a gigerenzer2018">(<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">Gigerenzer 2004</a>, <a href="references.html#ref-gigerenzer2018" role="doc-biblioref">2018</a>; <a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer, Krauss, and Vitouch 2004</a>)</span> and the slogan-titled paper <em>The difference between “significant” and “not significant” is not itself statistically significant</em> <span class="citation" data-cites="gelman2006a">(<a href="references.html#ref-gelman2006a" role="doc-biblioref">Gelman and Stern 2006</a>)</span>. The Null Ritual has been criticised by frequentist and Bayesian statisticians alike and has resulted in the proposal of alternative, stricter, versions of NHST, like Statistical Inference as Severe Testing <span class="citation" data-cites="mayo2018 gelman2019">(SIST, <a href="references.html#ref-mayo2018" role="doc-biblioref">Mayo 2018</a>; for a critique see <a href="references.html#ref-gelman2019" role="doc-biblioref">Gelman et al. 2019</a>)</span>.</p>
 <p>The main tenet of the Null Ritual is that you set a <strong>null hypothesis</strong> and you try to <strong>reject</strong> it. A null hypothesis is, in practice, always a <em>nil</em> hypothesis: in other words, it is the hypothesis that there is <em>no</em> difference between two estimands (these usually being means of two or more groups of interest). Using a variety of numerical techniques, one obtains a <strong><em>p</em>-value</strong>, i.e.&nbsp;a frequentist probability. The <em>p</em>-value is used for inference: if the <em>p</em>-value is smaller than a threshold, one can reject the nil hypothesis; if the <em>p</em>-value is equal to or greater than the threshold, you cannot reject the null hypothesis. <em>p</em>-values are very commonly mistaken for Bayesian probabilities <span class="citation" data-cites="cassidy2019">(<a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>)</span> and this results in various misinterpretations of reported results.</p>
-<section id="the-p-value" class="level2" data-number="30.1">
-<h2 data-number="30.1" class="anchored" data-anchor-id="the-p-value"><span class="header-section-number">30.1</span> The <em>p</em>-value</h2>
+<section id="the-p-value" class="level2" data-number="29.1">
+<h2 data-number="29.1" class="anchored" data-anchor-id="the-p-value"><span class="header-section-number">29.1</span> The <em>p</em>-value</h2>
 <p>To illustrate <em>p</em>-values, we will compare simulated durations of vowels when followed by voiceless consonants vs voiced consonants. It is a well-known phenomenon that vowels followed by voiced consonants tend to be longer than vowels followed by voiceless ones <span class="citation" data-cites="coretta2019">(see review in <a href="references.html#ref-coretta2019" role="doc-biblioref">Coretta 2019</a>)</span>. Let’s simulate some vowel duration observations: we do so with the <code>rnorm()</code> function, which takes three arguments: the number of observations to sample and the mean and standard deviation of the Gaussian distribution to sample observations from. We use a <span class="math inline">\(Gaussian(80, 10)\)</span> for durations before voiceless consonants, and a <span class="math inline">\(Gaussian(90, 10)\)</span> for durations before voiced consonants. In other word, there is a difference of 10 milliseconds between the two means. Since the <code>rnorm()</code> function <em>randomly</em> samples from the given distribution, we have set a “seed” so that the code will return the same numbers every time it is run, for reproducibility.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2953</span>)</span>
@@ -780,7 +768,7 @@ window.Quarto = {
 </ul>
 <p><span class="math inline">\(H_0\)</span> simply states that there is no difference between the mean of vowel duration when followed by voiced or voiceless consonants. This is the “null” hypothesis. For <span class="math inline">\(H_1\)</span>, we decide to go with “greater than 0” because we know about the trend of longer vowels before voiced consonants, so the difference should be positive. This is called the “alternative” hypothesis.</p>
 <p>Here is where things get tricky: if <span class="math inline">\(H_0\)</span> is correct, then we should observe a difference as close to 0 as possible. Why not exactly 0? Because it is impossible for two samples (even if they come exactly from the same distribution) to have exactly the same mean for the difference to be 0. But how do we define “as close as possible”? The frequentist solution is to define a probability distribution of the difference between means centred around 0. This means that 0 has the highest probability, but that negative and positive differences around 0 are also possible.</p>
-<p>William Sealy Gosset, a statistician, chemist and brewer who worked for Guinness, the brewery, has proposed the <em>t</em>-distribution (also called the Student-<em>t</em> distribution, from Gosset’s pseudonym “Student”) as an appropriate probability distribution for differences between means. The <em>t</em>-distribution is similar to a Gaussian distribution, but the probability on either side of the mean declines more gently than with the Gaussian. As the Gaussian, the <em>t</em>-distribution has a mean and a standard deviation. It has an extra parameter: the degrees of freedom, or <span class="math inline">\(df\)</span>. The <span class="math inline">\(df\)</span> affect how quickly the probability declines moving away from zero: the higher the <span class="math inline">\(df\)</span> the more quickly the probability gets lower. This is illustrated in <a href="#fig-tdist" class="quarto-xref">Figure&nbsp;<span>30.1</span></a>. The figure shows four different <em>t</em>-distributions: what they all have in common is that the mean is 0 and the standard deviation is 1. These are called “standard” <em>t</em>-distributions. Where they differ is in their degrees of freedom. When the degrees of freedom are infinite (<code>Inf</code>), the <em>t</em>-distribution is equivalent to a Gaussian distribution.</p>
+<p>William Sealy Gosset, a statistician, chemist and brewer who worked for Guinness, the brewery, has proposed the <em>t</em>-distribution (also called the Student-<em>t</em> distribution, from Gosset’s pseudonym “Student”) as an appropriate probability distribution for differences between means. The <em>t</em>-distribution is similar to a Gaussian distribution, but the probability on either side of the mean declines more gently than with the Gaussian. As the Gaussian, the <em>t</em>-distribution has a mean and a standard deviation. It has an extra parameter: the degrees of freedom, or <span class="math inline">\(df\)</span>. The <span class="math inline">\(df\)</span> affect how quickly the probability declines moving away from zero: the higher the <span class="math inline">\(df\)</span> the more quickly the probability gets lower. This is illustrated in <a href="#fig-tdist" class="quarto-xref">Figure&nbsp;<span>29.1</span></a>. The figure shows four different <em>t</em>-distributions: what they all have in common is that the mean is 0 and the standard deviation is 1. These are called “standard” <em>t</em>-distributions. Where they differ is in their degrees of freedom. When the degrees of freedom are infinite (<code>Inf</code>), the <em>t</em>-distribution is equivalent to a Gaussian distribution.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Degrees of freedom to compare</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="cn">Inf</span>)</span>
@@ -813,7 +801,7 @@ window.Quarto = {
 <img src="ch-null-ritual_files/figure-html/fig-tdist-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;30.1: Example <em>t</em>-distributions with different degrees of freedom and fixed mean and standard deviation (mean = 0, sd = 1).
+Figure&nbsp;29.1: Example <em>t</em>-distributions with different degrees of freedom and fixed mean and standard deviation (mean = 0, sd = 1).
 </figcaption>
 </figure>
 </div>
@@ -854,7 +842,7 @@ t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> ( (var_voi<span class="sc">/</span><span class="dv">15</span> <span class="sc">+</span> var_vls<span class="sc">/</span><span class="dv">15</span>)<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>      ( ((var_voi<span class="sc">/</span><span class="dv">15</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">15</span> <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">+</span> ((var_vls<span class="sc">/</span><span class="dv">15</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">15</span> <span class="sc">-</span> <span class="dv">1</span>)) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The degrees of freedom for our data are approximately 28. <a href="#fig-tdist-2" class="quarto-xref">Figure&nbsp;<span>30.2</span></a> shows a <em>t</em>-distribution with those degrees of freedom and a dashed line where our <em>t</em>-statistic falls. The shaded purple area marks the area under the probability curve with <em>t</em> values equal or greater than the obtained <em>t</em>-statistic. The size of this area is the probability that we get a <em>t</em> value equal or greater than the obtained <em>t</em>-statistic. This probability is the <em>p</em>-value!</p>
+<p>The degrees of freedom for our data are approximately 28. <a href="#fig-tdist-2" class="quarto-xref">Figure&nbsp;<span>29.2</span></a> shows a <em>t</em>-distribution with those degrees of freedom and a dashed line where our <em>t</em>-statistic falls. The shaded purple area marks the area under the probability curve with <em>t</em> values equal or greater than the obtained <em>t</em>-statistic. The size of this area is the probability that we get a <em>t</em> value equal or greater than the obtained <em>t</em>-statistic. This probability is the <em>p</em>-value!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">df =</span> df) <span class="sc">|&gt;</span></span>
@@ -887,7 +875,7 @@ t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
 <img src="ch-null-ritual_files/figure-html/fig-tdist-2-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tdist-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;30.2: Standard <em>t</em>-distribution and obtained <em>t</em>-statistic.
+Figure&nbsp;29.2: Standard <em>t</em>-distribution and obtained <em>t</em>-statistic.
 </figcaption>
 </figure>
 </div>
@@ -904,12 +892,12 @@ Figure&nbsp;30.2: Standard <em>t</em>-distribution and obtained <em>t</em>-stati
 <p>In other words, assuming <span class="math inline">\(H_0\)</span> is true and there is not difference between the two groups of vowel duration, the probability of obtaining a <em>t</em>-statistic greater or equal to 2.4374424 is approximately 0.01. In other words, there is approximately a 1% probability that the difference between durations of vowels followed by voiced or voiceless consonants is 7.4399103 or larger. Of course, we want the <em>p</em>-value to be as small as possible: if <span class="math inline">\(H_0\)</span> is true and the true difference is 0, finding a large difference should be very unlikely (think about the <em>t</em>-distribution: values away from 0 are less likely than 0 and values closer to 0).</p>
 <p>But how do we decide how small is small enough? Is 1% small enough? What about 0.5%? 5%?, maybe 10%? This is the so-called <span class="math inline">\(\alpha\)</span>-level (read “alpha level”, from the Greek letter <span class="math inline">\(\alpha\)</span>). We will get back to the issue of setting an <span class="math inline">\(\alpha\)</span>-level in the next section, but for now now that in social research it has become standard to set it to 0.05. In other words, if the <em>p</em>-value is lower than <span class="math inline">\(\alpha = 0.05\)</span> then we take the <em>p</em>-value to be small enough, otherwise we don’t. When the <em>p</em>-value is smaller than 0.05, we say we found a <em>statistically significant difference</em>, when it is equal or greater than 0.05, we say we found a <em>statistically non-significant difference</em>. When we find a statistical significant difference, the frequentist story goes, we say that we <em>reject</em> the null hypothesis <span class="math inline">\(H_0\)</span>. In our simulated example of vowel duration, the <em>p</em>-value is smaller than 0.05, so we say the mean vowel durations before voiced vs voiceless consonants are (statistically) significantly different from each other.</p>
 </section>
-<section id="the-null-ritual" class="level2" data-number="30.2">
-<h2 data-number="30.2" class="anchored" data-anchor-id="the-null-ritual"><span class="header-section-number">30.2</span> The “Null Ritual”</h2>
+<section id="the-null-ritual" class="level2" data-number="29.2">
+<h2 data-number="29.2" class="anchored" data-anchor-id="the-null-ritual"><span class="header-section-number">29.2</span> The “Null Ritual”</h2>
 <p>XXX</p>
 </section>
-<section id="why-prefer-bayesian-inference" class="level2" data-number="30.3">
-<h2 data-number="30.3" class="anchored" data-anchor-id="why-prefer-bayesian-inference"><span class="header-section-number">30.3</span> Why prefer Bayesian inference?</h2>
+<section id="why-prefer-bayesian-inference" class="level2" data-number="29.3">
+<h2 data-number="29.3" class="anchored" data-anchor-id="why-prefer-bayesian-inference"><span class="header-section-number">29.3</span> Why prefer Bayesian inference?</h2>
 <p>Here are a few practical and conceptual reasons for why Bayesian statistics might be more appropriate in most research contexts.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1609,12 +1597,12 @@ window.onload = function() {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./ch-regression-more.html" class="pagination-link" aria-label="More than two levels">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">More than two levels</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ch-regression-bernoulli.html" class="pagination-link" aria-label="Binary outcomes">
-        <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
