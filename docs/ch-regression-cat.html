@@ -712,6 +712,7 @@ window.Quarto = {
   <li><a href="#posterior-predictions" id="toc-posterior-predictions" class="nav-link" data-scroll-target="#posterior-predictions"><span class="header-section-number">27.4</span> Posterior predictions</a></li>
   <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">27.5</span> Reporting</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">27.6</span> Conclusion</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">27.7</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-cat.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1211,13 +1212,41 @@ Figure&nbsp;27.5: Posterior predictions of RT by word type.
 </section>
 <section id="reporting" class="level2" data-number="27.5">
 <h2 data-number="27.5" class="anchored" data-anchor-id="reporting"><span class="header-section-number">27.5</span> Reporting</h2>
+<p>Reporting regression models with categorical predictors is not too different from reporting models with a numeric predictor, but there are a couple of things that you need to keep in mind. With a categorical predictor you should report the estimates for the intercept, the difference from the intercept and the predicted value for the second level in the categorical predictor. You should also tell the reader how the categorical predictor was coded. Here is the full report for our model of reaction times.</p>
+<blockquote class="blockquote">
+<p>We fitted a Bayesian regression model using the brms package <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. We used a Gaussian distribution for the outcome variable, reaction times (in milliseconds). We included word type (real vs nonce word) as the regression predictor. Word type was coded using the default R treatment contrasts, with real word set as the reference level.</p>
+<p>Based on the model results, there is a 95% probability that the mean RT with real words is between 941 and 965 ms (mean = 953, SD = 6). When the word is a nonce word, the RTs are between 1057 and 1082 ms at 95% confidence (mean = 1069, SD = 6). When comparing RTs for nonce vs real words, there is an 95% probability that the difference is between 99 to 134 ms (mean = 116, SD = 9). The residual standard deviation is between 306 and 319 ms (mean = 312, SD = 3).</p>
+</blockquote>
 </section>
 <section id="conclusion" class="level2" data-number="27.6">
 <h2 data-number="27.6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">27.6</span> Conclusion</h2>
-<p>The model suggested that RTs with nonce words are 99-134 ms longer than RTs with real words. Now, <em>is a difference of 99-134 ms a linguistically meaningful one?</em> Statistics cannot help with that: only a well developed mathematical model of lexical retrieval and related neurocognitive processes would allow us to make any statement regarding the linguistic relevance of a particular result. This aspect applies to any statistical approach, whether frequentist or Bayesian. Within a frequentist framework (which you will learn about in <a href="ch-null-ritual.html" class="quarto-xref"><span>Chapter 29</span></a>), “statistical significance” is <em>not</em> “linguistic significance”. A difference between two groups can be “statistically significant” and not be linguistically meaningful and vice versa. Within the Bayesian framework, getting posterior distributions that are very certain (like the ones we have gotten so far) doesn’t necessarily mean that we have a better understanding of the processes behind the phenomenon we are investigating. After having obtained estimates from a model, always ask yourself: <strong>what do those estimates mean, based on our current understanding of the linguistic phenomenon under investigation?</strong></p>
+<p>To summarise, the model suggests that RTs with nonce words are 99-134 ms longer than RTs with real words. Now, <em>is a difference of 99-134 ms a linguistically meaningful one?</em> Statistics cannot help with that: only a well developed mathematical model of lexical retrieval and related neurocognitive processes would allow us to make any statement regarding the linguistic relevance of a particular result. This aspect applies to any statistical approach, whether frequentist or Bayesian. Within a frequentist framework (which you will learn about in <a href="ch-null-ritual.html" class="quarto-xref"><span>Chapter 29</span></a>), “statistical significance” is <em>not</em> “linguistic significance”. A difference between two groups can be “statistically significant” and not be linguistically meaningful and vice versa. Within the Bayesian framework, getting posterior distributions that are very certain (like the ones we have gotten so far) doesn’t necessarily mean that we have a better understanding of the processes behind the phenomenon we are investigating. After having obtained estimates from a model, always ask yourself: <strong>what do those estimates mean, based on our current understanding of the linguistic phenomenon under investigation?</strong></p>
+</section>
+<section id="summary" class="level2" data-number="27.7">
+<h2 data-number="27.7" class="anchored" data-anchor-id="summary"><span class="header-section-number">27.7</span> Summary</h2>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul>
+<li><p><strong>Categorical predictors</strong> can be included in regression models by coding them as numbers.</p></li>
+<li><p>The most common coding system uses <strong>treatment contrasts</strong>. The reference level is coded as 0 and the other level is coded as 1.</p></li>
+<li><p>The <strong>intercept is the mean outcome for the reference level</strong> of the categorical predictor. The <strong>slope is the difference</strong> in mean outcome between the second level and the reference.</p></li>
+</ul>
+</div>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-burkner2017" class="csl-entry" role="listitem">
+Bürkner, Paul-Christian. 2017. <span>“Brms: An r Package for Bayesian Multilevel Models Using Stan.”</span> <em>Journal of Statistical Software</em> 80 (1): 128. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>.
+</div>
+<div id="ref-rcoreteam2025" class="csl-entry" role="listitem">
+R Core Team. 2025. <em>R: A Language and Environment for Statistical Computing [Version 4.5.0]</em>.
+</div>
 <div id="ref-tucker2019" class="csl-entry" role="listitem">
 Tucker, Benjamin V, Daniel Brenner, Kyle Danielson D, Matthew C Kelley, Filip Nenadić, and Michelle Sims. 2019. <span>“The Massive Auditory Lexical Decision (MALD) Database.”</span> <em>Behavior Research Methods</em> 51 (3): 11871204. <a href="https://doi.org/10.3758/s13428-018-1056-1">https://doi.org/10.3758/s13428-018-1056-1</a>.
 </div>

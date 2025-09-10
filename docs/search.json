@@ -1436,6 +1436,50 @@
     ]
   },
   {
+    "objectID": "ch-regression-cat.html#posterior-predictions",
+    "href": "ch-regression-cat.html#posterior-predictions",
+    "title": "27  Regression with categorical predictors",
+    "section": "27.4 Posterior predictions",
+    "text": "27.4 Posterior predictions\nThe coefficients are just telling us the difference in RT between nonce and real words, but not the predicted mean RT for nonce words. As in Chapter 25, we can simply plug in the draws from the model according to the model formulae to obtain any estimand of interest, like the posterior predictions of RTs when the word is not a real word. Remember, for nonce words (\\(w_i = 1\\)):\n\\[\n\\begin{align}\n\\mu_{\\text{F}} & = \\beta_0 + \\beta_1 \\cdot 1 = \\beta_0 + \\beta_1\n\\end{align}\n\\]\nTo get the predicted RTs for nonce words we need to sum b_Intercept and b_IsWordFALSE. Since we are at it, we also create a column for real words (that is just b_Intercept so we are basically just copying it that column; remember, \\(\\mu_T = \\beta_1\\)).\n\nrt_bm_1_draws &lt;- as_draws_df(rt_bm_1) |&gt; \n  mutate(\n    real = b_Intercept,\n    nonce = b_Intercept + b_IsWordFALSE\n  )\n\nquantile2(rt_bm_1_draws$real, c(0.025, 0.975)) |&gt; round()\n\n q2.5 q97.5 \n  941   965 \n\nquantile2(rt_bm_1_draws$nonce, c(0.025, 0.975)) |&gt; round()\n\n q2.5 q97.5 \n 1057  1082 \n\n\nThe CrI for nonce is the same as the one you see in the model summary for Intercept. when the word is not a real word, the RTs are between 1057 and 1080 ms at 95% probability. Compare this with the mean RTs when the word is a real word: 95% CrI [941, 965] ms. Reaction times are longer with nonce words than with real words, as b_IsWordFALSE indicated. The conditional_effect() function from brms plots predicted values of the outcome variable depending on specified predictors. We can use it to plot the 95% CrIs (and mean) of the predicted RTs depending on word type.\n\nconditional_effects(rt_bm_1, effects = \"IsWord\")\n\n\n\n\n\n\n\n\nI always find plotting the full posterior distributions to be more informative (and I find the plots with error bars and dots to be potentially misleading, since they are just showing summaries of the posteriors). We have already the posterior draws of RTs with real words (b_Intercept; and those with nonce words, but to make plotting more straightforward we need to pivot the data.\nPivoting is the process of changing the shape of the data from a long format to a wide format and vice versa. You can find nice animations on Garrick Aden-Buie’s website that illustrate the process visually. What we need is pivoting from a wide to a long format: rt_bm_1_draws has two columns we are interested in, real and nonce, but to plot we need a column like word_type which says if the posterior prediction is for real or nonce words and a column like pred for the posterior prediction. We can achieve this with the pivot_longer() function from tidyr (another tidyverse package). You can learn more about pivoting in the package vignette Pivoting. We first select the two columns we want to pivot, real and nonce with select(), then we pivot with pivot_longer(): the function needs to know which columns to pivot and here we are saying to pivot all columns with the special tidyverse function everything() (note that this only works with certain tidyverse functions). Then we need to tell pivot_longer() what we want to name the column with the original column names and what name we want for the column with the values of the original columns. Check the result and play around with the code to understand how pivoting works.\n\nrt_bm_1_long &lt;- rt_bm_1_draws |&gt; \n  select(real, nonce) |&gt; \n  pivot_longer(everything(), names_to = \"word_type\", values_to = \"pred\")\n\nWarning: Dropping 'draws_df' class as required metadata was removed.\n\nrt_bm_1_long\n\n\n  \n\n\n\nNow we can plot the data with ggplot and ggdist’s stat_halfeye(). We are setting the error bars to show the 50% and 95% CrI (.width = c(0.5, 0.95)). I have also added code on the last line to manually set the “breaks” of the x-axis using the breaks argument in scale_x_continuous().\n\nrt_bm_1_long |&gt; \n  ggplot(aes(pred, word_type)) +\n  stat_halfeye(.width = c(0.5, 0.95)) +\n  scale_x_continuous(breaks = seq(920, 1100, by = 20)) +\n  labs(\n    x = \"Predicted RTs (ms)\", y = \"Word type\"\n  )\n\n\n\n\n\n\n\nFigure 27.5: Posterior predictions of RT by word type.",
+    "crumbs": [
+      "Week 7",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Regression with categorical predictors</span>"
+    ]
+  },
+  {
+    "objectID": "ch-regression-cat.html#reporting",
+    "href": "ch-regression-cat.html#reporting",
+    "title": "27  Regression with categorical predictors",
+    "section": "27.5 Reporting",
+    "text": "27.5 Reporting\nReporting regression models with categorical predictors is not too different from reporting models with a numeric predictor, but there are a couple of things that you need to keep in mind. With a categorical predictor you should report the estimates for the intercept, the difference from the intercept and the predicted value for the second level in the categorical predictor. You should also tell the reader how the categorical predictor was coded. Here is the full report for our model of reaction times.\n\nWe fitted a Bayesian regression model using the brms package (Bürkner 2017) in R (R Core Team 2025). We used a Gaussian distribution for the outcome variable, reaction times (in milliseconds). We included word type (real vs nonce word) as the regression predictor. Word type was coded using the default R treatment contrasts, with real word set as the reference level.\nBased on the model results, there is a 95% probability that the mean RT with real words is between 941 and 965 ms (mean = 953, SD = 6). When the word is a nonce word, the RTs are between 1057 and 1082 ms at 95% confidence (mean = 1069, SD = 6). When comparing RTs for nonce vs real words, there is an 95% probability that the difference is between 99 to 134 ms (mean = 116, SD = 9). The residual standard deviation is between 306 and 319 ms (mean = 312, SD = 3).",
+    "crumbs": [
+      "Week 7",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Regression with categorical predictors</span>"
+    ]
+  },
+  {
+    "objectID": "ch-regression-cat.html#conclusion",
+    "href": "ch-regression-cat.html#conclusion",
+    "title": "27  Regression with categorical predictors",
+    "section": "27.6 Conclusion",
+    "text": "27.6 Conclusion\nTo summarise, the model suggests that RTs with nonce words are 99-134 ms longer than RTs with real words. Now, is a difference of 99-134 ms a linguistically meaningful one? Statistics cannot help with that: only a well developed mathematical model of lexical retrieval and related neurocognitive processes would allow us to make any statement regarding the linguistic relevance of a particular result. This aspect applies to any statistical approach, whether frequentist or Bayesian. Within a frequentist framework (which you will learn about in Chapter 29), “statistical significance” is not “linguistic significance”. A difference between two groups can be “statistically significant” and not be linguistically meaningful and vice versa. Within the Bayesian framework, getting posterior distributions that are very certain (like the ones we have gotten so far) doesn’t necessarily mean that we have a better understanding of the processes behind the phenomenon we are investigating. After having obtained estimates from a model, always ask yourself: what do those estimates mean, based on our current understanding of the linguistic phenomenon under investigation?",
+    "crumbs": [
+      "Week 7",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Regression with categorical predictors</span>"
+    ]
+  },
+  {
+    "objectID": "ch-regression-cat.html#summary",
+    "href": "ch-regression-cat.html#summary",
+    "title": "27  Regression with categorical predictors",
+    "section": "27.7 Summary",
+    "text": "27.7 Summary\n\n\n\n\n\n\n\nCategorical predictors can be included in regression models by coding them as numbers.\nThe most common coding system uses treatment contrasts. The reference level is coded as 0 and the other level is coded as 1.\nThe intercept is the mean outcome for the reference level of the categorical predictor. The slope is the difference in mean outcome between the second level and the reference.\n\n\n\n\n\n\n\n\nBürkner, Paul-Christian. 2017. “Brms: An r Package for Bayesian Multilevel Models Using Stan.” Journal of Statistical Software 80 (1): 128. https://doi.org/10.18637/jss.v080.i01.\n\n\nR Core Team. 2025. R: A Language and Environment for Statistical Computing [Version 4.5.0].\n\n\nTucker, Benjamin V, Daniel Brenner, Kyle Danielson D, Matthew C Kelley, Filip Nenadić, and Michelle Sims. 2019. “The Massive Auditory Lexical Decision (MALD) Database.” Behavior Research Methods 51 (3): 11871204. https://doi.org/10.3758/s13428-018-1056-1.",
+    "crumbs": [
+      "Week 7",
+      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Regression with categorical predictors</span>"
+    ]
+  },
+  {
     "objectID": "ch-regression-more.html",
     "href": "ch-regression-more.html",
     "title": "28  More than two levels",
@@ -1674,39 +1718,6 @@
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>A</span>  <span class='chapter-title'>Regression models cheat sheet</span>"
-    ]
-  },
-  {
-    "objectID": "ch-regression-cat.html#posterior-predictions",
-    "href": "ch-regression-cat.html#posterior-predictions",
-    "title": "27  Regression with categorical predictors",
-    "section": "27.4 Posterior predictions",
-    "text": "27.4 Posterior predictions\nThe coefficients are just telling us the difference in RT between nonce and real words, but not the predicted mean RT for nonce words. As in Chapter 25, we can simply plug in the draws from the model according to the model formulae to obtain any estimand of interest, like the posterior predictions of RTs when the word is not a real word. Remember, for nonce words (\\(w_i = 1\\)):\n\\[\n\\begin{align}\n\\mu_{\\text{F}} & = \\beta_0 + \\beta_1 \\cdot 1 = \\beta_0 + \\beta_1\n\\end{align}\n\\]\nTo get the predicted RTs for nonce words we need to sum b_Intercept and b_IsWordFALSE. Since we are at it, we also create a column for real words (that is just b_Intercept so we are basically just copying it that column; remember, \\(\\mu_T = \\beta_1\\)).\n\nrt_bm_1_draws &lt;- as_draws_df(rt_bm_1) |&gt; \n  mutate(\n    real = b_Intercept,\n    nonce = b_Intercept + b_IsWordFALSE\n  )\n\nquantile2(rt_bm_1_draws$real, c(0.025, 0.975)) |&gt; round()\n\n q2.5 q97.5 \n  941   965 \n\nquantile2(rt_bm_1_draws$nonce, c(0.025, 0.975)) |&gt; round()\n\n q2.5 q97.5 \n 1057  1082 \n\n\nThe CrI for nonce is the same as the one you see in the model summary for Intercept. when the word is not a real word, the RTs are between 1057 and 1080 ms at 95% probability. Compare this with the mean RTs when the word is a real word: 95% CrI [941, 965] ms. Reaction times are longer with nonce words than with real words, as b_IsWordFALSE indicated. The conditional_effect() function from brms plots predicted values of the outcome variable depending on specified predictors. We can use it to plot the 95% CrIs (and mean) of the predicted RTs depending on word type.\n\nconditional_effects(rt_bm_1, effects = \"IsWord\")\n\n\n\n\n\n\n\n\nI always find plotting the full posterior distributions to be more informative (and I find the plots with error bars and dots to be potentially misleading, since they are just showing summaries of the posteriors). We have already the posterior draws of RTs with real words (b_Intercept; and those with nonce words, but to make plotting more straightforward we need to pivot the data.\nPivoting is the process of changing the shape of the data from a long format to a wide format and vice versa. You can find nice animations on Garrick Aden-Buie’s website that illustrate the process visually. What we need is pivoting from a wide to a long format: rt_bm_1_draws has two columns we are interested in, real and nonce, but to plot we need a column like word_type which says if the posterior prediction is for real or nonce words and a column like pred for the posterior prediction. We can achieve this with the pivot_longer() function from tidyr (another tidyverse package). You can learn more about pivoting in the package vignette Pivoting. We first select the two columns we want to pivot, real and nonce with select(), then we pivot with pivot_longer(): the function needs to know which columns to pivot and here we are saying to pivot all columns with the special tidyverse function everything() (note that this only works with certain tidyverse functions). Then we need to tell pivot_longer() what we want to name the column with the original column names and what name we want for the column with the values of the original columns. Check the result and play around with the code to understand how pivoting works.\n\nrt_bm_1_long &lt;- rt_bm_1_draws |&gt; \n  select(real, nonce) |&gt; \n  pivot_longer(everything(), names_to = \"word_type\", values_to = \"pred\")\n\nWarning: Dropping 'draws_df' class as required metadata was removed.\n\nrt_bm_1_long\n\n\n  \n\n\n\nNow we can plot the data with ggplot and ggdist’s stat_halfeye(). We are setting the error bars to show the 50% and 95% CrI (.width = c(0.5, 0.95)). I have also added code on the last line to manually set the “breaks” of the x-axis using the breaks argument in scale_x_continuous().\n\nrt_bm_1_long |&gt; \n  ggplot(aes(pred, word_type)) +\n  stat_halfeye(.width = c(0.5, 0.95)) +\n  scale_x_continuous(breaks = seq(920, 1100, by = 20)) +\n  labs(\n    x = \"Predicted RTs (ms)\", y = \"Word type\"\n  )\n\n\n\n\n\n\n\nFigure 27.5: Posterior predictions of RT by word type.",
-    "crumbs": [
-      "Week 7",
-      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Regression with categorical predictors</span>"
-    ]
-  },
-  {
-    "objectID": "ch-regression-cat.html#reporting",
-    "href": "ch-regression-cat.html#reporting",
-    "title": "27  Regression with categorical predictors",
-    "section": "27.5 Reporting",
-    "text": "27.5 Reporting",
-    "crumbs": [
-      "Week 7",
-      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Regression with categorical predictors</span>"
-    ]
-  },
-  {
-    "objectID": "ch-regression-cat.html#conclusion",
-    "href": "ch-regression-cat.html#conclusion",
-    "title": "27  Regression with categorical predictors",
-    "section": "27.6 Conclusion",
-    "text": "27.6 Conclusion\nThe model suggested that RTs with nonce words are 99-134 ms longer than RTs with real words. Now, is a difference of 99-134 ms a linguistically meaningful one? Statistics cannot help with that: only a well developed mathematical model of lexical retrieval and related neurocognitive processes would allow us to make any statement regarding the linguistic relevance of a particular result. This aspect applies to any statistical approach, whether frequentist or Bayesian. Within a frequentist framework (which you will learn about in Chapter 29), “statistical significance” is not “linguistic significance”. A difference between two groups can be “statistically significant” and not be linguistically meaningful and vice versa. Within the Bayesian framework, getting posterior distributions that are very certain (like the ones we have gotten so far) doesn’t necessarily mean that we have a better understanding of the processes behind the phenomenon we are investigating. After having obtained estimates from a model, always ask yourself: what do those estimates mean, based on our current understanding of the linguistic phenomenon under investigation?\n\n\n\n\nTucker, Benjamin V, Daniel Brenner, Kyle Danielson D, Matthew C Kelley, Filip Nenadić, and Michelle Sims. 2019. “The Massive Auditory Lexical Decision (MALD) Database.” Behavior Research Methods 51 (3): 11871204. https://doi.org/10.3758/s13428-018-1056-1.",
-    "crumbs": [
-      "Week 7",
-      "<span class='chapter-number'>27</span>  <span class='chapter-title'>Regression with categorical predictors</span>"
     ]
   }
 ]
