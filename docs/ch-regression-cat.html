@@ -709,7 +709,7 @@ window.Quarto = {
   <li><a href="#revisiting-reaction-times" id="toc-revisiting-reaction-times" class="nav-link active" data-scroll-target="#revisiting-reaction-times"><span class="header-section-number">27.1</span> Revisiting reaction times</a></li>
   <li><a href="#treatment-contrasts" id="toc-treatment-contrasts" class="nav-link" data-scroll-target="#treatment-contrasts"><span class="header-section-number">27.2</span> Treatment contrasts</a></li>
   <li><a href="#model-rts-by-word-type" id="toc-model-rts-by-word-type" class="nav-link" data-scroll-target="#model-rts-by-word-type"><span class="header-section-number">27.3</span> Model RTs by word type</a></li>
-  <li><a href="#posterior-predictions" id="toc-posterior-predictions" class="nav-link" data-scroll-target="#posterior-predictions"><span class="header-section-number">27.4</span> Posterior predictions</a></li>
+  <li><a href="#sec-reg-cat-pred" id="toc-sec-reg-cat-pred" class="nav-link" data-scroll-target="#sec-reg-cat-pred"><span class="header-section-number">27.4</span> Posterior predictions</a></li>
   <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">27.5</span> Reporting</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">27.6</span> Conclusion</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">27.7</span> Summary</a></li>
@@ -1131,8 +1131,8 @@ Figure&nbsp;27.4: Density plots of the posterior probability distributions of th
 </ul>
 <p>So here we have our answer: at 95% confidence (another way of saying at 95% probability), based on the model and data, RTs for nonce words are 99 to 134 ms longer than RTs for real words. What about the predicted RTs for nonce words?</p>
 </section>
-<section id="posterior-predictions" class="level2" data-number="27.4">
-<h2 data-number="27.4" class="anchored" data-anchor-id="posterior-predictions"><span class="header-section-number">27.4</span> Posterior predictions</h2>
+<section id="sec-reg-cat-pred" class="level2" data-number="27.4">
+<h2 data-number="27.4" class="anchored" data-anchor-id="sec-reg-cat-pred"><span class="header-section-number">27.4</span> Posterior predictions</h2>
 <p>The coefficients are just telling us the difference in RT between nonce and real words, but not the predicted mean RT for nonce words. As in <a href="ch-regression-draws.html" class="quarto-xref"><span>Chapter 25</span></a>, we can simply plug in the draws from the model according to the model formulae to obtain any estimand of interest, like the posterior predictions of RTs when the word is not a real word. Remember, for nonce words (<span class="math inline">\(w_i = 1\)</span>):</p>
 <p><span class="math display">\[
 \begin{align}
