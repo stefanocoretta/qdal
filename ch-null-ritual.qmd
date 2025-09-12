@@ -15,11 +15,11 @@ In @sec-bayes, you were introduced to the Bayesian approach to inference, and we
 
 ## Frequentist statistics, feuds and eugenics: a brief history
 
-A lot of current research is carried out with frequentist methods. This is a historical accident, based on both an initial misunderstanding of Bayesian statistics (which is, by the way, older than frequentist statistics) and the fact that frequentist maths was much easier to deal with (and personal computers did not exist at the time). Bayesian statistics, rooted in Thomas Bayes's (1701-1771) work on updating probabilities with new evidence based on a specific interpration of Bayes' Theorem, remained largely dormant until the 20th century due to computational difficulties and philosophical debates. It gained widespread traction in the 1990s with advances in computational methods, especially the development of Markov Chain Monte Carlo ( @sec-regression-draws). However, modern frequentist statistics is attributed to three statisticians whose lives span several decades before the time Bayesianism found a place in statistical debates: Ronald Fisher (1890-1926), Jerzy Neyman (1894-1981) and Egon Pearson (1895-1980, the son of another statistician, Karl Pearson 1857-1936).
+A lot of current research is carried out with frequentist methods. This is a historical accident, based on both an initial misunderstanding of Bayesian statistics (which is, by the way, older than frequentist statistics) and the fact that frequentist maths was much easier to deal with (and personal computers did not exist at the time). Bayesian statistics, rooted in [Thomas Bayes](https://en.wikipedia.org/wiki/Thomas_Bayes)'s (1701-1771) work on updating probabilities with new evidence based on a specific interpration of Bayes' Theorem, remained largely dormant until the 20th century due to computational difficulties and philosophical debates. It gained widespread traction in the 1990s with advances in computational methods, especially the development of Markov Chain Monte Carlo ( @sec-regression-draws). However, modern frequentist statistics is attributed to three statisticians whose lives span several decades before the time Bayesianism found a place in statistical debates: Ronald Fisher (1890-1926), Jerzy Neyman (1894-1981) and Egon Pearson (1895-1980, the son of another statistician, Karl Pearson 1857-1936).
 
-The history of frequentist statistics is a tale of heated debates, feuds and the now discredited field of eugenics (a colonial movement with the aim of improving the genetic "quality" of human populations). Francis Galton (1822-1911) is considered the originator of eugenics: this is the same Galton who came up with the idea of "regression toward mediocrity" which gives the name to regression models (see Spotlight box in @sec-reg-intro). Karl Pearson was deeply influenced by Galton and saw statistics as a tool for improving racial fitness. Pearson's Biometric School in Britain was explicitly tied to eugenics research. Ronald Fisher was another British statistician who strongly believed in eugenics and racial differences. While both K. Pearson and Fisher were proponents of eugenics, they differed in their understanding of statistics. Fisher criticised K. Pearson's approach as too mechanic and simplistic (thus earning the elder statistician’s lasting disapproval). Fisher came up with the concept of **statistical significance** and devised the famous ***p*****-value** as a way to quantify statistical significance based on data, against a hypothesis (to be nullified) of how the researcher thought the data were produced.
+The history of frequentist statistics is a tale of heated debates, feuds and the now discredited field of eugenics (a colonial movement with the aim of improving the genetic "quality" of human populations). [Francis Galton](https://en.wikipedia.org/wiki/Francis_Galton) (1822-1911) is considered the originator of eugenics: this is the same Galton who came up with the idea of "regression toward mediocrity" which gives the name to regression models (see Spotlight box in @sec-reg-intro). [Karl Pearson](https://en.wikipedia.org/wiki/Karl_Pearson) was deeply influenced by Galton and saw statistics as a tool for improving racial fitness. Pearson's Biometric School in Britain was explicitly tied to eugenics research. [Ronald Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher) was another British statistician who strongly believed in eugenics and racial differences. While both K. Pearson and Fisher were proponents of eugenics, they differed in their understanding of statistics. Fisher criticised K. Pearson's approach as too mechanic and simplistic (thus earning the elder statistician’s lasting disapproval). Fisher came up with the concept of **statistical significance** and devised the famous ***p*****-value** as a way to quantify statistical significance based on data, against a hypothesis (to be nullified) of how the researcher thought the data were produced.
 
-Fisher's contemporaries Jerzy Neyman and Egon Pearson (the son of K. Pearson), who both rejected eugenics, found Fisher's critiques to K. Pearson's (the father) approach well-founded, but they themselves thought Fisher's significance testing fell short. While Fisher's significance testing was based on quantifying significance in light of a single hypothesis, Neyman and E. Pearson (the son) argued that one should contrast two opposing hypotheses and control for error rates in rejecting one and accepting the other. They thus introduced the idea of "**significance level**", a threshold which determined if one accepted a result as statistical significant or not. In sum, while Fisher's approach was focused on estimating the *degree* of statistical significance, Neyman and Pearson's approach was more interested in *decision-making* under uncertainty. "Fisherian frequentism" and "Neyman–Pearson frequentism", as they later became to be known, are incompatible approaches, despite both being based on the same statistical concept of the *p*-value, because they entail two very different interpretations of statistical significance (and the objective of research more generally).
+Fisher's contemporaries [Jerzy Neyman](https://en.wikipedia.org/wiki/Jerzy_Neyman) and [Egon Pearson](https://en.wikipedia.org/wiki/Egon_Pearson) (the son of K. Pearson), who both rejected eugenics, found Fisher's critiques to K. Pearson's (the father) approach well-founded, but they themselves thought Fisher's significance testing fell short. While Fisher's significance testing was based on quantifying significance in light of a single hypothesis, Neyman and E. Pearson (the son) argued that one should contrast two opposing hypotheses and control for error rates in rejecting one and accepting the other. They thus introduced the idea of "**significance level**", a threshold which determined if one accepted a result as statistical significant or not. In sum, while Fisher's approach was focused on estimating the *degree* of statistical significance, Neyman and Pearson's approach was more interested in *decision-making* under uncertainty. "Fisherian frequentism" and "Neyman–Pearson frequentism", as they later became to be known, are incompatible approaches, despite both being based on the same statistical concept of the *p*-value, because they entail two very different interpretations of statistical significance (and the objective of research more generally).
 
 ## Null Hypothesis Significance Testing
 
@@ -52,17 +52,19 @@ diff <- mean_voi - mean_vls
 diff
 ```
 
-The difference in the sample means is about `{r} round(diff, 1)`. Now, a frequentist statistician would define the following two hypotheses:
+The difference in the sample means is about `{r} round(diff, 1)`. Now, a NHST researcher would define the following two hypotheses:
 
 -   $H_0$: the difference between means is 0.
 
--   $H1$: the difference between means is *greater than* 0.
+-   $H1$: the difference between means is *not* 0.
 
-$H_0$ simply states that there is no difference between the mean of vowel duration when followed by voiced or voiceless consonants. This is the "null" hypothesis. For $H_1$, we decide to go with "greater than 0" because we know about the trend of longer vowels before voiced consonants, so the difference should be positive. This is called the "alternative" hypothesis.
+$H_0$ simply states that there is no difference between the mean of vowel duration when followed by voiced or voiceless consonants. This is the "null" hypothesis. $H_1$, called the "alternative" hypothesis, states that the difference between means is different from exactly 0. We could have decided to go with "greater than 0", rather than just "not 0 ", because we know about the trend of longer vowels before voiced consonants, so the difference should be positive. But this is not how NHST is usually set up: it is always assumed that the $H_1$ is "the difference between means is not 0".
 
 Here is where things get tricky: if $H_0$ is correct, then we should observe a difference as close to 0 as possible. Why not exactly 0? Because it is impossible for two samples (even if they come exactly from the same distribution) to have exactly the same mean for the difference to be 0. But how do we define "as close as possible"? The frequentist solution is to define a probability distribution of the difference between means centred around 0. This means that 0 has the highest probability, but that negative and positive differences around 0 are also possible.
 
-William Sealy Gosset, a statistician, chemist and brewer who worked for Guinness, the brewery, has proposed the *t*-distribution (also called the Student-*t* distribution, from Gosset's pseudonym "Student") as an appropriate probability distribution for differences between means. The *t*-distribution is similar to a Gaussian distribution, but the probability on either side of the mean declines more gently than with the Gaussian. As the Gaussian, the *t*-distribution has a mean and a standard deviation. It has an extra parameter: the degrees of freedom, or $df$. The $df$ affect how quickly the probability declines moving away from zero: the higher the $df$ the more quickly the probability gets lower. This is illustrated in @fig-tdist. The figure shows four different *t*-distributions: what they all have in common is that the mean is 0 and the standard deviation is 1. These are called "standard" *t*-distributions. Where they differ is in their degrees of freedom. When the degrees of freedom are infinite (`Inf`), the *t*-distribution is equivalent to a Gaussian distribution.
+[William Sealy Gosset](https://en.wikipedia.org/wiki/William_Sealy_Gosset) (1876-1937), a statistician, chemist and brewer who worked for Guinness the brewery, proposed the *t*-distribution for this purpose. Gosset, though employed at Guinness, was sent to University College London in 1906–1907 to study statistics under Karl Pearson (the father), who at the time was the leading authority in mathematical statistics. Guinness allowed this because Gosset needed advanced statistical tools to handle small experimental data sets in brewing and agriculture. K. Pearson's *Biometrika* journal became the outlet where Gosset published his famous 1908 paper "The probable error of a mean" [@student1908]. K. Pearson encouraged Gosset to publish it, though Guinness insisted that he use a pseudonym to protect trade secrets, so Gosset published under the pseudonym "Student". Because of this, the *t*-distribution is also called the Student-*t* distribution. Gosset argued that the *t*-distrubtion was an appropriate probability distribution for differences between means, especially with small sample sizes.
+
+The *t*-distribution is similar to a Gaussian distribution, but the probability on either side of the mean declines more gently than with the Gaussian. As the Gaussian, the *t*-distribution has a mean and a standard deviation. It has an extra parameter: the degrees of freedom, or $df$. The $df$ affect how quickly the probability declines moving away from zero: the higher the $df$ the more quickly the probability gets lower. This is illustrated in @fig-tdist. The figure shows four different *t*-distributions: what they all have in common is that the mean is 0 and the standard deviation is 1. These are called "standard" *t*-distributions. Where they differ is in their degrees of freedom. When the degrees of freedom are infinite (`Inf`), the *t*-distribution is equivalent to a Gaussian distribution.
 
 ```{r}
 #| label: fig-tdist
@@ -123,11 +125,13 @@ tstat <- (mean_voi - mean_vls) / sqrt((var_voi / 15) + (var_vls / 15))
 tstat
 ```
 
-So the *t*-statistic for our calculated difference is `{r} tstat`. The frequentist statistician would then ask: what is the probability of finding a *t*-statistic (and a difference) this large or larger, assuming that the *t*-statistic (and the difference) is 0. This probability is the ***p*****-value**. You should note two things:
+So the *t*-statistic for our calculated difference is `{r} tstat`. Gosset introduced the *t*-statistics as a tool for quantile interval estimation and for comparing means, but hypothesis testing wouldn't be "invented" until Fisher's work on the *p*-value one or two decades later. Fisher took Gosset's *t*-statistic and embedded it into his broader significance testing framework. Fisher popularized the use of the *t*-distribution for calculating *p*-values: the probability, under the null hypothesis, of obtaining a *t*-statistic as extreme or more extreme than the observed value. This reframing changed the purpose of Gosset's work from estimation to a frequentist test of significance.
 
--   First, the part about the real difference being 0. This is $H_0$ from above, our null hypothesis that the difference is 0. For a *p*-value to work, we must assume that $H_0$ is true. Otherwise, the frequentist machinery does not work.
+Now, after having obtained the *t*-statistic, the NHST researcher would ask: what is the probability of finding a *t*-statistic (and the difference in means it represents) this large or larger, assuming that the *t*-statistic (and the difference) is 0. This probability is Fisher's ***p*****-value**. You should note two things:
 
--   Another important aspect is the "difference this large *or larger*": due to how probability density function works (i.e. functions to obtain probabilities of continuous variables), we cannot obtain the probability of a specific value, but only the probability of an interval of values. The frequentist story goes that, if $H_0$ is true, you should not get very large differences, let alone larger differences than the one found.
+-   First, the part about the real difference being 0. This is $H_0$ from above, our null hypothesis that the difference is 0. For a *p*-value to work, we must assume that $H_0$ is always true. Otherwise, the frequentist machinery does not work.
+
+-   Another important aspect is the "difference this large *or larger*": due to how probability density functions work, we cannot obtain the probability of a specific value, but only the probability of an interval of values (@sec-gaussian). The NHST story goes that, if $H_0$ is true, you should not get very large differences, let alone larger differences than the one found.
 
 The next step is thus to obtain the probability of $t \geq$ `{r} tstat` (*t* being equal or greater than `{r} tstat`), given a standard *t*-distribution. Before we can do this we need to pick the degrees of freedom of the distribution, because of course these affect the probability. The degrees of freedom are calculated based on the data with the following, admittedly complex, formula:
 
@@ -137,19 +141,19 @@ $$
 
 ```{r}
 #| label: t-test
-#| collapse: true
+#| code-fold: true
 
 df <- ( (var_voi/15 + var_vls/15)^2 ) / 
       ( ((var_voi/15)^2 / (15 - 1)) + ((var_vls/15)^2 / (15 - 1)) )
 
 ```
 
-The degrees of freedom for our data are approximately `{r} round(df)`. @fig-tdist-2 shows a *t*-distribution with those degrees of freedom and a dashed line where our *t*-statistic falls. The shaded purple area marks the area under the probability curve with *t* values equal or greater than the obtained *t*-statistic. The size of this area is the probability that we get a *t* value equal or greater than the obtained *t*-statistic. This probability is the *p*-value!
+The degrees of freedom for our data are approximately `{r} round(df)`. @fig-tdist-2 shows a *t*-distribution with those degrees of freedom and a dashed line where our *t*-statistic falls. Now, since we set $H_1$ to be "the difference is not 0", we are including both positive and negative differences between the means. The sign of the *t*-statistic reflects the sign of the difference: positive *t* means a positive difference, while negative *t* indicates a negative difference between the two means. Since $H_1$ is non-directional (it does not specify whether the difference is positive or negative), the *p*-value must account for extreme values of the *t*-statistic in both directions. This is called a two-tailed *t*-test: the *p*-value is the probability of observing a *t*-statistic at least as extreme as the one obtained, in either tail of the *t*-distribution. In @fig-tdist-2, the dotted line to the left of the distribution marks the *t*-statistic but with negative sign. The shaded purple area on both tails of the distribution marks the area under the density curve with *t* values as extreme or more extreme than the obtained *t*-statistic. The size of this area is the probability that we get a *t* value as extreme or more extreme than the obtained *t*-statistic. This probability is the *p*-value!
 
 ```{r}
 #| label: fig-tdist-2
 #| fig-cap: "Standard *t*-distribution and obtained *t*-statistic."
-#| collapse: true
+#| code-fold: true
 
 # Create data
 data <- tibble(df = df) |>
@@ -166,33 +170,42 @@ data <- tibble(df = df) |>
 ggplot(data, aes(x = x, y = y)) +
   geom_line(linewidth = 1) +
   geom_vline(xintercept = tstat, linetype = "dashed") +
+  geom_vline(xintercept = -tstat, linetype = "dotted") +
   geom_area(
     data = subset(data, x >= tstat),
     aes(x = x, y = y),
     fill = "purple", alpha = 0.3
   ) +
+  geom_area(
+    data = subset(data, x <= -tstat),
+    aes(x = x, y = y),
+    fill = "purple", alpha = 0.3
+  ) +
+  annotate(
+    "text", x = 3, y = 0.05, label = "t-statistic"
+  ) +
   labs(
     title = glue::glue("Standard t-Distribution with df = {round(df)}"),
     x = "t-statistic", y = "Density",
+    caption = "The sum of the shaded areas is the p-value."
   )
 ```
 
-You can get the *p*-value in R using the `pt()` function. You need the *t*-value and the degrees of freedom. These are saved in `tstat` and `df` from previous code. We also need to set another argument, `lower.tail`: this argument states whether we want the probability of getting a *t* value that is equal or less than the specified *t* value, but we want the probability of getting a *t* value that is equal or greater than the specified *t* value, so we set `lower.tail` to `FALSE`.
+You can get the *p*-value in R using the `pt()` function. You need the *t*-value and the degrees of freedom. These are saved in `tstat` and `df` from previous code. We also need to set another argument, `lower.tail`: this argument, when set to `TRUE`, states that we want the probability of getting a *t* value that is equal or less than the specified *t* value, but we want the probability of getting a *t* value that is equal or greater than the specified *t* value, since the *t*-value is positive, so we set `lower.tail` to `FALSE`. Since this is a two-tailed *t*-test, we also need the probability for the negative tail. Since the distribution is symmetric around 0, the upper and lower-tail probabilities given a *t*-statistic are the same, so we can simply multiply the upper-tail probability by 2.
 
 ```{r}
 #| label: pt
 
-pvalue <- pt(tstat, df, lower.tail = FALSE)
+# pt() times 2 to get the two-tailed prob
+pvalue <- pt(tstat, df, lower.tail = FALSE) * 2
 pvalue
 ```
 
-In other words, assuming $H_0$ is true and there is not difference between the two groups of vowel duration, the probability of obtaining a *t*-statistic greater or equal to `{r} tstat` is approximately `{r} round(pvalue, 2)`. In other words, there is approximately a `{r} round(pvalue, 2)*100`% probability that the difference between durations of vowels followed by voiced or voiceless consonants is `{r} diff` or larger. Of course, we want the *p*-value to be as small as possible: if $H_0$ is true and the true difference is 0, finding a large difference should be very unlikely (think about the *t*-distribution: values away from 0 are less likely than 0 and values closer to 0).
+In other words, assuming $H_0$ is true and there is not difference between the two groups of vowel duration, the probability of obtaining a *t*-statistic as extreme or more extreme than $\pm$ `{r} round(tstat, 2)` is approximately `{r} round(pvalue, 2)`. In other words, there is approximately a `{r} round(pvalue, 2)*100`% probability that the difference between durations of vowels followed by voiced or voiceless consonants is $\pm$ `{r} round(diff)` ms or larger. Of course, we want the *p*-value to be as small as possible: if $H_0$ is true and the true difference is 0, finding a large difference should be very unlikely (think about the *t*-distribution: values away from 0 are less likely than 0 and values closer to 0). This was the original formulation of Fisher's statistical testing: the *p* value could be taken as the *degree* of significance. However, Neyman and Pearson argued that a threshold should be decided and that a binary decision regarding significance should be taken.
 
-But how do we decide how small is small enough? Is 1% small enough? What about 0.5%? 5%?, maybe 10%? This is the so-called $\alpha$-level (read "alpha level", from the Greek letter $\alpha$). We will get back to the issue of setting an $\alpha$-level in the next section, but for now now that in social research it has become standard to set it to 0.05. In other words, if the *p*-value is lower than $\alpha = 0.05$ then we take the *p*-value to be small enough, otherwise we don't. When the *p*-value is smaller than 0.05, we say we found a *statistically significant difference*, when it is equal or greater than 0.05, we say we found a *statistically non-significant difference*. When we find a statistical significant difference, the frequentist story goes, we say that we *reject* the null hypothesis $H_0$. In our simulated example of vowel duration, the *p*-value is smaller than 0.05, so we say the mean vowel durations before voiced vs voiceless consonants are (statistically) significantly different from each other.
+How do we choose how small a *p-*value is small enough? Is 1% small enough? What about 0.5%? 5%?, maybe 10%? This is what the so-called $\alpha$-level is for (read "alpha level", from the Greek letter $\alpha$). We will get back to the issue of setting an $\alpha$-level in the next section, but for now know that in social research it has become standard to set it to 0.05. In other words, if the *p*-value is lower than $\alpha = 0.05$ then we take the *p*-value to be small enough, otherwise we don't. When the *p*-value is smaller than 0.05, we say we found a *statistically significant difference*, when it is equal or greater than 0.05, we say we found a *statistically non-significant difference*. When we find a statistical significant difference, the NHST story goes, we say that we *reject* the null hypothesis $H_0$. In our simulated example of vowel duration, the *p*-value is smaller than 0.05, so we say the mean vowel durations before voiced vs voiceless consonants are (statistically) significantly different from each other.
 
-## The Null Ritual  {#sec-null-ritual}
-
-XXX
+## The Null Ritual {#sec-null-ritual}
 
 ## Why prefer Bayesian inference?
 
