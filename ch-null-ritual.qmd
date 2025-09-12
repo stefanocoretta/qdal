@@ -69,7 +69,7 @@ The *t*-distribution is similar to a Gaussian distribution, but the probability 
 ```{r}
 #| label: fig-tdist
 #| fig-cap: "Example *t*-distributions with different degrees of freedom and fixed mean and standard deviation (mean = 0, sd = 1)."
-#| collapse: true
+#| code-fold: true
 
 # Degrees of freedom to compare
 dfs <- c(1, 2, 5, Inf)
