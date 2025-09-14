@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -89,18 +89,19 @@ div.csl-indent {
 <link href="./ch-regression.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-befe23ebd2f54d8af2c8a89d1a1611f1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4824bc4fcff8d7c1e04965ee072d4f81.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-af5faff1a7f2ddcc6b024224fbf5cec2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-4824bc4fcff8d7c1e04965ee072d4f81.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-5fb1cbb79f85a0fa3795ecf5c470cb6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -151,7 +152,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -354,7 +355,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
         <div class="sidebar-tools-main">
@@ -749,7 +752,7 @@ window.Quarto = {
 <h2 data-number="25.2" class="anchored" data-anchor-id="reproducible-model-fit"><span class="header-section-number">25.2</span> Reproducible model fit</h2>
 <p>Before we move to the model, it is worth making a couple practical considerations. Fitting simple models with brms is relatively quick. However, more complex model using larger data sets can take some time for the MCMC to efficiently sample the posterior distribution (sometimes even hours!). It is useful to save the model fit to a file so that, once the model is fit once, you don’t have to fit it again. This can be done by specifying a file path in the <code>file</code> argument in the <code>brm()</code> function. I suggest developing the habit of having a dedicated <code>cache/</code> in your Quarto project to save all of the brms model objects in. Go ahead and create a <code>cache/</code> folder in you project. Then, in your <code>week-05.qmd</code> document, rewrite the model from the previous chapter like so:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vow_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vow_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># `1 +` can be omitted.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  v1_duration <span class="sc">~</span> speech_rate,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> gaussian,</span>
@@ -757,7 +760,7 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cores =</span> <span class="dv">4</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">20912</span>,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"cache/vow_bm"</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The <code>file</code> argument tells brms to save the model output to the <code>cache/</code> folder in a file called <code>vow_bm.rds</code>. The extension <code>.rds</code> is appended automatically (this is the same file type you encountered where reading data, like <code>glot_status.rds</code>). What about <code>cores</code> and <code>seed</code>? When the model is fit, four MCMC chains are run. By default, these are run sequentially: the first chain, then the second, then the third and finally the fourth. But we can speed things up a bit by running them in parallel on separate computer cores. Virtually all computers today have at least four cores, so we can run the four chains using four cores. This is what <code>cores = 4</code> does: it tells brms to run each chain on one core so they are run in parallel. Since the MCMC algorithm contains a random component (physical particles are randomly flicked across the landscape), every time you refit the model, a different set of draws are drawn (because the particles stop at random places in the landscape). One way to make the model reproducible (meaning, obtaining exactly the same draws every time) is to set a “seed”. In computing, a seed is a number used for random number generation: when set, the same list of “random” numbers is produced. The MCMC algorithm uses random number generation to run itself, so by setting the seed we are in fact “fixing” the randomness of the algorithm. The seed number can be any number: here I set it to <code>20912</code>.</p>
 <p>Now run the model. The model will be fitted and the model object will be saved in <code>cache/</code> with the file name <code>vow_bm.rds</code>. If you now re-run the same code again, you will notice that <code>brm()</code> does not fit the model again, but rather reads it from the file (no output is shown, but trust me, it works!). This saves time: you fit the model once but you can read the output multiple times. This is also good for reproducibility: an independent researcher with access to your code and the cache folder can run your code and get exactly the same results as yours.</p>
@@ -779,7 +782,7 @@ Important
 <h2 data-number="25.3" class="anchored" data-anchor-id="extract-mcmc-posterior-draws"><span class="header-section-number">25.3</span> Extract MCMC posterior draws</h2>
 <p>There are different ways to extract the MCMC posterior draws from a fitted model. In this book, we will use the <code>as_draws_df()</code> function from the <a href="https://mc-stan.org/posterior/">posterior</a> package. The function extracts the draws from a Bayesian regression model and outputs them as a data frame. Before we extract the draws from the <code>vow_bm</code> model, let’s revisit the summary.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(vow_bm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(vow_bm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: gaussian 
   Links: mu = identity; sigma = identity 
@@ -804,8 +807,8 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>The <code>Draws</code> information in the summary are exactly that: information on the MCMC draws of the model. It says 4 chains were run each with 2000 iterations of which 1000 used for warm-up. <code>thin = 1</code> just tells brms to keep all the post-warm up draws, and it’s fine as is so you can just ignore it. Then the summary tells us that there are 4000 total post-warm-up draws. We are good to go! We can extract the MCMC draws from the model using the <code>as_draws_df()</code> function. This function returns a data frame (more specifically a tidyverse tibble with class <code>draws_df</code>) with values from each draw of the MCMC algorithm. Since there are 4000 post-warm-up draws, the tibble has 4000 rows.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>vow_bm_draws <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(vow_bm)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>vow_bm_draws</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>vow_bm_draws <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(vow_bm)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>vow_bm_draws</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -839,37 +842,37 @@ vdur &amp; \sim Gaussian(\mu, \sigma) \\
 <h2 data-number="25.4" class="anchored" data-anchor-id="summary-measures-of-the-posterior-draws"><span class="header-section-number">25.4</span> Summary measures of the posterior draws</h2>
 <p>The <code>Regression Coefficients</code> table from the <code>summary()</code> of the model reports summary measures calculated from the drawn values of <code>b_Intercept</code> and <code>b_speech_rate</code>. These summary measures are the mean (<code>Estimate</code>), the standard deviation (<code>Est.error</code>) of the draws and the lower and upper limits of the 95% Credible Interval (CrI). We can obtain those same measures ourselves from the data frame with the draws. Let’s calculate the mean and SD of <code>b_Intercept</code> and <code>b_speech_rate</code> (we round to the second digit with <code>round(2)</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercept</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(vow_bm_draws<span class="sc">$</span>b_Intercept) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercept</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(vow_bm_draws<span class="sc">$</span>b_Intercept) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 198.47</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(vow_bm_draws<span class="sc">$</span>b_Intercept) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(vow_bm_draws<span class="sc">$</span>b_Intercept) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.33</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Speech rate</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(vow_bm_draws<span class="sc">$</span>b_speech_rate) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Speech rate</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(vow_bm_draws<span class="sc">$</span>b_speech_rate) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -21.73</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(vow_bm_draws<span class="sc">$</span>b_speech_rate) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(vow_bm_draws<span class="sc">$</span>b_speech_rate) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.62</code></pre>
 </div>
 </div>
 <p>Compare the values obtained now with the values in the model summary above. They are the same, because the summary measures in the model summary are simply summary measures of the draws. What if we want to calculate the Credible Intervals (CrIs)? In <a href="ch-gaussian.html" class="quarto-xref"><span>Chapter 19</span></a>, you learned about the quantile function (the inverse CDF) to calculate intervals from <em>theoretical</em> distributions. However, here we need to calculate intervals from a sample of posterior draws: the MCMC draws. Note that central probability intervals of posterior draws are called Credible Intervals in Bayesian statistics, so CrI is just a specific type of interval. To obtain intervals from samples we can use the <code>quantile2()</code> function from the posterior package. This function takes two arguments: <code>x</code>, a vector of values to calculate the interval of, and <code>probs</code>, a vector of probabilities, like <code>qnorm()</code>. By default, <code>probs = c(0.05, 0.95)</code>. This gives you a 90% CrI interval, but the model summary returns by default a 95% CrI. For a 95% CrI, we need the 2.5th percentile and the 97.5th percentile: <code>c(0.025, 0.975)</code>. Here’s the code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercept</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(vow_bm_draws<span class="sc">$</span>b_Intercept, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(vow_bm_draws<span class="sc">$</span>b_Intercept, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  q2.5  q97.5 
 191.76 204.97 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Speech rate</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(vow_bm_draws<span class="sc">$</span>b_speech_rate, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Speech rate</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(vow_bm_draws<span class="sc">$</span>b_speech_rate, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  q2.5  q97.5 
 -22.93 -20.49 </code></pre>
@@ -882,7 +885,7 @@ vdur &amp; \sim Gaussian(\mu, \sigma) \\
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 1
+<span class="screen-reader-only">Warning</span>Exercise 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -892,18 +895,18 @@ Exercise 1
 <p>With this model, <code>vow_bm</code>, getting all of these CrIs might look trivial: the 95% CrIs are quite narrow, giving us quite a precise range of values for both the intercept and the coefficient of speech rate. This is because there is quite a lot of data and the model is quite simple, there is only one predictor. With more complex model and smaller data sets, uncertainty is greater and the intervals will span a large range of values. We will see examples later in the book. In those cases, it is helpful to be able to discuss CrIs at different levels of probability, since a lower-probability CrI might tells us something clearer about what we are investigating, while warning us of the increased uncertainty that comes with it.</p>
 <p>In the previous chapter, we mentioned that one can calculate the posterior probability of mean vowel duration <span class="math inline">\(vdur\)</span> based on a specific value of speech rate <span class="math inline">\(sr\)</span>, using the model. We also noted that since we are working with MCMC it is not just like plugging in numbers according to the model’s equation, but rather we need to use the entire probability distributions. In fact, we can use the MCMC draws and plug them in directly, as you would with a single number. However, with MCMC draws the operations in the equation are applied draw-wise. Let’s see what this means by means of code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>vow_bm_draws <span class="ot">&lt;-</span> vow_bm_draws <span class="sc">|&gt;</span> </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>vow_bm_draws <span class="ot">&lt;-</span> vow_bm_draws <span class="sc">|&gt;</span> </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">vdur_sr5 =</span> b_Intercept <span class="sc">+</span> b_speech_rate <span class="sc">*</span> <span class="dv">5</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(vow_bm_draws<span class="sc">$</span>vdur_sr5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(vow_bm_draws<span class="sc">$</span>vdur_sr5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 90.46033 89.10209 90.58991 90.38785 90.02444 89.54223</code></pre>
 </div>
 </div>
 <p>The mutate code <code>vdur_sr5 = b_Intercept + b_speech_rate * 5</code> is based on <span class="math inline">\(\mu = \beta_0 + \beta_1 sr\)</span>. In the code, <span class="math inline">\(sr\)</span> is set to 5 (syllables per second). So the mean vowel duration when speech rate is 5 syl/s is the intercept <span class="math inline">\(\beta_0\)</span> plus the slope <span class="math inline">\(\beta_1\)</span> times 5. Since we are mutating a data frame where each row is one of the 4000 total draws, we are summing and multiplying the values within each row. This gives us a new column <code>vdur_sr5</code> with 4000 predicted values of vowel duration, one per draw. You can then get summary measures, CrIs and even plot the values of the predicted column, like you would with the coefficients columns. The following code calculates the 95% CrI of the predicted vowel duration when speech rate is 5 syl/s (note we took 5 syl/s just as an example, but you can get prediction for any value of speech rate).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(vow_bm_draws<span class="sc">$</span>vdur_sr5, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(vow_bm_draws<span class="sc">$</span>vdur_sr5, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> q2.5 q97.5 
    89    91 </code></pre>
@@ -915,10 +918,10 @@ Exercise 1
 <h2 data-number="25.5" class="anchored" data-anchor-id="plotting-posterior-draws"><span class="header-section-number">25.5</span> Plotting posterior draws</h2>
 <p>Plotting posterior draws is as straightforward as plotting any data. You already have all of the tools to understand plotting draws with ggplot2. To plot the reconstructed posterior probability distribution of any parameter, we plot the probability density (with <code>geom_density()</code>) of the draws of that parameter. Let’s plot <code>b_speech_rate</code>. This will be the posterior probability density of the change in vowel duration for each increase of one syllable per second. <a href="#fig-vow-bm-sr" class="quarto-xref">Figure&nbsp;<span>25.1</span></a> shows the posterior probability density of <code>b_speech_rate</code>. If you compare this plot with the central panel of <a href="ch-regression.html#fig-vow-bm" class="quarto-xref">Figure&nbsp;<span>24.3</span></a>, the density curves are identical.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>vow_bm_draws <span class="sc">|&gt;</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>vow_bm_draws <span class="sc">|&gt;</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(b_speech_rate)) <span class="sc">+</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-vow-bm-sr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -934,7 +937,7 @@ Figure&nbsp;25.1: Posterior probability distribution of <code>b_speech_rate</cod
 </div>
 <p>The <a href="https://mjskay.github.io/ggdist/index.html">ggdist</a> package has some convenience ggplot geometries and stats for plotting posterior densities with CrIs. The <code>stat_halfeye()</code> can shade the area under the curve depending on the specified interval levels, like in the code for <a href="#fig-vow-bm-sr-cris" class="quarto-xref">Figure&nbsp;<span>25.2</span></a> below, which shows 50%, 80% and 95% CrIs. Below the density curve there are error bars of increasing thickness, each corresponding to a CrI. The large dot represents the <em>median</em> of the draws (rather than the mean, like in the model summary). The median is another acceptable summary measure for posteriors.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdist)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdist)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>vow_bm_draws <span class="sc">|&gt;</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> b_speech_rate)) <span class="sc">+</span></span>
@@ -943,7 +946,7 @@ Figure&nbsp;25.1: Posterior probability distribution of <code>b_speech_rate</cod
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">after_stat</span>(level))</span>
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">na.translate =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-vow-bm-sr-cris" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -964,7 +967,7 @@ Figure&nbsp;25.2: Posterior probability distribution of <code>b_speech_rate</cod
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 2
+<span class="screen-reader-only">Warning</span>Exercise 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1258,13 +1261,14 @@ window.onload = function() {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

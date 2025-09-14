@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -89,18 +89,19 @@ div.csl-indent {
 <link href="./ch-statistical-vars.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-befe23ebd2f54d8af2c8a89d1a1611f1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4824bc4fcff8d7c1e04965ee072d4f81.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-af5faff1a7f2ddcc6b024224fbf5cec2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-4824bc4fcff8d7c1e04965ee072d4f81.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-5fb1cbb79f85a0fa3795ecf5c470cb6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -325,7 +326,9 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
         <div class="sidebar-tools-main">
@@ -725,7 +728,7 @@ div.csl-indent {
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+<span class="screen-reader-only">Warning</span>Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -739,7 +742,7 @@ Important
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tabular data
+<span class="screen-reader-only">Tip</span>Tabular data
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -748,11 +751,11 @@ Tabular data
 </div>
 <p>Tabular data can be saved in different file formats. Different file formats have different file extensions. The <strong>comma separated values format</strong> (file extension <code>.csv</code>) is the best format to save data in because it is basically a plain text file, it’s quick to parse, and can be opened and edited with any software (plus, it’s not a proprietary format like <code>.docx</code> or <code>.xlsx</code>—these formats are specific to particular commercial software).</p>
 <p>This is what a <code>.csv</code> file looks like when you open it in a text editor (showing only the first few lines). The file contains tabular data (data that is structured as columns and rows, like a spreadsheet).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,banoshment,1,423,6.0474,Filler,Nonword,Phonological,NA</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unawareness,1,603,6.4019,Critical,Word,Unrelated,Left</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unholiness,1,739,6.6053,Critical,Word,Constituent,Left</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This is what the file would look like when layed out as a table.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -760,12 +763,12 @@ Tabular data
 </figure>
 </div>
 <p>To separate the values of each column, a <code>.csv</code> file uses a comma <code>,</code> (hence the name “comma separated values”) to separate the values in every row. The first line of the file indicates the names of the columns of the table:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>There are 11 columns. The rest of the rows is the data, i.e.&nbsp;the values of each column separated by commas.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,banoshment,1,423,6.0474,Filler,Nonword,Phonological,NA</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,banoshment,1,423,6.0474,Filler,Nonword,Phonological,NA</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unawareness,1,603,6.4019,Critical,Word,Unrelated,Left</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unholiness,1,739,6.6053,Critical,Word,Constituent,Left</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This might look a bit confusing, but you will see later that, after importing this type of file, you can view it as a nice spreadsheet (as you would in Excel), like in the figure above.</p>
 <p>Another common type of tabular data file is <strong>spreadsheets</strong>, like spreadsheets created by Microsoft Excel or Apple Numbers. These are all proprietary formats that require you to have the software that were created with if you want to modify them. Portability and openness are important aspects of conducting research, so that using open and non-proprietary file types makes your research more accessible and doesn’t privilege those who have access to specific software (remember, R is free!). Despite of this, a lot of data is shared as Excel files.</p>
 <p>There are also variations of the comma separated values type, like <strong>tab separated values</strong> files (<code>.tsv</code>, which uses tab characters instead of commas) and <strong>fixed-width</strong> files (usually <code>.txt</code>, where columns are separated by as many white spaces as needed so that the columns align).</p>
@@ -773,12 +776,12 @@ Tabular data
 <h3 data-number="9.1.1" class="anchored" data-anchor-id="non-tabular-data"><span class="header-section-number">9.1.1</span> Non-tabular data</h3>
 <p>Of course, R can import also data that is not tabular, like map data and complex hierarchical data, including XML, HTML and json data. We will not cover these types of data, but you can check out the resources in the Extra box.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-R Note: Non-tabular data
+<span class="screen-reader-only">Important</span>R Note: Non-tabular data
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -801,7 +804,7 @@ R Note: Non-tabular data
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Quiz 1
+<span class="screen-reader-only">Note</span>Quiz 1
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -825,7 +828,7 @@ Quiz 1
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-How to get the data
+<span class="screen-reader-only">Warning</span>How to get the data
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -874,7 +877,7 @@ How to get the data
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Did you open the Quarto project?
+<span class="screen-reader-only">Important</span>Did you open the Quarto project?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -909,9 +912,9 @@ project:
 <p>Note that while the <code>read_csv()</code> function does read the data in R, you must assign the output of the <code>read_csv()</code> function (i.e.&nbsp;the data we are reading) to a variable, using the assignment arrow <code>&lt;-</code>, just like we were assigning values to R variables in previous chapters. And since the <code>read_csv()</code> is a function from the tidyverse, you first need to attach the tidyverse packages with <code>library(tidyverse)</code> (remember, you need to attach packages <strong>only once</strong> per session). This will attach the core tidyverse packages, including readr. Of course, you can also attach the individual packages directly: <code>library(readr)</code>. If you use <code>library(tidyverse)</code> there is no need to attach individual tidyverse packages.</p>
 <p>Open your <code>week-02.R</code> script. Add the following lines in the script (don’t change the file path! explanation below) and run the code (you might want to put the <code>library()</code> line at the top of the script, with the other packages). The <code>read_csv()</code> line will print information about the data and read the data into <code>shallow</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>shallow <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/song2020/shallow.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>shallow <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/song2020/shallow.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 6500 Columns: 11
 ── Column specification ────────────────────────────────────────────────────────
@@ -930,7 +933,7 @@ dbl (3): ACC, RT, logRT
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Data frames and tibbles
+<span class="screen-reader-only">Tip</span>Data frames and tibbles
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -950,7 +953,7 @@ Data frames and tibbles
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Working directory
+<span class="screen-reader-only">Tip</span>Working directory
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -965,7 +968,7 @@ Working directory
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Relative path
+<span class="screen-reader-only">Tip</span>Relative path
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -979,7 +982,7 @@ Relative path
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 1: Get the working directory
+<span class="screen-reader-only">Warning</span>Exercise 1: Get the working directory
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -995,7 +998,7 @@ Exercise 1: Get the working directory
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Quiz 2
+<span class="screen-reader-only">Note</span>Quiz 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1035,15 +1038,15 @@ How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_VNZUE
 <h2 data-number="9.5" class="anchored" data-anchor-id="read-excel-sheets"><span class="header-section-number">9.5</span> Read Excel sheets</h2>
 <p>To read an Excel file we need first to attach the <a href="https://readxl.tidyverse.org/index.html">readxl</a> package. It should already be installed, because it comes with the tidyverse. If not, install it. Then add the following line to the script.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now we can use the <code>read_excel()</code> function. Let’s read the file.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>relatives <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"./data/los2023/relatives.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>relatives <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"./data/los2023/relatives.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now you can view the tibble <code>relatives</code> in the RStudio Viewer. Note that if the Excel file has more than one sheet, you can specify the sheet number when reading the file (the default is <code>sheet = 1</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>relatives_2 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"./data/los2023/relatives.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>relatives_2 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"./data/los2023/relatives.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The second sheet in <code>los2023/relatives.xlx</code> contains the description of the columns in the first sheet.</p>
 </section>
@@ -1051,7 +1054,7 @@ How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_VNZUE
 <h2 data-number="9.6" class="anchored" data-anchor-id="import-.rds-files"><span class="header-section-number">9.6</span> Import <code>.rds</code> files</h2>
 <p>Another useful type of data files is a file type specifically designed for R: <code>.rds</code> files. Each <code>.rds</code> file can only contain a single R object, like a tibble. You can read <code>.rds</code> files with the <code>readRDS()</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/coretta2022/glot_status.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/coretta2022/glot_status.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>As always, you need to assign the output of the function to a variable, here <code>glot_status</code>.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
@@ -1060,7 +1063,7 @@ How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_VNZUE
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<code>.rds</code> files
+<span class="screen-reader-only">Tip</span><code>.rds</code> files
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1070,7 +1073,7 @@ How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_VNZUE
 </div>
 <p>View the <code>glot_status</code> tibble now. It is also very easy to save a tibble to an <code>.rds</code> file with the <code>saveRDS()</code> function. For example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(shallow, <span class="st">"./data/song2020/shallow.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(shallow, <span class="st">"./data/song2020/shallow.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The first argument is the name of the tibble object and the second argument is the file path to save the object to.</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
@@ -1079,7 +1082,7 @@ How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_VNZUE
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Exercise 2
+<span class="screen-reader-only">Warning</span>Exercise 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1372,13 +1375,14 @@ window.onload = function() {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -89,18 +89,19 @@ div.csl-indent {
 <link href="./ch-regression-more.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-befe23ebd2f54d8af2c8a89d1a1611f1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4824bc4fcff8d7c1e04965ee072d4f81.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-af5faff1a7f2ddcc6b024224fbf5cec2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-4824bc4fcff8d7c1e04965ee072d4f81.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-5fb1cbb79f85a0fa3795ecf5c470cb6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -151,7 +152,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -354,7 +355,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
         <div class="sidebar-tools-main">
@@ -758,18 +761,18 @@ window.Quarto = {
 <h2 data-number="29.3" class="anchored" data-anchor-id="the-p-value"><span class="header-section-number">29.3</span> The <em>p</em>-value</h2>
 <p>To illustrate <em>p</em>-values, we will compare simulated durations of vowels when followed by voiceless consonants vs voiced consonants. It is a well-known phenomenon that vowels followed by voiced consonants tend to be longer than vowels followed by voiceless ones <span class="citation" data-cites="coretta2019">(see review in <a href="references.html#ref-coretta2019" role="doc-biblioref">Coretta 2019</a>)</span>. Let’s simulate some vowel duration observations: we do so with the <code>rnorm()</code> function, which takes three arguments: the number of observations to sample and the mean and standard deviation of the Gaussian distribution to sample observations from. We use a <span class="math inline">\(Gaussian(80, 10)\)</span> for durations before voiceless consonants, and a <span class="math inline">\(Gaussian(90, 10)\)</span> for durations before voiced consonants. In other word, there is a difference of 10 milliseconds between the two means. Since the <code>rnorm()</code> function <em>randomly</em> samples from the given distribution, we have set a “seed” so that the code will return the same numbers every time it is run, for reproducibility.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2953</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2953</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Vowel duration before voiceless consonants</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>vdur_vls <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">15</span>, <span class="at">mean =</span> <span class="dv">80</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>vdur_voi <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">15</span>, <span class="at">mean =</span> <span class="dv">90</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>vdur_voi <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">15</span>, <span class="at">mean =</span> <span class="dv">90</span>, <span class="at">sd =</span> <span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Normally, you don’t know what the underlying means are, we do here because we set them. So let’s get the sample mean of vowel duration in the two conditions, and take the difference.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mean_vls <span class="ot">&lt;-</span> <span class="fu">mean</span>(vdur_vls)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mean_vls <span class="ot">&lt;-</span> <span class="fu">mean</span>(vdur_vls)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mean_voi <span class="ot">&lt;-</span> <span class="fu">mean</span>(vdur_voi)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>diff <span class="ot">&lt;-</span> mean_voi <span class="sc">-</span> mean_vls</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>diff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>diff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.43991</code></pre>
 </div>
@@ -786,7 +789,7 @@ window.Quarto = {
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Degrees of freedom to compare</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Degrees of freedom to compare</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dfs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="cn">Inf</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data</span></span>
@@ -808,7 +811,7 @@ window.Quarto = {
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"t-statistic"</span>, <span class="at">y =</span> <span class="st">"Density"</span>,</span>
 <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"DFs"</span></span>
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-tdist" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -835,12 +838,12 @@ t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
 </ul>
 <p>We have the means of vowel duration before voiced and voiceless consonants and we know the sample size (15 observations per group), so we just need to calculate the variance.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>var_vls <span class="ot">&lt;-</span> <span class="fu">sd</span>(vdur_vls)<span class="sc">^</span><span class="dv">2</span> <span class="co"># also var(vdur_vls)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>var_vls <span class="ot">&lt;-</span> <span class="fu">sd</span>(vdur_vls)<span class="sc">^</span><span class="dv">2</span> <span class="co"># also var(vdur_vls)</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>var_voi <span class="ot">&lt;-</span> <span class="fu">sd</span>(vdur_voi)<span class="sc">^</span><span class="dv">2</span> <span class="co"># also var(vdur_voi)</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>tstat <span class="ot">&lt;-</span> (mean_voi <span class="sc">-</span> mean_vls) <span class="sc">/</span> <span class="fu">sqrt</span>((var_voi <span class="sc">/</span> <span class="dv">15</span>) <span class="sc">+</span> (var_vls <span class="sc">/</span> <span class="dv">15</span>))</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>tstat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>tstat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.437442</code></pre>
 </div>
@@ -858,15 +861,15 @@ t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> ( (var_voi<span class="sc">/</span><span class="dv">15</span> <span class="sc">+</span> var_vls<span class="sc">/</span><span class="dv">15</span>)<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>      ( ((var_voi<span class="sc">/</span><span class="dv">15</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">15</span> <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">+</span> ((var_vls<span class="sc">/</span><span class="dv">15</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">15</span> <span class="sc">-</span> <span class="dv">1</span>)) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> ( (var_voi<span class="sc">/</span><span class="dv">15</span> <span class="sc">+</span> var_vls<span class="sc">/</span><span class="dv">15</span>)<span class="sc">^</span><span class="dv">2</span> ) <span class="sc">/</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>      ( ((var_voi<span class="sc">/</span><span class="dv">15</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">15</span> <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">+</span> ((var_vls<span class="sc">/</span><span class="dv">15</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">15</span> <span class="sc">-</span> <span class="dv">1</span>)) )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <p>The degrees of freedom for our data are approximately 28. <a href="#fig-tdist-2" class="quarto-xref">Figure&nbsp;<span>29.2</span></a> shows a <em>t</em>-distribution with those degrees of freedom and a dashed line where our <em>t</em>-statistic falls. Now, since we set <span class="math inline">\(H_1\)</span> to be “the difference is not 0”, we are including both positive and negative differences between the means. The sign of the <em>t</em>-statistic reflects the sign of the difference: positive <em>t</em> means a positive difference, while negative <em>t</em> indicates a negative difference between the two means. Since <span class="math inline">\(H_1\)</span> is non-directional (it does not specify whether the difference is positive or negative), the <em>p</em>-value must account for extreme values of the <em>t</em>-statistic in both directions. This is called a two-tailed <em>t</em>-test: the <em>p</em>-value is the probability of observing a <em>t</em>-statistic at least as extreme as the one obtained, in either tail of the <em>t</em>-distribution.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">df =</span> df) <span class="sc">|&gt;</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">map</span>(df, <span class="sc">~</span> {</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tibble</span>(</span>
@@ -899,7 +902,7 @@ t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
 <span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"Standard t-Distribution with df = {round(df)}"</span>),</span>
 <span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"t-statistic"</span>, <span class="at">y =</span> <span class="st">"Density"</span>,</span>
 <span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"The sum of the shaded areas is the p-value."</span></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-tdist-2" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -917,15 +920,28 @@ Figure&nbsp;29.2: Standard <em>t</em>-distribution and obtained <em>t</em>-stati
 <p>In <a href="#fig-tdist-2" class="quarto-xref">Figure&nbsp;<span>29.2</span></a>, the dotted line to the left of the distribution marks the <em>t</em>-statistic but with negative sign. The shaded purple area on both tails of the distribution marks the area under the density curve with <em>t</em> values as extreme or more extreme than the obtained <em>t</em>-statistic. The size of this area is the probability that we get a <em>t</em> value as extreme or more extreme than the obtained <em>t</em>-statistic, <em>given that</em> <span class="math inline">\(H_0\)</span> <em>is true</em>. This probability is the <em>p</em>-value! The part “given that <span class="math inline">\(H_0\)</span> is true” shows that the <em>p</em>-value is a conditional probability, conditional on <span class="math inline">\(H_0\)</span> being true: we could write this as <span class="math inline">\(p = P(d | H_0)\)</span>, where the vertical bar <span class="math inline">\(|\)</span> indicates that the probability of the <em>t</em>-statistic is conditional on <span class="math inline">\(H_0\)</span> and <span class="math inline">\(d\)</span> stands for “data”, or more precisely for “data as extreme or more extreme than the one observed”. You have already encountered conditional probabilities in <a href="ch-bayes.html" class="quarto-xref"><span>Chapter 20</span></a>, in Bayes’ Theorem.</p>
 <p>You can get the <em>p</em>-value in R using the <code>pt()</code> function. You need the <em>t</em>-value and the degrees of freedom. These are saved in <code>tstat</code> and <code>df</code> from previous code. We also need to set another argument, <code>lower.tail</code>: this argument, when set to <code>TRUE</code>, states that we want the probability of getting a <em>t</em> value that is equal or less than the specified <em>t</em> value, but we want the probability of getting a <em>t</em> value that is equal or greater than the specified <em>t</em> value, since the <em>t</em>-value is positive, so we set <code>lower.tail</code> to <code>FALSE</code>. Since this is a two-tailed <em>t</em>-test, we also need the probability for the negative tail. Since the distribution is symmetric around 0, the upper and lower-tail probabilities given a <em>t</em>-statistic are the same, so we can simply multiply the upper-tail probability by 2.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pt() times 2 to get the two-tailed prob</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pt() times 2 to get the two-tailed prob</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>pvalue <span class="ot">&lt;-</span> <span class="fu">pt</span>(tstat, df, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>) <span class="sc">*</span> <span class="dv">2</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>pvalue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>pvalue</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.02150441</code></pre>
 </div>
 </div>
 <p>In other words, assuming <span class="math inline">\(H_0\)</span> is true and there is not difference between the two groups of vowel duration, the probability of obtaining a <em>t</em>-statistic as extreme or more extreme than <span class="math inline">\(\pm\)</span> 2.44 is approximately 0.02. In other words, there is approximately a 2% probability that the difference between durations of vowels followed by voiced or voiceless consonants is <span class="math inline">\(\pm\)</span> 7 ms or larger. Of course, we want the <em>p</em>-value to be as small as possible: if <span class="math inline">\(H_0\)</span> is true and the true difference is 0, finding a large difference should be very unlikely (think about the <em>t</em>-distribution: values away from 0 are less likely than 0 and values closer to 0). This was the original formulation of Fisher’s statistical testing: the <em>p</em> value could be taken as the <em>degree</em> of significance. However, Neyman and Pearson argued that a threshold should be decided and that a binary decision regarding significance should be taken.</p>
 <p>How do we choose how small a <em>p-</em>value is small enough? Is 1% small enough? What about 0.5%? 5%?, maybe 10%? This is what the so-called <span class="math inline">\(\alpha\)</span>-level is for (read “alpha level”, from the Greek letter <span class="math inline">\(\alpha\)</span>). We will get back to the issue of setting an <span class="math inline">\(\alpha\)</span>-level in the next section, but for now know that in social research it has become standard to set it to 0.05. In other words, if the <em>p</em>-value is lower than <span class="math inline">\(\alpha = 0.05\)</span> then we take the <em>p</em>-value to be small enough, otherwise we don’t. When the <em>p</em>-value is smaller than 0.05, we say we found a <em>statistically significant difference</em>, when it is equal or greater than 0.05, we say we found a <em>statistically non-significant difference</em>. When we find a statistical significant difference, the NHST story goes, we say that we <em>reject</em> the null hypothesis <span class="math inline">\(H_0\)</span>. In our simulated example of vowel duration, the <em>p</em>-value is smaller than 0.05, so we say the mean vowel durations before voiced vs voiceless consonants are (statistically) significantly different from each other.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span><em>p</em>-value
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong><em>p</em>-value</strong> is the probability of obtaining a result as extreme or more extreme than the one obtained, assuming the null hypothesis is true.</p>
+</div>
+</div>
 </section>
 <section id="sec-null-ritual" class="level2" data-number="29.4">
 <h2 data-number="29.4" class="anchored" data-anchor-id="sec-null-ritual"><span class="header-section-number">29.4</span> The Null Ritual</h2>
@@ -936,13 +952,14 @@ Figure&nbsp;29.2: Standard <em>t</em>-distribution and obtained <em>t</em>-stati
 <li><p>Always perform this procedure.</p></li>
 </ol>
 <p><span class="citation" data-cites="gigerenzer2004">Gigerenzer (<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">2004</a>)</span> explains how the null ritualistic approach to frequentism, or NHST, is an inconsistent hybrid of Fisher’s statistical significance testing and Neyman–Pearson decision theory. Fisherian frequentism did not have an <span class="math inline">\(\alpha\)</span>-level: the <em>p</em>-value was used as a degree of statistical significance. Neyman and Pearson rejected the idea of significance degree and argued for the use an <span class="math inline">\(\alpha\)</span>-level, but they in no way proposed a fixed level and, quite the opposite, urged researchers to set the <span class="math inline">\(\alpha\)</span>-level on a case-by-case basis. Moreover, Fisher’s null hypothesis didn’t have to be a <em>nil</em> hypothesis: you could set your null hypothesis (the hypothesis to be “nullified”) to anything it made sense, so you could have for example <span class="math inline">\(H_0: \delta = +2.5\)</span> (where <span class="math inline">\(\delta\)</span> “delta” is the difference between means) and the <em>p</em>-value would be about nullifying that hypothesis, not <span class="math inline">\(\delta = 0\)</span>.</p>
+<p>There is another level that is relevant to Neyman–Pearson statistics that is very often glossed over: the <span class="math inline">\(\beta\)</span>-level, also known as statistical power. Statistical power is the probability of finding a significant difference when there is a real difference. In social sciences, this is arbitrarily set to 0.8: i.e., there should be an 80% probability of finding a significance difference where there is one. Statistical power is in large part determined by the magnitude of the difference and the variance of the groups being compared. With small and very noisy differences, you need a larger sample size to reach a high statistical power. As with the <span class="math inline">\(\alpha\)</span>-level, a researcher should set the <span class="math inline">\(\beta\)</span>-level on a case-by-case basis. Once a statistical power level is chose, a researcher is supposed to run a prospective power analysis <span class="citation" data-cites="brysbaert2018 brysbaert2020">(<a href="references.html#ref-brysbaert2018" role="doc-biblioref">Brysbaert and Stevens 2018</a>; <a href="references.html#ref-brysbaert2020" role="doc-biblioref">Brysbaert 2020</a>)</span>: this is a procedure that, given the chosen statistical power and hypotehsised difference magnitude and variance, helps you determine a specific sample size needed to reach that statistical power. Calculating <em>p</em>-values without prospective power analysis is incorrect and yet has become the norm.</p>
 <p>Furthermore, researchers consistently misinterpret <em>p</em>-values and frequentist inference more generally <span class="citation" data-cites="gigerenzer2004a gigerenzer2018 perezgonzalez2015 cassidy2019">(<a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer, Krauss, and Vitouch 2004</a>; <a href="references.html#ref-gigerenzer2018" role="doc-biblioref">Gigerenzer 2018</a>; <a href="references.html#ref-perezgonzalez2015" role="doc-biblioref">Perezgonzalez 2015</a>; <a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>)</span>. There is a very common tendency to confuse the <em>p</em>-value for the probability that the null hypothesis <span class="math inline">\(H_0\)</span> is true. This is incorrect because the <em>p</em>-value is the probability <span class="math inline">\(P(d|H_0)\)</span>: it is conditional on <span class="math inline">\(H_0\)</span> being true and it is clearly not <span class="math inline">\(P(H_0)\)</span>. Another misinterpretation takes the <em>p</em>-value as the inverse of the probability that <span class="math inline">\(H_1\)</span> is true: again, this must be false because <span class="math inline">\(P(d|H_0)\)</span> is the probability of the “data” given <span class="math inline">\(H_0\)</span>, not the probability of <span class="math inline">\(H_0\)</span> (in which case, assuming contrasting hypotheses, then we would indeed have <span class="math inline">\(P(H_1) = -P(H_0)\)</span>). Finally, something dubbed “Bayesian wishful thinking” by <span class="citation" data-cites="gigerenzer2018">Gigerenzer (<a href="references.html#ref-gigerenzer2018" role="doc-biblioref">2018</a>)</span>, is the belief that the <em>p</em>-value is the probability of <span class="math inline">\(H_0\)</span> given the data (<span class="math inline">\(P(H_0|d)\)</span>) or worse the inverse of the probability of <span class="math inline">\(H_1\)</span> given the data (<span class="math inline">\(P(H_1|d)\)</span>). You might see why it is called Bayesian wishful thinking: a Bayesian posterior probability, as per Bayes’ Theorem, is precisely the probability of a hypothesis given the data: <span class="math inline">\(P(h|d)\)</span> (<a href="ch-bayes.html" class="quarto-xref"><span>Chapter 20</span></a>). However, a <em>p</em>-value is not <span class="math inline">\(P(h|d)\)</span> but rather <span class="math inline">\(P(d|H_0)\)</span>.</p>
 <p>These are just the main issues and misinterpretation of the null ritual NHST and if you’d like to learn more about this, I strongly recommend you to read <span class="citation" data-cites="gigerenzer2004">Gigerenzer (<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">2004</a>)</span> and the other papers cited in this section. <span class="citation" data-cites="gigerenzer2004a">Gigerenzer, Krauss, and Vitouch (<a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">2004</a>)</span> highlights how the null ritual can indeed hurt research and anything that comes from it. Alas, as said at the beginning of this chapter, virtually all contemporary research (especially in the social sciences and hence linguistics) adopts the null ritual for statistical inference. This means, in practice, that we should always be very sceptical of statements regarding statistical significance and or strength of evidence when reading such literature and we should instead focus more on the actual estimates of the estimands of interest.</p>
-<p>Many students (and supervisors) worry that not learning how to run many different frequentist/null-ritualist statistical tests and regression models could make it more difficult for you to understand previous literature, precisely because that is what most literature uses. This is in fact a unnecessary worry: all frequentist tests are just ways to obtain a <em>p</em>-value to test statistical significance and they tell you nothing else about the magnitude or importance of an estimate; frequentist regression models function on the same premise of using the equation of a line to estimate coefficients we’ve been discussing in the regression chapters, so that the structure of model coefficients and parameters is just the same. It is the interpretation that is different: in Bayesian regression models, you get a full posterior probability distribution for each parameter, while in frequentist regressions you only get a point-estimate (an estimate that is a single value). In other words, once you learn the basics of Bayesian regression models, you can still interpret frequentist/null-ritualistic regression models while avoiding the common pitfalls reviewed in this chapter.</p>
+<p>Many students (and supervisors) worry that not learning how to run many different frequentist/null-ritualistic statistical tests and regression models could make it more difficult for you to understand previous literature, precisely because that is what most literature uses. This is in fact a unnecessary worry: all frequentist tests are just ways to obtain a <em>p</em>-value to test statistical significance and they tell you nothing else about the magnitude or importance of an estimate; frequentist regression models function on the same premise of using the equation of a line to estimate coefficients we’ve been discussing in the regression chapters, so that the structure of model coefficients and parameters is just the same. It is the interpretation that is different: in Bayesian regression models, you get a full posterior probability distribution for each parameter, while in frequentist regressions you only get a point-estimate (an estimate that is a single value). In other words, once you learn the basics of Bayesian regression models, you can still interpret frequentist/null-ritualistic regression models while avoiding the common pitfalls reviewed in this chapter.</p>
 </section>
 <section id="why-prefer-bayesian-inference" class="level2" data-number="29.5">
 <h2 data-number="29.5" class="anchored" data-anchor-id="why-prefer-bayesian-inference"><span class="header-section-number">29.5</span> Why prefer Bayesian inference?</h2>
-<p>Now that you have a better understanding of frequentist statistics and more precisely the null ritualistic version of frequentism (or NHST) as practiced by researchers, here are a few practical and conceptual reasons for why Bayesian statistics might be more appropriate in most research contexts.</p>
+<p>Now that you have a better understanding of frequentist statistics and more precisely the null ritualistic version of frequentism (or NHST) as practised by researchers, here are a few practical and conceptual reasons for why Bayesian statistics might be more appropriate in most research contexts.</p>
 <section id="practical-reasons" class="level3" data-number="29.5.1">
 <h3 data-number="29.5.1" class="anchored" data-anchor-id="practical-reasons"><span class="header-section-number">29.5.1</span> Practical reasons</h3>
 <ul>
@@ -965,6 +982,12 @@ Figure&nbsp;29.2: Standard <em>t</em>-distribution and obtained <em>t</em>-stati
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-brysbaert2020" class="csl-entry" role="listitem">
+Brysbaert, Marc. 2020. <span>“Power Considerations in Bilingualism Research: Time to Step up Our Game.”</span> <em>Bilingualism: Language and Cognition</em> 24 (5): 813818. <a href="https://doi.org/10.1017/s1366728920000437">https://doi.org/10.1017/s1366728920000437</a>.
+</div>
+<div id="ref-brysbaert2018" class="csl-entry" role="listitem">
+Brysbaert, Marc, and Michaël Stevens. 2018. <span>“Power Analysis and Effect Size in Mixed Effects Models: A Tutorial.”</span> <em>Journal of Cognition</em> 1 (1). <a href="https://doi.org/10.5334/joc.10">https://doi.org/10.5334/joc.10</a>.
+</div>
 <div id="ref-cassidy2019" class="csl-entry" role="listitem">
 Cassidy, Scott A., Ralitza Dimova, Benjamin Giguère, Jeffrey R. Spence, and David J. Stanley. 2019. <span>“Failing Grade: 89 Per-Cent of Introduction to Psychology Textbooks That Define/Explain Statistical Significance Do so Incorrectly.”</span> <em>Advances in Methods and Practices in Psychological Science</em>. <a href="https://doi.org/10.1177/2515245919858072">https://doi.org/10.1177/2515245919858072</a>.
 </div>
@@ -1274,13 +1297,14 @@ window.onload = function() {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
