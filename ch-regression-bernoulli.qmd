@@ -91,11 +91,71 @@ Now, what we are trying to do when modelling binary outcome variables is to esti
 
 ## Probability and log-odds
 
-As we have just learned probabilities are bounded between 0 and 1 but we need something that is not bounded because regression models don't work with bounded numeric variables. This is where the **logit function** comes in: the logit function (from "*log*istic un*it*") is a mathematical function that transforms probabilities into log-odds. @fig-p-log-odds shows the correspondence of probabilities (on the *y*-axis) and log-odds (on the *x*-axis), as marked by the black S-shaped line. Since probabilities can't be smaller than 0 and greater than 1, the black line slopes in either direction and it approaches 0 and 1 on the *y*-axis without ever reaching them (in mathematical terms, it's an *asymptotic* line). It is helpful to just memorise that probability 0.5 corresponds to log-odds 0.
+As we have just learned, probabilities are bounded between 0 and 1 but we need something that is not bounded because regression models don't work with bounded numeric variables. This is where the **logit function** comes in: the logit function (from "*log*istic un*it*") is a mathematical function that transforms probabilities into log-odds. The logit function is the quantile function (the function that returns quantiles, the value below which a given proportion of a probability distribution lies) of the **logistic distribution**. The logit function is the quantile of a logistic function with mean 0 and standard deviation 1 (a standard logistic distribution). In R, the logit function is `qlogis()`. The default mean and SD in `qlogis()` are 0 and 1 respectively, so you can just input the first argument, `p` which is the probability you want to transform into log-odds.
+
+```{r}
+#| label: qlogis
+
+qlogis(0.2)
+qlogis(0.5)
+qlogis(0.8)
+
+```
+
+@fig-p-log-odds shows the logit function (the quantile function of the standard logistic distribution). The probabilities on the *x*-axis are transformed into log-odds on the *y* axis. When you fit a regression model with a binary outcome and a Bernoulli family, the estimates of the regression coefficients are in log-odds.
 
 ```{r}
 #| label: fig-p-log-odds
-#| fig-cap: "Correspondence between log-odds and probabilities"
+#| fig-cap: "The logit function (quantile function): from probabilities to log-odds."
+#| warning: false
+#| code-fold: true
+
+dots <- tibble(
+  p = seq(0.1, 0.9, by = 0.1),
+  log_odds = qlogis(p)
+)
+
+log_odds_p <- tibble(
+  p = seq(0, 1, by = 0.001),
+  log_odds = qlogis(p)
+) %>%
+  ggplot(aes(p, log_odds)) +
+  geom_vline(xintercept = 0.5, linetype = "dashed") +
+  geom_vline(xintercept = 0, colour = "#8856a7", linewidth = 1) +
+  geom_vline(xintercept = 1, colour = "#8856a7", linewidth = 1) +
+  geom_hline(yintercept = 0, alpha = 0.5) +
+  geom_line(linewidth = 2) +
+  geom_point(data = dots, size = 4) +
+  geom_point(x = 0.5, y = 0, colour = "#8856a7", size = 4) +
+  annotate("text", x = 0.2, y = 3, label = "logit(p) = log-odds") +
+  scale_x_continuous(breaks = seq(0, 1, by = 0.1), minor_breaks = NULL, limits = c(0, 1)) +
+  scale_y_continuous(breaks = seq(-6, 6, by = 1), minor_breaks = NULL) +
+  labs(
+    x = "Probability",
+    y = "Log-odds"
+  )
+log_odds_p
+```
+
+To go back from log-odds to probabilities, we use the inverse logit function. This is the CDF of the standard logistic distribution. In R, you apply the inverse logit function (also called the logistic function, because it is the CDF of the standard logistic distribution) with `plogis()`. As with `qnorm()`, the default mean and SD are 0 and 1 respectively so you can just input the log-odds you want to transform into probabilities as the first argument `q`.
+
+```{r}
+#| label: plogis
+
+plogis(-3)
+plogis(0)
+plogis(2)
+plogis(6)
+
+# To show that plogis is the inverse of qlogis
+plogis(qlogis(0.2))
+```
+
+@fig-p-log-odds shows the inverse logit transformation of log-odds (on the *x*-axis) into probabilities (on the *y*-axis). The inverse logit constructs the typical S-shaped curve (black thick line) of the CDF of the standard logistic distribution. Since probabilities can't be smaller than 0 and greater than 1, the black line slopes in either direction and it approaches 0 and 1 on the *y*-axis without ever reaching them (in mathematical terms, it's an *asymptotic* line). It is helpful to just memorise that log-odds 0 corresponds to probability 0.5 (and vice versa of course).
+
+```{r}
+#| label: fig-log-odds-p
+#| fig-cap: "The inverse logit function (CDF function): from log-odds to probabilities."
 #| warning: false
 #| code-fold: true
 
@@ -116,7 +176,7 @@ p_log_odds <- tibble(
   geom_line(linewidth = 2) +
   # geom_point(data = dots, size = 4) +
   geom_point(x = 0, y = 0.5, colour = "#8856a7", size = 4) +
-  annotate("text", x = -4, y = 0.8, label = "logit(p) = log-odds") +
+  annotate("text", x = -4, y = 0.8, label = "inv_logit(log-odds) = p") +
   scale_x_continuous(breaks = seq(-6, 6, by = 1), minor_breaks = NULL, limits = c(-6, 6)) +
   scale_y_continuous(breaks = seq(0, 1, by = 0.1), minor_breaks = NULL) +
   labs(
@@ -126,19 +186,15 @@ p_log_odds <- tibble(
 p_log_odds
 ```
 
-When you fit a regression model with a binary outcome and a Bernoulli family, the estimates of the regression coefficients are in log-odds. To transform log-odds back into probability, one uses the **inverse logit** (also called logistic) **function**. The logit and inverse logit functions in R are applied with the `qlogis()` and `plogis()` functions respectively. Those are the logit equivalents of the `qnorm()` and `pnorm()` functions you encountered in @sec-gaussian.
+::: callout-warning
+### Exercise 1
 
-```{r}
-#| label: pq-logis
-p <- 0.3
+Calculate the following:
 
-# from probability to log-odds
-log_odds <- qlogis(p)
-log_odds
+-   The log-odds corresponding to $p = (0.12, 0.66, 0.9999)$.
 
-# from log-odds to probability
-plogis(log_odds)
-```
+-   The probabilities corresponding to log-odds $= (-6, 0.5, 15)$.
+:::
 
 ## Fitting a Bernoulli model
 
