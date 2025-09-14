@@ -93,13 +93,50 @@ $$
 \end{align}
 $$
 
-We say that $\mu$ comes from a probability distribution $P(\mu_1, \sigma_1)$. We use a subscript $1$ to differentiate the mean and SD of the main $Gaussian(\mu, \sigma)$ distribution from the mean and SD of the probability distribution of the mean $\mu$. Similarly, we say that $\sigma$ comes from a probability distribution $P_+(\mu_2, \sigma_2)$: $P_+()$ is a (non-technical) way to indicate that the probability should include only positive values. Why? Because SDs can only be positive. By specifying $P_+()$ we are constraining the probability distribution of $\sigma$ to have positive values only. In sum, we need to estimate two probability distributions, $P(\mu_1, \sigma_1)$ and $P_+(\mu_2, \sigma_2)$. These are **posterior probability distributions**. You will learn more about posterior probability distributions in the next chapter. For now, just keep in mind that they are called *posterior* because the come from the combination of priors and data. But where are the priors?
+We say that $\mu$ comes from a probability distribution $P(\mu_1, \sigma_1)$. We use a subscript $1$ to differentiate the mean and SD of the main $Gaussian(\mu, \sigma)$ distribution from the mean and SD of the probability distribution of the mean $\mu$. Similarly, we say that $\sigma$ comes from a probability distribution $P_+(\mu_2, \sigma_2)$: $P_+()$ is a (non-technical) way to indicate that the probability should include only positive values. Why? Because SDs can only be positive. By specifying $P_+()$ we are constraining the probability distribution of $\sigma$ to have positive values only. In sum, we need to estimate two probability distributions, $P(\mu_1, \sigma_1)$ and $P_+(\mu_2, \sigma_2)$. These are **posterior probability distributions**. You will learn more about posterior probability distributions in the next chapter. For now, just keep in mind that they are called *posterior* because the come from the combination of priors and data.
 
+In the rest of this book, you will be using the default prior probability distributions, or priors for short, as set by brms, the R package we will use to fit Bayesian models. This means that you will not have to worry about priors while you step your toes into the ocean of Bayesian statistics. However, it is helpful to learn a bit of context in relation to priors. After all, one of the big differences between frequentist and Bayesian statistics are indeed the priors ($P(h)$ in Bayes' Theorem in @sec-gauss-model). After learning about priors in this chapter, you can safely assume that priors are handled by brms for you and you should not worry until after you completed this course. Note that in actual research, thinking about priors is a necessary step, even if one ends up using the default brms priors. Check out the Spotlight box to learn a bit more about priors.
+
+In the next chapter you will fit the Gaussian model of RTs using brms, with the default priors as set by the package.
+
+::: callout-note
+## Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+  "Because $\\sigma$ is always zero.",
+  answer = "Because $\\sigma$ represents variability, which cannot be negative.",
+  "Because $\\mu$ is also constrained to be positive."
+)
+
+cat("a. Why is the distribution of $\\sigma$ constrained to positive values only?", longmcq(opts_1))
+
+opts_2 <- c(
+  "Because RTs are Gaussian.",
+  "Because it is easier to run the model.",
+  answer = "Because a Gaussian distribution is a safe assumption to make."
+)
+
+cat("b. Why have we assumed that reaction times are Gaussian?", longmcq(opts_2))
+
+opts_3 <- c(
+  "The data alone.",
+  "Theoretical distributions chosen by the researcher before collecting data.",
+  answer = "The combination of priors and observed data."
+)
+
+cat("c. In Bayesian modeling, posterior probability distributions are described as:", longmcq(opts_3))
+```
+:::
+
+::: {.callout-important collapse="true"}
 ## Prior probability distributions
 
-In the rest of this book, you will be using the default prior probability distributions, or priors for short, as set by brms, the R package we will use to fit Bayesian models. This means that you will not have to worry about priors while you step your toes into the ocean of Bayesian statistics. However, it is helpful to learn a bit of context in relation to priors. After all, one of the big differences between frequentist and Bayesian statistics are indeed the priors ($P(h)$ in Bayes' Theorem in @sec-gauss-model). After learning about priors in this chapter, you can safely assume that priors are handled by brms for you and you should not worry until after you completed this course. Note that in actual research, thinking about priors is a necessary step, even if one ends up using the default brms priors.
-
-So, how do we go about choosing priors for the model above? Once you know that you are trying to estimate the (posterior) probability distribution of $\mu$ and $\sigma$ you also know that you should choose a prior for each parameter. In other words, each parameter in the model gets its own prior. But what is a prior exactly? It is just a probability distribution! With Gaussian models, it is common to use Gaussian probability distributions as the priors for the mean and SD of the Gaussian distribution. Yes, you read right: we use Gaussian distributions as priors for the parameters of the Gaussian distribution. Note that priors should be chosen *before* seeing the data. Here, we have seen the data many times, so let's just pretend we haven't. For example, let's say that we believe that, prior to seeing the data, the mean RT is a value from a Gaussian distribution with mean 900 ms and SD 200 ms: $Gaussian(900, 200)$. Do not worry as to how I came up with those numbers. Since you will not need to choose priors yourself, for now just focus on understanding how priors fit in Gaussian models. The $Gaussian(900, 200)$ distribution is shown in @fig-prior-mu.
+How do we go about choosing priors for the model above? Once you know that you are trying to estimate the (posterior) probability distribution of $\mu$ and $\sigma$ you also know that you should choose a prior for each parameter. In other words, each parameter in the model gets its own prior. But what is a prior exactly? It is just a probability distribution! With Gaussian models, it is common to use Gaussian probability distributions as the priors for the mean and SD of the Gaussian distribution. Yes, you read right: we use Gaussian distributions as priors for the parameters of the Gaussian distribution. Note that priors should be chosen *before* seeing the data. Here, we have seen the data many times, so let's just pretend we haven't. For example, let's say that we believe that, prior to seeing the data, the mean RT is a value from a Gaussian distribution with mean 900 ms and SD 200 ms: $Gaussian(900, 200)$. Do not worry as to how I came up with those numbers. Since you will not need to choose priors yourself, for now just focus on understanding how priors fit in Gaussian models. The $Gaussian(900, 200)$ distribution is shown in @fig-prior-mu.
 
 ```{r}
 #| label: fig-prior-mu
@@ -142,5 +179,4 @@ $$
 \sigma     & \sim \text{HalfGaussian}(0, 200) & \text{[Prior for $\sigma$]}
 \end{align}
 $$
-
-With the data and priors we are now ready to actually fit the Gaussian model to estimate the posterior probabilities of $\mu$ and $\sigma$. We will do this in the next chapter.
+:::
