@@ -27,8 +27,12 @@ So far you have been fitting regression models in which the outcome variable was
 
 When modelling binary outcomes, what the researcher is usually interested in is the probability of obtaining one of the two levels. For example, in a lexical decision task one might want to know the probability that real words were recognised as such (in other words, we are interested in accuracy: incorrect or correct response). Let's say there is an 80% probability of responding correctly. So ($p()$ stands for "probability of"):
 
--   $p(\text{correct}) = 0.8$
--   $p(\text{incorrect}) = 1 - p(\text{correct}) = 0.2$
+$$
+\begin{align}
+p(\text{correct}) & = 0.8\\
+p(\text{incorrect}) & = 1 - p(\text{correct}) = 0.2
+\end{align}
+$$
 
 You see that if you know the probability of one level (correct) you automatically know the probability of the other level, since there are only two levels and the total probability has to sum to 1. The distribution family for binary probabilities is the **Bernoulli family**. The Bernoulli family has only one parameter, $p$, which is the probability of obtaining one of the two levels (one can pick which level). With our lexical decision task example, we can write:
 
@@ -186,32 +190,35 @@ p_log_odds <- tibble(
 p_log_odds
 ```
 
+::: callout-tip
+### Logit and inverse logit functions
+
+The **logit function** is the quantile function of a standard logistic distribution, used to convert probabilities into log-odds.
+
+The **inverse logit** (aka logistic) **function** is the CDF of the standard logistic distribution, used to convert log-odds to probabilities.
+:::
+
 ::: callout-warning
 ### Exercise 1
 
 Calculate the following:
 
--   The log-odds corresponding to $p = (0.12, 0.66, 0.9999)$.
+-   The log-odds corresponding to $p = 0.12, 0.66, 0.9999$.
 
--   The probabilities corresponding to log-odds $= (-6, 0.5, 15)$.
+-   The probabilities corresponding to log-odds $= -6, 0.5, 15$.
 :::
 
 ## Fitting a Bernoulli model
-
-::: {.callout-warning collapse="true"}
-### Spotlight: Bernoulli, binomial and logistic regression
-
-A lot of researchers know Bernoulli models under the name "binomial" or "logistic" regression. Please, note that these are exactly equivalent: they refer to a model with a Bernoulli distribution for the outcome variable. It is just that different research traditions call them differently.
-
-So if somebody asks you to run a logistic regression, or if you read a paper that reports one, what they just mean is to run a regression with a binary outcome variable and a Bernoulli distribution!
-:::
 
 To illustrate how to fit a Bernoulli model, we will use data from @brentari2024 on the emergent Nicaraguan Sign Language (*Lengua de Señas Nicaragüense*, NSL).
 
 ```{r}
 #| label: verb-org
+#| message: false
 
 verb_org <- read_csv("data/brentari2024/verb_org.csv")
+
+verb_org
 ```
 
 `verb_org` contains information on predicates as signed by three groups (`Group`): home-signers (`homesign`), first generation NSL signers (`NSL1`) and second generation NSL signers (`NSL2`). Specifically, the data coded in `Num_Predicates` whether the predicates uttered by the signer were single-verb predicates (SVP, `single`) or a multi-verb predicates (MVP, `multiple`). The hypothesis of the study is that use of multi-verb predicates would increase with each generation, i.e. that NSL1 signers would use more MVPs than home-signers and that NSL2 signers would use more MVPs than home-signers and NSL1 signers. (For the linguistic reasons behind this hypothesis, check the paper linked above).
@@ -313,3 +320,11 @@ To conclude this introduction to Bernoulli models (aka binomial/logistic regress
 
 conditional_effects(mvp_bm)
 ```
+
+::: {.callout-warning collapse="true"}
+### Spotlight: Bernoulli, binomial and logistic regression
+
+A lot of researchers know Bernoulli models under the name "binomial" or "logistic" regression. Please, note that these are exactly equivalent: they refer to a model with a Bernoulli distribution for the outcome variable. It is just that different research traditions call them differently.
+
+So if somebody asks you to run a logistic regression, or if you read a paper that reports one, what they just mean is to run a regression with a binary outcome variable and a Bernoulli distribution!
+:::
