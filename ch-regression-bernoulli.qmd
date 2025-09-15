@@ -208,7 +208,7 @@ Calculate the following:
 -   The probabilities corresponding to log-odds $= -6, 0.5, 15$.
 :::
 
-## Fitting a Bernoulli model
+## Nicaraguan Sign Language single and multi-verb predicates
 
 To illustrate how to fit a Bernoulli model, we will use data from @brentari2024 on the emergent Nicaraguan Sign Language (*Lengua de Señas Nicaragüense*, NSL).
 
@@ -221,21 +221,120 @@ verb_org <- read_csv("data/brentari2024/verb_org.csv")
 verb_org
 ```
 
-`verb_org` contains information on predicates as signed by three groups (`Group`): home-signers (`homesign`), first generation NSL signers (`NSL1`) and second generation NSL signers (`NSL2`). Specifically, the data coded in `Num_Predicates` whether the predicates uttered by the signer were single-verb predicates (SVP, `single`) or a multi-verb predicates (MVP, `multiple`). The hypothesis of the study is that use of multi-verb predicates would increase with each generation, i.e. that NSL1 signers would use more MVPs than home-signers and that NSL2 signers would use more MVPs than home-signers and NSL1 signers. (For the linguistic reasons behind this hypothesis, check the paper linked above).
-
-Let's plot the data to learn a bit more about it.
+`verb_org` contains information on predicates as signed by three groups (`Group`): home-signers (`homesign`), first generation NSL signers (`NSL1`) and second generation NSL signers (`NSL2`). Specifically, the data coded in `Num_Predicates` whether the predicates uttered by the signer were single-verb predicates (SVP, `single`) or a multi-verb predicates (MVP, `multiple`). The hypothesis of the study is that use of multi-verb predicates would increase with each generation, i.e. that NSL1 signers would use more MVPs than home-signers and that NSL2 signers would use more MVPs than home-signers and NSL1 signers. (For the linguistic reasons behind this hypothesis, check the paper linked above). @fig-verb-org shows the proportion of single vs multiple predicates in the three groups.
 
 ```{r}
-#| label: verb-org-plot
+#| label: fig-verb-org
+#| fig-cap: "Proportion of single vs multiple predicates in three groups of NSL signers."
+#| code-fold: true
 
 verb_org |> 
   ggplot(aes(Group, fill = Num_Predicates)) +
-  geom_bar(position = "fill")
+  geom_bar(position = "fill") +
+  scale_fill_brewer(palette = "Dark2") +
+  labs(
+    y = "Proportion"
+  )
 ```
 
-What do you notice about the type of predicates in the three groups?
+What do you notice about the type of predicates in the three groups? Does it match the hypothesis put forward by the paper? We can calculate the proportion of multi-verb predicates by creating a column which codes `Num_Predicates` with `0` for single and `1` for multiple predicates. This is the same dummy coding we encountered in @sec-regression-cat for categorical predictors, but now we apply that to a binary outcome variable. Then you just take the mean of the dummy column by group, to obtain the proportion of multi-verb predicates for each group. Note that since we code multi-verb predicates with `1`, taking the mean gives you the proportion of multi-verb predicates and the proportion of single predicates is just $1 - p$ where $p$ is the proportion of multi-verb predicates.
 
-To assess the study hypothesis, we can fit a Bernoulli model with `Num_Predicates` as the outcome variable and `Group` as the predictor.
+```{r}
+#| label: verb-prop
+
+verb_org <- verb_org |> 
+  mutate(
+    Num_Pred_dum = ifelse(Num_Predicates == "multiple", 1, 0)
+  )
+
+verb_org |> 
+  group_by(Group) |> 
+  summarise(
+    prop_multi = round(mean(Num_Pred_dum), 2)
+  )
+```
+
+On average, home-signers produce 36% of multi-verb predicates, first generation signers (NSL1) 19% and second generation signers (NSL2) 50%. In other words, there is a decrease in production of multi-verb predicates from home-signers to NSL1 signers, while NSL2 signers basically just use either single or multi-verb predicates. Most times, it is also useful to plot the proportion for each participant separately. Unfortunately, this is an area were bad practices have become standard so it is worth spending some time on this, in a new section.
+
+## Plotting proportions, percentages and accuracy data
+
+A common (but incorrect) way of plotting proportion/percentage data (like accuracy, or the single vs multi-verb predicates of the `verb_org` dataset) is to calculate the proportion of each participant and then produce a bar chart with error bars that indicate the mean proportion (i.e. the mean of the proportions of each participant) and the dispersion around the mean accuracy. You might have seen something like @fig-prop-bad in many papers. This type of plot is called "bars and whiskers" because the error bars look like cat whiskers.
+
+```{r}
+#| label: fig-prop-bad
+#| fig-cap: "The bad way of plotting proportions."
+#| code-fold: false
+
+verb_org |> 
+  group_by(Participant, Group) |> 
+  summarise(prop = sum(Num_Pred_dum) / n(), .groups = "drop") |> 
+  group_by(Group) |> 
+  add_tally() |>
+  summarise(mean_prop = mean(prop), sd_prop = sd(prop)) |> 
+  ggplot(aes(Group, mean_prop)) +
+  geom_bar(stat = "identity") +
+  geom_errorbar(
+    aes(
+      ymin = mean_prop - sd_prop / sqrt(46),
+      ymax = mean_prop + sd_prop / sqrt(46)
+    ),
+    width = 0.2
+  )
+```
+
+THE HORROR. Alas, this is a very bad way of processing proportion data. You can learn why in @holtz2019.[^ch-regression-bernoulli-1] The alternative (robust) way to plot proportion data is to show the proportion for individual participants. To do so we can use a combination of `summarise()`, `geom_jitter()` and `stat_summary()`. First, we need to compute the proportion of multi-verb predicates by participant. The procedure is the same as calculating the proportion for the three signer groups, but now we do it for each participant. Note that participants only have a unique ID within group, so we need to group by participant and group (we need the group information any way to be able to plot participants by group below). We save the output to a new tibble `verb_part`.
+
+[^ch-regression-bernoulli-1]: This StackExchange answer is also useful: <https://stats.stackexchange.com/a/367889/128897>.
+
+```{r}
+#| label: verb-part
+
+verb_part <- verb_org |> 
+  group_by(Participant, Group) |> 
+  summarise(
+    prop_multi = round(mean(Num_Pred_dum), 2),
+    .groups = "drop"
+  )
+```
+
+Now we can plot the proportions and add mean and confidence intervals using `geom_jitter()` and `stat_summary()`. Before proceeding, you need to install the [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html) package. There is no need to attach it (it is used by `stat_summary()` under the hood). *Remember not to include the code for installation in your document; you need to install the package only once.* After several years of teaching, I still see a lot of students having `install.packages()` in their scripts.
+
+```{r}
+#| label: fig-prop-good
+#| fig-cap: "How to plot participants' proportions and overall proportions."
+
+ggplot() +
+  # Proportion of each participant
+  geom_jitter(
+    data = verb_part,
+    aes(x = Group, y = prop_multi),
+    width = 0.1, alpha = 0.5
+  ) +
+  # Mean proportion by stimulus with confidence interval
+  stat_summary(
+    data = verb_org,
+    aes(x = Group, y = Num_Pred_dum, colour = Group),
+    fun.data = "mean_cl_boot", size = 0.5
+  ) +
+  labs(
+    title = "Proportion of takete responses by participant and stimulus",
+    caption = "Mean proportion is represented by coloured points with 95% bootstrapped Confidence Intervals.",
+    x = "Stimulus",
+    y = "Proportion"
+  ) +
+  ylim(0, 1) +
+  theme(legend.position = "none")
+```
+
+In this data we don't have many participants for group, but you can immediately appreciate the variability between participants. You will notice something new in the code: we have specified the data inside `geom_jitter()` and `stat_summary()` instead of inside `ggplot()`. This is because the two functions need different data: `geom_jitter()` needs the data with the proportion we calculated for each participant and group; `stat_summary()` needs to calculate the mean and CIs from the overall data, rather than from the proportion data we created. This is the aspect that a lot of researchers get wrong: you should **not** take the mean of the participant proportions, unless all participants have exactly the same number of observations. In the `verb_org` data specifically, the number of observations do indeed differ for each participant. You can check this yourself by getting the number of observations per participant per group with the `count()` function.
+
+We are also specifying the aesthetics within each geom/stat function, because while `x` is the same, the `y` differs! In `stat_summary()`, the `fun.data` argument lets you specify the function you want to use for the summary statistics to be added. Here we are using the `mean_cl_boot` function, which returns the mean proportion of `Response_num` and the 95% Confidence Intervals (CIs) of that mean. The CIs are calculated using a bootstrapping procedure (if you are interested in learning what that is, check the documentation of `smean.sd` from the Hmisc package).
+
+This also makes a nice opportunity to mention one shortcoming of the models we are fitting, thinking a bit ahead of ourselves: the regression models we cover in Week 4 to 10 do not account for the fact that the data comes from multiple participants and instead they just assume that each observation in the data set is from a different participant.
+
+## Bernoulli model
+
+To statistically assess the hypothesis and obtain estimates of the proportion of multiple predicates, we can fit a Bernoulli model with `Num_Predicates` as the outcome variable and `Group` as a categorical predictor.
 
 Before we move on onto fitting the model, it is useful to transform `Num_Predicates` into a factor and specify the order of the levels so that `single` is the first level and `multiple` is the second level.
 
