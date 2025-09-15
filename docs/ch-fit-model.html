@@ -757,7 +757,7 @@ RT \sim Gaussian(\mu, \sigma)
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><code>RT ~ 1</code> and <code>family = gaussian</code> simply tell brms to model RT using a Gaussian distribution. This means that the probability distribution of the mean and the standard deviation of the Gaussian distribution of RTs will be estimated from the data. <code>RT ~ 1</code> might look very weird to you right now, but it will become clear in the next couple of chapters why it is that way. For now, just accept that that is the way you write a Gaussian model in R.</li>
-<li>We specify the data with <code>data = height</code>.</li>
+<li>We specify the data with <code>data = mald</code>.</li>
 </ul>
 <p>As with other R functions, we want to assign the output of <code>brm()</code> to a variable, here <code>rt_bm</code>. We will then be able to inspect the output in <code>rt_bm</code>. Now run the Gaussian model of RTs (don’t forget to attach the brms package and read the data, like in the following code).</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
@@ -1023,6 +1023,32 @@ sigma        317.8845  3.171714  313.8399  321.8941</code></pre>
 <p>Based on the model results, there is a 95% probability that the mean is between 1002 and 1019 ms (mean = 1011, SD = 4) and that the standard deviation is between 312 and 324 ms (mean = 318, SD = 3).</p>
 </blockquote>
 <p>The example used in this chapter is quite trivial: we are just estimating a mean and SD from the data, but in order to understand how to answer more involved questions it is fundamental that you understand what was covered in this chapter. So make sure to have grasped the basics of Gaussian models before moving onto regressions in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>. On the other hand, if you will ever be asked what we can expect RTs in a auditory lexical decision task to look like you might be able to say that, based on the model and data in this chapter, we can be quite confident that they will have a mean of about 1010 ms and an SD of about 320 ms. You might think this was a lot of work to just learn about what we knew directly from the sample, and it is, but be reassured that in normal research contexts things are always much more complex than this, so it is indeed worth the effort.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quiz 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Which function is used to fit Bayesian models?</p>
+<div id="radio_ZYJXGAPIXU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZYJXGAPIXU" value=""> <span><code>brms()</code></span></label><label><input type="radio" autocomplete="off" name="radio_ZYJXGAPIXU" value="answer"> <span><code>brm()</code></span></label><label><input type="radio" autocomplete="off" name="radio_ZYJXGAPIXU" value=""> <span><code>bm()</code></span></label>
+</div></li>
+<li><p>The <code>Estimate</code> column in further distributional parameters is:</p>
+<div id="radio_ZPSMWDDHTD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZPSMWDDHTD" value=""> <span>The mean of the posterior distributino of the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_ZPSMWDDHTD" value=""> <span>The standard deviation of the posterior distribution of the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_ZPSMWDDHTD" value="answer"> <span>The mean of the posterior distribution of the standard deviation.</span></label>
+</div></li>
+<li><p>The posterior of each parameter is the value in the <code>Estimate</code> column. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+<li><p>Only 95% CrI should be used for inference. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+<li><p>To fit a Gaussian model, the formula has the form <code>y ~ 1</code>. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>The intercept corresponds to the parameter <span class="math inline">\(\mu\)</span>. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+</ol>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">

@@ -42,7 +42,7 @@ brm(
 ```
 
 -   `RT ~ 1` and `family = gaussian` simply tell brms to model RT using a Gaussian distribution. This means that the probability distribution of the mean and the standard deviation of the Gaussian distribution of RTs will be estimated from the data. `RT ~ 1` might look very weird to you right now, but it will become clear in the next couple of chapters why it is that way. For now, just accept that that is the way you write a Gaussian model in R.
--   We specify the data with `data = height`.
+-   We specify the data with `data = mald`.
 
 As with other R functions, we want to assign the output of `brm()` to a variable, here `rt_bm`. We will then be able to inspect the output in `rt_bm`. Now run the Gaussian model of RTs (don't forget to attach the brms package and read the data, like in the following code).
 
@@ -276,3 +276,34 @@ What about reporting the model in writing? We could report the model and the res
 > Based on the model results, there is a 95% probability that the mean is between `{r} round(brms::fixef(rt_bm)[3])` and `{r} round(brms::fixef(rt_bm)[4])` ms (mean = `{r} round(brms::fixef(rt_bm)[1])`, SD = `{r} round(brms::fixef(rt_bm)[2])`) and that the standard deviation is between `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q2.5"])` and `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q97.5"])` ms (mean = `{r} round(brms::posterior_summary(rt_bm)["sigma", "Estimate"])`, SD = `{r} round(brms::posterior_summary(rt_bm)["sigma", "Est.Error"])`).
 
 The example used in this chapter is quite trivial: we are just estimating a mean and SD from the data, but in order to understand how to answer more involved questions it is fundamental that you understand what was covered in this chapter. So make sure to have grasped the basics of Gaussian models before moving onto regressions in @sec-reg-intro. On the other hand, if you will ever be asked what we can expect RTs in a auditory lexical decision task to look like you might be able to say that, based on the model and data in this chapter, we can be quite confident that they will have a mean of about 1010 ms and an SD of about 320 ms. You might think this was a lot of work to just learn about what we knew directly from the sample, and it is, but be reassured that in normal research contexts things are always much more complex than this, so it is indeed worth the effort.
+
+::: callout-note
+## Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+  "`brms()`",
+  answer = "`brm()`",
+  "`bm()`"
+)
+
+cat("a. Which function is used to fit Bayesian models?", longmcq(opts_1))
+
+opts_2 <- c(
+  "The mean of the posterior distributino of the mean.",
+  "The standard deviation of the posterior distribution of the mean.",
+  answer = "The mean of the posterior distribution of the standard deviation."
+)
+
+cat("b. The `Estimate` column in further distributional parameters is:", longmcq(opts_2))
+
+cat("a. The posterior of each parameter is the value in the `Estimate` column.", torf(FALSE), "\n\n")
+cat("b. Only 95% CrI should be used for inference.", torf(FALSE), "\n\n")
+cat("c. To fit a Gaussian model, the formula has the form `y ~ 1`.", torf(TRUE), "\n\n")
+cat("d. The intercept corresponds to the parameter $\\mu$.", torf(TRUE), "\n\n")
+```
+:::
