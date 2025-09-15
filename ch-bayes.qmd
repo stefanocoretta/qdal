@@ -9,6 +9,7 @@
 #| include: false
 
 library(tidyverse)
+library(webexercises)
 
 ```
 
@@ -79,4 +80,44 @@ d |>
 
 Now let's update our latest prior with the probability taken from the second observation: this was L, land. The solid line in the second panel is the probability of getting a W and L: the probability indicates that a proportion of 0.5 is the most probable. This makes sense: if in two tosses you got one W and one L, then the most probable hypothesis is that there is 50% of water and 50% of land. We combine again our prior (dashed line) with the data (solid line) to obtain the dashed line in the third top panel. This is our new prior. The rest of the figure shows how the prior gets updated at each new observation of W or L. You see that the highest density of the dashed lines quickly moves to the right. They are now suggesting that the globe has a higher proportion of water than land. Chapter 2 of @mcelreath2020 goes into much more details and I recommend you read that at some point if you feel this section felt a bit too abstract.
 
-Hopefully you can appreciate how different the frequentist and Bayesian approaches are: while frequentist statistics focusses on the rejection of a null/nil hypothesis based on the probability of the data given the hypothesis, or $P(d|h)$, Bayesian statistics is about obtaining the probability of any hypothesis given the data, or $P(h|d)$. You might also realise now that $P(d|h)$ appears in Bayes' Theorem. But the theorem also include the prior, $P(h)$. This is totally missing in the frequentist approach. The following section goes through a few reasons to prefer Bayesian inference over frequentist for research.
+Hopefully you can appreciate how different the frequentist and Bayesian approaches are: while frequentist statistics focusses on the rejection of a null/nil hypothesis based on the probability of the data given the hypothesis, or $P(d|h)$, Bayesian statistics is about obtaining the probability of any hypothesis given the data, or $P(h|d)$. You might also realise now that $P(d|h)$ appears in Bayes' Theorem. But the theorem also include the prior, $P(h)$. This is totally missing in the frequentist approach.
+
+::: callout-note
+## Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+   "Frequentist probability is about the likelihood of a hypothesis being true, while Bayesian probability is about repeating an experiment infinitely.",
+   answer = "Frequentist probability is about the frequency of outcomes in repeated trials, while Bayesian probability is about the degree of certainty in an event given conditions.",
+   "Frequentist probability uses prior beliefs, while Bayesian probability ignores them.",
+   "Frequentist and Bayesian probability are mathematically identical and differ only in terminology."
+)
+
+cat("a. What is the main conceptual difference between the frequentist and Bayesian interpretations of probability?", longmcq(opts_1))
+
+
+opts_2 <- c(
+   answer = "All proportions of water are considered equally probable before any data is observed.",
+   "The Earth is assumed to be exactly 50% water and 50% land.",
+   "The probability of land is always higher than the probability of water.",
+   "The prior distribution automatically adjusts after the first observation."
+)
+
+cat("b. In the 'globe-tossing' example, what does a uniform prior (or flat prior) mean?", longmcq(opts_2))
+
+
+opts_3 <- c(
+   "The probability of the data given the hypothesis, $P(d|h)$.",
+   answer = "The updating of prior beliefs in light of new data.",
+   "The concept of hypothesis testing with a null hypothesis.",
+   "The use of repeated replications of a study."
+)
+
+cat("c. In the 'globe-tossing' example, what does a uniform prior (or flat prior) mean?", longmcq(opts_3))
+
+```
+:::
