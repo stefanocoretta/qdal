@@ -535,6 +535,8 @@ opts_5b <- c(
 cat("b. Which of the following is **not** a logical vector.", longmcq(opts_5b))
 ```
 
+:::::
+
 ::: {.callout-tip collapse="true"}
 #### Hint
 
@@ -571,7 +573,6 @@ class(char)
 
 -   `"FALSE"` is **not** a logical vector because `FALSE` has been quoted (anything that is quoted is a string!).
 :::
-:::::
 
 ::: {.callout-important collapse="true"}
 #### R Note: For-loops and if-else statements
