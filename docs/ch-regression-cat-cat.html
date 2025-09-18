@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>31&nbsp; Regression models: multiple predictors – Quantitative Data Analysis for Linguists in R</title>
+<title>32&nbsp; Regression models: multiple predictors – Quantitative Data Analysis for Linguists in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./ch-regression-interaction.html" rel="next">
-<link href="./ch-regression-bernoulli.html" rel="prev">
+<link href="./ch-regression-lognorm.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -322,7 +322,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-cat-cat.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-regression-cat-cat.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-cat-cat.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-regression-cat-cat.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -631,6 +631,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -645,13 +651,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -689,8 +695,8 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#two-categorical-predictors" id="toc-two-categorical-predictors" class="nav-link active" data-scroll-target="#two-categorical-predictors"><span class="header-section-number">31.1</span> Two categorical predictors</a></li>
-  <li><a href="#is-the-effect-of-attitude-the-same-in-both-genders" id="toc-is-the-effect-of-attitude-the-same-in-both-genders" class="nav-link" data-scroll-target="#is-the-effect-of-attitude-the-same-in-both-genders"><span class="header-section-number">31.2</span> Is the effect of attitude the same in both genders?</a></li>
+  <li><a href="#two-categorical-predictors" id="toc-two-categorical-predictors" class="nav-link active" data-scroll-target="#two-categorical-predictors"><span class="header-section-number">32.1</span> Two categorical predictors</a></li>
+  <li><a href="#is-the-effect-of-attitude-the-same-in-both-genders" id="toc-is-the-effect-of-attitude-the-same-in-both-genders" class="nav-link" data-scroll-target="#is-the-effect-of-attitude-the-same-in-both-genders"><span class="header-section-number">32.2</span> Is the effect of attitude the same in both genders?</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-cat-cat.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -698,9 +704,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-cat-cat.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-regression-cat-cat.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-cat-cat.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-regression-cat-cat.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-regression-cat-cat" class="quarto-section-identifier"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></h1>
+<h1 class="title"><span id="sec-regression-cat-cat" class="quarto-section-identifier"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></h1>
 </div>
 
 
@@ -727,8 +733,8 @@ RT_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 \]</span></p>
 <p>The categorical predictor <span class="math inline">\(W\)</span> (<code>IsWord</code> in the data) has two levels (<code>TRUE</code> and <code>FALSE</code>), so there are two indexing variables: <span class="math inline">\(W_{\text{T}}\)</span> and <span class="math inline">\(W_{\text{F}}\)</span>. Each indexing variable gets its coefficient: <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span>. In most context, however, you will want to investigate the effects of more than one predictor.</p>
 <p>Regression models can be fit with multiple predictors. Traditionally, regression models with a single predictor were called “simple regression” and models with more than one “multiple regression”, but it doesn’t make sense to have a specific name: they are all regression models. In this chapter, we will discuss regression models with two categorical predictors.</p>
-<section id="two-categorical-predictors" class="level2" data-number="31.1">
-<h2 data-number="31.1" class="anchored" data-anchor-id="two-categorical-predictors"><span class="header-section-number">31.1</span> Two categorical predictors</h2>
+<section id="two-categorical-predictors" class="level2" data-number="32.1">
+<h2 data-number="32.1" class="anchored" data-anchor-id="two-categorical-predictors"><span class="header-section-number">32.1</span> Two categorical predictors</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>polite <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/winter2012/polite.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -798,8 +804,8 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
 </section>
-<section id="is-the-effect-of-attitude-the-same-in-both-genders" class="level2" data-number="31.2">
-<h2 data-number="31.2" class="anchored" data-anchor-id="is-the-effect-of-attitude-the-same-in-both-genders"><span class="header-section-number">31.2</span> Is the effect of attitude the same in both genders?</h2>
+<section id="is-the-effect-of-attitude-the-same-in-both-genders" class="level2" data-number="32.2">
+<h2 data-number="32.2" class="anchored" data-anchor-id="is-the-effect-of-attitude-the-same-in-both-genders"><span class="header-section-number">32.2</span> Is the effect of attitude the same in both genders?</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(gender, f0mn, <span class="at">colour =</span> attitude)) <span class="sc">+</span></span>
@@ -811,7 +817,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <img src="ch-regression-cat-cat_files/figure-html/fig-f0-plot-1.png" id="fig-f0-plot" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-f0-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;31.1
+Figure&nbsp;32.1
 </figcaption>
 </figure>
 </div>
@@ -1451,13 +1457,13 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ch-regression-bernoulli.html" class="pagination-link" aria-label="Binary outcomes">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes</span></span>
+      <a href="./ch-regression-lognorm.html" class="pagination-link" aria-label="Log-normal regression">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ch-regression-interaction.html" class="pagination-link" aria-label="Regression models: interactions">
-        <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

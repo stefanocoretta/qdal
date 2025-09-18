@@ -1,3 +1,0 @@
-# Log-normal regression {#sec-lognorm}
-
-<!--# TODO: lognormal -->

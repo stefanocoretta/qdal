@@ -62,6 +62,7 @@ book:
   - part: Week 8
     chapters:
       - ch-regression-bernoulli.qmd
+      - ch-regression-lognorm.qmd
   - part: Week 9
     chapters:
       - ch-regression-cat-cat.qmd
