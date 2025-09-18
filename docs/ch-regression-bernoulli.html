@@ -1309,29 +1309,39 @@ Figure&nbsp;30.7: Predicted probabilities of multi-verb predicates by group as p
 </div>
 </div>
 </div>
-<p>Very often, we also want to know the posterior probability of the difference between a level and another level that is not the reference: here for example we might want to know the difference between NSL1 and NSL2. It is easy: we just take the difference of the inverse-logit-transformed predicted draws columns <code>NSL1</code> and <code>NSL2</code> in <code>mvp_bm_draws</code>. This approach also works with the log-odds draws directly, to get the difference in log-odds.</p>
+<p>Very often, we also want to know the posterior probability of the difference between a level and another level that is not the reference: here for example we might want to know the difference between NSL1 and NSL2. It is easy: we just take the difference of the log-odds predicted draws columns <code>NSL1</code> and <code>NSL2</code> in <code>mpv_bm_draws</code>. If we want to know the difference between the probabilities rather than the log-odds, we use the inverse-logit-transformed predicted draws.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws <span class="ot">&lt;-</span> mvp_bm_draws <span class="sc">|&gt;</span> </span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL2_NSL1_log =</span> NSL2 <span class="sc">-</span> NSL1,</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL2_NSL1_p =</span> <span class="fu">plogis</span>(NSL2) <span class="sc">-</span> <span class="fu">plogis</span>(NSL1)</span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(mvp_bm_draws<span class="sc">$</span>NSL2_NSL1_log, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL1_homesign_p =</span> <span class="fu">plogis</span>(NSL1) <span class="sc">-</span> <span class="fu">plogis</span>(homesign),</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL2_NSL1_p =</span> <span class="fu">plogis</span>(NSL2) <span class="sc">-</span> <span class="fu">plogis</span>(NSL1)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(mvp_bm_draws<span class="sc">$</span>NSL1_homesign_p, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  q10   q90 
+-0.22 -0.11 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(mvp_bm_draws<span class="sc">$</span>NSL2_NSL1_log, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> q10  q90 
 1.17 1.73 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(mvp_bm_draws<span class="sc">$</span>NSL2_NSL1_p, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(mvp_bm_draws<span class="sc">$</span>NSL2_NSL1_p, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> q10  q90 
 0.25 0.36 </code></pre>
 </div>
 </div>
-<p>The log-odds in NSL2 are 1.17-1.73 units higher than in NSL1, at 80% probability. The probability of a multi-verb predicate is 25 to 36 percentage points higher in NSL2 than NSL1, at 80% confidence. Note how we say <em>percentage points</em> and not percent. There isn’t a 25-36% increase, but the probability increases by 25-36 units, which for probabilities expressed as percentages are called percentage points. Mixing these things up is a common mistake, so be careful.</p>
+<p>The log-odds in NSL2 are 1.17-1.73 units higher than in NSL1, at 80% probability. The probability of a multi-verb predicate is 11 to 22 percentage points lower in NSL1 than home-signers and it is 25 to 36 percentage points higher in NSL2 than NSL1, at 80% confidence. Note how we say <em>percentage points</em> and not percent. There isn’t a 25-36% increase, but the probability increases by 25-36 units, which for probabilities expressed as percentages are called percentage points. Mixing these things up is a common mistake, so be careful.</p>
 </section>
 <section id="reporting" class="level2" data-number="30.6">
 <h2 data-number="30.6" class="anchored" data-anchor-id="reporting"><span class="header-section-number">30.6</span> Reporting</h2>
+<blockquote class="blockquote">
+<p>We fitted a Bayesian Bernoulli regression model to assess the probability of multi-verb predicates in NSL. The model was fitted with brms <span class="citation" data-cites="burkner2017">Bürkner (<a href="references.html#ref-burkner2017" role="doc-biblioref">2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">R Core Team (<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">2025</a>)</span>, with the default priors, four chains with 2000 iterations each, of which 1000 for warm-up. We included group (home-signers, NSL1 and NSL2) as the only predictor, which was coded with the default treatment contrasts (home-signers as the reference level).</p>
+<p>According to the model, there is a 32-41% probability of multi-verb predicates in home-signers, for NSL1 it is 16-22% and for NSL2 it is 45-54%, at 80% confidence. The results indicate that the hypothesis that the probability of multi-verb predicates should increase from home-signers to NSL1 to NSL2 is not borne out. The probability decreases by 11-22 percentage points from home-signers to NSL1, and increases by 25-36 points from NSL1 to NSL2. Moreover, the probability of multi-verb predicates in NSL2 indicates that single and multi-verb predicates are equally probable in NSL2.</p>
+</blockquote>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1355,8 +1365,14 @@ Figure&nbsp;30.7: Predicted probabilities of multi-verb predicates by group as p
 <div id="ref-brentari2024" class="csl-entry" role="listitem">
 Brentari, Diane, Susan Goldin-Meadow, Laura Horton, Ann Senghas, and Marie Coppola. 2024. <span>“The Organization of Verb Meaning in Lengua de Señas Nicaragüense (LSN): Sequential or Simultaneous Structures?”</span> <em>Glossa: A Journal of General Linguistics</em> 9 (1). <a href="https://doi.org/10.16995/glossa.10342">https://doi.org/10.16995/glossa.10342</a>.
 </div>
+<div id="ref-burkner2017" class="csl-entry" role="listitem">
+Bürkner, Paul-Christian. 2017. <span>“Brms: An r Package for Bayesian Multilevel Models Using Stan.”</span> <em>Journal of Statistical Software</em> 80 (1): 128. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>.
+</div>
 <div id="ref-holtz2019" class="csl-entry" role="listitem">
 Holtz, Yan. 2019. <span>“The Issue with Error Bars.”</span> <a href="https://www.data-to-viz.com/caveat/error_bar.html">https://www.data-to-viz.com/caveat/error_bar.html</a>.
+</div>
+<div id="ref-rcoreteam2025" class="csl-entry" role="listitem">
+R Core Team. 2025. <em>R: A Language and Environment for Statistical Computing [Version 4.5.0]</em>.
 </div>
 </div>
 </section>

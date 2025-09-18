@@ -95,7 +95,7 @@ For each trial, we get a `1` for correct or a `0` for incorrect. If you take the
 
 Now, what we are trying to do when modelling binary outcome variables is to estimate the probability $p$ from the data. But there is a catch: probabilities are bounded between 0 and 1 and regression models don't work with bounded variables out of the box! Bounded probabilities are transformed into an unbounded numeric variable. The following section explains how.
 
-## Probability and log-odds  {#sec-prob-log}
+## Probability and log-odds {#sec-prob-log}
 
 As we have just learned, probabilities are bounded between 0 and 1 but we need something that is not bounded because regression models don't work with bounded numeric variables. This is where the **logit function** comes in: the logit function (from "*log*istic un*it*") is a mathematical function that transforms probabilities into log-odds. The logit function is the quantile function (the function that returns quantiles, the value below which a given proportion of a probability distribution lies) of the **logistic distribution**. The logit function is the quantile of a logistic function with mean 0 and standard deviation 1 (a standard logistic distribution). In R, the logit function is `qlogis()`. The default mean and SD in `qlogis()` are 0 and 1 respectively, so you can just input the first argument, `p` which is the probability you want to transform into log-odds.
 
@@ -509,7 +509,7 @@ mvp_bm_draws_long |>
   labs(x = "Probability of multi-verb predicate")
 ```
 
-Very often, we also want to know the posterior probability of the difference between a level and another level that is not the reference: here for example we might want to know the difference between NSL1 and NSL2. It is easy: we just take the difference of the inverse-logit-transformed predicted draws columns `NSL1` and `NSL2` in `mvp_bm_draws`. This approach also works with the log-odds draws directly, to get the difference in log-odds.
+Very often, we also want to know the posterior probability of the difference between a level and another level that is not the reference: here for example we might want to know the difference between NSL1 and NSL2. It is easy: we just take the difference of the log-odds predicted draws columns `NSL1` and `NSL2` in `mpv_bm_draws`. If we want to know the difference between the probabilities rather than the log-odds, we use the inverse-logit-transformed predicted draws.
 
 ```{r}
 #| label: mvp-bm-draws-diff
@@ -517,16 +517,22 @@ Very often, we also want to know the posterior probability of the difference bet
 mvp_bm_draws <- mvp_bm_draws |> 
   mutate(
     NSL2_NSL1_log = NSL2 - NSL1,
+    NSL1_homesign_p = plogis(NSL1) - plogis(homesign),
     NSL2_NSL1_p = plogis(NSL2) - plogis(NSL1)
   )
 
+quantile2(mvp_bm_draws$NSL1_homesign_p, c(0.1, 0.9)) |> round(2)
 quantile2(mvp_bm_draws$NSL2_NSL1_log, c(0.1, 0.9)) |> round(2)
 quantile2(mvp_bm_draws$NSL2_NSL1_p, c(0.1, 0.9)) |> round(2)
 ```
 
-The log-odds in NSL2 are 1.17-1.73 units higher than in NSL1, at 80% probability. The probability of a multi-verb predicate is 25 to 36 percentage points higher in NSL2 than NSL1, at 80% confidence. Note how we say *percentage points* and not percent. There isn't a 25-36% increase, but the probability increases by 25-36 units, which for probabilities expressed as percentages are called percentage points. Mixing these things up is a common mistake, so be careful.
+The log-odds in NSL2 are 1.17-1.73 units higher than in NSL1, at 80% probability. The probability of a multi-verb predicate is 11 to 22 percentage points lower in NSL1 than home-signers and it is 25 to 36 percentage points higher in NSL2 than NSL1, at 80% confidence. Note how we say *percentage points* and not percent. There isn't a 25-36% increase, but the probability increases by 25-36 units, which for probabilities expressed as percentages are called percentage points. Mixing these things up is a common mistake, so be careful.
 
 ## Reporting
+
+> We fitted a Bayesian Bernoulli regression model to assess the probability of multi-verb predicates in NSL. The model was fitted with brms @burkner2017 in R @rcoreteam2025, with the default priors, four chains with 2000 iterations each, of which 1000 for warm-up. We included group (home-signers, NSL1 and NSL2) as the only predictor, which was coded with the default treatment contrasts (home-signers as the reference level).
+>
+> According to the model, there is a 32-41% probability of multi-verb predicates in home-signers, for NSL1 it is 16-22% and for NSL2 it is 45-54%, at 80% confidence. The results indicate that the hypothesis that the probability of multi-verb predicates should increase from home-signers to NSL1 to NSL2 is not borne out. The probability decreases by 11-22 percentage points from home-signers to NSL1, and increases by 25-36 points from NSL1 to NSL2. Moreover, the probability of multi-verb predicates in NSL2 indicates that single and multi-verb predicates are equally probable in NSL2.
 
 ::: {.callout-warning collapse="true"}
 ### Spotlight: Bernoulli, binomial and logistic regression
@@ -535,4 +541,3 @@ A lot of researchers know Bernoulli models under the name "binomial" or "logisti
 
 So if somebody asks you to run a logistic regression, or if you read a paper that reports one, what they just mean is to run a regression with a binary outcome variable and a Bernoulli distribution!
 :::
-
