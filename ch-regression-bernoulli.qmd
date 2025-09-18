@@ -2,7 +2,7 @@
 author: ["Stefano Coretta", "Elizabeth Pankratz"]
 ---
 
-# Binary outcomes {#sec-regression-bernoulli}
+# Binary outcomes: Bernoulli regression {#sec-regression-bernoulli}
 
 ![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
 
