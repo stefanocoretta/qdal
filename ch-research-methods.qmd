@@ -68,7 +68,7 @@ Similarly to the exploratory/corroboratory axis, there is still prejudice agains
 
 ## Research objectives
 
-Orthogonal to the two research axes from the previous section, we can classify research instances based on their objectives. There are in principle three types of **research objectives**: establishing facts, improving the fit of a framework to the facts, and comparing the fit of difference frameworks to the facts. Each has its merits and to improve our understanding of the Universe we need all three, although there is nothing wrong for any one study to focus just on one or two!
+Orthogonal to the two research axes from the previous section, we can classify research instances based on their objectives. There are in principle three types of **research objectives**: establishing facts, improving the fit of a framework to the facts, and comparing the fit of different frameworks to the facts. Each has its merits and to improve our understanding of the Universe we need all three, although there is nothing wrong for any one study to focus just on one or two!
 
 ::: callout-tip
 ### Establish facts
@@ -99,7 +99,7 @@ Examples:
 ::: callout-tip
 ### Compare fit of different frameworks to facts
 
-**This objective allows researcher two compare two or more frameworks in light of empirical results.** The main prerequisite for this approach is that each framework must have different expectations in relation to the phenomenon at hand.
+**This objective allows a researcher to compare two or more frameworks in light of empirical results.** The main prerequisite for this approach is that each framework must have different expectations in relation to the phenomenon at hand.
 
 When different frameworks entail different and exclusive hypotheses, one can test the hypotheses with data: the results might help excluding certain hypotheses and keep others. The frameworks that generate the excluded hypotheses have to be abandoned (unless they can be modified to fit the new results, see above, while still be different enough from other frameworks).
 
