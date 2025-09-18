@@ -1,3 +1,78 @@
 # Log-normal regression {#sec-regression-lognorm}
 
 <!--# TODO: lognormal -->
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+theme_set(theme_light())
+library(brms)
+library(posterior)
+library(bayesplot)
+library(ggdist)
+```
+
+```{r}
+#| label: mald
+
+mald <- readRDS("data/tucker2019/mald_1_1.rds")
+```
+
+```{r}
+#| label: rt-bm-1
+
+rt_bm_1 <- brm(
+  RT ~ IsWord,
+  family = gaussian,
+  data = mald,
+  seed = 6725,
+  file = "cache/ch-regression-cat-rt_bm_1"
+)
+```
+
+```{r}
+#| label: rt-bm-1-pp
+
+pp_check(rt_bm_1, ndraws = 50)
+```
+
+$$
+\begin{align}
+RT_i & \sim LogNormal(\mu_i, \sigma)\\
+\mu_i & = \beta_0 + \beta_1 \cdot sr_i\\
+\end{align}
+$$
+
+```{r}
+#| label: rt-bm-2
+
+rt_bm_2 <- brm(
+  RT ~ IsWord,
+  family = lognormal,
+  data = mald,
+  cores = 4,
+  seed = 6725,
+  file = "cache/ch-regression-cat-rt_bm_2"
+)
+```
+
+```{r}
+#| label: rt-bm-2-pp
+
+pp_check(rt_bm_2, ndraws = 50)
+```
+
+```{r}
+#| label: rt-bm-2-cond
+
+conditional_effects(rt_bm_2)
+```
+
+```{r}
+#| label: rt-bm-2-draws
+
+rt_bm_2_draws <- as_draws_df(rt_bm_2)
+```
+

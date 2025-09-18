@@ -178,7 +178,7 @@ The subscript $i$ is an index of each observation in the data. There are 5000 ob
 
 $$
 \begin{align}
-vdur_i & \sim Gaussian(\mu_i, \sigma)\\
+RT_i & \sim Gaussian(\mu_i, \sigma)\\
 \mu_i & = \beta_0 + \beta_1 \cdot sr_i\\
 \end{align}
 $$
@@ -271,7 +271,7 @@ Moving onto the 95% CrIs:
 
 So here we have our answer: at 95% confidence (another way of saying at 95% probability), based on the model and data, RTs for nonce words are 99 to 134 ms longer than RTs for real words. What about the predicted RTs for nonce words?
 
-## Posterior predictions  {#sec-reg-cat-pred}
+## Posterior predictions {#sec-reg-cat-pred}
 
 The coefficients are just telling us the difference in RT between nonce and real words, but not the predicted mean RT for nonce words. As in @sec-regression-draws, we can simply plug in the draws from the model according to the model formulae to obtain any estimand of interest, like the posterior predictions of RTs when the word is not a real word. Remember, for nonce words ($w_i = 1$):
 
