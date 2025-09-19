@@ -14,6 +14,12 @@ library(bayesplot)
 library(ggdist)
 ```
 
+In @sec-probability, we talked about skewness of distributions in relation to the density plots of reaction times. In @sec-gauss-model, we further explained that it is the onus of the researcher to decide on a distribution family when fitting regression models and we said that, in the absence of more specific knowledge, the Gaussian distribution is a safe assumption to make. Note that the choice of distribution family should be based as much as possible on theoretical grounds (as opposed to empirical). In other words, you shouldn't plot the variable to check with distribution it might follow (more on this in the Important box below).
+
+There are heuristics one can follow to pick a theoretically grounded distribution. The major ones are listed in @sec-outcome, so you can refer to that section in the appendix, but in this chapter we will focus on one type of variables and the default distribution choice: i.e. variables that can only take on values that are positive numbers. These variables, in the absence of more specific knowledge, can be assumed to be from a log-normal distribution.
+
+## Log-normal distribution
+
 ```{r}
 #| label: mald
 
@@ -52,8 +58,20 @@ x1 <- rnorm(n, mean = 2, sd = 0.5)
 x2 <- rnorm(n, mean = 3, sd = 1.5)
 x3 <- rnorm(n, mean = 4, sd = 3)
 
-# Combine into a mixture
-x_mixture <- c(x1, x2, x3)
+dat <- tibble(
+  x = c(x1, x2, x3),
+  gr = rep(c("a", "b", "c"), each = n)
+)
+
+dat |> 
+  ggplot(aes(x)) +
+  geom_density() +
+  geom_rug()
+
+dat |> 
+  ggplot(aes(x, fill = gr)) +
+  geom_density(alpha = 0.5) +
+  geom_rug()
 ```
 :::
 
@@ -120,3 +138,4 @@ rt_bm_2_draws <- rt_bm_2_draws |>
     nonce_log = exp(nonce_log)
   )
 ```
+
