@@ -21,6 +21,43 @@ mald <- readRDS("data/tucker2019/mald_1_1.rds")
 ```
 
 ```{r}
+#| label: fig-rt-lognorm
+mald |> 
+  ggplot(aes(RT, fill = IsWord)) +
+  geom_density(alpha = 0.5) +
+  geom_rug()
+```
+
+```{r}
+#| label: fig-rt-gaussian-log
+mald |> 
+  ggplot(aes(log(RT), fill = IsWord)) +
+  geom_density(alpha = 0.5) +
+  geom_rug()
+```
+
+::: callout-important
+**Looking at a density plot is not a safe way to decide if you need to log a variable or if a variable is log-normal.**
+
+There are cases where the density plot is a combination of multiple underlying distributions with different means and SDs that makes it look as if it is skewed.
+
+```{r}
+set.seed(123)
+
+# Sample sizes
+n <- 2000
+
+# Three different normal distributions
+x1 <- rnorm(n, mean = 2, sd = 0.5)
+x2 <- rnorm(n, mean = 3, sd = 1.5)
+x3 <- rnorm(n, mean = 4, sd = 3)
+
+# Combine into a mixture
+x_mixture <- c(x1, x2, x3)
+```
+:::
+
+```{r}
 #| label: rt-bm-1
 
 rt_bm_1 <- brm(
@@ -74,5 +111,12 @@ conditional_effects(rt_bm_2)
 #| label: rt-bm-2-draws
 
 rt_bm_2_draws <- as_draws_df(rt_bm_2)
-```
 
+rt_bm_2_draws <- rt_bm_2_draws |>
+  mutate(
+    real_log = b_Intercept,
+    nonce_log = b_Intercept + b_IsWordFALSE,
+    real = exp(real_log),
+    nonce_log = exp(nonce_log)
+  )
+```
