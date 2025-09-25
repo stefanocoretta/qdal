@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; Statistical variables – Quantitative Data Analysis for Linguists in R</title>
+<title>32&nbsp; Open Research – Quantitative Data Analysis for Linguists in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -30,8 +50,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ch-read-data.html" rel="next">
-<link href="./ch-scripts.html" rel="prev">
+<link href="./ch-regression-cat-cat.html" rel="next">
+<link href="./ch-regression-lognorm.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -80,8 +100,6 @@ ul.task-list li input[type="checkbox"] {
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
-<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
 <link rel="stylesheet" href="include/webex.css">
@@ -258,7 +276,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-inference.html">Week 2</a></li><li class="breadcrumb-item"><a href="./ch-statistical-vars.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical variables</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-open-research.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-open-research.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -365,7 +383,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-statistical-vars.html" class="sidebar-item-text sidebar-link active">
+  <a href="./ch-statistical-vars.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
   </div>
 </li>
@@ -586,7 +604,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
+  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
@@ -643,23 +661,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#estimandum-estimands-and-statistical-variables" id="toc-estimandum-estimands-and-statistical-variables" class="nav-link active" data-scroll-target="#estimandum-estimands-and-statistical-variables"><span class="header-section-number">8.1</span> Estimandum, estimands and statistical variables</a></li>
-  <li><a href="#types-of-variables" id="toc-types-of-variables" class="nav-link" data-scroll-target="#types-of-variables"><span class="header-section-number">8.2</span> Types of variables</a>
-  <ul class="collapse">
-  <li><a href="#numeric-vs-categorical-variables" id="toc-numeric-vs-categorical-variables" class="nav-link" data-scroll-target="#numeric-vs-categorical-variables"><span class="header-section-number">8.2.1</span> Numeric vs categorical variables</a></li>
-  <li><a href="#continuous-vs-discrete-variables" id="toc-continuous-vs-discrete-variables" class="nav-link" data-scroll-target="#continuous-vs-discrete-variables"><span class="header-section-number">8.2.2</span> Continuous vs discrete variables</a></li>
-  </ul></li>
-  <li><a href="#sec-operationalise" id="toc-sec-operationalise" class="nav-link" data-scroll-target="#sec-operationalise"><span class="header-section-number">8.3</span> Operationalisation</a></li>
+  <li><a href="#reliability-of-results" id="toc-reliability-of-results" class="nav-link active" data-scroll-target="#reliability-of-results"><span class="header-section-number">32.1</span> Reliability of results</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-statistical-vars.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-open-research.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-inference.html">Week 2</a></li><li class="breadcrumb-item"><a href="./ch-statistical-vars.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical variables</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-open-research.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-open-research.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-stat-vars" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></h1>
+<h1 class="title"><span id="sec-open-research" class="quarto-section-identifier"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></h1>
 </div>
 
 
@@ -676,193 +688,56 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><img src="https://img.shields.io/badge/Area-Statistics-red.png" class="img-fluid"></p>
-<section id="estimandum-estimands-and-statistical-variables" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="estimandum-estimands-and-statistical-variables"><span class="header-section-number">8.1</span> Estimandum, estimands and statistical variables</h2>
-<p>Statistical variables are a fundamental aspect of quantitative data analysis. There isn’t an agreed upon definition of statistical variable, but generally speaking, anything that you have measured or counted is a statistical variable. For example, let’s say you want to measure language proficiency in L2 learners: “language proficiency” is your <strong>estimandum</strong>, i.e.&nbsp;the concept or entity you wish to measure; you decide to measure language proficiency using the score of a proficiency test, this is the <strong>estimand</strong>, i.e.&nbsp;the specific measurement of the estimandum “language proficiency”. When the estimand can take on different values, the estimand is a <strong>statistical variable</strong>: every participant will have a different proficiency score.</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Estimandum, estimands and variable
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>An <strong>estimandum</strong> is any characteristic, phenomenon, entity, concept that is the target of the measurement/counting process.</p>
-<p>An <strong>estimand</strong> is the specific quantity of an estimandum that can be measured.</p>
-<p>A <strong>(statistical) variable</strong> is any estimand or characteristics, number, or quantity that has been measured or counted and can vary.</p>
-</div>
-</div>
-<p>Language research involves a large variety of statistical variables. Here just a few examples:</p>
-<ul>
-<li>Token number of telic verbs and atelic verbs in a corpus of written Sanskrit.</li>
-<li>Voice Onset Time of stops in Mapudungun.</li>
-<li>Friendliness ratings of synthetic speech.</li>
-<li>Accuracy of responses in a lexical decision task.</li>
-<li>Digit memory span.</li>
-<li>Phrasal headedness (head-initial vs head-final).</li>
-</ul>
-<p>Try and think of more!</p>
-<p>So a statistical variable is a measured characteristic. More specifically, a statistical variable is also a mathematical construct: the outcome of the specific mathematical process that generates the values that can be observed and measured. In the case of language proficiency, the statistical variable “proficiency test score” is generated by a process that includes a lot of factors (which can themselves be construed as statistical variables), like actual proficiency, stress levels when taking the test, baseline memory capacity, years of learning and so on. The <strong>generative process</strong>, i.e.&nbsp;the process that generates the values of a statistical variable, is ultimately what the researcher is interested in.</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Generative process
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The <strong>generative process</strong> of an estimand is the mathematical process that generates the values of the estimand that are observed or measured.</p>
-</div>
-</div>
-<p>When you observe or measure something, i.e.&nbsp;when you collect a sample, you are taking note of the values of the statistical variable generated by the generative process. We call them statistical <em>variables</em> because each time you sample the variable, you get different values. In other words, the generative process allows for variation in the output values. The opposite of a variable is a called a statistical <em>constant</em>. Generative processes can contain both variables and constants. Statistical variables and constants are two types of estimands. In practice, you don’t have to worry about whether something is a variable or a constant and in most research contexts you will be working with statistical variables.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Quiz 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>True or false?</strong></p>
-<ol type="a">
-<li><p>The estimandum refers to the specific measurable quantity of a concept or entity. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
-<li><p>The generative process comprises only statistical variables. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
-<li><p>A statistical variable is defined as any measurable or countable entity that can vary in value. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
-</ol>
-</div>
-</div>
-</section>
-<section id="types-of-variables" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="types-of-variables"><span class="header-section-number">8.2</span> Types of variables</h2>
-<p>You will find that some statistics textbooks overcomplicate things when it come to types of statistical variables. From an applied statistics perspective, you only need to be able to identify numeric vs categorical variables and continuous vs discrete variables.</p>
-<section id="numeric-vs-categorical-variables" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="numeric-vs-categorical-variables"><span class="header-section-number">8.2.1</span> Numeric vs categorical variables</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/num-cat.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="400"></p>
-</figure>
-</div>
-<p>The distinction is quite self-explanatory:</p>
-<ul>
-<li><p><strong>Numeric variables</strong> are variables that are numbers.</p></li>
-<li><p><strong>Categorical variables</strong> are variables that correspond to categories, groups or levels on a scale.</p></li>
-</ul>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Examples
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Numeric variables</strong></p>
-<ul>
-<li>Number of multi-verb predicates in a book.</li>
-<li>Duration of stressed vowels.</li>
-<li>Rating score between 0-100.</li>
-</ul>
-<p><strong>Categorical variables</strong></p>
-<ul>
-<li>Gender (non-binary, female, male, …).</li>
-<li>First vs second language users.</li>
-<li>Ejective vs non-ejective consonant.</li>
-</ul>
-</div>
-</div>
-<p>Learning how to recognise variables is a fundamental skill in quantitative data analysis, since the type of variables determines the type of analyses you can carry out.</p>
-</section>
-<section id="continuous-vs-discrete-variables" class="level3" data-number="8.2.2">
-<h3 data-number="8.2.2" class="anchored" data-anchor-id="continuous-vs-discrete-variables"><span class="header-section-number">8.2.2</span> Continuous vs discrete variables</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/cont-discr.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="400"></p>
-</figure>
-</div>
-<p>Orthogonal to the numeric/categorical distinction, there is the <strong>continuous vs discrete</strong> distinction. This one can be at times less straightforward.</p>
-<ul>
-<li><p>A <strong>continuous variable</strong> is a variable that can take on any value between any two numbers. For example, speech segment duration can be 0.2 s, 0.25 s, 0.2534 s and so on. Segment duration is continuous.</p></li>
-<li><p>A <strong>discrete variable</strong> is a variable that can only take on a set of values, and no value in between. For example, number of gestures is discrete because you can measure 1, 2, 3, 10 gestures but not 3 gestures and three quarters.</p></li>
-</ul>
-<p>Numeric variables can be either continuous or discrete, while categorical variables can only be discrete. There are also sub-types of numeric continuous, numeric discrete and categorical (discrete) variables. The following call-out introduces these sub-types, with examples.</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Types of variables
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Numeric continuous variable</strong>: <em>between any two values there is an infinite number of values</em>.</p>
-<ul>
-<li><p>The variable can take on any positive and negative number, including 0. For example, temperature in degrees Celsius.</p></li>
-<li><p>The variable can take on any positive number only. For example, segment duration, fundamental frequency (f0), reaction times.</p></li>
-<li><p><strong>Proportions</strong> and <strong>percentages</strong>: The variable can take on any number between 0 and 1. For example, proportion of accurate responses, probability of scalar inference, proportion of voicing during stop closure, acceptability rating on a 0-100 scale.</p></li>
-</ul>
-<p><strong>Numeric discrete variable</strong>: <em>between any two consecutive values there are no other values</em>.</p>
-<ul>
-<li><strong>Counts</strong>: The variable can take only on any positive integer number. For example, number of telic and atelic verbs in a corpus, number of words known by a child, number of turns in a conversation.</li>
-</ul>
-<p><strong>Categorical (discrete) variable</strong>. There are three main subtypes.</p>
-<ul>
-<li><p><strong>Binary</strong> or <strong>dichotomous</strong>: The variable can take only one of two values. For example, accuracy (incorrect, correct), voicing (voiceless, voiced), headedness (initial vs final).</p></li>
-<li><p>The variable can take any of three of more values (sometimes called a <strong>multinomial</strong> variable). For example, gender (non-binary, female, male), place of articulation (labial, coronal, dorsal, glottal, …).</p></li>
-<li><p><strong>Ordinal</strong>: The variable can take any of three of more values and the values have a natural order. For example, Likert scales of attitude (positive, indifferent, negative), proficiency (functional, good, very good, native-like), lenition (stop, fricative, approximant, deletion).</p></li>
-</ul>
-</div>
-</div>
-</section>
-</section>
-<section id="sec-operationalise" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="sec-operationalise"><span class="header-section-number">8.3</span> Operationalisation</h2>
-<p>It should be clear now that the estimand is not quite the same thing as the estimandum. The estimand is the researcher’s way to capture the estimandum so that it can be analysed. The relationship between the estimandum and the estimand variable is called <strong>operationalisation</strong>: an estimandum is operationalised into an estimand. The action of <strong>operationalisation</strong> consists in choosing how to measure something: as a numeric or as a categorical variable. In some cases, the choice is obvious, but in most cases something could be operationalised either way and different considerations have to be taken into account when choosing, like the particular framework adopted and the study design.</p>
-<p>Let’s think about “age” for a moment: age can be operationalised as years or months (numeric discrete) or as age bins, like young vs old (categorical). Different studies might require one or the other operationalisation of the estimandum “age”. Another example is “acceptability” in morphosyntactic studies: acceptability can be operationalised as a binary categorical variable (grammatical vs agrammatical, and we normally talk of “grammaticality”), as a categorical scale (acceptable, somewhat acceptable, somewhat not acceptable, unacceptable), or a numeric continuous scale (0 to 100). It is important, when planning a study, to carefully think about estimanda (the plural of estimandum) and estimands and how their relationship could be less clear than one might think.</p>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Exercise 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Think of all the ways to operationalise the following variables:</p>
-<ul>
-<li>Voice Onset Time.</li>
-<li>Friendliness of speech.</li>
-<li>Lexical frequency.</li>
-</ul>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Quiz 2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-Which of the following sets contains <em>only</em> discrete variables.
-<div id="radio_THWQRQEURS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_THWQRQEURS" value=""> <span>Number of occurences in corpus, sentence duration (ms), articulation rate (syllables per second)</span></label><label><input type="radio" autocomplete="off" name="radio_THWQRQEURS" value=""> <span>Reaction times (ms), accuracy (correct/incorrect), 7-point likert scale</span></label><label><input type="radio" autocomplete="off" name="radio_THWQRQEURS" value="answer"> <span>Accuracy (correct/incorrect), 7-point likert scale, number of occurrences in corpus</span></label><label><input type="radio" autocomplete="off" name="radio_THWQRQEURS" value=""> <span>Fundamental frequency (hz), response accuracy (percentage), reaction times (ms)</span></label>
-</div>
-</div>
-</div>
+<p><img src="https://img.shields.io/badge/Area-Research_methods-blue.png" class="img-fluid"></p>
+<p><a href="ch-research-cycle.html" class="quarto-xref"><span>Chapter 17</span></a> introduced the concept of Questionable Research Practice: these are practices that, whether intentionally or not, negatively affect the research enterprise <span class="citation" data-cites="simmons2011 morin2015 flake2020">(<a href="references.html#ref-simmons2011" role="doc-biblioref">Simmons, Nelson, and Simonsohn 2011</a>; <a href="references.html#ref-morin2015" role="doc-biblioref">Morin 2015</a>; <a href="references.html#ref-flake2020" role="doc-biblioref">Flake and Fried 2020</a>)</span>. These, combined with theoretical underspecification typical of most research <span class="citation" data-cites="devezer2021 scheel2022">(<a href="references.html#ref-devezer2021" role="doc-biblioref">Devezer et al. 2021</a>; <a href="references.html#ref-scheel2022" role="doc-biblioref">Scheel 2022</a>)</span>, have contributed towards what we can call a “research crisis” <span class="citation" data-cites="pashler2012 gelman2014a schooler2014 fanelli2017 amrhein2019 starns2019 yarkoni2022">(<a href="references.html#ref-pashler2012" role="doc-biblioref">Pashler and Wagenmakers 2012</a>; <a href="references.html#ref-gelman2014a" role="doc-biblioref">Gelman and Loken 2014</a>; <a href="references.html#ref-schooler2014" role="doc-biblioref">Schooler 2014</a>; <a href="references.html#ref-fanelli2017" role="doc-biblioref">Fanelli, Costas, and Ioannidis 2017</a>; <a href="references.html#ref-amrhein2019" role="doc-biblioref">Amrhein, Trafimow, and Greenland 2019</a>; <a href="references.html#ref-starns2019" role="doc-biblioref">Starns et al. 2019</a>; <a href="references.html#ref-yarkoni2022" role="doc-biblioref">Yarkoni 2022</a>)</span>. In response to this research crisis, or crises, researchers have initiated a movement known as Open Research <span class="citation" data-cites="munafo2017 cruwell2019">(<a href="references.html#ref-munafo2017" role="doc-biblioref">Munafò et al. 2017</a>; <a href="references.html#ref-cruwell2019" role="doc-biblioref">Crüwell et al. 2019</a>)</span>, also called Open Scholarship and Open Science (some researchers find Open Science less inclusive, because of how loaded the term “science” is, so Open Research or Scholarship are now preferred). This chapter explains what Open Research entails.</p>
+<section id="reliability-of-results" class="level2" data-number="32.1">
+<h2 data-number="32.1" class="anchored" data-anchor-id="reliability-of-results"><span class="header-section-number">32.1</span> Reliability of results</h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-amrhein2019" class="csl-entry" role="listitem">
+Amrhein, Valentin, David Trafimow, and Sander Greenland. 2019. <span>“Inferential Statistics as Descriptive Statistics: There Is No Replication Crisis If We Don<span>’</span>t Expect Replication.”</span> <em>The American Statistician</em> 73 (sup1): 262–70. <a href="https://doi.org/10.1080/00031305.2018.1543137">https://doi.org/10.1080/00031305.2018.1543137</a>.
+</div>
+<div id="ref-cruwell2019" class="csl-entry" role="listitem">
+Crüwell, Sophia, Johnny van Doorn, Alexander Etz, Matthew C. Makel, Hannah Moshontz, Jesse Niebaum, Amy Orben, Sam Parsons, and Michael Schulte-Mecklenbeck. 2019. <span>“Seven Easy Steps to Open Science: An Annotated Reading List.”</span> <em>Zeitschrift Für Psychologie</em> 227 (4): 237248. <a href="https://doi.org/10.1027/2151-2604/a000387">https://doi.org/10.1027/2151-2604/a000387</a>.
+</div>
+<div id="ref-devezer2021" class="csl-entry" role="listitem">
+Devezer, Berna, Danielle J. Navarro, Joachim Vandekerckhove, and Erkan Ozge Buzbas. 2021. <span>“The Case for Formal Methodology in Scientific Reform.”</span> <em>Royal Society Open Science</em> 8 (3): rsos.200805, 200805. <a href="https://doi.org/10.1098/rsos.200805">https://doi.org/10.1098/rsos.200805</a>.
+</div>
+<div id="ref-fanelli2017" class="csl-entry" role="listitem">
+Fanelli, Daniele, Rodrigo Costas, and John P. A. Ioannidis. 2017. <span>“Meta-Assessment of Bias in Science.”</span> <em>Proceedings of the National Academy of Sciences</em> 114 (14): 3714–19. <a href="https://doi.org/10.1073/pnas.1618569114">https://doi.org/10.1073/pnas.1618569114</a>.
+</div>
+<div id="ref-flake2020" class="csl-entry" role="listitem">
+Flake, Jessica Kay, and Eiko I. Fried. 2020. <span>“Measurement Schmeasurement: Questionable Measurement Practices and How to Avoid Them.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 3 (4): 456465. <a href="https://doi.org/10.1177/2515245920952393">https://doi.org/10.1177/2515245920952393</a>.
+</div>
+<div id="ref-gelman2014a" class="csl-entry" role="listitem">
+Gelman, Andrew, and Eric Loken. 2014. <span>“The Statistical Crisis in Science: Data-Dependent Analysis. A <span>“</span>Garden of Forking Paths<span>”</span><span></span>explains Why Many Statistically Significant Comparisons Don’t Hold Up.”</span> <em>American Scientist</em> 102 (6): 460466.
+</div>
+<div id="ref-morin2015" class="csl-entry" role="listitem">
+Morin, Olivier. 2015. <span>“A Plea for <span>“</span>Shmeasurement<span>”</span> in the Social Sciences.”</span> <em>Biological Theory</em> 10 (3): 237245. <a href="https://doi.org/10.1007/s13752-015-0217-z">https://doi.org/10.1007/s13752-015-0217-z</a>.
+</div>
+<div id="ref-munafo2017" class="csl-entry" role="listitem">
+Munafò, Marcus R., Brian A. Nosek, Dorothy V. M. Bishop, Katherine S. Button, Christopher D. Chambers, Nathalie Percie Du Sert, Uri Simonsohn, Eric-Jan Wagenmakers, Jennifer J. Ware, and John P. A. Ioannidis. 2017. <span>“A Manifesto for Reproducible Science.”</span> <em>Nature Human Behaviour</em> 1 (1): 21. <a href="https://doi.org/10.1038/s41562-016-0021">https://doi.org/10.1038/s41562-016-0021</a>.
+</div>
+<div id="ref-pashler2012" class="csl-entry" role="listitem">
+Pashler, Harold, and Eric-Jan Wagenmakers. 2012. <span>“Editors’ Introduction to the Special Section on Replicability in Psychological Science: A Crisis of Confidence?”</span> <em>Perspectives on Psychological Science</em> 7 (6): 528530. <a href="https://doi.org/10.1177/1745691612465253">https://doi.org/10.1177/1745691612465253</a>.
+</div>
+<div id="ref-scheel2022" class="csl-entry" role="listitem">
+Scheel, Anne M. 2022. <span>“Why Most Psychological Research Findings Are Not Even Wrong.”</span> <em>Infant and Child Development</em> 31 (1): e2295. <a href="https://doi.org/10.1002/icd.2295">https://doi.org/10.1002/icd.2295</a>.
+</div>
+<div id="ref-schooler2014" class="csl-entry" role="listitem">
+Schooler, Jonathan W. 2014. <span>“Metascience Could Rescue the <span>‘Replication Crisis’</span>.”</span> <em>Nature News</em> 515 (7525): 9. <a href="https://doi.org/10.1038/515009a">https://doi.org/10.1038/515009a</a>.
+</div>
+<div id="ref-simmons2011" class="csl-entry" role="listitem">
+Simmons, Joseph P, Leif D Nelson, and Uri Simonsohn. 2011. <span>“False-Positive Psychology: Undisclosed Flexibility in Data Collection and Analysis Allows Presenting Anything as Significant.”</span> <em>Psychological Science</em> 22 (11): 13591366.
+</div>
+<div id="ref-starns2019" class="csl-entry" role="listitem">
+Starns, Jeffrey J., Andrea M. Cataldo, Caren M. Rotello, Jeffrey Annis, Andrew Aschenbrenner, Arndt Bröder, Gregory Cox, et al. 2019. <span>“Assessing Theoretical Conclusions with Blinded Inference to Investigate a Potential Inference Crisis.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 2 (4): 335349. <a href="https://doi.org/10.1177/2515245919869583">https://doi.org/10.1177/2515245919869583</a>.
+</div>
+<div id="ref-yarkoni2022" class="csl-entry" role="listitem">
+Yarkoni, Tal. 2022. <span>“The Generalizability Crisis.”</span> <em>Behavioral and Brain Sciences</em> 45. <a href="https://doi.org/10.1017/s0140525x20001685">https://doi.org/10.1017/s0140525x20001685</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -1495,13 +1370,13 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ch-scripts.html" class="pagination-link" aria-label="R scripts">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R scripts</span></span>
+      <a href="./ch-regression-lognorm.html" class="pagination-link" aria-label="Log-normal regression">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch-read-data.html" class="pagination-link" aria-label="Read data in R">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Read data in R</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ch-regression-cat-cat.html" class="pagination-link" aria-label="Regression models: multiple predictors">
+        <span class="nav-page-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1510,4 +1385,4 @@ window.onload = function() {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-statistical-vars.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-open-research.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

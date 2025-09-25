@@ -65,6 +65,7 @@ book:
       - ch-regression-lognorm.qmd
   - part: Week 9
     chapters:
+      - ch-open-research.qmd
       - ch-regression-cat-cat.qmd
       - ch-regression-interaction.qmd
   - references.qmd

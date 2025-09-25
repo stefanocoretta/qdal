@@ -1,0 +1,7 @@
+# Open Research {#sec-open-research}
+
+![](https://img.shields.io/badge/Area-Research_methods-blue)
+
+@sec-res-cycle introduced the concept of Questionable Research Practice: these are practices that, whether intentionally or not, negatively affect the research enterprise [@simmons2011; @morin2015; @flake2020]. These, combined with theoretical underspecification typical of most research [@devezer2021; @scheel2022], have contributed towards what we can call a "research crisis" [@pashler2012; @gelman2014a; @schooler2014; @fanelli2017; @amrhein2019; @starns2019; @yarkoni2022]. In response to this research crisis, or crises, researchers have initiated a movement known as Open Research [@munafo2017; @cruwell2019], also called Open Scholarship and Open Science (some researchers find Open Science less inclusive, because of how loaded the term "science" is, so Open Research or Scholarship are now preferred). This chapter explains what Open Research entails.
+
+## Reliability of results
