@@ -1,6 +1,6 @@
 # R basics {#sec-r-basics}
 
-![](https://img.shields.io/badge/Area-R-green)
+![](/img/badge-r.png)
 
 ## Why R?
 

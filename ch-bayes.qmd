@@ -1,6 +1,6 @@
 # Bayesian inference {#sec-bayes}
 
-![](https://img.shields.io/badge/Area-Statistics-red)
+![](/img/badge-stats.png)
 
 ![](img/volcano-raining.png){fig-align="center" width="500"}
 

@@ -362,8 +362,9 @@ window.Quarto = {
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -768,7 +769,7 @@ window.Quarto = {
 </header>
 
 
-<p><img src="https://img.shields.io/badge/Area-Statistics-red.png" class="img-fluid"> <img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
+<p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
 <p><strong>Binary outcome variables</strong> are very common in linguistics. These are categorical variable that have <strong>two levels</strong>, e.g.:</p>
 <ul>
 <li>yes / no</li>
@@ -780,17 +781,17 @@ window.Quarto = {
 <p>So far you have been fitting regression models in which the outcome variable was numeric and continuous. However, a lot of studies use binary outcome variables and it thus important to learn how to deal with those. This is what this chapter is about.</p>
 <p>When modelling binary outcomes, what the researcher is usually interested in is the probability of obtaining one of the two levels. For example, in a lexical decision task one might want to know the probability that real words were recognised as such (in other words, we are interested in accuracy: incorrect or correct response). Let’s say there is an 80% probability of responding correctly. So (<span class="math inline">\(p()\)</span> stands for “probability of”):</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 p(\text{correct}) &amp; = 0.8\\
 p(\text{incorrect}) &amp; = 1 - p(\text{correct}) = 0.2
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>You see that if you know the probability of one level (correct) you automatically know the probability of the other level, since there are only two levels and the total probability has to sum to 1. The distribution family for binary probabilities is the <strong>Bernoulli family</strong>. The Bernoulli family has only one parameter, <span class="math inline">\(p\)</span>, which is the probability of obtaining one of the two levels (one can pick which level). With our lexical decision task example, we can write:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 resp_{\text{correct}} &amp; \sim Bernoulli(p) \\
 p &amp; = 0.8
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>You can read it as:</p>
 <blockquote class="blockquote">
@@ -1170,10 +1171,10 @@ Figure&nbsp;30.6: Proportion of single vs multiple predicates in three groups of
 </div>
 <p>Now we can move on onto modelling. Here is the mathematical formula of the model we will fit.</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 MVP_i &amp; \sim Bernoulli(p_i) \\
 logit(p_i) &amp; = \beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i \\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>The probability of using an multi-verb predicate follows a Bernoulli distribution with probability <span class="math inline">\(p\)</span>, which is the only parameter. The logit function is applied to the parameter <span class="math inline">\(p\)</span> as discussed in <a href="#sec-prob-log" class="quarto-xref"><span>Section 30.1</span></a>. Functions applied to model parameters are known as <strong>link functions</strong>. Bernoulli models use the logit link (i.e.&nbsp;the logit function). Because the logit link returns log-odds from probabilities, the log-odds of <span class="math inline">\(p\)</span>, rather than just the probability <span class="math inline">\(p\)</span>, are equal to the regression equation <span class="math inline">\(\beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i\)</span>. This model has three regression coefficients: <span class="math inline">\(\beta_0, \beta_1, \beta_2\)</span>. With one categorical predictor, regression models need one coefficient for each level in the predictor: since we have three levels in <code>Group</code>, we need three coefficients.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">

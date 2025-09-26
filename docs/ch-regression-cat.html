@@ -360,8 +360,9 @@ window.Quarto = {
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -760,13 +761,13 @@ window.Quarto = {
 </header>
 
 
-<p><img src="https://img.shields.io/badge/Area-Statistics-red.png" class="img-fluid"> <img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
+<p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
 <p>In <a href="ch-regression.html" class="quarto-xref"><span>Chapter 24</span></a> you learned how to fit regression models of the following form in R using the brms package.</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 y &amp; \sim Gaussian(\mu, \sigma)\\
 \mu &amp; = \beta_0 + \beta_1 \cdot x\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>In these models, <span class="math inline">\(x\)</span> was a numeric predictor, like speech rate in the chapter’s example. Numeric predictors are not the only type of predictors that a regression model can handle. Regression predictors can also be categorical variables: gender, age group, place of articulation, mono- vs bi-lingual, etc. However, regression model cannot handle categorical predictors directly: think about it, what would it mean to multiply <span class="math inline">\(\beta_1\)</span> by “female” or by “old”? Categorical predictors have to be re-coded as numbers.</p>
 <p>In this chapter we will revisit the MALD reaction times (RTs) data from <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>, this time with the following research question:</p>
@@ -1004,27 +1005,27 @@ Table&nbsp;27.2: Treatment contrasts coding of the categorical predictor <code>I
 </div>
 <p>We can now update the equation of <span class="math inline">\(\mu\)</span>:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 RT_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 \mu_i &amp; = \beta_0 + \beta_1 \cdot w_i\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>The subscript <span class="math inline">\(i\)</span> is an index of each observation in the data. There are 5000 observations in <code>mald</code> so <span class="math inline">\(i = [1..5000]\)</span> (<span class="math inline">\(i\)</span> is goes from 1 to 5000). <span class="math inline">\(RT_i\)</span> then is indexing the specific observations in the data, <span class="math inline">\(RT_1\)</span>, <span class="math inline">\(RT_2\)</span>, <span class="math inline">\(RT_3\)</span>, …, <span class="math inline">\(RT_{5000}\)</span>. Each observation is from a real or nonce word: this is coded by <span class="math inline">\(w_i\)</span>. The subscript <span class="math inline">\(i\)</span> in <span class="math inline">\(w_i\)</span> is indexing the <code>IsWord</code> value of the <span class="math inline">\(i\)</span>th observation. In the data, <span class="math inline">\(RT_1 = 617\)</span> and <span class="math inline">\(w_1 = 0\)</span> (i.e.&nbsp;<code>TRUE</code>). The mean <span class="math inline">\(mu_i\)</span> also has a subscript <span class="math inline">\(i\)</span>. The <span class="math inline">\(i\)</span> is there to say that now <span class="math inline">\(\mu\)</span> depends on the specific observation <span class="math inline">\(i\)</span>, so that we can model a different mean depending on <span class="math inline">\(w_i\)</span>. In fact, in the model in <a href="ch-regression.html" class="quarto-xref"><span>Chapter 24</span></a>, <span class="math inline">\(i\)</span> was implied to keep things simple, but technically it should be added, because the mean does depend on the value of <span class="math inline">\(sr\)</span>:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 RT_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 \mu_i &amp; = \beta_0 + \beta_1 \cdot sr_i\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>These are just technicalities of the notation, so you shouldn’t be too tripped up about it, the substance of the model is the same.</p>
 <p>Going back to our model of RTs as a function of word type (“as a function of” is another way of saying that you are modelling an outcome variable depending on a predictor), <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> are the regression coefficients, exactly like in the regression model with vowel duration and speech rate. You can think of <span class="math inline">\(\beta_0\)</span> as the model’s intercept and of <span class="math inline">\(\beta_1\)</span> as the model’s slope. Can you figure out why? Recall that a regression model with a numeric predictor is basically the formula of a line. In <a href="ch-regression.html" class="quarto-xref"><span>Chapter 24</span></a>, we modelled vowel duration as a function of speech rate. The intercept of the regression line estimated by the model indicates where the line crosses the <em>y</em>-axis when the <em>x</em> value is 0: in that model, that was the vowel duration when speech rate is 0. In the model above, with RTs as a function of word type, the numeric predictor is the indicator variable <span class="math inline">\(w\)</span>, which stands for the categorical predictor <code>IsWord</code>. The formula of a line really works just with numbers so for the formula to make sense, we had to make the categorical predictor <code>IsWord</code> into a number and treatment contrasts is such one way of doing so.</p>
 <p>Now, <span class="math inline">\(\beta_0\)</span> is the model’s intercept because that is the mean RT when <span class="math inline">\(w\)</span> is 0 (like with vowel duration when speech rate is 0; can you see the parallel?). And <span class="math inline">\(\beta_1\)</span> is the model’s slope because <span class="math inline">\(\beta_1\)</span> is the change in RT for a unit increase of <span class="math inline">\(w\)</span>, which is when <span class="math inline">\(w\)</span> goes from 0 to 1. This in turn corresponds to the change in level in the categorical predictor. Do you see the connection? It’s a bit contorted, but once you get this, it should explain several aspects of regression models with categorical predictors and treatment contrasts. So <span class="math inline">\(\mu_i\)</span> is the sum of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1 \cdot w_i\)</span>. <span class="math inline">\(w_i\)</span> is 0 (when the word is real) or 1 (the the word is a nonce word). That is why we write <span class="math inline">\(RT_i\)</span>: the subscript <span class="math inline">\(i\)</span> allows us to pick the correct value of <span class="math inline">\(w_i\)</span> for each specific observation. The result of plugging in the value of <span class="math inline">\(w_i\)</span> is laid out in the following formulae.</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \mu_i &amp; = \beta_0 + \beta_1 \cdot w_i\\
 \mu_{\text{T}} &amp; = \beta_0 + \beta_1 \cdot 0 = \beta_0\\
 \mu_{\text{F}} &amp; = \beta_0 + \beta_1 \cdot 1 = \beta_0 + \beta_1
-\end{align}
+\end{aligned}
 \]</span></p>
 <ul>
 <li><p>When <code>IsWord</code> is <code>TRUE</code>, the mean RT is equal to <span class="math inline">\(\beta_0\)</span>.</p></li>
@@ -1032,10 +1033,10 @@ RT_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 </ul>
 <p>If <span class="math inline">\(\beta_0\)</span> is the <em>mean</em> RT when <code>IsWord</code> is <code>TRUE</code>, what is <span class="math inline">\(\beta_1\)</span> by itself? Simple.</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \beta_1 &amp; = \mu_\text{F} - \mu_\text{T}\\
 &amp; = (\beta_0 + \beta_1) - \beta_0
-\end{align}
+\end{aligned}
 \]</span></p>
 <p><span class="math inline">\(\beta_0\)</span> is the <em>difference</em> between the mean RT when <code>IsWord</code> is <code>TRUE</code> and the mean RT when <code>IsWord</code> is <code>FALSE</code>. As mentioned above, with treatment contrasts you are comparing the second level to the first. So one regression coefficient will be the mean of the reference level, and the other coefficient will be the <em>difference</em> between the mean of the two levels. I know this is not particularly beginner-friendly, but this is the default in R when using categorical predictors and it is the most common way to code categorical predictors, so you will frequently find tables in academic articles with regression coefficients that have to be interpreted that way.</p>
 </section>
@@ -1156,9 +1157,9 @@ Figure&nbsp;27.4: Density plots of the posterior probability distributions of th
 <h2 data-number="27.4" class="anchored" data-anchor-id="sec-reg-cat-pred"><span class="header-section-number">27.4</span> Posterior predictions</h2>
 <p>The coefficients are just telling us the difference in RT between nonce and real words, but not the predicted mean RT for nonce words. As in <a href="ch-regression-draws.html" class="quarto-xref"><span>Chapter 25</span></a>, we can simply plug in the draws from the model according to the model formulae to obtain any estimand of interest, like the posterior predictions of RTs when the word is not a real word. Remember, for nonce words (<span class="math inline">\(w_i = 1\)</span>):</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \mu_{\text{F}} &amp; = \beta_0 + \beta_1 \cdot 1 = \beta_0 + \beta_1
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>To get the predicted RTs for nonce words we need to sum <code>b_Intercept</code> and <code>b_IsWordFALSE</code>. Since we are at it, we also create a column for real words (that is just <code>b_Intercept</code> so we are basically just copying it that column; remember, <span class="math inline">\(\mu_T = \beta_1\)</span>).</p>
 <div class="cell">

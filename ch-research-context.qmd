@@ -1,6 +1,6 @@
 # Research context {#sec-res-context}
 
-![](https://img.shields.io/badge/Area-Research_methods-blue)
+![](/img/badge-resmethods.png)
 
 @fig-res-process shows the main steps that compose the research process. The first component is the [research context]{.smallcaps}. @ellis2008 discuss the research context and propose a convenient break-down of the concept. @fig-res-context is a schematic representation of different aspects of the research context, from the most general to the most specific. An example of each is also provided.
 

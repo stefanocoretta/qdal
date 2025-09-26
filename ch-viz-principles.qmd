@@ -1,6 +1,6 @@
 # Visualisation principles {#sec-viz}
 
-![](https://img.shields.io/badge/Area-Statistics-red)
+![](/img/badge-stats.png)
 
 ```{r}
 #| label: setup

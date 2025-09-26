@@ -1,6 +1,6 @@
 # Research methods {#sec-res-meth}
 
-![](https://img.shields.io/badge/Area-Research_methods-blue)
+![](/img/badge-resmethods.png)
 
 ![A conceptual model of Research Methods (Hodotics).](img/res-methods-2.png){#fig-hodotics fig-align="center"}
 

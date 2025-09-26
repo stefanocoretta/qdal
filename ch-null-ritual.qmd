@@ -1,6 +1,6 @@
 # Frequentist statistics, the Null Ritual and *p*-values {#sec-freq}
 
-![](https://img.shields.io/badge/Area-Research_methods-blue) ![](https://img.shields.io/badge/Area-Statistics-red)
+![](/img/badge-resmethods.png) ![](/img/badge-stats.png)
 
 ```{r}
 #| label: setup

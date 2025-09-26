@@ -360,8 +360,9 @@ window.Quarto = {
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -754,7 +755,7 @@ window.Quarto = {
 </header>
 
 
-<p><img src="https://img.shields.io/badge/Area-Statistics-red.png" class="img-fluid"> <img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
+<p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
 <p>In the context of a quantitative research study, a simple objective is to figure out the values of the parameters of the probability distribution of the variable of interest: Voice Onset Time, number of telic verbs, informativity score, acceptability ratings, reaction times, and so on. Let’s imagine we are interested in understanding more about the nature of reaction times in auditory lexical decision tasks (lexical decision tasks in which the target is presented aurally rather than in writing). We can revisit the RT data from <span class="citation" data-cites="tucker2019">Tucker et al. (<a href="references.html#ref-tucker2019" role="doc-biblioref">2019</a>)</span> to try and address the following research question:</p>
 <blockquote class="blockquote">
 <p>RQ: In a typical auditory lexical decision task, what are the mean and standard deviation of reaction times (RTs)?</p>
@@ -824,19 +825,19 @@ Figure&nbsp;21.1: Empirical and theoretical density distribution of reaction tim
 <h2 data-number="21.1" class="anchored" data-anchor-id="gaussian-models"><span class="header-section-number">21.1</span> Gaussian models</h2>
 <p>A statistical tool we can use to obtain an estimate of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> is a Gaussian model. A Gaussian model is a statistical model that estimates the values of the parameters of a (theoretical) Gaussian distribution, i.e.&nbsp;<span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>. We can provisionally describe the model using formulae, like this:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{RT} &amp; \sim Gaussian(\mu, \sigma)\\
 \mu &amp; = ...\\
 \sigma &amp; = ...\\
-\end{align}
+\end{aligned}
 \]</span></p>
-<p>Now, here is where things get interesting. Bayesian approaches to statistics assume uncertainty in the parameters of the distribution one is estimating. So not only the observed values of RT are uncertain because they come for a probability distribution, but the parameters of the distribution are themselves uncertain. You can think of the mean and SD are uncertain variables that need to be estimated from the data. When we say a varible is uncertain, we describe it using a probability distribution. So the aim of a Gaussian model is to estimate the probability distributions of the parameters from the data (and the priors), rather than just their values.</p>
+<p>Now, here is where things get interesting. Bayesian approaches to statistics assume uncertainty in the parameters of the distribution one is estimating. So not only the observed values of RT are uncertain because they come for a probability distribution, but the parameters of the distribution are themselves uncertain. You can think of the mean and SD are uncertain variables that need to be estimated from the data. When we say a variable is uncertain, we describe it using a probability distribution. So the aim of a Gaussian model is to estimate the probability distributions of the parameters from the data (and the priors), rather than just their values.</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{RT} &amp; \sim Gaussian(\mu, \sigma)\\
 \mu &amp; \sim P(\mu_1, \sigma_1)\\
 \sigma &amp; \sim P_+(\mu_2, \sigma_2)\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>We say that <span class="math inline">\(\mu\)</span> comes from a probability distribution <span class="math inline">\(P(\mu_1, \sigma_1)\)</span>. We use a subscript <span class="math inline">\(1\)</span> to differentiate the mean and SD of the main <span class="math inline">\(Gaussian(\mu, \sigma)\)</span> distribution from the mean and SD of the probability distribution of the mean <span class="math inline">\(\mu\)</span>. Similarly, we say that <span class="math inline">\(\sigma\)</span> comes from a probability distribution <span class="math inline">\(P_+(\mu_2, \sigma_2)\)</span>: <span class="math inline">\(P_+()\)</span> is a (non-technical) way to indicate that the probability should include only positive values. Why? Because SDs can only be positive. By specifying <span class="math inline">\(P_+()\)</span> we are constraining the probability distribution of <span class="math inline">\(\sigma\)</span> to have positive values only. In sum, we need to estimate two probability distributions, <span class="math inline">\(P(\mu_1, \sigma_1)\)</span> and <span class="math inline">\(P_+(\mu_2, \sigma_2)\)</span>. These are <strong>posterior probability distributions</strong>. You will learn more about posterior probability distributions in the next chapter. For now, just keep in mind that they are called <em>posterior</em> because the come from the combination of priors and data.</p>
 <p>In the rest of this book, you will be using the default prior probability distributions, or priors for short, as set by brms, the R package we will use to fit Bayesian models. This means that you will not have to worry about priors while you step your toes into the ocean of Bayesian statistics. However, it is helpful to learn a bit of context in relation to priors. After all, one of the big differences between frequentist and Bayesian statistics are indeed the priors (<span class="math inline">\(P(h)\)</span> in Bayes’ Theorem in <a href="#sec-gauss-model" class="quarto-xref"><span>Chapter 21</span></a>). After learning about priors in this chapter, you can safely assume that priors are handled by brms for you and you should not worry until after you completed this course. Note that in actual research, thinking about priors is a necessary step, even if one ends up using the default brms priors. Check out the Spotlight box to learn a bit more about priors.</p>
@@ -853,16 +854,16 @@ Figure&nbsp;21.1: Empirical and theoretical density distribution of reaction tim
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>Why is the distribution of <span class="math inline">\(\sigma\)</span> constrained to positive values only?
-<div id="radio_GXRTNJBHBK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GXRTNJBHBK" value=""> <span>Because <span class="math inline">\(\sigma\)</span> is always zero.</span></label><label><input type="radio" autocomplete="off" name="radio_GXRTNJBHBK" value="answer"> <span>Because <span class="math inline">\(\sigma\)</span> represents variability, which cannot be negative.</span></label><label><input type="radio" autocomplete="off" name="radio_GXRTNJBHBK" value=""> <span>Because <span class="math inline">\(\mu\)</span> is also constrained to be positive.</span></label>
+<div id="radio_ZEIUXCZREO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZEIUXCZREO" value=""> <span>Because <span class="math inline">\(\sigma\)</span> is always zero.</span></label><label><input type="radio" autocomplete="off" name="radio_ZEIUXCZREO" value="answer"> <span>Because <span class="math inline">\(\sigma\)</span> represents variability, which cannot be negative.</span></label><label><input type="radio" autocomplete="off" name="radio_ZEIUXCZREO" value=""> <span>Because <span class="math inline">\(\mu\)</span> is also constrained to be positive.</span></label>
 </div></li>
 <li>Why have we assumed that reaction times are Gaussian?
-<div id="radio_ANEIDDRYVT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ANEIDDRYVT" value=""> <span>Because RTs are Gaussian.</span></label><label><input type="radio" autocomplete="off" name="radio_ANEIDDRYVT" value=""> <span>Because it is easier to run the model.</span></label><label><input type="radio" autocomplete="off" name="radio_ANEIDDRYVT" value="answer"> <span>Because a Gaussian distribution is a safe assumption to make.</span></label>
+<div id="radio_HOLBQLREWN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HOLBQLREWN" value=""> <span>Because RTs are Gaussian.</span></label><label><input type="radio" autocomplete="off" name="radio_HOLBQLREWN" value=""> <span>Because it is easier to run the model.</span></label><label><input type="radio" autocomplete="off" name="radio_HOLBQLREWN" value="answer"> <span>Because a Gaussian distribution is a safe assumption to make.</span></label>
 </div></li>
 <li>In Bayesian modeling, posterior probability distributions are described as:
-<div id="radio_NQEMYXRFUU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NQEMYXRFUU" value=""> <span>The data alone.</span></label><label><input type="radio" autocomplete="off" name="radio_NQEMYXRFUU" value=""> <span>Theoretical distributions chosen by the researcher before collecting data.</span></label><label><input type="radio" autocomplete="off" name="radio_NQEMYXRFUU" value="answer"> <span>The combination of priors and observed data.</span></label>
+<div id="radio_POKKPHSQGG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_POKKPHSQGG" value=""> <span>The data alone.</span></label><label><input type="radio" autocomplete="off" name="radio_POKKPHSQGG" value=""> <span>Theoretical distributions chosen by the researcher before collecting data.</span></label><label><input type="radio" autocomplete="off" name="radio_POKKPHSQGG" value="answer"> <span>The combination of priors and observed data.</span></label>
 </div></li>
 </ol>
 </div>
@@ -933,11 +934,11 @@ Figure&nbsp;21.3: The prior for <span class="math inline">\(\sigma\)</span>.
 </div>
 <p>The prior for <span class="math inline">\(\sigma\)</span> indicates that we expect values closer to zero to be more probable that larger values. We can rewrite the model formulae above as:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{RT}  &amp; \sim \text{Gaussian}(\mu, \sigma) \\
 \mu        &amp; \sim \text{Gaussian}(900, 200)   &amp; \text{[Prior for $\mu$]} \\
 \sigma     &amp; \sim \text{HalfGaussian}(0, 200) &amp; \text{[Prior for $\sigma$]}
-\end{align}
+\end{aligned}
 \]</span></p>
 </div>
 </div>

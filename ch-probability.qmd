@@ -1,6 +1,6 @@
 # Probability distributions {#sec-probability}
 
-![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
+![](/img/badge-stats.png) ![](/img/badge-r.png)
 
 ## Probabilities
 

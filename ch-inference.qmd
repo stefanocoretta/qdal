@@ -1,6 +1,6 @@
 # Inference {#sec-inference}
 
-![](https://img.shields.io/badge/Area-Statistics-red)
+![](/img/badge-stats.png)
 
 ![](img/bro.png){fig-align="center" width="250"}
 

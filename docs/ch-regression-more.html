@@ -360,8 +360,9 @@ window.Quarto = {
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -757,7 +758,7 @@ window.Quarto = {
 </header>
 
 
-<p><img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
+<p><img src="./img/badge-r.png" class="img-fluid"></p>
 <p><a href="ch-regression-cat.html" class="quarto-xref"><span>Chapter 27</span></a> showed you how to fit a regression model with a categorical predictor. We modelled reaction times as a function of word type (real or nonce) from the MALD dataset <span class="citation" data-cites="tucker2019">(<a href="references.html#ref-tucker2019" role="doc-biblioref">Tucker et al. 2019</a>)</span>. The categorical predictor <code>IsWord</code> (word type: real or nonce) was included in the model using treatment contrasts: the model’s intercept is the mean of the first level and the “slope” is the difference between the second level and the first. In this chapter we will look at new data, Voice Onset Time (VOT) of Mixean Basque <span class="citation" data-cites="egurtzegi2020">(<a href="references.html#ref-egurtzegi2020" role="doc-biblioref">Egurtzegi and Carignan 2020</a>)</span>, to illustrate how to fit and interpret a regression model with a categorical predictor that has three levels, phonation (voiced, voiceless unaspirated, aspirated).</p>
 <section id="mixean-basque-vot" class="level2" data-number="28.1">
 <h2 data-number="28.1" class="anchored" data-anchor-id="mixean-basque-vot"><span class="header-section-number">28.1</span> Mixean Basque VOT</h2>
@@ -938,10 +939,10 @@ Table&nbsp;28.1: Treatment contrasts coding of the categorical predictor <code>p
 </div>
 <p>Now that we know how <code>phonation</code> is coded, we can look at the model formula.</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \text{VOT}_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 \mu_i &amp; = \beta_0 + \beta_1 \cdot ph_{\text{VD}[i]} + \beta_2 \cdot ph_{\text{VL}[i]}\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>The formula states that each observation of VOT come from a Gaussian distribution with a mean and standard deviation and that the mean depends on the value of the indicator variables <span class="math inline">\(ph_\text{VD}\)</span> and <span class="math inline">\(ph_\text{VL}\)</span>: that is what the subscript <span class="math inline">\(i\)</span> is for.</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
@@ -971,11 +972,11 @@ Table&nbsp;28.1: Treatment contrasts coding of the categorical predictor <code>p
 <div class="callout-body-container callout-body">
 <p>For example, for <code>phonation</code> = <code>aspirated</code>:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 \mu_i &amp; = \beta_0 + \beta_1 \cdot ph_{\text{VD}[i]} + \beta_2 \cdot ph_{\text{VL}[i]}\\
 &amp; = \beta_0 + \beta_1 \cdot 0 + \beta_2 \cdot 0\\
 &amp; = \beta_0
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>So the mean VOT with aspirated stops is <span class="math inline">\(\beta_0\)</span>.</p>
 </div>
@@ -1004,8 +1005,8 @@ Table&nbsp;28.1: Treatment contrasts coding of the categorical predictor <code>p
 </div>
 <div class="callout-body-container callout-body">
 <strong>How many regression coefficients are there in the model above?</strong>
-<div id="radio_EVRLHIDFBZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EVRLHIDFBZ" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_EVRLHIDFBZ" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_EVRLHIDFBZ" value=""> <span>4</span></label>
+<div id="radio_HOGXAWUTIA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HOGXAWUTIA" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_HOGXAWUTIA" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_HOGXAWUTIA" value=""> <span>4</span></label>
 </div>
 </div>
 </div>
@@ -1021,8 +1022,8 @@ Table&nbsp;28.1: Treatment contrasts coding of the categorical predictor <code>p
 </div>
 <div class="callout-body-container callout-body">
 <strong>Based on the density plots of VOT you made above, which of the following sets of expectations makes sense?</strong>
-<div id="radio_SSOEBIUCUP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SSOEBIUCUP" value=""> <span><span class="math inline">\(\beta_0, \beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_SSOEBIUCUP" value="answer"> <span><span class="math inline">\(\beta_0\)</span> should have positive values and <span class="math inline">\(\beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_SSOEBIUCUP" value=""> <span><span class="math inline">\(\beta_0, \beta_1\)</span> should have positive values, <span class="math inline">\(\beta_2\)</span> should have negative values.</span></label>
+<div id="radio_ALHJNRABBY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ALHJNRABBY" value=""> <span><span class="math inline">\(\beta_0, \beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_ALHJNRABBY" value="answer"> <span><span class="math inline">\(\beta_0\)</span> should have positive values and <span class="math inline">\(\beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_ALHJNRABBY" value=""> <span><span class="math inline">\(\beta_0, \beta_1\)</span> should have positive values, <span class="math inline">\(\beta_2\)</span> should have negative values.</span></label>
 </div>
 </div>
 </div>

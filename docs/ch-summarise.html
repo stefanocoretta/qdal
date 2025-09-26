@@ -331,8 +331,9 @@ div.csl-indent {
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -731,7 +732,7 @@ div.csl-indent {
 </header>
 
 
-<p><img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
+<p><img src="./img/badge-r.png" class="img-fluid"></p>
 <section id="summarise-with-summarise" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="summarise-with-summarise"><span class="header-section-number">11.1</span> Summarise with <code>summarise()</code></h2>
 <p>Now that you have learned about summary measures, we can talk about how to summarise data in R, rather than just vectors as we did in the previous chapter. When you work with data, you always want to get summary measures for most of the variables in the data. Data reports usually include summary measures. It is also important to understand which summary measure is appropriate for which type of variable, which was covered in the previous section. Now, you will learn how to obtain summary measures using the <code>summarise()</code> function from the <a href="https://dplyr.tidyverse.org">dplyr</a> tidyverse package. Let’s practice with the data from <span class="citation" data-cites="song2020">Song et al. (<a href="references.html#ref-song2020" role="doc-biblioref">2020</a>)</span> you read in <a href="ch-read-data.html" class="quarto-xref"><span>Chapter 9</span></a>. We want to get a measure of central tendency and dispersion for the reaction times, in the <code>RT</code> column. In order to decide which measures to pick, think about the nature of the <code>RT</code> variable. Reaction times is a numeric and continuous statistical variable, and it can only have positive values. So the mean and standard deviations are appropriate measures. Let’s start with the mean of the reaction time column <code>RT</code>. Go to your <code>week-02.R</code> script: if you followed <a href="ch-read-data.html" class="quarto-xref"><span>Chapter 9</span></a> (and you should have), the script should already have the code to attach the tidyverse and read the <code>song2020/shallow.csv</code> file into a variable called <code>shallow</code>.</p>
@@ -903,12 +904,12 @@ Show me
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>What does the <code>na.rm</code> argument of <code>mean()</code> do?
-<div id="radio_XPTSQAPJFT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XPTSQAPJFT" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_XPTSQAPJFT" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_XPTSQAPJFT" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
+<div id="radio_JZPBTTGOUP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JZPBTTGOUP" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_JZPBTTGOUP" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_JZPBTTGOUP" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
 </div></li>
 <li>Which is the mean of <code>c(4, 23, NA, 5)</code> when <code>na.rm</code> has the default value?
-<div id="radio_HICCUVWFNO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HICCUVWFNO" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_HICCUVWFNO" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_HICCUVWFNO" value=""> <span><code>10.66</code>.</span></label>
+<div id="radio_LSFHLAVSCH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LSFHLAVSCH" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_LSFHLAVSCH" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_LSFHLAVSCH" value=""> <span><code>10.66</code>.</span></label>
 </div></li>
 </ol>
 </div>

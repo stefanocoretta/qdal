@@ -1,6 +1,6 @@
 # Regression models: multiple predictors {#sec-regression-cat-cat}
 
-![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
+![](/img/badge-stats.png) ![](/img/badge-r.png)
 
 ```{r}
 #| label: setup
@@ -14,10 +14,10 @@ library(brms)
 So far, we fitted regressions with a single predictor, like the following Gaussian model of reaction times from @sec-regression-index:
 
 $$
-\begin{align}
+\begin{aligned}
 RT_i & \sim Gaussian(\mu_i, \sigma)\\
 \mu_i & = \beta_1 \cdot W_{\text{T}[i]} + \beta_2 \cdot W_{\text{F}[i]}\\
-\end{align}
+\end{aligned}
 $$
 
 The categorical predictor $W$ (`IsWord` in the data) has two levels (`TRUE` and `FALSE`), so there are two indexing variables: $W_{\text{T}}$ and $W_{\text{F}}$. Each indexing variable gets its coefficient: $\beta_1$ and $\beta_2$. In most context, however, you will want to investigate the effects of more than one predictor.

@@ -360,8 +360,9 @@ window.Quarto = {
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -928,10 +929,10 @@ Figure&nbsp;31.3: A Gaussian variable from three groups with different mean/SDs 
 </div>
 <p>We can plot the empirical and predicted distribution using the <code>pp_check()</code> function from the brms package. The function name stands for posterior predictive check: in other words, we are checking how the predicted joint posterior distribution of the data looks like when compared with the empirical distribution. The joint posterior probability distribution is simply the probability of the outcome variable as predicted by the posterior probability distributions of the parameters of the model. The Gaussian regression above correspond to the following mathematical equations:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 RT_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 \mu_i &amp; = \beta_0 + \beta_1 \cdot w_i\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>The joint posterior distribution of the outcome <span class="math inline">\(RT\)</span> is the <span class="math inline">\(Gaussian(\mu, \sigma)\)</span> distribution in the model. This is based on the posterior probability of the regression coefficients <span class="math inline">\(\beta_0, \beta_1\)</span> and the overall standard deviation <span class="math inline">\(\sigma\)</span>. Remember that inference in the context of Bayesian regression models using MCMC is based on the MCMC draws. Each draw has sampled a value for the model parameters. So for each draw we can reconstruct one joint posterior distribution based on the specific parameter values of that draw. It is useful to plot the joint posterior based on several draws, but since this computation is expensive, it is usually best to use just some and not all the draws. There isn’t a specific number and by default <code>pp_check()</code> uses 10 draws. In most cases these suffice. In the following code I set the number of draws to 50 just to illustrate how to use the <code>ndraws</code> argument.</p>
 <p><a href="#fig-rt-bm-1-pp" class="quarto-xref">Figure&nbsp;<span>31.4</span></a> shows the output of the <code>pp_check()</code> function. The first argument of the function is simply the model object, <code>rt_bm_1</code>. We set <code>ndraws = 50</code> to use 50 random draws from the MCMC draws to reconstruct joint posteriors. These are in light blue in the figure. The dark blue, thicker line is the empirical density of the data, the same density you would get with <code>geom_density()</code>. It is quite obvious that the reconstructed posterior densities do not match the empirical density. Values below 500 ms are over-estimated by the model (in other words, the model over-predicts the presence of lower RT values) and similarly values between 1000 and 1500 ms are over-estimated. The empirical density of the data is much more compact around the peak of the distribution, compare to the posteriors from the model.</p>
@@ -953,10 +954,10 @@ Figure&nbsp;31.4: Posterior predictive checks for a Gaussian regression model of
 <p>A common reason for the failure of the posterior probability to correctly reconstruct the empirical distribution is the incorrect choice of the family distribution (another notable reason is not including important predictors in the model, like in the three Gaussian groups from the example above: a Gaussian model of that data without group as a predictor will incorrectly estimate values). We have learned above that RT values can be assumed to be log-normal, rather than Gaussian, because they are continuous and can only be positive.</p>
 <p>We will proceed then with modelling RTs using a log-normal regression model. This is just a regression model with a log-normal family as the distribution family for the outcome variable, here RTs. Here are the model formulae:</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 RT_i &amp; \sim LogNormal(\mu_i, \sigma)\\
 \mu_i &amp; = \beta_0 + \beta_1 \cdot w_i\\
-\end{align}
+\end{aligned}
 \]</span></p>
 <ul>
 <li><p>Reaction times <span class="math inline">\(RT\)</span> are distributed according to a log-normal distribution with mean <span class="math inline">\(\mu\)</span> and SD <span class="math inline">\(\sigma\)</span>.</p></li>

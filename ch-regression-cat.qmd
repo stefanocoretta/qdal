@@ -1,6 +1,6 @@
 # Regression with categorical predictors {#sec-regression-cat}
 
-![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
+![](/img/badge-stats.png) ![](/img/badge-r.png)
 
 ```{r}
 #| label: setup
@@ -17,10 +17,10 @@ library(ggdist)
 In @sec-regression you learned how to fit regression models of the following form in R using the brms package.
 
 $$
-\begin{align}
+\begin{aligned}
 y & \sim Gaussian(\mu, \sigma)\\
 \mu & = \beta_0 + \beta_1 \cdot x\\
-\end{align}
+\end{aligned}
 $$
 
 In these models, $x$ was a numeric predictor, like speech rate in the chapter's example. Numeric predictors are not the only type of predictors that a regression model can handle. Regression predictors can also be categorical variables: gender, age group, place of articulation, mono- vs bi-lingual, etc. However, regression model cannot handle categorical predictors directly: think about it, what would it mean to multiply $\beta_1$ by "female" or by "old"? Categorical predictors have to be re-coded as numbers.
@@ -168,19 +168,19 @@ We will use `IsWord` with the order `TRUE` and `FALSE`. This means that `TRUE` w
 We can now update the equation of $\mu$:
 
 $$
-\begin{align}
+\begin{aligned}
 RT_i & \sim Gaussian(\mu_i, \sigma)\\
 \mu_i & = \beta_0 + \beta_1 \cdot w_i\\
-\end{align}
+\end{aligned}
 $$
 
 The subscript $i$ is an index of each observation in the data. There are 5000 observations in `mald` so $i = [1..5000]$ ($i$ is goes from 1 to 5000). $RT_i$ then is indexing the specific observations in the data, $RT_1$, $RT_2$, $RT_3$, ..., $RT_{5000}$. Each observation is from a real or nonce word: this is coded by $w_i$. The subscript $i$ in $w_i$ is indexing the `IsWord` value of the $i$th observation. In the data, $RT_1 = 617$ and $w_1 = 0$ (i.e. `TRUE`). The mean $mu_i$ also has a subscript $i$. The $i$ is there to say that now $\mu$ depends on the specific observation $i$, so that we can model a different mean depending on $w_i$. In fact, in the model in @sec-regression, $i$ was implied to keep things simple, but technically it should be added, because the mean does depend on the value of $sr$:
 
 $$
-\begin{align}
+\begin{aligned}
 RT_i & \sim Gaussian(\mu_i, \sigma)\\
 \mu_i & = \beta_0 + \beta_1 \cdot sr_i\\
-\end{align}
+\end{aligned}
 $$
 
 These are just technicalities of the notation, so you shouldn't be too tripped up about it, the substance of the model is the same.
@@ -190,11 +190,11 @@ Going back to our model of RTs as a function of word type ("as a function of" is
 Now, $\beta_0$ is the model's intercept because that is the mean RT when $w$ is 0 (like with vowel duration when speech rate is 0; can you see the parallel?). And $\beta_1$ is the model's slope because $\beta_1$ is the change in RT for a unit increase of $w$, which is when $w$ goes from 0 to 1. This in turn corresponds to the change in level in the categorical predictor. Do you see the connection? It's a bit contorted, but once you get this, it should explain several aspects of regression models with categorical predictors and treatment contrasts. So $\mu_i$ is the sum of $\beta_0$ and $\beta_1 \cdot w_i$. $w_i$ is 0 (when the word is real) or 1 (the the word is a nonce word). That is why we write $RT_i$: the subscript $i$ allows us to pick the correct value of $w_i$ for each specific observation. The result of plugging in the value of $w_i$ is laid out in the following formulae.
 
 $$
-\begin{align}
+\begin{aligned}
 \mu_i & = \beta_0 + \beta_1 \cdot w_i\\
 \mu_{\text{T}} & = \beta_0 + \beta_1 \cdot 0 = \beta_0\\
 \mu_{\text{F}} & = \beta_0 + \beta_1 \cdot 1 = \beta_0 + \beta_1
-\end{align}
+\end{aligned}
 $$
 
 -   When `IsWord` is `TRUE`, the mean RT is equal to $\beta_0$.
@@ -204,10 +204,10 @@ $$
 If $\beta_0$ is the *mean* RT when `IsWord` is `TRUE`, what is $\beta_1$ by itself? Simple.
 
 $$
-\begin{align}
+\begin{aligned}
 \beta_1 & = \mu_\text{F} - \mu_\text{T}\\
 & = (\beta_0 + \beta_1) - \beta_0
-\end{align}
+\end{aligned}
 $$
 
 $\beta_0$ is the *difference* between the mean RT when `IsWord` is `TRUE` and the mean RT when `IsWord` is `FALSE`. As mentioned above, with treatment contrasts you are comparing the second level to the first. So one regression coefficient will be the mean of the reference level, and the other coefficient will be the *difference* between the mean of the two levels. I know this is not particularly beginner-friendly, but this is the default in R when using categorical predictors and it is the most common way to code categorical predictors, so you will frequently find tables in academic articles with regression coefficients that have to be interpreted that way.
@@ -276,9 +276,9 @@ So here we have our answer: at 95% confidence (another way of saying at 95% prob
 The coefficients are just telling us the difference in RT between nonce and real words, but not the predicted mean RT for nonce words. As in @sec-regression-draws, we can simply plug in the draws from the model according to the model formulae to obtain any estimand of interest, like the posterior predictions of RTs when the word is not a real word. Remember, for nonce words ($w_i = 1$):
 
 $$
-\begin{align}
+\begin{aligned}
 \mu_{\text{F}} & = \beta_0 + \beta_1 \cdot 1 = \beta_0 + \beta_1
-\end{align}
+\end{aligned}
 $$
 
 To get the predicted RTs for nonce words we need to sum `b_Intercept` and `b_IsWordFALSE`. Since we are at it, we also create a column for real words (that is just `b_Intercept` so we are basically just copying it that column; remember, $\mu_T = \beta_1$).

@@ -4,7 +4,7 @@ author: ["Stefano Coretta", "Elizabeth Pankratz"]
 
 # Binary outcomes: Bernoulli regression {#sec-regression-bernoulli}
 
-![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
+![](/img/badge-stats.png) ![](/img/badge-r.png)
 
 ```{r}
 #| label: setup
@@ -30,19 +30,19 @@ So far you have been fitting regression models in which the outcome variable was
 When modelling binary outcomes, what the researcher is usually interested in is the probability of obtaining one of the two levels. For example, in a lexical decision task one might want to know the probability that real words were recognised as such (in other words, we are interested in accuracy: incorrect or correct response). Let's say there is an 80% probability of responding correctly. So ($p()$ stands for "probability of"):
 
 $$
-\begin{align}
+\begin{aligned}
 p(\text{correct}) & = 0.8\\
 p(\text{incorrect}) & = 1 - p(\text{correct}) = 0.2
-\end{align}
+\end{aligned}
 $$
 
 You see that if you know the probability of one level (correct) you automatically know the probability of the other level, since there are only two levels and the total probability has to sum to 1. The distribution family for binary probabilities is the **Bernoulli family**. The Bernoulli family has only one parameter, $p$, which is the probability of obtaining one of the two levels (one can pick which level). With our lexical decision task example, we can write:
 
 $$
-\begin{align}
+\begin{aligned}
 resp_{\text{correct}} & \sim Bernoulli(p) \\
 p & = 0.8
-\end{align}
+\end{aligned}
 $$
 
 You can read it as:
@@ -376,10 +376,10 @@ verb_org |>
 Now we can move on onto modelling. Here is the mathematical formula of the model we will fit.
 
 $$
-\begin{align}
+\begin{aligned}
 MVP_i & \sim Bernoulli(p_i) \\
 logit(p_i) & = \beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i \\
-\end{align}
+\end{aligned}
 $$
 
 The probability of using an multi-verb predicate follows a Bernoulli distribution with probability $p$, which is the only parameter. The logit function is applied to the parameter $p$ as discussed in @sec-prob-log. Functions applied to model parameters are known as **link functions**. Bernoulli models use the logit link (i.e. the logit function). Because the logit link returns log-odds from probabilities, the log-odds of $p$, rather than just the probability $p$, are equal to the regression equation $\beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i$. This model has three regression coefficients: $\beta_0, \beta_1, \beta_2$. With one categorical predictor, regression models need one coefficient for each level in the predictor: since we have three levels in `Group`, we need three coefficients.

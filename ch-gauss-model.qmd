@@ -1,6 +1,6 @@
 # Gaussian models {#sec-gauss-model}
 
-![](https://img.shields.io/badge/Area-Statistics-red) ![](https://img.shields.io/badge/Area-R-green)
+![](/img/badge-stats.png) ![](/img/badge-r.png)
 
 ```{r}
 #| label: setup
@@ -76,21 +76,21 @@ ggplot(data = tibble(x = 0:300), aes(x)) +
 A statistical tool we can use to obtain an estimate of $\mu$ and $\sigma$ is a Gaussian model. A Gaussian model is a statistical model that estimates the values of the parameters of a (theoretical) Gaussian distribution, i.e. $\mu$ and $\sigma$. We can provisionally describe the model using formulae, like this:
 
 $$
-\begin{align}
+\begin{aligned}
 \text{RT} & \sim Gaussian(\mu, \sigma)\\
 \mu & = ...\\
 \sigma & = ...\\
-\end{align}
+\end{aligned}
 $$
 
-Now, here is where things get interesting. Bayesian approaches to statistics assume uncertainty in the parameters of the distribution one is estimating. So not only the observed values of RT are uncertain because they come for a probability distribution, but the parameters of the distribution are themselves uncertain. You can think of the mean and SD are uncertain variables that need to be estimated from the data. When we say a varible is uncertain, we describe it using a probability distribution. So the aim of a Gaussian model is to estimate the probability distributions of the parameters from the data (and the priors), rather than just their values.
+Now, here is where things get interesting. Bayesian approaches to statistics assume uncertainty in the parameters of the distribution one is estimating. So not only the observed values of RT are uncertain because they come for a probability distribution, but the parameters of the distribution are themselves uncertain. You can think of the mean and SD are uncertain variables that need to be estimated from the data. When we say a variable is uncertain, we describe it using a probability distribution. So the aim of a Gaussian model is to estimate the probability distributions of the parameters from the data (and the priors), rather than just their values.
 
 $$
-\begin{align}
+\begin{aligned}
 \text{RT} & \sim Gaussian(\mu, \sigma)\\
 \mu & \sim P(\mu_1, \sigma_1)\\
 \sigma & \sim P_+(\mu_2, \sigma_2)\\
-\end{align}
+\end{aligned}
 $$
 
 We say that $\mu$ comes from a probability distribution $P(\mu_1, \sigma_1)$. We use a subscript $1$ to differentiate the mean and SD of the main $Gaussian(\mu, \sigma)$ distribution from the mean and SD of the probability distribution of the mean $\mu$. Similarly, we say that $\sigma$ comes from a probability distribution $P_+(\mu_2, \sigma_2)$: $P_+()$ is a (non-technical) way to indicate that the probability should include only positive values. Why? Because SDs can only be positive. By specifying $P_+()$ we are constraining the probability distribution of $\sigma$ to have positive values only. In sum, we need to estimate two probability distributions, $P(\mu_1, \sigma_1)$ and $P_+(\mu_2, \sigma_2)$. These are **posterior probability distributions**. You will learn more about posterior probability distributions in the next chapter. For now, just keep in mind that they are called *posterior* because the come from the combination of priors and data.
@@ -173,10 +173,10 @@ ggplot() +
 The prior for $\sigma$ indicates that we expect values closer to zero to be more probable that larger values. We can rewrite the model formulae above as:
 
 $$
-\begin{align}
+\begin{aligned}
 \text{RT}  & \sim \text{Gaussian}(\mu, \sigma) \\
 \mu        & \sim \text{Gaussian}(900, 200)   & \text{[Prior for $\mu$]} \\
 \sigma     & \sim \text{HalfGaussian}(0, 200) & \text{[Prior for $\sigma$]}
-\end{align}
+\end{aligned}
 $$
 :::

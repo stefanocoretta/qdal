@@ -1,6 +1,6 @@
 # Research cycle {#sec-res-cycle}
 
-![](https://img.shields.io/badge/Area-Research_methods-blue)
+![](/img/badge-resmethods.png)
 
 ```{r}
 #| label: setup

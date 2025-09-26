@@ -1,6 +1,6 @@
 # More than two levels {#sec-regression-more}
 
-![](https://img.shields.io/badge/Area-R-green)
+![](/img/badge-r.png)
 
 @sec-regression-cat showed you how to fit a regression model with a categorical predictor. We modelled reaction times as a function of word type (real or nonce) from the MALD dataset [@tucker2019]. The categorical predictor `IsWord` (word type: real or nonce) was included in the model using treatment contrasts: the model's intercept is the mean of the first level and the "slope" is the difference between the second level and the first. In this chapter we will look at new data, Voice Onset Time (VOT) of Mixean Basque [@egurtzegi2020], to illustrate how to fit and interpret a regression model with a categorical predictor that has three levels, phonation (voiced, voiceless unaspirated, aspirated).
 
@@ -142,10 +142,10 @@ An other important aspect of treatment coding of categorical predictors that we 
 Now that we know how `phonation` is coded, we can look at the model formula.
 
 $$
-\begin{align}
+\begin{aligned}
 \text{VOT}_i & \sim Gaussian(\mu_i, \sigma)\\
 \mu_i & = \beta_0 + \beta_1 \cdot ph_{\text{VD}[i]} + \beta_2 \cdot ph_{\text{VL}[i]}\\
-\end{align}
+\end{aligned}
 $$
 
 The formula states that each observation of VOT come from a Gaussian distribution with a mean and standard deviation and that the mean depends on the value of the indicator variables $ph_\text{VD}$ and $ph_\text{VL}$: that is what the subscript $i$ is for.
@@ -162,11 +162,11 @@ Work out the formula of the mean VOT for each level of `phonation` by substituti
 For example, for `phonation` = `aspirated`:
 
 $$
-\begin{align}
+\begin{aligned}
 \mu_i & = \beta_0 + \beta_1 \cdot ph_{\text{VD}[i]} + \beta_2 \cdot ph_{\text{VL}[i]}\\
 & = \beta_0 + \beta_1 \cdot 0 + \beta_2 \cdot 0\\
 & = \beta_0
-\end{align}
+\end{aligned}
 $$
 
 So the mean VOT with aspirated stops is $\beta_0$.

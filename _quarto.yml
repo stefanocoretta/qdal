@@ -13,6 +13,7 @@ book:
     style: docked
   date: 2025/08/13
   page-navigation: true
+  downloads: [pdf]
   chapters:
   - index.qmd
   - preface.qmd
@@ -90,6 +91,8 @@ format:
     fig-align: center
     link-external-icon: true
     link-external-newwindow: true
+  pdf:
+    pdf-engine: xelatex
 
 callout-icon: false
 

@@ -1,6 +1,6 @@
 # Plotting {#sec-plotting}
 
-![](https://img.shields.io/badge/Area-R-green)
+![](/img/badge-r.png)
 
 ```{r}
 #| label: setup

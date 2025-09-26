@@ -360,8 +360,9 @@ window.Quarto = {
       </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -758,7 +759,7 @@ window.Quarto = {
 </header>
 
 
-<p><img src="https://img.shields.io/badge/Area-Statistics-red.png" class="img-fluid"> <img src="https://img.shields.io/badge/Area-R-green.png" class="img-fluid"></p>
+<p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
 <section id="mcmc-what" class="level2" data-number="25.1">
 <h2 data-number="25.1" class="anchored" data-anchor-id="mcmc-what"><span class="header-section-number">25.1</span> MCMC what?</h2>
 <p>Bayesian regression models fitted with brms/Stan use the Markov Chain Monte Carlo (MCMC) sampling algorithm to estimate the probability distributions of the model’s parameters. You have first encountered MCMC in <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>: the text printed when running <code>brm()</code> is about the MCMC. Bayesian models reconstruct the posterior probability distribution of a set of parameters. More precisely, they reconstruct (i.e.&nbsp;estimate) the <em>joint</em> probability distribution of the parameters. In other words, all parameters are estimated at the same time: think of this as a multidimensional space of probability, with one dimension per parameter. With two parameters, like intercept and slope, this is a 3-dimensional space, something we can imagine: think of a landscape with hills and valleys, where the <em>x</em>-axis are values for the intercept, the <em>y</em>-axis are values for the slope and the <em>z</em>-axis (the vertical axis) are probability densities. The hills represent high probability areas and valleys represent low probability areas. This landscape of hills and valleys is determined by the two components of the Bayes’ Theorem: the prior probability distribution <span class="math inline">\(P(h)\)</span> and the probability of the data given the prior, <span class="math inline">\(P(d | h)\)</span>.</p>
@@ -843,10 +844,10 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </ul>
 <p>Make sure that you understand these columns in light of the MCMC algorithm. The following columns contain the drawn values at each draw for three parameters of the model: <code>b_Intercept</code>, <code>b_speech_rate</code> and <code>sigma</code>. To remind yourself what these mean, let’s have a look at the mathematical formula of the model.</p>
 <p><span class="math display">\[
-\begin{align}
+\begin{aligned}
 vdur &amp; \sim Gaussian(\mu, \sigma) \\
 \mu        &amp; = \beta_0 + \beta_1 \cdot sr \\
-\end{align}
+\end{aligned}
 \]</span></p>
 <p>So:</p>
 <ul>

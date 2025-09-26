@@ -163,10 +163,10 @@ rt_bm_1 <- brm(
 We can plot the empirical and predicted distribution using the `pp_check()` function from the brms package. The function name stands for posterior predictive check: in other words, we are checking how the predicted joint posterior distribution of the data looks like when compared with the empirical distribution. The joint posterior probability distribution is simply the probability of the outcome variable as predicted by the posterior probability distributions of the parameters of the model. The Gaussian regression above correspond to the following mathematical equations:
 
 $$
-\begin{align}
+\begin{aligned}
 RT_i & \sim Gaussian(\mu_i, \sigma)\\
 \mu_i & = \beta_0 + \beta_1 \cdot w_i\\
-\end{align}
+\end{aligned}
 $$
 
 The joint posterior distribution of the outcome $RT$ is the $Gaussian(\mu, \sigma)$ distribution in the model. This is based on the posterior probability of the regression coefficients $\beta_0, \beta_1$ and the overall standard deviation $\sigma$. Remember that inference in the context of Bayesian regression models using MCMC is based on the MCMC draws. Each draw has sampled a value for the model parameters. So for each draw we can reconstruct one joint posterior distribution based on the specific parameter values of that draw. It is useful to plot the joint posterior based on several draws, but since this computation is expensive, it is usually best to use just some and not all the draws. There isn't a specific number and by default `pp_check()` uses 10 draws. In most cases these suffice. In the following code I set the number of draws to 50 just to illustrate how to use the `ndraws` argument.
@@ -185,10 +185,10 @@ A common reason for the failure of the posterior probability to correctly recons
 We will proceed then with modelling RTs using a log-normal regression model. This is just a regression model with a log-normal family as the distribution family for the outcome variable, here RTs. Here are the model formulae:
 
 $$
-\begin{align}
+\begin{aligned}
 RT_i & \sim LogNormal(\mu_i, \sigma)\\
 \mu_i & = \beta_0 + \beta_1 \cdot w_i\\
-\end{align}
+\end{aligned}
 $$
 
 -   Reaction times $RT$ are distributed according to a log-normal distribution with mean $\mu$ and SD $\sigma$.

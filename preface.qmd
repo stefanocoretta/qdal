@@ -18,11 +18,11 @@ The book is structured according to the schedule of the QML course. Chapters are
 
 Each chapter has "badges" that indicate the major topic area of the chapter. While some chapters focus on a specific area, others focus on more than one. These are the badges:
 
--   ![](https://img.shields.io/badge/Area-Research_methods-blue){alt="https://img.shields.io/badge/Area-Research_methods-blue"} is for chapters on research methods more generally, including research practices and philosophy.
+-   ![](/img/badge-resmethods.png){alt="https://img.shields.io/badge/Area-Research_methods-blue"} is for chapters on research methods more generally, including research practices and philosophy.
 
--   ![](https://img.shields.io/badge/Area-Statistics-red) is for chapters that introduce statistical concepts without going necessarily into the details of how to do that in R.
+-   ![](/img/badge-stats.png) is for chapters that introduce statistical concepts without going necessarily into the details of how to do that in R.
 
--   ![](https://img.shields.io/badge/Area-R-green){alt="https://img.shields.io/badge/Area-R-green"} is for chapters that teach you how to use R to complete a particular task, like reading or plotting data, using statistical models or transform data.
+-   ![](/img/badge-r.png){alt="https://img.shields.io/badge/Area-R-green"} is for chapters that teach you how to use R to complete a particular task, like reading or plotting data, using statistical models or transform data.
 
 The book also uses different types of "call-out boxes" to present specific content. Here are examples.
 
@@ -109,6 +109,8 @@ ggplot(data = tibble(x = 0:300), aes(x)) +
   )
 ```
 
+::: {.content-visible when-format="html"}
+
 ## Highlighting and notes
 
 Highlighting and notes are enabled in this book, thanks to the Hypothesis plugin. You can access the Hypothesis sidebar from the right side of the textbook (click on the `<` button, above the eye button in the right-end side of the website).
@@ -116,3 +118,5 @@ Highlighting and notes are enabled in this book, thanks to the Hypothesis plugin
 **You need to create an Hypothesis account and log in** on the side bar to be able to use the plugin. The account is free. Highlighting and comments are private by default. Please do not make public highlights and notes.
 
 ![](img/hypothesis.gif){fig-align="center"}
+
+:::

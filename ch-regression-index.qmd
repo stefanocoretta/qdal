@@ -1,6 +1,6 @@
 # Indexing categorical predictors {#sec-regression-index}
 
-![](https://img.shields.io/badge/Area-R-green)
+![](/img/badge-r.png)
 
 @sec-regression-cat showed you how to fit a regression model with a categorical predictor. We modelled reaction times as a function of word type (real or nonce). The categorical predictor `IsWord` (word type) was coded with so-called treatment contrasts using dummy coding: the model's intercept is the mean of the first level and the "slope" is the difference between the second level and the first.
 
@@ -13,10 +13,10 @@ In this chapter we revisit the regression model from @sec-regression-cat using i
 When using treatment coding and contrasts, the model coefficients are set up this way:
 
 $$
-\begin{align}
+\begin{aligned}
 RT_i & \sim Gaussian(\mu_i, \sigma)\\
 \mu_i & = \beta_0 + \beta_1 \cdot w_i\\
-\end{align}
+\end{aligned}
 $$
 
 where $w$ is the indicator variable for `IsWord`. $\beta_0$ is the mean RT with real words and $\beta_1$ is the difference between the mean RT with nonce words and that with real words.
@@ -24,10 +24,10 @@ where $w$ is the indicator variable for `IsWord`. $\beta_0$ is the mean RT with 
 With indexing, the model mathematical specification is the following:
 
 $$
-\begin{align}
+\begin{aligned}
 RT_i & \sim Gaussian(\mu_i, \sigma)\\
 \mu_i & = \beta_1 \cdot W_{\text{T}[i]} + \beta_2 \cdot W_{\text{F}[i]}\\
-\end{align}
+\end{aligned}
 $$
 
 In this formula, $\text{W}_\text{T}$ and $\text{W}_\text{T}$ are indicator variables. The system these indicator variables use is known as "one-hot encoding": each level of the categorical predictor gets an indicator variable, which is $1$ if the level of the observation $i$ is the level encoded by that indicator variable, otherwise 0. @tbl-index shows the correspondence between levels of `IsWord` and the values of the indicator variables.
@@ -42,12 +42,12 @@ In this formula, $\text{W}_\text{T}$ and $\text{W}_\text{T}$ are indicator varia
 The regression formula has two coefficients to be estimated: $\beta_1$ and $\beta_2$. $\beta_1$ is the mean RT when `IsWord` is `TRUE` ($\mu_\text{T}$) and $\beta_2$ is the mean RT when `IsWord` is `FALSE` ($\mu_\text{F}$), as shown below by substituting the indicator variables with the values $0$ or $1$ depending on the level of `IsWord`.
 
 $$
-\begin{align}
+\begin{aligned}
 \mu_\text{T} & = \beta_1 \cdot 1 + \beta_2 \cdot 0\\
 & = \beta_1\\
 \mu_\text{F} & = \beta_1 \cdot 0 + \beta_2 \cdot 1\\
 & = \beta_2\\
-\end{align}
+\end{aligned}
 $$
 
 Since treatment contrasts are the default in R, the formula `RT ~ IsWord` gives us treatment contrasts. So how do you instruct R to use indexing instead?

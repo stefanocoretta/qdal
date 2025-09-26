@@ -1,6 +1,6 @@
 # Quantitative data analysis {#sec-quantitative}
 
-![](https://img.shields.io/badge/Area-Statistics-red)
+![](/img/badge-stats.png)
 
 ![](img/res-process-data-ana.png)
 
