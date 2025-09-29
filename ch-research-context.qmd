@@ -60,7 +60,7 @@ The following are some examples of non-falsifiable hypotheses:
 -   "Life might exist outside of the Solar system." (if we observe life outside the Solar system or we don't, the statement is still true, because of the *might exist*).
 -   "Languages with a 1st person inclusive dual can have a 1st person exclusive dual." (whether we observe a language with both 1st inclusive and exclusive dual or not, the statement is still true, because of the *can have*.)
 
-Falsification has become a tenet of a lost of modern quantitative research and has become what could be regarded as *falsificationism*, but falsification is not the only approach to quantitative research, as you have learned in this chapter: precision and testability are two other equally valid criteria to follow when formulating hypotheses.
+Falsification has become a tenet of a lot of modern quantitative research and has become what could be regarded as *falsificationism*, but falsification is not the only approach to quantitative research, as you have learned in this chapter: precision and testability are two other equally valid criteria to follow when formulating hypotheses.
 
 If you are interested in the philosophy behind research and statistics (commonly known as "philosophy of science") I recommend the following books (of increasing length and depth): @okasha2016, @dienes2008, @rosenberg2020.
 :::
