@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -83,6 +118,35 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="include/webex.css">
 </head>
@@ -645,8 +709,17 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#hatr-and-effective-sample-size" id="toc-hatr-and-effective-sample-size" class="nav-link active" data-scroll-target="#hatr-and-effective-sample-size"><span class="header-section-number">32.1</span> <span class="math inline">\(\hat{R}\)</span> and Effective Sample Size</a></li>
+  <li><a href="#chain-mixing" id="toc-chain-mixing" class="nav-link" data-scroll-target="#chain-mixing"><span class="header-section-number">32.2</span> Chain mixing</a></li>
+  <li><a href="#possible-solutions" id="toc-possible-solutions" class="nav-link" data-scroll-target="#possible-solutions"><span class="header-section-number">32.3</span> Possible solutions</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">32.4</span> Summary</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-diag.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -672,8 +745,105 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
+<p>In <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 31</span></a>, you found out about posterior predictive checks with <code>pp_check()</code>. The function returns a plot with the empirical distribution of the data and a number of predicted joint distributions based on the fitted model. Ideally, if the model correctly recovers the underlying generative process, the empirical and posterior distributions should overlap or at least be very similar. Posterior predictive checks are one simple way of doing model diagnostics. Model diagnostics is important, but in my opinion has been overly emphasised and it has become a substitute of good theoretical thinking (by theoretical I mean both linguistic and statistical). In this chapter I will introduce two other diagnostic checks you should look out for and I will present some solutions to fix common issues with model fitting.</p>
+<section id="hatr-and-effective-sample-size" class="level2" data-number="32.1">
+<h2 data-number="32.1" class="anchored" data-anchor-id="hatr-and-effective-sample-size"><span class="header-section-number">32.1</span> <span class="math inline">\(\hat{R}\)</span> and Effective Sample Size</h2>
+<p>When you print a model summary, the regression coefficients table and the further distributional parameters (if present) have some extra columns we haven’t discussed yet. These columns are the <code>Rhat</code>, the <code>Bulk_ESS</code> and <code>Tail_ESS</code> columns. Let’s reload the log-normal model from <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 31</span></a> and print the model summary.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>rt_bm_2 <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  RT <span class="sc">~</span> IsWord,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> lognormal,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mald_filt,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">6725</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"cache/ch-regression-lognormal-rt_bm_2"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rt_bm_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: lognormal 
+  Links: mu = identity; sigma = identity 
+Formula: RT ~ IsWord 
+   Data: mald_filt (Number of observations: 4999) 
+  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
+         total post-warmup draws = 4000
+
+Regression Coefficients:
+            Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept       6.82      0.01     6.81     6.83 1.00     4019     2995
+IsWordFALSE     0.11      0.01     0.10     0.12 1.00     3585     2510
+
+Further Distributional Parameters:
+      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+sigma     0.27      0.00     0.26     0.27 1.00     3294     2989
+
+Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
+and Tail_ESS are effective sample size measures, and Rhat is the potential
+scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
+</div>
+</div>
+<p>Let’s focus on <code>Rhat</code>: this is a <strong>measure of convergence</strong>, called <span class="math inline">\(\hat{R}\)</span> (read “R hat”). When the MCMC algorithm shows good convergence at the end of all chains, <span class="math inline">\(\hat{R}\)</span> is 1 or as close to 1 as possible. In this model, all <span class="math inline">\(\hat{R}\)</span> values are exactly 1, indicating model convergence. Note that <span class="math inline">\(\hat{R}\)</span> doesn’t have to be precisely 1, other slightly higher values of 1 are still acceptable. brms warns you if any <span class="math inline">\(\hat{R}\)</span> value is too high, so if you don’t see warning messages when the model has finished fitting, you should not worry about it.</p>
+<p>Moving onto <code>Bulk_ESS</code> and <code>Tail_ESS</code>, these are two <strong>measures of Effective Sample Size</strong> (ESS). Since the model fit is based on a series of MCMC draws, the sample size of the draws is the number of total MCMC iterations (4000 by default). However, these draws are not fully independent from each other, because they are derived from the same underlying MCMC process. This generally means that the “effective” sample size might be different, when accounting for the level of dependence between the draws. The MCMC algorithm is so efficient that in some cases the ESS is higher than the actual number of draws. brms reports two ESS measures: <strong>bulk ESS and tail ESS</strong>. The bulk ESS focuses on the central part (the bulk) of the posterior distribution of the parameter, while the tail ESS on the tails of the posterior distribution (usually the lower 5% and upper 95% quantiles). A sufficient bulk ESS means that the posterior mean/median are robust, because the MCMC algorithm has robustly explored the typical values of the parameter. When tail ESS is sufficient, this indicates that the model has efficiently explored rare or extreme values of the parameter. Ideally, both bulk and tail ESS should be hight enough. There isn’t a hard cut-off but it has been suggested that a value of 400 generally indicates efficient exploration of the parameter space. In any case, brms warns you if ESS is too low, so as with <span class="math inline">\(\hat{R}\)</span>, if you don’t see a warning about low ESS, you should not worry.</p>
+</section>
+<section id="chain-mixing" class="level2" data-number="32.2">
+<h2 data-number="32.2" class="anchored" data-anchor-id="chain-mixing"><span class="header-section-number">32.2</span> Chain mixing</h2>
+<p>Another simple way of assessing whether a model has efficiently explored the parameter space is to check the MCMC chains with a so-called trace plot. An MCMC trace plot is a type of line plot which plots the value of each draw in each MCMC chain (<em>y</em>-axis), ordered by iteration number (<em>x</em>-axis). You can see the trace plots of the parameters of the log-normal model in <a href="#fig-rt-bm-2-chains" class="quarto-xref">Figure&nbsp;<span>32.1</span></a>. When the model has efficiently explored the parameter space of a parameter, the trace plot will look like a “hairy caterpillar”. This indicates that the chains have “mixed” well, in other words that they independently explored the same part of the parameter space.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mcmc_trace</span>(rt_bm_2, <span class="at">regex_pars =</span> <span class="st">"^b_|sigma"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-rt-bm-2-chains" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rt-bm-2-chains-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-regression-diag_files/figure-html/fig-rt-bm-2-chains-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-bm-2-chains-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.1: Trace plot of model parameters.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-bad-trace" class="quarto-xref">Figure&nbsp;<span>32.2</span></a> shows what bad trace plots look like (sadly, when they are very bad they look like squashed caterpillars, like the trace plots to the right). The red ticks below the trace lines mark divergent transitions: these are transitions from one iteration to the next that are considered problematic. The more divergent transitions there are, the less reliable the MCMC exploration is. Ideally, there should be no divergent transitions, but a few (less than 1-5%) is fine if no other warning are produced. brms warns you about divergent transitions, but you should use your judgement in determining whether there are other underlying issues and usually the trace plot clearly indicates if there are issues.</p>
+<div id="fig-bad-trace" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bad-trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/trace_c.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bad-trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.2: Examples of bad MCMC trace plots.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="possible-solutions" class="level2" data-number="32.3">
+<h2 data-number="32.3" class="anchored" data-anchor-id="possible-solutions"><span class="header-section-number">32.3</span> Possible solutions</h2>
+<p>When brms gives you a warning about any of the diagnostics mentioned here, it also usually gives you possible solutions. Note that in certain cases, using these solutions does not solve the problem, if there are more fundamental issues with the model specification (like including a combination of predictors that can’t be estimated by the data, or when the sample size is very small and the model is very complex).</p>
+<p>A common solution to convergence issues (i.e.&nbsp;problematic <span class="math inline">\(\hat{R}\)</span>, bulk/tail ESS or trace plots) is to increase the number of iterations. The default number is 2000 of which 1000 for warm-up, so you could set them to 3000 or 4000 with <code>iter = 3000</code> in the <code>brm()</code> call. Note that increasing the number of iterations means that the model will take longer to fit.</p>
+<p>Another solution is to increase one or more parameters related to the MCMC algorithm: one is the maximum tree-depth and the other is the adaptive delta. Both parameters control aspects of the physic equations used by the MCMC algorithm. The default values are <code>max_treedepth = 10</code> and <code>adapt_delta = 0.8</code>. If brms suggests to increase either of these parameters you can do so with <code>control = list(max_treedepth = 15, adapt_delta = 0.9)</code> (note that <code>adapt_delta</code> must be smaller than 1). The higher these values, the longer the model takes but the better the exploration of the MCMC algorithm should be.</p>
+</section>
+<section id="summary" class="level2" data-number="32.4">
+<h2 data-number="32.4" class="anchored" data-anchor-id="summary"><span class="header-section-number">32.4</span> Summary</h2>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Diagnostics
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Posterior predictive checks with <code>pp_check()</code>.</p></li>
+<li><p><span class="math inline">\(\hat{R}\)</span> should be 1 if the model converged fine.</p></li>
+<li><p>Bulk and tail Estimated Sample Size (ESS) should be high enough (&gt; 400).</p></li>
+<li><p>MCMC trace plots should look like “hairy caterpillars”, indicating the chains have “mixed” well.</p></li>
+</ul>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script>
@@ -1320,4 +1490,4 @@ window.onload = function() {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-diag.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-diag.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
