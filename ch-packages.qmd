@@ -15,7 +15,7 @@ library(webexercises)
 When working through the book, always **make sure you are in a Quarto Project** by checking the top-right corner of RStudio.
 :::
 
-When you install R, a **library** of packages is also installed. **Packages** provide R with extra functionalities, usually by making extra functions available for use. You can think of packages as "plug-ins" that you install once and then you can "activate" them when you need them. The library installed with R contains a set of packages that are collectively known as the **base R packages**, but you can install more any time!
+When you install R, a **library** of packages is also installed. **Packages** provide R with extra functionalities, usually by making extra functions available for use. You can think of packages as "plug-ins" that you install once and then you can "activate" them when you need them. The library installed with R contains a set of packages that are collectively known as the **base R packages**, but you can install more at any time!
 
 Note that the R library is a folder on your computer. Packages are *not* installed inside RStudio. Remember that RStudio is just an interface.
 
@@ -49,7 +49,7 @@ If you install a package with the function `install.packages()`, do so in the Co
 
 ![](img/install-packages.png){fig-align="center" width="350"}
 
-Go ahead and try to install a package using the second method. Install the **cowsay** and the **fortunes** packages (see picture above for how to write the packages). After installing you will see that the package fortunes is listed in the Packages tab.
+Go ahead and try to install a package using the second method. Install the **cowsay** and the **fortunes** packages (see picture above for how to write the packages). After installing you will see that the package "fortunes" is listed in the Packages tab.
 
 ::: callout-tip
 ### Install packages
@@ -60,7 +60,7 @@ In the "Install packages" window, list the package names and then click `Install
 :::
 
 ::: callout-important
-**You need to install a package ONLY ONCE!** Once installed, it's there for ever, saved in the R library. You will be able to use all of your installed packages in any RStudio/Quarto project you create.
+**You need to install a package ONLY ONCE!** Once installed, it's there forever, saved in the R library. You will be able to use all of your installed packages in any RStudio/Quarto project you create.
 :::
 
 ## Attaching packages
@@ -125,7 +125,7 @@ How many arguments does `say()` have? How many arguments have a default value?
 
 Default argument values allow you to use the function without specifying those arguments. Just write `say()` in your script on a new line and run it. Does the output make sense based on the `Usage` section of the documentation?
 
-The rest of the function documentation usually has further details, which are followed by `Examples`. It is always a good idea to look at the example and test them in the Console when learning new functions.
+The rest of the function documentation usually has further details, which are followed by `Examples`. It is always a good idea to look at the examples and test them in the Console when learning new functions.
 
 ::: callout-note
 ## Quiz 1

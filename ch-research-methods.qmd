@@ -20,11 +20,11 @@ Let's zoom in on the [research process]{.smallcaps}, as represented in @fig-res-
 
 ![A conceptual model of research process.](img/res-process.png){#fig-res-process fig-align="center"}
 
--   **Context**: the research context includes several aspects of the research process, including the background (i.e. the previous literature and current knowledge) and the rational of the study (from the general topic to specific research questions/hypotheses).
+-   **Context**: the research context includes several aspects of the research process, including the background (i.e. the previous literature and current knowledge) and the rationale of the study (from the general topic to specific research questions/hypotheses).
 
 -   **Data acquisition**: this is the process of gathering data to be used in the study. Data acquisition covers many different types of processes, from experimental set-ups to corpus queries.
 
--   **Data analysis** is the process of analysing the acquired data using qualitative, quantitative or a mixed methods. This part of the research process also include interpreting the output of such analysis.
+-   **Data analysis** is the process of analysing the acquired data using qualitative, quantitative or mixed methods. This part of the research process also includes interpreting the output of such analysis.
 
 -   **Communication**: finally, the last step in a research process cycle is to communicate what was done and what was learned, both to the research community and to the wider public.
 
@@ -37,7 +37,7 @@ Let's zoom in on the [research process]{.smallcaps}, as represented in @fig-res-
 
 The word *empirical* is related to *experience*, and in the context of research it basically means "based on experience (i.e. data and observation)".
 
-Lear more about the etymology of *empirical* [here](https://en.wiktionary.org/wiki/empirical#Etymology).
+Learn more about the etymology of *empirical* [here](https://en.wiktionary.org/wiki/empirical#Etymology).
 :::
 
 ## Axes of research
@@ -68,7 +68,7 @@ Similarly to the exploratory/corroboratory axis, there is still prejudice agains
 
 ## Research objectives
 
-Orthogonal to the two research axes from the previous section, we can classify research instances based on their objectives. There are in principle three types of **research objectives**: establishing facts, improving the fit of a framework to the facts, and comparing the fit of different frameworks to the facts. Each has its merits and to improve our understanding of the Universe we need all three, although there is nothing wrong for any one study to focus just on one or two!
+Orthogonal to the two research axes from the previous section, we can classify research instances based on their objectives. There are in principle three types of **research objectives**: establishing facts, improving the fit of a framework to the facts, and comparing the fit of different frameworks to the facts. Each has its merits and to improve our understanding of the Universe we need all three, although there is nothing wrong with any one study focusing just on one or two!
 
 ::: callout-tip
 ### Establish facts
@@ -101,7 +101,7 @@ Examples:
 
 **This objective allows a researcher to compare two or more frameworks in light of empirical results.** The main prerequisite for this approach is that each framework must have different expectations in relation to the phenomenon at hand.
 
-When different frameworks entail different and exclusive hypotheses, one can test the hypotheses with data: the results might help excluding certain hypotheses and keep others. The frameworks that generate the excluded hypotheses have to be abandoned (unless they can be modified to fit the new results, see above, while still be different enough from other frameworks).
+When different frameworks entail different and exclusive hypotheses, one can test the hypotheses with data: the results might help exclude certain hypotheses and keep others. The frameworks that generate the excluded hypotheses have to be abandoned (unless they can be modified to fit the new results, see above, while still being different enough from other frameworks).
 
 Examples:
 
@@ -109,7 +109,7 @@ Examples:
 -   A strict feed-forward architecture of grammar does not allow phonetic details to be sensitive to morphological structure, while some exemplar-based models allow that.
 :::
 
-Each of the three objectives are important in research, but note that in order to really advance our understanding of things the third objective is fundamental: it is only by directly comparing different frameworks that we can accumulate knowledge and weed out inaccurate explanations. Every time you read about a study, ask yourself which of these objectives the study is setting to address.
+Each of the three objectives are important in research, but note that in order to really advance our understanding of things the third objective is fundamental: it is only by directly comparing different frameworks that we can accumulate knowledge and weed out inaccurate explanations. Every time you read about a study, ask yourself which of these objectives the study is setting out to address.
 
 ::: callout-note
 #### Quiz 1

@@ -11,12 +11,12 @@
 library(webexercises)
 ```
 
-Statistical variables are a fundamental aspect of quantitative data analysis. There isn't an agreed upon definition of statistical variable, but generally speaking, anything that you have measured or counted is a statistical variable. For example, let's say you want to measure language proficiency in L2 learners: "language proficiency" is your **estimandum**, i.e. the concept or entity you wish to measure; you decide to measure language proficiency using the score of a proficiency test, this is the **estimand**, i.e. the specific measurement of the estimandum "language proficiency". When the estimand can take on different values, the estimand is a **statistical variable**: every participant will have a different proficiency score.
+Statistical variables are a fundamental aspect of quantitative data analysis. There isn't an agreed upon definition of a statistical variable, but generally speaking, anything that you have measured or counted is a statistical variable. For example, let's say you want to measure language proficiency in L2 learners: "language proficiency" is your **estimandum**, i.e. the concept or entity you wish to measure; you decide to measure language proficiency using the score of a proficiency test, this is the **estimand**, i.e. the specific measurement of the estimandum "language proficiency". When the estimand can take on different values, the estimand is a **statistical variable**: every participant will have a different proficiency score.
 
 ::: callout-tip
 ### Estimandum, estimands and variable
 
-An **estimandum** is any characteristic, phenomenon, entity, concept that is the target of the measurement/counting process.
+An **estimandum** is any characteristic, phenomenon, entity, or concept that is the target of the measurement/counting process.
 
 An **estimand** is the specific quantity of an estimandum that can be measured.
 

@@ -204,14 +204,14 @@ library(tidyverse)
 shallow <- read_csv("./data/song2020/shallow.csv")
 ```
 
-If you look at the `Environment` tab, you will see `shallow` listed under `Data`. You can preview the data by clicking on the name of the data in the `Environment` tab. A `View` tab will be opened in the top-left panel of RStudio and you will see a nicely formatted table, as you would in a programme like Excel. We will dive into this data later, so just have a peak for now.
+If you look at the `Environment` tab, you will see `shallow` listed under `Data`. You can preview the data by clicking on the name of the data in the `Environment` tab. A `View` tab will be opened in the top-left panel of RStudio and you will see a nicely formatted table, as you would in a programme like Excel. We will dive into this data later, so just have a peek for now.
 
 ::: callout-tip
 ### Data frames and tibbles
 
 In R, a data table is called a **data frame**.
 
-**Tibbles** are special data frame created with the read functions from the tidyverse. If you are curious about the difference, check [this page](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html#:~:text=There%20are%20three%20key%20differences,%2C%20subsetting%2C%20and%20recycling%20rules.).
+**Tibbles** are special data frames created with the read functions from the tidyverse. If you are curious about the difference, check [this page](https://cran.r-project.org/web/packages/tibble/vignettes/tibble.html#:~:text=There%20are%20three%20key%20differences,%2C%20subsetting%2C%20and%20recycling%20rules.).
 
 In this textbook, "data frame" and "tibble" will be used interchangeably (since we are using the read functions from the tidyverse, all resulting data frames will be tibbles).
 :::

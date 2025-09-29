@@ -57,9 +57,9 @@ Open RStudio on your computer and familiarise yourself with the different parts.
 
 -   Blue (left): the **Console**.
 
--   Green (top-right): the **Environment tab**.
+-   Green (top right): the **Environment tab**.
 
--   Purple (bottom-right): the **Files tab**.
+-   Purple (bottom right): the **Files tab**.
 
 ![](img/rstudio-1-2.png)
 
@@ -81,7 +81,7 @@ The **Environment tab** lists the objects created with R, while in the **Files t
 
 ### RStudio and Quarto projects
 
-RStudio is an IDE (see above) which allows you to work efficiently with R, all in one place. **Note** that files and data live in folders on your computer, outside of RStudio: do not think of RStudio as an app where you can save files in. All the files that you see in the Files tab are files on your computer and you can access them from the Finder or File Explorer as you would with any other file.
+RStudio is an IDE (see above) which allows you to work efficiently with R, all in one place. **Note** that files and data live in folders on your computer, outside of RStudio: do not think of RStudio as an app that you can save files in. All the files that you see in the Files tab are files on your computer and you can access them from the Finder or File Explorer as you would with any other file.
 
 In principle, you can open RStudio and then navigate to any folder or file on your computer. However, there is a more efficient way of working with RStudio: **RStudio and Quarto Projects**.
 
@@ -95,7 +95,7 @@ A **Quarto Project** is an RStudio Project with a `_quarto.yml` file.
 
 You can create as many Quarto Projects as you wish, and I recommend to create one per project (your dissertation, a research project, a course, etc...). We will create a Quarto Project for this course (meaning, you will create a folder for the course which will be the Quarto Project). You will have to use this project/folder throughout the semester.
 
-To create a new Quarto Project, click on the button that looks like a transparent light blue box with a plus, in the top-left corner of RStudio. A window like the one below will pop up.
+To create a new Quarto Project, click on the button that looks like a transparent light blue box with a plus, in the top left corner of RStudio. A window like the one below will pop up.
 
 ![](img/rstudio-3.png)
 
@@ -120,7 +120,7 @@ When working through this textbook, always make sure you are in the Quarto Proje
 
 You know you are in an RStudio/Quarto Project because you can see the name of the Project in the top-right corner of RStudio, next to the light blue cube icon.
 
-If you see `Project (none)` in the top-right corner, that means your **are not** in a Quarto Project.
+If you see `Project (none)` in the top-right corner, that means you **are not** in a Quarto Project.
 
 An easy way to ensure that RStudio is opened from within a specific project, to open RStudio go to the project folder in File Explorer or Finder and double click on the `.Rproj` file. This will automatically open RStudio and set the project to that folder.
 :::
@@ -173,14 +173,14 @@ cat("b. R is a programming language.", torf(TRUE), "\n\n")
 cat("c. An IDE is necessary to run R.", torf(FALSE), "\n\n")
 cat("d. RStudio projects are folders with an `.Rproj` file.", torf(TRUE), "\n\n")
 cat("f. Quarto projects can't be RStudio projects", torf(FALSE), "\n\n")
-cat("g. The project name is shown in the top-right corner of RStudio.", torf(TRUE), "\n\n")
+cat("g. The project name is shown in the top right corner of RStudio.", torf(TRUE), "\n\n")
 cat("h. I have disabled `Restore .RData` and `Save workspace` in the settings.", torf(TRUE))
 ```
 :::
 
 ## R basics
 
-In this part of the tutorial you will learn the very basics of R. If you have prior experience with programming, you should find all this familiar. If not, not to worry! Make sure you understand the concept highlighted in the green boxes and practice the related skills.
+In this part of the tutorial you will learn the very basics of R. If you have prior experience with programming, you should find all this familiar. If not, not to worry! Make sure you understand the concepts highlighted in the green boxes and practise the related skills.
 
 In the following sections, you should just run code directly in the R Console in RStudio, i.e. you will type code in the Console and press `ENTER` to run it.
 
@@ -323,7 +323,7 @@ two_i <- c(6, 8)
 three_i <- c(6, 8, 42)
 ```
 
-Check the list of variables in the `Environment` tab. You will see now that before the values of `two_i` and `three_i` you get the vector type `num` for numeric. (If the vector has only one value, you don't see the type in the `Enviroment` list but it is still of a specific type).
+Check the list of variables in the `Environment` tab. You will see now that before the values of `two_i` and `three_i` you get the vector type `num` for numeric. (If the vector has only one value, you don't see the type in the `Enviroment` list but it is still of a specific type.)
 
 ::: callout-tip
 #### Numeric vector
@@ -429,7 +429,7 @@ The `Sys.Date()` function and other functions like it don't take any arguments.
 ::: {.callout-important collapse="true"}
 #### R Note: R vs Python
 
-If you are familiar with Python, you will soon realise that R and Python, although they share many concepts and types of objects, they can differ substantially. This is because R is a **functional** programming language (based on *functions*) while Python is an **Object Oriented** programming language (based on *methods* applied on objects).
+If you are familiar with Python, you will soon realise that R and Python, although they share many concepts and types of objects, can differ substantially. This is because R is a **functional** programming language (based on *functions*) while Python is an **Object Oriented** programming language (based on *methods* applied on objects).
 
 Generally speaking, functions look like `print(x)` while methods look like `x.print()`
 :::
@@ -613,7 +613,7 @@ Here's a summary of what you learned.
 ::: {.callout-note appearance="minimal"}
 -   **R** is a programming language while **RStudio** is an IDE.
 
--   **RStudio projects** are folders with an `.Rproj` file (you can see the name of the project you are currently in in the top-right corner of RStudio).
+-   **RStudio projects** are folders with an `.Rproj` file (you can see the name of the project you are currently in in the top right corner of RStudio).
 
 -   You can perform mathematical operations with `+, -, *, /.`
 
@@ -621,7 +621,7 @@ Here's a summary of what you learned.
 
 -   A typical object to be stored in a variable is a **vector**: there are different type of vectors, like **numeric**, **character** and **logical**.
 
--   Functions are used to perform an operation on its arguments: `sum()` sums it's arguments, `mean()` calculates the mean and `cat()` prints the arguments.
+-   Functions are used to perform an operation on its arguments: `sum()` sums its arguments, `mean()` calculates the mean and `cat()` prints the arguments.
 :::
 
 ::: {.callout-important collapse="true"}

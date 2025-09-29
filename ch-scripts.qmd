@@ -9,7 +9,7 @@
 library(webexercises)
 ```
 
-In @sec-r-basics and @sec-packages, you've been writing R code in the **Console** and run it there. But this is not a very efficient way of using R code. Every time, you need to write the code and execute it in the right order and it quickly becomes very difficult to keep track of everything when things start getting more involved. A solution is to use **R scripts**.
+In @sec-r-basics and @sec-packages, you've been writing R code in the **Console** and running it there. But this is not a very efficient way of using R code. Every time, you need to write the code and execute it in the right order and it quickly becomes very difficult to keep track of everything when things start getting more involved. A solution is to use **R scripts**.
 
 ::: callout-tip
 ## R script
@@ -17,13 +17,13 @@ In @sec-r-basics and @sec-packages, you've been writing R code in the **Console*
 An **R script** is a file with the `.R` extension that contains R code.
 :::
 
-From now on, you should write all code in an R script, until you will learn about Quarto documents in @sec-quarto.
+From now on, you should write all code in an R script, until you learn about Quarto documents in @sec-quarto.
 
 ## Create an R script
 
 First, create a folder called `code` in your Quarto project folder. You can do so in two different ways:
 
--   You can click on the `New Folder` button in the `Files` panel (bottom-right) in RStudio, set the name and click `Ok`. The folder will be created within the current folder shown in the `Files` list.
+-   You can click on the `New Folder` button in the `Files` panel (bottom-right) in RStudio, set the name and click `OK`. The folder will be created within the current folder shown in the `Files` list.
 
 -   Since Quarto Projects are just folders on your computer, you can create a new folder as you would with any other folder from your computer File Explorer/Finder.
 
@@ -51,7 +51,7 @@ Rather, **open the Quarto project by double clicking on the `.Rproj` file** and 
 
 ## Write code
 
-Now, let's start filling up that script! Generally, you start the script with calls to `library()` to load all the packages you need for the script. Please, get in the habit of doing this from now, so that you can keep your scripts tidy and pretty! You will learn soon about the tidyverse packages in the following chapter so for now just attach the cowsay and fortune packages.
+Now, let's start filling up that script! Generally, you start the script with calls to `library()` to load all the packages you need for the script. Please, get in the habit of doing this from now, so that you can keep your scripts tidy and pretty! You will learn about the tidyverse packages in the following chapter, so for now just attach the cowsay and fortune packages.
 
 ::: callout-important
 Start your R scripts with calls to `library()` and attach all of the packages that are needed to run that script.
@@ -135,7 +135,7 @@ So you see there is a difference between *valid* code and *working* code.
 
 That's all there is to know about using R scripts. You write code and some comments and you can run code in the script and see the output in the `Console`. However, there is an important aspect that was not explicitly mentioned above: **a script is supposed to work from top (first line) to bottom (last line)**, so the order of the code in the script matters. A good habit to get into is to restart the R session every now and then and re-run the entire script. To restart the R session you can either go to the `Session` menu \> `Restart R` or you can press `SHIFT+CMD/CTRL+0` (the last key is "zero"). Try this now. Restart the R session and run your script again.
 
-But why it is important to restart the session to verify that the script runs? A typical case of scripts that don't run is when you call a variable in a function before having declared the variable (with `<-`) or when you call a function without having attached the package the function is from. However, an R session remembers everything you run: if you try to run code with a non-declared variable (like `sum(a, 1)`, but `a` is not declared) you will get an error; if you now write the code that declares the variable (`a <- 3`) but you put it after the line of code that uses the variable, the code will run because now the variable is declares and available in the session. If you keep the code this way and restart the session, the code will no longer work. This is because each line is executed in order and by the time R gets to the `sum(a, 1)` , the line `a <- 3` hasn't been executed yet so `a` is not available. This example might seem trivial (and it is) but with more complex scripts it is actually quite easy to do things like this (calling a variable on line 10 of the script while it is declared on line 1263).
+But why it is important to restart the session to verify that the script runs? A typical case of scripts that don't run is when you call a variable in a function before having declared the variable (with `<-`) or when you call a function without having attached the package the function is from. However, an R session remembers everything you run: if you try to run code with a non-declared variable (like `sum(a, 1)`, but `a` is not declared) you will get an error; if you now write the code that declares the variable (`a <- 3`) but you put it after the line of code that uses the variable, the code will run because now the variable is declared and available in the session. If you keep the code this way and restart the session, the code will no longer work. This is because each line is executed in order and by the time R gets to the `sum(a, 1)` , the line `a <- 3` hasn't been executed yet so `a` is not available. This example might seem trivial (and it is) but with more complex scripts it is actually quite easy to do things like this (calling a variable on line 10 of the script while it is declared on line 1263).
 
 ::: callout-warning
 ## Exercise 1

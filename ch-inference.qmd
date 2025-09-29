@@ -40,7 +40,7 @@ However, despite inference being based on data, it does not guarantee that the a
 cat("**True or false?**", "\n\n")
 cat("a. Inference is not needed if you gather data from the entire population.", torf(TRUE), "\n\n")
 cat("b. Population refers only to human participants.", torf(FALSE), "\n\n")
-cat("c. A sample is *always* a truthful representation fo the population.", torf(FALSE), "\n\n")
+cat("c. A sample is *always* a truthful representation of the population.", torf(FALSE), "\n\n")
 cat("d. You can collect the same sample multiple times.", torf(FALSE))
 ```
 :::
@@ -66,13 +66,13 @@ cat("d. You can collect the same sample multiple times.", torf(FALSE))
 -   **Variability** is found among different observations of the same phenomenon, due to natural fluctuations and measurement error.
 :::
 
-So uncertainty is a feature of each mesurement, while variability occurs between different measurements. Together, uncertainty and variability render the inference process more complex and can interfere with its outcomes.
+So uncertainty is a feature of each measurement, while variability occurs between different measurements. Together, uncertainty and variability render the inference process more complex and can interfere with its outcomes.
 
 The following picture is a reconstruction of what [Galileo Galilei](https://en.wikipedia.org/wiki/Galileo_Galilei) saw when he pointed one of his first telescopes towards Saturn, based on his 1610 sketch: a blurry circle flanked by two smaller blurry circles.
 
 ![](img/uncertainty.png)
 
-Only six years later, telescopes were much better and Galileo could correctly identify that the flaking circles were not spheres orbiting around Saturn, but rings. The figures below show how the sketches evolved over time between first observation and publication.
+Only six years later, telescopes were much better and Galileo could correctly identify that the flanking circles were not spheres orbiting around Saturn, but rings. The figures below show how the sketches evolved over time between first observation and publication.
 
 ![](img/saturn-galileo-sketches_med_hr.jpeg){fig-align="center"}
 
@@ -177,7 +177,7 @@ Statistics is a many things, but it is also *not* a lot of things.
 
 -   Statistics is **not maths**, but it is informed by maths.
 
--   Statistics is **not about hard truths** not how to seek the truth.
+-   Statistics is **not about hard truths**, but about how to seek the truth.
 
 -   Statistics is **not a purely objective** endeavour. In fact there are a *lot* of subjective aspects to statistics (see below).
 
@@ -207,9 +207,9 @@ cat("d. We can completely remove uncertainty with statistics.", torf(FALSE))
 
 ## Many Analysts, One Data Set: subjectivity exposed
 
-In @silberzahn2018, a group of researchers asked 29 independent analysis teams to answer the following question based on provided data: Is there a link between player skin tone and number of red cards in soccer? Crucially, **69% of the teams reported an effect of player skin tone, and 31% did not**. In total, the 29 teams came up with 21 unique types of statistical analysis. These results clearly show how subjective statistics is and how even a straightforward question can lead to a multitude of answers. To put it in Silberzah et al's words: "The observed results from analyzing a complex data set can be highly contingent on **justifiable, but subjective**, analytic decisions. This is why you should always be somewhat **sceptical of the results of any single study**: you never know what results might have been found if another research team did the study. This is a reason for why replicating research is very important. You will learn about replication and related concepts in @sec-res-cycle.
+In @silberzahn2018, a group of researchers asked 29 independent analysis teams to answer the following question based on provided data: Is there a link between player skin tone and number of red cards in soccer? Crucially, **69% of the teams reported an effect of player skin tone, and 31% did not**. In total, the 29 teams came up with 21 unique types of statistical analysis. These results clearly show how subjective statistics is and how even a straightforward question can lead to a multitude of answers. To put it in Silberzahn et al's words: "The observed results from analyzing a complex data set can be highly contingent on **justifiable, but subjective**, analytic decisions. This is why you should always be somewhat **sceptical of the results of any single study**: you never know what results might have been found if another research team did the study. This is one of the reasons why replicating research is very important. You will learn about replication and related concepts in @sec-res-cycle.
 
-@coretta2023 tried something similar, but in the context of the speech sciences: they asked 30 independent analysis teams (84 signed up, 46 submitted an analysis, 30 submitted usable analyses) to answer the question: Do speakers acoustically modify utterances to signal atypical word combinations? Outstandingly, the 30 teams submitted 109 individual analyses—a bit more than 3 analyses per team!—and 52 unique measurement specifications in 47 unique model specifications. @coretta2023 say: "**Nine teams out of the thirty (30%) reported to have found at least one statistically reliable effect** (based on the inferential criteria they specified). Of the 170 critical model coefficients, 37 were claimed to show a statistically reliable effect (21.8%)." @fig-flex illustrates the analytic flexibility typical of acoustic analyses. (A) shows the pipeline of decision a researcher would have to do: which linguistic unit, which temporal window, which acoustic parameters and how to measure those. You can appreciate that there are potentially many combinations. (B) illustrates the fundamental frequency (f0) contour of the sentences "I can't bear ANOTHER meeting on Zoom" and "I can't bear another meeting on ZOOM". In both sentences, the green shaded area marks the word "another". Finally, in (C) you see the different parameters that can be extracted from the f0 contour of the word "another". In sum, there are many choices a researcher is faced with and, while most of these choices might be justifiable, they are still subjective, as shows by the large variability of actual analyses carried out by the analyses teams in @coretta2023.
+@coretta2023 tried something similar, but in the context of the speech sciences: they asked 30 independent analysis teams (84 signed up, 46 submitted an analysis, 30 submitted usable analyses) to answer the question: Do speakers acoustically modify utterances to signal atypical word combinations? Outstandingly, the 30 teams submitted 109 individual analyses—a bit more than 3 analyses per team!—and 52 unique measurement specifications in 47 unique model specifications. @coretta2023 say: "**Nine teams out of the thirty (30%) reported to have found at least one statistically reliable effect** (based on the inferential criteria they specified). Of the 170 critical model coefficients, 37 were claimed to show a statistically reliable effect (21.8%)." @fig-flex illustrates the analytic flexibility typical of acoustic analyses. (A) shows the pipeline of decision a researcher would have to do: which linguistic unit, which temporal window, which acoustic parameters and how to measure those. You can appreciate that there are potentially many combinations. (B) illustrates the fundamental frequency (f0) contour of the sentences "I can't bear ANOTHER meeting on Zoom" and "I can't bear another meeting on ZOOM". In both sentences, the green shaded area marks the word "another". Finally, in (C) you see the different parameters that can be extracted from the f0 contour of the word "another". In sum, there are many choices a researcher is faced with and, while most of these choices might be justifiable, they are still subjective, as shown by the large variability of actual analyses carried out by the analysis teams in @coretta2023.
 
 ![Illustration of the analytic flexibility associated with acoustic analyses [from @coretta2023]](img/forking-paths.png){#fig-flex fig-align="center" width="500"}
 
@@ -219,7 +219,7 @@ The @silberzahn2018 and @coretta2023 studies are just the tip of the iceberg. We
 
 @kruschke2018 revisit the New Statistics and make a further proposal: to adopt the historically older but only recently popularised approach of Bayesian statistics. They call this the **Bayesian New Statistics**. The classical approach to statistics is the frequentist method, based on work by Fisher, Neyman and Pearson. Put simply, frequentist statistics is based on rejecting the "null hypothesis" (i.e. the hypothesis that there is no difference between groups) using *p*-values. Bayesian statistics provides researchers with more appropriate and more robust ways to answer research questions, by reallocating belief or credibility across possibilities. You will learn more about the frequentist and the Bayesian approaches in @sec-bayes.
 
-This textbook adopts the Bayesian New Statistics approach. Note that we will not really touch upon Bayesian statistics in the strict sense until @sec-bayes, just before statistical modelling will be introduced. So you should not worry too much about it for now: just try to appreciate that not only statistics is not intended to objectively separate truths from falsities, but also there are several ways to practice statistics. After all, statistics is a human activity, and like all other human activities it is embedded in the world constructed by humans and their idiosyncrasies.
+This textbook adopts the Bayesian New Statistics approach. Note that we will not really touch upon Bayesian statistics in the strict sense until @sec-bayes, just before statistical modelling will be introduced. So you should not worry too much about it for now: just try to appreciate that not only is statistics not intended to objectively separate truths from falsities, but also there are several ways to practise statistics. After all, statistics is a human activity, and like all other human activities it is embedded in the world constructed by humans and their idiosyncrasies.
 
 ::: callout-note
 ### Quiz 3
@@ -248,5 +248,5 @@ cat("Three researchers meet at a coffee shop. Each of them tells the other two a
 
 -   Statistics is a tool to quantify uncertainty and variability.
 
--   The (Bayesian) New Statistics is an approach to statistics that highlights the subjective nature of statistics and stressed the importance of estimation over statistical significance.
+-   The (Bayesian) New Statistics is an approach to statistics that highlights the subjective nature of statistics and stresses the importance of estimation over statistical significance.
 :::
