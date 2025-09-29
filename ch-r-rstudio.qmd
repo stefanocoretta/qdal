@@ -95,7 +95,7 @@ A **Quarto Project** is an RStudio Project with a `_quarto.yml` file.
 
 You can create as many Quarto Projects as you wish, and I recommend to create one per project (your dissertation, a research project, a course, etc...). We will create a Quarto Project for this course (meaning, you will create a folder for the course which will be the Quarto Project). You will have to use this project/folder throughout the semester.
 
-To create a new Quarto Project, click on the button that looks like a transparent light blue box with a plus, in the top left corner of RStudio. A window like the one below will pop up.
+To create a new Quarto Project, click on the button that looks like a transparent light blue box with a plus, in the top-left corner of RStudio. A window like the one below will pop up.
 
 ![](img/rstudio-3.png)
 
@@ -173,7 +173,7 @@ cat("b. R is a programming language.", torf(TRUE), "\n\n")
 cat("c. An IDE is necessary to run R.", torf(FALSE), "\n\n")
 cat("d. RStudio projects are folders with an `.Rproj` file.", torf(TRUE), "\n\n")
 cat("f. Quarto projects can't be RStudio projects", torf(FALSE), "\n\n")
-cat("g. The project name is shown in the top right corner of RStudio.", torf(TRUE), "\n\n")
+cat("g. The project name is shown in the top-right corner of RStudio.", torf(TRUE), "\n\n")
 cat("h. I have disabled `Restore .RData` and `Save workspace` in the settings.", torf(TRUE))
 ```
 :::
@@ -613,7 +613,7 @@ Here's a summary of what you learned.
 ::: {.callout-note appearance="minimal"}
 -   **R** is a programming language while **RStudio** is an IDE.
 
--   **RStudio projects** are folders with an `.Rproj` file (you can see the name of the project you are currently in in the top right corner of RStudio).
+-   **RStudio projects** are folders with an `.Rproj` file (you can see the name of the project you are currently in in the top-right corner of RStudio).
 
 -   You can perform mathematical operations with `+, -, *, /.`
 
