@@ -1,6 +1,6 @@
 # Log-normal regression {#sec-regression-lognorm}
 
-<!--# TODO: lognormal -->
+![](/img/badge-stats.png) ![](/img/badge-r.png)
 
 ```{r}
 #| label: setup

@@ -1,0 +1,15 @@
+# Model diagnostics {#sec-regression-diag}
+
+![](/img/badge-stats.png) ![](/img/badge-r.png)
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+theme_set(theme_light())
+library(brms)
+library(posterior)
+library(bayesplot)
+library(ggdist)
+```

@@ -85,7 +85,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ch-open-research.html" rel="next">
+<link href="./ch-regression-diag.html" rel="next">
 <link href="./ch-regression-bernoulli.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -658,6 +658,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -672,19 +678,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -761,7 +767,7 @@ window.Quarto = {
 </header>
 
 
-<!--# TODO: lognormal -->
+<p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
 <p>In <a href="ch-probability.html" class="quarto-xref"><span>Chapter 18</span></a>, we talked about skewness of distributions in relation to the density plots of reaction times. In <a href="ch-gauss-model.html" class="quarto-xref"><span>Chapter 21</span></a>, we further explained that it is the onus of the researcher to decide on a distribution family when fitting regression models and we said that, in the absence of more specific knowledge, the Gaussian distribution is a safe assumption to make. Note that the choice of distribution family should be based as much as possible on theoretical grounds (as opposed to empirical). In other words, you shouldn’t plot the variable to check with distribution it might follow (more on this in the Important box below).</p>
 <p>There are heuristics one can follow to pick a theoretically grounded distribution. The major ones are listed in <a href="app-reg-cheat-sheet.html#sec-outcome" class="quarto-xref"><span>Section B.2</span></a>, so you can refer to that section in the appendix, but in this chapter we will focus on one type of variables and the default distribution choice: i.e.&nbsp;variables that can only take on values that are positive numbers. These variables, in the absence of more specific knowledge, can be assumed to be from a log-normal distribution.</p>
 <section id="log-normal-distribution" class="level2" data-number="31.1">
@@ -1793,8 +1799,8 @@ window.onload = function() {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch-open-research.html" class="pagination-link" aria-label="Open Research">
-        <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ch-regression-diag.html" class="pagination-link" aria-label="Model diagnostics">
+        <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

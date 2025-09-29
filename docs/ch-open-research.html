@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>32&nbsp; Open Research – Quantitative Data Analysis for Linguists in R</title>
+<title>33&nbsp; Open Research – Quantitative Data Analysis for Linguists in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -51,7 +51,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./ch-regression-cat-cat.html" rel="next">
-<link href="./ch-regression-lognorm.html" rel="prev">
+<link href="./ch-regression-diag.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -276,7 +276,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-open-research.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-open-research.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-open-research.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-open-research.html"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -592,6 +592,12 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -606,19 +612,19 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -662,8 +668,8 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#reliability-of-results" id="toc-reliability-of-results" class="nav-link active" data-scroll-target="#reliability-of-results"><span class="header-section-number">32.1</span> Reliability of results</a></li>
-  <li><a href="#sharing-research-compendia" id="toc-sharing-research-compendia" class="nav-link" data-scroll-target="#sharing-research-compendia"><span class="header-section-number">32.2</span> Sharing research compendia</a></li>
+  <li><a href="#reliability-of-results" id="toc-reliability-of-results" class="nav-link active" data-scroll-target="#reliability-of-results"><span class="header-section-number">33.1</span> Reliability of results</a></li>
+  <li><a href="#sharing-research-compendia" id="toc-sharing-research-compendia" class="nav-link" data-scroll-target="#sharing-research-compendia"><span class="header-section-number">33.2</span> Sharing research compendia</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-open-research.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -671,9 +677,9 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-open-research.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-open-research.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-open-research.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-open-research.html"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-open-research" class="quarto-section-identifier"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></h1>
+<h1 class="title"><span id="sec-open-research" class="quarto-section-identifier"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></h1>
 </div>
 
 
@@ -692,24 +698,24 @@ div.csl-indent {
 
 <p><img src="./img/badge-resmethods.png" class="img-fluid"></p>
 <p><a href="ch-research-cycle.html" class="quarto-xref"><span>Chapter 17</span></a> introduced the concept of Questionable Research Practices: these are practices that, whether intentionally or not, negatively affect the research enterprise <span class="citation" data-cites="simmons2011 morin2015 flake2020">(<a href="references.html#ref-simmons2011" role="doc-biblioref">Simmons, Nelson, and Simonsohn 2011</a>; <a href="references.html#ref-morin2015" role="doc-biblioref">Morin 2015</a>; <a href="references.html#ref-flake2020" role="doc-biblioref">Flake and Fried 2020</a>)</span>. These, combined with theoretical underspecification typical of most research <span class="citation" data-cites="devezer2021 scheel2022">(<a href="references.html#ref-devezer2021" role="doc-biblioref">Devezer et al. 2021</a>; <a href="references.html#ref-scheel2022" role="doc-biblioref">Scheel 2022</a>)</span>, have contributed towards what we can call a “research crisis” <span class="citation" data-cites="pashler2012 gelman2014a schooler2014 fanelli2017 amrhein2019 starns2019 yarkoni2022">(<a href="references.html#ref-pashler2012" role="doc-biblioref">Pashler and Wagenmakers 2012</a>; <a href="references.html#ref-gelman2014a" role="doc-biblioref">Gelman and Loken 2014</a>; <a href="references.html#ref-schooler2014" role="doc-biblioref">Schooler 2014</a>; <a href="references.html#ref-fanelli2017" role="doc-biblioref">Fanelli, Costas, and Ioannidis 2017</a>; <a href="references.html#ref-amrhein2019" role="doc-biblioref">Amrhein, Trafimow, and Greenland 2019</a>; <a href="references.html#ref-starns2019" role="doc-biblioref">Starns et al. 2019</a>; <a href="references.html#ref-yarkoni2022" role="doc-biblioref">Yarkoni 2022</a>)</span>. In response to this research crisis, or crises, researchers have initiated a movement known as Open Research <span class="citation" data-cites="munafo2017 cruwell2019">(<a href="references.html#ref-munafo2017" role="doc-biblioref">Munafò et al. 2017</a>; <a href="references.html#ref-cruwell2019" role="doc-biblioref">Crüwell et al. 2019</a>)</span>, also called Open Scholarship and Open Science (some researchers find Open Science less inclusive, because of how loaded the term “science” is, so Open Research or Scholarship are now preferred). Open Research is a movement that stresses the importance of a more honest and transparent research by promoting a series of research principles and by warning from common, although not necessarily intentional, questionable practices and misconceptions. This chapter explains what Open Research entails.</p>
-<section id="reliability-of-results" class="level2" data-number="32.1">
-<h2 data-number="32.1" class="anchored" data-anchor-id="reliability-of-results"><span class="header-section-number">32.1</span> Reliability of results</h2>
-<p>A core principle of Open Research is about reliability of results presented in research literature. Results can be considered <strong>reliable</strong> if they meet the following criteria: reliable results are <strong>reproducible, replicable, robust and generalisable</strong>. These criteria are determined by the combination of two aspects of research: the data and the analysis of such data. Imagine an independent team of researchers: they pick an existing published study and want to check the reliability of the results presented in the study. As far as the data are concerned, they can re-use the same data of the original study or collect new data following the same protocol of the original study. In terms of data analysis, they can use the same analysis pipeline of the original study or use a different method. When you combine data and analysis choice together, you get a matrix of criteria for reliable results, as shown in <a href="#fig-reliable" class="quarto-xref">Figure&nbsp;<span>32.1</span></a>.</p>
+<section id="reliability-of-results" class="level2" data-number="33.1">
+<h2 data-number="33.1" class="anchored" data-anchor-id="reliability-of-results"><span class="header-section-number">33.1</span> Reliability of results</h2>
+<p>A core principle of Open Research is about reliability of results presented in research literature. Results can be considered <strong>reliable</strong> if they meet the following criteria: reliable results are <strong>reproducible, replicable, robust and generalisable</strong>. These criteria are determined by the combination of two aspects of research: the data and the analysis of such data. Imagine an independent team of researchers: they pick an existing published study and want to check the reliability of the results presented in the study. As far as the data are concerned, they can re-use the same data of the original study or collect new data following the same protocol of the original study. In terms of data analysis, they can use the same analysis pipeline of the original study or use a different method. When you combine data and analysis choice together, you get a matrix of criteria for reliable results, as shown in <a href="#fig-reliable" class="quarto-xref">Figure&nbsp;<span>33.1</span></a>.</p>
 <div id="fig-reliable" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-reliable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="img/reproducible-matrix-e570d1a3271ef48dd15c45fe8dc1693a.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-reliable-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;32.1: The four criteria for reliable results, by <a href="https://book.the-turing-way.org/reproducible-research/overview/overview-definitions">The Turing Way</a> (CC BY 4.0).
+Figure&nbsp;33.1: The four criteria for reliable results, by <a href="https://book.the-turing-way.org/reproducible-research/overview/overview-definitions">The Turing Way</a> (CC BY 4.0).
 </figcaption>
 </figure>
 </div>
 <p>When an independent researcher takes the data of the original study, applies the same analytical pipeline and obtains the same results as reported in the original study, we say that the results are <strong>reproducible</strong>. There is also a more specific meaning, which is computational reproducibility, by which the same data and computer code produce the same results. If independent researchers use the same data collection protocol and apply the same analysis workflow, but they collect new data and obtain the same results, we say the original results are <strong>replicable</strong>. With the same data but a different analysis pipeline, the original results are <strong>robust</strong> if they are the same as the one obtained with a different pipeline. Finally, with new data and a different analysis the results are <strong>generalisable</strong> if you obtain the same results of the original study.</p>
 <p>Together, reproducibility, replicability, robustness and generalisability are necessary (but not sufficient) criteria to ensure reliable results. Unfortunately, the current situation in terms of reproducibility and replicability is dire: the level of (computational) reproducibility is low in many fields, including linguistics <span class="citation" data-cites="bochynska2023">(<a href="references.html#ref-bochynska2023" role="doc-biblioref">Bochynska et al. 2023</a>)</span> and the replicability success rates are low. <span class="citation" data-cites="opensciencecollaboration2015">Open Science Collaboration (<a href="references.html#ref-opensciencecollaboration2015" role="doc-biblioref">2015</a>)</span> found that, in psychology, a large portion of replications produced weaker evidence than the original studies that were replicated. Replication success is more difficult to assess in linguistics, given the few direct replication attempts <span class="citation" data-cites="kobrock2023">(<a href="references.html#ref-kobrock2023" role="doc-biblioref">Kobrock and Roettger 2023</a>)</span>. Less is known about robustness and generalisability, although <span class="citation" data-cites="yarkoni2022">Yarkoni (<a href="references.html#ref-yarkoni2022" role="doc-biblioref">2022</a>)</span> presents convincing arguments that we can expect a generalisability crisis as well. Overall, we are facing several reliability crises, which are part of the wider research crisis.</p>
 </section>
-<section id="sharing-research-compendia" class="level2" data-number="32.2">
-<h2 data-number="32.2" class="anchored" data-anchor-id="sharing-research-compendia"><span class="header-section-number">32.2</span> Sharing research compendia</h2>
+<section id="sharing-research-compendia" class="level2" data-number="33.2">
+<h2 data-number="33.2" class="anchored" data-anchor-id="sharing-research-compendia"><span class="header-section-number">33.2</span> Sharing research compendia</h2>
 <p>A research compendium is collection of files, data, materials, images, computer code, analysis outputs, resaerch notebooks, etc. of a research project. A simple practice encouraged by Open Research advocates is to openly share a project’s research compendium so that independent researchers can access it and re-use its components. Sharing a research compendium, especially data, of course is intertwined with ethics and obtaining proper consent from participants or any other source.</p>
 
 
@@ -1398,13 +1404,13 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ch-regression-lognorm.html" class="pagination-link" aria-label="Log-normal regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span>
+      <a href="./ch-regression-diag.html" class="pagination-link" aria-label="Model diagnostics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ch-regression-cat-cat.html" class="pagination-link" aria-label="Regression models: multiple predictors">
-        <span class="nav-page-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
