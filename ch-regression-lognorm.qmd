@@ -296,11 +296,18 @@ round(plogis(2 + 0.3) - plogis(2), 2)
 
 When the baseline log-odds is 1 (corresponding to about 73%), a 0.3 log-odd increase corresponds to a 5 percentage point increase (from 73 to 78%). When the baseline is 2 (about 88%) the same increase corresponds to a 3 percentage point increase. With log estimates, the same principle applies: for the same log difference, the difference in the original scale (like milliseconds for RT) is greater with larger baselines.
 
+## Posterior predictions
+
+We can plot posterior predictions as per usual, using the `conditional_effect()` function. @fig-rt-bm-2-cond shows the output of the function. Note how RTs are plotted on the original millisecond scale, rather than in logged milliseconds.
+
 ```{r}
-#| label: rt-bm-2-cond
+#| label: fig-rt-bm-2-cond
+#| fig-cap: "Posterior predictions of RTs based on a log-normal regression model, by lexical status."
 
 conditional_effects(rt_bm_2)
 ```
+
+We can also extract the draws from the model and calculate the posterior predictive draws from them, and then plot them using ggplot2, as we have done in previous chapters. The following code extracts and mutates the draws: remember that the draws are in logged milliseconds, so if we want to transform these back to milliseconds, we just use the exponential function `exp()`. `nonce_log` is the predicted log RT of nonce words, i.e. the sum of the intercept plus the coefficient `b_IsWordFALSE`.
 
 ```{r}
 #| label: rt-bm-2-draws
@@ -312,6 +319,28 @@ rt_bm_2_draws <- rt_bm_2_draws |>
     real_log = b_Intercept,
     nonce_log = b_Intercept + b_IsWordFALSE,
     real = exp(real_log),
-    nonce_log = exp(nonce_log)
+    nonce = exp(nonce_log)
   )
 ```
+
+Finally, we can plot the predictions, shown in @fig-rt-bm-2-preds. We need to pivot the tibble first with `pivot_longer()`.
+
+```{r}
+#| label: fig-rt-bm-2-preds
+#| fig-cap: "Posterior predictions of RTs in real and nonce words."
+#| warning: false
+#| code-fold: true
+
+rt_bm_2_draws |> 
+  select(real:nonce) |> 
+  pivot_longer(real:nonce) |> 
+  ggplot(aes(value, name)) +
+  stat_halfeye() +
+  labs(
+    x = "Predicted RTs (ms)", y = "Lexical status",
+    caption = "Point = median, thick bar = 66% CrI, thin bar = 95% CrI."
+  )
+
+```
+
+## Reporting

@@ -733,6 +733,8 @@ window.Quarto = {
   <li><a href="#modelling-rts-with-a-log-normal-regression" id="toc-modelling-rts-with-a-log-normal-regression" class="nav-link" data-scroll-target="#modelling-rts-with-a-log-normal-regression"><span class="header-section-number">31.3</span> Modelling RTs with a log-normal regression</a></li>
   <li><a href="#interpreting-log-normal-regressions" id="toc-interpreting-log-normal-regressions" class="nav-link" data-scroll-target="#interpreting-log-normal-regressions"><span class="header-section-number">31.4</span> Interpreting log-normal regressions</a></li>
   <li><a href="#logs-and-ratios" id="toc-logs-and-ratios" class="nav-link" data-scroll-target="#logs-and-ratios"><span class="header-section-number">31.5</span> Logs and ratios</a></li>
+  <li><a href="#posterior-predictions" id="toc-posterior-predictions" class="nav-link" data-scroll-target="#posterior-predictions"><span class="header-section-number">31.6</span> Posterior predictions</a></li>
+  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">31.7</span> Reporting</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-lognorm.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1086,16 +1088,26 @@ Figure&nbsp;31.6: The exponential function: from logs to ratios.
 </div>
 </div>
 <p>When the baseline log-odds is 1 (corresponding to about 73%), a 0.3 log-odd increase corresponds to a 5 percentage point increase (from 73 to 78%). When the baseline is 2 (about 88%) the same increase corresponds to a 3 percentage point increase. With log estimates, the same principle applies: for the same log difference, the difference in the original scale (like milliseconds for RT) is greater with larger baselines.</p>
+</section>
+<section id="posterior-predictions" class="level2" data-number="31.6">
+<h2 data-number="31.6" class="anchored" data-anchor-id="posterior-predictions"><span class="header-section-number">31.6</span> Posterior predictions</h2>
+<p>We can plot posterior predictions as per usual, using the <code>conditional_effect()</code> function. <a href="#fig-rt-bm-2-cond" class="quarto-xref">Figure&nbsp;<span>31.7</span></a> shows the output of the function. Note how RTs are plotted on the original millisecond scale, rather than in logged milliseconds.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(rt_bm_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ch-regression-lognorm_files/figure-html/rt-bm-2-cond-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-rt-bm-2-cond" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rt-bm-2-cond-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-regression-lognorm_files/figure-html/fig-rt-bm-2-cond-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-bm-2-cond-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;31.7: Posterior predictions of RTs based on a log-normal regression model, by lexical status.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p>We can also extract the draws from the model and calculate the posterior predictive draws from them, and then plot them using ggplot2, as we have done in previous chapters. The following code extracts and mutates the draws: remember that the draws are in logged milliseconds, so if we want to transform these back to milliseconds, we just use the exponential function <code>exp()</code>. <code>nonce_log</code> is the predicted log RT of nonce words, i.e.&nbsp;the sum of the intercept plus the coefficient <code>b_IsWordFALSE</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>rt_bm_2_draws <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(rt_bm_2)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1104,9 +1116,39 @@ Figure&nbsp;31.6: The exponential function: from logs to ratios.
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">real_log =</span> b_Intercept,</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">nonce_log =</span> b_Intercept <span class="sc">+</span> b_IsWordFALSE,</span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">real =</span> <span class="fu">exp</span>(real_log),</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">nonce_log =</span> <span class="fu">exp</span>(nonce_log)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">nonce =</span> <span class="fu">exp</span>(nonce_log)</span>
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>Finally, we can plot the predictions, shown in <a href="#fig-rt-bm-2-preds" class="quarto-xref">Figure&nbsp;<span>31.8</span></a>. We need to pivot the tibble first with <code>pivot_longer()</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>rt_bm_2_draws <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(real<span class="sc">:</span>nonce) <span class="sc">|&gt;</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(real<span class="sc">:</span>nonce) <span class="sc">|&gt;</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value, name)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_halfeye</span>() <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Predicted RTs (ms)"</span>, <span class="at">y =</span> <span class="st">"Lexical status"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Point = median, thick bar = 66% CrI, thin bar = 95% CrI."</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-rt-bm-2-preds" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rt-bm-2-preds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-regression-lognorm_files/figure-html/fig-rt-bm-2-preds-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-bm-2-preds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;31.8: Posterior predictions of RTs in real and nonce words.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="reporting" class="level2" data-number="31.7">
+<h2 data-number="31.7" class="anchored" data-anchor-id="reporting"><span class="header-section-number">31.7</span> Reporting</h2>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
