@@ -349,7 +349,7 @@ glot_status |>
 
 R has two assignment operators: the assignment arrow `<-` and `=`. Current R coding practices favour `<-` over `=`, hence this book uses exclusively the former. Both have the same assignment direction: the object to the right of the operator is assigned to the variable name to the left of the operator. This is virtually how all programming languages work.
 
-It is less know, however, that the assignment arrow can be "reversed", `->` so that assignment goes from left to right. The following are equivalent.
+It is less known, however, that the assignment arrow can be "reversed", `->` so that assignment goes from left to right. The following are equivalent.
 
 ``` r
 a <- 2
