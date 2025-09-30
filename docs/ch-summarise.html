@@ -910,12 +910,12 @@ Show me
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>What does the <code>na.rm</code> argument of <code>mean()</code> do?
-<div id="radio_JZPBTTGOUP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JZPBTTGOUP" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_JZPBTTGOUP" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_JZPBTTGOUP" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
+<div id="radio_EBNOERBGEC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EBNOERBGEC" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_EBNOERBGEC" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_EBNOERBGEC" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
 </div></li>
 <li>Which is the mean of <code>c(4, 23, NA, 5)</code> when <code>na.rm</code> has the default value?
-<div id="radio_LSFHLAVSCH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LSFHLAVSCH" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_LSFHLAVSCH" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_LSFHLAVSCH" value=""> <span><code>10.66</code>.</span></label>
+<div id="radio_HUYDHTABKZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HUYDHTABKZ" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_HUYDHTABKZ" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_HUYDHTABKZ" value=""> <span><code>10.66</code>.</span></label>
 </div></li>
 </ol>
 </div>
@@ -964,7 +964,7 @@ Show me
 # ℹ 2 more variables: Relation_type &lt;chr&gt;, Branching &lt;chr&gt;</code></pre>
 </div>
 </div>
-<p>The grouping information is stored as an “attribute” in the tibble, named <code>groups</code>. You can check this attribute with <code>attr()</code>. You get a tibble with the groupings. Hopefully now you understand that, even if nothing seems to have happened, the tibble has been grouped. Since you saved the output of <code>group_by()</code> into a new variable <code>shallow_g</code>, note that <code>shallow</code> was not affected (try running <code>atrr(shallow, "groups")</code> and you will get a <code>NULL</code>). Here’s the output:</p>
+<p>The grouping information is stored as an “attribute” in the tibble, named <code>groups</code>. You can check this attribute with <code>attr()</code>. You get a tibble with the groupings. Hopefully now you understand that, even if nothing seems to have happened, the tibble has been grouped. Since you saved the output of <code>group_by()</code> into a new variable <code>shallow_g</code>, note that <code>shallow</code> was not affected (try running <code>attr(shallow, "groups")</code> and you will get a <code>NULL</code>). Here’s the output:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
