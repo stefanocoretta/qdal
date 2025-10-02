@@ -36,4 +36,16 @@ A version control system is software that allows users to take incremental "snap
 
 One of the advantages of using a version control system is that it helps ensuring computational reproducibility. Everything needed for code to be run is managed by the version control system and independent researchers can access and clone the versioned repository and re-use the code. git is very efficient with textual files, of the kind you would use for code, but it is less ideal with large data files. The software Data Version Control (DVC, <https://dvc.org>) was developed to more efficiently version larger files. Note that while for git repositories there are online services like GitHub and GitLab, for DVC repositories a dedicated server does not exist so usually "remote" DVC repositories have to be hosted on other servers.
 
-## Licenses and re-use
+## Licences and re-use
+
+When sharing research compendia, it is important to specify a license that explains how the contents of the research compendium can be re-used. So just sharing the compendium does not automatically make it "open" if it can't be reused. Commonly used licences are the Creative Common licences (<https://creativecommons.org/share-your-work/>). In particular the CC-BY licence allows re-use of compendia provided attribution of the original authors is given. For software more specifically, there are several licences like the MIT license and the GNU licence. When sharing compendia you should carefully think about which licence to distribute the compendia under.
+
+## Summary
+
+::: {.callout-note appearance="simple"}
+-   Open Research is a movement that stresses the importance of a more honest and transparent research.
+
+-   Core principles of Open Research are sharing research compendia under permissive licences, ensuring computational reproducibility, and registering study plans with pre-registrations or Registered Reports.
+
+-   @cruwell2019 is a review of Open Research principles and resources.
+:::
