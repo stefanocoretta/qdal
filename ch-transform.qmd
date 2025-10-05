@@ -280,7 +280,7 @@ Let's count the number of languages for each endangerment status using the new `
 #| label: count
 
 glot_status |>
-  group_by(status) |> 
+  group_by(Status) |> 
   count()
 ```
 

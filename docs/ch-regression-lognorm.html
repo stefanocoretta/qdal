@@ -741,6 +741,7 @@ window.Quarto = {
   <li><a href="#logs-and-ratios" id="toc-logs-and-ratios" class="nav-link" data-scroll-target="#logs-and-ratios"><span class="header-section-number">31.5</span> Logs and ratios</a></li>
   <li><a href="#posterior-predictions" id="toc-posterior-predictions" class="nav-link" data-scroll-target="#posterior-predictions"><span class="header-section-number">31.6</span> Posterior predictions</a></li>
   <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">31.7</span> Reporting</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">31.8</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-lognorm.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1122,8 +1123,9 @@ Figure&nbsp;31.7: Posterior predictions of RTs based on a log-normal regression 
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">real_log =</span> b_Intercept,</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">nonce_log =</span> b_Intercept <span class="sc">+</span> b_IsWordFALSE,</span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">real =</span> <span class="fu">exp</span>(real_log),</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">nonce =</span> <span class="fu">exp</span>(nonce_log)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">nonce =</span> <span class="fu">exp</span>(nonce_log),</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">nonce_real =</span> nonce <span class="sc">-</span> real</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Finally, we can plot the predictions, shown in <a href="#fig-rt-bm-2-preds" class="quarto-xref">Figure&nbsp;<span>31.8</span></a>. We need to pivot the tibble first with <code>pivot_longer()</code>.</p>
 <div class="cell">
@@ -1152,12 +1154,59 @@ Figure&nbsp;31.8: Posterior predictions of RTs in real and nonce words.
 </div>
 </div>
 </div>
+<p>We can also get the CrIs as usual.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(rt_bm_2_draws<span class="sc">$</span>real, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> q1 q90 
+908 925 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(rt_bm_2_draws<span class="sc">$</span>nonce, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  q1  q90 
+1014 1033 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(rt_bm_2_draws<span class="sc">$</span>nonce_real, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> q1 q90 
+ 90 117 </code></pre>
+</div>
+</div>
 </section>
 <section id="reporting" class="level2" data-number="31.7">
 <h2 data-number="31.7" class="anchored" data-anchor-id="reporting"><span class="header-section-number">31.7</span> Reporting</h2>
+<blockquote class="blockquote">
+<p>We fitted a Bayesian regression model with a log-normal family for the outcome variable (reaction times, RT) using brms <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. As predictor, we entered the lexical status of the word (real or nonce), coded using default treatment contrasts with real set as the reference level.</p>
+<p>The model indicates that the average RT for real words is between 908-925 ms at 80% confidence (<span class="math inline">\(\beta\)</span> = 6.82, SD = 0.01). RTs for nonce words are between 90-117 ms longer than for real words (<span class="math inline">\(\beta\)</span> = 0.11, SD = 0.01), at 80% probability. Average RTs for nonce words are predicted to be between 1014-1033 ms, at 80% confidence.</p>
+</blockquote>
+</section>
+<section id="summary" class="level2" data-number="31.8">
+<h2 data-number="31.8" class="anchored" data-anchor-id="summary"><span class="header-section-number">31.8</span> Summary</h2>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul>
+<li><p>Continuous variables that can only be positive numbers, like segment duration and reaction times, usually follow a log-normal distribution.</p></li>
+<li><p>These variables can be modelled with log-normal regression models (<code>family = lognormal</code>).</p></li>
+<li><p>Estimates in log-normal models are in logs.</p></li>
+<li><p>Coefficients that represent differences between levels can be transformed to ratio differences by exponentiating the coefficient with <code>exp()</code>.</p></li>
+<li><p>Predictions can be converted back to the original scale with <code>exp()</code> as well (for predictions, you should <em>always</em> include the intercept; exponentiating difference coefficients alone gives you for example the ratio difference in RTs, not the predicted RTs in milliseconds).</p></li>
+</ul>
+</div>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-burkner2017" class="csl-entry" role="listitem">
+Bürkner, Paul-Christian. 2017. <span>“Brms: An r Package for Bayesian Multilevel Models Using Stan.”</span> <em>Journal of Statistical Software</em> 80 (1): 128. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>.
+</div>
+<div id="ref-rcoreteam2025" class="csl-entry" role="listitem">
+R Core Team. 2025. <em>R: A Language and Environment for Statistical Computing [Version 4.5.0]</em>.
+</div>
 <div id="ref-tucker2019" class="csl-entry" role="listitem">
 Tucker, Benjamin V, Daniel Brenner, Kyle Danielson D, Matthew C Kelley, Filip Nenadić, and Michelle Sims. 2019. <span>“The Massive Auditory Lexical Decision (MALD) Database.”</span> <em>Behavior Research Methods</em> 51 (3): 11871204. <a href="https://doi.org/10.3758/s13428-018-1056-1">https://doi.org/10.3758/s13428-018-1056-1</a>.
 </div>

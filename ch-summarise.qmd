@@ -211,7 +211,7 @@ print(shallow_g)
 
 ```
 
-The grouping information is stored as an "attribute" in the tibble, named `groups`. You can check this attribute with `attr()`. You get a tibble with the groupings. Hopefully now you understand that, even if nothing seems to have happened, the tibble has been grouped. Since you saved the output of `group_by()` into a new variable `shallow_g`, note that `shallow` was not affected (try running `atrr(shallow, "groups")` and you will get a `NULL`). Here's the output:
+The grouping information is stored as an "attribute" in the tibble, named `groups`. You can check this attribute with `attr()`. You get a tibble with the groupings. Hopefully now you understand that, even if nothing seems to have happened, the tibble has been grouped. Since you saved the output of `group_by()` into a new variable `shallow_g`, note that `shallow` was not affected (try running `attr(shallow, "groups")` and you will get a `NULL`). Here's the output:
 
 ```{r}
 #| label: group-by-attr

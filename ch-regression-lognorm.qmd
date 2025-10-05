@@ -319,7 +319,8 @@ rt_bm_2_draws <- rt_bm_2_draws |>
     real_log = b_Intercept,
     nonce_log = b_Intercept + b_IsWordFALSE,
     real = exp(real_log),
-    nonce = exp(nonce_log)
+    nonce = exp(nonce_log),
+    nonce_real = nonce - real
   )
 ```
 
@@ -343,4 +344,33 @@ rt_bm_2_draws |>
 
 ```
 
+We can also get the CrIs as usual.
+
+```{r}
+#| label: rt-bm-2-cris
+
+quantile2(rt_bm_2_draws$real, probs = c(0.01, 0.9)) |> round()
+quantile2(rt_bm_2_draws$nonce, probs = c(0.01, 0.9)) |> round()
+quantile2(rt_bm_2_draws$nonce_real, probs = c(0.01, 0.9)) |> round()
+
+```
+
 ## Reporting
+
+> We fitted a Bayesian regression model with a log-normal family for the outcome variable (reaction times, RT) using brms [@burkner2017] in R [@rcoreteam2025]. As predictor, we entered the lexical status of the word (real or nonce), coded using default treatment contrasts with real set as the reference level.
+>
+> The model indicates that the average RT for real words is between 908-925 ms at 80% confidence ($\beta$ = `{r} mean(rt_bm_2_draws$b_Intercept) |> round(2)`, SD = `{r} sd(rt_bm_2_draws$b_Intercept) |> round(2)`). RTs for nonce words are between 90-117 ms longer than for real words ($\beta$ = `{r} mean(rt_bm_2_draws$b_IsWordFALSE) |> round(2)`, SD = `{r} sd(rt_bm_2_draws$b_IsWordFALSE) |> round(2)`), at 80% probability. Average RTs for nonce words are predicted to be between 1014-1033 ms, at 80% confidence.
+
+## Summary
+
+::: {.callout-note appearance="simple"}
+-   Continuous variables that can only be positive numbers, like segment duration and reaction times, usually follow a log-normal distribution.
+
+-   These variables can be modelled with log-normal regression models (`family = lognormal`).
+
+-   Estimates in log-normal models are in logs.
+
+-   Coefficients that represent differences between levels can be transformed to ratio differences by exponentiating the coefficient with `exp()`.
+
+-   Predictions can be converted back to the original scale with `exp()` as well (for predictions, you should *always* include the intercept; exponentiating difference coefficients alone gives you for example the ratio difference in RTs, not the predicted RTs in milliseconds).
+:::

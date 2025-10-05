@@ -117,7 +117,7 @@ opts_3 <- c(
    "The use of repeated replications of a study."
 )
 
-cat("c. In the 'globe-tossing' example, what does a uniform prior (or flat prior) mean?", longmcq(opts_3))
+cat("c. Which element is present in Bayesian inference but absent in the frequentist approach?", longmcq(opts_3))
 
 ```
 :::

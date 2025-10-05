@@ -797,12 +797,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>Which of the following does not contain a logical operator?
-<div id="radio_PEWBDWPUBV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PEWBDWPUBV" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_PEWBDWPUBV" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_PEWBDWPUBV" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_PEWBDWPUBV" value=""> <span><code>19 &lt; 2</code></span></label>
+<div id="radio_WOVRCJUCUF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WOVRCJUCUF" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_WOVRCJUCUF" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_WOVRCJUCUF" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_WOVRCJUCUF" value=""> <span><code>19 &lt; 2</code></span></label>
 </div></li>
 <li>Which of the following returns <code>c(FALSE, TRUE)</code>?
-<div id="radio_WDGICANJBD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WDGICANJBD" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_WDGICANJBD" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_WDGICANJBD" value=""> <span><code>"apple" != "apple"</code></span></label>
+<div id="radio_ISUBAXXKAH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ISUBAXXKAH" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_ISUBAXXKAH" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_ISUBAXXKAH" value=""> <span><code>"apple" != "apple"</code></span></label>
 </div></li>
 </ol>
 </div>
@@ -1027,12 +1027,12 @@ Important
 <p>Let’s count the number of languages for each endangerment status using the new <code>Status</code> column. You learned about the <code>count()</code> feature in <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">|&gt;</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(status) <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Status) <span class="sc">|&gt;</span> </span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["status"],"name":[1],"type":["fct"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"not_endangered","2":"2956"},{"1":"threatened","2":"1537"},{"1":"shifting","2":"1837"},{"1":"moribund","2":"414"},{"1":"nearly_extinct","2":"351"},{"1":"extinct","2":"1250"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Status"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"extinct","2":"1250"},{"1":"moribund","2":"414"},{"1":"nearly_extinct","2":"351"},{"1":"not_endangered","2":"2956"},{"1":"shifting","2":"1837"},{"1":"threatened","2":"1537"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -1129,7 +1129,7 @@ Figure&nbsp;12.1: Number of languages by endangerment status (repeated).
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>R has two assignment operators: the assignment arrow <code>&lt;-</code> and <code>=</code>. Current R coding practices favour <code>&lt;-</code> over <code>=</code>, hence this book uses exclusively the former. Both have the same assignment direction: the object to the right of the operator is assigned to the variable name to the left of the operator. This is virtually how all programming languages work.</p>
-<p>It is less know, however, that the assignment arrow can be “reversed”, <code>-&gt;</code> so that assignment goes from left to right. The following are equivalent.</p>
+<p>It is less known, however, that the assignment arrow can be “reversed”, <code>-&gt;</code> so that assignment goes from left to right. The following are equivalent.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="ot">-&gt;</span> a</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>We could re-write the mutate code above like this:</p>
