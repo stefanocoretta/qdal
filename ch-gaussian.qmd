@@ -153,11 +153,11 @@ The **Cumulative Distribution Function** (CDF) is a function that gives, for any
 
 Calculate the probability that $X$ is:
 
--   less or equal than -2 with $Gaussian(0, 1)$
+-   less than or equal to -2 with $Gaussian(0, 1)$
 
--   less or equal than +1.75 with $Gaussian(0, 1)$.
+-   less than or equal to +1.75 with $Gaussian(0, 1)$.
 
--   less or equal than 700 with $Gaussian(900, 200)$.
+-   less than or equal to 700 with $Gaussian(900, 200)$.
 :::
 
 By default, `pnorm()` uses the lower-tail CDF: this returns the "less than or equal to" probability. It's on the "lower" tail of the distribution, or the tail to the left of the density peak. But we can also compute the upper-tail probability. @fig-quant-up shows an upper-tail probability with $X \geq -1$ with $Gaussian(0, 1)$. To obtain the upper-tail probability with `pnorm()`, rather than the lower-tail probability, set `lower.tail` to `FALSE`.
