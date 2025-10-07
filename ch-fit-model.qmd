@@ -119,9 +119,9 @@ Let's break down the summary bit by bit:
 
     -   Finally, `Draws` has information about the MCMC algorithm. Again, you can discard those for now.
 
--   Then, the `Regression Coefficients` are listed as a table. They are called regression coefficients because brms fits Bayesian *regression* models and a Gaussian model is a special type of regression model (you will learn about regression models in later chapters). In the Gaussian model we fitted now, we only have one regression coefficient, `Intercept`, which corresponds to $\mu$ from the formula above (for the reason why it is called that way, you will have to wait until regression models are introduced in the following chapter, I apologise for the many promissory explanations...). You will learn how to interpret the `Regression Coefficients` table below.
+-   Then, the `Regression Coefficients` are listed as a table. They are called regression coefficients because brms fits Bayesian *regression* models and a Gaussian model is a special type of regression model (you will learn about regression models in later chapters). In the Gaussian model we fitted now, we only have one regression coefficient, `Intercept`, which corresponds to $\mu$ from the formula above (for the reason why it is called that, you will have to wait until regression models are introduced in the following chapter; I apologise for the many promissory explanations...). You will learn how to interpret the `Regression Coefficients` table below.
 
--   Then `Further distributional parameters` are also in the form of a table. Here we only have `sigma` which is $\sigma$ from the formula above. The table has the same columns as the `Regression Coefficients` table.
+-   The `Further distributional parameters` are also in the form of a table. Here we only have `sigma` which is $\sigma$ from the formula above. The table has the same columns as the `Regression Coefficients` table.
 
 ## Posterior probability distributions
 
@@ -217,7 +217,7 @@ ggplot() +
 
 ## Plotting the posterior distributions
 
-While the model summary reports *summaries* of the posterior distributions, it is always helpful to *plot* the posteriors. We can easily do so with the base R `plot()` function, like in @fig-rt-bm. The density plots of the posteriors distributions of the two parameters estimated in the model are shown on the left of the figure: `b_Intercept` which corresponds to `Intercept` from the summary and `sigma` (the reason for why it's `b_Intercept` will become clear in @sec-reg-intro).
+While the model summary reports *summaries* of the posterior distributions, it is always helpful to *plot* the posteriors. We can easily do so with the base R `plot()` function, like in @fig-rt-bm. The density plots of the posterior distributions of the two parameters estimated in the model are shown on the left of the figure: `b_Intercept` which corresponds to `Intercept` from the summary and `sigma` (the reason for why it's `b_Intercept` will become clear in @sec-reg-intro).
 
 ```{r}
 #| label: fig-rt-bm
@@ -275,7 +275,7 @@ What about reporting the model in writing? We could report the model and the res
 >
 > Based on the model results, there is a 95% probability that the mean is between `{r} round(brms::fixef(rt_bm)[3])` and `{r} round(brms::fixef(rt_bm)[4])` ms (mean = `{r} round(brms::fixef(rt_bm)[1])`, SD = `{r} round(brms::fixef(rt_bm)[2])`) and that the standard deviation is between `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q2.5"])` and `{r} round(brms::posterior_summary(rt_bm)["sigma", "Q97.5"])` ms (mean = `{r} round(brms::posterior_summary(rt_bm)["sigma", "Estimate"])`, SD = `{r} round(brms::posterior_summary(rt_bm)["sigma", "Est.Error"])`).
 
-The example used in this chapter is quite trivial: we are just estimating a mean and SD from the data, but in order to understand how to answer more involved questions it is fundamental that you understand what was covered in this chapter. So make sure to have grasped the basics of Gaussian models before moving onto regressions in @sec-reg-intro. On the other hand, if you will ever be asked what we can expect RTs in a auditory lexical decision task to look like you might be able to say that, based on the model and data in this chapter, we can be quite confident that they will have a mean of about 1010 ms and an SD of about 320 ms. You might think this was a lot of work to just learn about what we knew directly from the sample, and it is, but be reassured that in normal research contexts things are always much more complex than this, so it is indeed worth the effort.
+The example used in this chapter is quite trivial: we are just estimating a mean and SD from the data, but in order to understand how to answer more involved questions it is fundamental that you understand what was covered in this chapter. So make sure you have grasped the basics of Gaussian models before moving onto regressions in @sec-reg-intro. On the other hand, if you are ever asked what we can expect RTs in an auditory lexical decision task to look like you might be able to say that, based on the model and data in this chapter, we can be quite confident that they will have a mean of about 1010 ms and an SD of about 320 ms. You might think this was a lot of work to just learn about what we knew directly from the sample, and it is, but be reassured that in normal research contexts things are always much more complex than this, so it is indeed worth the effort.
 
 ::: callout-note
 ## Quiz 1
@@ -294,7 +294,7 @@ opts_1 <- c(
 cat("a. Which function is used to fit Bayesian models?", longmcq(opts_1))
 
 opts_2 <- c(
-  "The mean of the posterior distributino of the mean.",
+  "The mean of the posterior distribution of the mean.",
   "The standard deviation of the posterior distribution of the mean.",
   answer = "The mean of the posterior distribution of the standard deviation."
 )
