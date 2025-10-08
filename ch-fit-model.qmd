@@ -24,7 +24,7 @@ The brms package relies on software that is external to R (the C++ toolchain) so
 
 ### Windows
 
-For Windows, follow the instructions here: <https://cran.r-project.org/bin/windows/Rtools/rtools43/rtools.html>
+For Windows, install the RTools version for your R version (the RTools and R version should match): <https://cran.r-project.org/bin/windows/Rtools/>.
 
 ### macOS
 
@@ -43,6 +43,18 @@ For Linux, follow the instructions here: <https://github.com/stan-dev/rstan/wiki
 ## Install brms
 
 Now install brms in R with the usual method.
+
+## Check the C++ installation
+
+To check that the C++ installation was successful, run the following code in the RStudio Console.
+
+``` r
+library(brms)
+
+fit1 <- brm(count ~ zBase, prior = prior(normal(0, 10), class = b), data = epilepsy, chain = 1)
+```
+
+If everything is well, you will see `Compiling Stan program...` and `Start sampling` in the console and the object `fit1` should show up in the Environment tab when sampling is done.
 :::
 
 You can run a Bayesian Gaussian model with the `brm()` function, short for "Bayesian Regression Model" (a Gaussian model is a special type of regression model). The mandatory arguments of `brm()` are a model formula, a distribution family (of the outcome variable), and the data you want to run the model with. Running a model with data is also formally known as *fitting the model to the data*. We want to fit a Gaussian model to reaction times from @tucker2019. Let's revisit the mathematical formula of the model from @sec-gauss-model (let's discard the priors; see the R Note box below):
