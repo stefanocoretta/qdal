@@ -20,31 +20,31 @@ The brms package can run a variety of Bayesian (regression) models. It is a very
 
 The brms package relies on software that is external to R (the C++ toolchain) so you will have to install this extra software separately for brms to work. Following the C++ toolchain installation instructions for your operating system.
 
-## Install the C++ toolchain
+**Install the C++ toolchain**
 
-### Windows
+Windows
 
-For Windows, install the RTools version for your R version (the RTools and R version should match): <https://cran.r-project.org/bin/windows/Rtools/>.
+-   For Windows, install the RTools version for your R version (the RTools and R version should match): <https://cran.r-project.org/bin/windows/Rtools/>.
 
-### macOS
+macOS
 
-For macOS, open the Terminal and write the following line then press enter/return:
+-   For macOS, open the Terminal app and write the following line then press enter/return:
 
 ```         
 xcode-select --install
 ```
 
-You'll see a panel that asks you to install the Xcode Command Line Tools. Install them. Downloading and installation will take 30 to 60 minutes.
+-   You'll see a panel that asks you to install the Xcode Command Line Tools. Install them. Downloading and installation will take 30 to 60 minutes.
 
-### Linux
+Linux
 
-For Linux, follow the instructions here: <https://github.com/stan-dev/rstan/wiki/Configuring-C-Toolchain-for-Linux>
+-   For Linux, follow the instructions here: <https://github.com/stan-dev/rstan/wiki/Configuring-C-Toolchain-for-Linux>
 
-## Install brms
+**Install brms**
 
 Now install brms in R with the usual method.
 
-## Check the C++ installation
+**Check the C++ installation**
 
 To check that the C++ installation was successful, run the following code in the RStudio Console.
 

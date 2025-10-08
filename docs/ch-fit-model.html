@@ -734,10 +734,10 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#posterior-probability-distributions" id="toc-posterior-probability-distributions" class="nav-link active" data-scroll-target="#posterior-probability-distributions"><span class="header-section-number">22.4</span> Posterior probability distributions</a></li>
-  <li><a href="#plotting-the-posterior-distributions" id="toc-plotting-the-posterior-distributions" class="nav-link" data-scroll-target="#plotting-the-posterior-distributions"><span class="header-section-number">22.5</span> Plotting the posterior distributions</a></li>
-  <li><a href="#interpreting-credible-intervals" id="toc-interpreting-credible-intervals" class="nav-link" data-scroll-target="#interpreting-credible-intervals"><span class="header-section-number">22.6</span> Interpreting Credible Intervals</a></li>
-  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">22.7</span> Reporting</a></li>
+  <li><a href="#posterior-probability-distributions" id="toc-posterior-probability-distributions" class="nav-link active" data-scroll-target="#posterior-probability-distributions"><span class="header-section-number">22.1</span> Posterior probability distributions</a></li>
+  <li><a href="#plotting-the-posterior-distributions" id="toc-plotting-the-posterior-distributions" class="nav-link" data-scroll-target="#plotting-the-posterior-distributions"><span class="header-section-number">22.2</span> Plotting the posterior distributions</a></li>
+  <li><a href="#interpreting-credible-intervals" id="toc-interpreting-credible-intervals" class="nav-link" data-scroll-target="#interpreting-credible-intervals"><span class="header-section-number">22.3</span> Interpreting Credible Intervals</a></li>
+  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">22.4</span> Reporting</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-fit-model.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -778,35 +778,31 @@ window.Quarto = {
 </div>
 <div class="callout-body-container callout-body">
 <p>The brms package relies on software that is external to R (the C++ toolchain) so you will have to install this extra software separately for brms to work. Following the C++ toolchain installation instructions for your operating system.</p>
-<section id="install-the-c-toolchain" class="level2" data-number="22.1">
-<h2 data-number="22.1" class="anchored" data-anchor-id="install-the-c-toolchain"><span class="header-section-number">22.1</span> Install the C++ toolchain</h2>
-<section id="windows" class="level3" data-number="22.1.1">
-<h3 data-number="22.1.1" class="anchored" data-anchor-id="windows"><span class="header-section-number">22.1.1</span> Windows</h3>
-<p>For Windows, install the RTools version for your R version (the RTools and R version should match): <a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a>.</p>
-</section>
-<section id="macos" class="level3" data-number="22.1.2">
-<h3 data-number="22.1.2" class="anchored" data-anchor-id="macos"><span class="header-section-number">22.1.2</span> macOS</h3>
-<p>For macOS, open the Terminal and write the following line then press enter/return:</p>
+<p><strong>Install the C++ toolchain</strong></p>
+<p>Windows</p>
+<ul>
+<li>For Windows, install the RTools version for your R version (the RTools and R version should match): <a href="https://cran.r-project.org/bin/windows/Rtools/" class="uri">https://cran.r-project.org/bin/windows/Rtools/</a>.</li>
+</ul>
+<p>macOS</p>
+<ul>
+<li>For macOS, open the Terminal app and write the following line then press enter/return:</li>
+</ul>
 <pre><code>xcode-select --install</code></pre>
-<p>You’ll see a panel that asks you to install the Xcode Command Line Tools. Install them. Downloading and installation will take 30 to 60 minutes.</p>
-</section>
-<section id="linux" class="level3" data-number="22.1.3">
-<h3 data-number="22.1.3" class="anchored" data-anchor-id="linux"><span class="header-section-number">22.1.3</span> Linux</h3>
-<p>For Linux, follow the instructions here: <a href="https://github.com/stan-dev/rstan/wiki/Configuring-C-Toolchain-for-Linux" class="uri">https://github.com/stan-dev/rstan/wiki/Configuring-C-Toolchain-for-Linux</a></p>
-</section>
-</section>
-<section id="install-brms" class="level2" data-number="22.2">
-<h2 data-number="22.2" class="anchored" data-anchor-id="install-brms"><span class="header-section-number">22.2</span> Install brms</h2>
+<ul>
+<li>You’ll see a panel that asks you to install the Xcode Command Line Tools. Install them. Downloading and installation will take 30 to 60 minutes.</li>
+</ul>
+<p>Linux</p>
+<ul>
+<li>For Linux, follow the instructions here: <a href="https://github.com/stan-dev/rstan/wiki/Configuring-C-Toolchain-for-Linux" class="uri">https://github.com/stan-dev/rstan/wiki/Configuring-C-Toolchain-for-Linux</a></li>
+</ul>
+<p><strong>Install brms</strong></p>
 <p>Now install brms in R with the usual method.</p>
-</section>
-<section id="check-the-c-installation" class="level2" data-number="22.3">
-<h2 data-number="22.3" class="anchored" data-anchor-id="check-the-c-installation"><span class="header-section-number">22.3</span> Check the C++ installation</h2>
+<p><strong>Check the C++ installation</strong></p>
 <p>To check that the C++ installation was successful, run the following code in the RStudio Console.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">brm</span>(count <span class="sc">~</span> zBase, <span class="at">prior =</span> <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">class =</span> b), <span class="at">data =</span> epilepsy, <span class="at">chain =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If everything is well, you will see <code>Compiling Stan program...</code> and <code>Start sampling</code> in the console and the object <code>fit1</code> should show up in the Environment tab when sampling is done.</p>
-</section>
 </div>
 </div>
 <p>You can run a Bayesian Gaussian model with the <code>brm()</code> function, short for “Bayesian Regression Model” (a Gaussian model is a special type of regression model). The mandatory arguments of <code>brm()</code> are a model formula, a distribution family (of the outcome variable), and the data you want to run the model with. Running a model with data is also formally known as <em>fitting the model to the data</em>. We want to fit a Gaussian model to reaction times from <span class="citation" data-cites="tucker2019">Tucker et al. (<a href="references.html#ref-tucker2019" role="doc-biblioref">2019</a>)</span>. Let’s revisit the mathematical formula of the model from <a href="ch-gauss-model.html" class="quarto-xref"><span>Chapter 21</span></a> (let’s discard the priors; see the R Note box below):</p>
@@ -893,8 +889,8 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li><p>Then, the <code>Regression Coefficients</code> are listed as a table. They are called regression coefficients because brms fits Bayesian <em>regression</em> models and a Gaussian model is a special type of regression model (you will learn about regression models in later chapters). In the Gaussian model we fitted now, we only have one regression coefficient, <code>Intercept</code>, which corresponds to <span class="math inline">\(\mu\)</span> from the formula above (for the reason why it is called that way, you will have to wait until regression models are introduced in the following chapter, I apologise for the many promissory explanations…). You will learn how to interpret the <code>Regression Coefficients</code> table below.</p></li>
 <li><p>Then <code>Further distributional parameters</code> are also in the form of a table. Here we only have <code>sigma</code> which is <span class="math inline">\(\sigma\)</span> from the formula above. The table has the same columns as the <code>Regression Coefficients</code> table.</p></li>
 </ul>
-<section id="posterior-probability-distributions" class="level2" data-number="22.4">
-<h2 data-number="22.4" class="anchored" data-anchor-id="posterior-probability-distributions"><span class="header-section-number">22.4</span> Posterior probability distributions</h2>
+<section id="posterior-probability-distributions" class="level2" data-number="22.1">
+<h2 data-number="22.1" class="anchored" data-anchor-id="posterior-probability-distributions"><span class="header-section-number">22.1</span> Posterior probability distributions</h2>
 <p>The main characteristic of Bayesian models is that they don’t just provide you with a single numeric estimate for the model parameters. As mentioned in <a href="ch-gauss-model.html" class="quarto-xref"><span>Chapter 21</span></a>, the model estimates a <em>full probability distribution</em> for each parameter/coefficient. These probability distributions are called <strong>posterior probability distributions</strong> (or posteriors for short). They are called <em>posterior</em> because they are derived from the data and the prior probability distributions. The model we fitted has two parameters: the mean <span class="math inline">\(\mu\)</span> and the standard deviation <span class="math inline">\(\sigma\)</span>. For reasons that will become clear in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>, the <span class="math inline">\(\mu\)</span> parameter is called <code>Intercept</code> in the summary: you can find it in the <code>Regression Coefficients</code> table. The standard deviation <span class="math inline">\(\sigma\)</span> is in the <code>Further distributional parameters</code> table.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1015,8 +1011,8 @@ Figure&nbsp;22.1: Default brms priors for this chapter’s model and data.
 </div>
 </div>
 </section>
-<section id="plotting-the-posterior-distributions" class="level2" data-number="22.5">
-<h2 data-number="22.5" class="anchored" data-anchor-id="plotting-the-posterior-distributions"><span class="header-section-number">22.5</span> Plotting the posterior distributions</h2>
+<section id="plotting-the-posterior-distributions" class="level2" data-number="22.2">
+<h2 data-number="22.2" class="anchored" data-anchor-id="plotting-the-posterior-distributions"><span class="header-section-number">22.2</span> Plotting the posterior distributions</h2>
 <p>While the model summary reports <em>summaries</em> of the posterior distributions, it is always helpful to <em>plot</em> the posteriors. We can easily do so with the base R <code>plot()</code> function, like in <a href="#fig-rt-bm" class="quarto-xref">Figure&nbsp;<span>22.2</span></a>. The density plots of the posteriors distributions of the two parameters estimated in the model are shown on the left of the figure: <code>b_Intercept</code> which corresponds to <code>Intercept</code> from the summary and <code>sigma</code> (the reason for why it’s <code>b_Intercept</code> will become clear in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rt_bm, <span class="at">combo =</span> <span class="fu">c</span>(<span class="st">"dens"</span>, <span class="st">"trace"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1037,8 +1033,8 @@ Figure&nbsp;22.2: Posterior plots of the rt_bm Gaussian model
 <p>For <code>sigma</code>, i.e.&nbsp;<span class="math inline">\(\sigma\)</span>, the posterior probability covers values between 310 and 325. What is the mean of the posterior probability of <span class="math inline">\(\sigma\)</span>? The answer is in the summary, in <code>Further distributional parameters</code>. There you will also find the standard deviation of the posterior of <span class="math inline">\(\sigma\)</span>. That’s a standard deviation of a standard deviation! As before, this is because we are not estimating a simple value for <span class="math inline">\(\sigma\)</span> but a full (posterior) probability distribution and we can summarise this distribution with a mean and a standard deviation. Again, the highest peak in the distribution corresponds to the <code>Estimate</code> value.</p>
 <p>Now, looking at a full probability distribution like that is not very straightforward and summary measures can be even less straightforward. Credible Intervals (CrIs) help summarise the posterior distributions so that interpretation is more straightforward.</p>
 </section>
-<section id="interpreting-credible-intervals" class="level2" data-number="22.6">
-<h2 data-number="22.6" class="anchored" data-anchor-id="interpreting-credible-intervals"><span class="header-section-number">22.6</span> Interpreting Credible Intervals</h2>
+<section id="interpreting-credible-intervals" class="level2" data-number="22.3">
+<h2 data-number="22.3" class="anchored" data-anchor-id="interpreting-credible-intervals"><span class="header-section-number">22.3</span> Interpreting Credible Intervals</h2>
 <p>The model summary reports the Bayesian Credible Intervals (CrIs) of the posterior distributions. Another way of returning summaries of the coefficients is to use the <code>posterior_summary()</code> function which returns a table (technically, a matrix, another type of R objects; we print only the first two rows with <code>[1:2,]</code> because we can ignore the other ones).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(rt_bm)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1084,8 +1080,8 @@ sigma        317.8845  3.171714  313.8399  321.8941</code></pre>
 </div>
 <p>Here you have the results from the regression model. Really, the results of the model are the full posterior probabilities, but it makes things easier to focus on the CrIs. If you are used to frequentist statistics (either from learning how to run them or from reading frequentist analyses in academic papers) this might seem a bit underwhelming. But this is the core thinking of Bayesian statistics: inference is based on full probability distributions for the model’s parameters, rather than on a single value (like a <em>p</em>-value).</p>
 </section>
-<section id="reporting" class="level2" data-number="22.7">
-<h2 data-number="22.7" class="anchored" data-anchor-id="reporting"><span class="header-section-number">22.7</span> Reporting</h2>
+<section id="reporting" class="level2" data-number="22.4">
+<h2 data-number="22.4" class="anchored" data-anchor-id="reporting"><span class="header-section-number">22.4</span> Reporting</h2>
 <!--# TODO: Link to chapter where they learn how to report multiple CrIs once you have written that. -->
 <p>What about reporting the model in writing? We could report the model and the results like this (for simplicity, we report only the 95% CrIs here. You will learn how to report multiple CrIs in tables later).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <blockquote class="blockquote">
@@ -1105,12 +1101,12 @@ sigma        317.8845  3.171714  313.8399  321.8941</code></pre>
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li><p>Which function is used to fit Bayesian models?</p>
-<div id="radio_OSXJBMJJMG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OSXJBMJJMG" value=""> <span><code>brms()</code></span></label><label><input type="radio" autocomplete="off" name="radio_OSXJBMJJMG" value="answer"> <span><code>brm()</code></span></label><label><input type="radio" autocomplete="off" name="radio_OSXJBMJJMG" value=""> <span><code>bm()</code></span></label>
+<div id="radio_OWTZLFTFEK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OWTZLFTFEK" value=""> <span><code>brms()</code></span></label><label><input type="radio" autocomplete="off" name="radio_OWTZLFTFEK" value="answer"> <span><code>brm()</code></span></label><label><input type="radio" autocomplete="off" name="radio_OWTZLFTFEK" value=""> <span><code>bm()</code></span></label>
 </div></li>
 <li><p>The <code>Estimate</code> column in further distributional parameters is:</p>
-<div id="radio_ZMKQTAZJRP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZMKQTAZJRP" value=""> <span>The mean of the posterior distributino of the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_ZMKQTAZJRP" value=""> <span>The standard deviation of the posterior distribution of the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_ZMKQTAZJRP" value="answer"> <span>The mean of the posterior distribution of the standard deviation.</span></label>
+<div id="radio_HSAKKSPYVV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HSAKKSPYVV" value=""> <span>The mean of the posterior distributino of the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_HSAKKSPYVV" value=""> <span>The standard deviation of the posterior distribution of the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_HSAKKSPYVV" value="answer"> <span>The mean of the posterior distribution of the standard deviation.</span></label>
 </div></li>
 <li><p>The posterior of each parameter is the value in the <code>Estimate</code> column. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
 <li><p>Only 95% CrI should be used for inference. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
