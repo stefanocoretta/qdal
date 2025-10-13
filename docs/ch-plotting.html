@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -94,9 +94,9 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -848,7 +848,7 @@ window.Quarto = {
 <li><p><code>H1H2</code>: the difference between H2 and H1 (second and first harmonic; the paper reports that this “was based on the central vowel portion of each vowel” although it is not clear if the H1-H2 value of each vowel in the utterance was averaged to produce a mean H1-H2 difference per utterance). A higher H1-H2 difference indicates that the voice is more breathy (as opposed to modal).</p></li>
 <li><p><code>gender</code>: the gender of the speaker (<code>F</code> = female, <code>M</code> = male).</p></li>
 </ul>
-<p><a href="#fig-final-plot" class="quarto-xref">Figure&nbsp;<span>15.1</span></a> shows the plot we will end up with and you will learn how to create it bit by bit below. This plot is a scatter plot, with mean f0 on the <em>x</em>-axis and the H1-H2 difference on the <em>y</em>-axis. Each point represent a an observation in the data, i.e.&nbsp;a row. The points are coloured based on the gender of the participant. You might notice that when mean f0 is high, the H1-H2 difference is lower. In other words, higher mean f0 corresponds to breathier voice.</p>
+<p><a href="#fig-final-plot" class="quarto-xref">Figure&nbsp;<span>15.1</span></a> shows the plot we will end up with and you will learn how to create it bit by bit below. This plot is a scatter plot, with mean f0 on the <em>x</em>-axis and the H1-H2 difference on the <em>y</em>-axis. Each point represents an observation in the data, i.e.&nbsp;a row. The points are coloured based on the gender of the participant. You might notice that when mean f0 is high, the H1-H2 difference is lower. In other words, higher mean f0 corresponds to breathier voice.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-final-plot" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -1053,8 +1053,8 @@ Figure&nbsp;15.3: Scatter plot of mean f0 and H1-H2 difference (filtered).
 </div>
 <div class="callout-body-container callout-body">
 <strong>Which of the following will produce the same plot as <a href="#fig-first-plot" class="quarto-xref">Figure&nbsp;<span>15.2</span></a>?</strong> Reason through it first without running the code, then run all of these to check whether they look the way you expected.
-<div id="radio_YSPJEDSUNG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YSPJEDSUNG" value=""> <span><code>ggplot(polite, aes(H1H2, f0mn)) + geom_point()</code></span></label><label><input type="radio" autocomplete="off" name="radio_YSPJEDSUNG" value="answer"> <span><code>ggplot(polite, aes(y = H1H2, x = f0mn)) + geom_point()</code></span></label><label><input type="radio" autocomplete="off" name="radio_YSPJEDSUNG" value=""> <span><code>ggplot(polite, aes(y = f0mn, x = H1H2)) + geom_point()</code></span></label>
+<div id="radio_SDNPCCYCSZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SDNPCCYCSZ" value=""> <span><code>ggplot(polite, aes(H1H2, f0mn)) + geom_point()</code></span></label><label><input type="radio" autocomplete="off" name="radio_SDNPCCYCSZ" value="answer"> <span><code>ggplot(polite, aes(y = H1H2, x = f0mn)) + geom_point()</code></span></label><label><input type="radio" autocomplete="off" name="radio_SDNPCCYCSZ" value=""> <span><code>ggplot(polite, aes(y = f0mn, x = H1H2)) + geom_point()</code></span></label>
 </div>
 </div>
 </div>

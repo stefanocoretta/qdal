@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,9 +74,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -780,7 +780,7 @@ Figure&nbsp;19.1
 <li><p>The <strong>mean</strong>, represented with the Greek letter <span class="math inline">\(\mu\)</span> [mjuː]. This parameter is the probability’s central tendency. Values around the mean have higher probability than values further away from the mean.</p></li>
 <li><p>The <strong>standard deviation</strong>, represented with the Greek letter <span class="math inline">\(\sigma\)</span> [ˈsɪgmə]. This parameter is the probability’s dispersion around the mean. The higher <span class="math inline">\(\sigma\)</span> the greater the spread (i.e.&nbsp;the dispersion) of values around the mean.</p></li>
 </ul>
-<p>You have already encountered means and standard deviations in <a href="ch-sum-measures.html" class="quarto-xref"><span>Chapter 10</span></a>. It is no coincidence that the go-to summary measures for continuous variables are the mean and the standard deviation. When you don’t know exactly what the underlying distribution of a variable is and all you want is a measure of central tendency and of dispersion, one assumes a Gaussian distribution and calculates mean and standard deviations. Note that in most cases we know a bit more than that and it fact the Gaussian distribution is very rare in nature. This is why we will call it Gaussian and not “normal”, since it is only “normal” from a statistical-theoretical perspective (it has simple mathematical properties that makes it easy to use in applied statistics).</p>
+<p>You have already encountered means and standard deviations in <a href="ch-sum-measures.html" class="quarto-xref"><span>Chapter 10</span></a>. It is no coincidence that the go-to summary measures for continuous variables are the mean and the standard deviation. When you don’t know exactly what the underlying distribution of a variable is and all you want is a measure of central tendency and of dispersion, one assumes a Gaussian distribution and calculates mean and standard deviations. Note that in most cases we know a bit more than that and in fact the Gaussian distribution is very rare in nature. This is why we will call it Gaussian and not “normal”, since it is only “normal” from a statistical-theoretical perspective (it has simple mathematical properties that makes it easy to use in applied statistics).</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -952,9 +952,9 @@ Figure&nbsp;19.3: Illustration of the lower-tail probability with Gaussian(0, 1)
 <div class="callout-body-container callout-body">
 <p>Calculate the probability that <span class="math inline">\(X\)</span> is:</p>
 <ul>
-<li><p>less or equal than -2 with <span class="math inline">\(Gaussian(0, 1)\)</span></p></li>
-<li><p>less or equal than +1.75 with <span class="math inline">\(Gaussian(0, 1)\)</span>.</p></li>
-<li><p>less or equal than 700 with <span class="math inline">\(Gaussian(900, 200)\)</span>.</p></li>
+<li><p>less than or equal to -2 with <span class="math inline">\(Gaussian(0, 1)\)</span></p></li>
+<li><p>less than or equal to +1.75 with <span class="math inline">\(Gaussian(0, 1)\)</span>.</p></li>
+<li><p>less than or equal to 700 with <span class="math inline">\(Gaussian(900, 200)\)</span>.</p></li>
 </ul>
 </div>
 </div>
@@ -1304,16 +1304,16 @@ Figure&nbsp;19.7: The 95% interval of Gaussian(0, 1).
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>Which of the following percentiles define an 80% interval?
-<div id="radio_BQNJHLNUUF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BQNJHLNUUF" value="answer"> <span>(0.1, 0.9)</span></label><label><input type="radio" autocomplete="off" name="radio_BQNJHLNUUF" value=""> <span>(0.2, 0.8)</span></label><label><input type="radio" autocomplete="off" name="radio_BQNJHLNUUF" value=""> <span>(0.05, 0.95)</span></label>
+<div id="radio_HZVZHDLPRD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HZVZHDLPRD" value="answer"> <span>(0.1, 0.9)</span></label><label><input type="radio" autocomplete="off" name="radio_HZVZHDLPRD" value=""> <span>(0.2, 0.8)</span></label><label><input type="radio" autocomplete="off" name="radio_HZVZHDLPRD" value=""> <span>(0.05, 0.95)</span></label>
 </div></li>
 <li>Which of the following percentiles define a <em>non</em>-central 85% interval?
-<div id="radio_HPWQVOXXDO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HPWQVOXXDO" value=""> <span>(0.075, 0.925)</span></label><label><input type="radio" autocomplete="off" name="radio_HPWQVOXXDO" value="answer"> <span>(0.1, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_HPWQVOXXDO" value=""> <span>(0.05, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_HPWQVOXXDO" value=""> <span>(0.15, 0.85)</span></label>
+<div id="radio_IOQOVTNNQM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IOQOVTNNQM" value=""> <span>(0.075, 0.925)</span></label><label><input type="radio" autocomplete="off" name="radio_IOQOVTNNQM" value="answer"> <span>(0.1, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_IOQOVTNNQM" value=""> <span>(0.05, 0.95)</span></label><label><input type="radio" autocomplete="off" name="radio_IOQOVTNNQM" value=""> <span>(0.15, 0.85)</span></label>
 </div></li>
 <li>Which interval do the 40th and 60th percentile define?
-<div id="radio_GRWQGLOIHN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GRWQGLOIHN" value=""> <span>A 60% central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_GRWQGLOIHN" value=""> <span>A 20% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_GRWQGLOIHN" value=""> <span>A 40% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_GRWQGLOIHN" value="answer"> <span>A 20% central interval.</span></label>
+<div id="radio_RZMTMWLLZJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RZMTMWLLZJ" value=""> <span>A 60% central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_RZMTMWLLZJ" value=""> <span>A 20% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_RZMTMWLLZJ" value=""> <span>A 40% non-central interval.</span></label><label><input type="radio" autocomplete="off" name="radio_RZMTMWLLZJ" value="answer"> <span>A 20% central interval.</span></label>
 </div></li>
 </ol>
 </div>

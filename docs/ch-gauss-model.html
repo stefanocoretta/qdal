@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.24">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -94,9 +94,9 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b651517ce65839d647a86e2780455cfb.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -837,7 +837,7 @@ Figure&nbsp;21.1: Empirical and theoretical density distribution of reaction tim
 \sigma &amp; = ...\\
 \end{aligned}
 \]</span></p>
-<p>Now, here is where things get interesting. Bayesian approaches to statistics assume uncertainty in the parameters of the distribution one is estimating. So not only the observed values of RT are uncertain because they come for a probability distribution, but the parameters of the distribution are themselves uncertain. You can think of the mean and SD are uncertain variables that need to be estimated from the data. When we say a variable is uncertain, we describe it using a probability distribution. So the aim of a Gaussian model is to estimate the probability distributions of the parameters from the data (and the priors), rather than just their values.</p>
+<p>Now, here is where things get interesting. Bayesian approaches to statistics assume uncertainty in the parameters of the distribution one is estimating. So not only the observed values of RT are uncertain because they come from a probability distribution, but the parameters of the distribution are themselves uncertain. You can think of the mean and SD as uncertain variables that need to be estimated from the data. When we say a variable is uncertain, we describe it using a probability distribution. So the aim of a Gaussian model is to estimate the probability distributions of the parameters from the data (and the priors), rather than just their values.</p>
 <p><span class="math display">\[
 \begin{aligned}
 \text{RT} &amp; \sim Gaussian(\mu, \sigma)\\
@@ -846,7 +846,7 @@ Figure&nbsp;21.1: Empirical and theoretical density distribution of reaction tim
 \end{aligned}
 \]</span></p>
 <p>We say that <span class="math inline">\(\mu\)</span> comes from a probability distribution <span class="math inline">\(P(\mu_1, \sigma_1)\)</span>. We use a subscript <span class="math inline">\(1\)</span> to differentiate the mean and SD of the main <span class="math inline">\(Gaussian(\mu, \sigma)\)</span> distribution from the mean and SD of the probability distribution of the mean <span class="math inline">\(\mu\)</span>. Similarly, we say that <span class="math inline">\(\sigma\)</span> comes from a probability distribution <span class="math inline">\(P_+(\mu_2, \sigma_2)\)</span>: <span class="math inline">\(P_+()\)</span> is a (non-technical) way to indicate that the probability should include only positive values. Why? Because SDs can only be positive. By specifying <span class="math inline">\(P_+()\)</span> we are constraining the probability distribution of <span class="math inline">\(\sigma\)</span> to have positive values only. In sum, we need to estimate two probability distributions, <span class="math inline">\(P(\mu_1, \sigma_1)\)</span> and <span class="math inline">\(P_+(\mu_2, \sigma_2)\)</span>. These are <strong>posterior probability distributions</strong>. You will learn more about posterior probability distributions in the next chapter. For now, just keep in mind that they are called <em>posterior</em> because the come from the combination of priors and data.</p>
-<p>In the rest of this book, you will be using the default prior probability distributions, or priors for short, as set by brms, the R package we will use to fit Bayesian models. This means that you will not have to worry about priors while you step your toes into the ocean of Bayesian statistics. However, it is helpful to learn a bit of context in relation to priors. After all, one of the big differences between frequentist and Bayesian statistics are indeed the priors (<span class="math inline">\(P(h)\)</span> in Bayes’ Theorem in <a href="#sec-gauss-model" class="quarto-xref"><span>Chapter 21</span></a>). After learning about priors in this chapter, you can safely assume that priors are handled by brms for you and you should not worry until after you completed this course. Note that in actual research, thinking about priors is a necessary step, even if one ends up using the default brms priors. Check out the Spotlight box to learn a bit more about priors.</p>
+<p>In the rest of this book, you will be using the default prior probability distributions, or priors for short, as set by brms, the R package we will use to fit Bayesian models. This means that you will not have to worry about priors while you dip your toes into the ocean of Bayesian statistics. However, it is helpful to learn a bit of context in relation to priors. After all, one of the big differences between frequentist and Bayesian statistics are indeed the priors (<span class="math inline">\(P(h)\)</span> in Bayes’ Theorem in <a href="#sec-gauss-model" class="quarto-xref"><span>Chapter 21</span></a>). After learning about priors in this chapter, you can safely assume that priors are handled by brms for you and you should not worry until after you completed this course. Note that in actual research, thinking about priors is a necessary step, even if one ends up using the default brms priors. Check out the Spotlight box to learn a bit more about priors.</p>
 <p>In the next chapter you will fit the Gaussian model of RTs using brms, with the default priors as set by the package.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -860,16 +860,16 @@ Figure&nbsp;21.1: Empirical and theoretical density distribution of reaction tim
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>Why is the distribution of <span class="math inline">\(\sigma\)</span> constrained to positive values only?
-<div id="radio_ZEIUXCZREO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZEIUXCZREO" value=""> <span>Because <span class="math inline">\(\sigma\)</span> is always zero.</span></label><label><input type="radio" autocomplete="off" name="radio_ZEIUXCZREO" value="answer"> <span>Because <span class="math inline">\(\sigma\)</span> represents variability, which cannot be negative.</span></label><label><input type="radio" autocomplete="off" name="radio_ZEIUXCZREO" value=""> <span>Because <span class="math inline">\(\mu\)</span> is also constrained to be positive.</span></label>
+<div id="radio_KHHNGWLVST" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KHHNGWLVST" value=""> <span>Because <span class="math inline">\(\sigma\)</span> is always zero.</span></label><label><input type="radio" autocomplete="off" name="radio_KHHNGWLVST" value="answer"> <span>Because <span class="math inline">\(\sigma\)</span> represents variability, which cannot be negative.</span></label><label><input type="radio" autocomplete="off" name="radio_KHHNGWLVST" value=""> <span>Because <span class="math inline">\(\mu\)</span> is also constrained to be positive.</span></label>
 </div></li>
 <li>Why have we assumed that reaction times are Gaussian?
-<div id="radio_HOLBQLREWN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HOLBQLREWN" value=""> <span>Because RTs are Gaussian.</span></label><label><input type="radio" autocomplete="off" name="radio_HOLBQLREWN" value=""> <span>Because it is easier to run the model.</span></label><label><input type="radio" autocomplete="off" name="radio_HOLBQLREWN" value="answer"> <span>Because a Gaussian distribution is a safe assumption to make.</span></label>
+<div id="radio_NTFZZLQZGI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NTFZZLQZGI" value=""> <span>Because RTs are Gaussian.</span></label><label><input type="radio" autocomplete="off" name="radio_NTFZZLQZGI" value=""> <span>Because it is easier to run the model.</span></label><label><input type="radio" autocomplete="off" name="radio_NTFZZLQZGI" value="answer"> <span>Because a Gaussian distribution is a safe assumption to make.</span></label>
 </div></li>
 <li>In Bayesian modeling, posterior probability distributions are described as:
-<div id="radio_POKKPHSQGG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_POKKPHSQGG" value=""> <span>The data alone.</span></label><label><input type="radio" autocomplete="off" name="radio_POKKPHSQGG" value=""> <span>Theoretical distributions chosen by the researcher before collecting data.</span></label><label><input type="radio" autocomplete="off" name="radio_POKKPHSQGG" value="answer"> <span>The combination of priors and observed data.</span></label>
+<div id="radio_VPCFPWHJLB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VPCFPWHJLB" value=""> <span>The data alone.</span></label><label><input type="radio" autocomplete="off" name="radio_VPCFPWHJLB" value=""> <span>Theoretical distributions chosen by the researcher before collecting data.</span></label><label><input type="radio" autocomplete="off" name="radio_VPCFPWHJLB" value="answer"> <span>The combination of priors and observed data.</span></label>
 </div></li>
 </ol>
 </div>
