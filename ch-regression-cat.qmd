@@ -179,7 +179,7 @@ The subscript $i$ is an index of each observation in the data. There are 5000 ob
 $$
 \begin{aligned}
 RT_i & \sim Gaussian(\mu_i, \sigma)\\
-\mu_i & = \beta_0 + \beta_1 \cdot sr_i\\
+\mu_i & = \beta_0 + \beta_1 \cdot w_i\\
 \end{aligned}
 $$
 
