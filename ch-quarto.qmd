@@ -18,7 +18,7 @@ library(webexercises)
 polite <- read_csv("data/winter2012/polite.csv")
 ```
 
-Before moving onto data visualisation, it is time now to step up your coding organisation skills. Keeping track of the code you use for data analysis is a very important aspect of research project managing: not only the code is there if you need to rerun it later, but it allows your data analysis to be **reproducible** (i.e., it can be reproduced by you or other people in such a way that starting with the same data and code you get to the same results).
+Before moving onto data visualisation, it is time now to step up your coding organisation skills. Keeping track of the code you use for data analysis is a very important aspect of research project managing: not only is the code there if you need to rerun it later, but it allows your data analysis to be **reproducible** (i.e., it can be reproduced by you or other people in such a way that starting with the same data and code you get to the same results).
 
 ::: callout-tip
 ### Reproducible research
@@ -224,7 +224,7 @@ Now that you have done all of this hard work, why don't you try and render the Q
 
 ## Render Quarto files to PDF
 
-Rendering a Quarto file to PDF is done through LaTeX, a typesetting system with it's own programming language. You don't really need to learn LaTeX to render to PDF, because the conversion is handles by Quarto, but since usually computers don't come with LaTeX you will have to install it (you can learn more about LaTeX in the Spotlight box below). Do this now, by **running the following code in the `Terminal` in RStudio**.
+Rendering a Quarto file to PDF is done through LaTeX, a typesetting system with its own programming language. You don't really need to learn LaTeX to render to PDF, because the conversion is handles by Quarto, but since usually computers don't come with LaTeX you will have to install it (you can learn more about LaTeX in the Spotlight box below). Do this now, by **running the following code in the `Terminal` in RStudio**.
 
 ::: callout-important
 Note that you are supposed to run the code in the RStudio **Terminal**, not the RStudio R console! The RStudio terminal can be found next to the console in the bottom-left corner of RStudio.
@@ -242,7 +242,7 @@ format:
   pdf: default
 ```
 
-You will see that not there is a small arrow next to the `Render` button. If you click on it a drop-down menu will appear, with two options: "HTML" and "PDF". This is because we have instructed Quarto that the file should be rendered in two formats in the yaml preamble with the yaml code above. Click on the PDF option now. If all is well, you should soon see your Quarto file rendered to PDF!
+You will see that now there is a small arrow next to the `Render` button. If you click on it a drop-down menu will appear, with two options: "HTML" and "PDF". This is because we have instructed Quarto that the file should be rendered in two formats in the yaml preamble with the yaml code above. Click on the PDF option now. If all is well, you should soon see your Quarto file rendered to PDF!
 
 ![](img/quarto-format.png){fig-align="center" width="500"}
 

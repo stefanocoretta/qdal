@@ -11,27 +11,66 @@ theme_set(theme_light())
 library(brms)
 ```
 
-So far, we fitted regressions with a single predictor, like the following Gaussian model of reaction times from @sec-regression-index:
+So far, we fitted regressions with a single predictor, like the following Gaussian model of reaction times from @sec-regression-cat using the data from @tucker2019:
 
 $$
 \begin{aligned}
 RT_i & \sim Gaussian(\mu_i, \sigma)\\
-\mu_i & = \beta_1 \cdot W_{\text{T}[i]} + \beta_2 \cdot W_{\text{F}[i]}\\
+\mu_i & = \beta_0 + \beta_1 \cdot w_i\\
 \end{aligned}
 $$
 
-The categorical predictor $W$ (`IsWord` in the data) has two levels (`TRUE` and `FALSE`), so there are two indexing variables: $W_{\text{T}}$ and $W_{\text{F}}$. Each indexing variable gets its coefficient: $\beta_1$ and $\beta_2$. In most context, however, you will want to investigate the effects of more than one predictor.
-
-Regression models can be fit with multiple predictors. Traditionally, regression models with a single predictor were called "simple regression" and models with more than one "multiple regression", but it doesn't make sense to have a specific name: they are all regression models. In this chapter, we will discuss regression models with two categorical predictors.
+The categorical predictor $W$ (`IsWord` in the data) has two levels (`TRUE` and `FALSE`), so there is one intercept and one coefficient for the dummy variable $w_i$: $\beta_0$ and $\beta_1$. In most context, however, you will want to investigate the effects of more than one predictor. Regression models can be fit with multiple predictors. Traditionally, regression models with a single predictor were called "simple regression" and models with more than one "multiple regression", but it doesn't make sense to have a specific name: they are all regression models. In this chapter, we will discuss regression models with two categorical predictors.
 
 ## Two categorical predictors
+
+To illustrate how to fit and interpret models with two categorical predictors, we will use the `winter2012/polite.csv` data from @winter2012. The data contains several acoustic measures from the speech of Korean speakers. The participants of the study were asked to make a request imagining they were speaking either to a friend or to someone of higher status, thus producing speech in both an informal and polite condition, respectively. This is coded in the `attitude` column of the `polite` data, which we read in the code below.
 
 ```{r}
 #| label: polite
 #| message: false
 
 polite <- read_csv("data/winter2012/polite.csv")
+polite
 ```
+
+The `polite` data also contains information about the gender of the participant: in the data there are female and male participants. In this chapter we will model the mean fundamental frequency (f0) of each utterance depending on gender and attitude. The data contains some missing f0 data, so we filter it out first.
+
+```{r}
+#| label: polite-filt
+
+polite_filt <- polite |> 
+  drop_na(f0mn)
+
+```
+
+Now let's plot mean f0 by gender and attitude. We can achieve this by using a jitter plot by gender, with coloured points by attitude. @fig-polite-f0-gend-att shows this plot. However, the plot is not very legible because the points for informal and polite attitude are on the same vertical axis.
+
+```{r}
+#| label: fig-polite-f0-gend-att
+#| fig-cap: "Mean f0 by gender and attitude."
+
+polite_filt |> 
+  ggplot(aes(gender, f0mn, colour = attitude)) +
+  geom_jitter()
+```
+
+We can improve the plot by "dodging" the jitter for informal and polite attitude with the `position` argument in `geom_jitter()`. The argument takes one of the position functions: here we want `position_jitterdodge()`, used to dodge the jitter geometry. The `dodge.width` argument sets how far apart the jitters should be (the width of the dodging). @fig-polite-f0-gend-att-2 is clearer, now that the jitters are dodged.
+
+```{r}
+#| label: fig-polite-f0-gend-att-2
+#| fig-cap: "Mean f0 by gender and attitude (repr)."
+
+polite_filt |> 
+  ggplot(aes(gender, f0mn, colour = attitude)) +
+  geom_jitter(position = position_jitterdodge(dodge.width = 1))
+```
+
+::: callout-warning
+### Exercise 1
+
+Try out the `jitter.width` argument of `position_jitterdodge()`. Set it so that there is greater visual separation between the informal and polite jitters.
+:::
 
 ```{r}
 #| label: f0-bm

@@ -86,16 +86,16 @@ ita_egg_clean |>
   )
 ```
 
-By glancing at the individual points, we can see a negative relationship between speech rate and vowel duration: vowels get shorter with greater speech rate. This is reflected by the regression line too, which has a *negative* slope. A negative slope means that when the values on the *x*-axis increase, the values on the *y*-axis decrease. When the opposite is true, i.e. when with increasing *x*-axis values you observe increasing *y*-axis values, we say the regression line has *positive* slope. Positive and negative slope correspond to what some call a *direct* and *inverse* relationship. In terms of the equation of the line $y = \beta_0 + \beta_1 x$, a *positive slope* means $\beta_1$ is a *positive* number and, conversely, a *negative slope* means $\beta_1$ is a *negative* number. When $\beta_0$ is zero, then the regression line is flat and we say that the two variables are independent: changing one, does not systematically change the other. You explored these features of the regression slope in @sec-reg-intro, when playing around with the [Regression Models Illustrated](https://stefanocoretta.shinyapps.io/lines/) app and when answering the quiz.
+By glancing at the individual points, we can see a negative relationship between speech rate and vowel duration: vowels get shorter with greater speech rate. This is reflected by the regression line too, which has a *negative* slope. A negative slope means that when the values on the *x*-axis increase, the values on the *y*-axis decrease. When the opposite is true, i.e. when with increasing *x*-axis values you observe increasing *y*-axis values, we say the regression line has *positive* slope. Positive and negative slope correspond to what some call a *direct* and *inverse* relationship. In terms of the equation of the line $y = \beta_0 + \beta_1 x$, a *positive slope* means $\beta_1$ is a *positive* number and, conversely, a *negative slope* means $\beta_1$ is a *negative* number. When $\beta_1$ is zero, then the regression line is flat and we say that the two variables are independent: changing one, does not systematically change the other. You explored these features of the regression slope in @sec-reg-intro, when playing around with the [Regression Models Illustrated](https://stefanocoretta.shinyapps.io/lines/) app and when answering the quiz.
 
 ::: callout-tip
 ### Direct/positive and inverse/negative relationship
 
 When the slope $\beta_1$ is positive, the regression line has **positive slope** and $x$ and $y$ have a **direct relationship**.
 
-When the slope $\beta_0$ is negative, the regression line has **negative slope** and $x$ and $y$ have an **inverse relationship**.
+When the slope $\beta_1$ is negative, the regression line has **negative slope** and $x$ and $y$ have an **inverse relationship**.
 
-When the slope $\beta_0$ is `0` zero, the regression line is flat and $x$ and $y$ are **independent**.
+When the slope $\beta_1$ is `0` zero, the regression line is flat and $x$ and $y$ are **independent**.
 :::
 
 @fig-vow-rate-lm looks very nice, but the plot doesn't tell us much about the estimates for $\beta_0$ and $\beta_1$. For that, we need to actually fit the regression model.
