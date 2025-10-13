@@ -75,7 +75,7 @@ The `polite` data contains several acoustic measurements from utterances spoken 
 
 -   `gender`: the gender of the speaker (`F` = female, `M` = male).
 
-@fig-final-plot shows the plot we will end up with and you will learn how to create it bit by bit below. This plot is a scatter plot, with mean f0 on the *x*-axis and the H1-H2 difference on the *y*-axis. Each point represent a an observation in the data, i.e. a row. The points are coloured based on the gender of the participant. You might notice that when mean f0 is high, the H1-H2 difference is lower. In other words, higher mean f0 corresponds to breathier voice.
+@fig-final-plot shows the plot we will end up with and you will learn how to create it bit by bit below. This plot is a scatter plot, with mean f0 on the *x*-axis and the H1-H2 difference on the *y*-axis. Each point represents an observation in the data, i.e. a row. The points are coloured based on the gender of the participant. You might notice that when mean f0 is high, the H1-H2 difference is lower. In other words, higher mean f0 corresponds to breathier voice.
 
 ```{r}
 #| label: fig-final-plot
