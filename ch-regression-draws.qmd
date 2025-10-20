@@ -17,7 +17,7 @@ library(posterior)
 
 Bayesian regression models fitted with brms/Stan use the Markov Chain Monte Carlo (MCMC) sampling algorithm to estimate the probability distributions of the model's parameters. You have first encountered MCMC in @sec-fit-model: the text printed when running `brm()` is about the MCMC. Bayesian models reconstruct the posterior probability distribution of a set of parameters. More precisely, they reconstruct (i.e. estimate) the *joint* probability distribution of the parameters. In other words, all parameters are estimated at the same time: think of this as a multidimensional space of probability, with one dimension per parameter. With two parameters, like intercept and slope, this is a 3-dimensional space, something we can imagine: think of a landscape with hills and valleys, where the *x*-axis are values for the intercept, the *y*-axis are values for the slope and the *z*-axis (the vertical axis) are probability densities. The hills represent high probability areas and valleys represent low probability areas. This landscape of hills and valleys is determined by the two components of the Bayes' Theorem: the prior probability distribution $P(h)$ and the probability of the data given the prior, $P(d | h)$.
 
-Constructing the landscape from the prior and data analytically (i.e. solving the mathematical equation of Bayes' Theorem) is very often very hard or even impossible. The MCMC algorithm allows us to sample points in the landscape without actually mathematically reconstruct the landscape. In the Stan software, which brms uses to fit Bayesian models, the MCMC algorithm uses a specific implementation called Hamiltonian Monte Carlo (HMC). The HMC version of MCMC simulates physical particles rolling through the posterior landscape, using equations from physical mechanics. At each iteration, the algorithm "flicks" a particle (like a pinball ball) and then stops it in its tracks: the place on the posterior landscape where the particle stops is taken as a "draw". In the 3-dimensional landscape of intercept and slope, the intercept and slope values corresponding to the spot the particle was stopped are recorded. So the draw from one iteration holds one value for the intercept and one for the slope. The algorithm proceeds for several iterations, thus creating a list of draws. These draws can be used to plot and summarise the posterior distributions of the parameters. The draws are called **posterior draws**, because they come from the posterior probability distribution.
+Constructing the landscape from the prior and data analytically (i.e. solving the mathematical equation of Bayes' Theorem) is very often very hard or even impossible. The MCMC algorithm allows us to sample points in the landscape without actually mathematically reconstructing the landscape. In the Stan software, which brms uses to fit Bayesian models, the MCMC algorithm uses a specific implementation called Hamiltonian Monte Carlo (HMC). The HMC version of MCMC simulates physical particles rolling through the posterior landscape, using equations from physical mechanics. At each iteration, the algorithm "flicks" a particle (like a pinball ball) and then stops it in its tracks: the place on the posterior landscape where the particle stops is taken as a "draw". In the 3-dimensional landscape of intercept and slope, the intercept and slope values corresponding to the spot the particle was stopped are recorded. So the draw from one iteration holds one value for the intercept and one for the slope. The algorithm proceeds for several iterations, thus creating a list of draws. These draws can be used to plot and summarise the posterior distributions of the parameters. The draws are called **posterior draws**, because they come from the posterior probability distribution.
 
 This is a bit abstract and if you want to learn more about MCMC, I recommend @mcelreath2020, Ch 9 and @nicenboim2025, Ch 3. Note that to be a proficient user of brms and Bayesian regression models, you don't need to fully understand the mathematics behind MCMC algorithms, as long as you understand them conceptually.
 
@@ -25,7 +25,7 @@ When you run a model with brms, the draws (i.e. the sampled values) are stored i
 
 ## Reproducible model fit
 
-Before we move to the model, it is worth making a couple practical considerations. Fitting simple models with brms is relatively quick. However, more complex model using larger data sets can take some time for the MCMC to efficiently sample the posterior distribution (sometimes even hours!). It is useful to save the model fit to a file so that, once the model is fit once, you don't have to fit it again. This can be done by specifying a file path in the `file` argument in the `brm()` function. I suggest developing the habit of having a dedicated `cache/` in your Quarto project to save all of the brms model objects in. Go ahead and create a `cache/` folder in you project. Then, in your `week-05.qmd` document, rewrite the model from the previous chapter like so:
+Before we move to the model, it is worth making a couple practical considerations. Fitting simple models with brms is relatively quick. However, more complex model using larger data sets can take some time for the MCMC to efficiently sample the posterior distribution (sometimes even hours!). It is useful to save the model fit to a file so that, once the model is fit once, you don't have to fit it again. This can be done by specifying a file path in the `file` argument in the `brm()` function. I suggest developing the habit of having a dedicated `cache/` in your Quarto project to save all of the brms model objects in. Go ahead and create a `cache/` folder in your project. Then, in your `week-05.qmd` document, rewrite the model from the previous chapter like so:
 
 ```{r}
 #| label: ita-egg
@@ -56,7 +56,7 @@ The `file` argument tells brms to save the model output to the `cache/` folder i
 Now run the model. The model will be fitted and the model object will be saved in `cache/` with the file name `vow_bm.rds`. If you now re-run the same code again, you will notice that `brm()` does not fit the model again, but rather reads it from the file (no output is shown, but trust me, it works!). This saves time: you fit the model once but you can read the output multiple times. This is also good for reproducibility: an independent researcher with access to your code and the cache folder can run your code and get exactly the same results as yours.
 
 ::: callout-important
-When you save the model fit to a file, R does not keep track of changes in the model specification (like changes in formula or data and so on), so if you make changes to model, you need to **delete the saved model file** before re-running the code for the changes to have effect!
+When you save the model fit to a file, R does not keep track of changes in the model specification (like changes in formula or data and so on), so if you make changes to the model, you need to **delete the saved model file** before re-running the code for the changes to have effect!
 :::
 
 ## Extract MCMC posterior draws
@@ -78,7 +78,7 @@ vow_bm_draws <- as_draws_df(vow_bm)
 vow_bm_draws
 ```
 
-Ignore the `Intercept`, `lprior` and `lp__` columns, they are for internal safekeeping. Open the data frame in the RStudio viewer. You will see three extra column: `.chain`, `.iteration` and `.draw` (which are mentioned in the message printed with the tibble). They indicate:
+Ignore the `Intercept`, `lprior` and `lp__` columns, they are for internal safekeeping. Open the data frame in the RStudio viewer. You will see three extra columns: `.chain`, `.iteration` and `.draw` (which are mentioned in the message printed with the tibble). They indicate:
 
 -   `.chain`: The MCMC chain number (1 to 4).
 -   `.iteration`: The iteration number within chain (1 to 1000).
@@ -141,7 +141,7 @@ Compare these values with the ones in summary: again they are the same. Remember
 Calculate the 90%, 80% and 60% CrIs of `b_Intecept` and `b_speech_rate`.
 :::
 
-With this model, `vow_bm`, getting all of these CrIs might look trivial: the 95% CrIs are quite narrow, giving us quite a precise range of values for both the intercept and the coefficient of speech rate. This is because there is quite a lot of data and the model is quite simple, there is only one predictor. With more complex model and smaller data sets, uncertainty is greater and the intervals will span a large range of values. We will see examples later in the book. In those cases, it is helpful to be able to discuss CrIs at different levels of probability, since a lower-probability CrI might tells us something clearer about what we are investigating, while warning us of the increased uncertainty that comes with it.
+With this model, `vow_bm`, getting all of these CrIs might look trivial: the 95% CrIs are quite narrow, giving us quite a precise range of values for both the intercept and the coefficient of speech rate. This is because there is quite a lot of data and the model is quite simple, there is only one predictor. With more complex model and smaller data sets, uncertainty is greater and the intervals will span a large range of values. We will see examples later in the book. In those cases, it is helpful to be able to discuss CrIs at different levels of probability, since a lower-probability CrI might tell us something clearer about what we are investigating, while warning us of the increased uncertainty that comes with it.
 
 In the previous chapter, we mentioned that one can calculate the posterior probability of mean vowel duration $vdur$ based on a specific value of speech rate $sr$, using the model. We also noted that since we are working with MCMC it is not just like plugging in numbers according to the model's equation, but rather we need to use the entire probability distributions. In fact, we can use the MCMC draws and plug them in directly, as you would with a single number. However, with MCMC draws the operations in the equation are applied draw-wise. Let's see what this means by means of code:
 
@@ -164,7 +164,7 @@ quantile2(vow_bm_draws$vdur_sr5, c(0.025, 0.975)) |> round()
 
 ```
 
-Based on the model and data, when speech rate is 5 syl/s, the predicted vowel duration is 80-91 ms, at 95% probability.
+Based on the model and data, when speech rate is 5 syl/s, the predicted vowel duration is 89-91 ms, at 95% probability.
 
 ## Plotting posterior draws
 
