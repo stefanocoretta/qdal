@@ -9,6 +9,7 @@
 library(tidyverse)
 theme_set(theme_light())
 library(brms)
+library(ggdist)
 ```
 
 So far, we fitted regressions with a single predictor, like the following Gaussian model of reaction times from @sec-regression-cat using the data from @tucker2019:
@@ -166,31 +167,96 @@ In other words, the difference expressed by $\beta_1$ for `gender` is the averag
 Same thing for $\beta_2$ for `attitude`: this is the average of (a) the difference between `attitude` = `polite` and `attitude` = `informal` when `gender` = `F` and (b) the difference between `attitude` = `polite` and `attitude` = `informal` when `gender` = `M`.
 It sounds complicated, but in practice it makes sense: the model gives you an estimated difference for one predictor averaged across the levels of the other predictor.
 
+Here is how we interpret the results of this model (based on the 95% CrIs):
+
+-   `Intercept`: the mean `f0mn` with female participants in the informal condition is between 246 and 264 Hz at 95% confidence.
+
+-   `genderM`: the mean `f0mn` is between 106 and 126 Hz lower in male participants than female participants (averaged across the levels of attitude), at 95% confidence.
+
+-   `attitudepol`: the mean `f0mn` is between 4 and 25 Hz lower in the polite condition than in the informal condition (averaged across genders), at 95% probability.
+
+It is worth stressing here that, because of the "averaging across levels" of the "other" predictor, the estimated difference of each predictor is expected to be the same in all levels of the other predictor.
+We can see this by plotting the expected `f0mn` based on the model.
+We use `conditional_effects()` here for convenience (you will have to plot the posterior distributions from the draws in the exercise below).
+@fig-f0-bm-cond shows the expected predictions of `f0mn` depending on gender and attitude, separately.
+
 ```{r}
-#| label: f0-bm-cond-gender
+#| label: fig-f0-bm-cond
+#| fig-cap: "Expected predictions of mean f0 by gender and by attitude."
+#| layout-ncol: 2
+#| code-fold: true
 
 conditional_effects(f0_bm, "gender")
-```
-
-```{r}
-#| label: f0-bm-cond-attitude
-
 conditional_effects(f0_bm, "attitude")
 ```
 
+To obtain a single plot that shows the expected `f0mn` for gender and attitude together, you can specify both predictors separated by a colon `gender:attitude`.
+The code below produces @fig-f0-bm-cond-both. The order you put the predictors in matters: with `gender:attitude`, gender is places on the *x*-axis and attitude is included as a colour aesthetic.
+Deciding which order to use depends on the data and question: here it makes sense to use `gender:attitude` since our main question is about attitude.
+
 ```{r}
-#| label: f0-bm-cond-both
+#| label: fig-f0-bm-cond-both
+#| fig-cap: "Expected predictions of mean f0 by gender and attitude."
 
 conditional_effects(f0_bm, "gender:attitude")
 ```
 
-## Is the effect of attitude the same in both genders?
+@fig-f0-bm-cond-both should make you appreciate why the effect of attitude is modelled to be the same in female and male participants (and conversely, the effect of gender is the same in informal and polite attitude; you can see this by plotting with the order `attitude:gender`).
+If you compare the dots for informal/polite within each gender in the plot, you will notice that the distance between them is basically the same in both genders.
+
+::: callout-warning
+### Exercise 3
+
+Use `as_draws_df()` to obtain the model's draws and recreate the following plot.
 
 ```{r}
-#| label: fig-f0-plot
+#| label: exercise-3
+#| echo: false
 #| warning: false
 
-polite |> 
+f0_bm_draws <- as_draws_df(f0_bm)
+
+f0_bm_epred <- f0_bm_draws |> 
+  mutate(
+    f_inf = b_Intercept,
+    f_pol = b_Intercept + b_attitudepol,
+    m_inf = b_Intercept + b_genderM,
+    m_pol = b_Intercept + b_genderM + b_attitudepol
+  ) |> 
+  pivot_longer(f_inf:m_pol, names_to = "cond", values_to = "epred")
+
+f0_bm_epred |> 
+  ggplot(aes(epred, cond)) +
+  # from ggdist
+  stat_halfeye() +
+  labs(
+    x = "Predicted mean f0", y = "Gender/attitude"
+  )
+```
+:::
+
+::: {.callout-tip collapse="true"}
+## Hint
+
+-   You need `mutate()` to create new columns with the expected draws for each gender/attitude combination.
+
+-   Then you can pivot the new columns so that you get two columns: one which states the gender/attitude combination and one that holds the calculated expected draw.
+
+-   You can then plot the pivoted data.
+:::
+
+The fact that the model is estimating the coefficients for gender and attitude independently from each other begs the question: what if the effect of attitude is *not* the same in both genders?
+Based on the data, shown again in @fig-polite-f0-gend-att-repr, it seems that the male data does not show much of a difference depending on attitude, as the female data does.
+
+```{r}
+#| label: fig-polite-f0-gend-att-repr
+#| fig-label: "Mean f0 by gender and attitude (repr)."
+#| code-fold: false
+
+polite_filt |> 
   ggplot(aes(gender, f0mn, colour = attitude)) +
   geom_jitter(alpha = 0.7, position = position_jitterdodge(jitter.width = 0.1, seed = 2836))
 ```
+
+How do we let the model estimate a different effect of attitude based on gender?
+This is the topic of the next chapter.

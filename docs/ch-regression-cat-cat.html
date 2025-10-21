@@ -737,7 +737,6 @@ window.Quarto = {
   <li><a href="#two-categorical-predictors" id="toc-two-categorical-predictors" class="nav-link active" data-scroll-target="#two-categorical-predictors"><span class="header-section-number">34.1</span> Two categorical predictors</a></li>
   <li><a href="#fitting-the-model" id="toc-fitting-the-model" class="nav-link" data-scroll-target="#fitting-the-model"><span class="header-section-number">34.2</span> Fitting the model</a></li>
   <li><a href="#interpreting-models-with-multiple-categorical-predictors" id="toc-interpreting-models-with-multiple-categorical-predictors" class="nav-link" data-scroll-target="#interpreting-models-with-multiple-categorical-predictors"><span class="header-section-number">34.3</span> Interpreting models with multiple categorical predictors</a></li>
-  <li><a href="#is-the-effect-of-attitude-the-same-in-both-genders" id="toc-is-the-effect-of-attitude-the-same-in-both-genders" class="nav-link" data-scroll-target="#is-the-effect-of-attitude-the-same-in-both-genders"><span class="header-section-number">34.4</span> Is the effect of attitude the same in both genders?</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-cat-cat.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -972,56 +971,124 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li><p><code>attitudepol</code> is <span class="math inline">\(\beta_2\)</span>: this is the <em>difference</em> in mean <code>f0mn</code> between <code>attitude</code> = <code>polite</code> and <code>attitude</code> = <code>informal</code>, <em>averaged</em> across the levels of <code>gender</code>.</p></li>
 </ul>
 <p>The interpretation of the <code>Intercept</code> is straightforward, but you should not the “averaged across the levels of” part in the other two coefficients. Since the model now has more than one parameter, the difference estimated between the levels of one predictor is the average (i.e.&nbsp;the mean) of the difference in each level of the other predictor(s). In other words, the difference expressed by <span class="math inline">\(\beta_1\)</span> for <code>gender</code> is the average of (a) the difference between <code>gender</code> = <code>M</code> and <code>gender</code> = <code>F</code> when <code>attitude</code> = <code>informal</code> and (b) the difference between <code>gender</code> = <code>M</code> and <code>gender</code> = <code>F</code> when <code>attitude</code> = <code>polite</code>. Same thing for <span class="math inline">\(\beta_2\)</span> for <code>attitude</code>: this is the average of (a) the difference between <code>attitude</code> = <code>polite</code> and <code>attitude</code> = <code>informal</code> when <code>gender</code> = <code>F</code> and (b) the difference between <code>attitude</code> = <code>polite</code> and <code>attitude</code> = <code>informal</code> when <code>gender</code> = <code>M</code>. It sounds complicated, but in practice it makes sense: the model gives you an estimated difference for one predictor averaged across the levels of the other predictor.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(f0_bm, <span class="st">"gender"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ch-regression-cat-cat_files/figure-html/f0-bm-cond-gender-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(f0_bm, <span class="st">"attitude"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ch-regression-cat-cat_files/figure-html/f0-bm-cond-attitude-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(f0_bm, <span class="st">"gender:attitude"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ch-regression-cat-cat_files/figure-html/f0-bm-cond-both-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="is-the-effect-of-attitude-the-same-in-both-genders" class="level2" data-number="34.4">
-<h2 data-number="34.4" class="anchored" data-anchor-id="is-the-effect-of-attitude-the-same-in-both-genders"><span class="header-section-number">34.4</span> Is the effect of attitude the same in both genders?</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span> </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(gender, f0mn, <span class="at">colour =</span> attitude)) <span class="sc">+</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> <span class="fl">0.1</span>, <span class="at">seed =</span> <span class="dv">2836</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-f0-plot" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<p>Here is how we interpret the results of this model (based on the 95% CrIs):</p>
+<ul>
+<li><p><code>Intercept</code>: the mean <code>f0mn</code> with female participants in the informal condition is between 246 and 264 Hz at 95% confidence.</p></li>
+<li><p><code>genderM</code>: the mean <code>f0mn</code> is between 106 and 126 Hz lower in male participants than female participants (averaged across the levels of attitude), at 95% confidence.</p></li>
+<li><p><code>attitudepol</code>: the mean <code>f0mn</code> is between 4 and 25 Hz lower in the polite condition than in the informal condition (averaged across genders), at 95% probability.</p></li>
+</ul>
+<p>It is worth stressing here that, because of the “averaging across levels” of the “other” predictor, the estimated difference of each predictor is expected to be the same in all levels of the other predictor. We can see this by plotting the expected <code>f0mn</code> based on the model. We use <code>conditional_effects()</code> here for convenience (you will have to plot the posterior distributions from the draws in the exercise below). <span class="quarto-unresolved-ref">?fig-f0-bm-cond</span> shows the expected predictions of <code>f0mn</code> depending on gender and attitude, separately.</p>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(f0_bm, <span class="st">"gender"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(f0_bm, <span class="st">"attitude"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell quarto-layout-panel" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-f0-bm-cond-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-f0-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-regression-cat-cat_files/figure-html/fig-f0-plot-1.png" id="fig-f0-plot" class="img-fluid figure-img" width="672">
+<div aria-describedby="fig-f0-bm-cond-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-regression-cat-cat_files/figure-html/fig-f0-bm-cond-1.png" class="img-fluid figure-img" width="672">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-f0-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;34.3
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-f0-bm-cond-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;34.3: Expected predictions of mean f0 by gender and by attitude.
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-f0-bm-cond-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-f0-bm-cond-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-regression-cat-cat_files/figure-html/fig-f0-bm-cond-2.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-f0-bm-cond-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;34.4: Expected predictions of mean f0 by gender and by attitude.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
+</div>
+<p>To obtain a single plot that shows the expected <code>f0mn</code> for gender and attitude together, you can specify both predictors separated by a colon <code>gender:attitude</code>. The code below produces <a href="#fig-f0-bm-cond-both" class="quarto-xref">Figure&nbsp;<span>34.5</span></a>. The order you put the predictors in matters: with <code>gender:attitude</code>, gender is places on the <em>x</em>-axis and attitude is included as a colour aesthetic. Deciding which order to use depends on the data and question: here it makes sense to use <code>gender:attitude</code> since our main question is about attitude.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(f0_bm, <span class="st">"gender:attitude"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-f0-bm-cond-both" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-f0-bm-cond-both-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-regression-cat-cat_files/figure-html/fig-f0-bm-cond-both-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-f0-bm-cond-both-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;34.5: Expected predictions of mean f0 by gender and attitude.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-f0-bm-cond-both" class="quarto-xref">Figure&nbsp;<span>34.5</span></a> should make you appreciate why the effect of attitude is modelled to be the same in female and male participants (and conversely, the effect of gender is the same in informal and polite attitude; you can see this by plotting with the order <code>attitude:gender</code>). If you compare the dots for informal/polite within each gender in the plot, you will notice that the distance between them is basically the same in both genders.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Exercise 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use <code>as_draws_df()</code> to obtain the model’s draws and recreate the following plot.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ch-regression-cat-cat_files/figure-html/exercise-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>You need <code>mutate()</code> to create new columns with the expected draws for each gender/attitude combination.</p></li>
+<li><p>Then you can pivot the new columns so that you get two columns: one which states the gender/attitude combination and one that holds the calculated expected draw.</p></li>
+<li><p>You can then plot the pivoted data.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<p>The fact that the model is estimating the coefficients for gender and attitude independently from each other begs the question: what if the effect of attitude is <em>not</em> the same in both genders? Based on the data, shown again in <a href="#fig-polite-f0-gend-att-repr" class="quarto-xref">Figure&nbsp;<span>34.6</span></a>, it seems that the male data does not show much of a difference depending on attitude, as the female data does.</p>
+<div class="cell" data-fig-label="Mean f0 by gender and attitude (repr).">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>polite_filt <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(gender, f0mn, <span class="at">colour =</span> attitude)) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> <span class="fl">0.1</span>, <span class="at">seed =</span> <span class="dv">2836</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-polite-f0-gend-att-repr" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-polite-f0-gend-att-repr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="ch-regression-cat-cat_files/figure-html/fig-polite-f0-gend-att-repr-1.png" id="fig-polite-f0-gend-att-repr" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-polite-f0-gend-att-repr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;34.6
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>How do we let the model estimate a different effect of attitude based on gender? This is the topic of the next chapter.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
