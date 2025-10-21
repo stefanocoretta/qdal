@@ -735,7 +735,9 @@ window.Quarto = {
    
   <ul>
   <li><a href="#two-categorical-predictors" id="toc-two-categorical-predictors" class="nav-link active" data-scroll-target="#two-categorical-predictors"><span class="header-section-number">34.1</span> Two categorical predictors</a></li>
-  <li><a href="#is-the-effect-of-attitude-the-same-in-both-genders" id="toc-is-the-effect-of-attitude-the-same-in-both-genders" class="nav-link" data-scroll-target="#is-the-effect-of-attitude-the-same-in-both-genders"><span class="header-section-number">34.2</span> Is the effect of attitude the same in both genders?</a></li>
+  <li><a href="#fitting-the-model" id="toc-fitting-the-model" class="nav-link" data-scroll-target="#fitting-the-model"><span class="header-section-number">34.2</span> Fitting the model</a></li>
+  <li><a href="#interpreting-models-with-multiple-categorical-predictors" id="toc-interpreting-models-with-multiple-categorical-predictors" class="nav-link" data-scroll-target="#interpreting-models-with-multiple-categorical-predictors"><span class="header-section-number">34.3</span> Interpreting models with multiple categorical predictors</a></li>
+  <li><a href="#is-the-effect-of-attitude-the-same-in-both-genders" id="toc-is-the-effect-of-attitude-the-same-in-both-genders" class="nav-link" data-scroll-target="#is-the-effect-of-attitude-the-same-in-both-genders"><span class="header-section-number">34.4</span> Is the effect of attitude the same in both genders?</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-cat-cat.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -839,6 +841,92 @@ Figure&nbsp;34.2: Mean f0 by gender and attitude (repr).
 <p>Try out the <code>jitter.width</code> argument of <code>position_jitterdodge()</code>. Set it so that there is greater visual separation between the informal and polite jitters.</p>
 </div>
 </div>
+</section>
+<section id="fitting-the-model" class="level2" data-number="34.2">
+<h2 data-number="34.2" class="anchored" data-anchor-id="fitting-the-model"><span class="header-section-number">34.2</span> Fitting the model</h2>
+<p>We can now move onto fitting a regression model to <code>f0mn</code>, with <code>gender</code> and <code>attitude</code> as two categorical predictors. Here is what the model formula would look like:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f0mn_i &amp; \sim Gaussian(\mu_i, \sigma) \\
+\mu_i &amp; = \beta_0 + \beta_1 \cdot gen_{\text{M}[i]} + \beta_2 \cdot att_{\text{POL}[i]}
+\end{aligned}
+\]</span></p>
+<p>The formula has two indicator variables: <span class="math inline">\(gen_{\text{M}}\)</span> and <span class="math inline">\(att_{\text{POL}}\)</span>. The first variable states if the <span class="math inline">\(f0mn\)</span> value is from a female participant (<span class="math inline">\(gen_{\text{M}} = 0\)</span>) or a male participant (<span class="math inline">\(gen_{\text{M}} = 1\)</span>). The second variable states if the <span class="math inline">\(f0mn\)</span> value is from the informal condition (<span class="math inline">\(att_{\text{POL}} = 0\)</span>) or the polite condition (<span class="math inline">\(att_{\text{POL}} = 1\)</span>). <a href="#tbl-gen-att-contrasts" class="quarto-xref">Table&nbsp;<span>34.1</span></a> shows the treatment contrasts table.</p>
+<div id="tbl-gen-att-contrasts" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-gen-att-contrasts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;34.1: Treatment contrasts coding of the categorical predictors gender and attitude.
+</figcaption>
+<div aria-describedby="tbl-gen-att-contrasts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 52%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;"><span class="math inline">\(gen_\text{M}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(att_\text{POL}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>gender</code> = <code>F</code> and <code>attitude</code> = <code>informal</code></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>gender</code> = <code>F</code> and <code>attitude</code> = <code>polite</code></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>gender</code> = <code>M</code> and <code>attitude</code> = <code>informal</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>gender</code> = <code>M</code> and <code>attitude</code> = <code>polite</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Exercise 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Work out the formula for <span class="math inline">\(\mu\)</span> depending on each value combination of <code>gender</code> and <code>attitude</code>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Just plug in the <code>0</code> and <code>1</code> in the formula depending on the value of gender and attitude. You want four formulae (one per gender/attitude combination).</p>
+</div>
+</div>
+</div>
+<p>Fitting a regression model with multiple predictors is as easy as just adding the predictors in the formula using a <code>+</code>: <code>f0mn ~ gender + attitude</code>. Note that from this point on we won’t include the <code>1 +</code> any more, since it’s implicit, but you can still write it out if you wish. The rest of the code has no surprises.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>f0_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  f0mn <span class="sc">~</span> gender <span class="sc">+</span> attitude,</span>
@@ -849,6 +937,10 @@ Figure&nbsp;34.2: Mean f0 by gender and attitude (repr).
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"cache/ch-regression-cat-cat_f0_bm"</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+<section id="interpreting-models-with-multiple-categorical-predictors" class="level2" data-number="34.3">
+<h2 data-number="34.3" class="anchored" data-anchor-id="interpreting-models-with-multiple-categorical-predictors"><span class="header-section-number">34.3</span> Interpreting models with multiple categorical predictors</h2>
+<p>Let’s print out the model summary. If you look at the <code>Regression Coefficients</code> table, you will find three coefficients, each matching one of the <span class="math inline">\(\beta\)</span> coefficients in the <span class="math inline">\(\mu\)</span> formula above.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(f0_bm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -874,6 +966,12 @@ and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
+<ul>
+<li><p><code>Intercept</code> is <span class="math inline">\(\beta_0\)</span>: this is the mean <code>f0mn</code> when <code>gender</code> = <code>F</code> and <code>attitude</code> = <code>informal</code>.</p></li>
+<li><p><code>genderM</code> is <span class="math inline">\(\beta_1\)</span>: this is the <em>difference</em> in mean <code>f0mn</code> between <code>gender</code> = <code>M</code> and <code>gender</code> = <code>F</code>, <em>averaged</em> across the levels of <code>attitude</code>.</p></li>
+<li><p><code>attitudepol</code> is <span class="math inline">\(\beta_2\)</span>: this is the <em>difference</em> in mean <code>f0mn</code> between <code>attitude</code> = <code>polite</code> and <code>attitude</code> = <code>informal</code>, <em>averaged</em> across the levels of <code>gender</code>.</p></li>
+</ul>
+<p>The interpretation of the <code>Intercept</code> is straightforward, but you should not the “averaged across the levels of” part in the other two coefficients. Since the model now has more than one parameter, the difference estimated between the levels of one predictor is the average (i.e.&nbsp;the mean) of the difference in each level of the other predictor(s). In other words, the difference expressed by <span class="math inline">\(\beta_1\)</span> for <code>gender</code> is the average of (a) the difference between <code>gender</code> = <code>M</code> and <code>gender</code> = <code>F</code> when <code>attitude</code> = <code>informal</code> and (b) the difference between <code>gender</code> = <code>M</code> and <code>gender</code> = <code>F</code> when <code>attitude</code> = <code>polite</code>. Same thing for <span class="math inline">\(\beta_2\)</span> for <code>attitude</code>: this is the average of (a) the difference between <code>attitude</code> = <code>polite</code> and <code>attitude</code> = <code>informal</code> when <code>gender</code> = <code>F</code> and (b) the difference between <code>attitude</code> = <code>polite</code> and <code>attitude</code> = <code>informal</code> when <code>gender</code> = <code>M</code>. It sounds complicated, but in practice it makes sense: the model gives you an estimated difference for one predictor averaged across the levels of the other predictor.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(f0_bm, <span class="st">"gender"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -905,8 +1003,8 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
 </section>
-<section id="is-the-effect-of-attitude-the-same-in-both-genders" class="level2" data-number="34.2">
-<h2 data-number="34.2" class="anchored" data-anchor-id="is-the-effect-of-attitude-the-same-in-both-genders"><span class="header-section-number">34.2</span> Is the effect of attitude the same in both genders?</h2>
+<section id="is-the-effect-of-attitude-the-same-in-both-genders" class="level2" data-number="34.4">
+<h2 data-number="34.4" class="anchored" data-anchor-id="is-the-effect-of-attitude-the-same-in-both-genders"><span class="header-section-number">34.4</span> Is the effect of attitude the same in both genders?</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(gender, f0mn, <span class="at">colour =</span> attitude)) <span class="sc">+</span></span>
