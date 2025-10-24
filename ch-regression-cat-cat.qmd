@@ -107,7 +107,7 @@ The second variable states if the $f0mn$ value is from the informal condition ($
 @tbl-gen-att-contrasts shows the treatment contrasts table.
 
 |                                            | $gen_\text{M}$ | $att_\text{POL}$ |
-|:------------------------------------:|:---------------:|:---------------:|
+|:------------------------------------------:|:--------------:|:----------------:|
 | `gender` = `F` and `attitude` = `informal` |       0        |        0         |
 |  `gender` = `F` and `attitude` = `polite`  |       0        |        1         |
 | `gender` = `M` and `attitude` = `informal` |       1        |        0         |
@@ -191,7 +191,8 @@ conditional_effects(f0_bm, "attitude")
 ```
 
 To obtain a single plot that shows the expected `f0mn` for gender and attitude together, you can specify both predictors separated by a colon `gender:attitude`.
-The code below produces @fig-f0-bm-cond-both. The order you put the predictors in matters: with `gender:attitude`, gender is places on the *x*-axis and attitude is included as a colour aesthetic.
+The code below produces @fig-f0-bm-cond-both.
+The order you put the predictors in matters: with `gender:attitude`, gender is places on the *x*-axis and attitude is included as a colour aesthetic.
 Deciding which order to use depends on the data and question: here it makes sense to use `gender:attitude` since our main question is about attitude.
 
 ```{r}
@@ -251,7 +252,7 @@ Based on the data, shown again in @fig-polite-f0-gend-att-repr, it seems that th
 ```{r}
 #| label: fig-polite-f0-gend-att-repr
 #| fig-label: "Mean f0 by gender and attitude (repr)."
-#| code-fold: false
+#| code-fold: true
 
 polite_filt |> 
   ggplot(aes(gender, f0mn, colour = attitude)) +

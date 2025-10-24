@@ -859,8 +859,8 @@ Table&nbsp;34.1: Treatment contrasts coding of the categorical predictors gender
 <div aria-describedby="tbl-gen-att-contrasts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 52%">
-<col style="width: 23%">
+<col style="width: 56%">
+<col style="width: 20%">
 <col style="width: 23%">
 </colgroup>
 <thead>
@@ -1072,9 +1072,12 @@ Figure&nbsp;34.5: Expected predictions of mean f0 by gender and attitude.
 </div>
 <p>The fact that the model is estimating the coefficients for gender and attitude independently from each other begs the question: what if the effect of attitude is <em>not</em> the same in both genders? Based on the data, shown again in <a href="#fig-polite-f0-gend-att-repr" class="quarto-xref">Figure&nbsp;<span>34.6</span></a>, it seems that the male data does not show much of a difference depending on attitude, as the female data does.</p>
 <div class="cell" data-fig-label="Mean f0 by gender and attitude (repr).">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>polite_filt <span class="sc">|&gt;</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(gender, f0mn, <span class="at">colour =</span> attitude)) <span class="sc">+</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> <span class="fl">0.1</span>, <span class="at">seed =</span> <span class="dv">2836</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div id="fig-polite-f0-gend-att-repr" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
 <figure class="quarto-float quarto-float-fig figure">
