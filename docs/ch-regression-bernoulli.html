@@ -738,7 +738,7 @@ window.Quarto = {
   <ul>
   <li><a href="#sec-prob-log" id="toc-sec-prob-log" class="nav-link active" data-scroll-target="#sec-prob-log"><span class="header-section-number">30.1</span> Probability and log-odds</a></li>
   <li><a href="#nicaraguan-sign-language-single-and-multi-verb-predicates" id="toc-nicaraguan-sign-language-single-and-multi-verb-predicates" class="nav-link" data-scroll-target="#nicaraguan-sign-language-single-and-multi-verb-predicates"><span class="header-section-number">30.2</span> Nicaraguan Sign Language single and multi-verb predicates</a></li>
-  <li><a href="#plotting-proportions-percentages-and-accuracy-data" id="toc-plotting-proportions-percentages-and-accuracy-data" class="nav-link" data-scroll-target="#plotting-proportions-percentages-and-accuracy-data"><span class="header-section-number">30.3</span> Plotting proportions, percentages and accuracy data</a></li>
+  <li><a href="#sec-plot-prop" id="toc-sec-plot-prop" class="nav-link" data-scroll-target="#sec-plot-prop"><span class="header-section-number">30.3</span> Plotting proportions, percentages and accuracy data</a></li>
   <li><a href="#bernoulli-model-of-nsl-predicates" id="toc-bernoulli-model-of-nsl-predicates" class="nav-link" data-scroll-target="#bernoulli-model-of-nsl-predicates"><span class="header-section-number">30.4</span> Bernoulli model of NSL predicates</a></li>
   <li><a href="#fit-the-bernoulli-model-with-brms" id="toc-fit-the-bernoulli-model-with-brms" class="nav-link" data-scroll-target="#fit-the-bernoulli-model-with-brms"><span class="header-section-number">30.5</span> Fit the Bernoulli model with brms</a></li>
   <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">30.6</span> Reporting</a></li>
@@ -1061,8 +1061,8 @@ Figure&nbsp;30.3: Proportion of single vs multiple predicates in three groups of
 </div>
 <p>On average, home-signers produce 36% of multi-verb predicates, first generation signers (NSL1) 19% and second generation signers (NSL2) 50%. In other words, there is a decrease in production of multi-verb predicates from home-signers to NSL1 signers, while NSL2 signers basically just use either single or multi-verb predicates. Most times, it is also useful to plot the proportion for each participant separately. Unfortunately, this is an area were bad practices have become standard so it is worth spending some time on this, in a new section.</p>
 </section>
-<section id="plotting-proportions-percentages-and-accuracy-data" class="level2" data-number="30.3">
-<h2 data-number="30.3" class="anchored" data-anchor-id="plotting-proportions-percentages-and-accuracy-data"><span class="header-section-number">30.3</span> Plotting proportions, percentages and accuracy data</h2>
+<section id="sec-plot-prop" class="level2" data-number="30.3">
+<h2 data-number="30.3" class="anchored" data-anchor-id="sec-plot-prop"><span class="header-section-number">30.3</span> Plotting proportions, percentages and accuracy data</h2>
 <p>A common (but incorrect) way of plotting proportion/percentage data (like accuracy, or the single vs multi-verb predicates of the <code>verb_org</code> dataset) is to calculate the proportion of each participant and then produce a bar chart with error bars that indicate the mean proportion (i.e.&nbsp;the mean of the proportions of each participant) and the dispersion around the mean accuracy. You might have seen something like <a href="#fig-prop-bad" class="quarto-xref">Figure&nbsp;<span>30.4</span></a> in many papers. This type of plot is called “bars and whiskers” because the error bars look like cat whiskers.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>verb_org <span class="sc">|&gt;</span> </span>

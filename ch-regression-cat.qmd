@@ -115,7 +115,7 @@ A **jitter** plot shows the numeric data in a strip of jittered points (one poin
 A **violin** is a mirrored density curve.
 :::
 
-It is good practice to show the raw data and the density using violin and jitter plots, because, so this should be your go-to choice for plotting numeric data by categorical groups, like RTs and type of word here.
+It is good practice to show the raw data and the density using violin and jitter plots, because patterns in the data are visible when plotting the raw data (while they aren't when using for example bar charts, more on this in @sec-plot-prop), so this should be your go-to choice for plotting numeric data by categorical groups, like RTs and type of word here.
 Now we can obtain a few summary measures.
 The following code groups the data by `IsWord` and then calculates the mean, median and standard deviation of RTs.
 After `summarise()`, we are using a trick to round all columns that are numeric, namely the columns with the mean, median and SD.
@@ -288,7 +288,7 @@ $$
 \end{aligned}
 $$
 
-$\beta_0$ is the *difference* between the mean RT when `IsWord` is `TRUE` and the mean RT when `IsWord` is `FALSE`.
+$\beta_1$ is the *difference* between the mean RT when `IsWord` is `TRUE` and the mean RT when `IsWord` is `FALSE`.
 As mentioned above, with treatment contrasts you are comparing the second level to the first.
 So one regression coefficient will be the mean of the reference level, and the other coefficient will be the *difference* between the mean of the two levels.
 I know this is not particularly beginner-friendly, but this is the default in R when using categorical predictors and it is the most common way to code categorical predictors, so you will frequently find tables in academic articles with regression coefficients that have to be interpreted that way.
