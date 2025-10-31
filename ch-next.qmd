@@ -1,0 +1,23 @@
+# What's next? {#sec-next}
+
+You made it! You completed your journey in learning the basics of quantitative research methods, R and Open Research principles and practices. This is not the end, of course. Becoming proficient in quantitative methods requires years of practices and one semester is just not enough. While everything we covered in this course is a necessary pre-requisite, most research will require you to learn much much more.
+
+This section gives you a glimpse of other topics you could learn about and topics you might need for your research (including your dissertation/thesis if you will be doing that soon). For each topic I will point you to some resources, but note that in some cases you might have to do some preliminary readings to be able to consume the contents of the linked resources. I am planning to add extra chapters in this textbook to cover these topics in the future, but until I have time to do that, you will have to make do with external resources.
+
+## Further interactions
+
+## Multilevel regression models (aka mixed-effects)
+
+## Causal inference
+
+## Further distribution families
+
+## Non-linear modelling
+
+## Sample size determination
+
+## Dimensionality reduction approaches
+
+
+
+

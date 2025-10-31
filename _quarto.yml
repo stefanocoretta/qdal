@@ -70,6 +70,9 @@ book:
       - ch-open-research.qmd
       - ch-regression-cat-cat.qmd
       - ch-regression-interaction.qmd
+  - part: Week 10
+    chapters:
+      - ch-next.qmd
   - references.qmd
   appendices:
     - app-computer-basics.qmd

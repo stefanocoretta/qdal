@@ -183,6 +183,9 @@ We use `conditional_effects()` here for convenience (you will have to plot the p
 ```{r}
 #| label: fig-f0-bm-cond
 #| fig-cap: "Expected predictions of mean f0 by gender and by attitude."
+#| fig-subcap: 
+#|   - "Expected predictions of mean f0 by gender."
+#|   - "Expected predictions of mean f0 by attitude."
 #| layout-ncol: 2
 #| code-fold: true
 
