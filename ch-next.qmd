@@ -10,6 +10,8 @@ This section gives you a glimpse of other topics you could learn about and topic
 
 ## Causal inference
 
+## Prior probability distributions
+
 ## Further distribution families
 
 ## Non-linear modelling
