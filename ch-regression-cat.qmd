@@ -234,9 +234,9 @@ $RT_i$ then is indexing the specific observations in the data, $RT_1$, $RT_2$, $
 Each observation is from a real or nonce word: this is coded by $w_i$.
 The subscript $i$ in $w_i$ is indexing the `IsWord` value of the $i$th observation.
 In the data, $RT_1 = 617$ and $w_1 = 0$ (i.e. `TRUE`).
-The mean $mu_i$ also has a subscript $i$.
+The mean $\mu_i$ also has a subscript $i$.
 The $i$ is there to say that now $\mu$ depends on the specific observation $i$, so that we can model a different mean depending on $w_i$.
-In fact, in the model in @sec-regression, $i$ was implied to keep things simple, but technically it should be added, because the mean does depend on the value of $sr$:
+In fact, in the model in @sec-regression, $i$ was implied to keep things simple, but technically it should be added, because the mean does depend on the value of $w$:
 
 $$
 \begin{aligned}

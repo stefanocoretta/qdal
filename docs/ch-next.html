@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Inference – Quantitative Data Analysis for Linguists in R</title>
+<title>36&nbsp; What’s next? – Quantitative Data Analysis for Linguists in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,62 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -85,8 +30,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ch-scripts.html" rel="next">
-<link href="./ch-packages.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./ch-regression-interaction.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -135,38 +80,7 @@ div.csl-indent {
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
-<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="include/webex.css">
 </head>
@@ -342,7 +256,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-inference.html">Week 2</a></li><li class="breadcrumb-item"><a href="./ch-inference.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inference</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-next.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-next.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What’s next?</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -438,7 +352,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-inference.html" class="sidebar-item-text sidebar-link active">
+  <a href="./ch-inference.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
   </div>
 </li>
@@ -706,7 +620,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
+  <a href="./ch-next.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
@@ -751,21 +665,24 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#uncertainty-and-variability" id="toc-uncertainty-and-variability" class="nav-link active" data-scroll-target="#uncertainty-and-variability"><span class="header-section-number">6.1</span> Uncertainty and variability</a></li>
-  <li><a href="#what-is-statistics-and-isnt" id="toc-what-is-statistics-and-isnt" class="nav-link" data-scroll-target="#what-is-statistics-and-isnt"><span class="header-section-number">6.2</span> What is statistics (and isn’t)?</a></li>
-  <li><a href="#many-analysts-one-data-set-subjectivity-exposed" id="toc-many-analysts-one-data-set-subjectivity-exposed" class="nav-link" data-scroll-target="#many-analysts-one-data-set-subjectivity-exposed"><span class="header-section-number">6.3</span> Many Analysts, One Data Set: subjectivity exposed</a></li>
-  <li><a href="#the-new-statistics" id="toc-the-new-statistics" class="nav-link" data-scroll-target="#the-new-statistics"><span class="header-section-number">6.4</span> The “New Statistics”</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">6.5</span> Summary</a></li>
+  <li><a href="#further-interactions" id="toc-further-interactions" class="nav-link active" data-scroll-target="#further-interactions"><span class="header-section-number">36.1</span> Further interactions</a></li>
+  <li><a href="#multilevel-regression-models-aka-mixed-effects" id="toc-multilevel-regression-models-aka-mixed-effects" class="nav-link" data-scroll-target="#multilevel-regression-models-aka-mixed-effects"><span class="header-section-number">36.2</span> Multilevel regression models (aka mixed-effects)</a></li>
+  <li><a href="#causal-inference" id="toc-causal-inference" class="nav-link" data-scroll-target="#causal-inference"><span class="header-section-number">36.3</span> Causal inference</a></li>
+  <li><a href="#prior-probability-distributions" id="toc-prior-probability-distributions" class="nav-link" data-scroll-target="#prior-probability-distributions"><span class="header-section-number">36.4</span> Prior probability distributions</a></li>
+  <li><a href="#further-distribution-families" id="toc-further-distribution-families" class="nav-link" data-scroll-target="#further-distribution-families"><span class="header-section-number">36.5</span> Further distribution families</a></li>
+  <li><a href="#non-linear-modelling" id="toc-non-linear-modelling" class="nav-link" data-scroll-target="#non-linear-modelling"><span class="header-section-number">36.6</span> Non-linear modelling</a></li>
+  <li><a href="#sample-size-determination" id="toc-sample-size-determination" class="nav-link" data-scroll-target="#sample-size-determination"><span class="header-section-number">36.7</span> Sample size determination</a></li>
+  <li><a href="#dimensionality-reduction-approaches" id="toc-dimensionality-reduction-approaches" class="nav-link" data-scroll-target="#dimensionality-reduction-approaches"><span class="header-section-number">36.8</span> Dimensionality reduction approaches</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-inference.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-next.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-inference.html">Week 2</a></li><li class="breadcrumb-item"><a href="./ch-inference.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inference</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-next.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-next.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What’s next?</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-inference" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inference</span></span></h1>
+<h1 class="title"><span id="sec-next" class="quarto-section-identifier"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What’s next?</span></span></h1>
 </div>
 
 
@@ -782,377 +699,33 @@ window.Quarto = {
 </header>
 
 
-<p><img src="./img/badge-stats.png" class="img-fluid"></p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/bro.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="250"></p>
-</figure>
-</div>
-<p>Imbuing numbers with meaning is a good characterisation of the <strong>inference process</strong>. Here is how it works. We have a question about something. Let’s imagine that this something is the population of British Sign Language signers. We want to know whether the cultural background of the BSL signers is linked to different pragmatic uses of the sign for BROTHER. But we <em>can’t survey the entire population</em> of BSL signers. So instead of surveying <em>all</em> BSL users, we take a <strong>sample</strong> from the BSL population. The sample is our data (the product of our study or observation). Now, how do we go from data/observation to answering our question about the use of BROTHER? We can use the inference process!</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Inference process
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Inference</strong> is the process of understanding something about a population based on the sample (aka the data) taken from that population.</p>
-</div>
-</div>
-<p>The figure below is a schematic representation of the inference process.</p>
-<p><img src="img/inference.png" class="img-fluid"></p>
-<p>The inference process has two main stages: producing data and inference. For the first step, <strong>producing data</strong>, we start off with a population. Note that <em>population</em> can be a set of anything, not just a specific group of people. For example, the words in a dictionary can be a “population”; or the antipassive constructions of Austronesian languages, and so on. From that population, we select a <strong>sample</strong> and that sample produces our <strong>data</strong>. We analyse the data to get results. Finally, we use <strong>inference</strong> to understand something about the population based on the results from the sampled data. Inference can take many forms and the type of inference we are interested in here is <strong>statistical inference</strong>: i.e.&nbsp;using statistics to do inference.</p>
-<p>However, despite inference being based on data, it does not guarantee that the answers to our questions are right or even that they are true. In fact, any observation we make comes with a certain degree of <strong>uncertainty and variability</strong>.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Quiz 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>True or false?</strong></p>
-<ol type="a">
-<li><p>Inference is not needed if you gather data from the entire population. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
-<li><p>Population refers only to human participants. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
-<li><p>A sample is <em>always</em> a truthful representation of the population. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
-<li><p>You can collect the same sample multiple times. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
-</ol>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Spotlight: Science is wrong
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li>Check out the Scientific American article <em>If You Say ‘Science Is Right,’ You’re Wrong</em> by Naomi Oreskes: <a href="https://www.scientificamerican.com/article/if-you-say-science-is-right-youre-wrong/" class="uri">https://www.scientificamerican.com/article/if-you-say-science-is-right-youre-wrong/</a>.</li>
-<li>Learn more about uncertainty and subjectivity in research: <span class="citation" data-cites="vasishth2021">Vasishth and Gelman (<a href="references.html#ref-vasishth2021" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="gelman2017">Gelman and Hennig (<a href="references.html#ref-gelman2017" role="doc-biblioref">2017</a>)</span>.</li>
-</ul>
-</div>
-</div>
-</div>
-<section id="uncertainty-and-variability" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="uncertainty-and-variability"><span class="header-section-number">6.1</span> Uncertainty and variability</h2>
-<p><img src="img/pliny.jpg" class="img-fluid"></p>
-<p><a href="https://en.wikipedia.org/wiki/Pliny_the_Elder">Pliny the Elder</a> was a Roman philosopher who died in the Vesuvius eruption in 79 CE. He certainly did not expect to die then. Leaving dark irony aside, as researchers we have to deal with uncertainty and variability.</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Uncertainty and variability
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li><p><strong>Uncertainty</strong> is a characteristic of each observation of a phenomenon, due to measurement error or because we cannot directly measure what we want to measure.</p></li>
-<li><p><strong>Variability</strong> is found among different observations of the same phenomenon, due to natural fluctuations and measurement error.</p></li>
-</ul>
-</div>
-</div>
-<p>So uncertainty is a feature of each measurement, while variability occurs between different measurements. Together, uncertainty and variability render the inference process more complex and can interfere with its outcomes.</p>
-<p>The following picture is a reconstruction of what <a href="https://en.wikipedia.org/wiki/Galileo_Galilei">Galileo Galilei</a> saw when he pointed one of his first telescopes towards Saturn, based on his 1610 sketch: a blurry circle flanked by two smaller blurry circles.</p>
-<p><img src="img/uncertainty.png" class="img-fluid"></p>
-<p>Only six years later, telescopes were much better and Galileo could correctly identify that the flanking circles were not spheres orbiting around Saturn, but rings. The figures below show how the sketches evolved over time between first observation and publication.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/saturn-galileo-sketches_med_hr.jpeg" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-<p>The moral of the story is that at any point in history we are like Galileo in at least some of our research: we might be close to understanding something but not quite yet.</p>
-<p>To give a more concrete example of how each sample is but an imperfect represetation of the population it is taken from, let’s look at reaction times (RTs) data from the MALD dataset <span class="citation" data-cites="tucker2019">(<a href="references.html#ref-tucker2019" role="doc-biblioref">Tucker et al. 2019</a>)</span>. The study the data comes from used an auditory lexical decision task to elicit RTs and accuracy data. In each trial, participants listened to a word and pressed a button to say if the word is a real English word or not. The RT is the time lag between the offset of the auditory stimulus (the target word) and the button press. Note that to keep things more manageable, the data we will read is just a subset of the full data. <a href="#fig-mald-rt" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> shows a density plot of the data: the <em>x</em>-axis is the range of RTs (in logged milliseconds), while the <em>y</em>-axis shows the “density” of the data. Higher density means that the data contains a lot of observations in that region. Conversely, low density means that the data does not contain a lot of observations in that range. You will learn more about density plots in <a href="ch-probability.html" class="quarto-xref"><span>Chapter 18</span></a>.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mald <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/tucker2019/mald_1_1.rds"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mald <span class="sc">|&gt;</span> </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(RT_log <span class="sc">&gt;</span> <span class="dv">6</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(RT_log)) <span class="sc">+</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"purple"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reaction Times (logged ms)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-mald-rt" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-mald-rt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-inference_files/figure-html/fig-mald-rt-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mald-rt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.1: Distribution of logged RT values from the MALD data set. The density is a relative measure of how many observations for particular values there are in the data.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>The mean logged RT is 6.88 and the standard deviation (a measure of dispersion around the mean, you will learn about them in <a href="ch-sum-measures.html" class="quarto-xref"><span>Chapter 10</span></a>) is 0.28. We might take these values as the mean and standard deviation of the population of logged RTs. But this would not be correct: these are the <em>sample</em> mean and standard deviation. To show why we cannot take these to be the mean and standard deviation of the population, we can simulate RT data based on those values (you will understand the details of this later on, when you learn about probability distributions in <a href="ch-probability.html" class="quarto-xref"><span>Chapter 18</span></a>, so for now just stay for the ride).</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9899</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>rt_l <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  rt_l[i] <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">20</span>, <span class="fu">mean</span>(mald<span class="sc">$</span>RT_log), <span class="fu">sd</span>(mald<span class="sc">$</span>RT_log)))</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-</div>
-<p>We sample 20 randomly generated values from a distribution with mean 6.88 and standard deviation 0.28. We then can take the mean and SD of these generated values and compare them to the original distribution’s mean and SD. But we can go further and sample 20 values 10 times. This procedure gives us 10 means and standard deviations, one for each sample of 20 values. The means and standard deviations of these 10 random samples are shown in <a href="ch-regression-cat.html#tbl-rt-1" class="quarto-xref">Table&nbsp;<span>27.3</span></a>.</p>
-<div class="cell">
-<div id="tbl-rt-l" class="cell quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-rt-l-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;6.1
-</figcaption>
-<div aria-describedby="tbl-rt-l-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="cell-output-display">
-<table class="do-not-create-environment caption-top table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: right;">sample</th>
-<th style="text-align: right;">mean</th>
-<th style="text-align: right;">sd</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">6.84</td>
-<td style="text-align: right;">0.24</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">7.02</td>
-<td style="text-align: right;">0.30</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">6.92</td>
-<td style="text-align: right;">0.19</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">6.88</td>
-<td style="text-align: right;">0.31</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">6.84</td>
-<td style="text-align: right;">0.27</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">6.80</td>
-<td style="text-align: right;">0.22</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">6.84</td>
-<td style="text-align: right;">0.25</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">6.95</td>
-<td style="text-align: right;">0.34</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">6.99</td>
-<td style="text-align: right;">0.31</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">6.97</td>
-<td style="text-align: right;">0.32</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</figure>
-</div>
-</div>
-<p>You will notice that, while all the means and SD are very close to the mean and SD we sampled from, they are not exactly the same: every sample’s mean and SD are slightly different from each other and from the mean and SD we sample from. In other words, it’s very very unlikely that the sample mean and standard deviation are <em>exactly</em> the population mean and standard deviation. Inference is affected by uncertainty and variability. So what do we do with such uncertainty and variability? We can use statistics to quantify them!</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Statistics
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Statistics is a tool that helps us quantifying uncertainty and controlling for variability.</strong></p>
-</div>
-</div>
-<p>But what is statistics exactly?</p>
+<p>You made it! You completed your journey in learning the basics of quantitative research methods, R and Open Research principles and practices. This is not the end, of course. Becoming proficient in quantitative methods requires years of practices and one semester is just not enough. While everything we covered in this course is a necessary pre-requisite, most research will require you to learn much much more.</p>
+<p>This section gives you a glimpse of other topics you could learn about and topics you might need for your research (including your dissertation/thesis if you will be doing that soon). For each topic I will point you to some resources, but note that in some cases you might have to do some preliminary readings to be able to consume the contents of the linked resources. I am planning to add extra chapters in this textbook to cover these topics in the future, but until I have time to do that, you will have to make do with external resources.</p>
+<section id="further-interactions" class="level2" data-number="36.1">
+<h2 data-number="36.1" class="anchored" data-anchor-id="further-interactions"><span class="header-section-number">36.1</span> Further interactions</h2>
 </section>
-<section id="what-is-statistics-and-isnt" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="what-is-statistics-and-isnt"><span class="header-section-number">6.2</span> What is statistics (and isn’t)?</h2>
-<p>Statistics is a <strong>tool</strong>. But what does it do? There are at least four ways of looking at statistics as a tool.</p>
-<ul>
-<li><p>Statistics is the <strong>science</strong> concerned with developing and studying methods for collecting, analyzing, interpreting and presenting empirical data. (From <a href="https://www.stat.uci.edu/what-is-statistics/">UCI Department of Statistics</a>)</p></li>
-<li><p>Statistics is the <strong>technology</strong> of extracting information, illumination and understanding from data, often in the face of uncertainty. (From the <a href="https://www.thebritishacademy.ac.uk/blog/what-is-statistics/">British Academy</a>)</p></li>
-<li><p>Statistics is a <strong>mathematical and conceptual</strong> discipline that focuses on the relation between data and hypotheses. (From the <a href="https://plato.stanford.edu/entries/statistics/">Standford Encyclopedia of Philosophy</a>)</p></li>
-<li><p>Statistics is the <strong>art</strong> of applying the science of scientific methods. (From <a href="https://www.oriresults.com/articles/blog-posts/the-art-of-statistics/">ORI Results</a>, <a href="https://www.nature.com/articles/d41586-019-00898-0">Nature</a>)</p></li>
-</ul>
-<p>To quote a historically important statistician:</p>
-<div class="callout callout-style-simple callout-important no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><em>Statistic is both a science and an art</em>.</p>
-<p>It is a <em>science</em> in that its methods are basically systematic and have general application and an <em>art</em> in that their successful application depends, to a considerable degree, on the skill and special experience of the statistician, and on his knowledge of the field of application.</p>
-<p>—L. H. C. Tippett</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Spotlight: Etymology
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The word <em>statistics</em> is related to <em>state</em> and it is no coincidence. The discipline of statistics was born as a sub-field of politics and economics. Check out the full etymology of <em>statistics</em> here: <a href="https://en.wiktionary.org/wiki/statistics#Etymology_1" class="uri">https://en.wiktionary.org/wiki/statistics#Etymology_1</a>.</p>
-</div>
-</div>
-</div>
-<p>Statistics is a many things, but it is also <em>not</em> a lot of things.</p>
-<ul>
-<li><p>Statistics is <strong>not maths</strong>, but it is informed by maths.</p></li>
-<li><p>Statistics is <strong>not about hard truths</strong>, but about how to seek the truth.</p></li>
-<li><p>Statistics is <strong>not a purely objective</strong> endeavour. In fact there are a <em>lot</em> of subjective aspects to statistics (see below).</p></li>
-<li><p>Statistics is <strong>not a substitute</strong> of common sense and expert knowledge.</p></li>
-<li><p>Statistics is <strong>not just</strong> about <span class="math inline">\(p\)</span>-values and significance testing.</p></li>
-</ul>
-<p>As Gollum would put it, <em>all that glisters is not gold</em>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="img/gollum-statistician.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="300"></p>
-</figure>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Quiz 2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>True or false?</strong></p>
-<ol type="a">
-<li><p>Statistics is necessary if one wants to know the truth. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
-<li><p>Statistics is only relevant to objective science. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
-<li><p>Statistics is based on mathematics but it is also informed by philosophy. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
-<li><p>We can completely remove uncertainty with statistics. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
-</ol>
-</div>
-</div>
+<section id="multilevel-regression-models-aka-mixed-effects" class="level2" data-number="36.2">
+<h2 data-number="36.2" class="anchored" data-anchor-id="multilevel-regression-models-aka-mixed-effects"><span class="header-section-number">36.2</span> Multilevel regression models (aka mixed-effects)</h2>
 </section>
-<section id="many-analysts-one-data-set-subjectivity-exposed" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="many-analysts-one-data-set-subjectivity-exposed"><span class="header-section-number">6.3</span> Many Analysts, One Data Set: subjectivity exposed</h2>
-<p>In <span class="citation" data-cites="silberzahn2018">Silberzahn et al. (<a href="references.html#ref-silberzahn2018" role="doc-biblioref">2018</a>)</span>, a group of researchers asked 29 independent analysis teams to answer the following question based on provided data: Is there a link between player skin tone and number of red cards in soccer? Crucially, <strong>69% of the teams reported an effect of player skin tone, and 31% did not</strong>. In total, the 29 teams came up with 21 unique types of statistical analysis. These results clearly show how subjective statistics is and how even a straightforward question can lead to a multitude of answers. To put it in Silberzahn et al’s words: “The observed results from analyzing a complex data set can be highly contingent on <strong>justifiable, but subjective</strong>, analytic decisions. This is why you should always be somewhat <strong>sceptical of the results of any single study</strong>: you never know what results might have been found if another research team did the study. This is one of the reasons why replicating research is very important. You will learn about replication and related concepts in <a href="ch-research-cycle.html" class="quarto-xref"><span>Chapter 17</span></a>.</p>
-<p><span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span> tried something similar, but in the context of the speech sciences: they asked 30 independent analysis teams (84 signed up, 46 submitted an analysis, 30 submitted usable analyses) to answer the question: Do speakers acoustically modify utterances to signal atypical word combinations? Outstandingly, the 30 teams submitted 109 individual analyses—a bit more than 3 analyses per team!—and 52 unique measurement specifications in 47 unique model specifications. <span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span> say: “<strong>Nine teams out of the thirty (30%) reported to have found at least one statistically reliable effect</strong> (based on the inferential criteria they specified). Of the 170 critical model coefficients, 37 were claimed to show a statistically reliable effect (21.8%).” <a href="#fig-flex" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> illustrates the analytic flexibility typical of acoustic analyses. (A) shows the pipeline of decision a researcher would have to do: which linguistic unit, which temporal window, which acoustic parameters and how to measure those. You can appreciate that there are potentially many combinations. (B) illustrates the fundamental frequency (f0) contour of the sentences “I can’t bear ANOTHER meeting on Zoom” and “I can’t bear another meeting on ZOOM”. In both sentences, the green shaded area marks the word “another”. Finally, in (C) you see the different parameters that can be extracted from the f0 contour of the word “another”. In sum, there are many choices a researcher is faced with and, while most of these choices might be justifiable, they are still subjective, as shown by the large variability of actual analyses carried out by the analysis teams in <span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span>.</p>
-<div id="fig-flex" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-flex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="img/forking-paths.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-flex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.2: Illustration of the analytic flexibility associated with acoustic analyses <span class="citation" data-cites="coretta2023">(from <a href="references.html#ref-coretta2023" role="doc-biblioref">Coretta et al. 2023</a>)</span>
-</figcaption>
-</figure>
-</div>
+<section id="causal-inference" class="level2" data-number="36.3">
+<h2 data-number="36.3" class="anchored" data-anchor-id="causal-inference"><span class="header-section-number">36.3</span> Causal inference</h2>
 </section>
-<section id="the-new-statistics" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="the-new-statistics"><span class="header-section-number">6.4</span> The “New Statistics”</h2>
-<p>The <span class="citation" data-cites="silberzahn2018">Silberzahn et al. (<a href="references.html#ref-silberzahn2018" role="doc-biblioref">2018</a>)</span> and <span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span> studies are just the tip of the iceberg. We are currently facing a “research crisis”. As mentioned above, we will dig deeper into this subject in <a href="ch-research-cycle.html" class="quarto-xref"><span>Chapter 17</span></a>. In brief, the research crisis is a mix of problems related to how research is conducted and published. In response to the research crisis, <span class="citation" data-cites="cumming2013">Cumming (<a href="references.html#ref-cumming2013" role="doc-biblioref">2013</a>)</span> introduced a new approach to statistics, which he calls the “New Statistics”. The <strong>New Statistics</strong> mainly addresses three problems: (1) published research is a biased selection of all (existing and possible) research; (2) data analysis and reporting are often selective and biased, (3) in many research fields, studies are rarely replicated, so false conclusions persist. To help solve those problems, the New Statistics proposes these solutions (among others): (1) promoting <strong>research integrity</strong>, by which researchers explicitly discuss the subjectivity and shortcomings of quantitative research, (2) shifting away from statistical significance of differences between groups to quantitative <strong>estimation</strong> of those differences, (3) building a <strong>cumulative</strong> quantitative discipline, in which phenomena are studied again and again in the same contexts and with the same conditions to ensure they are robust enough.</p>
-<p><span class="citation" data-cites="kruschke2018">Kruschke and Liddell (<a href="references.html#ref-kruschke2018" role="doc-biblioref">2018</a>)</span> revisit the New Statistics and make a further proposal: to adopt the historically older but only recently popularised approach of Bayesian statistics. They call this the <strong>Bayesian New Statistics</strong>. The classical approach to statistics is the frequentist method, based on work by Fisher, Neyman and Pearson. Put simply, frequentist statistics is based on rejecting the “null hypothesis” (i.e.&nbsp;the hypothesis that there is no difference between groups) using <em>p</em>-values. Bayesian statistics provides researchers with more appropriate and more robust ways to answer research questions, by reallocating belief or credibility across possibilities. You will learn more about the frequentist and the Bayesian approaches in <a href="ch-bayes.html" class="quarto-xref"><span>Chapter 20</span></a>.</p>
-<p>This textbook adopts the Bayesian New Statistics approach. Note that we will not really touch upon Bayesian statistics in the strict sense until <a href="ch-bayes.html" class="quarto-xref"><span>Chapter 20</span></a>, just before statistical modelling will be introduced. So you should not worry too much about it for now: just try to appreciate that not only is statistics not intended to objectively separate truths from falsities, but also there are several ways to practise statistics. After all, statistics is a human activity, and like all other human activities it is embedded in the world constructed by humans and their idiosyncrasies.</p>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Quiz 3
-</div>
-</div>
-<div class="callout-body-container callout-body">
-Three researchers meet at a coffee shop. Each of them tells the other two about their recent findings. Below, you can find what each said. Based on how they talk about the results, which one among them aligns with the New Statistics approach and recognises the shortcomings of research?
-<div id="radio_JEKMZANLVJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JEKMZANLVJ" value=""> <span>Researcher A. My team investigated the effect of emotional dysregulation on speaking rate and they found a significant effect. We have ultimately shown that people with emotional dysregulation speak faster.</span></label><label><input type="radio" autocomplete="off" name="radio_JEKMZANLVJ" value=""> <span>Researcher B. I wanted to know if it is true that languages with morphologically rich grammars are more difficult to learn than isolating languages. We tested several measures of learning difficulty in two groups of infants, one learning a morphologically rich language and one learning an isolating language. We found that two measures were significantly higher for the morphologically rich language group than the isolating language group. Hence we have found solid evidence that morphologically rich grammars are more difficult to learn.</span></label><label><input type="radio" autocomplete="off" name="radio_JEKMZANLVJ" value="answer"> <span>Researcher C. We compared reaction times (RTs) of chimpanzees looking at videos of humans vs chimpanzees signing. If low-level motor perception is mostly affected by the conspecificity (human vs conspecific), we should see differences in RTs of 20-70 ms. If motor resonance is mostly affected (activation of the observer’s own motor system when seeing an action they could perform themselves), we should find differences in RTs of 80-200 ms. We found that in the conspecific condition, RTs were 74-98 ms shorter at 95% probability. This range mostly overlaps with the motor resonance hypothesis (80-200) but it also lies outside of it, somewhat close to the higher end of the low-level perception range (20-70). In sum, we could not establish which hypothesis could better explain the data.</span></label>
-</div>
-</div>
-</div>
+<section id="prior-probability-distributions" class="level2" data-number="36.4">
+<h2 data-number="36.4" class="anchored" data-anchor-id="prior-probability-distributions"><span class="header-section-number">36.4</span> Prior probability distributions</h2>
 </section>
-<section id="summary" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">6.5</span> Summary</h2>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<ul>
-<li><p>Inference is the process of learning something about a population through a sample.</p></li>
-<li><p>Uncertainty in each observation and variability across observations affect the inference process.</p></li>
-<li><p>Statistics is a tool to quantify uncertainty and variability.</p></li>
-<li><p>The (Bayesian) New Statistics is an approach to statistics that highlights the subjective nature of statistics and stresses the importance of estimation over statistical significance.</p></li>
-</ul>
-</div>
-</div>
-</div>
+<section id="further-distribution-families" class="level2" data-number="36.5">
+<h2 data-number="36.5" class="anchored" data-anchor-id="further-distribution-families"><span class="header-section-number">36.5</span> Further distribution families</h2>
+</section>
+<section id="non-linear-modelling" class="level2" data-number="36.6">
+<h2 data-number="36.6" class="anchored" data-anchor-id="non-linear-modelling"><span class="header-section-number">36.6</span> Non-linear modelling</h2>
+</section>
+<section id="sample-size-determination" class="level2" data-number="36.7">
+<h2 data-number="36.7" class="anchored" data-anchor-id="sample-size-determination"><span class="header-section-number">36.7</span> Sample size determination</h2>
+</section>
+<section id="dimensionality-reduction-approaches" class="level2" data-number="36.8">
+<h2 data-number="36.8" class="anchored" data-anchor-id="dimensionality-reduction-approaches"><span class="header-section-number">36.8</span> Dimensionality reduction approaches</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-coretta2023" class="csl-entry" role="listitem">
-Coretta, Stefano, Joseph V. Casillas, Simon Roessig, Michael Franke, Byron Ahn, Ali H. Al-Hoorie, Jalal Al-Tamimi, et al. 2023. <span>“Multidimensional Signals and Analytic Flexibility: Estimating Degrees of Freedom in Human-Speech Analyses.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 6 (3). <a href="https://doi.org/10.1177/25152459231162567">https://doi.org/10.1177/25152459231162567</a>.
-</div>
-<div id="ref-cumming2013" class="csl-entry" role="listitem">
-Cumming, Geoff. 2013. <span>“The New Statistics: Why and How.”</span> <em>Psychological Science</em> 25 (1): 729. <a href="https://doi.org/10.1177/0956797613504966">https://doi.org/10.1177/0956797613504966</a>.
-</div>
-<div id="ref-gelman2017" class="csl-entry" role="listitem">
-Gelman, Andrew, and Christian Hennig. 2017. <span>“Beyond Subjective and Objective in Statistics.”</span> <em>Journal of the Royal Statistical Society: Series A (Statistics in Society)</em> 180 (4): 9671033. <a href="https://doi.org/10.1111/rssa.12276">https://doi.org/10.1111/rssa.12276</a>.
-</div>
-<div id="ref-kruschke2018" class="csl-entry" role="listitem">
-Kruschke, John K., and Torrin M. Liddell. 2018. <span>“The Bayesian New Statistics: Hypothesis Testing, Estimation, Meta-Analysis, and Power Analysis from a Bayesian Perspective.”</span> <em>Psychonomic Bulletin &amp; Review</em> 25 (1): 178206. <a href="https://doi.org/10.3758/s13423-016-1221-4">https://doi.org/10.3758/s13423-016-1221-4</a>.
-</div>
-<div id="ref-silberzahn2018" class="csl-entry" role="listitem">
-Silberzahn, Raphael, Eric L. Uhlmann, Daniel P. Martin, Pasquale Anselmi, Frederik Aust, Eli Awtrey, Štěpán Bahník, Feng Bai, Colin Bannard, and Evelina Bonnier. 2018. <span>“Many Analysts, One Data Set: Making Transparent How Variations in Analytic Choices Affect Results.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 1 (3): 337356. <a href="https://doi.org/10.1177/2515245917747646">https://doi.org/10.1177/2515245917747646</a>.
-</div>
-<div id="ref-tucker2019" class="csl-entry" role="listitem">
-Tucker, Benjamin V, Daniel Brenner, Kyle Danielson D, Matthew C Kelley, Filip Nenadić, and Michelle Sims. 2019. <span>“The Massive Auditory Lexical Decision (MALD) Database.”</span> <em>Behavior Research Methods</em> 51 (3): 11871204. <a href="https://doi.org/10.3758/s13428-018-1056-1">https://doi.org/10.3758/s13428-018-1056-1</a>.
-</div>
-<div id="ref-vasishth2021" class="csl-entry" role="listitem">
-Vasishth, Shravan, and Andrew Gelman. 2021. <span>“How to Embrace Variation and Accept Uncertainty in Linguistic and Psycholinguistic Data Analysis.”</span> <em>Linguistics</em> 59 (5): 13111342. <a href="https://doi.org/10.1515/ling-2019-0051">https://doi.org/10.1515/ling-2019-0051</a>.
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->
@@ -1785,13 +1358,13 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ch-packages.html" class="pagination-link" aria-label="R packages">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R packages</span></span>
+      <a href="./ch-regression-interaction.html" class="pagination-link" aria-label="Regression models: interactions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch-scripts.html" class="pagination-link" aria-label="R scripts">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R scripts</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1800,4 +1373,4 @@ window.onload = function() {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-inference.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-next.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
