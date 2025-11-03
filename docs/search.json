@@ -1968,7 +1968,29 @@
     "href": "ch-regression-interaction.html#interpreting-models-with-interactions",
     "title": "35  Regression models: interactions",
     "section": "35.3 Interpreting models with interactions",
-    "text": "35.3 Interpreting models with interactions\n\nsummary(f0_bm_int)\n\n Family: gaussian \n  Links: mu = identity; sigma = identity \nFormula: f0mn ~ gender + attitude + gender:attitude \n   Data: polite (Number of observations: 212) \n  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;\n         total post-warmup draws = 4000\n\nRegression Coefficients:\n                    Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS\nIntercept             256.56      5.20   246.38   267.27 1.00     2632     2950\ngenderM              -119.38      7.66  -134.08  -104.50 1.00     2532     2665\nattitudepol           -17.48      7.28   -31.76    -3.18 1.00     2573     2806\ngenderM:attitudepol     6.65     10.67   -14.20    27.47 1.00     2191     2693\n\nFurther Distributional Parameters:\n      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS\nsigma    39.10      1.94    35.52    43.14 1.00     3834     2779\n\nDraws were sampled using sampling(NUTS). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1).\n\n\n\nconditional_effects(f0_bm_int, \"gender:attitude\")\n\n\n\n\n\n\n\n\n\nf0_bm_int_draws &lt;- as_draws_df(f0_bm_int)\n\n\nf0_bm_int_draws &lt;- f0_bm_int_draws |&gt; \n  mutate(\n    f_inf = b_Intercept,\n    f_pol = b_Intercept + b_attitudepol,\n    m_inf = b_Intercept + b_genderM,\n    m_pol = b_Intercept + b_genderM + b_attitudepol + `b_genderM:attitudepol`\n  )\n\n\nlibrary(posterior)\n\nThis is posterior version 1.6.1\n\n\n\nAttaching package: 'posterior'\n\n\nThe following objects are masked from 'package:stats':\n\n    mad, sd, var\n\n\nThe following objects are masked from 'package:base':\n\n    %in%, match\n\nf0_bm_int_draws |&gt; \n  mutate(\n    m_pol_inf = m_pol - m_inf\n  ) |&gt; \n  summarise(\n    mean_diff = mean(m_pol_inf), sd_diff = sd(m_pol_inf),\n    lo_diff = quantile2(m_pol_inf, probs = 0.025), hi_diff = quantile2(m_pol_inf, probs = 0.975)\n  ) |&gt;\n  round()\n\n\n  \n\n\n\n\n\n\n\nWinter, Bodo, and Sven Grawunder. 2012. “The Phonetic Profile of Korean Formal and Informal Speech Registers.” Journal of Phonetics 40 (6): 808–15. https://doi.org/10.1016/j.wocn.2012.08.006.",
+    "text": "35.3 Interpreting models with interactions\nLet’s look at the model summary. With interactions, the coefficients of categorical predictors are interpreted slightly differently than when there are no interactions.\n\nsummary(f0_bm_int)\n\n Family: gaussian \n  Links: mu = identity; sigma = identity \nFormula: f0mn ~ gender + attitude + gender:attitude \n   Data: polite (Number of observations: 212) \n  Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;\n         total post-warmup draws = 4000\n\nRegression Coefficients:\n                    Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS\nIntercept             256.56      5.20   246.38   267.27 1.00     2632     2950\ngenderM              -119.38      7.66  -134.08  -104.50 1.00     2532     2665\nattitudepol           -17.48      7.28   -31.76    -3.18 1.00     2573     2806\ngenderM:attitudepol     6.65     10.67   -14.20    27.47 1.00     2191     2693\n\nFurther Distributional Parameters:\n      Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS\nsigma    39.10      1.94    35.52    43.14 1.00     3834     2779\n\nDraws were sampled using sampling(NUTS). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1).\n\n\n\nIntercept is \\(\\beta_0\\): this is, as you would expect, the mean f0 when gender and attitude are at their reference levels, i.e. female and informal. According to the model, there is a 95% probability that the mean f0 is between 246 and 267 Hz with female speakers and informal attitude.\ngenderM is \\(\\beta_1\\): this is the difference in mean f0 between male and female gender, when attitude is informal (i.e. at the reference level of attitude). This differs from the interpretation in models with no interactions where instead the coefficient would capture the average difference between male and female gender. According to the model, the mean f0 is 105 to 134 Hz lower in male than in female participants, when the attitude is informal.\nattitudepol is \\(\\beta_2\\): this is the difference in mean f0 between polite and informal attitude, when gender is female (i.e. at the reference level of gender). This also differs from the interpretation in models with no interactions where instead the coefficient would capture the average difference between polite and informal attitude. According to the model, the mean f0 is 3 to 32 Hz lower in polite than in informal speech, in female speakers.\ngenderM:attitudepol is \\(\\beta_3\\): this is the interaction coefficient. This coefficient tells you the adjustment you have to make to the effects of gender and attitude (so \\(\\beta_1 +\\beta_2 + \\beta_3\\)), on top of what is predicted by the additive effects of gender and attitude (so \\(\\beta_1 + \\beta_2\\)). According to the model, the difference between female informal and male polite speech differs from the additive effect of gender and attitude by -14 to +27 Hz, at 95% confidence. The 95% CrI [-14, +27] spans both negative and positive values: there is uncertainty as to whether the effect of attitude differs in the two genders (and, symmetrically, whether the effect of gender differs in informal and polite speech), and as to weather the difference is positive or negative. The interval might indicate that a positive difference is more likely, given that the interval spans a wider range of positive values than negative values.\n\nLet’s extract the model’s draws and process them to get summary measures and relevant plots.",
+    "crumbs": [
+      "Week 9",
+      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Regression models: interactions</span>"
+    ]
+  },
+  {
+    "objectID": "ch-regression-interaction.html#models-draws-and-expected-predictions",
+    "href": "ch-regression-interaction.html#models-draws-and-expected-predictions",
+    "title": "35  Regression models: interactions",
+    "section": "35.4 Model’s draws and expected predictions",
+    "text": "35.4 Model’s draws and expected predictions\nWe can extract the draws from the model object as usual.\n\nf0_bm_int_draws &lt;- as_draws_df(f0_bm_int)\n\nTo calculate the expected predictions of f0, we plug in the columns from the draws object f0_bm_int_draws according to the model’s formula. To name the new columns with the expected predictions, we use f for female and m for male for gender, and inf for informal and pol for polite for attitude. Note that, since the name of interaction coefficient b_genderM:attitudepol contains a colon :, we need to surround it with back-ticks to prevent R for interpreting the colon : as the range operator (like in 1:5, which returns integers from 1 to 5).\n\nf0_bm_int_draws &lt;- f0_bm_int_draws |&gt; \n  mutate(\n    # \\beta_0\n    f_inf = b_Intercept,\n    # \\beta_0 + \\beta_1\n    f_pol = b_Intercept + b_attitudepol,\n    # \\beta_0 + \\beta_2\n    m_inf = b_Intercept + b_genderM,\n    # \\beta_0 + \\beta_1 + \\beta_2 + \\beta_3\n    m_pol = b_Intercept + b_genderM + b_attitudepol + `b_genderM:attitudepol`\n  )\n\nLet’s plot the distributions of the expected predictions we just calculated. We need to pivot the draws object: to make plotting easier, we need a column with the gender value and one column with the attitude value, and also a column with the expected prediction values. We can split the cond column with separate() from dplyr. This function splits strings by punctuation characters, like _, so it works with strings like f_inf, which gets split into f and inf. The two new values are input into the specified new columns gender and attitude (the user picks and specifies the names as one of the arguments).\n\nf0_bm_int_epred &lt;- f0_bm_int_draws |&gt; \n  # First, select only the columns we need to pivot\n  select(f_inf:m_pol) |&gt; \n  # From wide to long\n  pivot_longer(f_inf:m_pol, names_to = \"cond\", values_to = \"epred\") |&gt; \n  # Split `cond` column to make a gender and an attitude column\n  separate(cond, c(\"gender\", \"attitude\"))\n\nf0_bm_int_epred\n\n\n  \n\n\n\nNow we can plot the expected predictions with ggplot2 (Figure 35.2). We set scales = \"free_x\" in facet_grid() to allow ggplot to use different scales in the x-axis (try to run the code without specifying the scales argument to see why).\n\nf0_bm_int_epred |&gt; \n  ggplot(aes(epred, attitude)) +\n  stat_halfeye() +\n  facet_grid(cols = vars(gender), scales = \"free_x\")\n\n\n\n\n\n\n\nFigure 35.2: Density plot of the expected predictions of f0 by gender and attitude.\n\n\n\n\n\nAn alternative to stat_halfeye() is stat_interval(). By default, it plots the 50-80-95% CrIs of the expected predictions.\n\nf0_bm_int_epred |&gt; \n  ggplot(aes(attitude, epred)) +\n  stat_interval() +\n  facet_grid(cols = vars(gender))\n\n\n\n\n\n\n\nFigure 35.3: Intervals plot of the expected predictions of f0 by gender and attitude.\n\n\n\n\n\nWe can observe two main things:\n\nThe f0 of female participants is generally higher than that of male participants.\nIn both genders, f0 is somewhat higher in informal than in polite speech.\nPossibly, the attitude difference is somewhat larger in female than in male participants.\n\nThese general observations can be quantified using CrIs from the model. For example, the 95% CrI of the \\(\\beta_3\\) coefficient suggests a good amount of uncertainty in how the attitude effect differs between female and male participants. Furthermore, we can compute summary measures of the attitude difference in male participants directly.\n\nf0_bm_int_draws |&gt; \n  mutate(\n    m_pol_inf = m_pol - m_inf\n  ) |&gt; \n  summarise(\n    mean_diff = mean(m_pol_inf), sd_diff = sd(m_pol_inf),\n    lo_diff = quantile2(m_pol_inf, probs = 0.025),\n    hi_diff = quantile2(m_pol_inf, probs = 0.975)\n  ) |&gt;\n  round()\n\n\n  \n\n\n\nThe mean difference is -11 Hz (SD = 8) and the 95% CrI is [-27, +5] Hz. This is somewhat indicative of a difference (polite speech is produced with a somewhat lower f0) but it is also possible that there is instead a negligible positive difference (+5 Hz). Comparing this with the effect of attitude in female participants (as given by \\(\\beta_2\\) or attitudepol) which is at 95% confidence between -32 to -3 Hz, we cannot really argue for or against the effect of attitude being different in the two genders. In other words, we are left with a certain level of uncertainty.",
+    "crumbs": [
+      "Week 9",
+      "<span class='chapter-number'>35</span>  <span class='chapter-title'>Regression models: interactions</span>"
+    ]
+  },
+  {
+    "objectID": "ch-regression-interaction.html#summary",
+    "href": "ch-regression-interaction.html#summary",
+    "title": "35  Regression models: interactions",
+    "section": "35.5 Summary",
+    "text": "35.5 Summary\n\n\n\n\n\n\n\nInteraction terms allow us to estimate how the effect of one predictor differs based on the levels of another.\nInterpretation of a coefficient for any one predictor is thus based on the reference level of the other predictors.\nWe can still calculate expected predictions and any comparison of interest based on the model’s draws.\n\n\n\n\n\n\n\n\nWinter, Bodo, and Sven Grawunder. 2012. “The Phonetic Profile of Korean Formal and Informal Speech Registers.” Journal of Phonetics 40 (6): 808–15. https://doi.org/10.1016/j.wocn.2012.08.006.",
     "crumbs": [
       "Week 9",
       "<span class='chapter-number'>35</span>  <span class='chapter-title'>Regression models: interactions</span>"
@@ -2008,11 +2030,22 @@
     ]
   },
   {
+    "objectID": "ch-next.html#prior-probability-distributions",
+    "href": "ch-next.html#prior-probability-distributions",
+    "title": "36  What’s next?",
+    "section": "36.4 Prior probability distributions",
+    "text": "36.4 Prior probability distributions",
+    "crumbs": [
+      "Week 10",
+      "<span class='chapter-number'>36</span>  <span class='chapter-title'>What's next?</span>"
+    ]
+  },
+  {
     "objectID": "ch-next.html#further-distribution-families",
     "href": "ch-next.html#further-distribution-families",
     "title": "36  What’s next?",
-    "section": "36.4 Further distribution families",
-    "text": "36.4 Further distribution families",
+    "section": "36.5 Further distribution families",
+    "text": "36.5 Further distribution families",
     "crumbs": [
       "Week 10",
       "<span class='chapter-number'>36</span>  <span class='chapter-title'>What's next?</span>"
@@ -2022,8 +2055,8 @@
     "objectID": "ch-next.html#non-linear-modelling",
     "href": "ch-next.html#non-linear-modelling",
     "title": "36  What’s next?",
-    "section": "36.5 Non-linear modelling",
-    "text": "36.5 Non-linear modelling",
+    "section": "36.6 Non-linear modelling",
+    "text": "36.6 Non-linear modelling",
     "crumbs": [
       "Week 10",
       "<span class='chapter-number'>36</span>  <span class='chapter-title'>What's next?</span>"
@@ -2033,8 +2066,8 @@
     "objectID": "ch-next.html#sample-size-determination",
     "href": "ch-next.html#sample-size-determination",
     "title": "36  What’s next?",
-    "section": "36.6 Sample size determination",
-    "text": "36.6 Sample size determination",
+    "section": "36.7 Sample size determination",
+    "text": "36.7 Sample size determination",
     "crumbs": [
       "Week 10",
       "<span class='chapter-number'>36</span>  <span class='chapter-title'>What's next?</span>"
@@ -2044,8 +2077,8 @@
     "objectID": "ch-next.html#dimensionality-reduction-approaches",
     "href": "ch-next.html#dimensionality-reduction-approaches",
     "title": "36  What’s next?",
-    "section": "36.7 Dimensionality reduction approaches",
-    "text": "36.7 Dimensionality reduction approaches",
+    "section": "36.8 Dimensionality reduction approaches",
+    "text": "36.8 Dimensionality reduction approaches",
     "crumbs": [
       "Week 10",
       "<span class='chapter-number'>36</span>  <span class='chapter-title'>What's next?</span>"

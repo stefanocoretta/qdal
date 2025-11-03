@@ -16,6 +16,8 @@ Keep reading to learn about them.
 library(tidyverse)
 theme_set(theme_light())
 library(brms)
+library(posterior)
+library(ggdist)
 ```
 
 Let's start by reading and filtering the `polite` data [@winter2012].
@@ -112,6 +114,9 @@ Getting a regression model to estimate interactions is easy, but a warning: beca
 
 ## Interpreting models with interactions
 
+Let's look at the model summary.
+With interactions, the coefficients of categorical predictors are interpreted slightly differently than when there are no interactions.
+
 ```{r}
 #| label: f0-bm-int-summary
 
@@ -119,10 +124,28 @@ summary(f0_bm_int)
 
 ```
 
-```{r}
-#| label: f0-bm-int-cond
-conditional_effects(f0_bm_int, "gender:attitude")
-```
+-   `Intercept` is $\beta_0$: this is, as you would expect, the mean f0 when gender and attitude are at their reference levels, i.e. female and informal.
+    According to the model, there is a 95% probability that the mean f0 is between 246 and 267 Hz with female speakers and informal attitude.
+
+-   `genderM` is $\beta_1$: this is the difference in mean f0 between male and female gender, *when attitude is informal* (i.e. at the reference level of attitude).
+    This differs from the interpretation in models with no interactions where instead the coefficient would capture the *average* difference between male and female gender.
+    According to the model, the mean f0 is 105 to 134 Hz lower in male than in female participants, when the attitude is informal.
+
+-   `attitudepol` is $\beta_2$: this is the difference in mean f0 between polite and informal attitude, *when gender is female* (i.e. at the reference level of gender).
+    This also differs from the interpretation in models with no interactions where instead the coefficient would capture the *average* difference between polite and informal attitude.
+    According to the model, the mean f0 is 3 to 32 Hz lower in polite than in informal speech, in female speakers.
+
+-   `genderM:attitudepol` is $\beta_3$: this is the interaction coefficient.
+    This coefficient tells you the *adjustment* you have to make to the effects of gender and attitude (so $\beta_1 +\beta_2 + \beta_3$), on top of what is predicted by the additive effects of gender and attitude (so $\beta_1 + \beta_2$).
+    According to the model, the difference between female informal and male polite speech differs from the additive effect of gender and attitude by -14 to +27 Hz, at 95% confidence.
+    The 95% CrI \[-14, +27\] spans both negative and positive values: there is uncertainty as to whether the effect of attitude differs in the two genders (and, symmetrically, whether the effect of gender differs in informal and polite speech), and as to weather the difference is positive or negative.
+    The interval might indicate that a positive difference is more likely, given that the interval spans a wider range of positive values than negative values.
+
+Let's extract the model's draws and process them to get summary measures and relevant plots.
+
+## Model's draws and expected predictions
+
+We can extract the draws from the model object as usual.
 
 ```{r}
 #| label: f0-bm-int-draws
@@ -130,22 +153,88 @@ conditional_effects(f0_bm_int, "gender:attitude")
 f0_bm_int_draws <- as_draws_df(f0_bm_int)
 ```
 
+To calculate the expected predictions of f0, we plug in the columns from the draws object `f0_bm_int_draws` according to the model's formula.
+To name the new columns with the expected predictions, we use `f` for female and `m` for male for gender, and `inf` for informal and `pol` for polite for attitude.
+Note that, since the name of interaction coefficient `b_genderM:attitudepol` contains a colon `:`, we need to surround it with back-ticks to prevent R for interpreting the colon `:` as the range operator (like in `1:5`, which returns integers from 1 to 5).
+
 ```{r}
 #| label: f0-bm-int-draws-2
 
 f0_bm_int_draws <- f0_bm_int_draws |> 
   mutate(
+    # \beta_0
     f_inf = b_Intercept,
+    # \beta_0 + \beta_1
     f_pol = b_Intercept + b_attitudepol,
+    # \beta_0 + \beta_2
     m_inf = b_Intercept + b_genderM,
+    # \beta_0 + \beta_1 + \beta_2 + \beta_3
     m_pol = b_Intercept + b_genderM + b_attitudepol + `b_genderM:attitudepol`
   )
 ```
 
+Let's plot the distributions of the expected predictions we just calculated.
+We need to pivot the draws object: to make plotting easier, we need a column with the gender value and one column with the attitude value, and also a column with the expected prediction values.
+We can split the `cond` column with `separate()` from dplyr.
+This function splits strings by punctuation characters, like `_`, so it works with strings like `f_inf`, which gets split into `f` and `inf`.
+The two new values are input into the specified new columns `gender` and `attitude` (the user picks and specifies the names as one of the arguments).
+
+```{r}
+#| label: f0-bm-int-epred
+#| warning: false
+
+f0_bm_int_epred <- f0_bm_int_draws |> 
+  # First, select only the columns we need to pivot
+  select(f_inf:m_pol) |> 
+  # From wide to long
+  pivot_longer(f_inf:m_pol, names_to = "cond", values_to = "epred") |> 
+  # Split `cond` column to make a gender and an attitude column
+  separate(cond, c("gender", "attitude"))
+
+f0_bm_int_epred
+```
+
+Now we can plot the expected predictions with ggplot2 (@fig-f0-bm-int-epred).
+We set `scales = "free_x"` in `facet_grid()` to allow ggplot to use different scales in the *x*-axis (try to run the code without specifying the `scales` argument to see why).
+
+```{r}
+#| label: fig-f0-bm-int-epred
+#| fig-cap: "Density plot of the expected predictions of f0 by gender and attitude."
+
+f0_bm_int_epred |> 
+  ggplot(aes(epred, attitude)) +
+  stat_halfeye() +
+  facet_grid(cols = vars(gender), scales = "free_x")
+
+```
+
+An alternative to `stat_halfeye()` is `stat_interval()`.
+By default, it plots the 50-80-95% CrIs of the expected predictions.
+
+```{r}
+#| label: fig-f0-bm-int-epred-interval
+#| fig-cap: "Intervals plot of the expected predictions of f0 by gender and attitude."
+
+f0_bm_int_epred |> 
+  ggplot(aes(attitude, epred)) +
+  stat_interval() +
+  facet_grid(cols = vars(gender))
+```
+
+We can observe two main things:
+
+-   The f0 of female participants is generally higher than that of male participants.
+
+-   In both genders, f0 is somewhat higher in informal than in polite speech.
+
+-   Possibly, the attitude difference is somewhat larger in female than in male participants.
+
+These general observations can be quantified using CrIs from the model.
+For example, the 95% CrI of the $\beta_3$ coefficient suggests a good amount of uncertainty in how the attitude effect differs between female and male participants.
+Furthermore, we can compute summary measures of the attitude difference in male participants directly.
+
 ```{r}
 #| label: f0-bm-int2-draws-summarise
-
-library(posterior)
 
 f0_bm_int_draws |> 
   mutate(
@@ -153,7 +242,23 @@ f0_bm_int_draws |>
   ) |> 
   summarise(
     mean_diff = mean(m_pol_inf), sd_diff = sd(m_pol_inf),
-    lo_diff = quantile2(m_pol_inf, probs = 0.025), hi_diff = quantile2(m_pol_inf, probs = 0.975)
+    lo_diff = quantile2(m_pol_inf, probs = 0.025),
+    hi_diff = quantile2(m_pol_inf, probs = 0.975)
   ) |>
   round()
 ```
+
+The mean difference is -11 Hz (SD = 8) and the 95% CrI is \[-27, +5\] Hz.
+This is somewhat indicative of a difference (polite speech is produced with a somewhat lower f0) but it is also possible that there is instead a negligible positive difference (+5 Hz).
+Comparing this with the effect of attitude in female participants (as given by $\beta_2$ or `attitudepol`) which is at 95% confidence between -32 to -3 Hz, we cannot really argue for or against the effect of attitude being different in the two genders.
+In other words, we are left with a certain level of uncertainty.
+
+## Summary
+
+::: {.callout-note appearance="minimal"}
+-   Interaction terms allow us to estimate how the effect of one predictor differs based on the levels of another.
+
+-   Interpretation of a coefficient for any one predictor is thus based on the reference level of the other predictors.
+
+-   We can still calculate expected predictions and any comparison of interest based on the model's draws.
+:::
