@@ -14,7 +14,7 @@ library(bayesplot)
 library(ggdist)
 ```
 
-In @sec-probability, we talked about skewness of distributions in relation to the density plots of reaction times. In @sec-gauss-model, we further explained that it is the onus of the researcher to decide on a distribution family when fitting regression models and we said that, in the absence of more specific knowledge, the Gaussian distribution is a safe assumption to make. Note that the choice of distribution family should be based as much as possible on theoretical grounds (as opposed to empirical). In other words, you shouldn't plot the variable to check with distribution it might follow (more on this in the Important box below).
+In @sec-probability, we talked about skewness of distributions in relation to the density plots of reaction times. In @sec-gauss-model, we further explained that it is the onus of the researcher to decide on a distribution family when fitting regression models and we said that, in the absence of more specific knowledge, the Gaussian distribution is a safe assumption to make. Note that the choice of distribution family should be based as much as possible on theoretical grounds (as opposed to empirical). In other words, you shouldn't plot the variable to check which distribution it might follow (more on this in the Important box below).
 
 There are heuristics one can follow to pick a theoretically grounded distribution. The major ones are listed in @sec-outcome, so you can refer to that section in the appendix, but in this chapter we will focus on one type of variables and the default distribution choice: i.e. variables that can only take on values that are positive numbers. These variables, in the absence of more specific knowledge, can be assumed to be from a log-normal distribution.
 
@@ -132,7 +132,7 @@ Deciding if a variable is log-normal should be based on theoretical consideratio
 
 Very extreme values are generally called **outliers**: an outlier is a value that is more extreme than what the distribution would indicate. The definition of outlier is quite vague and there are different ways of operationalising "outlierness" (i.e. to determine if a value is an outlier). There are also different camps as to what to do with outliers, particularly in regard to inclusion/exclusion criteria. I side with the camp that suggests not to exclude outliers, if they are real outliers. In most cases, thinking about errors is a much more useful way of deciding which values to include or exclude. For example, in our RT data there is one observation of 34 ms. The second lowest RT is 200 ms. Given the task participants had to complete, a lexical decision task, it is unlikely that they could thoughfully answer after only 34 ms (that is a very short time, a vowel is usually longer than that!). So we could argue that that was an error: the participant mistakenly pressed the button before thinking about the answer.
 
-We have a good theoretical reason to exclude that observation. We would not call this an outlier, because it is an error. You should reserve the word outlier only for extreme observations that are not the result of an error, misunderstanding or the like. It also very often depends on the specific task at hand: for certain task, an RT of 5 seconds might still be acceptable, but for others it probably means the participant was distracted. This type of observations do not represent the process one is interested in, so they are best left out. But if there are observations that are extreme, but not so extreme to believe that they come from errors or other causes, then it is theoretically more sound to keep them.
+We have a good theoretical reason to exclude that observation. We would not call this an outlier, because it is an error. You should reserve the word outlier only for extreme observations that are not the result of an error, misunderstanding or the like. It also very often depends on the specific task at hand: for certain tasks, an RT of 5 seconds might still be acceptable, but for others it probably means the participant was distracted. This type of observations do not represent the process one is interested in, so they are best left out. But if there are observations that are extreme, but not so extreme to believe that they come from errors or other causes, then it is theoretically more sound to keep them.
 
 Since we have established that this very low RT observation of 34 ms must be an error, let's drop it from the data before moving on onto modelling.
 
@@ -160,7 +160,7 @@ rt_bm_1 <- brm(
 )
 ```
 
-We can plot the empirical and predicted distribution using the `pp_check()` function from the brms package. The function name stands for posterior predictive check: in other words, we are checking how the predicted joint posterior distribution of the data looks like when compared with the empirical distribution. The joint posterior probability distribution is simply the probability of the outcome variable as predicted by the posterior probability distributions of the parameters of the model. The Gaussian regression above correspond to the following mathematical equations:
+We can plot the empirical and predicted distribution using the `pp_check()` function from the brms package. The function name stands for posterior predictive check: in other words, we are checking how the predicted joint posterior distribution of the data looks when compared with the empirical distribution. The joint posterior probability distribution is simply the probability of the outcome variable as predicted by the posterior probability distributions of the parameters of the model. The Gaussian regression above correspond to the following mathematical equations:
 
 $$
 \begin{aligned}
@@ -180,7 +180,7 @@ The joint posterior distribution of the outcome $RT$ is the $Gaussian(\mu, \sigm
 pp_check(rt_bm_1, ndraws = 50)
 ```
 
-A common reason for the failure of the posterior probability to correctly reconstruct the empirical distribution is the incorrect choice of the family distribution (another notable reason is not including important predictors in the model, like in the three Gaussian groups from the example above: a Gaussian model of that data without group as a predictor will incorrectly estimate values). We have learned above that RT values can be assumed to be log-normal, rather than Gaussian, because they are continuous and can only be positive.
+A common reason for the failure of the posterior probability to correctly reconstruct the empirical distribution is the incorrect choice of the distribution family (another notable reason is not including important predictors in the model, like in the three Gaussian groups from the example above: a Gaussian model of that data without group as a predictor will incorrectly estimate values). We have learned above that RT values can be assumed to be log-normal, rather than Gaussian, because they are continuous and can only be positive.
 
 We will proceed then with modelling RTs using a log-normal regression model. This is just a regression model with a log-normal family as the distribution family for the outcome variable, here RTs. Here are the model formulae:
 
@@ -232,7 +232,7 @@ summary(rt_bm_2, prob = 0.8)
 
 ```
 
-As usual, the first lines give us information about the model. The family is `lognormal`. The link functions are `indentity` for both the mean `mu` and the standard deviation `sigma` (these are $\mu$ and $\sigma$ from the model formula above). You have encountered link functions in the previous chapter, when you learned about Bernoulli models. A Bernoulli model uses the logit link to model probabilities, which are bounded between 0 and 1. The log-normal model we just fitted uses the identity function instead: the identity function simply returns the same values, in other words the values are not transformed. This might look surprising because we know that the estimates are on the log scale, not on the natural scale, so we would assume a log link.
+As usual, the first lines give us information about the model. The family is `lognormal`. The link functions are `identity` for both the mean `mu` and the standard deviation `sigma` (these are $\mu$ and $\sigma$ from the model formula above). You have encountered link functions in the previous chapter, when you learned about Bernoulli models. A Bernoulli model uses the logit link to model probabilities, which are bounded between 0 and 1. The log-normal model we just fitted uses the identity function instead: the identity function simply returns the same values, in other words the values are not transformed. This might look surprising because we know that the estimates are on the log scale, not on the natural scale, so we would assume a log link.
 
 However, link functions are applied to model parameters, rather than on the outcome variable. The log-transformation we discussed in log-normal models is applied to the outcome variable directly. Because of this, the model parameters are already on the log-scale and don't have to be further transformed. That's why the link for the mean and SD is the identity function. If you look back at @sec-fit-model and @sec-regression, you will see that the links are also the identity function in Gaussian models and Gaussian regression models. This is because with Gaussian families, the model parameters are on the original scale and are not transformed (the estimates for the models of RTs were in milliseconds because RTs were measured in milliseconds).
 
@@ -253,7 +253,7 @@ You see that, apart from the fact that the estimates are about log-RTs rather th
 
 ## Logs and ratios
 
-Differences of logged variables, aka log differences for short, can also be interpreted by converting them to the ratio of the difference. Converting log differences to ratios is done by applied the inverse of the logarithm function, which is the exponential function: in R, this is simply `exp()`. @fig-log-ratio illustrated the relationship between logs on the *x*-axis and ratios on the *y*-axes (logs are converted to ratios with `exp()`).
+Differences of logged variables, aka log differences for short, can also be interpreted by converting them to the ratio of the difference. Converting log differences to ratios is done by applying the inverse of the logarithm function, which is the exponential function: in R, this is simply `exp()`. @fig-log-ratio illustrated the relationship between logs on the *x*-axis and ratios on the *y*-axes (logs are converted to ratios with `exp()`).
 
 ```{r}
 #| label: fig-log-ratio
