@@ -26,9 +26,8 @@ In linguistics, it is common to call them *mixed-effects linear* models, but the
 Varying terms are also commonly called "random effects".
 However, randomness is not a characterising feature of varying terms and the same variable could in principle be entered as a varying or constant term depending on the study design and research question.
 
-To learn about hierarchical models and varying terms, see @mcelreath2020, Ch 13-14 and @burkner2018.
-For an introduction to multilevel models fitted within the Null Ritual approach, see @winter2013.
-On terminology and definitions, see the following blog post: <https://stefanocoretta.github.io/posts/2021-03-15-on-random-effects/>.
+To learn about hierarchical models and varying terms, see @mcelreath2020 [Ch 13-14], @nalborczyk2019, @burkner2018 and @veenman2023. For an introduction to multilevel models fitted within the Null Ritual approach, see @winter2013.
+On terminology and definitions, see the following blog post <https://stefanocoretta.github.io/posts/2021-03-15-on-random-effects/> and @gelman2005.
 
 ## Causal inference
 
@@ -95,10 +94,10 @@ brms(
 ```
 
 The best way to learn about priors is to read through @mcelreath2020 (there isn't a single chapter that deals with them, instead they are explained throughout the book).
-Practical suggestions for common priors can be found in @standevelopmentteam2025 (also see @mikkola2024 for a more mathematical treatment).
+Practical suggestions for common priors can be found in @standevelopmentteam2025 [also see @mikkola2024, @bockting2024 and @gelman2006 for a more detailed treatment].
 
 Common steps in Bayesian analyses related to priors specification are prior predictive checks [or simulations, see @mcelreath2020, Ch. 4 and subsequent] and prior sensitivity analyses, like those based on posterior shrinkage and the posterior *z-*score [@betancourt2018].
-Also see @schad2021 for an overview of the Bayesian workflow.
+Also see @gelman and @schad2021 for an overview of the Bayesian workflow and @veenman2023 for prior specification in the context of hierarchical/multilevel/mixed-effects models.
 
 ## Further distribution families
 
