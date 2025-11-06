@@ -20,7 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -81,6 +136,35 @@ ul.task-list li input[type="checkbox"] {
   });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="include/webex.css">
 </head>
@@ -668,7 +752,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#further-interactions" id="toc-further-interactions" class="nav-link active" data-scroll-target="#further-interactions"><span class="header-section-number">36.1</span> Further interactions</a></li>
   <li><a href="#multilevel-regression-models-aka-mixed-effects" id="toc-multilevel-regression-models-aka-mixed-effects" class="nav-link" data-scroll-target="#multilevel-regression-models-aka-mixed-effects"><span class="header-section-number">36.2</span> Multilevel regression models (aka mixed-effects)</a></li>
   <li><a href="#causal-inference" id="toc-causal-inference" class="nav-link" data-scroll-target="#causal-inference"><span class="header-section-number">36.3</span> Causal inference</a></li>
-  <li><a href="#prior-probability-distributions" id="toc-prior-probability-distributions" class="nav-link" data-scroll-target="#prior-probability-distributions"><span class="header-section-number">36.4</span> Prior probability distributions</a></li>
+  <li><a href="#prior-probability-distributions-and-sensitivity-analyses" id="toc-prior-probability-distributions-and-sensitivity-analyses" class="nav-link" data-scroll-target="#prior-probability-distributions-and-sensitivity-analyses"><span class="header-section-number">36.4</span> Prior probability distributions and sensitivity analyses</a></li>
   <li><a href="#further-distribution-families" id="toc-further-distribution-families" class="nav-link" data-scroll-target="#further-distribution-families"><span class="header-section-number">36.5</span> Further distribution families</a></li>
   <li><a href="#non-linear-modelling" id="toc-non-linear-modelling" class="nav-link" data-scroll-target="#non-linear-modelling"><span class="header-section-number">36.6</span> Non-linear modelling</a></li>
   <li><a href="#sample-size-determination" id="toc-sample-size-determination" class="nav-link" data-scroll-target="#sample-size-determination"><span class="header-section-number">36.7</span> Sample size determination</a></li>
@@ -706,15 +790,43 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="multilevel-regression-models-aka-mixed-effects" class="level2" data-number="36.2">
 <h2 data-number="36.2" class="anchored" data-anchor-id="multilevel-regression-models-aka-mixed-effects"><span class="header-section-number">36.2</span> Multilevel regression models (aka mixed-effects)</h2>
+<p>Most research in linguistics involves multiple observations from different participants, items, texts, corpora, schools, and so on (this design is known as <em>repeated measures</em>). Unless you instruct them so, regression models will not be aware of hierarchy in the data (like different participants or texts). Instead, the model will work on the assumption that each data point is independent. Estimates obtained through regression modelling will be biased because of this wrong assumption. A solution is to include variables like participant or item in the model as “varying” terms.</p>
+<p>Models with variables entered as varying terms are known variably as multilevel, hierarchical, nested, mixed-effects, random-effects models. As always, don’t let the different terms fool you: they all refer to the same type of regression model. In linguistics, it is common to call them <em>mixed-effects linear</em> models, but they are not a special class of regression models. Varying terms are also commonly called “random effects”. However, randomness is not a characterising feature of varying terms and the same variable could in principle be entered as a varying or constant term depending on the study design and research question.</p>
+<p>To learn about hierarchical models and varying terms, see <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span>, Ch 13-14 and <span class="citation" data-cites="burkner2018">Bürkner (<a href="references.html#ref-burkner2018" role="doc-biblioref">2018</a>)</span>. For an introduction to multilevel models fitted within the Null Ritual approach, see <span class="citation" data-cites="winter2013">Winter (<a href="references.html#ref-winter2013" role="doc-biblioref">n.d.</a>)</span>. On terminology and definitions, see the following blog post: <a href="https://stefanocoretta.github.io/posts/2021-03-15-on-random-effects/" class="uri">https://stefanocoretta.github.io/posts/2021-03-15-on-random-effects/</a>.</p>
 </section>
 <section id="causal-inference" class="level2" data-number="36.3">
 <h2 data-number="36.3" class="anchored" data-anchor-id="causal-inference"><span class="header-section-number">36.3</span> Causal inference</h2>
+<p>One maxim any researcher knows about is “correlation is not causation”. This is the idea that statistical correlation between two or more variables (e.g.&nbsp;<em>x</em> and <em>y</em> are correlated) should not be interpreted causally (<em>x</em> causes <em>y</em>). However, in explanatory research we are truly not just interested in correlations, but explanatory questions are ultimately about causation. The language we use also reflects a causal interest: “the effect of <em>x</em> on <em>y</em>”. For example, when we investigate whether inclusive language policies improve language revitalisation efforts, we are interested in the <em>causal</em> relationship between inclusive language policies and language revitalisation, not just in their numeric correlation.</p>
+<p>Correlation is not causation, unless one adopts a causal approach. <strong>Causal Inference</strong> is one such approach, based on work by Judea Pearl on <em>do-</em>calculus (a branch of mathematics and logic for the estimation of causal effects). An applied extension of <em>do</em>-calculus is the use of <strong>Directed Acyclic Graphs</strong>. These graphs are created by the research to layout the causal relationships between variables. Estimation without causal inference can be biased, because of relationships between variables like mediation, confounding and colliding.</p>
+<p><strong>Mediation</strong> is when a variable <span class="math inline">\(M\)</span> is caused by <span class="math inline">\(X\)</span> and it causes <span class="math inline">\(Y\)</span> but <span class="math inline">\(X\)</span> doesn’t directly cause <span class="math inline">\(Y\)</span>: <span class="math inline">\(X \rightarrow M \rightarrow Y\)</span>. If you fit a regression model <span class="math inline">\(Y \sim X\)</span> you might find a correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> even if there is none because of the mediating effect of <span class="math inline">\(M\)</span>. In other words, once you account for the effect <span class="math inline">\(X\)</span> on <span class="math inline">\(M\)</span>, <span class="math inline">\(X\)</span> has no further direct effect on <span class="math inline">\(Y\)</span>. Confounding is when a variable <span class="math inline">\(C\)</span> causes both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> but <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have no causal relationship: <span class="math inline">\(X \leftarrow C \rightarrow Y\)</span>. A regression model <span class="math inline">\(Y \sim X\)</span> will find a correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> even if there is none, because of the confounding effect of <span class="math inline">\(C\)</span>. Colliding is conceptually the reverse of confounding: <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> both cause <span class="math inline">\(K\)</span>, but they are not directly causally linked, <span class="math inline">\(X \rightarrow K \leftarrow Y\)</span>. A regression model <span class="math inline">\(Y \sim X\)</span> will find a correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> even if there is none.</p>
+<p>To learn about Causal Inference and Directed Acyclic Graphs, see <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span> Ch 5-6 (and subsequent). The YouTube video-lectures by McElreath are also useful: <a href="https://www.youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus" class="uri">https://www.youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus</a>.</p>
 </section>
-<section id="prior-probability-distributions" class="level2" data-number="36.4">
-<h2 data-number="36.4" class="anchored" data-anchor-id="prior-probability-distributions"><span class="header-section-number">36.4</span> Prior probability distributions</h2>
+<section id="prior-probability-distributions-and-sensitivity-analyses" class="level2" data-number="36.4">
+<h2 data-number="36.4" class="anchored" data-anchor-id="prior-probability-distributions-and-sensitivity-analyses"><span class="header-section-number">36.4</span> Prior probability distributions and sensitivity analyses</h2>
+<p>You have encountered priors in <a href="ch-bayes.html" class="quarto-xref"><span>Chapter 20</span></a>, but we have been using brms default priors through the course. In most context the default priors will be enough, but it is worth thinking about priors even when you use the default priors.</p>
+<p>Priors are probability distributions, like the other probability distributions you’ve been working with so far. They define the probability of a specific model parameter taking certain values: in other words, you define a probability distribution over a range of values to express your prior belief in relation to which values you believe the parameter could take. In the simplest of cases, prior probability distributions can be expressed as Gaussian distributions, where you specify a prior mean and a standard deviation for a specific parameter. Each model parameter requires a prior (brms sets default priors for any parameter the model you are fitting has). For example, for a simple Gaussian model of reaction times (you have learned in <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 31</span></a> that RTs are not Gaussian, but let’s use the Gaussian distribution to make things easier) <span class="math inline">\(RT \sim Gaussian(\mu, \sigma)\)</span>, we could set the following priors for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\mu &amp; \sim Gaussian(1000, 250)\\
+\sigma &amp; \sim Gaussian_+(0, 250)
+\end{aligned}
+\]</span></p>
+<p>The prior for the mean <span class="math inline">\(\mu\)</span>, <span class="math inline">\(Gaussian(1000, 250)\)</span> states that we believe the mean RTs to be between 500 and 1500 ms at 95% confidence. This is because the 95% interval of <span class="math inline">\(Gaussian(1000, 250)\)</span> is approximately <span class="math inline">\([500, 1500]\)</span>. The 95% central interval of a Gaussian distribution is defined approximately by the lower limit <span class="math inline">\(\mu - 2 \cdot \sigma\)</span> and the upper limit <span class="math inline">\(\mu + 2 \cdot \sigma\)</span>, so <span class="math inline">\(1000 - 2 \times 250\)</span> and <span class="math inline">\(1000 + 2 \times 250\)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> As for the prior of <span class="math inline">\(\sigma\)</span>, note that standard deviation can only be positive, so we constrain the prior distribution to positive values only (that’s what the subscript <span class="math inline">\(+\)</span> is doing in <span class="math inline">\(Gaussian_+\)</span>; this is a half-Gaussian distribution, truncated at 0). The 95% interval of this distribution is [0, 500] ms (the lower limit is 0 because it is a half-Gaussian distribution, the upper limit is <span class="math inline">\(\mu + 2 \cdot \sigma\)</span>).</p>
+<p>You can set these priors when fitting a model with <code>brm()</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">brms</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  RT <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> gaussian,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prior =</span> <span class="fu">c</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">1000</span>, <span class="dv">250</span>), <span class="at">class =</span> Intercept),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">prior</span>(<span class="fu">normal</span>(<span class="dv">0</span>, <span class="dv">250</span>), <span class="at">class =</span> sigma)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The best way to learn about priors is to read through <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span> (there isn’t a single chapter that deals with them, instead they are explained throughout the book). Practical suggestions for common priors can be found in <span class="citation" data-cites="standevelopmentteam2025">Stan Development Team (<a href="references.html#ref-standevelopmentteam2025" role="doc-biblioref">2025</a>)</span> (also see <span class="citation" data-cites="mikkola2024">Mikkola et al. (<a href="references.html#ref-mikkola2024" role="doc-biblioref">2024</a>)</span> for a more mathematical treatment).</p>
+<p>Common steps in Bayesian analyses related to priors specification are prior predictive checks <span class="citation" data-cites="mcelreath2020">(or simulations, see <a href="references.html#ref-mcelreath2020" role="doc-biblioref">McElreath 2020</a>, Ch. 4 and subsequent)</span> and prior sensitivity analyses, like those based on posterior shrinkage and the posterior <em>z-</em>score <span class="citation" data-cites="betancourt2018">(<a href="references.html#ref-betancourt2018" role="doc-biblioref">Betancourt 2018</a>)</span>. Also see <span class="citation" data-cites="schad2021">Schad, Betancourt, and Vasishth (<a href="references.html#ref-schad2021" role="doc-biblioref">2021</a>)</span> for an overview of the Bayesian workflow.</p>
 </section>
 <section id="further-distribution-families" class="level2" data-number="36.5">
 <h2 data-number="36.5" class="anchored" data-anchor-id="further-distribution-families"><span class="header-section-number">36.5</span> Further distribution families</h2>
+<p>The textbook covered the Gaussian, Bernoulli and log-normal (log-Gaussian) distribution families. Remember that the distribution family of a regression model is decided by the nature of the outcome variable. Other common families are the beta (for 0-1 variables), Poisson (for counts), ordinal (for Likert-scale data), categorical (for multinomial variables, i.e.&nbsp;variables with more than two unordered levels). See <a href="app-reg-cheat-sheet.html" class="quarto-xref"><span>Appendix B</span></a> for resources on these and other families.</p>
 </section>
 <section id="non-linear-modelling" class="level2" data-number="36.6">
 <h2 data-number="36.6" class="anchored" data-anchor-id="non-linear-modelling"><span class="header-section-number">36.6</span> Non-linear modelling</h2>
@@ -726,6 +838,35 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="36.8" class="anchored" data-anchor-id="dimensionality-reduction-approaches"><span class="header-section-number">36.8</span> Dimensionality reduction approaches</h2>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-betancourt2018" class="csl-entry" role="listitem">
+Betancourt, Michael. 2018. <span>“Calibrating Model-Based Inferences and Decisions.”</span> <a href="https://doi.org/10.48550/arXiv.1803.08393">https://doi.org/10.48550/arXiv.1803.08393</a>.
+</div>
+<div id="ref-burkner2018" class="csl-entry" role="listitem">
+Bürkner, Paul-Christian. 2018. <span>“Advanced Bayesian Multilevel Modeling with the r Package Brms.”</span> <em>The R Journal</em> 10 (1): 395411. <a href="https://doi.org/10.32614/RJ-2018-017">https://doi.org/10.32614/RJ-2018-017</a>.
+</div>
+<div id="ref-mcelreath2020" class="csl-entry" role="listitem">
+McElreath, Richard. 2020. <em>Statistical Rethinking: A Bayesian Course with Examples in R and Stan</em>. Second edition. Chapman &amp; Hall/CRC Texts in Statistical Science Series. Boca Raton: CRC Press.
+</div>
+<div id="ref-mikkola2024" class="csl-entry" role="listitem">
+Mikkola, Petrus, Osvaldo A. Martin, Suyog Chandramouli, Marcelo Hartmann, Oriol Abril Pla, Owen Thomas, Henri Pesonen, et al. 2024. <span>“Prior Knowledge Elicitation: The Past, Present, and Future.”</span> <em>Bayesian Analysis</em> 19 (4). <a href="https://doi.org/10.1214/23-BA1381">https://doi.org/10.1214/23-BA1381</a>.
+</div>
+<div id="ref-schad2021" class="csl-entry" role="listitem">
+Schad, Daniel J., Michael Betancourt, and Shravan Vasishth. 2021. <span>“Toward a Principled Bayesian Workflow in Cognitive Science.”</span> <em>Psychological Methods</em> 26 (1): 103–26. <a href="https://doi.org/10.1037/met0000275">https://doi.org/10.1037/met0000275</a>.
+</div>
+<div id="ref-standevelopmentteam2025" class="csl-entry" role="listitem">
+Stan Development Team. 2025. <span>“Prior Choice Recommendations.”</span> <a href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations</a>.
+</div>
+<div id="ref-winter2013" class="csl-entry" role="listitem">
+Winter, Bodo. n.d. <span>“Linear Models and Linear Mixed Effects Models in r with Linguistic Applications.”</span>
+</div>
+</div>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Technically, the lower limit <span class="math inline">\(\mu - 1.96 \cdot \sigma\)</span> and the upper limit <span class="math inline">\(\mu + 1.96 \cdot \sigma\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
