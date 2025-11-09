@@ -145,3 +145,17 @@ A framework for the justification of sample size can be found in @lakens2021 (wh
 For a simple way to determine sample size based on pre-existing data, check out @coretta2022a. A theoretical discussion of sample size for clinical trials is available in @halpern2001.
 
 ## Dimensionality reduction approaches
+
+Regression models work best when you have a clear theoretical view on the variables of interest.
+Some times, you might be working with multi-dimensional data, with a large number of variables and not enough theory to be able to determine which variables are relevant (for example, as determined through Causal Inference).
+
+In these cases, it is useful to reduce the dimensionality of the data: in other words, it is useful to capture covariance between variables using dimensionality reduction approaches, like Principal Component Analysis, Multiple Correspondence Analysis and and Cluster Analysis.
+
+Principal Component Analysis (PCA) finds numeric components, called principal components (PCs), that can capture the covariation of the numeric variables in the data set.
+The scores of the principal components capturing variation in the data can be used for further analysis.
+You can find information about PCA [here](https://www.sthda.com/english/articles/index.php?url=/31-principal-component-methods-in-r-practical-guide/#google_vignette).
+Multiple Correspondence Analysis (McA) is the discrete equivalent of PCA, i.e. it can be used with discrete/categorical variables.
+See [here](https://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/114-mca-multiple-correspondence-analysis-in-r-essentials/) for an introduction.
+Another dimensionality reduction technique is Cluster Analysis (CA, aka hierarchical clustering).
+[This tutorial](https://www.datanovia.com/en/blog/cluster-analysis-in-r-practical-guide/) guides you through a CA in R.
+For a detailed treatment of these techniques see @kassambara2017a and @kassambara2017.
