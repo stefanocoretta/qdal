@@ -833,9 +833,14 @@ window.Quarto = {
 </section>
 <section id="non-linear-modelling" class="level2" data-number="36.6">
 <h2 data-number="36.6" class="anchored" data-anchor-id="non-linear-modelling"><span class="header-section-number">36.6</span> Non-linear modelling</h2>
+<p>Regression models are built on the equation of a straight line. This is true even when it looks as if we are modelling non-linear effects in models like Bernoulli or Poisson. The predicted relationships between numeric predictors and Bernoulli or Poisson outcomes looks non-linear because the linearity is applied to the linear term of the model (the parameter that is expressed with a linear equation). For example, in Bernoulli models the linear equation is applied to the logit transformation of the parameter <em>p</em>.</p>
+<p>However, all regression models assume a linear relationship between a predictor and an outcome at the level of the linear term. In some cases, a linear relationship might not make sense. For example, if you are modelling change in probability of a morphological form across time, it is possible that the change is not linear even in log-odds, and maybe the probability first rises but then gets lower. This type of non-linear relationship can be modelled in Bayesian regression models using smoothers, <code>s()</code> in the model’s formula.</p>
+<p>You can check out the tutorials on non-linear models and smoothers with brms in <span class="citation" data-cites="franke2025">Franke (<a href="references.html#ref-franke2025" role="doc-biblioref">2025</a>, Ch 10)</span>.</p>
 </section>
 <section id="sample-size-determination" class="level2" data-number="36.7">
 <h2 data-number="36.7" class="anchored" data-anchor-id="sample-size-determination"><span class="header-section-number">36.7</span> Sample size determination</h2>
+<p>Determining sample size is an important step in any quantitative analysis. Sample size determination is necessary to ensure one has enough data to estimate parameters to the desired level of precision. In the Null Ritual approach, sample size determination is based on the so-called “power analysis”: this type of analysis lets you calculate the sample size required for you to be able to detect a significant effect based on a pre-determined minimum effect size. Check <span class="citation" data-cites="green2016">Green and MacLeod (<a href="references.html#ref-green2016" role="doc-biblioref">2016</a>)</span> and <span class="citation" data-cites="brysbaert2018 brysbaert2020">Brysbaert and Stevens (<a href="references.html#ref-brysbaert2018" role="doc-biblioref">2018</a>; also see <a href="references.html#ref-brysbaert2020" role="doc-biblioref">Brysbaert 2020</a> for bilingualism research)</span>.</p>
+<p>A framework for the justification of sample size can be found in <span class="citation" data-cites="lakens2021">Lakens (<a href="references.html#ref-lakens2021" role="doc-biblioref">2021</a>)</span> (while it focusses on Null Hypothesis Significance Testing, it can be helpful for Bayesian approaches too). For a simple way to determine sample size based on pre-existing data, check out <span class="citation" data-cites="coretta2022a">Coretta (<a href="references.html#ref-coretta2022a" role="doc-biblioref">2022</a>)</span>. A theoretical discussion of sample size for clinical trials is available in <span class="citation" data-cites="halpern2001">Halpern, Brown, and Hornberger (<a href="references.html#ref-halpern2001" role="doc-biblioref">2001</a>)</span>.</p>
 </section>
 <section id="dimensionality-reduction-approaches" class="level2" data-number="36.8">
 <h2 data-number="36.8" class="anchored" data-anchor-id="dimensionality-reduction-approaches"><span class="header-section-number">36.8</span> Dimensionality reduction approaches</h2>
@@ -848,8 +853,20 @@ Betancourt, Michael. 2018. <span>“Calibrating Model-Based Inferences and Decis
 <div id="ref-bockting2024" class="csl-entry" role="listitem">
 Bockting, Florence, Stefan T. Radev, and Paul-Christian Bürkner. 2024. <span>“Simulation-Based Prior Knowledge Elicitation for Parametric Bayesian Models.”</span> <em>Scientific Reports</em> 14 (1): 17330. <a href="https://doi.org/10.1038/s41598-024-68090-7">https://doi.org/10.1038/s41598-024-68090-7</a>.
 </div>
+<div id="ref-brysbaert2020" class="csl-entry" role="listitem">
+Brysbaert, Marc. 2020. <span>“Power Considerations in Bilingualism Research: Time to Step up Our Game.”</span> <em>Bilingualism: Language and Cognition</em> 24 (5): 813818. <a href="https://doi.org/10.1017/s1366728920000437">https://doi.org/10.1017/s1366728920000437</a>.
+</div>
+<div id="ref-brysbaert2018" class="csl-entry" role="listitem">
+Brysbaert, Marc, and Michaël Stevens. 2018. <span>“Power Analysis and Effect Size in Mixed Effects Models: A Tutorial.”</span> <em>Journal of Cognition</em> 1 (1). <a href="https://doi.org/10.5334/joc.10">https://doi.org/10.5334/joc.10</a>.
+</div>
 <div id="ref-burkner2018" class="csl-entry" role="listitem">
 Bürkner, Paul-Christian. 2018. <span>“Advanced Bayesian Multilevel Modeling with the r Package Brms.”</span> <em>The R Journal</em> 10 (1): 395411. <a href="https://doi.org/10.32614/RJ-2018-017">https://doi.org/10.32614/RJ-2018-017</a>.
+</div>
+<div id="ref-coretta2022a" class="csl-entry" role="listitem">
+Coretta, Stefano. 2022. <span>“Bayesian CrI-Width Power Analysis.”</span> <a href="https://stefanocoretta.github.io/posts/2022-04-05-bayesian-ci-width-power-analysis/">https://stefanocoretta.github.io/posts/2022-04-05-bayesian-ci-width-power-analysis/</a>.
+</div>
+<div id="ref-franke2025" class="csl-entry" role="listitem">
+Franke, Michael. 2025. <em>Bayesian Regression: Theory &amp; Practice</em>. <a href="https://michael-franke.github.io/Bayesian-Regression/">https://michael-franke.github.io/Bayesian-Regression/</a>.
 </div>
 <div id="ref-gelman2005" class="csl-entry" role="listitem">
 Gelman, Andrew. 2005. <span>“Analysis of Variance: Why It Is More Important Than Ever.”</span> <em>The Annals of Statistics</em> 33 (1). <a href="https://doi.org/10.1214/009053604000001048">https://doi.org/10.1214/009053604000001048</a>.
@@ -859,6 +876,15 @@ Gelman, Andrew. 2005. <span>“Analysis of Variance: Why It Is More Important Th
 </div>
 <div id="ref-gelman" class="csl-entry" role="listitem">
 Gelman, Andrew, Aki Vehtari, Daniel Simpson, Charles C. Margossian, Bob Carpenter, Yuling Yao, Lauren Kennedy, Jonah Gabry, Paul-Christian Bürkner, and Martin Modrák. 2020. <span>“Bayesian Workflow.”</span> <a href="https://doi.org/10.48550/ARXIV.2011.01808">https://doi.org/10.48550/ARXIV.2011.01808</a>.
+</div>
+<div id="ref-green2016" class="csl-entry" role="listitem">
+Green, Peter, and Catriona J. MacLeod. 2016. <span>“Simr: An r Package for Power Analysis of Generalized Linear Mixed Models by Simulation.”</span> <em>Methods in Ecology and Evolution</em> 7 (4): 493498. <a href="https://doi.org/10.1111/2041-210X.12504">https://doi.org/10.1111/2041-210X.12504</a>.
+</div>
+<div id="ref-halpern2001" class="csl-entry" role="listitem">
+Halpern, Jerry, Byron Wm. Brown, and John Hornberger. 2001. <span>“The Sample Size for a Clinical Trial: A Bayesian<span></span>decision Theoretic Approach.”</span> <em>Statistics in Medicine</em> 20 (6): 841–58. <a href="https://doi.org/10.1002/sim.703">https://doi.org/10.1002/sim.703</a>.
+</div>
+<div id="ref-lakens2021" class="csl-entry" role="listitem">
+Lakens, Daniël. 2021. <span>“Sample Size Justification.”</span> <a href="https://doi.org/10.31234/osf.io/9d3yf">https://doi.org/10.31234/osf.io/9d3yf</a>.
 </div>
 <div id="ref-mcelreath2020" class="csl-entry" role="listitem">
 McElreath, Richard. 2020. <em>Statistical Rethinking: A Bayesian Course with Examples in R and Stan</em>. Second edition. Chapman &amp; Hall/CRC Texts in Statistical Science Series. Boca Raton: CRC Press.

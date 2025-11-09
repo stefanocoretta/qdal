@@ -122,6 +122,26 @@ See @sec-reg-cheat-sheet for resources on these and other families.
 
 ## Non-linear modelling
 
+Regression models are built on the equation of a straight line.
+This is true even when it looks as if we are modelling non-linear effects in models like Bernoulli or Poisson.
+The predicted relationships between numeric predictors and Bernoulli or Poisson outcomes looks non-linear because the linearity is applied to the linear term of the model (the parameter that is expressed with a linear equation).
+For example, in Bernoulli models the linear equation is applied to the logit transformation of the parameter *p*.
+
+However, all regression models assume a linear relationship between a predictor and an outcome at the level of the linear term.
+In some cases, a linear relationship might not make sense.
+For example, if you are modelling change in probability of a morphological form across time, it is possible that the change is not linear even in log-odds, and maybe the probability first rises but then gets lower.
+This type of non-linear relationship can be modelled in Bayesian regression models using smoothers, `s()` in the model's formula.
+
+You can check out the tutorials on non-linear models and smoothers with brms in @franke2025 [Ch 10].
+
 ## Sample size determination
+
+Determining sample size is an important step in any quantitative analysis.
+Sample size determination is necessary to ensure one has enough data to estimate parameters to the desired level of precision.
+In the Null Ritual approach, sample size determination is based on the so-called "power analysis": this type of analysis lets you calculate the sample size required for you to be able to detect a significant effect based on a pre-determined minimum effect size.
+Check @green2016 and @brysbaert2018 [also see @brysbaert2020 for bilingualism research].
+
+A framework for the justification of sample size can be found in @lakens2021 (while it focusses on Null Hypothesis Significance Testing, it can be helpful for Bayesian approaches too).
+For a simple way to determine sample size based on pre-existing data, check out @coretta2022a. A theoretical discussion of sample size for clinical trials is available in @halpern2001.
 
 ## Dimensionality reduction approaches
