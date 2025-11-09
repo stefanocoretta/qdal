@@ -12,6 +12,19 @@ I am planning to add extra chapters in this textbook to cover these topics in th
 
 ## Further interactions
 
+In @sec-regression-interaction, you learned how to model an interaction between two categorical predictors in data from @winter2012: gender and attitude (and their effect on mean f0).
+While categorical/categorical interactions are quite straightforward, the other combinations are also very common but they tend to be more involved because of the presence of a numeric predictor: the other two-way interactions are categorical/numeric and numeric/numeric.
+Interactions are not restricted to two-way combinations: in certain cases you might need three-way, four-way interactions or higher.
+
+Linguistic theory should determine which interactions are needed in your model, but when in doubt or when doing exploratory research it doesn't hurt to include interactions so that these can be estimated.
+The posterior of the interaction will provide you with an estimate of the interaction.
+Sometimes it is fine to assume that the estimate of one predictor is independent from other predictors and in that case you can do without interactions.
+In other cases your research question will require you to include interaction.
+There isn't a cookbook for interactions and you will just have to think about them on a case-by-case basis.
+
+To learn more about interactions, see @mcelreath2020 [Ch. 8].
+Within the Null Ritualistic approach, it has become popular to drop interactions if they are not significant, but this is very problematic because a non-significant interaction doesn't automatically mean that there isn't one (the usual problem of *p*-values).
+
 ## Multilevel regression models (aka mixed-effects)
 
 Most research in linguistics involves multiple observations from different participants, items, texts, corpora, schools, and so on (this design is known as *repeated measures*).
@@ -26,7 +39,8 @@ In linguistics, it is common to call them *mixed-effects linear* models, but the
 Varying terms are also commonly called "random effects".
 However, randomness is not a characterising feature of varying terms and the same variable could in principle be entered as a varying or constant term depending on the study design and research question.
 
-To learn about hierarchical models and varying terms, see @mcelreath2020 [Ch 13-14], @nalborczyk2019, @burkner2018 and @veenman2023. For an introduction to multilevel models fitted within the Null Ritual approach, see @winter2013.
+To learn about hierarchical models and varying terms, see @mcelreath2020 [Ch 13-14], @nalborczyk2019, @burkner2018 and @veenman2023.
+For an introduction to multilevel models fitted within the Null Ritual approach, see @winter2013.
 On terminology and definitions, see the following blog post <https://stefanocoretta.github.io/posts/2021-03-15-on-random-effects/> and @gelman2005.
 
 ## Causal inference
@@ -94,7 +108,7 @@ brms(
 ```
 
 The best way to learn about priors is to read through @mcelreath2020 (there isn't a single chapter that deals with them, instead they are explained throughout the book).
-Practical suggestions for common priors can be found in @standevelopmentteam2025 [also see @mikkola2024, @bockting2024 and @gelman2006 for a more detailed treatment].
+Practical suggestions for common priors can be found in [@standevelopmentteam2025; also see @mikkola2024, @bockting2024 and @gelman2006 for a more detailed treatment].
 
 Common steps in Bayesian analyses related to priors specification are prior predictive checks [or simulations, see @mcelreath2020, Ch. 4 and subsequent] and prior sensitivity analyses, like those based on posterior shrinkage and the posterior *z-*score [@betancourt2018].
 Also see @gelman and @schad2021 for an overview of the Bayesian workflow and @veenman2023 for prior specification in the context of hierarchical/multilevel/mixed-effects models.

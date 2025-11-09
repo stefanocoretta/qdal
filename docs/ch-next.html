@@ -787,6 +787,9 @@ window.Quarto = {
 <p>This section gives you a glimpse of other topics you could learn about and topics you might need for your research (including your dissertation/thesis if you will be doing that soon). For each topic I will point you to some resources, but note that in some cases you might have to do some preliminary readings to be able to consume the contents of the linked resources. I am planning to add extra chapters in this textbook to cover these topics in the future, but until I have time to do that, you will have to make do with external resources.</p>
 <section id="further-interactions" class="level2" data-number="36.1">
 <h2 data-number="36.1" class="anchored" data-anchor-id="further-interactions"><span class="header-section-number">36.1</span> Further interactions</h2>
+<p>In <a href="ch-regression-interaction.html" class="quarto-xref"><span>Chapter 35</span></a>, you learned how to model an interaction between two categorical predictors in data from <span class="citation" data-cites="winter2012">Winter and Grawunder (<a href="references.html#ref-winter2012" role="doc-biblioref">2012</a>)</span>: gender and attitude (and their effect on mean f0). While categorical/categorical interactions are quite straightforward, the other combinations are also very common but they tend to be more involved because of the presence of a numeric predictor: the other two-way interactions are categorical/numeric and numeric/numeric. Interactions are not restricted to two-way combinations: in certain cases you might need three-way, four-way interactions or higher.</p>
+<p>Linguistic theory should determine which interactions are needed in your model, but when in doubt or when doing exploratory research it doesn’t hurt to include interactions so that these can be estimated. The posterior of the interaction will provide you with an estimate of the interaction. Sometimes it is fine to assume that the estimate of one predictor is independent from other predictors and in that case you can do without interactions. In other cases your research question will require you to include interaction. There isn’t a cookbook for interactions and you will just have to think about them on a case-by-case basis.</p>
+<p>To learn more about interactions, see <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>, Ch. 8)</span>. Within the Null Ritualistic approach, it has become popular to drop interactions if they are not significant, but this is very problematic because a non-significant interaction doesn’t automatically mean that there isn’t one (the usual problem of <em>p</em>-values).</p>
 </section>
 <section id="multilevel-regression-models-aka-mixed-effects" class="level2" data-number="36.2">
 <h2 data-number="36.2" class="anchored" data-anchor-id="multilevel-regression-models-aka-mixed-effects"><span class="header-section-number">36.2</span> Multilevel regression models (aka mixed-effects)</h2>
@@ -877,6 +880,9 @@ Veenman, Myrthe, Angelika M. Stefan, and Julia M. Haaf. 2023. <span>“Bayesian 
 </div>
 <div id="ref-winter2013" class="csl-entry" role="listitem">
 Winter, Bodo. 2013. <span>“Linear Models and Linear Mixed Effects Models in r with Linguistic Applications.”</span>
+</div>
+<div id="ref-winter2012" class="csl-entry" role="listitem">
+Winter, Bodo, and Sven Grawunder. 2012. <span>“The Phonetic Profile of Korean Formal and Informal Speech Registers.”</span> <em>Journal of Phonetics</em> 40 (6): 808–15. <a href="https://doi.org/10.1016/j.wocn.2012.08.006">https://doi.org/10.1016/j.wocn.2012.08.006</a>.
 </div>
 </div>
 </section>
