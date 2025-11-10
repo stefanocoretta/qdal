@@ -1,5 +1,7 @@
 # What's next? {#sec-next}
 
+![](/img/badge-stats.png) ![](/img/badge-r.png)
+
 You made it!
 You completed your journey in learning the basics of quantitative research methods, R and Open Research principles and practices.
 This is not the end, of course.
@@ -43,7 +45,7 @@ To learn about hierarchical models and varying terms, see @mcelreath2020 [Ch 13-
 For an introduction to multilevel models fitted within the Null Ritual approach, see @winter2013.
 On terminology and definitions, see the following blog post <https://stefanocoretta.github.io/posts/2021-03-15-on-random-effects/> and @gelman2005.
 
-## Causal inference
+## Causal inference  {#sec-next-causal}
 
 One maxim any researcher knows about is "correlation is not causation".
 This is the idea that statistical correlation between two or more variables (e.g. *x* and *y* are correlated) should not be interpreted causally (*x* causes *y*).
@@ -68,7 +70,7 @@ A regression model $Y \sim X$ will find a correlation between $X$ and $Y$ even i
 To learn about Causal Inference and Directed Acyclic Graphs, see @mcelreath2020 Ch 5-6 (and subsequent).
 The YouTube video-lectures by McElreath are also useful: <https://www.youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus>.
 
-## Prior probability distributions and sensitivity analyses
+## Prior probability distributions and sensitivity analyses  {#sec-next-priors}
 
 You have encountered priors in @sec-bayes, but we have been using brms default priors through the course.
 In most context the default priors will be enough, but it is worth thinking about priors even when you use the default priors.
@@ -134,15 +136,16 @@ This type of non-linear relationship can be modelled in Bayesian regression mode
 
 You can check out the tutorials on non-linear models and smoothers with brms in @franke2025 [Ch 10].
 
-## Sample size determination
+## Sample size determination  {#sec-next-size}
 
 Determining sample size is an important step in any quantitative analysis.
 Sample size determination is necessary to ensure one has enough data to estimate parameters to the desired level of precision.
 In the Null Ritual approach, sample size determination is based on the so-called "power analysis": this type of analysis lets you calculate the sample size required for you to be able to detect a significant effect based on a pre-determined minimum effect size.
-Check @green2016 and @brysbaert2018 [also see @brysbaert2020 for bilingualism research].
+Check @green2016 and [@brysbaert2018; also see @brysbaert2020 for bilingualism research].
 
 A framework for the justification of sample size can be found in @lakens2021 (while it focusses on Null Hypothesis Significance Testing, it can be helpful for Bayesian approaches too).
-For a simple way to determine sample size based on pre-existing data, check out @coretta2022a. A theoretical discussion of sample size for clinical trials is available in @halpern2001.
+For a simple way to determine sample size based on pre-existing data, check out @coretta2022a.
+A theoretical discussion of sample size for clinical trials is available in @halpern2001.
 
 ## Dimensionality reduction approaches
 

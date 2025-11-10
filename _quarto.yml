@@ -73,6 +73,7 @@ book:
   - part: Week 10
     chapters:
       - ch-next.qmd
+      - ch-workflow.qmd
   - references.qmd
   appendices:
     - app-computer-basics.qmd
