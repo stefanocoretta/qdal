@@ -69,6 +69,7 @@ A regression model $Y \sim X$ will find a correlation between $X$ and $Y$ even i
 
 To learn about Causal Inference and Directed Acyclic Graphs, see @mcelreath2020 Ch 5-6 (and subsequent).
 The YouTube video-lectures by McElreath are also useful: <https://www.youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus>.
+Check out @rohrer2018 for a paper-format introduction.
 
 ## Prior probability distributions and sensitivity analyses {#sec-next-priors}
 
