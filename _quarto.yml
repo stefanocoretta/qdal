@@ -74,6 +74,7 @@ book:
     chapters:
       - ch-next.qmd
       - ch-workflow.qmd
+      - ch-end.qmd
   - references.qmd
   appendices:
     - app-computer-basics.qmd
