@@ -62,7 +62,7 @@ If you randomly sampled from $Bernoulli(0.8)$ you would get "correct" 80% of the
 We can test this in R.
 In previous chapters we used the `rnorm()` function to generate random numbers from Gaussian distributions.
 R doesn't have an `rbern()` function, so we have to use the `rbinom()` function instead.
-The function generates random observations from a binomial distribution: the binomial distributions is a more general form of the Bernoulli distribution.
+The function generates random observations from a binomial distribution: the binomial distribution is a more general form of the Bernoulli distribution.
 It has two parameters, $n$ the number of trials and $p$ the "success" probability of each trial.
 If we code each level in the binary variable as 0 and 1, $p$ is the probability of getting 1 (that's why it is called the "success" probability).
 
@@ -311,7 +311,7 @@ verb_org |>
 On average, home-signers produce 36% of multi-verb predicates, first generation signers (NSL1) 19% and second generation signers (NSL2) 50%.
 In other words, there is a decrease in production of multi-verb predicates from home-signers to NSL1 signers, while NSL2 signers basically just use either single or multi-verb predicates.
 Most times, it is also useful to plot the proportion for each participant separately.
-Unfortunately, this is an area were bad practices have become standard so it is worth spending some time on this, in a new section.
+Unfortunately, this is an area where bad practices have become standard so it is worth spending some time on this, in a new section.
 
 ## Plotting proportions, percentages and accuracy data {#sec-plot-prop}
 
@@ -406,7 +406,7 @@ In `stat_summary()`, the `fun.data` argument lets you specify the function you w
 Here we are using the `mean_cl_boot` function, which returns the mean proportion of `Response_num` and the 95% Confidence Intervals (CIs) of that mean.
 The CIs are calculated using a bootstrapping procedure (if you are interested in learning what that is, check the documentation of `smean.sd` from the Hmisc package).
 
-This also makes a nice opportunity to mention one shortcoming of the models we are fitting, thinking a bit ahead of ourselves: the regression models we cover in Week 4 to 10 do not account for the fact that the data comes from multiple participants and instead they just assume that each observation in the data set is from a different participant.
+This also creates a nice opportunity to mention one shortcoming of the models we are fitting, thinking a bit ahead of ourselves: the regression models we cover in Week 4 to 10 do not account for the fact that the data comes from multiple participants and instead they just assume that each observation in the data set is from a different participant.
 When you have multiple observations from each participant, we call this a *repeated measure* design.
 This is a problem because it breaks one assumption of regression models: that all the observations are independent from each other.
 Of course, if they come from the same participant, they are not independent.
@@ -417,7 +417,7 @@ We won't have time in this course to learn about the solution (i.e. hierarchical
 The hypothesis of the study is that use of multi-verb predicates would increase with each generation.
 To statistically assess this hypothesis and obtain estimates of the proportion of multiple predicates, we can fit a Bernoulli model with `Num_Predicates` as the outcome variable and `Group` as a categorical predictor.
 Before we move on onto fitting the model, it is useful to transform `Num_Predicates` into a factor and specify the order of the levels so that `single` is the first level and `multiple` is the second level.
-Wee need this because Bernoulli models estimate the probability (the parameter $p$ in $Bernoulli(p)$) of obtaining the *second* level in the outcome variable (remember, $p$ is the probability of success, i.e. of obtaining $1$ in a 0/1 coded binary variable).
+We need this because Bernoulli models estimate the probability (the parameter $p$ in $Bernoulli(p)$) of obtaining the *second* level in the outcome variable (remember, $p$ is the probability of success, i.e. of obtaining $1$ in a 0/1 coded binary variable).
 The first level in the factor corresponds to `0` and the second level to `1`.
 We want to set this order because the hypothesis states that multi-verb predicates should increase, and by modelling the probability of multi-verb predicates we can more straightforwardly address the hypothesis (of course, if the probability of multi-verb predicates increases, the probability of single-verb predicates decreases, because $q = 1 - p$).
 Complete the following code to make `Num_Predicates` into a factor.

@@ -229,7 +229,7 @@ RT_i & \sim Gaussian(\mu_i, \sigma)\\
 $$
 
 The subscript $i$ is an index of each observation in the data.
-There are 5000 observations in `mald` so $i = [1..5000]$ ($i$ is goes from 1 to 5000).
+There are 5000 observations in `mald` so $i = [1..5000]$ ($i$ goes from 1 to 5000).
 $RT_i$ then is indexing the specific observations in the data, $RT_1$, $RT_2$, $RT_3$, ..., $RT_{5000}$.
 Each observation is from a real or nonce word: this is coded by $w_i$.
 The subscript $i$ in $w_i$ is indexing the `IsWord` value of the $i$th observation.
@@ -245,7 +245,7 @@ RT_i & \sim Gaussian(\mu_i, \sigma)\\
 \end{aligned}
 $$
 
-These are just technicalities of the notation, so you shouldn't be too tripped up about it, the substance of the model is the same.
+These are just technicalities of the notation, so you shouldn't get too caught up on it, the substance of the model is the same.
 
 Going back to our model of RTs as a function of word type ("as a function of" is another way of saying that you are modelling an outcome variable depending on a predictor), $\beta_0$ and $\beta_1$ are the regression coefficients, exactly like in the regression model with vowel duration and speech rate.
 You can think of $\beta_0$ as the model's intercept and of $\beta_1$ as the model's slope.
@@ -376,7 +376,7 @@ $$
 $$
 
 To get the expected RTs for nonce words we need to sum `b_Intercept` and `b_IsWordFALSE`.
-Since we are at it, we also create a column for real words (that is just `b_Intercept` so we are basically just copying it that column; remember, $\mu_T = \beta_1$).
+While we are at it, we also create a column for real words (that is just `b_Intercept` so we are basically just copying it that column; remember, $\mu_T = \beta_1$).
 
 ```{r}
 #| label: rt-bm-1-pred
@@ -406,7 +406,7 @@ conditional_effects(rt_bm_1, effects = "IsWord")
 ```
 
 I always find plotting the full posterior distributions to be more informative (and I find the plots with error bars and dots to be potentially misleading, since they are just showing summaries of the posteriors).
-We have already the posterior draws of RTs with real words (`b_Intercept`; and those with nonce words, but to make plotting more straightforward we need to pivot the data.
+We already have the posterior draws of RTs with real words (`b_Intercept`); and those with nonce words, but to make plotting more straightforward we need to pivot the data.
 
 Pivoting is the process of changing the shape of the data from a long format to a wide format and vice versa.
 You can find nice animations on [Garrick Aden-Buie’s website](https://www.garrickadenbuie.com/project/tidyexplain/#tidy-data) that illustrate the process visually.
