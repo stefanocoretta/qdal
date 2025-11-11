@@ -113,7 +113,7 @@ The best way to learn about priors is to read through @mcelreath2020 (there isn'
 Practical suggestions for common priors can be found in [@standevelopmentteam2025; also see @mikkola2024, @bockting2024 and @gelman2006 for a more detailed treatment].
 
 Common steps in Bayesian analyses related to priors specification are prior predictive checks [or simulations, see @mcelreath2020, Ch. 4 and subsequent] and prior sensitivity analyses, like those based on posterior shrinkage and the posterior *z-*score [@betancourt2018].
-Also see @gelman and @schad2021 for an overview of the Bayesian workflow and @veenman2023 for prior specification in the context of hierarchical/multilevel/mixed-effects models.
+Also see @gelman2020 and @schad2021 for an overview of the Bayesian workflow and @veenman2023 for prior specification in the context of hierarchical/multilevel/mixed-effects models.
 
 ## Further distribution families
 
