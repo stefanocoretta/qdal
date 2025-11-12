@@ -1,4 +1,4 @@
-# A new beginning
+# A new beginning  {#sec-end}
 
 This is really the end of your QML journey, but just the beginning of your learning process.
 As mentioned before, to be able to fully carry out a quantitative study you need to cover many more topics, which depend on the nature and topic of the specific study you are carrying out.

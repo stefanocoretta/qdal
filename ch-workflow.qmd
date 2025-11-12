@@ -1,4 +1,4 @@
-# A workflow for quantitative studies {#sec-design}
+# A workflow for quantitative studies {#sec-workflow}
 
 ![](/img/badge-stats.png) ![](/img/badge-r.png)
 
@@ -12,7 +12,8 @@ We also recommend @gelman2020 and @schad2021 as complementing approaches.
 
 ![Aspects of the research context, from general to specific, by @ellis2008. Repr. @sec-res-context.](img/research-topic.png){fig-align="center"}
 
-In @sec-res-context, we introduced the research context framework proposed by @ellis2008. The framework is an aid to defining the object of study, from a more general perspective (the topic) down to a specific research question and hypothesis.
+In @sec-res-context, we introduced the research context framework proposed by @ellis2008.
+The framework is an aid to defining the object of study, from a more general perspective (the topic) down to a specific research question and hypothesis.
 This step normally takes up a large chunk of research time, since this is when researchers spend time reading and synthesising relevant literature.
 At the end of this stage, you should have *precise and testable research questions* and, if appropriate, *research hypotheses*.
 This includes carefully thinking about the definition of the words and concepts in the RQs/RHs [@morin2015; @flake2020; for a realistic-positivistic view, see @devezer2019; @devezer2021], what your population is, and how your positionality informs all this [@jafar2018; @darwinholmes2020; @castanelli2024].
@@ -79,4 +80,3 @@ If you are following an RR route, you would write your Stage 2 manuscript and su
 Your study is completed and published.
 Most often than not, the results open up other venues for investigation and follow-up studies can be developed.
 The research cycle begins once again.
-

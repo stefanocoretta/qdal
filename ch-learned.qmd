@@ -1,0 +1,33 @@
+# What you have learned  {#sec-learned}
+
+This chapter summarises the concepts, methods and skills that were covered in the textbook.
+You can use this as a final check that you didn't miss anything important.
+@sec-next lists further topics you could read about to continue your learning process, @sec-workflow is an overview of a possible workflow for quantitative studies (note that it covers steps and topics that you have not learned, but references are given when necessary), and finally @sec-end concludes the textbook.
+
+## Research methods
+
+-   Research methods comprises of the research process, project management, digital skills, philosophy, ethics.
+
+-   The research process is made up of context, data acquisition, data analysis, communication.
+
+-   Empirical research can be placed along two research axes (descriptive/explanatory, exploratory/corroboratory) and it can have on or more research objectives (establish facts, improve fit of framework to facts, compare fit of different frameworks).
+
+-   The research context spans everything between the more general research topic down to the more specific research questions and hypotheses.
+
+-   Research questions and hypotheses should be precise and testable.
+
+-   Quantitative data analysis includes the following main steps: summarising, visualising and modelling.
+
+-   Statistical inference is about learning something about a population through a sample taken from the population.
+
+-   Statistics is about uncertainty and variability.
+
+-   As part of the research cycle, we are faced with researcher's degrees of freedom and with Questionable Research Practices.
+    This has led to a series of research crises, related to four concepts of research reliability: reproducibility, replicability, robustness and generalisability.
+
+-   The Null Ritual has been established as the standard frequentist approach in contemporary research, despite the theoretical pitfalls.
+    *P*-values are frequently misinterpreted and misused.
+
+-   Open Research is a movement that stresses the importance of a more honest and transparent research by promoting a series of research principles and by warning from common, although not necessarily intentional, questionable practices and misconceptions.
+
+## Statistics and R
