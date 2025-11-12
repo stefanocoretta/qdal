@@ -18,10 +18,6 @@ You can use this as a final check that you didn't miss anything important.
 
 -   Quantitative data analysis includes the following main steps: summarising, visualising and modelling.
 
--   Statistical inference is about learning something about a population through a sample taken from the population.
-
--   Statistics is about uncertainty and variability.
-
 -   As part of the research cycle, we are faced with researcher's degrees of freedom and with Questionable Research Practices.
     This has led to a series of research crises, related to four concepts of research reliability: reproducibility, replicability, robustness and generalisability.
 
@@ -31,3 +27,33 @@ You can use this as a final check that you didn't miss anything important.
 -   Open Research is a movement that stresses the importance of a more honest and transparent research by promoting a series of research principles and by warning from common, although not necessarily intentional, questionable practices and misconceptions.
 
 ## Statistics and R
+
+-   R is a statistical programming language, RStudio is an IDE.
+
+-   RStudio/Quarto projects allow you to organise your data and code.
+    Quarto documents allow you to include formatted text, code and output in a single file.
+
+-   The tidyverse packages are a set of R packages for reading, transforming and visualising data.
+
+-   Packages can be installed into the R package library with `install.packages()` and can be attached with `library()`.
+
+-   You can read data with the `read_*()` functions from the readr and readxl packages, or with `readRDS()`.
+
+-   Transforming data can be achieved with `mutate()`, `summarise()`, and `filter()` from the dplyr package.
+    Other relevant functions are `group_by()` and `count()`.
+
+-   You can plot data with the ggplot2 package, using `ggplot()`, `aes()`, and geometries/statistic functions.
+
+-   Statistical inference is about learning something about a population through a sample taken from the population.
+
+-   Statistics is about uncertainty and variability.
+
+-   Probability distribution and probability intervals allow us to quantify uncertainty and variability.
+
+-   Bayesian inference is a statistical inference approach based on the Bayesian interpretation of probabilities (as the probability of an event happening).
+
+-   Bayes' Theorem states that the posterior probability distribution is proportional to the product of the prior probability distribution and the likelihood of the data (i.e. the probability distribution of the data given the prior probability distribution).
+
+-   Regression models are statistical models based on the equation of a line.
+
+-   
