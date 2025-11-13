@@ -1,4 +1,4 @@
-# What you have learned  {#sec-learned}
+# What you've learned {#sec-learned}
 
 This chapter summarises the concepts, methods and skills that were covered in the textbook.
 You can use this as a final check that you didn't miss anything important.
@@ -44,6 +44,8 @@ You can use this as a final check that you didn't miss anything important.
 
 -   You can plot data with the ggplot2 package, using `ggplot()`, `aes()`, and geometries/statistic functions.
 
+-   Data frames/tibbles can be pivoted with the `pivot_longer()` and `pivot_wider()` functions from the tidyr package.
+
 -   Statistical inference is about learning something about a population through a sample taken from the population.
 
 -   Statistics is about uncertainty and variability.
@@ -54,6 +56,67 @@ You can use this as a final check that you didn't miss anything important.
 
 -   Bayes' Theorem states that the posterior probability distribution is proportional to the product of the prior probability distribution and the likelihood of the data (i.e. the probability distribution of the data given the prior probability distribution).
 
+-   <u>Cr</u>edible <u>I</u>ntervals (CrI) tell you the range of values of the posterior probability distribution that are within a certain probability level.
+    For example, a 80% CrI tells you that there is an 80% probability or confidence that the parameter's value is within that interval.
+
 -   Regression models are statistical models based on the equation of a line.
 
--   
+-   The outcome variable of a regression model determines the distribution family of the model:
+
+    -   For a numeric continuous variable that can be negative and positive use a Gaussian distribution.
+
+    -   For a binary categorical variable use a Bernoulli distribution.
+
+    -   For a numeric continuous variable that can only be positive use a log-normal distribution.
+
+-   The simplest Bayesian Gaussian Regression model is of the form:
+
+$$
+\begin{aligned}
+y & \sim Gaussian(\mu, \sigma)\\
+\mu & = \beta_0 + \beta_1 \cdot x\\
+\end{aligned}
+$$
+
+-   The simplest Bayesian Bernoulli regression model is of the form:
+
+$$
+\begin{aligned}
+y & \sim Bernoulli(p)\\
+logit(p) & = \beta_0 + \beta_1 \cdot x\\
+\end{aligned}
+$$
+
+-   The simplest Bayesian log-normal regression model is of the form ($\mu$ and $\sigma$ are on the log scale):
+
+$$
+\begin{aligned}
+y & \sim LogNormal(\mu, \sigma)\\
+\mu & = \beta_0 + \beta_1 \cdot x\\
+\end{aligned}
+$$
+
+-   Categorical predictors have to be numerically code.
+    The default coding system in regression models is treatment contrasts, where predictors are coded using dummy variables (`0/1`).
+    The number of dummy variables is `N-1` where `N` is the number of levels in the predictor.
+
+-   Interactions between predictors allow you to model the effect of one predictor based on the levels of another.
+    The R syntax for interactions is `x + w + x:w` or `x * w`.
+
+-   Bayesian regression models can be fitted with `brm()` from the brms package.
+
+-   brms uses the Markov Chain Monte Carlo algorithm to estimate the values of the model's parameters.
+    The output of MCMC is a list of MCMC draws.
+    All operations on the model are operations on the MCMC draws (like summarising and plotting).
+
+-   You can extract the draws from the model with `as_draws_df()`.
+    The output can be transformed, summarised and plotted.
+
+-   `conditional_effects()` is a convenience function that plots the expected values of the outcome based on model's draws.
+
+-   The draws of Bernoulli models are in log-odds and log-odds can be transformed into probabilities with the inverse logit (or logistic) function, in R `plogis()`.
+    Remember to always include `b_Intercept` when using `plogis()` (do `plogis(b_Intercept)` and `plogis(b_Intercept + ...)` where `...` is other coefficients.
+
+-   You can calculate Credible Intervals with `quantile2()` from the posterior package.
+    You should calculate CrIs at multiple probability levels (95, 90, 80, 70, 60, ...).
+    You can also find the largest CrI that contains only positive or negative values if the 95% CrI spans both positive and negative values.

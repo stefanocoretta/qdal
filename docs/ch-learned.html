@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>36&nbsp; What you have learned – Quantitative Data Analysis for Linguists in R</title>
+<title>36&nbsp; What you’ve learned – Quantitative Data Analysis for Linguists in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -81,6 +81,35 @@ ul.task-list li input[type="checkbox"] {
   });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="include/webex.css">
 </head>
@@ -256,7 +285,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-learned.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-learned.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you have learned</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-learned.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-learned.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -621,7 +650,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you have learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -692,9 +721,9 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-learned.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-learned.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you have learned</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-learned.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-learned.html"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-learned" class="quarto-section-identifier"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you have learned</span></span></h1>
+<h1 class="title"><span id="sec-learned" class="quarto-section-identifier"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></h1>
 </div>
 
 
@@ -721,8 +750,6 @@ ul.task-list li input[type="checkbox"] {
 <li><p>The research context spans everything between the more general research topic down to the more specific research questions and hypotheses.</p></li>
 <li><p>Research questions and hypotheses should be precise and testable.</p></li>
 <li><p>Quantitative data analysis includes the following main steps: summarising, visualising and modelling.</p></li>
-<li><p>Statistical inference is about learning something about a population through a sample taken from the population.</p></li>
-<li><p>Statistics is about uncertainty and variability.</p></li>
 <li><p>As part of the research cycle, we are faced with researcher’s degrees of freedom and with Questionable Research Practices. This has led to a series of research crises, related to four concepts of research reliability: reproducibility, replicability, robustness and generalisability.</p></li>
 <li><p>The Null Ritual has been established as the standard frequentist approach in contemporary research, despite the theoretical pitfalls. <em>P</em>-values are frequently misinterpreted and misused.</p></li>
 <li><p>Open Research is a movement that stresses the importance of a more honest and transparent research by promoting a series of research principles and by warning from common, although not necessarily intentional, questionable practices and misconceptions.</p></li>
@@ -730,6 +757,64 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="statistics-and-r" class="level2" data-number="36.2">
 <h2 data-number="36.2" class="anchored" data-anchor-id="statistics-and-r"><span class="header-section-number">36.2</span> Statistics and R</h2>
+<ul>
+<li><p>R is a statistical programming language, RStudio is an IDE.</p></li>
+<li><p>RStudio/Quarto projects allow you to organise your data and code. Quarto documents allow you to include formatted text, code and output in a single file.</p></li>
+<li><p>The tidyverse packages are a set of R packages for reading, transforming and visualising data.</p></li>
+<li><p>Packages can be installed into the R package library with <code>install.packages()</code> and can be attached with <code>library()</code>.</p></li>
+<li><p>You can read data with the <code>read_*()</code> functions from the readr and readxl packages, or with <code>readRDS()</code>.</p></li>
+<li><p>Transforming data can be achieved with <code>mutate()</code>, <code>summarise()</code>, and <code>filter()</code> from the dplyr package. Other relevant functions are <code>group_by()</code> and <code>count()</code>.</p></li>
+<li><p>You can plot data with the ggplot2 package, using <code>ggplot()</code>, <code>aes()</code>, and geometries/statistic functions.</p></li>
+<li><p>Data frames/tibbles can be pivoted with the <code>pivot_longer()</code> and <code>pivot_wider()</code> functions from the tidyr package.</p></li>
+<li><p>Statistical inference is about learning something about a population through a sample taken from the population.</p></li>
+<li><p>Statistics is about uncertainty and variability.</p></li>
+<li><p>Probability distribution and probability intervals allow us to quantify uncertainty and variability.</p></li>
+<li><p>Bayesian inference is a statistical inference approach based on the Bayesian interpretation of probabilities (as the probability of an event happening).</p></li>
+<li><p>Bayes’ Theorem states that the posterior probability distribution is proportional to the product of the prior probability distribution and the likelihood of the data (i.e.&nbsp;the probability distribution of the data given the prior probability distribution).</p></li>
+<li><p><u>Cr</u>edible <u>I</u>ntervals (CrI) tell you the range of values of the posterior probability distribution that are within a certain probability level. For example, a 80% CrI tells you that there is an 80% probability or confidence that the parameter’s value is within that interval.</p></li>
+<li><p>Regression models are statistical models based on the equation of a line.</p></li>
+<li><p>The outcome variable of a regression model determines the distribution family of the model:</p>
+<ul>
+<li><p>For a numeric continuous variable that can be negative and positive use a Gaussian distribution.</p></li>
+<li><p>For a binary categorical variable use a Bernoulli distribution.</p></li>
+<li><p>For a numeric continuous variable that can only be positive use a log-normal distribution.</p></li>
+</ul></li>
+<li><p>The simplest Bayesian Gaussian Regression model is of the form:</p></li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+y &amp; \sim Gaussian(\mu, \sigma)\\
+\mu &amp; = \beta_0 + \beta_1 \cdot x\\
+\end{aligned}
+\]</span></p>
+<ul>
+<li>The simplest Bayesian Bernoulli regression model is of the form:</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+y &amp; \sim Bernoulli(p)\\
+logit(p) &amp; = \beta_0 + \beta_1 \cdot x\\
+\end{aligned}
+\]</span></p>
+<ul>
+<li>The simplest Bayesian log-normal regression model is of the form (<span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are on the log scale):</li>
+</ul>
+<p><span class="math display">\[
+\begin{aligned}
+y &amp; \sim LogNormal(\mu, \sigma)\\
+\mu &amp; = \beta_0 + \beta_1 \cdot x\\
+\end{aligned}
+\]</span></p>
+<ul>
+<li><p>Categorical predictors have to be numerically code. The default coding system in regression models is treatment contrasts, where predictors are coded using dummy variables (<code>0/1</code>). The number of dummy variables is <code>N-1</code> where <code>N</code> is the number of levels in the predictor.</p></li>
+<li><p>Interactions between predictors allow you to model the effect of one predictor based on the levels of another. The R syntax for interactions is <code>x + w + x:w</code> or <code>x * w</code>.</p></li>
+<li><p>Bayesian regression models can be fitted with <code>brm()</code> from the brms package.</p></li>
+<li><p>brms uses the Markov Chain Monte Carlo algorithm to estimate the values of the model’s parameters. The output of MCMC is a list of MCMC draws. All operations on the model are operations on the MCMC draws (like summarising and plotting).</p></li>
+<li><p>You can extract the draws from the model with <code>as_draws_df()</code>. The output can be transformed, summarised and plotted.</p></li>
+<li><p><code>conditional_effects()</code> is a convenience function that plots the expected values of the outcome based on model’s draws.</p></li>
+<li><p>The draws of Bernoulli models are in log-odds and log-odds can be transformed into probabilities with the inverse logit (or logistic) function, in R <code>plogis()</code>. Remember to always include <code>b_Intercept</code> when using <code>plogis()</code> (do <code>plogis(b_Intercept)</code> and <code>plogis(b_Intercept + ...)</code> where <code>...</code> is other coefficients.</p></li>
+<li><p>You can calculate Credible Intervals with <code>quantile2()</code> from the posterior package. You should calculate CrIs at multiple probability levels (95, 90, 80, 70, 60, …). You can also find the largest CrI that contains only positive or negative values if the 95% CrI spans both positive and negative values.</p></li>
+</ul>
 
 
 </section>
