@@ -4,7 +4,17 @@
     "href": "index.html",
     "title": "Quantitative Data Analysis for Linguists in R",
     "section": "",
-    "text": "Welcome!\nHello! Welcome to the Quantitative Data Analysis for Linguists in R textbook! This is the textbook for the Quantitative Methods in Linguistics and English Language course at the University of Edinburgh, but the textbook is open to all.\nCite as:\n\nStefano Coretta. 2025. Quantitative data analysis for linguists in R [v1.0]. https://stefanocoretta.github.io/qdal/.",
+    "text": "Welcome!\nHello! Welcome to the Quantitative Data Analysis for Linguists in R textbook! This is the textbook for the Quantitative Methods in Linguistics and English Language course at the University of Edinburgh, but the textbook is open to all.",
+    "crumbs": [
+      "Welcome!"
+    ]
+  },
+  {
+    "objectID": "index.html#license",
+    "href": "index.html#license",
+    "title": "Quantitative Data Analysis for Linguists in R",
+    "section": "License",
+    "text": "License\nQuantitative Data Analysis for Linguists in R © 2025 by Stefano Coretta is licensed under CC BY-NC-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/\nCite as:\n\nStefano Coretta. 2025. Quantitative data analysis for linguists in R [v1.0]. https://stefanocoretta.github.io/qdal/.",
     "crumbs": [
       "Welcome!"
     ]
