@@ -1,5 +1,29 @@
-# source("renv/activate.R")
-renv::settings$snapshot.type("all")
-# load webexercises before each chapter
-# needs to check namespace to not bork github actions
-if (requireNamespace('webexercises', quietly = TRUE)) library(webexercises)
+set_up <- function() {
+  if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak")
+  if (!requireNamespace("renv", quietly = TRUE)) pak::pak("renv")
+
+  remotes <- c(
+    "stan-dev/cmdstanr",
+    "stefanocoretta/coretta2018itapol",
+    "stefanocoretta/coretta2019eng"
+  )
+
+  # Install GitHub packages
+  pak::pak(remotes)
+
+  # Get list of necessary packages
+  deps <- unique(renv::dependencies()[,2])
+
+  # Drop GitHub packages from deps list. pak doesn't know where to find them.
+  deps <- setdiff(
+    deps,
+    c("cmdstanr", "coretta2018itapol", "coretta2019eng")
+  )
+
+  # Install all dependencies (except the ones from GitHub)
+  pak::pak(deps)
+
+  cmdstanr::check_cmdstan_toolchain()
+}
+
+
