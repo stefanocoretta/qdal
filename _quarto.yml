@@ -5,7 +5,7 @@ project:
 
 book:
   title: Quantitative Data Analysis for Linguists in R
-  subtitle: "v1.1"
+  subtitle: "v1.1.9000"
   author: Stefano Coretta
   repo-url: https://github.com/stefanocoretta/qdal
   repo-link-target: "_blank"
@@ -18,14 +18,14 @@ book:
   chapters:
   - index.qmd
   - preface.qmd
-  - part: Week 1
+  - part: Week 2
     chapters:
     - ch-research-methods.qmd
     - ch-research-context.qmd
     - ch-quantitative.qmd
     - ch-r-rstudio.qmd
     - ch-packages.qmd
-  - part: Week 2
+  - part: Week 3
     chapters:
     - ch-inference.qmd
     - ch-scripts.qmd
@@ -33,7 +33,7 @@ book:
     - ch-read-data.qmd
     - ch-sum-measures.qmd
     - ch-summarise.qmd
-  - part: Week 3
+  - part: Week 4
     chapters:
     - ch-transform.qmd
     - ch-quarto.qmd
@@ -41,21 +41,18 @@ book:
     - ch-plotting.qmd
     - ch-more-plotting.qmd
     - ch-research-cycle.qmd
-  - part: Week 4
+  - part: Week 5
     chapters:
     - ch-probability.qmd
     - ch-gaussian.qmd
     - ch-bayes.qmd
     - ch-gauss-model.qmd
     - ch-fit-model.qmd
-  - part: Week 5
+  - part: Week 6
     chapters:
     - ch-regression-intro.qmd
     - ch-regression.qmd
     - ch-regression-draws.qmd
-  - part: Week 6
-    chapters:
-    - ch-interim-summ.qmd
   - part: Week 7
     chapters:
     - ch-regression-cat.qmd

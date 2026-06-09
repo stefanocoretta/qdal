@@ -10,8 +10,8 @@ This is the textbook for the [Quantitative Methods in Linguistics and English La
 
 ## License
 
-*Quantitative Data Analysis for Linguists in R* © 2025 by Stefano Coretta is licensed under CC BY-NC-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/
-
+*Quantitative Data Analysis for Linguists in R* © 2025 by Stefano Coretta is licensed under CC BY-NC-SA 4.0.
+To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 Cite as:
 
