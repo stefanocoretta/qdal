@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>29&nbsp; Frequentist statistics, the Null Ritual and p-values – Quantitative Data Analysis for Linguists in R</title>
+<title>28&nbsp; Frequentist statistics, the Null Ritual and p-values – Quantitative Data Analysis for Linguists in R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -59,7 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -89,19 +91,18 @@ div.csl-indent {
 <link href="./ch-regression-more.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-5fb1cbb79f85a0fa3795ecf5c470cb6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9e7382ee7cd961dafdf7e033f60763af.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -139,7 +140,7 @@ div.csl-indent {
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -342,7 +343,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-cat.html">Week 7</a></li><li class="breadcrumb-item"><a href="./ch-null-ritual.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-cat.html">Week 7</a></li><li class="breadcrumb-item"><a href="./ch-null-ritual.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -355,13 +356,11 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code" target="_blank"><i class="bi bi-github"></i></a>
     <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
@@ -389,7 +388,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 1</span></a>
+ <span class="menu-text">Week 2</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -430,7 +429,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 2</span></a>
+ <span class="menu-text">Week 3</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -477,7 +476,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 3</span></a>
+ <span class="menu-text">Week 4</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -524,7 +523,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 4</span></a>
+ <span class="menu-text">Week 5</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -565,7 +564,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 5</span></a>
+ <span class="menu-text">Week 6</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -594,7 +593,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 6</span></a>
+ <span class="menu-text">Week 7</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -602,8 +601,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-interim-summ.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
+  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
       </ul>
@@ -611,7 +622,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 7</span></a>
+ <span class="menu-text">Week 8</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -619,20 +630,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
   </div>
 </li>
       </ul>
@@ -640,7 +651,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 8</span></a>
+ <span class="menu-text">Week 9</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -648,20 +659,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
+  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -669,7 +680,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 9</span></a>
+ <span class="menu-text">Week 10</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -677,55 +688,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 10</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -738,13 +720,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./app-computer-basics.html" class="sidebar-item-text sidebar-link">
@@ -769,14 +751,14 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#frequentist-statistics-feuds-and-eugenics-a-brief-history" id="toc-frequentist-statistics-feuds-and-eugenics-a-brief-history" class="nav-link active" data-scroll-target="#frequentist-statistics-feuds-and-eugenics-a-brief-history"><span class="header-section-number">29.1</span> Frequentist statistics, feuds and eugenics: a brief history</a></li>
-  <li><a href="#null-hypothesis-significance-testing" id="toc-null-hypothesis-significance-testing" class="nav-link" data-scroll-target="#null-hypothesis-significance-testing"><span class="header-section-number">29.2</span> Null Hypothesis Significance Testing</a></li>
-  <li><a href="#the-p-value" id="toc-the-p-value" class="nav-link" data-scroll-target="#the-p-value"><span class="header-section-number">29.3</span> The <em>p</em>-value</a></li>
-  <li><a href="#sec-null-ritual" id="toc-sec-null-ritual" class="nav-link" data-scroll-target="#sec-null-ritual"><span class="header-section-number">29.4</span> The Null Ritual</a></li>
-  <li><a href="#why-prefer-bayesian-inference" id="toc-why-prefer-bayesian-inference" class="nav-link" data-scroll-target="#why-prefer-bayesian-inference"><span class="header-section-number">29.5</span> Why prefer Bayesian inference?</a>
+  <li><a href="#frequentist-statistics-feuds-and-eugenics-a-brief-history" id="toc-frequentist-statistics-feuds-and-eugenics-a-brief-history" class="nav-link active" data-scroll-target="#frequentist-statistics-feuds-and-eugenics-a-brief-history"><span class="header-section-number">28.1</span> Frequentist statistics, feuds and eugenics: a brief history</a></li>
+  <li><a href="#null-hypothesis-significance-testing" id="toc-null-hypothesis-significance-testing" class="nav-link" data-scroll-target="#null-hypothesis-significance-testing"><span class="header-section-number">28.2</span> Null Hypothesis Significance Testing</a></li>
+  <li><a href="#the-p-value" id="toc-the-p-value" class="nav-link" data-scroll-target="#the-p-value"><span class="header-section-number">28.3</span> The <em>p</em>-value</a></li>
+  <li><a href="#sec-null-ritual" id="toc-sec-null-ritual" class="nav-link" data-scroll-target="#sec-null-ritual"><span class="header-section-number">28.4</span> The Null Ritual</a></li>
+  <li><a href="#why-prefer-bayesian-inference" id="toc-why-prefer-bayesian-inference" class="nav-link" data-scroll-target="#why-prefer-bayesian-inference"><span class="header-section-number">28.5</span> Why prefer Bayesian inference?</a>
   <ul class="collapse">
-  <li><a href="#practical-reasons" id="toc-practical-reasons" class="nav-link" data-scroll-target="#practical-reasons"><span class="header-section-number">29.5.1</span> Practical reasons</a></li>
-  <li><a href="#conceptual-reasons" id="toc-conceptual-reasons" class="nav-link" data-scroll-target="#conceptual-reasons"><span class="header-section-number">29.5.2</span> Conceptual reasons</a></li>
+  <li><a href="#practical-reasons" id="toc-practical-reasons" class="nav-link" data-scroll-target="#practical-reasons"><span class="header-section-number">28.5.1</span> Practical reasons</a></li>
+  <li><a href="#conceptual-reasons" id="toc-conceptual-reasons" class="nav-link" data-scroll-target="#conceptual-reasons"><span class="header-section-number">28.5.2</span> Conceptual reasons</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-null-ritual.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -785,9 +767,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-cat.html">Week 7</a></li><li class="breadcrumb-item"><a href="./ch-null-ritual.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-cat.html">Week 7</a></li><li class="breadcrumb-item"><a href="./ch-null-ritual.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-freq" class="quarto-section-identifier"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></h1>
+<h1 class="title"><span id="sec-freq" class="quarto-section-identifier"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></h1>
 </div>
 
 
@@ -805,20 +787,20 @@ window.Quarto = {
 
 
 <p><img src="./img/badge-resmethods.png" class="img-fluid"> <img src="./img/badge-stats.png" class="img-fluid"></p>
-<p>In <a href="ch-bayes.html" class="quarto-xref"><span>Chapter 20</span></a>, you were introduced to the Bayesian approach to inference, and we only briefly mentioned frequentist statistics. It is very likely that you had heard of <em>p</em>-values before, especially when reading research literature. You will have also heard of “statistical significance”, which is based on the <em>p</em>-value obtained in a statistical test performed on data. This section will explain what <em>p</em>-values are, how they are often misinterpreted and misused <span class="citation" data-cites="cassidy2019 gigerenzer2004">(<a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>; <a href="references.html#ref-gigerenzer2004" role="doc-biblioref">Gigerenzer 2004</a>)</span>, and how the “Null Ritual”, a degenerate form of statistics derived from different frequentist frameworks (yes, you can do frequentist statistics in different ways!) has become the standard in research, despite not being a coherent way of doing frequentist statistics <span class="citation" data-cites="gigerenzer2004a">(<a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer, Krauss, and Vitouch 2004</a>)</span>.</p>
-<section id="frequentist-statistics-feuds-and-eugenics-a-brief-history" class="level2" data-number="29.1">
-<h2 data-number="29.1" class="anchored" data-anchor-id="frequentist-statistics-feuds-and-eugenics-a-brief-history"><span class="header-section-number">29.1</span> Frequentist statistics, feuds and eugenics: a brief history</h2>
+<p>In <a href="ch-bayes.html" class="quarto-xref"><span>Chapter 20</span></a>, you were introduced to the Bayesian approach to inference, and we only briefly mentioned frequentist statistics. It is very likely that you had heard of <em>p</em>-values before, especially when reading research literature. You will have also heard of “statistical significance”, which is based on the <em>p</em>-value obtained in a statistical test performed on data. This section will explain what <em>p</em>-values are, how they are often misinterpreted and misused <span class="citation" data-cites="cassidy2019 gigerenzer2004">(<a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>; <a href="references.html#ref-gigerenzer2004" role="doc-biblioref">Gigerenzer 2004</a>)</span>, and how the “Null Ritual”, a degenerate form of statistics derived from different frequentist frameworks (yes, you can do frequentist statistics in different ways!) has become the standard in research, despite not being a coherent way of doing frequentist statistics <span class="citation" data-cites="gigerenzer2004a">(<a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer et al. 2004</a>)</span>.</p>
+<section id="frequentist-statistics-feuds-and-eugenics-a-brief-history" class="level2" data-number="28.1">
+<h2 data-number="28.1" class="anchored" data-anchor-id="frequentist-statistics-feuds-and-eugenics-a-brief-history"><span class="header-section-number">28.1</span> Frequentist statistics, feuds and eugenics: a brief history</h2>
 <p>A lot of current research is carried out with frequentist methods. This is a historical accident, based on both an initial misunderstanding of Bayesian statistics (which is, by the way, older than frequentist statistics) and the fact that frequentist maths was much easier to deal with (and personal computers did not exist at the time). Bayesian statistics, rooted in <a href="https://en.wikipedia.org/wiki/Thomas_Bayes">Thomas Bayes</a>‘s (1701-1771) work on updating probabilities with new evidence based on a specific interpretation of Bayes’ Theorem, remained largely dormant until the 20th century due to computational difficulties and philosophical debates. It gained widespread traction in the 1990s with advances in computational methods, especially the development of Markov Chain Monte Carlo ( <a href="ch-regression-draws.html" class="quarto-xref"><span>Chapter 25</span></a>). However, modern frequentist statistics is attributed to three statisticians whose lives span several decades before the time Bayesianism found a place in statistical debates: Ronald Fisher (1890-1926), Jerzy Neyman (1894-1981) and Egon Pearson (1895-1980, the son of another statistician, Karl Pearson 1857-1936).</p>
 <p>The history of frequentist statistics is a tale of heated debates, feuds and the now discredited field of eugenics (a colonial movement with the aim of improving the genetic “quality” of human populations). <a href="https://en.wikipedia.org/wiki/Francis_Galton">Francis Galton</a> (1822-1911) is considered the originator of eugenics: this is the same Galton who came up with the idea of “regression toward mediocrity” which gives the name to regression models (see Spotlight box in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>). <a href="https://en.wikipedia.org/wiki/Karl_Pearson">Karl Pearson</a> was deeply influenced by Galton and saw statistics as a tool for improving racial fitness. Pearson’s Biometric School in Britain was explicitly tied to eugenics research. <a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a> was another British statistician who strongly believed in eugenics and racial differences. While both K. Pearson and Fisher were proponents of eugenics, they differed in their understanding of statistics. Fisher criticised K. Pearson’s approach as too mechanic and simplistic (thus earning the elder statistician’s lasting disapproval). Fisher came up with the concept of <strong>statistical significance</strong> and devised the famous <strong><em>p</em>-value</strong> as a way to quantify statistical significance based on data, against a hypothesis (to be nullified) of how the researcher thought the data were produced.</p>
 <p>Fisher’s contemporaries <a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Jerzy Neyman</a> and <a href="https://en.wikipedia.org/wiki/Egon_Pearson">Egon Pearson</a> (the son of K. Pearson), who both rejected eugenics, found Fisher’s critiques to K. Pearson’s (the father) approach well-founded, but they themselves thought Fisher’s significance testing fell short. While Fisher’s significance testing was based on quantifying significance in light of a single hypothesis, Neyman and E. Pearson (the son) argued that one should contrast two opposing hypotheses and control for error rates in rejecting one and accepting the other. They thus introduced the idea of “<strong>significance level</strong>”, a threshold which determined if one accepted a result as statistically significant or not. In sum, while Fisher’s approach was focused on estimating the <em>degree</em> of statistical significance, Neyman and Pearson’s approach was more interested in <em>decision-making</em> under uncertainty. “Fisherian frequentism” and “Neyman–Pearson frequentism”, as they later became to be known, are incompatible approaches, despite both being based on the same statistical concept of the <em>p</em>-value, because they entail two very different interpretations of statistical significance (and the objective of research more generally).</p>
 </section>
-<section id="null-hypothesis-significance-testing" class="level2" data-number="29.2">
-<h2 data-number="29.2" class="anchored" data-anchor-id="null-hypothesis-significance-testing"><span class="header-section-number">29.2</span> Null Hypothesis Significance Testing</h2>
+<section id="null-hypothesis-significance-testing" class="level2" data-number="28.2">
+<h2 data-number="28.2" class="anchored" data-anchor-id="null-hypothesis-significance-testing"><span class="header-section-number">28.2</span> Null Hypothesis Significance Testing</h2>
 <p>Moving forward in time to the last three decades, the commonly accepted approach to frequentist inference is the so-called <strong>Null Hypothesis Significance Testing</strong>, or NHST. As practised by researchers, the NHST approach is an incoherent mix of Fisherian and Neyman–Pearson frequentism <span class="citation" data-cites="perezgonzalez2015">(<a href="references.html#ref-perezgonzalez2015" role="doc-biblioref">Perezgonzalez 2015</a>)</span>. The main tenet of the NHST is that you set a <strong>null hypothesis</strong> and you try to <strong>reject</strong> it (as Fisher expected statistical significance to be used). A null hypothesis is, in practice, always a <em>nil</em> hypothesis: in other words, it is the hypothesis that there is <em>no</em> difference between two estimands (these usually being means of two or more groups of interest). This aspect is a great departure from both Fisherian and Neyman–Pearson frequentism, since neither says anything about the null hypothesis having to necessarily be a nil hypothesis. Then, using a variety of numerical techniques, one obtains a <strong><em>p</em>-value</strong>, i.e.&nbsp;a frequentist probability. The <em>p</em>-value is used for inference: if the <em>p</em>-value is smaller than a threshold (Neyman–Pearson’s significance level), you can reject the nil hypothesis; if the <em>p</em>-value is equal to or greater than the threshold, you cannot reject the null hypothesis.</p>
-<p>The following section explains <em>p</em>-values within the NHST approach, since that is the approach researchers adopt (knowingly or less knowingly) when using <em>p</em>-values. Note however that the NHST approach has been heavily criticised by frequentist and Bayesian statisticians alike and has resulted in the proposal of alternative, stricter, versions of NHST, like the frequentist Statistical Inference as Severe Testing <span class="citation" data-cites="mayo2018 gelman2019">(SIST, <a href="references.html#ref-mayo2018" role="doc-biblioref">Mayo 2018</a>; for a critique see <a href="references.html#ref-gelman2019" role="doc-biblioref">Gelman et al. 2019</a>)</span>. The inconsistent nature of NHST has led to the elaboration of the concept and label “<strong>Null Ritual</strong>” <span class="citation" data-cites="gigerenzer2004 gigerenzer2004a gigerenzer2018">(<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">Gigerenzer 2004</a>, <a href="references.html#ref-gigerenzer2018" role="doc-biblioref">2018</a>; <a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer, Krauss, and Vitouch 2004</a>)</span> and the slogan-titled paper <em>The difference between “significant” and “not significant” is not itself statistically significant</em> <span class="citation" data-cites="gelman2006a">(<a href="references.html#ref-gelman2006a" role="doc-biblioref">Gelman and Stern 2006</a>)</span>. <em>p</em>-values are very commonly mistaken for Bayesian probabilities <span class="citation" data-cites="cassidy2019">(<a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>)</span> and this results in various misinterpretations of reported results. <a href="#sec-null-ritual" class="quarto-xref"><span>Section 29.4</span></a> explains the main issues with the Null Ritual and invites you to always think critically when reading results and discussions in published research.</p>
+<p>The following section explains <em>p</em>-values within the NHST approach, since that is the approach researchers adopt (knowingly or less knowingly) when using <em>p</em>-values. Note however that the NHST approach has been heavily criticised by frequentist and Bayesian statisticians alike and has resulted in the proposal of alternative, stricter, versions of NHST, like the frequentist Statistical Inference as Severe Testing <span class="citation" data-cites="mayo2018 gelman2019">(SIST, <a href="references.html#ref-mayo2018" role="doc-biblioref">Mayo 2018</a>; for a critique see <a href="references.html#ref-gelman2019" role="doc-biblioref">Gelman et al. 2019</a>)</span>. The inconsistent nature of NHST has led to the elaboration of the concept and label “<strong>Null Ritual</strong>” <span class="citation" data-cites="gigerenzer2004 gigerenzer2004a gigerenzer2018">(<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">Gigerenzer 2004</a>, <a href="references.html#ref-gigerenzer2018" role="doc-biblioref">2018</a>; <a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer et al. 2004</a>)</span> and the slogan-titled paper <em>The difference between “significant” and “not significant” is not itself statistically significant</em> <span class="citation" data-cites="gelman2006a">(<a href="references.html#ref-gelman2006a" role="doc-biblioref">Gelman and Stern 2006</a>)</span>. <em>p</em>-values are very commonly mistaken for Bayesian probabilities <span class="citation" data-cites="cassidy2019">(<a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>)</span> and this results in various misinterpretations of reported results. <a href="#sec-null-ritual" class="quarto-xref"><span>Section 28.4</span></a> explains the main issues with the Null Ritual and invites you to always think critically when reading results and discussions in published research.</p>
 </section>
-<section id="the-p-value" class="level2" data-number="29.3">
-<h2 data-number="29.3" class="anchored" data-anchor-id="the-p-value"><span class="header-section-number">29.3</span> The <em>p</em>-value</h2>
+<section id="the-p-value" class="level2" data-number="28.3">
+<h2 data-number="28.3" class="anchored" data-anchor-id="the-p-value"><span class="header-section-number">28.3</span> The <em>p</em>-value</h2>
 <p>To illustrate <em>p</em>-values, we will compare simulated durations of vowels when followed by voiceless consonants vs voiced consonants. It is a well-known phenomenon that vowels followed by voiced consonants tend to be longer than vowels followed by voiceless ones <span class="citation" data-cites="coretta2019">(see review in <a href="references.html#ref-coretta2019" role="doc-biblioref">Coretta 2019</a>)</span>. Let’s simulate some vowel duration observations: we do so with the <code>rnorm()</code> function, which takes three arguments: the number of observations to sample and the mean and standard deviation of the Gaussian distribution to sample observations from. We use a <span class="math inline">\(Gaussian(80, 10)\)</span> for durations before voiceless consonants, and a <span class="math inline">\(Gaussian(90, 10)\)</span> for durations before voiced consonants. In other word, there is a difference of 10 milliseconds between the two means. Since the <code>rnorm()</code> function <em>randomly</em> samples from the given distribution, we have set a “seed” so that the code will return the same numbers every time it is run, for reproducibility.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2953</span>)</span>
@@ -845,7 +827,7 @@ window.Quarto = {
 <p><span class="math inline">\(H_0\)</span> simply states that there is no difference between the mean of vowel duration when followed by voiced or voiceless consonants. This is the “null” hypothesis. <span class="math inline">\(H_1\)</span>, called the “alternative” hypothesis, states that the difference between means is different from exactly 0. We could have decided to go with “greater than 0”, rather than just “not 0”, because we know about the trend of longer vowels before voiced consonants, so the difference should be positive. But this is not how NHST is usually set up: it is always assumed that the <span class="math inline">\(H_1\)</span> is “the difference between means is not 0”.</p>
 <p>Here is where things get tricky: if <span class="math inline">\(H_0\)</span> is correct, then we should observe a difference as close to 0 as possible. Why not exactly 0? Because it is impossible for two samples (even if they come from exactly the same distribution) to have exactly the same mean for the difference to be 0. But how do we define “as close as possible”? The frequentist solution is to define a probability distribution of the difference between means centred around 0. This means that 0 has the highest probability, but that negative and positive differences around 0 are also possible.</p>
 <p><a href="https://en.wikipedia.org/wiki/William_Sealy_Gosset">William Sealy Gosset</a> (1876-1937), a statistician, chemist and brewer who worked for Guinness the brewery, proposed the <em>t</em>-distribution for this purpose. Gosset, though employed at Guinness, was sent to University College London in 1906–1907 to study statistics under Karl Pearson (the father), who at the time was the leading authority in mathematical statistics. Guinness allowed this because Gosset needed advanced statistical tools to handle small experimental data sets in brewing and agriculture. K. Pearson’s <em>Biometrika</em> journal became the outlet where Gosset published his famous 1908 paper “The probable error of a mean” <span class="citation" data-cites="student1908">(<a href="references.html#ref-student1908" role="doc-biblioref">Student 1908</a>)</span>. K. Pearson encouraged Gosset to publish it, though Guinness insisted that he use a pseudonym to protect trade secrets, so Gosset published under the pseudonym “Student”. Because of this, the <em>t</em>-distribution is also called the Student-<em>t</em> distribution. Gosset argued that the <em>t</em>-distribution was an appropriate probability distribution for differences between means, especially with small sample sizes.</p>
-<p>The <em>t</em>-distribution is similar to a Gaussian distribution, but the probability on either side of the mean declines more gently than with the Gaussian. As the Gaussian, the <em>t</em>-distribution has a mean and a standard deviation. It has an extra parameter: the degrees of freedom, or <span class="math inline">\(df\)</span>. The <span class="math inline">\(df\)</span> affect how quickly the probability declines moving away from zero: the higher the <span class="math inline">\(df\)</span> the more quickly the probability gets lower. This is illustrated in <a href="#fig-tdist" class="quarto-xref">Figure&nbsp;<span>29.1</span></a>. The figure shows four different <em>t</em>-distributions: what they all have in common is that the mean is 0 and the standard deviation is 1. These are called “standard” <em>t</em>-distributions. Where they differ is in their degrees of freedom. When the degrees of freedom are infinite (<code>Inf</code>), the <em>t</em>-distribution is equivalent to a Gaussian distribution.</p>
+<p>The <em>t</em>-distribution is similar to a Gaussian distribution, but the probability on either side of the mean declines more gently than with the Gaussian. As the Gaussian, the <em>t</em>-distribution has a mean and a standard deviation. It has an extra parameter: the degrees of freedom, or <span class="math inline">\(df\)</span>. The <span class="math inline">\(df\)</span> affect how quickly the probability declines moving away from zero: the higher the <span class="math inline">\(df\)</span> the more quickly the probability gets lower. This is illustrated in <a href="#fig-tdist" class="quarto-xref">Figure&nbsp;<span>28.1</span></a>. The figure shows four different <em>t</em>-distributions: what they all have in common is that the mean is 0 and the standard deviation is 1. These are called “standard” <em>t</em>-distributions. Where they differ is in their degrees of freedom. When the degrees of freedom are infinite (<code>Inf</code>), the <em>t</em>-distribution is equivalent to a Gaussian distribution.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -880,7 +862,7 @@ window.Quarto = {
 <img src="ch-null-ritual_files/figure-html/fig-tdist-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;29.1: Example <em>t</em>-distributions with different degrees of freedom and fixed mean and standard deviation (mean = 0, sd = 1).
+Figure&nbsp;28.1: Example <em>t</em>-distributions with different degrees of freedom and fixed mean and standard deviation (mean = 0, sd = 1).
 </figcaption>
 </figure>
 </div>
@@ -925,7 +907,7 @@ t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>      ( ((var_voi<span class="sc">/</span><span class="dv">15</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">15</span> <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">+</span> ((var_vls<span class="sc">/</span><span class="dv">15</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">15</span> <span class="sc">-</span> <span class="dv">1</span>)) )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>The degrees of freedom for our data are approximately 28. <a href="#fig-tdist-2" class="quarto-xref">Figure&nbsp;<span>29.2</span></a> shows a <em>t</em>-distribution with those degrees of freedom and a dashed line where our <em>t</em>-statistic falls. Now, since we set <span class="math inline">\(H_1\)</span> to be “the difference is not 0”, we are including both positive and negative differences between the means. The sign of the <em>t</em>-statistic reflects the sign of the difference: positive <em>t</em> means a positive difference, while negative <em>t</em> indicates a negative difference between the two means. Since <span class="math inline">\(H_1\)</span> is non-directional (it does not specify whether the difference is positive or negative), the <em>p</em>-value must account for extreme values of the <em>t</em>-statistic in both directions. This is called a two-tailed <em>t</em>-test: the <em>p</em>-value is the probability of observing a <em>t</em>-statistic at least as extreme as the one obtained, in either tail of the <em>t</em>-distribution.</p>
+<p>The degrees of freedom for our data are approximately 28. <a href="#fig-tdist-2" class="quarto-xref">Figure&nbsp;<span>28.2</span></a> shows a <em>t</em>-distribution with those degrees of freedom and a dashed line where our <em>t</em>-statistic falls. Now, since we set <span class="math inline">\(H_1\)</span> to be “the difference is not 0”, we are including both positive and negative differences between the means. The sign of the <em>t</em>-statistic reflects the sign of the difference: positive <em>t</em> means a positive difference, while negative <em>t</em> indicates a negative difference between the two means. Since <span class="math inline">\(H_1\)</span> is non-directional (it does not specify whether the difference is positive or negative), the <em>p</em>-value must account for extreme values of the <em>t</em>-statistic in both directions. This is called a two-tailed <em>t</em>-test: the <em>p</em>-value is the probability of observing a <em>t</em>-statistic at least as extreme as the one obtained, in either tail of the <em>t</em>-distribution.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -971,13 +953,13 @@ t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
 <img src="ch-null-ritual_files/figure-html/fig-tdist-2-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tdist-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;29.2: Standard <em>t</em>-distribution and obtained <em>t</em>-statistic.
+Figure&nbsp;28.2: Standard <em>t</em>-distribution and obtained <em>t</em>-statistic.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>In <a href="#fig-tdist-2" class="quarto-xref">Figure&nbsp;<span>29.2</span></a>, the dotted line to the left of the distribution marks the <em>t</em>-statistic but with negative sign. The shaded purple area on both tails of the distribution marks the area under the density curve with <em>t</em> values as extreme or more extreme than the obtained <em>t</em>-statistic. The size of this area is the probability that we get a <em>t</em> value as extreme or more extreme than the obtained <em>t</em>-statistic, <em>given that</em> <span class="math inline">\(H_0\)</span> <em>is true</em>. This probability is the <em>p</em>-value! The part “given that <span class="math inline">\(H_0\)</span> is true” shows that the <em>p</em>-value is a conditional probability, conditional on <span class="math inline">\(H_0\)</span> being true: we could write this as <span class="math inline">\(p = P(d | H_0)\)</span>, where the vertical bar <span class="math inline">\(|\)</span> indicates that the probability of the <em>t</em>-statistic is conditional on <span class="math inline">\(H_0\)</span> and <span class="math inline">\(d\)</span> stands for “data”, or more precisely for “data as extreme or more extreme than the one observed”. You have already encountered conditional probabilities in <a href="ch-bayes.html" class="quarto-xref"><span>Chapter 20</span></a>, in Bayes’ Theorem.</p>
+<p>In <a href="#fig-tdist-2" class="quarto-xref">Figure&nbsp;<span>28.2</span></a>, the dotted line to the left of the distribution marks the <em>t</em>-statistic but with negative sign. The shaded purple area on both tails of the distribution marks the area under the density curve with <em>t</em> values as extreme or more extreme than the obtained <em>t</em>-statistic. The size of this area is the probability that we get a <em>t</em> value as extreme or more extreme than the obtained <em>t</em>-statistic, <em>given that</em> <span class="math inline">\(H_0\)</span> <em>is true</em>. This probability is the <em>p</em>-value! The part “given that <span class="math inline">\(H_0\)</span> is true” shows that the <em>p</em>-value is a conditional probability, conditional on <span class="math inline">\(H_0\)</span> being true: we could write this as <span class="math inline">\(p = P(d | H_0)\)</span>, where the vertical bar <span class="math inline">\(|\)</span> indicates that the probability of the <em>t</em>-statistic is conditional on <span class="math inline">\(H_0\)</span> and <span class="math inline">\(d\)</span> stands for “data”, or more precisely for “data as extreme or more extreme than the one observed”. You have already encountered conditional probabilities in <a href="ch-bayes.html" class="quarto-xref"><span>Chapter 20</span></a>, in Bayes’ Theorem.</p>
 <p>You can get the <em>p</em>-value in R using the <code>pt()</code> function. You need the <em>t</em>-value and the degrees of freedom. These are saved in <code>tstat</code> and <code>df</code> from previous code. We also need to set another argument, <code>lower.tail</code>: this argument, when set to <code>TRUE</code>, states that we want the probability of getting a <em>t</em> value that is equal to or less than the specified <em>t</em> value, but we want the probability of getting a <em>t</em> value that is equal to or greater than the specified <em>t</em> value, since the <em>t</em>-value is positive, so we set <code>lower.tail</code> to <code>FALSE</code>. Since this is a two-tailed <em>t</em>-test, we also need the probability for the negative tail. Since the distribution is symmetric around 0, the upper and lower-tail probabilities given a <em>t</em>-statistic are the same, so we can simply multiply the upper-tail probability by 2.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pt() times 2 to get the two-tailed prob</span></span>
@@ -1003,8 +985,8 @@ Figure&nbsp;29.2: Standard <em>t</em>-distribution and obtained <em>t</em>-stati
 </div>
 </div>
 </section>
-<section id="sec-null-ritual" class="level2" data-number="29.4">
-<h2 data-number="29.4" class="anchored" data-anchor-id="sec-null-ritual"><span class="header-section-number">29.4</span> The Null Ritual</h2>
+<section id="sec-null-ritual" class="level2" data-number="28.4">
+<h2 data-number="28.4" class="anchored" data-anchor-id="sec-null-ritual"><span class="header-section-number">28.4</span> The Null Ritual</h2>
 <p><span class="citation" data-cites="gigerenzer2004">Gigerenzer (<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">2004</a>)</span> calls the way researchers perform NHST the “null ritual”. He defines the null ritual as the following procedure <span class="citation" data-cites="gigerenzer2004">(<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">Gigerenzer 2004, 588</a>)</span>:</p>
 <ol type="1">
 <li><p>Set up a statistical null hypothesis of “no mean difference” or “zero correlation.” Don’t specify the predictions of your research hypothesis or of any alternative substantive hypotheses.</p></li>
@@ -1013,15 +995,15 @@ Figure&nbsp;29.2: Standard <em>t</em>-distribution and obtained <em>t</em>-stati
 </ol>
 <p><span class="citation" data-cites="gigerenzer2004">Gigerenzer (<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">2004</a>)</span> explains how the null ritualistic approach to frequentism, or NHST, is an inconsistent hybrid of Fisher’s statistical significance testing and Neyman–Pearson decision theory. Fisherian frequentism did not have an <span class="math inline">\(\alpha\)</span>-level: the <em>p</em>-value was used as a degree of statistical significance. Neyman and Pearson rejected the idea of significance degree and argued for the use an <span class="math inline">\(\alpha\)</span>-level, but they in no way proposed a fixed level and, quite the opposite, urged researchers to set the <span class="math inline">\(\alpha\)</span>-level on a case-by-case basis. Moreover, Fisher’s null hypothesis didn’t have to be a <em>nil</em> hypothesis: you could set your null hypothesis (the hypothesis to be “nullified”) to anything it made sense, so you could have for example <span class="math inline">\(H_0: \delta = +2.5\)</span> (where <span class="math inline">\(\delta\)</span> “delta” is the difference between means) and the <em>p</em>-value would be about nullifying that hypothesis, not <span class="math inline">\(\delta = 0\)</span>.</p>
 <p>There is another level that is relevant to Neyman–Pearson statistics that is very often glossed over: the <span class="math inline">\(\beta\)</span>-level, also known as statistical power. Statistical power is the probability of finding a significant difference when there is a real difference. In social sciences, this is arbitrarily set to 0.8: i.e., there should be an 80% probability of finding a significance difference where there is one. Statistical power is in large part determined by the magnitude of the difference and the variance of the groups being compared. With small and very noisy differences, you need a larger sample size to reach a high statistical power. As with the <span class="math inline">\(\alpha\)</span>-level, a researcher should set the <span class="math inline">\(\beta\)</span>-level on a case-by-case basis. Once a statistical power level is chosen, a researcher is supposed to run a prospective power analysis <span class="citation" data-cites="brysbaert2018 brysbaert2020">(<a href="references.html#ref-brysbaert2018" role="doc-biblioref">Brysbaert and Stevens 2018</a>; <a href="references.html#ref-brysbaert2020" role="doc-biblioref">Brysbaert 2020</a>)</span>: this is a procedure that, given the chosen statistical power and hypothesised difference magnitude and variance, helps you determine a specific sample size needed to reach that statistical power. Calculating <em>p</em>-values without prospective power analysis is incorrect and yet has become the norm.</p>
-<p>Furthermore, researchers consistently misinterpret <em>p</em>-values and frequentist inference more generally <span class="citation" data-cites="gigerenzer2004a gigerenzer2018 perezgonzalez2015 cassidy2019">(<a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer, Krauss, and Vitouch 2004</a>; <a href="references.html#ref-gigerenzer2018" role="doc-biblioref">Gigerenzer 2018</a>; <a href="references.html#ref-perezgonzalez2015" role="doc-biblioref">Perezgonzalez 2015</a>; <a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>)</span>. There is a very common tendency to confuse the <em>p</em>-value for the probability that the null hypothesis <span class="math inline">\(H_0\)</span> is true. This is incorrect because the <em>p</em>-value is the probability <span class="math inline">\(P(d|H_0)\)</span>: it is conditional on <span class="math inline">\(H_0\)</span> being true and it is clearly not <span class="math inline">\(P(H_0)\)</span>. Another misinterpretation takes the <em>p</em>-value as the inverse of the probability that <span class="math inline">\(H_1\)</span> is true: again, this must be false because <span class="math inline">\(P(d|H_0)\)</span> is the probability of the “data” given <span class="math inline">\(H_0\)</span>, not the probability of <span class="math inline">\(H_0\)</span> (in which case, assuming contrasting hypotheses, then we would indeed have <span class="math inline">\(P(H_1) = -P(H_0)\)</span>). Finally, something dubbed “Bayesian wishful thinking” by <span class="citation" data-cites="gigerenzer2018">Gigerenzer (<a href="references.html#ref-gigerenzer2018" role="doc-biblioref">2018</a>)</span>, is the belief that the <em>p</em>-value is the probability of <span class="math inline">\(H_0\)</span> given the data (<span class="math inline">\(P(H_0|d)\)</span>) or worse the inverse of the probability of <span class="math inline">\(H_1\)</span> given the data (<span class="math inline">\(P(H_1|d)\)</span>). You might see why it is called Bayesian wishful thinking: a Bayesian posterior probability, as per Bayes’ Theorem, is precisely the probability of a hypothesis given the data: <span class="math inline">\(P(h|d)\)</span> (<a href="ch-bayes.html" class="quarto-xref"><span>Chapter 20</span></a>). However, a <em>p</em>-value is not <span class="math inline">\(P(h|d)\)</span> but rather <span class="math inline">\(P(d|H_0)\)</span>.</p>
-<p>These are just the main issues and misinterpretation of the null ritual NHST and if you’d like to learn more about this, I strongly recommend you read <span class="citation" data-cites="gigerenzer2004">Gigerenzer (<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">2004</a>)</span> and the other papers cited in this section. <span class="citation" data-cites="gigerenzer2004a">Gigerenzer, Krauss, and Vitouch (<a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">2004</a>)</span> highlights how the null ritual can indeed hurt research and anything that comes from it. Alas, as said at the beginning of this chapter, virtually all contemporary research (especially in the social sciences and hence linguistics) adopts the null ritual for statistical inference. This means, in practice, that we should always be very sceptical of statements regarding statistical significance and or strength of evidence when reading such literature and we should instead focus more on the actual estimates of the estimands of interest.</p>
+<p>Furthermore, researchers consistently misinterpret <em>p</em>-values and frequentist inference more generally <span class="citation" data-cites="gigerenzer2004a gigerenzer2018 perezgonzalez2015 cassidy2019">(<a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">Gigerenzer et al. 2004</a>; <a href="references.html#ref-gigerenzer2018" role="doc-biblioref">Gigerenzer 2018</a>; <a href="references.html#ref-perezgonzalez2015" role="doc-biblioref">Perezgonzalez 2015</a>; <a href="references.html#ref-cassidy2019" role="doc-biblioref">Cassidy et al. 2019</a>)</span>. There is a very common tendency to confuse the <em>p</em>-value for the probability that the null hypothesis <span class="math inline">\(H_0\)</span> is true. This is incorrect because the <em>p</em>-value is the probability <span class="math inline">\(P(d|H_0)\)</span>: it is conditional on <span class="math inline">\(H_0\)</span> being true and it is clearly not <span class="math inline">\(P(H_0)\)</span>. Another misinterpretation takes the <em>p</em>-value as the inverse of the probability that <span class="math inline">\(H_1\)</span> is true: again, this must be false because <span class="math inline">\(P(d|H_0)\)</span> is the probability of the “data” given <span class="math inline">\(H_0\)</span>, not the probability of <span class="math inline">\(H_0\)</span> (in which case, assuming contrasting hypotheses, then we would indeed have <span class="math inline">\(P(H_1) = -P(H_0)\)</span>). Finally, something dubbed “Bayesian wishful thinking” by <span class="citation" data-cites="gigerenzer2018">Gigerenzer (<a href="references.html#ref-gigerenzer2018" role="doc-biblioref">2018</a>)</span>, is the belief that the <em>p</em>-value is the probability of <span class="math inline">\(H_0\)</span> given the data (<span class="math inline">\(P(H_0|d)\)</span>) or worse the inverse of the probability of <span class="math inline">\(H_1\)</span> given the data (<span class="math inline">\(P(H_1|d)\)</span>). You might see why it is called Bayesian wishful thinking: a Bayesian posterior probability, as per Bayes’ Theorem, is precisely the probability of a hypothesis given the data: <span class="math inline">\(P(h|d)\)</span> (<a href="ch-bayes.html" class="quarto-xref"><span>Chapter 20</span></a>). However, a <em>p</em>-value is not <span class="math inline">\(P(h|d)\)</span> but rather <span class="math inline">\(P(d|H_0)\)</span>.</p>
+<p>These are just the main issues and misinterpretation of the null ritual NHST and if you’d like to learn more about this, I strongly recommend you read <span class="citation" data-cites="gigerenzer2004">Gigerenzer (<a href="references.html#ref-gigerenzer2004" role="doc-biblioref">2004</a>)</span> and the other papers cited in this section. <span class="citation" data-cites="gigerenzer2004a">Gigerenzer et al. (<a href="references.html#ref-gigerenzer2004a" role="doc-biblioref">2004</a>)</span> highlights how the null ritual can indeed hurt research and anything that comes from it. Alas, as said at the beginning of this chapter, virtually all contemporary research (especially in the social sciences and hence linguistics) adopts the null ritual for statistical inference. This means, in practice, that we should always be very sceptical of statements regarding statistical significance and or strength of evidence when reading such literature and we should instead focus more on the actual estimates of the estimands of interest.</p>
 <p>Many students (and supervisors) worry that not learning how to run many different frequentist/null-ritualistic statistical tests and regression models could make it more difficult for you to understand previous literature, precisely because that is what most literature uses. This is in fact a unnecessary worry: all frequentist tests are just ways to obtain a <em>p</em>-value to test statistical significance and they tell you nothing else about the magnitude or importance of an estimate; frequentist regression models function on the same premise of using the equation of a line to estimate coefficients we’ve been discussing in the regression chapters, so that the structure of model coefficients and parameters is just the same. It is the interpretation that is different: in Bayesian regression models, you get a full posterior probability distribution for each parameter, while in frequentist regressions you only get a point-estimate (an estimate that is a single value). In other words, once you learn the basics of Bayesian regression models, you can still interpret frequentist/null-ritualistic regression models while avoiding the common pitfalls reviewed in this chapter.</p>
 </section>
-<section id="why-prefer-bayesian-inference" class="level2" data-number="29.5">
-<h2 data-number="29.5" class="anchored" data-anchor-id="why-prefer-bayesian-inference"><span class="header-section-number">29.5</span> Why prefer Bayesian inference?</h2>
+<section id="why-prefer-bayesian-inference" class="level2" data-number="28.5">
+<h2 data-number="28.5" class="anchored" data-anchor-id="why-prefer-bayesian-inference"><span class="header-section-number">28.5</span> Why prefer Bayesian inference?</h2>
 <p>Now that you have a better understanding of frequentist statistics and more precisely the null ritualistic version of frequentism (or NHST) as practised by researchers, here are a few practical and conceptual reasons for why Bayesian statistics might be more appropriate in most research contexts.</p>
-<section id="practical-reasons" class="level3" data-number="29.5.1">
-<h3 data-number="29.5.1" class="anchored" data-anchor-id="practical-reasons"><span class="header-section-number">29.5.1</span> Practical reasons</h3>
+<section id="practical-reasons" class="level3" data-number="28.5.1">
+<h3 data-number="28.5.1" class="anchored" data-anchor-id="practical-reasons"><span class="header-section-number">28.5.1</span> Practical reasons</h3>
 <ul>
 <li><p>Fitting frequentist models can lead to anti-conservative <em>p</em>-values (i.e.&nbsp;increased false positive rates, called Type-I error rates: there is no effect but yet you get a significant <em>p</em>-value). An interesting example of this for the non-technically inclined reader can be found in <span class="citation" data-cites="dobreva2024">Dobreva (<a href="references.html#ref-dobreva2024" role="doc-biblioref">2024</a>)</span>. Frequentist regression models fitted with <code>lm()/lmer()</code> tend to be more sensitive to small sample sizes than Bayesian models (with small sample sizes, Bayesian models return estimates with greater uncertainty, which is a more conservative approach).</p></li>
 <li><p>While very simple models will return very similar estimates whether they are frequentist or Bayesian, in most cases more complex models won’t converge if run with frequentist packages like lme4, especially without adequate sample sizes. Bayesian regression models always converge, while frequentist ones don’t always do.</p></li>
@@ -1029,8 +1011,8 @@ Figure&nbsp;29.2: Standard <em>t</em>-distribution and obtained <em>t</em>-stati
 <li><p>With Bayesian models, you can reuse posterior distributions from previous work and include that knowledge as priors into your Bayesian analysis. This feature effectively speeds up the discovery process (getting to the real value estimate of interest faster). You can embed previous knowledge in Bayesian models while you can’t in frequentist ones.</p></li>
 </ul>
 </section>
-<section id="conceptual-reasons" class="level3" data-number="29.5.2">
-<h3 data-number="29.5.2" class="anchored" data-anchor-id="conceptual-reasons"><span class="header-section-number">29.5.2</span> Conceptual reasons</h3>
+<section id="conceptual-reasons" class="level3" data-number="28.5.2">
+<h3 data-number="28.5.2" class="anchored" data-anchor-id="conceptual-reasons"><span class="header-section-number">28.5.2</span> Conceptual reasons</h3>
 <ul>
 <li><p>Frequentist regression models cannot provide evidence for a difference between groups, only evidence to reject the null (i.e.&nbsp;nil) hypothesis.</p></li>
 <li><p>A frequentist Confidence Interval (CI) like a 95% CI can only tell us that, if we run the same study multiple times, 95% of the time the CI will include the real value (but we don’t know whether the CI we got in our study is one from the 5% percent of CIs that <em>do not contain</em> the real value). On the other hand, a 95% Bayesian Credible Interval (CrI) <em>always</em> tells us that the real value is within a certain range, conditional on model and data. So, frequentist models really just give you a point estimate, while Bayesian models give you a range of values and their probability.</p></li>
@@ -1041,7 +1023,7 @@ Figure&nbsp;29.2: Standard <em>t</em>-distribution and obtained <em>t</em>-stati
 <p>Of course, there are merits in fitting frequentist models, for example in corporate decisions, but you’ll still have to do a lot of work. The main conceptual difference then is that frequentist and Bayesian regression models answer very different questions and as (knowledge-oriented) researchers we are generally interested in questions that the latter can answer and the former cannot.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-brysbaert2020" class="csl-entry" role="listitem">
 Brysbaert, Marc. 2020. <span>“Power Considerations in Bilingualism Research: Time to Step up Our Game.”</span> <em>Bilingualism: Language and Cognition</em> 24 (5): 813818. <a href="https://doi.org/10.1017/s1366728920000437">https://doi.org/10.1017/s1366728920000437</a>.
 </div>
@@ -1049,16 +1031,16 @@ Brysbaert, Marc. 2020. <span>“Power Considerations in Bilingualism Research: T
 Brysbaert, Marc, and Michaël Stevens. 2018. <span>“Power Analysis and Effect Size in Mixed Effects Models: A Tutorial.”</span> <em>Journal of Cognition</em> 1 (1). <a href="https://doi.org/10.5334/joc.10">https://doi.org/10.5334/joc.10</a>.
 </div>
 <div id="ref-cassidy2019" class="csl-entry" role="listitem">
-Cassidy, Scott A., Ralitza Dimova, Benjamin Giguère, Jeffrey R. Spence, and David J. Stanley. 2019. <span>“Failing Grade: 89 Per-Cent of Introduction to Psychology Textbooks That Define/Explain Statistical Significance Do so Incorrectly.”</span> <em>Advances in Methods and Practices in Psychological Science</em>. <a href="https://doi.org/10.1177/2515245919858072">https://doi.org/10.1177/2515245919858072</a>.
+Cassidy, Scott A., Ralitza Dimova, Benjamin Giguère, Jeffrey R. Spence, and David J. Stanley. 2019. <span>“Failing Grade: 89 Per-Cent of Introduction to Psychology Textbooks That Define/Explain Statistical Significance Do so Incorrectly.”</span> <em>Advances in Methods and Practices in Psychological Science</em>, ahead of print. <a href="https://doi.org/10.1177/2515245919858072">https://doi.org/10.1177/2515245919858072</a>.
 </div>
 <div id="ref-coretta2019" class="csl-entry" role="listitem">
 Coretta, Stefano. 2019. <span>“An Exploratory Study of Voicing-Related Differences in Vowel Duration as Compensatory Temporal Adjustment in Italian and Polish.”</span> <em>Glossa: A Journal of General Linguistics</em> 4 (1): 1–25. <a href="https://doi.org/10.5334/gjgl.869">https://doi.org/10.5334/gjgl.869</a>.
 </div>
 <div id="ref-dobreva2024" class="csl-entry" role="listitem">
-Dobreva, Simona. 2024. <span>“Bayesian Vs Frequentist Approach: Same Data, Opposite Results.”</span> <a href="https://365datascience.com/trending/bayesian-vs-frequentist-approach/">https://365datascience.com/trending/bayesian-vs-frequentist-approach/</a>.
+Dobreva, Simona. 2024. <em>Bayesian Vs Frequentist Approach: Same Data, Opposite Results</em>. <a href="https://365datascience.com/trending/bayesian-vs-frequentist-approach/">https://365datascience.com/trending/bayesian-vs-frequentist-approach/</a>.
 </div>
 <div id="ref-gelman2019" class="csl-entry" role="listitem">
-Gelman, Andrew, Daniel Lakeland, Brian Haig, Christian Hennig, Art Owen, Robert Cousins, Stan Young, et al. 2019. <span>“Many Perspectives on Deborah Mayo’s <span>“</span>Statistical Inference as Severe Testing: How to Get Beyond the Statistics Wars<span>”</span>.”</span> <a href="https://doi.org/10.48550/arXiv.1905.08876">https://doi.org/10.48550/arXiv.1905.08876</a>.
+Gelman, Andrew, Daniel Lakeland, Brian Haig, et al. 2019. <em>Many Perspectives on Deborah Mayo’s <span>“</span>Statistical Inference as Severe Testing: How to Get Beyond the Statistics Wars<span>”</span></em>. <a href="https://doi.org/10.48550/arXiv.1905.08876">https://doi.org/10.48550/arXiv.1905.08876</a>.
 </div>
 <div id="ref-gelman2006a" class="csl-entry" role="listitem">
 Gelman, Andrew, and Hal Stern. 2006. <span>“The Difference Between <span>“</span>Significant<span>”</span> and <span>“</span>Not Significant<span>”</span> Is Not Itself Statistically Significant.”</span> <em>The American Statistician</em> 60 (4): 328331. <a href="https://doi.org/10.1198/000313006X152649">https://doi.org/10.1198/000313006X152649</a>.
@@ -1067,10 +1049,10 @@ Gelman, Andrew, and Hal Stern. 2006. <span>“The Difference Between <span>“</
 Gigerenzer, Gerd. 2004. <span>“Mindless Statistics.”</span> <em>The Journal of Socio-Economics</em> 33 (5): 587606. <a href="https://doi.org/10.1016/j.socec.2004.09.033">https://doi.org/10.1016/j.socec.2004.09.033</a>.
 </div>
 <div id="ref-gigerenzer2018" class="csl-entry" role="listitem">
-———. 2018. <span>“Statistical Rituals: The Replication Delusion and How We Got There.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 1 (2): 198218. <a href="https://doi.org/10.1177/2515245918771329">https://doi.org/10.1177/2515245918771329</a>.
+Gigerenzer, Gerd. 2018. <span>“Statistical Rituals: The Replication Delusion and How We Got There.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 1 (2): 198218. <a href="https://doi.org/10.1177/2515245918771329">https://doi.org/10.1177/2515245918771329</a>.
 </div>
 <div id="ref-gigerenzer2004a" class="csl-entry" role="listitem">
-Gigerenzer, Gerd, Stefan Krauss, and Oliver Vitouch. 2004. <span>“The Null Ritual. What You Always Wanted to Know about Signi<span>fi</span>cance Testing but Were Afraid to Ask.”</span> In, 391408.
+Gigerenzer, Gerd, Stefan Krauss, and Oliver Vitouch. 2004. <em>The Null Ritual. What You Always Wanted to Know about Signi<span>fi</span>cance Testing but Were Afraid to Ask</em>.
 </div>
 <div id="ref-mayo2018" class="csl-entry" role="listitem">
 Mayo, Deborah G. 2018. <em>Statistical Inference as Severe Testing: How to Get Beyond the Statistics Wars</em>. 1st ed. Cambridge University Press. <a href="https://doi.org/10.1017/9781107286184">https://doi.org/10.1017/9781107286184</a>.
@@ -1716,12 +1698,12 @@ window.onload = function() {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./ch-regression-more.html" class="pagination-link" aria-label="More than two levels">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">More than two levels</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ch-regression-bernoulli.html" class="pagination-link" aria-label="Binary outcomes: Bernoulli regression">
-        <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

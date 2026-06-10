@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>23&nbsp; Introduction to regression – Quantitative Data Analysis for Linguists in R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -59,7 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -89,19 +91,18 @@ div.csl-indent {
 <link href="./ch-fit-model.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-5fb1cbb79f85a0fa3795ecf5c470cb6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9e7382ee7cd961dafdf7e033f60763af.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -139,7 +140,7 @@ div.csl-indent {
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -342,7 +343,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-intro.html">Week 5</a></li><li class="breadcrumb-item"><a href="./ch-regression-intro.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction to regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-intro.html">Week 6</a></li><li class="breadcrumb-item"><a href="./ch-regression-intro.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction to regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -355,13 +356,11 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code" target="_blank"><i class="bi bi-github"></i></a>
     <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
@@ -389,7 +388,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 1</span></a>
+ <span class="menu-text">Week 2</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -430,7 +429,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 2</span></a>
+ <span class="menu-text">Week 3</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -477,7 +476,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 3</span></a>
+ <span class="menu-text">Week 4</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -524,7 +523,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 4</span></a>
+ <span class="menu-text">Week 5</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -565,7 +564,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 5</span></a>
+ <span class="menu-text">Week 6</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -594,7 +593,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 6</span></a>
+ <span class="menu-text">Week 7</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -602,8 +601,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-interim-summ.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
+  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
       </ul>
@@ -611,7 +622,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 7</span></a>
+ <span class="menu-text">Week 8</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -619,20 +630,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
   </div>
 </li>
       </ul>
@@ -640,7 +651,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 8</span></a>
+ <span class="menu-text">Week 9</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -648,20 +659,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
+  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -669,7 +680,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 9</span></a>
+ <span class="menu-text">Week 10</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -677,55 +688,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 10</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -738,13 +720,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./app-computer-basics.html" class="sidebar-item-text sidebar-link">
@@ -779,7 +761,7 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-intro.html">Week 5</a></li><li class="breadcrumb-item"><a href="./ch-regression-intro.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction to regression</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-intro.html">Week 6</a></li><li class="breadcrumb-item"><a href="./ch-regression-intro.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction to regression</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-reg-intro" class="quarto-section-identifier"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Introduction to regression</span></span></h1>
 </div>
@@ -945,16 +927,16 @@ y &amp; = 3 + 2 \cdot 3\\
 <p>Use the <a href="https://stefanocoretta.shinyapps.io/lines/">Linear Models Illustrated</a> app to answer the following questions.</p>
 <ol type="a">
 <li>What happens to the line when you increase the intercept <span class="math inline">\(\beta_0\)</span>?
-<div id="radio_GQJTLAXMAQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GQJTLAXMAQ" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_GQJTLAXMAQ" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_GQJTLAXMAQ" value="answer"> <span>The whole line shifts upwards.</span></label><label><input type="radio" autocomplete="off" name="radio_GQJTLAXMAQ" value=""> <span>The line becomes flat.</span></label>
+<div id="radio_GSKBYEIJNK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GSKBYEIJNK" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_GSKBYEIJNK" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_GSKBYEIJNK" value="answer"> <span>The whole line shifts upwards.</span></label><label><input type="radio" autocomplete="off" name="radio_GSKBYEIJNK" value=""> <span>The line becomes flat.</span></label>
 </div></li>
 <li>What happens to the line when you set the slope <span class="math inline">\(\beta_1\)</span> to a negative number?
-<div id="radio_NJLBBMNQFT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NJLBBMNQFT" value="answer"> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_NJLBBMNQFT" value=""> <span>The whole line becomes flat.</span></label><label><input type="radio" autocomplete="off" name="radio_NJLBBMNQFT" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_NJLBBMNQFT" value=""> <span>The line increases from left to right.</span></label>
+<div id="radio_AXSSFARDML" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AXSSFARDML" value="answer"> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_AXSSFARDML" value=""> <span>The whole line becomes flat.</span></label><label><input type="radio" autocomplete="off" name="radio_AXSSFARDML" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_AXSSFARDML" value=""> <span>The line increases from left to right.</span></label>
 </div></li>
 <li>What happens to the line when you set the slope <span class="math inline">\(\beta_1\)</span> to <code>0</code> zero?
-<div id="radio_VZJPGRXLJA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VZJPGRXLJA" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_VZJPGRXLJA" value=""> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_VZJPGRXLJA" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_VZJPGRXLJA" value="answer"> <span>The line becomes flat.</span></label>
+<div id="radio_OPJAQBUFLH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OPJAQBUFLH" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_OPJAQBUFLH" value=""> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_OPJAQBUFLH" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_OPJAQBUFLH" value="answer"> <span>The line becomes flat.</span></label>
 </div></li>
 </ol>
 </div>
@@ -1075,12 +1057,12 @@ y = \beta_0 + \beta_1 \cdot x + \epsilon
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-galton1886" class="csl-entry" role="listitem">
 Galton, Francis. 1886. <span>“Regression Towards Mediocrity in Hereditary Stature.”</span> <em>The Journal of the Anthropological Institute of Great Britain and Ireland</em> 15: 246. <a href="https://doi.org/10.2307/2841583">https://doi.org/10.2307/2841583</a>.
 </div>
 <div id="ref-galton1980" class="csl-entry" role="listitem">
-———. 1980. <span>“Kinship and Correlation.”</span> <em>The North American Review</em> 150 (401): 419431.
+Galton, Francis. 1980. <span>“Kinship and Correlation.”</span> <em>The North American Review</em> 150 (401): 419431.
 </div>
 </div>
 </section>

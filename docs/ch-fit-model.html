@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>22&nbsp; Fitting Gaussian models with brms – Quantitative Data Analysis for Linguists in R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -59,7 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -89,19 +91,18 @@ div.csl-indent {
 <link href="./ch-gauss-model.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-5fb1cbb79f85a0fa3795ecf5c470cb6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9e7382ee7cd961dafdf7e033f60763af.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -139,7 +140,7 @@ div.csl-indent {
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -342,7 +343,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-fit-model.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fitting Gaussian models with brms</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 5</a></li><li class="breadcrumb-item"><a href="./ch-fit-model.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fitting Gaussian models with brms</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -355,13 +356,11 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code" target="_blank"><i class="bi bi-github"></i></a>
     <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
@@ -389,7 +388,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 1</span></a>
+ <span class="menu-text">Week 2</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -430,7 +429,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 2</span></a>
+ <span class="menu-text">Week 3</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -477,7 +476,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 3</span></a>
+ <span class="menu-text">Week 4</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -524,7 +523,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 4</span></a>
+ <span class="menu-text">Week 5</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -565,7 +564,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 5</span></a>
+ <span class="menu-text">Week 6</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -594,7 +593,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 6</span></a>
+ <span class="menu-text">Week 7</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -602,8 +601,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-interim-summ.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
+  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
       </ul>
@@ -611,7 +622,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 7</span></a>
+ <span class="menu-text">Week 8</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -619,20 +630,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
   </div>
 </li>
       </ul>
@@ -640,7 +651,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 8</span></a>
+ <span class="menu-text">Week 9</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -648,20 +659,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
+  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -669,7 +680,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 9</span></a>
+ <span class="menu-text">Week 10</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -677,55 +688,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 10</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -738,13 +720,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./app-computer-basics.html" class="sidebar-item-text sidebar-link">
@@ -780,7 +762,7 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-fit-model.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fitting Gaussian models with brms</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 5</a></li><li class="breadcrumb-item"><a href="./ch-fit-model.html"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fitting Gaussian models with brms</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-fit-model" class="quarto-section-identifier"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Fitting Gaussian models with brms</span></span></h1>
 </div>
@@ -801,7 +783,7 @@ window.Quarto = {
 
 <p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
 <p>In the previous chapter, I have introduced the theory behind Bayesian Gaussian models. In this chapter, you will learn how to fit Gaussian models in R. You can fit a Gaussian model to data in R using the <a href="https://paulbuerkner.com/brms/">brms</a> package (the name is an initialism of “Bayesian Regression Models using Stan”; Gaussian models are a special type of regression models, which will be introduced in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>).</p>
-<p>The brms package can run a variety of Bayesian (regression) models. It is a very flexible package that allows you to model a lot of different types of variables. You don’t really need to understand all of the technical details to be able to effectively use the package and interpret the results, so this textbook will focus on how to use the package in the context of research. We will cover some of the technicalities, but if you are are particularly interested in the inner workings of the package, feel free to find materials on specific aspects by searching online. One useful thing to know is that brms is a bridge between R and the statistical programming software <a href="https://mc-stan.org">Stan</a>. Stan is a powerful piece of software that can run any type of Bayesian model, not just regressions. What brms does is that it allows you to write Bayesian models in R, which are translated into Stan models and run with Stan under the hood. You can safely use brms without learning Stan, but if you are interested, you can check <a href="https://bruno.nicenboim.me/bayescogsci/ch-introstan.html#ch-introstan">Ch 8-10</a> of <span class="citation" data-cites="nicenboim2025">Nicenboim, Schad, and Vasishth (<a href="references.html#ref-nicenboim2025" role="doc-biblioref">2025</a>)</span> and the <a href="https://mc-stan.org">Stan documentation</a>.</p>
+<p>The brms package can run a variety of Bayesian (regression) models. It is a very flexible package that allows you to model a lot of different types of variables. You don’t really need to understand all of the technical details to be able to effectively use the package and interpret the results, so this textbook will focus on how to use the package in the context of research. We will cover some of the technicalities, but if you are are particularly interested in the inner workings of the package, feel free to find materials on specific aspects by searching online. One useful thing to know is that brms is a bridge between R and the statistical programming software <a href="https://mc-stan.org">Stan</a>. Stan is a powerful piece of software that can run any type of Bayesian model, not just regressions. What brms does is that it allows you to write Bayesian models in R, which are translated into Stan models and run with Stan under the hood. You can safely use brms without learning Stan, but if you are interested, you can check <a href="https://bruno.nicenboim.me/bayescogsci/ch-introstan.html#ch-introstan">Ch 8-10</a> of <span class="citation" data-cites="nicenboim2025">Nicenboim et al. (<a href="references.html#ref-nicenboim2025" role="doc-biblioref">2025</a>)</span> and the <a href="https://mc-stan.org">Stan documentation</a>.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -892,7 +874,7 @@ RT \sim Gaussian(\mu, \sigma)
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rt_bm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: gaussian 
-  Links: mu = identity; sigma = identity 
+  Links: mu = identity 
 Formula: RT ~ 1 
    Data: mald (Number of observations: 5000) 
   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
@@ -982,12 +964,12 @@ RT &amp; \sim Gaussian(\mu, \sigma)\\
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["prior"],"name":[1],"type":["chr"],"align":["left"]},{"label":["class"],"name":[2],"type":["chr"],"align":["left"]},{"label":["coef"],"name":[3],"type":["chr"],"align":["left"]},{"label":["group"],"name":[4],"type":["chr"],"align":["left"]},{"label":["resp"],"name":[5],"type":["chr"],"align":["left"]},{"label":["dpar"],"name":[6],"type":["chr"],"align":["left"]},{"label":["nlpar"],"name":[7],"type":["chr"],"align":["left"]},{"label":["lb"],"name":[8],"type":["chr"],"align":["left"]},{"label":["ub"],"name":[9],"type":["chr"],"align":["left"]},{"label":["source"],"name":[10],"type":["chr"],"align":["left"]}],"data":[{"1":"student_t(3, 935.5, 220.2)","2":"Intercept","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"default"},{"1":"student_t(3, 0, 220.2)","2":"sigma","3":"","4":"","5":"","6":"","7":"","8":"0","9":"","10":"default"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["prior"],"name":[1],"type":["chr"],"align":["left"]},{"label":["class"],"name":[2],"type":["chr"],"align":["left"]},{"label":["coef"],"name":[3],"type":["chr"],"align":["left"]},{"label":["group"],"name":[4],"type":["chr"],"align":["left"]},{"label":["resp"],"name":[5],"type":["chr"],"align":["left"]},{"label":["dpar"],"name":[6],"type":["chr"],"align":["left"]},{"label":["nlpar"],"name":[7],"type":["chr"],"align":["left"]},{"label":["lb"],"name":[8],"type":["chr"],"align":["left"]},{"label":["ub"],"name":[9],"type":["chr"],"align":["left"]},{"label":["tag"],"name":[10],"type":["chr"],"align":["left"]},{"label":["source"],"name":[11],"type":["chr"],"align":["left"]}],"data":[{"1":"student_t(3, 935.5, 220.2)","2":"Intercept","3":"","4":"","5":"","6":"","7":"","8":"","9":"","10":"","11":"default"},{"1":"student_t(3, 0, 220.2)","2":"sigma","3":"","4":"","5":"","6":"","7":"","8":"0","9":"","10":"","11":"default"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
 </div>
-<p>There are two priors, one for the intercept (<span class="math inline">\(\mu\)</span>) and one for <span class="math inline">\(\sigma\)</span> (see <code>class</code> column). For both <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, brms sets a Student-<em>t</em> prior probability distribution. The Student-<em>t</em> distribution is a continuous probability distribution with three parameters: the degrees of freedom, the mean and the standard deviation. You will encounter the Student-<em>t</em> distribution in <a href="ch-null-ritual.html" class="quarto-xref"><span>Chapter 29</span></a>, where you will learn about frequentist <em>p</em>-values. For now, it will suffice to say that a Student-<em>t</em> distribution (also simply called a <em>t</em>-distribution) is similar to a Gaussian distribution (hence the two parameters, mean and SD).</p>
+<p>There are two priors, one for the intercept (<span class="math inline">\(\mu\)</span>) and one for <span class="math inline">\(\sigma\)</span> (see <code>class</code> column). For both <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, brms sets a Student-<em>t</em> prior probability distribution. The Student-<em>t</em> distribution is a continuous probability distribution with three parameters: the degrees of freedom, the mean and the standard deviation. You will encounter the Student-<em>t</em> distribution in <a href="ch-null-ritual.html" class="quarto-xref"><span>Chapter 28</span></a>, where you will learn about frequentist <em>p</em>-values. For now, it will suffice to say that a Student-<em>t</em> distribution (also simply called a <em>t</em>-distribution) is similar to a Gaussian distribution (hence the two parameters, mean and SD).</p>
 <p>Normally, you would choose priors <em>before</em> collecting/seeing the data. Here, brms actually uses the data to come up with generic priors that cover a wide range of values without including very unlikely values. Yet, the priors set by brms are so generic that, as said above, they bear very little effect on the posterior. So they are safe to use, even if they are based on the data itself. Just remember, thought, that if you do want to specify your own priors, you must do so independent of the data (ideally, even before you have access to the data, whether you collect it yourself or whether it is pre-existing).</p>
 <p>For this model and data, brms sets a <em>t-</em>distribution for the prior of the mean <span class="math inline">\(\mu\)</span>, with mean 935.5 and SD 220.2, and a <em>t</em>-distribution for the SD <span class="math inline">\(\sigma\)</span>, with mean 0 and SD 220.2. You will notice that the SDs of both priors are the same. The following figures illustrate the density curve of the priors.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x_mu <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2000</span>)</span>
@@ -997,16 +979,21 @@ RT &amp; \sim Gaussian(\mu, \sigma)\\
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">element_blank</span>(), <span class="at">y =</span> <span class="st">"Density"</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>x_sigma <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1500</span>)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> x_sigma, <span class="at">y =</span> extraDistr<span class="sc">::</span><span class="fu">dlst</span>(x_sigma, <span class="dv">3</span>, <span class="dv">0</span>, <span class="fl">220.2</span>)) <span class="sc">+</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">element_blank</span>(), <span class="at">y =</span> <span class="st">"Density"</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `label` cannot be a &lt;ggplot2::element_blank&gt; object.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>x_sigma <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1500</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> x_sigma, <span class="at">y =</span> extraDistr<span class="sc">::</span><span class="fu">dlst</span>(x_sigma, <span class="dv">3</span>, <span class="dv">0</span>, <span class="fl">220.2</span>)) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">element_blank</span>(), <span class="at">y =</span> <span class="st">"Density"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `label` cannot be a &lt;ggplot2::element_blank&gt; object.</code></pre>
+</div>
 <div id="fig-default-priors" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-default-priors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1050,7 +1037,7 @@ Figure&nbsp;22.1: Default brms priors for this chapter’s model and data.
 <h2 data-number="22.2" class="anchored" data-anchor-id="plotting-the-posterior-distributions"><span class="header-section-number">22.2</span> Plotting the posterior distributions</h2>
 <p>While the model summary reports <em>summaries</em> of the posterior distributions, it is always helpful to <em>plot</em> the posteriors. We can easily do so with the base R <code>plot()</code> function, like in <a href="#fig-rt-bm" class="quarto-xref">Figure&nbsp;<span>22.2</span></a>. The density plots of the posterior distributions of the two parameters estimated in the model are shown on the left of the figure: <code>b_Intercept</code> which corresponds to <code>Intercept</code> from the summary and <code>sigma</code> (the reason for why it’s <code>b_Intercept</code> will become clear in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rt_bm, <span class="at">combo =</span> <span class="fu">c</span>(<span class="st">"dens"</span>, <span class="st">"trace"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rt_bm, <span class="at">combo =</span> <span class="fu">c</span>(<span class="st">"dens"</span>, <span class="st">"trace"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-rt-bm" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1072,7 +1059,7 @@ Figure&nbsp;22.2: Posterior plots of the rt_bm Gaussian model
 <h2 data-number="22.3" class="anchored" data-anchor-id="interpreting-credible-intervals"><span class="header-section-number">22.3</span> Interpreting Credible Intervals</h2>
 <p>The model summary reports the Bayesian Credible Intervals (CrIs) of the posterior distributions. Another way of returning summaries of the coefficients is to use the <code>posterior_summary()</code> function which returns a table (technically, a matrix, another type of R objects; we print only the first two rows with <code>[1:2,]</code> because we can ignore the other ones).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(rt_bm)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(rt_bm)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Estimate Est.Error      Q2.5     Q97.5
 b_Intercept 1010.5015  4.452312 1001.6555 1019.2559
@@ -1082,10 +1069,10 @@ sigma        317.8845  3.171714  311.7382  324.1688</code></pre>
 <p>A Bayesian CrI is simply the central probability interval of a posterior probability distribution. You have encountered intervals in <a href="ch-gaussian.html" class="quarto-xref"><span>Chapter 19</span></a>. By default, brms prints the 95% CrIs: these are the 95% central probability intervals of the posterior probability of each coefficient. The 95% CrI of the <code>b_Intercept</code> is between 1002 and 1019. This means that there is a 95% probability, or (equivalently) that we can be 95% confident, that the <code>Intercept</code>, i.e.&nbsp;<span class="math inline">\(\mu\)</span>, is within that range, given the model and data. For <code>sigma</code>, i.e.&nbsp;<span class="math inline">\(\sigma\)</span>, the 95% CrI is between 312 and 324. So, again, there is a 95% probability that the <code>sigma</code> value is between those values, given the model and data. So, to summarise, a 95% CrI tells us that we can be 95% confident, or in other words that there is a 95% probability, that the value of the coefficient is between the values of the CrI.</p>
 <p>There is nothing special about 95% CrI and in fact it is recommended to calculate and report a few of them. Personally, I use 90, 80, 70 and 60% CrIs. You can get any CrI with the <code>summary()</code> and the <code>posterior_summary()</code> functions, but you will also learn an alternative and more succinct way in <a href="ch-regression.html" class="quarto-xref"><span>Chapter 24</span></a>. Here is how to get an 80% CrI with <code>summary()</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rt_bm, <span class="at">prob =</span> <span class="fl">0.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rt_bm, <span class="at">prob =</span> <span class="fl">0.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: gaussian 
-  Links: mu = identity; sigma = identity 
+  Links: mu = identity 
 Formula: RT ~ 1 
    Data: mald (Number of observations: 5000) 
   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
@@ -1106,7 +1093,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>For <code>posterior_summary()</code>, you specify the percentiles rather than the probability level.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(rt_bm, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior_summary</span>(rt_bm, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             Estimate Est.Error       Q10       Q90
 b_Intercept 1010.5015  4.452312 1004.7400 1016.1351
@@ -1136,12 +1123,12 @@ sigma        317.8845  3.171714  313.8399  321.8941</code></pre>
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li><p>Which function is used to fit Bayesian models?</p>
-<div id="radio_HLLALBVDRA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HLLALBVDRA" value=""> <span><code>brms()</code></span></label><label><input type="radio" autocomplete="off" name="radio_HLLALBVDRA" value="answer"> <span><code>brm()</code></span></label><label><input type="radio" autocomplete="off" name="radio_HLLALBVDRA" value=""> <span><code>bm()</code></span></label>
+<div id="radio_ENBRILEVWM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ENBRILEVWM" value=""> <span><code>brms()</code></span></label><label><input type="radio" autocomplete="off" name="radio_ENBRILEVWM" value="answer"> <span><code>brm()</code></span></label><label><input type="radio" autocomplete="off" name="radio_ENBRILEVWM" value=""> <span><code>bm()</code></span></label>
 </div></li>
 <li><p>The <code>Estimate</code> column in further distributional parameters is:</p>
-<div id="radio_PSCKQLAVPP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PSCKQLAVPP" value=""> <span>The mean of the posterior distribution of the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_PSCKQLAVPP" value=""> <span>The standard deviation of the posterior distribution of the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_PSCKQLAVPP" value="answer"> <span>The mean of the posterior distribution of the standard deviation.</span></label>
+<div id="radio_BGOQLDCQNM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BGOQLDCQNM" value=""> <span>The mean of the posterior distribution of the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_BGOQLDCQNM" value=""> <span>The standard deviation of the posterior distribution of the mean.</span></label><label><input type="radio" autocomplete="off" name="radio_BGOQLDCQNM" value="answer"> <span>The mean of the posterior distribution of the standard deviation.</span></label>
 </div></li>
 <li><p>The posterior of each parameter is the value in the <code>Estimate</code> column. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
 <li><p>Only 95% CrI should be used for inference. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
@@ -1152,7 +1139,7 @@ sigma        317.8845  3.171714  313.8399  321.8941</code></pre>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-nicenboim2025" class="csl-entry" role="listitem">
 Nicenboim, Bruno, Daniel J. Schad, and Shravan Vasishth. 2025. <em>Introduction to Bayesian Data Analysis for Cognitive Science</em>. <a href="https://bruno.nicenboim.me/bayescogsci/">https://bruno.nicenboim.me/bayescogsci/</a>.
 </div>

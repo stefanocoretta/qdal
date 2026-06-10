@@ -26,4 +26,5 @@ set_up <- function() {
   cmdstanr::check_cmdstan_toolchain()
 }
 
-
+# Load webexercises before each chapter
+if (requireNamespace('webexercises', quietly = TRUE)) library(webexercises)

@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>20&nbsp; Bayesian inference – Quantitative Data Analysis for Linguists in R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -59,7 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -89,19 +91,18 @@ div.csl-indent {
 <link href="./ch-gaussian.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-5fb1cbb79f85a0fa3795ecf5c470cb6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9e7382ee7cd961dafdf7e033f60763af.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -139,7 +140,7 @@ div.csl-indent {
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -342,7 +343,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-bayes.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Bayesian inference</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 5</a></li><li class="breadcrumb-item"><a href="./ch-bayes.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Bayesian inference</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -355,13 +356,11 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code" target="_blank"><i class="bi bi-github"></i></a>
     <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
@@ -389,7 +388,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 1</span></a>
+ <span class="menu-text">Week 2</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -430,7 +429,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 2</span></a>
+ <span class="menu-text">Week 3</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -477,7 +476,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 3</span></a>
+ <span class="menu-text">Week 4</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -524,7 +523,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 4</span></a>
+ <span class="menu-text">Week 5</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -565,7 +564,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 5</span></a>
+ <span class="menu-text">Week 6</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -594,7 +593,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 6</span></a>
+ <span class="menu-text">Week 7</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -602,8 +601,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-interim-summ.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
+  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
       </ul>
@@ -611,7 +622,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 7</span></a>
+ <span class="menu-text">Week 8</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -619,20 +630,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
   </div>
 </li>
       </ul>
@@ -640,7 +651,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 8</span></a>
+ <span class="menu-text">Week 9</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -648,20 +659,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
+  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -669,7 +680,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 9</span></a>
+ <span class="menu-text">Week 10</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -677,55 +688,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 10</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -738,13 +720,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./app-computer-basics.html" class="sidebar-item-text sidebar-link">
@@ -771,7 +753,7 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-bayes.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Bayesian inference</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-probability.html">Week 5</a></li><li class="breadcrumb-item"><a href="./ch-bayes.html"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Bayesian inference</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-bayes" class="quarto-section-identifier"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Bayesian inference</span></span></h1>
 </div>
@@ -796,7 +778,7 @@ window.Quarto = {
 <p><img src="img/volcano-raining.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
 </figure>
 </div>
-<p>In <a href="ch-probability.html" class="quarto-xref"><span>Chapter 18</span></a> and <a href="ch-gaussian.html" class="quarto-xref"><span>Chapter 19</span></a> you learned about probabilities, probability distributions and probability intervals. Statistical inference (<a href="ch-inference.html" class="quarto-xref"><span>Chapter 6</span></a>) is built on probability, but, while probabilities and distributions are precise mathematical concepts, their more philosophical interpretation varies depending on which stance one adopts. Among the two most common approaches to interpreting probability there are the frequentist and the Bayesian approach. Most of current research is carried out with frequentist methods. This is a historical accident, based on both an initial misunderstanding of Bayesian statistics (which is, by the way, older than frequentist statistics) and the fact that frequentist maths was much easier to work with (and personal computers did not exist). Despite the wide-spread use of frequentist statistics, this textbook (and related course) teaches you statistics in the Bayesian approach. There are several reasons for preferring Bayesian over frequentist statistics, both from a pedagogical and practical perspective, but until you learn more about frequentist statistics in <a href="ch-null-ritual.html" class="quarto-xref"><span>Chapter 29</span></a>, you will have to trust us for now.</p>
+<p>In <a href="ch-probability.html" class="quarto-xref"><span>Chapter 18</span></a> and <a href="ch-gaussian.html" class="quarto-xref"><span>Chapter 19</span></a> you learned about probabilities, probability distributions and probability intervals. Statistical inference (<a href="ch-inference.html" class="quarto-xref"><span>Chapter 6</span></a>) is built on probability, but, while probabilities and distributions are precise mathematical concepts, their more philosophical interpretation varies depending on which stance one adopts. Among the two most common approaches to interpreting probability there are the frequentist and the Bayesian approach. Most of current research is carried out with frequentist methods. This is a historical accident, based on both an initial misunderstanding of Bayesian statistics (which is, by the way, older than frequentist statistics) and the fact that frequentist maths was much easier to work with (and personal computers did not exist). Despite the wide-spread use of frequentist statistics, this textbook (and related course) teaches you statistics in the Bayesian approach. There are several reasons for preferring Bayesian over frequentist statistics, both from a pedagogical and practical perspective, but until you learn more about frequentist statistics in <a href="ch-null-ritual.html" class="quarto-xref"><span>Chapter 28</span></a>, you will have to trust us for now.</p>
 <p>Probabilities in a <strong>frequentist framework</strong> are about average occurrences of events in a hypothetical series of repetitions of those events. Imagine you observe a volcano for a long period of time. The number of times the volcano erupts within that time tells us the <strong>frequency</strong> of occurrence of the event of volcanic eruption. In other words, it tells us its (frequentist) probability. In the <strong>Bayesian framework</strong>, probabilities are about the <strong>level of (un)certainty</strong> that an event will occur at any specific time given certain conditions. This is probably the way we normally think about probabilities: like in the weather forecast, if somebody tells you tomorrow it will rain with a probability of 85%, you intuitively know that it is very likely that it will rain tomorrow although it is not certain. In the context of research, a frequentist probability tells you the probability of obtaining the same result again and again given an imaginary series of replications of the study that generated that probability. On the other hand, a Bayesian probability tells you the probability of your hypothesis given the results of your study and your prior beliefs.</p>
 <p>Bayesian inference approaches are now gaining momentum in many fields, including linguistics. The main advantage of Bayesian inference is that it allows researchers to answer research questions in a more straightforward way, using a more intuitive take on uncertainty and probability than what frequentist methods can offer. Bayesian inference is based on the concept of <strong>updating prior beliefs in light of new data</strong>. Given a set of <strong>prior probabilities</strong> and <strong>observations</strong>, Bayesian inference allows us to revise those prior probabilities and produce <strong>posterior probabilities</strong>. This is possible through the Bayesian interpretation of probabilities in the context of <a href="https://www.mathsisfun.com/data/bayes-theorem.html">Bayes’ Theorem</a>, which takes the name from <a href="https://en.wikipedia.org/wiki/Thomas_Bayes">Rev.&nbsp;Thomas Bayes</a> (1701–1771).</p>
 <p>In simple conceptual terms, the Bayesian interpretation of Bayes’ Theorem states that the probability of a hypothesis <span class="math inline">\(h\)</span> given the observed data <span class="math inline">\(d\)</span> is proportional to the product of the prior probability of <span class="math inline">\(h\)</span> and the probability of <span class="math inline">\(d\)</span> given <span class="math inline">\(h\)</span>.</p>
@@ -804,7 +786,7 @@ window.Quarto = {
 P(h|d) \sim P(h) \cdot P(d|h)
 \]</span></p>
 <p>The prior probability <span class="math inline">\(P(h)\)</span> represents the researcher’s beliefs towards <span class="math inline">\(h\)</span>. These beliefs can be based on expert knowledge, previous studies or mathematical principles.</p>
-<p>Let’s see a practical example of Bayesian updating based on the “globe-tossing” scenario described in <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span>, Ch 2 (originally from <span class="citation" data-cites="gelman2011">Gelman, Nolan, and Nolan (<a href="references.html#ref-gelman2011" role="doc-biblioref">2011</a>)</span>). Imagine holding a small globe that represents Earth. You want to know what fraction of its surface is covered by water. To estimate this, you adopt a simple method: toss the globe into the air, and when you catch it, note whether the spot under your right index finger is water (W) or land (L). Then toss it again and repeat. This process produces a sequence of observations. For example, the first nine outcomes might be: WLWWWLWLW. In this sequence, six outcomes are water and three are land. We call this sequence the data, i.e.&nbsp;<span class="math inline">\(d\)</span>. What we are trying to estimate here is the true proportion of water.</p>
+<p>Let’s see a practical example of Bayesian updating based on the “globe-tossing” scenario described in <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span>, Ch 2 (originally from <span class="citation" data-cites="gelman2011">Gelman et al. (<a href="references.html#ref-gelman2011" role="doc-biblioref">2011</a>)</span>). Imagine holding a small globe that represents Earth. You want to know what fraction of its surface is covered by water. To estimate this, you adopt a simple method: toss the globe into the air, and when you catch it, note whether the spot under your right index finger is water (W) or land (L). Then toss it again and repeat. This process produces a sequence of observations. For example, the first nine outcomes might be: WLWWWLWLW. In this sequence, six outcomes are water and three are land. We call this sequence the data, i.e.&nbsp;<span class="math inline">\(d\)</span>. What we are trying to estimate here is the true proportion of water.</p>
 <p>So what about our prior beliefs about the true proportion of water, i.e.&nbsp;<span class="math inline">\(P(h)\)</span>? Let’s say that our prior belief (assuming complete ignorance about the true proportion of water) is that all proportions are equally probable. This is called a <strong>uniform prior</strong>, or a <strong>flat</strong> prior. You can see why in <a href="#fig-prior-update" class="quarto-xref">Figure&nbsp;<span>20.1</span></a>. If you look at the top-left panel (the one with “n = 1”), the dashed line represents our prior belief: all proportions of water (on the <em>x</em>-axis) are equally probable, so that the prior probability distribution is flat. Note that a probability of 0 means Earth is all land, and a probability of 1 means Earth is all water. Now, let’s update the flat prior distribution with the first observation in the globe-tossing exercise: the first outcome was W, water. This observations corresponds to a distribution in which 1 has the greatest probability and values below it have decreasing probability. This is represented in the top-left panel of <a href="#fig-prior-update" class="quarto-xref">Figure&nbsp;<span>20.1</span></a> as the solid slanted line. This is <span class="math inline">\(P(d | h)\)</span>. If we combine the flat prior and the probability of the data we get the dashed line in the second top panel (with “n = 2”). That is the posterior probability distribution resulting from the Bayesian update at step “n = 1”. This becomes the prior probability distribution at step “n = 2”.</p>
 <div class="cell">
 <details class="code-fold">
@@ -877,31 +859,31 @@ Figure&nbsp;20.1: Bayesian updating of a prior based on observations. From <span
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>What is the main conceptual difference between the frequentist and Bayesian interpretations of probability?
-<div id="radio_MLXIHHSMIW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MLXIHHSMIW" value=""> <span>Frequentist probability is about the likelihood of a hypothesis being true, while Bayesian probability is about repeating an experiment infinitely.</span></label><label><input type="radio" autocomplete="off" name="radio_MLXIHHSMIW" value="answer"> <span>Frequentist probability is about the frequency of outcomes in repeated trials, while Bayesian probability is about the degree of certainty in an event given conditions.</span></label><label><input type="radio" autocomplete="off" name="radio_MLXIHHSMIW" value=""> <span>Frequentist probability uses prior beliefs, while Bayesian probability ignores them.</span></label><label><input type="radio" autocomplete="off" name="radio_MLXIHHSMIW" value=""> <span>Frequentist and Bayesian probability are mathematically identical and differ only in terminology.</span></label>
+<div id="radio_EUMHUNDOJQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EUMHUNDOJQ" value=""> <span>Frequentist probability is about the likelihood of a hypothesis being true, while Bayesian probability is about repeating an experiment infinitely.</span></label><label><input type="radio" autocomplete="off" name="radio_EUMHUNDOJQ" value="answer"> <span>Frequentist probability is about the frequency of outcomes in repeated trials, while Bayesian probability is about the degree of certainty in an event given conditions.</span></label><label><input type="radio" autocomplete="off" name="radio_EUMHUNDOJQ" value=""> <span>Frequentist probability uses prior beliefs, while Bayesian probability ignores them.</span></label><label><input type="radio" autocomplete="off" name="radio_EUMHUNDOJQ" value=""> <span>Frequentist and Bayesian probability are mathematically identical and differ only in terminology.</span></label>
 </div></li>
 <li>In the ‘globe-tossing’ example, what does a uniform prior (or flat prior) mean?
-<div id="radio_VOCMPNMZGF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VOCMPNMZGF" value="answer"> <span>All proportions of water are considered equally probable before any data is observed.</span></label><label><input type="radio" autocomplete="off" name="radio_VOCMPNMZGF" value=""> <span>The Earth is assumed to be exactly 50% water and 50% land.</span></label><label><input type="radio" autocomplete="off" name="radio_VOCMPNMZGF" value=""> <span>The probability of land is always higher than the probability of water.</span></label><label><input type="radio" autocomplete="off" name="radio_VOCMPNMZGF" value=""> <span>The prior distribution automatically adjusts after the first observation.</span></label>
+<div id="radio_JNGRKZRNND" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JNGRKZRNND" value="answer"> <span>All proportions of water are considered equally probable before any data is observed.</span></label><label><input type="radio" autocomplete="off" name="radio_JNGRKZRNND" value=""> <span>The Earth is assumed to be exactly 50% water and 50% land.</span></label><label><input type="radio" autocomplete="off" name="radio_JNGRKZRNND" value=""> <span>The probability of land is always higher than the probability of water.</span></label><label><input type="radio" autocomplete="off" name="radio_JNGRKZRNND" value=""> <span>The prior distribution automatically adjusts after the first observation.</span></label>
 </div></li>
 <li>Which element is present in Bayesian inference but absent in the frequentist approach?
-<div id="radio_CJKAIMARHG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CJKAIMARHG" value=""> <span>The probability of the data given the hypothesis, <span class="math inline">\(P(d|h)\)</span>.</span></label><label><input type="radio" autocomplete="off" name="radio_CJKAIMARHG" value="answer"> <span>The updating of prior beliefs in light of new data.</span></label><label><input type="radio" autocomplete="off" name="radio_CJKAIMARHG" value=""> <span>The concept of hypothesis testing with a null hypothesis.</span></label><label><input type="radio" autocomplete="off" name="radio_CJKAIMARHG" value=""> <span>The use of repeated replications of a study.</span></label>
+<div id="radio_FCMDUBTEMP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FCMDUBTEMP" value=""> <span>The probability of the data given the hypothesis, <span class="math inline">\(P(d|h)\)</span>.</span></label><label><input type="radio" autocomplete="off" name="radio_FCMDUBTEMP" value="answer"> <span>The updating of prior beliefs in light of new data.</span></label><label><input type="radio" autocomplete="off" name="radio_FCMDUBTEMP" value=""> <span>The concept of hypothesis testing with a null hypothesis.</span></label><label><input type="radio" autocomplete="off" name="radio_FCMDUBTEMP" value=""> <span>The use of repeated replications of a study.</span></label>
 </div></li>
 </ol>
 </div>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-gelman2011" class="csl-entry" role="listitem">
-Gelman, Andrew, Deborah Ann Nolan, and Deborah Ann Nolan. 2011. <em>Teaching statistics: a bag of tricks</em>. Repr. Oxford: Oxford Univ. Press.
+Gelman, Andrew, Deborah Ann Nolan, and Deborah Ann Nolan. 2011. <em>Teaching statistics: a bag of tricks</em>. Repr. Oxford Univ. Press.
 </div>
 <div id="ref-kurtz2023" class="csl-entry" role="listitem">
 Kurtz, Solomon. 2023. <em>Statistical Rethinking with Brms, Ggplot2, and the Tidyverse: Second Edition</em>. Version 0.4.0. <a href="https://bookdown.org/content/4857/">https://bookdown.org/content/4857/</a>.
 </div>
 <div id="ref-mcelreath2020" class="csl-entry" role="listitem">
-McElreath, Richard. 2020. <em>Statistical Rethinking: A Bayesian Course with Examples in R and Stan</em>. Second edition. Chapman &amp; Hall/CRC Texts in Statistical Science Series. Boca Raton: CRC Press.
+McElreath, Richard. 2020. <em>Statistical Rethinking: A Bayesian Course with Examples in r and Stan</em>. Second edition. Chapman &amp; Hall/CRC Texts in Statistical Science Series. CRC Press.
 </div>
 </div>
 

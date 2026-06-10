@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>Appendix B — Regression models cheat sheet – Quantitative Data Analysis for Linguists in R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -24,7 +27,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -53,19 +55,18 @@ div.csl-indent {
 <link href="./app-computer-basics.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-5fb1cbb79f85a0fa3795ecf5c470cb6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9e7382ee7cd961dafdf7e033f60763af.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -101,7 +102,7 @@ div.csl-indent {
 </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -317,13 +318,11 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code" target="_blank"><i class="bi bi-github"></i></a>
     <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
@@ -351,7 +350,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 1</span></a>
+ <span class="menu-text">Week 2</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -392,7 +391,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 2</span></a>
+ <span class="menu-text">Week 3</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -439,7 +438,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 3</span></a>
+ <span class="menu-text">Week 4</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -486,7 +485,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 4</span></a>
+ <span class="menu-text">Week 5</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -527,7 +526,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 5</span></a>
+ <span class="menu-text">Week 6</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -556,7 +555,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 6</span></a>
+ <span class="menu-text">Week 7</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -564,8 +563,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-interim-summ.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
+  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
       </ul>
@@ -573,7 +584,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 7</span></a>
+ <span class="menu-text">Week 8</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -581,20 +592,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
   </div>
 </li>
       </ul>
@@ -602,7 +613,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 8</span></a>
+ <span class="menu-text">Week 9</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -610,20 +621,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
+  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -631,7 +642,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 9</span></a>
+ <span class="menu-text">Week 10</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -639,55 +650,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 10</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -700,13 +682,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./app-computer-basics.html" class="sidebar-item-text sidebar-link">
@@ -855,7 +837,7 @@ In the Land of Inference where the distributions lie.</p>
 <li><p>The variable has <em>more than two levels</em>, but it is not ordered: <strong>categorical (multinomial) model</strong>.</p>
 <ul>
 <li><p>Fit categorical (multinomial) models with <code>brms::brm(..., family = categorical)</code>.</p></li>
-<li><p>As far as I know, there isn’t a tutorial for this family, but <span class="citation" data-cites="lorson2021">Lorson, Cummins, and Rohde (<a href="references.html#ref-lorson2021" role="doc-biblioref">2021</a>)</span> uses categorical models. The research compendium (with data and code) of the paper can be found here: <a href="https://osf.io/e5av9/" class="uri">https://osf.io/e5av9/</a>.</p></li>
+<li><p>As far as I know, there isn’t a tutorial for this family, but <span class="citation" data-cites="lorson2021">Lorson et al. (<a href="references.html#ref-lorson2021" role="doc-biblioref">2021</a>)</span> uses categorical models. The research compendium (with data and code) of the paper can be found here: <a href="https://osf.io/e5av9/" class="uri">https://osf.io/e5av9/</a>.</p></li>
 <li><p>Just a quick note: if you have an outcome variable with 3 levels (A, B and C) and you fit a categorical (multinomial) model, then <span class="math inline">\(P(A) = \frac{e^0}{e^0 + e^{B} + e^{C}}\)</span>, where the superscripts <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> are the estimated log-odds difference of the B and C level vs the A level (these are the two intercepts in the model). This makes sense, because, assuming each level is equally probable, <span class="math inline">\(\frac{e^{0}}{1 + e^{0} + e^{0}} = 0.333\)</span> for all levels.</p></li>
 </ul></li>
 </ul>
@@ -872,7 +854,7 @@ In the Land of Inference where the distributions lie.</p>
 </ul>
 <p>The presence of “levels” within the data (whether they come from natural groupings like participant or word, or from repeated measures) breaks one of the assumptions of regression models: that each observation must be independent. This is why you must include varying terms in the regression model, to account for this structure (and now you see why they are called hierarchical and multilevel models). If you don’t include any varying term, your model will expect that each observation is independent and hence it will underestimate variance and return unreliable results.</p>
 <p>In the toy-example of f0 measurements, you will want to include varying terms for <em>participant</em> and <em>word</em>. These will take care to let the model know of the structure of the data mentioned above. If you have other predictors in the model, you should also add them as (varying) slopes in the varying terms. For example: <code>(question | participant) + (question | word)</code> (where <code>question</code> = statement vs question).</p>
-<p>Here are some tutorials: <span class="citation" data-cites="winter2013">Winter (<a href="references.html#ref-winter2013" role="doc-biblioref">2013</a>)</span>, <span class="citation" data-cites="debruine2021">DeBruine and Barr (<a href="references.html#ref-debruine2021" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="kirby2018">Kirby and Sonderegger (<a href="references.html#ref-kirby2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="burkner2018">Bürkner (<a href="references.html#ref-burkner2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="veenman2023">Veenman, Stefan, and Haaf (<a href="references.html#ref-veenman2023" role="doc-biblioref">2023</a>)</span>, <span class="citation" data-cites="pedersen2019">Pedersen et al. (<a href="references.html#ref-pedersen2019" role="doc-biblioref">2019</a>)</span>.</p>
+<p>Here are some tutorials: <span class="citation" data-cites="winter2013">Winter (<a href="references.html#ref-winter2013" role="doc-biblioref">2013</a>)</span>, <span class="citation" data-cites="debruine2021">DeBruine and Barr (<a href="references.html#ref-debruine2021" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="kirby2018">Kirby and Sonderegger (<a href="references.html#ref-kirby2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="burkner2018">Bürkner (<a href="references.html#ref-burkner2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="veenman2023">Veenman et al. (<a href="references.html#ref-veenman2023" role="doc-biblioref">2023</a>)</span>, <span class="citation" data-cites="pedersen2019">Pedersen et al. (<a href="references.html#ref-pedersen2019" role="doc-biblioref">2019</a>)</span>.</p>
 </section>
 <section id="step-3-are-there-non-linear-effects" class="level2" data-number="B.4">
 <h2 data-number="B.4" class="anchored" data-anchor-id="step-3-are-there-non-linear-effects"><span class="header-section-number">B.4</span> Step 3: Are there non-linear effects?</h2>
@@ -884,18 +866,18 @@ In the Land of Inference where the distributions lie.</p>
 <p>To learn more about multivariate models, I really recommend <span class="citation" data-cites="burkner2024a">Bürkner (<a href="references.html#ref-burkner2024a" role="doc-biblioref">2024</a>)</span>.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-burkner2018" class="csl-entry" role="listitem">
 Bürkner, Paul-Christian. 2018. <span>“Advanced Bayesian Multilevel Modeling with the r Package Brms.”</span> <em>The R Journal</em> 10 (1): 395411. <a href="https://doi.org/10.32614/RJ-2018-017">https://doi.org/10.32614/RJ-2018-017</a>.
 </div>
 <div id="ref-burkner2024a" class="csl-entry" role="listitem">
-———. 2024. <span>“Estimating Multivariate Models with Brms.”</span> <a href="https://cran.r-project.org/web/packages/brms/vignettes/brms_multivariate.html">https://cran.r-project.org/web/packages/brms/vignettes/brms_multivariate.html</a>.
+Bürkner, Paul-Christian. 2024. <span>“Estimating Multivariate Models with Brms.”</span> <a href="https://cran.r-project.org/web/packages/brms/vignettes/brms_multivariate.html">https://cran.r-project.org/web/packages/brms/vignettes/brms_multivariate.html</a>.
 </div>
 <div id="ref-burkner2019" class="csl-entry" role="listitem">
 Bürkner, Paul-Christian, and Matti Vuorre. 2019. <span>“Ordinal Regression Models in Psychology: A Tutorial.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 2 (1): 77101. <a href="https://doi.org/10.1177/2515245918823199">https://doi.org/10.1177/2515245918823199</a>.
 </div>
 <div id="ref-coretta2025a" class="csl-entry" role="listitem">
-Coretta, Stefano, and Paul-Christian Bürkner. 2025. <span>“Bayesian Beta Regressions with Brms in r: A Tutorial for Phoneticians.”</span> <a href="https://doi.org/10.31219/osf.io/f9rqg_v1">https://doi.org/10.31219/osf.io/f9rqg_v1</a>.
+Coretta, Stefano, and Paul-Christian Bürkner. 2025. <em>Bayesian Beta Regressions with Brms in r: A Tutorial for Phoneticians</em>. <a href="https://doi.org/10.31219/osf.io/f9rqg_v1">https://doi.org/10.31219/osf.io/f9rqg_v1</a>.
 </div>
 <div id="ref-debruine2021" class="csl-entry" role="listitem">
 DeBruine, Lisa M., and Dale J. Barr. 2021. <span>“Understanding Mixed-Effects Models Through Data Simulation.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 4 (1). <a href="https://doi.org/10.1177/2515245920965119">https://doi.org/10.1177/2515245920965119</a>.
@@ -904,7 +886,7 @@ DeBruine, Lisa M., and Dale J. Barr. 2021. <span>“Understanding Mixed-Effects 
 Gelman, Andrew. 2005. <span>“Analysis of Variance: Why It Is More Important Than Ever.”</span> <em>The Annals of Statistics</em> 33 (1). <a href="https://doi.org/10.1214/009053604000001048">https://doi.org/10.1214/009053604000001048</a>.
 </div>
 <div id="ref-heiss2021" class="csl-entry" role="listitem">
-Heiss, Andrew. 2021. <span>“A Guide to Modeling Proportions with Bayesian Beta and Zero-Inflated Beta Regression Models.”</span> <a href="https://www.andrewheiss.com/blog/2021/11/08/beta-regression-guide">https://www.andrewheiss.com/blog/2021/11/08/beta-regression-guide</a>.
+Heiss, Andrew. 2021. <em>A Guide to Modeling Proportions with Bayesian Beta and Zero-Inflated Beta Regression Models</em>. <a href="https://www.andrewheiss.com/blog/2021/11/08/beta-regression-guide">https://www.andrewheiss.com/blog/2021/11/08/beta-regression-guide</a>.
 </div>
 <div id="ref-kirby2018" class="csl-entry" role="listitem">
 Kirby, James, and Morgan Sonderegger. 2018. <span>“Mixed-Effects Design Analysis for Experimental Phonetics.”</span> <em>Journal of Phonetics</em> 70: 7085. <a href="https://doi.org/10.1016/j.wocn.2018.05.005">https://doi.org/10.1016/j.wocn.2018.05.005</a>.
@@ -916,13 +898,13 @@ Lorson, Alexandra, Chris Cummins, and Hannah Rohde. 2021. <span>“Strategic Use
 Pedersen, Eric J., David L. Miller, Gavin L. Simpson, and Noam Ross. 2019. <span>“Hierarchical Generalized Additive Models in Ecology: An Introduction with Mgcv.”</span> <em>PeerJ</em> 7: e6876. <a href="https://doi.org/10.7717/peerj.6876">https://doi.org/10.7717/peerj.6876</a>.
 </div>
 <div id="ref-simpson2018" class="csl-entry" role="listitem">
-Simpson, Gavin L. 2018. <span>“Fitting GAMs with Brms: Part 1.”</span> <a href="https://fromthebottomoftheheap.net/2018/04/21/fitting-gams-with-brms/">https://fromthebottomoftheheap.net/2018/04/21/fitting-gams-with-brms/</a>.
+Simpson, Gavin L. 2018. <em>Fitting GAMs with Brms: Part 1</em>. <a href="https://fromthebottomoftheheap.net/2018/04/21/fitting-gams-with-brms/">https://fromthebottomoftheheap.net/2018/04/21/fitting-gams-with-brms/</a>.
 </div>
 <div id="ref-soskuthy2021" class="csl-entry" role="listitem">
 Sóskuthy, Márton. 2021. <span>“Evaluating Generalised Additive Mixed Modelling Strategies for Dynamic Speech Analysis.”</span> <em>Journal of Phonetics</em> 84: 101017. <a href="https://doi.org/10.1016/j.wocn.2020.101017">https://doi.org/10.1016/j.wocn.2020.101017</a>.
 </div>
 <div id="ref-soskuthy2017a" class="csl-entry" role="listitem">
-———. n.d. <span>“Generalised Additive Mixed Models for Dynamic Analysis in Linguistics: A Practical Introduction.”</span> <a href="https://doi.org/10.48550/arXiv.1703.05339">https://doi.org/10.48550/arXiv.1703.05339</a>.
+Sóskuthy, Márton. n.d. <em>Generalised Additive Mixed Models for Dynamic Analysis in Linguistics: A Practical Introduction</em>. <a href="https://doi.org/10.48550/arXiv.1703.05339">https://doi.org/10.48550/arXiv.1703.05339</a>.
 </div>
 <div id="ref-veenman2023" class="csl-entry" role="listitem">
 Veenman, Myrthe, Angelika M. Stefan, and Julia M. Haaf. 2023. <span>“Bayesian Hierarchical Modeling: An Introduction and Reassessment.”</span> <em>Behavior Research Methods</em> 56 (5): 4600–4631. <a href="https://doi.org/10.3758/s13428-023-02204-3">https://doi.org/10.3758/s13428-023-02204-3</a>.
@@ -934,7 +916,7 @@ Verissimo, Joao. 2021. <span>“Analysis of Rating Scales: A Pervasive Problem i
 Wieling, Martijn. 2018. <span>“Analyzing Dynamic Phonetic Data Using Generalized Additive Mixed Modeling: A Tutorial Focusing on Articulatory Differences Between L1 and L2 Speakers of English.”</span> <em>Journal of Phonetics</em> 70: 86116. <a href="https://doi.org/10.1016/j.wocn.2018.03.002">https://doi.org/10.1016/j.wocn.2018.03.002</a>.
 </div>
 <div id="ref-winter2013" class="csl-entry" role="listitem">
-Winter, Bodo. 2013. <span>“Linear Models and Linear Mixed Effects Models in r with Linguistic Applications.”</span>
+Winter, Bodo. 2013. <em>Linear Models and Linear Mixed Effects Models in r with Linguistic Applications</em>.
 </div>
 <div id="ref-winter2021" class="csl-entry" role="listitem">
 Winter, Bodo, and Paul-Christian Bürkner. 2021. <span>“Poisson Regression for Linguists: A Tutorial Introduction to Modelling Count Data with Brms.”</span> <em>Language and Linguistics Compass</em> 15 (11): e12439. <a href="https://doi.org/10.1111/lnc3.12439">https://doi.org/10.1111/lnc3.12439</a>.

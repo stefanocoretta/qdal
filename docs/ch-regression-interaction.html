@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>35&nbsp; Regression models: interactions – Quantitative Data Analysis for Linguists in R</title>
+<title>34&nbsp; Regression models: interactions – Quantitative Data Analysis for Linguists in R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -59,7 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -89,19 +91,18 @@ div.csl-indent {
 <link href="./ch-regression-cat-cat.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-5fb1cbb79f85a0fa3795ecf5c470cb6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9e7382ee7cd961dafdf7e033f60763af.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -139,7 +140,7 @@ div.csl-indent {
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -342,7 +343,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-open-research.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-regression-interaction.html"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-open-research.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-regression-interaction.html"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -355,13 +356,11 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code" target="_blank"><i class="bi bi-github"></i></a>
     <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
@@ -389,7 +388,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 1</span></a>
+ <span class="menu-text">Week 2</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -430,7 +429,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 2</span></a>
+ <span class="menu-text">Week 3</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -477,7 +476,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 3</span></a>
+ <span class="menu-text">Week 4</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -524,7 +523,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 4</span></a>
+ <span class="menu-text">Week 5</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -565,7 +564,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 5</span></a>
+ <span class="menu-text">Week 6</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -594,7 +593,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 6</span></a>
+ <span class="menu-text">Week 7</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -602,8 +601,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-interim-summ.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
+  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
       </ul>
@@ -611,7 +622,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 7</span></a>
+ <span class="menu-text">Week 8</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -619,20 +630,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
   </div>
 </li>
       </ul>
@@ -640,7 +651,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 8</span></a>
+ <span class="menu-text">Week 9</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -648,20 +659,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
+  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -669,7 +680,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 9</span></a>
+ <span class="menu-text">Week 10</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -677,55 +688,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 10</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -738,13 +720,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./app-computer-basics.html" class="sidebar-item-text sidebar-link">
@@ -769,11 +751,11 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#is-the-effect-of-attitude-modulated-by-gender" id="toc-is-the-effect-of-attitude-modulated-by-gender" class="nav-link active" data-scroll-target="#is-the-effect-of-attitude-modulated-by-gender"><span class="header-section-number">35.1</span> Is the effect of attitude modulated by gender?</a></li>
-  <li><a href="#interaction-terms" id="toc-interaction-terms" class="nav-link" data-scroll-target="#interaction-terms"><span class="header-section-number">35.2</span> Interaction terms</a></li>
-  <li><a href="#interpreting-models-with-interactions" id="toc-interpreting-models-with-interactions" class="nav-link" data-scroll-target="#interpreting-models-with-interactions"><span class="header-section-number">35.3</span> Interpreting models with interactions</a></li>
-  <li><a href="#models-draws-and-expected-predictions" id="toc-models-draws-and-expected-predictions" class="nav-link" data-scroll-target="#models-draws-and-expected-predictions"><span class="header-section-number">35.4</span> Model’s draws and expected predictions</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">35.5</span> Summary</a></li>
+  <li><a href="#is-the-effect-of-attitude-modulated-by-gender" id="toc-is-the-effect-of-attitude-modulated-by-gender" class="nav-link active" data-scroll-target="#is-the-effect-of-attitude-modulated-by-gender"><span class="header-section-number">34.1</span> Is the effect of attitude modulated by gender?</a></li>
+  <li><a href="#interaction-terms" id="toc-interaction-terms" class="nav-link" data-scroll-target="#interaction-terms"><span class="header-section-number">34.2</span> Interaction terms</a></li>
+  <li><a href="#interpreting-models-with-interactions" id="toc-interpreting-models-with-interactions" class="nav-link" data-scroll-target="#interpreting-models-with-interactions"><span class="header-section-number">34.3</span> Interpreting models with interactions</a></li>
+  <li><a href="#models-draws-and-expected-predictions" id="toc-models-draws-and-expected-predictions" class="nav-link" data-scroll-target="#models-draws-and-expected-predictions"><span class="header-section-number">34.4</span> Model’s draws and expected predictions</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">34.5</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-interaction.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -781,9 +763,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-open-research.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-regression-interaction.html"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-open-research.html">Week 9</a></li><li class="breadcrumb-item"><a href="./ch-regression-interaction.html"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-regression-interaction" class="quarto-section-identifier"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></h1>
+<h1 class="title"><span id="sec-regression-interaction" class="quarto-section-identifier"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></h1>
 </div>
 
 
@@ -802,8 +784,8 @@ window.Quarto = {
 
 <p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
 <p>The previous chapter explained how to include two predictors in a regression model and how to interpret the results of the model. But we were left wondering: what if the effect of attitude differs between the two genders? In this chapter we will talk about <strong>interactions</strong>: regression models can estimated different effects of one predictor depending on the levels of the other other predictor, by adding a so-called <em>interaction term</em>. Keep reading to learn about them.</p>
-<section id="is-the-effect-of-attitude-modulated-by-gender" class="level2" data-number="35.1">
-<h2 data-number="35.1" class="anchored" data-anchor-id="is-the-effect-of-attitude-modulated-by-gender"><span class="header-section-number">35.1</span> Is the effect of attitude modulated by gender?</h2>
+<section id="is-the-effect-of-attitude-modulated-by-gender" class="level2" data-number="34.1">
+<h2 data-number="34.1" class="anchored" data-anchor-id="is-the-effect-of-attitude-modulated-by-gender"><span class="header-section-number">34.1</span> Is the effect of attitude modulated by gender?</h2>
 <p>Let’s start by reading and filtering the <code>polite</code> data <span class="citation" data-cites="winter2012">(<a href="references.html#ref-winter2012" role="doc-biblioref">Winter and Grawunder 2012</a>)</span>. We drop <code>NA</code> values from the <code>f0mn</code> column.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>polite <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/winter2012/polite.csv"</span>)</span>
@@ -811,7 +793,7 @@ window.Quarto = {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>polite_filt <span class="ot">&lt;-</span> polite <span class="sc">|&gt;</span> </span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(f0mn)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><a href="#fig-polite-f0-gend-att-repr-2" class="quarto-xref">Figure&nbsp;<span>35.1</span></a> shows once again the mean f0 values split by gender and attitude. In principle, we have no reason to expect that the effect of attitude will be the same in both genders, and conversely we have no reason to expect the opposite (that it will be different). The best way forward in regression modelling is to allow the model to estimate the (possible) difference: depending on the results, you will be able to report the estimated difference and reason as to whether the difference is meaningful or not.</p>
+<p><a href="#fig-polite-f0-gend-att-repr-2" class="quarto-xref">Figure&nbsp;<span>34.1</span></a> shows once again the mean f0 values split by gender and attitude. In principle, we have no reason to expect that the effect of attitude will be the same in both genders, and conversely we have no reason to expect the opposite (that it will be different). The best way forward in regression modelling is to allow the model to estimate the (possible) difference: depending on the results, you will be able to report the estimated difference and reason as to whether the difference is meaningful or not.</p>
 <div class="cell" data-fig-label="Mean f0 by gender and attitude (repr).">
 <details class="code-fold">
 <summary>Code</summary>
@@ -826,15 +808,15 @@ window.Quarto = {
 <img src="ch-regression-interaction_files/figure-html/fig-polite-f0-gend-att-repr-2-1.png" id="fig-polite-f0-gend-att-repr-2" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-polite-f0-gend-att-repr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;35.1
+Figure&nbsp;34.1
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="interaction-terms" class="level2" data-number="35.2">
-<h2 data-number="35.2" class="anchored" data-anchor-id="interaction-terms"><span class="header-section-number">35.2</span> Interaction terms</h2>
+<section id="interaction-terms" class="level2" data-number="34.2">
+<h2 data-number="34.2" class="anchored" data-anchor-id="interaction-terms"><span class="header-section-number">34.2</span> Interaction terms</h2>
 <p>To allow a regression model to estimate “interactions” between predictors, or in other words to estimate different effects of one predictors based on the levels of the other, we need to include so-called <strong>interaction terms</strong>. An interaction term, is a model term that tells the model to estimate interactions. Before we see how to include interaction terms in R/brms, let’s go through the model’s formula.</p>
 <p>We will model mean f0 <code>f0mn</code> as a function of <code>gender</code> and <code>attitude</code> and an interaction between the two. Here is what the formula looks like:</p>
 <p><span class="math display">\[
@@ -895,14 +877,14 @@ f0mn_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 <p>Note that there is a <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> for interactions: instead of writing in full <code>gender + attitude + gender:attitude</code> you can just write <code>gender * attitude</code> (the two predictors separated by a star <code>*</code>). The “star” syntax expands to the full syntax. It is up to you which syntax you use, although for beginners I suggest using the longer one for clarity. Run the model now.</p>
 <p>Getting a regression model to estimate interactions is easy, but a warning: because we have included an interaction in the model, the interpretation of the coefficients has changed slightly relative to how we interpret the coefficients of categorical predictors in models without interactions!</p>
 </section>
-<section id="interpreting-models-with-interactions" class="level2" data-number="35.3">
-<h2 data-number="35.3" class="anchored" data-anchor-id="interpreting-models-with-interactions"><span class="header-section-number">35.3</span> Interpreting models with interactions</h2>
+<section id="interpreting-models-with-interactions" class="level2" data-number="34.3">
+<h2 data-number="34.3" class="anchored" data-anchor-id="interpreting-models-with-interactions"><span class="header-section-number">34.3</span> Interpreting models with interactions</h2>
 <p>Let’s look at the model summary. With interactions, the coefficients of categorical predictors are interpreted slightly differently than when there are no interactions.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(f0_bm_int)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: gaussian 
-  Links: mu = identity; sigma = identity 
+  Links: mu = identity 
 Formula: f0mn ~ gender + attitude + gender:attitude 
    Data: polite (Number of observations: 212) 
   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
@@ -932,8 +914,8 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </ul>
 <p>Let’s extract the model’s draws and process them to get summary measures and relevant plots.</p>
 </section>
-<section id="models-draws-and-expected-predictions" class="level2" data-number="35.4">
-<h2 data-number="35.4" class="anchored" data-anchor-id="models-draws-and-expected-predictions"><span class="header-section-number">35.4</span> Model’s draws and expected predictions</h2>
+<section id="models-draws-and-expected-predictions" class="level2" data-number="34.4">
+<h2 data-number="34.4" class="anchored" data-anchor-id="models-draws-and-expected-predictions"><span class="header-section-number">34.4</span> Model’s draws and expected predictions</h2>
 <p>We can extract the draws from the model object as usual.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>f0_bm_int_draws <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(f0_bm_int)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -971,7 +953,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
 </div>
-<p>Now we can plot the expected predictions with ggplot2 (<a href="#fig-f0-bm-int-epred" class="quarto-xref">Figure&nbsp;<span>35.2</span></a>). We set <code>scales = "free_x"</code> in <code>facet_grid()</code> to allow ggplot to use different scales in the <em>x</em>-axis (try to run the code without specifying the <code>scales</code> argument to see why).</p>
+<p>Now we can plot the expected predictions with ggplot2 (<a href="#fig-f0-bm-int-epred" class="quarto-xref">Figure&nbsp;<span>34.2</span></a>). We set <code>scales = "free_x"</code> in <code>facet_grid()</code> to allow ggplot to use different scales in the <em>x</em>-axis (try to run the code without specifying the <code>scales</code> argument to see why).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>f0_bm_int_epred <span class="sc">|&gt;</span> </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(epred, attitude)) <span class="sc">+</span></span>
@@ -984,7 +966,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <img src="ch-regression-interaction_files/figure-html/fig-f0-bm-int-epred-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-f0-bm-int-epred-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;35.2: Density plot of the expected predictions of f0 by gender and attitude.
+Figure&nbsp;34.2: Density plot of the expected predictions of f0 by gender and attitude.
 </figcaption>
 </figure>
 </div>
@@ -1003,7 +985,7 @@ Figure&nbsp;35.2: Density plot of the expected predictions of f0 by gender and a
 <img src="ch-regression-interaction_files/figure-html/fig-f0-bm-int-epred-interval-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-f0-bm-int-epred-interval-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;35.3: Intervals plot of the expected predictions of f0 by gender and attitude.
+Figure&nbsp;34.3: Intervals plot of the expected predictions of f0 by gender and attitude.
 </figcaption>
 </figure>
 </div>
@@ -1037,8 +1019,8 @@ Figure&nbsp;35.3: Intervals plot of the expected predictions of f0 by gender and
 </div>
 <p>The mean difference is -11 Hz (SD = 8) and the 95% CrI is [-27, +5] Hz. This is somewhat indicative of a difference (polite speech is produced with a somewhat lower f0) but it is also possible that there is instead a negligible positive difference (+5 Hz). Comparing this with the effect of attitude in female participants (as given by <span class="math inline">\(\beta_2\)</span> or <code>attitudepol</code>) which is at 95% confidence between -32 to -3 Hz, we cannot really argue for or against the effect of attitude being different in the two genders. In other words, we are left with a certain level of uncertainty.</p>
 </section>
-<section id="summary" class="level2" data-number="35.5">
-<h2 data-number="35.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">35.5</span> Summary</h2>
+<section id="summary" class="level2" data-number="34.5">
+<h2 data-number="34.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">34.5</span> Summary</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1055,7 +1037,7 @@ Figure&nbsp;35.3: Intervals plot of the expected predictions of f0 by gender and
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-winter2012" class="csl-entry" role="listitem">
 Winter, Bodo, and Sven Grawunder. 2012. <span>“The Phonetic Profile of Korean Formal and Informal Speech Registers.”</span> <em>Journal of Phonetics</em> 40 (6): 808–15. <a href="https://doi.org/10.1016/j.wocn.2012.08.006">https://doi.org/10.1016/j.wocn.2012.08.006</a>.
 </div>
@@ -1693,12 +1675,12 @@ window.onload = function() {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./ch-regression-cat-cat.html" class="pagination-link" aria-label="Regression models: multiple predictors">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ch-learned.html" class="pagination-link" aria-label="What you've learned">
-        <span class="nav-page-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

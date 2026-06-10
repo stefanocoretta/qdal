@@ -2,15 +2,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Stefano Coretta">
 <meta name="author" content="Elizabeth Pankratz">
 
-<title>30&nbsp; Binary outcomes: Bernoulli regression – Quantitative Data Analysis for Linguists in R</title>
+<title>29&nbsp; Binary outcomes: Bernoulli regression – Quantitative Data Analysis for Linguists in R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -61,7 +64,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -91,19 +93,18 @@ div.csl-indent {
 <link href="./ch-null-ritual.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-5fb1cbb79f85a0fa3795ecf5c470cb6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9e7382ee7cd961dafdf7e033f60763af.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -141,7 +142,7 @@ div.csl-indent {
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -344,7 +345,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html">Week 8</a></li><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html">Week 8</a></li><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -357,13 +358,11 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code" target="_blank"><i class="bi bi-github"></i></a>
     <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
@@ -391,7 +390,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 1</span></a>
+ <span class="menu-text">Week 2</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -432,7 +431,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 2</span></a>
+ <span class="menu-text">Week 3</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -479,7 +478,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 3</span></a>
+ <span class="menu-text">Week 4</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -526,7 +525,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 4</span></a>
+ <span class="menu-text">Week 5</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -567,7 +566,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 5</span></a>
+ <span class="menu-text">Week 6</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -596,7 +595,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 6</span></a>
+ <span class="menu-text">Week 7</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -604,8 +603,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-interim-summ.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
+  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
       </ul>
@@ -613,7 +624,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 7</span></a>
+ <span class="menu-text">Week 8</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -621,20 +632,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
   </div>
 </li>
       </ul>
@@ -642,7 +653,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 8</span></a>
+ <span class="menu-text">Week 9</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -650,20 +661,20 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
+  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -671,7 +682,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 9</span></a>
+ <span class="menu-text">Week 10</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -679,55 +690,26 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 10</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -740,13 +722,13 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./app-computer-basics.html" class="sidebar-item-text sidebar-link">
@@ -771,12 +753,12 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-prob-log" id="toc-sec-prob-log" class="nav-link active" data-scroll-target="#sec-prob-log"><span class="header-section-number">30.1</span> Probability and log-odds</a></li>
-  <li><a href="#nicaraguan-sign-language-single-and-multi-verb-predicates" id="toc-nicaraguan-sign-language-single-and-multi-verb-predicates" class="nav-link" data-scroll-target="#nicaraguan-sign-language-single-and-multi-verb-predicates"><span class="header-section-number">30.2</span> Nicaraguan Sign Language single and multi-verb predicates</a></li>
-  <li><a href="#sec-plot-prop" id="toc-sec-plot-prop" class="nav-link" data-scroll-target="#sec-plot-prop"><span class="header-section-number">30.3</span> Plotting proportions, percentages and accuracy data</a></li>
-  <li><a href="#bernoulli-model-of-nsl-predicates" id="toc-bernoulli-model-of-nsl-predicates" class="nav-link" data-scroll-target="#bernoulli-model-of-nsl-predicates"><span class="header-section-number">30.4</span> Bernoulli model of NSL predicates</a></li>
-  <li><a href="#fit-the-bernoulli-model-with-brms" id="toc-fit-the-bernoulli-model-with-brms" class="nav-link" data-scroll-target="#fit-the-bernoulli-model-with-brms"><span class="header-section-number">30.5</span> Fit the Bernoulli model with brms</a></li>
-  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">30.6</span> Reporting</a></li>
+  <li><a href="#sec-prob-log" id="toc-sec-prob-log" class="nav-link active" data-scroll-target="#sec-prob-log"><span class="header-section-number">29.1</span> Probability and log-odds</a></li>
+  <li><a href="#nicaraguan-sign-language-single-and-multi-verb-predicates" id="toc-nicaraguan-sign-language-single-and-multi-verb-predicates" class="nav-link" data-scroll-target="#nicaraguan-sign-language-single-and-multi-verb-predicates"><span class="header-section-number">29.2</span> Nicaraguan Sign Language single and multi-verb predicates</a></li>
+  <li><a href="#sec-plot-prop" id="toc-sec-plot-prop" class="nav-link" data-scroll-target="#sec-plot-prop"><span class="header-section-number">29.3</span> Plotting proportions, percentages and accuracy data</a></li>
+  <li><a href="#bernoulli-model-of-nsl-predicates" id="toc-bernoulli-model-of-nsl-predicates" class="nav-link" data-scroll-target="#bernoulli-model-of-nsl-predicates"><span class="header-section-number">29.4</span> Bernoulli model of NSL predicates</a></li>
+  <li><a href="#fit-the-bernoulli-model-with-brms" id="toc-fit-the-bernoulli-model-with-brms" class="nav-link" data-scroll-target="#fit-the-bernoulli-model-with-brms"><span class="header-section-number">29.5</span> Fit the Bernoulli model with brms</a></li>
+  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">29.6</span> Reporting</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-bernoulli.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -784,9 +766,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html">Week 8</a></li><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html">Week 8</a></li><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-regression-bernoulli" class="quarto-section-identifier"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></h1>
+<h1 class="title"><span id="sec-regression-bernoulli" class="quarto-section-identifier"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></h1>
 </div>
 
 
@@ -875,8 +857,8 @@ Binomial(n, p)
 </div>
 <p>For each trial, we get a <code>1</code> for correct or a <code>0</code> for incorrect. If you take the mean of the trials it should be very close to 0.8 (with those random observations, it is 0.84). Again, <span class="math inline">\(p\)</span> is the mean probability of success across trials.</p>
 <p>Now, what we are trying to do when modelling binary outcome variables is to estimate the probability <span class="math inline">\(p\)</span> from the data. But there is a catch: probabilities are bounded between 0 and 1 and regression models don’t work with bounded variables out of the box! Bounded probabilities are transformed into an unbounded numeric variable. The following section explains how.</p>
-<section id="sec-prob-log" class="level2" data-number="30.1">
-<h2 data-number="30.1" class="anchored" data-anchor-id="sec-prob-log"><span class="header-section-number">30.1</span> Probability and log-odds</h2>
+<section id="sec-prob-log" class="level2" data-number="29.1">
+<h2 data-number="29.1" class="anchored" data-anchor-id="sec-prob-log"><span class="header-section-number">29.1</span> Probability and log-odds</h2>
 <p>As we have just learned, probabilities are bounded between 0 and 1 but we need something that is not bounded because regression models don’t work with bounded numeric variables. This is where the <strong>logit function</strong> comes in: the logit function (from “<em>log</em>istic un<em>it</em>”) is a mathematical function that transforms probabilities into log-odds. The logit function is the quantile function (the function that returns quantiles, the value below which a given proportion of a probability distribution lies) of the <strong>logistic distribution</strong>. The logit function is the quantile of a logistic function with mean 0 and standard deviation 1 (a standard logistic distribution). In R, the logit function is <code>qlogis()</code>. The default mean and SD in <code>qlogis()</code> are 0 and 1 respectively, so you can just input the first argument, <code>p</code> which is the probability you want to transform into log-odds.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qlogis</span>(<span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -892,7 +874,7 @@ Binomial(n, p)
 <pre><code>[1] 1.386294</code></pre>
 </div>
 </div>
-<p><a href="#fig-p-log-odds" class="quarto-xref">Figure&nbsp;<span>30.1</span></a> shows the logit function (the quantile function of the standard logistic distribution). The probabilities on the <em>x</em>-axis are transformed into log-odds on the <em>y</em> axis. When you fit a regression model with a binary outcome and a Bernoulli family, the estimates of the regression coefficients are in log-odds.</p>
+<p><a href="#fig-p-log-odds" class="quarto-xref">Figure&nbsp;<span>29.1</span></a> shows the logit function (the quantile function of the standard logistic distribution). The probabilities on the <em>x</em>-axis are transformed into log-odds on the <em>y</em> axis. When you fit a regression model with a binary outcome and a Bernoulli family, the estimates of the regression coefficients are in log-odds.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -929,7 +911,7 @@ Binomial(n, p)
 <img src="ch-regression-bernoulli_files/figure-html/fig-p-log-odds-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-p-log-odds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;30.1: The logit function (quantile function): from probabilities to log-odds.
+Figure&nbsp;29.1: The logit function (quantile function): from probabilities to log-odds.
 </figcaption>
 </figure>
 </div>
@@ -959,7 +941,7 @@ Figure&nbsp;30.1: The logit function (quantile function): from probabilities to 
 <pre><code>[1] 0.2</code></pre>
 </div>
 </div>
-<p><a href="#fig-p-log-odds" class="quarto-xref">Figure&nbsp;<span>30.1</span></a> shows the inverse logit transformation of log-odds (on the <em>x</em>-axis) into probabilities (on the <em>y</em>-axis). The inverse logit constructs the typical S-shaped curve (black thick line) of the CDF of the standard logistic distribution. Since probabilities can’t be smaller than 0 and greater than 1, the black line slopes in either direction and it approaches 0 and 1 on the <em>y</em>-axis without ever reaching them (in mathematical terms, it’s an <em>asymptotic</em> line). It is helpful to just memorise that log-odds 0 corresponds to probability 0.5 (and vice versa of course).</p>
+<p><a href="#fig-p-log-odds" class="quarto-xref">Figure&nbsp;<span>29.1</span></a> shows the inverse logit transformation of log-odds (on the <em>x</em>-axis) into probabilities (on the <em>y</em>-axis). The inverse logit constructs the typical S-shaped curve (black thick line) of the CDF of the standard logistic distribution. Since probabilities can’t be smaller than 0 and greater than 1, the black line slopes in either direction and it approaches 0 and 1 on the <em>y</em>-axis without ever reaching them (in mathematical terms, it’s an <em>asymptotic</em> line). It is helpful to just memorise that log-odds 0 corresponds to probability 0.5 (and vice versa of course).</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -996,7 +978,7 @@ Figure&nbsp;30.1: The logit function (quantile function): from probabilities to 
 <img src="ch-regression-bernoulli_files/figure-html/fig-log-odds-p-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-log-odds-p-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;30.2: The inverse logit function (CDF function): from log-odds to probabilities.
+Figure&nbsp;29.2: The inverse logit function (CDF function): from log-odds to probabilities.
 </figcaption>
 </figure>
 </div>
@@ -1034,8 +1016,8 @@ Figure&nbsp;30.2: The inverse logit function (CDF function): from log-odds to pr
 </div>
 </div>
 </section>
-<section id="nicaraguan-sign-language-single-and-multi-verb-predicates" class="level2" data-number="30.2">
-<h2 data-number="30.2" class="anchored" data-anchor-id="nicaraguan-sign-language-single-and-multi-verb-predicates"><span class="header-section-number">30.2</span> Nicaraguan Sign Language single and multi-verb predicates</h2>
+<section id="nicaraguan-sign-language-single-and-multi-verb-predicates" class="level2" data-number="29.2">
+<h2 data-number="29.2" class="anchored" data-anchor-id="nicaraguan-sign-language-single-and-multi-verb-predicates"><span class="header-section-number">29.2</span> Nicaraguan Sign Language single and multi-verb predicates</h2>
 <p>To illustrate how to fit a Bernoulli model, we will use data from <span class="citation" data-cites="brentari2024">Brentari et al. (<a href="references.html#ref-brentari2024" role="doc-biblioref">2024</a>)</span> on the emergent Nicaraguan Sign Language (<em>Lengua de Señas Nicaragüense</em>, NSL).</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>verb_org <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/brentari2024/verb_org.csv"</span>)</span>
@@ -1049,7 +1031,7 @@ Figure&nbsp;30.2: The inverse logit function (CDF function): from log-odds to pr
 </div>
 </div>
 </div>
-<p><code>verb_org</code> contains information on predicates as signed by three groups (<code>Group</code>): home-signers (<code>homesign</code>), first generation NSL signers (<code>NSL1</code>) and second generation NSL signers (<code>NSL2</code>). Specifically, the data coded in <code>Num_Predicates</code> whether the predicates uttered by the signer were single-verb predicates (<code>single</code>) or a multi-verb predicates (<code>multiple</code>). The hypothesis of the study is that use of multi-verb predicates would increase with each generation, i.e.&nbsp;that NSL1 signers would use more multi-verb predicates than home-signers and that NSL2 signers would use more multi-verb predicates than home-signers and NSL1 signers. (For the linguistic reasons behind this hypothesis, check the paper linked above). <a href="#fig-verb-org" class="quarto-xref">Figure&nbsp;<span>30.3</span></a> shows the proportion of single vs multiple predicates in the three groups.</p>
+<p><code>verb_org</code> contains information on predicates as signed by three groups (<code>Group</code>): home-signers (<code>homesign</code>), first generation NSL signers (<code>NSL1</code>) and second generation NSL signers (<code>NSL2</code>). Specifically, the data coded in <code>Num_Predicates</code> whether the predicates uttered by the signer were single-verb predicates (<code>single</code>) or a multi-verb predicates (<code>multiple</code>). The hypothesis of the study is that use of multi-verb predicates would increase with each generation, i.e.&nbsp;that NSL1 signers would use more multi-verb predicates than home-signers and that NSL2 signers would use more multi-verb predicates than home-signers and NSL1 signers. (For the linguistic reasons behind this hypothesis, check the paper linked above). <a href="#fig-verb-org" class="quarto-xref">Figure&nbsp;<span>29.3</span></a> shows the proportion of single vs multiple predicates in the three groups.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1068,13 +1050,13 @@ Figure&nbsp;30.2: The inverse logit function (CDF function): from log-odds to pr
 <img src="ch-regression-bernoulli_files/figure-html/fig-verb-org-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-verb-org-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;30.3: Proportion of single vs multiple predicates in three groups of NSL signers.
+Figure&nbsp;29.3: Proportion of single vs multiple predicates in three groups of NSL signers.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>What do you notice about the type of predicates in the three groups? Does it match the hypothesis put forward by the paper? We can calculate the proportion of multi-verb predicates by creating a column which codes <code>Num_Predicates</code> with <code>0</code> for single and <code>1</code> for multi-verbs predicates. This is the same dummy coding we encountered in <a href="ch-regression-cat.html" class="quarto-xref"><span>Chapter 27</span></a> for categorical predictors, but now we apply that to a binary outcome variable. Then you just take the mean of the dummy column by group, to obtain the proportion of multi-verb predicates for each group. Note that since we code multi-verb predicates with <code>1</code>, taking the mean gives you the proportion of multi-verb predicates and the proportion of single predicates is just <span class="math inline">\(1 - p\)</span> where <span class="math inline">\(p\)</span> is the proportion of multi-verb predicates.</p>
+<p>What do you notice about the type of predicates in the three groups? Does it match the hypothesis put forward by the paper? We can calculate the proportion of multi-verb predicates by creating a column which codes <code>Num_Predicates</code> with <code>0</code> for single and <code>1</code> for multi-verbs predicates. This is the same dummy coding we encountered in <a href="ch-regression-cat.html" class="quarto-xref"><span>Chapter 26</span></a> for categorical predictors, but now we apply that to a binary outcome variable. Then you just take the mean of the dummy column by group, to obtain the proportion of multi-verb predicates for each group. Note that since we code multi-verb predicates with <code>1</code>, taking the mean gives you the proportion of multi-verb predicates and the proportion of single predicates is just <span class="math inline">\(1 - p\)</span> where <span class="math inline">\(p\)</span> is the proportion of multi-verb predicates.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>verb_org <span class="ot">&lt;-</span> verb_org <span class="sc">|&gt;</span> </span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -1096,9 +1078,9 @@ Figure&nbsp;30.3: Proportion of single vs multiple predicates in three groups of
 </div>
 <p>On average, home-signers produce 36% of multi-verb predicates, first generation signers (NSL1) 19% and second generation signers (NSL2) 50%. In other words, there is a decrease in production of multi-verb predicates from home-signers to NSL1 signers, while NSL2 signers basically just use either single or multi-verb predicates. Most times, it is also useful to plot the proportion for each participant separately. Unfortunately, this is an area where bad practices have become standard so it is worth spending some time on this, in a new section.</p>
 </section>
-<section id="sec-plot-prop" class="level2" data-number="30.3">
-<h2 data-number="30.3" class="anchored" data-anchor-id="sec-plot-prop"><span class="header-section-number">30.3</span> Plotting proportions, percentages and accuracy data</h2>
-<p>A common (but incorrect) way of plotting proportion/percentage data (like accuracy, or the single vs multi-verb predicates of the <code>verb_org</code> dataset) is to calculate the proportion of each participant and then produce a bar chart with error bars that indicate the mean proportion (i.e.&nbsp;the mean of the proportions of each participant) and the dispersion around the mean accuracy. You might have seen something like <a href="#fig-prop-bad" class="quarto-xref">Figure&nbsp;<span>30.4</span></a> in many papers. This type of plot is called “bars and whiskers” because the error bars look like cat whiskers.</p>
+<section id="sec-plot-prop" class="level2" data-number="29.3">
+<h2 data-number="29.3" class="anchored" data-anchor-id="sec-plot-prop"><span class="header-section-number">29.3</span> Plotting proportions, percentages and accuracy data</h2>
+<p>A common (but incorrect) way of plotting proportion/percentage data (like accuracy, or the single vs multi-verb predicates of the <code>verb_org</code> dataset) is to calculate the proportion of each participant and then produce a bar chart with error bars that indicate the mean proportion (i.e.&nbsp;the mean of the proportions of each participant) and the dispersion around the mean accuracy. You might have seen something like <a href="#fig-prop-bad" class="quarto-xref">Figure&nbsp;<span>29.4</span></a> in many papers. This type of plot is called “bars and whiskers” because the error bars look like cat whiskers.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>verb_org <span class="sc">|&gt;</span> </span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Participant, Group) <span class="sc">|&gt;</span> </span>
@@ -1122,7 +1104,7 @@ Figure&nbsp;30.3: Proportion of single vs multiple predicates in three groups of
 <img src="ch-regression-bernoulli_files/figure-html/fig-prop-bad-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prop-bad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;30.4: The bad way of plotting proportions.
+Figure&nbsp;29.4: The bad way of plotting proportions.
 </figcaption>
 </figure>
 </div>
@@ -1167,17 +1149,17 @@ Figure&nbsp;30.4: The bad way of plotting proportions.
 <img src="ch-regression-bernoulli_files/figure-html/fig-prop-good-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prop-good-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;30.5: How to plot participants’ proportions and overall proportions.
+Figure&nbsp;29.5: How to plot participants’ proportions and overall proportions.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>In this data we don’t have many participants for group, but you can immediately appreciate the variability between participants. You will notice something new in the code: we have specified the data inside <code>geom_jitter()</code> and <code>stat_summary()</code> instead of inside <code>ggplot()</code>. This is because the two functions need different data: <code>geom_jitter()</code> needs the data with the proportion we calculated for each participant and group; <code>stat_summary()</code> needs to calculate the mean and CIs from the overall data, rather than from the proportion data we created. This is the aspect that a lot of researchers get wrong: you should <strong>not</strong> take the mean of the participant proportions, unless all participants have exactly the same number of observations. In the <code>verb_org</code> data specifically, the number of observations do indeed differ for each participant. You can check this yourself by getting the number of observations per participant per group with the <code>count()</code> function. We are also specifying the aesthetics within each geom/stat function, because while <code>x</code> is the same, the <code>y</code> differs! In <code>stat_summary()</code>, the <code>fun.data</code> argument lets you specify the function you want to use for the summary statistics to be added. Here we are using the <code>mean_cl_boot</code> function, which returns the mean proportion of <code>Response_num</code> and the 95% Confidence Intervals (CIs) of that mean. The CIs are calculated using a bootstrapping procedure (if you are interested in learning what that is, check the documentation of <code>smean.sd</code> from the Hmisc package).</p>
-<p>This also creates a nice opportunity to mention one shortcoming of the models we are fitting, thinking a bit ahead of ourselves: the regression models we cover in Week 4 to 10 do not account for the fact that the data comes from multiple participants and instead they just assume that each observation in the data set is from a different participant. When you have multiple observations from each participant, we call this a <em>repeated measure</em> design. This is a problem because it breaks one assumption of regression models: that all the observations are independent from each other. Of course, if they come from the same participant, they are not independent. We won’t have time in this course to learn about the solution (i.e.&nbsp;hierarchical regression models, also known as multi-level, mixed-effects, nested-effects, or random-effects models; these are just regression models that are set up so they can account for hierarchical grouping in the data, like multiple observations from multiple participants, or multiple pupils from multiple classes from multiple schools), but I point you to further resources in <a href="ch-next.html" class="quarto-xref"><span>Chapter 37</span></a> (TBA).</p>
+<p>This also creates a nice opportunity to mention one shortcoming of the models we are fitting, thinking a bit ahead of ourselves: the regression models we cover in Week 4 to 10 do not account for the fact that the data comes from multiple participants and instead they just assume that each observation in the data set is from a different participant. When you have multiple observations from each participant, we call this a <em>repeated measure</em> design. This is a problem because it breaks one assumption of regression models: that all the observations are independent from each other. Of course, if they come from the same participant, they are not independent. We won’t have time in this course to learn about the solution (i.e.&nbsp;hierarchical regression models, also known as multi-level, mixed-effects, nested-effects, or random-effects models; these are just regression models that are set up so they can account for hierarchical grouping in the data, like multiple observations from multiple participants, or multiple pupils from multiple classes from multiple schools), but I point you to further resources in <a href="ch-next.html" class="quarto-xref"><span>Chapter 36</span></a> (TBA).</p>
 </section>
-<section id="bernoulli-model-of-nsl-predicates" class="level2" data-number="30.4">
-<h2 data-number="30.4" class="anchored" data-anchor-id="bernoulli-model-of-nsl-predicates"><span class="header-section-number">30.4</span> Bernoulli model of NSL predicates</h2>
+<section id="bernoulli-model-of-nsl-predicates" class="level2" data-number="29.4">
+<h2 data-number="29.4" class="anchored" data-anchor-id="bernoulli-model-of-nsl-predicates"><span class="header-section-number">29.4</span> Bernoulli model of NSL predicates</h2>
 <p>The hypothesis of the study is that use of multi-verb predicates would increase with each generation. To statistically assess this hypothesis and obtain estimates of the proportion of multiple predicates, we can fit a Bernoulli model with <code>Num_Predicates</code> as the outcome variable and <code>Group</code> as a categorical predictor. Before we move on onto fitting the model, it is useful to transform <code>Num_Predicates</code> into a factor and specify the order of the levels so that <code>single</code> is the first level and <code>multiple</code> is the second level. We need this because Bernoulli models estimate the probability (the parameter <span class="math inline">\(p\)</span> in <span class="math inline">\(Bernoulli(p)\)</span>) of obtaining the <em>second</em> level in the outcome variable (remember, <span class="math inline">\(p\)</span> is the probability of success, i.e.&nbsp;of obtaining <span class="math inline">\(1\)</span> in a 0/1 coded binary variable). The first level in the factor corresponds to <code>0</code> and the second level to <code>1</code>. We want to set this order because the hypothesis states that multi-verb predicates should increase, and by modelling the probability of multi-verb predicates we can more straightforwardly address the hypothesis (of course, if the probability of multi-verb predicates increases, the probability of single-verb predicates decreases, because <span class="math inline">\(q = 1 - p\)</span>). Complete the following code to make <code>Num_Predicates</code> into a factor.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>verb_org <span class="ot">&lt;-</span> verb_org <span class="sc">|&gt;</span> </span>
@@ -1185,7 +1167,7 @@ Figure&nbsp;30.5: How to plot participants’ proportions and overall proportion
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>If you reproduce <a href="#fig-verb-org" class="quarto-xref">Figure&nbsp;<span>30.3</span></a> now, you will see that the order of <code>Num_Predicates</code> in the legend is “single” then “multiple” and that the order of the proportions in the bar chart have flipped.</p>
+<p>If you reproduce <a href="#fig-verb-org" class="quarto-xref">Figure&nbsp;<span>29.3</span></a> now, you will see that the order of <code>Num_Predicates</code> in the legend is “single” then “multiple” and that the order of the proportions in the bar chart have flipped.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1204,7 +1186,7 @@ Figure&nbsp;30.5: How to plot participants’ proportions and overall proportion
 <img src="ch-regression-bernoulli_files/figure-html/fig-verb-org-repr-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-verb-org-repr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;30.6: Proportion of single vs multiple predicates in three groups of NSL signers (<em>repr</em>).
+Figure&nbsp;29.6: Proportion of single vs multiple predicates in three groups of NSL signers (<em>repr</em>).
 </figcaption>
 </figure>
 </div>
@@ -1217,7 +1199,7 @@ MVP_i &amp; \sim Bernoulli(p_i) \\
 logit(p_i) &amp; = \beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i \\
 \end{aligned}
 \]</span></p>
-<p>The probability of using an multi-verb predicate follows a Bernoulli distribution with probability <span class="math inline">\(p\)</span>, which is the only parameter. The logit function is applied to the parameter <span class="math inline">\(p\)</span> as discussed in <a href="#sec-prob-log" class="quarto-xref"><span>Section 30.1</span></a>. Functions applied to model parameters are known as <strong>link functions</strong>. Bernoulli models use the logit link (i.e.&nbsp;the logit function). Because the logit link returns log-odds from probabilities, the log-odds of <span class="math inline">\(p\)</span>, rather than just the probability <span class="math inline">\(p\)</span>, are equal to the regression equation <span class="math inline">\(\beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i\)</span>. This model has three regression coefficients: <span class="math inline">\(\beta_0, \beta_1, \beta_2\)</span>. With one categorical predictor, regression models need one coefficient for each level in the predictor: since we have three levels in <code>Group</code>, we need three coefficients.</p>
+<p>The probability of using an multi-verb predicate follows a Bernoulli distribution with probability <span class="math inline">\(p\)</span>, which is the only parameter. The logit function is applied to the parameter <span class="math inline">\(p\)</span> as discussed in <a href="#sec-prob-log" class="quarto-xref"><span>Section 29.1</span></a>. Functions applied to model parameters are known as <strong>link functions</strong>. Bernoulli models use the logit link (i.e.&nbsp;the logit function). Because the logit link returns log-odds from probabilities, the log-odds of <span class="math inline">\(p\)</span>, rather than just the probability <span class="math inline">\(p\)</span>, are equal to the regression equation <span class="math inline">\(\beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i\)</span>. This model has three regression coefficients: <span class="math inline">\(\beta_0, \beta_1, \beta_2\)</span>. With one categorical predictor, regression models need one coefficient for each level in the predictor: since we have three levels in <code>Group</code>, we need three coefficients.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1260,9 +1242,9 @@ logit(p_i) &amp; = \beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i \\
 </div>
 </div>
 </section>
-<section id="fit-the-bernoulli-model-with-brms" class="level2" data-number="30.5">
-<h2 data-number="30.5" class="anchored" data-anchor-id="fit-the-bernoulli-model-with-brms"><span class="header-section-number">30.5</span> Fit the Bernoulli model with brms</h2>
-<p>We can now fit the model with <code>brm()</code>. The model formula has no surprises: <code>Num_Predicates ~ Group</code>. This looks like the formula of the model in <a href="ch-regression-more.html" class="quarto-xref"><span>Chapter 28</span></a>: <code>VOT_ms ~ phonation</code>. We are modelling <code>Num_Predicates</code> as a function of <code>Group</code>, like we modelled <code>VOT_ms</code> as a function of phonation. In this model, you have to set the family to <code>bernoulli</code> to fit a Bernoulli model. We also set the number of cores, seed and file as usual.</p>
+<section id="fit-the-bernoulli-model-with-brms" class="level2" data-number="29.5">
+<h2 data-number="29.5" class="anchored" data-anchor-id="fit-the-bernoulli-model-with-brms"><span class="header-section-number">29.5</span> Fit the Bernoulli model with brms</h2>
+<p>We can now fit the model with <code>brm()</code>. The model formula has no surprises: <code>Num_Predicates ~ Group</code>. This looks like the formula of the model in <a href="ch-regression-more.html" class="quarto-xref"><span>Chapter 27</span></a>: <code>VOT_ms ~ phonation</code>. We are modelling <code>Num_Predicates</code> as a function of <code>Group</code>, like we modelled <code>VOT_ms</code> as a function of phonation. In this model, you have to set the family to <code>bernoulli</code> to fit a Bernoulli model. We also set the number of cores, seed and file as usual.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mvp_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  Num_Predicates <span class="sc">~</span> Group,</span>
@@ -1346,7 +1328,7 @@ GroupNSL2     0.56      0.21  0.30  0.83</code></pre>
 </div>
 </div>
 </div>
-<p>The predicted probability of multi-verb predicates in home-signers is 32-41%, for NSL1 it is 16-22% and for NSL2 it is 45-54%, at 80% confidence. Based on these results, we can see more clearly that the hypothesis of the study is not fully borne out by the data: we do not observe an increase in probability of multi-verb predicates from home-signers to NSL1 to NSL2. Instead, there is a decrease from home-signers to NSL1 and an increase from NSL1 to NSL2. Moreover, the predicted probability of multi-verb predicates in NSL2, 45-54%, indicates that NSL2 possibly use either single and multi-verb predicates with equal probability. <a href="#fig-mvp-bm-pred" class="quarto-xref">Figure&nbsp;<span>30.7</span></a> plots the predicted posterior probabilities of multi-verb predicates.</p>
+<p>The predicted probability of multi-verb predicates in home-signers is 32-41%, for NSL1 it is 16-22% and for NSL2 it is 45-54%, at 80% confidence. Based on these results, we can see more clearly that the hypothesis of the study is not fully borne out by the data: we do not observe an increase in probability of multi-verb predicates from home-signers to NSL1 to NSL2. Instead, there is a decrease from home-signers to NSL1 and an increase from NSL1 to NSL2. Moreover, the predicted probability of multi-verb predicates in NSL2, 45-54%, indicates that NSL2 possibly use either single and multi-verb predicates with equal probability. <a href="#fig-mvp-bm-pred" class="quarto-xref">Figure&nbsp;<span>29.7</span></a> plots the predicted posterior probabilities of multi-verb predicates.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1363,7 +1345,7 @@ GroupNSL2     0.56      0.21  0.30  0.83</code></pre>
 <img src="ch-regression-bernoulli_files/figure-html/fig-mvp-bm-pred-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mvp-bm-pred-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;30.7: Predicted probabilities of multi-verb predicates by group as per a Bernoulli regression model.
+Figure&nbsp;29.7: Predicted probabilities of multi-verb predicates by group as per a Bernoulli regression model.
 </figcaption>
 </figure>
 </div>
@@ -1396,8 +1378,8 @@ Figure&nbsp;30.7: Predicted probabilities of multi-verb predicates by group as p
 </div>
 <p>The log-odds in NSL2 are 1.17-1.73 units higher than in NSL1, at 80% probability. The probability of a multi-verb predicate is 11 to 22 percentage points lower in NSL1 than home-signers and it is 25 to 36 percentage points higher in NSL2 than NSL1, at 80% confidence. Note how we say <em>percentage points</em> and not percent. There isn’t a 25-36% increase, but the probability increases by 25-36 units, which for probabilities expressed as percentages are called percentage points. Mixing these things up is a common mistake, so be careful.</p>
 </section>
-<section id="reporting" class="level2" data-number="30.6">
-<h2 data-number="30.6" class="anchored" data-anchor-id="reporting"><span class="header-section-number">30.6</span> Reporting</h2>
+<section id="reporting" class="level2" data-number="29.6">
+<h2 data-number="29.6" class="anchored" data-anchor-id="reporting"><span class="header-section-number">29.6</span> Reporting</h2>
 <blockquote class="blockquote">
 <p>We fitted a Bayesian Bernoulli regression model to assess the probability of multi-verb predicates in NSL. The model was fitted with brms <span class="citation" data-cites="burkner2017">Bürkner (<a href="references.html#ref-burkner2017" role="doc-biblioref">2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">R Core Team (<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">2025</a>)</span>, with the default priors, four chains with 2000 iterations each, of which 1000 for warm-up. We included group (home-signers, NSL1 and NSL2) as the only predictor, which was coded with the default treatment contrasts (home-signers as the reference level).</p>
 <p>According to the model, there is a 32-41% probability of multi-verb predicates in home-signers, for NSL1 it is 16-22% and for NSL2 it is 45-54%, at 80% confidence. The results indicate that the hypothesis that the probability of multi-verb predicates should increase from home-signers to NSL1 to NSL2 is not borne out. The probability decreases by 11-22 percentage points from home-signers to NSL1, and increases by 25-36 points from NSL1 to NSL2. Moreover, the probability of multi-verb predicates in NSL2 indicates that single and multi-verb predicates are equally probable in NSL2.</p>
@@ -1421,7 +1403,7 @@ Figure&nbsp;30.7: Predicted probabilities of multi-verb predicates by group as p
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-brentari2024" class="csl-entry" role="listitem">
 Brentari, Diane, Susan Goldin-Meadow, Laura Horton, Ann Senghas, and Marie Coppola. 2024. <span>“The Organization of Verb Meaning in Lengua de Señas Nicaragüense (LSN): Sequential or Simultaneous Structures?”</span> <em>Glossa: A Journal of General Linguistics</em> 9 (1). <a href="https://doi.org/10.16995/glossa.10342">https://doi.org/10.16995/glossa.10342</a>.
 </div>
@@ -1429,7 +1411,7 @@ Brentari, Diane, Susan Goldin-Meadow, Laura Horton, Ann Senghas, and Marie Coppo
 Bürkner, Paul-Christian. 2017. <span>“Brms: An r Package for Bayesian Multilevel Models Using Stan.”</span> <em>Journal of Statistical Software</em> 80 (1): 128. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>.
 </div>
 <div id="ref-holtz2019" class="csl-entry" role="listitem">
-Holtz, Yan. 2019. <span>“The Issue with Error Bars.”</span> <a href="https://www.data-to-viz.com/caveat/error_bar.html">https://www.data-to-viz.com/caveat/error_bar.html</a>.
+Holtz, Yan. 2019. <em>The Issue with Error Bars</em>. <a href="https://www.data-to-viz.com/caveat/error_bar.html">https://www.data-to-viz.com/caveat/error_bar.html</a>.
 </div>
 <div id="ref-rcoreteam2025" class="csl-entry" role="listitem">
 R Core Team. 2025. <em>R: A Language and Environment for Statistical Computing [Version 4.5.0]</em>.
@@ -2074,12 +2056,12 @@ window.onload = function() {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./ch-null-ritual.html" class="pagination-link" aria-label="Frequentist statistics, the Null Ritual and *p*-values">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ch-regression-lognorm.html" class="pagination-link" aria-label="Log-normal regression">
-        <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

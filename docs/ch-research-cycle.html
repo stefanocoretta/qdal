@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>17&nbsp; Research cycle – Quantitative Data Analysis for Linguists in R</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -24,7 +27,6 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
-  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -54,19 +56,18 @@ div.csl-indent {
 <link href="./ch-more-plotting.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-d0ae9245876894da5ac7e18953ecc5cc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-5fb1cbb79f85a0fa3795ecf5c470cb6e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-4ba85d4b4427d31d840a79ec76a35f2e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9e7382ee7cd961dafdf7e033f60763af.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -278,7 +279,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-transform.html">Week 3</a></li><li class="breadcrumb-item"><a href="./ch-research-cycle.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Research cycle</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-transform.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-research-cycle.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Research cycle</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -291,13 +292,11 @@ div.csl-indent {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
-      <a href="./index.html" class="sidebar-logo-link">
-      </a>
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Quantitative Data Analysis for Linguists in R</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/stefanocoretta/qdal" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code" target="_blank"><i class="bi bi-github"></i></a>
     <a href="./Quantitative-Data-Analysis-for-Linguists-in-R.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
@@ -325,7 +324,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 1</span></a>
+ <span class="menu-text">Week 2</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -366,7 +365,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 2</span></a>
+ <span class="menu-text">Week 3</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -413,7 +412,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 3</span></a>
+ <span class="menu-text">Week 4</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -460,7 +459,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 4</span></a>
+ <span class="menu-text">Week 5</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -501,7 +500,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 5</span></a>
+ <span class="menu-text">Week 6</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -530,7 +529,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 6</span></a>
+ <span class="menu-text">Week 7</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -538,8 +537,20 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-interim-summ.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Interim summary</span></span></a>
+  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
       </ul>
@@ -547,7 +558,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 7</span></a>
+ <span class="menu-text">Week 8</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -555,20 +566,20 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
   </div>
 </li>
       </ul>
@@ -576,7 +587,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 8</span></a>
+ <span class="menu-text">Week 9</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -584,20 +595,20 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
+  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -605,7 +616,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 9</span></a>
+ <span class="menu-text">Week 10</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -613,55 +624,26 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
- <span class="menu-text">Week 10</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -674,13 +656,13 @@ div.csl-indent {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./app-computer-basics.html" class="sidebar-item-text sidebar-link">
@@ -714,7 +696,7 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-transform.html">Week 3</a></li><li class="breadcrumb-item"><a href="./ch-research-cycle.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Research cycle</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-transform.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-research-cycle.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Research cycle</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-res-cycle" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Research cycle</span></span></h1>
 </div>
@@ -747,7 +729,7 @@ Figure&nbsp;17.1: The research cycle
 </div>
 <p>The cycle starts with the development of <strong>research questions and hypotheses</strong>. This step involves a thorough literature review and the identification of the topic, research problem, goal, questions and, possibly, hypotheses (as described in <a href="ch-research-context.html" class="quarto-xref"><span>Chapter 2</span></a>). Once the research questions and hypotheses have been determined, the researcher proceeds with the <strong>design of the study</strong> which sets out to answer the research questions and assess the research hypotheses. The study design process includes determining a large number of interconnected aspects, like materials, procedures, data management and data analysis plans, target population, sampling method and so on. At times the study design process reveals shortcomings or unforeseen aspects of the research questions/hypotheses which can be updated accordingly.</p>
 <p>Once the study design has been finalised, one proceeds with <strong>acquiring data</strong> based on the protocols detailed in their plan. After the completion of data acquisition, researchers <strong>analyse data</strong> and <strong>interpret the results</strong> in light of the research questions and hypotheses. Finally, the outcomes of the study are <strong>published</strong> in some form and the <strong>next study cycle</strong> begins once again.</p>
-<p>This sounds all very reasonable, but in reality, the researchers’ practice is quite different. This chapter introduces the concept of “researcher’s degrees of freedom” and describes the so-called Questionable Research Practices (QRPs). We will review literature that shows the grim reality of how common QRPs are. In <a href="ch-open-research.html" class="quarto-xref"><span>Chapter 33</span></a>, you will learn about principles and tools that are designed to help minimise the presence and impact of QRPs in one’s own research.</p>
+<p>This sounds all very reasonable, but in reality, the researchers’ practice is quite different. This chapter introduces the concept of “researcher’s degrees of freedom” and describes the so-called Questionable Research Practices (QRPs). We will review literature that shows the grim reality of how common QRPs are. In <a href="ch-open-research.html" class="quarto-xref"><span>Chapter 32</span></a>, you will learn about principles and tools that are designed to help minimise the presence and impact of QRPs in one’s own research.</p>
 <section id="researchers-degrees-of-freedom" class="level2" data-number="17.1">
 <h2 data-number="17.1" class="anchored" data-anchor-id="researchers-degrees-of-freedom"><span class="header-section-number">17.1</span> Researcher’s degrees of freedom</h2>
 <div class="callout callout-style-simple callout-important no-icon">
@@ -761,8 +743,8 @@ Figure&nbsp;17.1: The research cycle
 </div>
 </div>
 <p>Data analysis involves many decisions, such as how to operationalise and measure a given phenomenon or behaviour, which data to submit to statistical modelling and which to exclude in the final analysis, or which inferential approach to employ. This “freedom” can be problematic because humans show cognitive biases that can lead to erroneous inferences <span class="citation" data-cites="tversky1974">(<a href="references.html#ref-tversky1974" role="doc-biblioref">Tversky and Kahneman 1974</a>)</span>. For example, humans are prone to see coherent patterns even in the absence of them <span class="citation" data-cites="brugger2001">(<a href="references.html#ref-brugger2001" role="doc-biblioref">Brugger 2001</a>)</span>, convince themselves of the validity of prior expectations by cherry-picking evidence <span class="citation" data-cites="nickerson1998">(aka confirmation bias, “I knew it,” <a href="references.html#ref-nickerson1998" role="doc-biblioref">Nickerson 1998</a>)</span>, and perceive events as being plausible in hindsight <span class="citation" data-cites="fischhoff1975">(“I knew it all along,” <a href="references.html#ref-fischhoff1975" role="doc-biblioref">Fischhoff 1975</a>)</span>. In conjunction with an academic incentive system that rewards certain discovery processes more than others <span class="citation" data-cites="koole2012 sterling1959">(<a href="references.html#ref-koole2012" role="doc-biblioref">Koole and Lakens 2012</a>; <a href="references.html#ref-sterling1959" role="doc-biblioref">Sterling 1959</a>)</span>, we often find ourselves exploring many possible analytic pathways but reporting only a selected few depending on the quality of the narrative that we can achieve with them.</p>
-<p>This issue is particularly amplified in fields in which the raw data lend themselves to many possible ways of being measured <span class="citation" data-cites="roettger2019">(<a href="references.html#ref-roettger2019" role="doc-biblioref">Roettger 2019</a>)</span>. Combined with a wide variety of conceptual and methodological traditions as well as varying levels of quantitative training across sub-fields, the inherent flexibility of data analysis might lead to a vast plurality of analytic approaches that can itself lead to different scientific conclusions <span class="citation" data-cites="roettger2019a">(<a href="references.html#ref-roettger2019a" role="doc-biblioref">Roettger, Winter, and Baayen 2019</a>)</span>. Analytic flexibility has been widely discussed from a conceptual point of view <span class="citation" data-cites="nosek2014 simmons2011 wagenmakers2012">(<a href="references.html#ref-nosek2014" role="doc-biblioref">Nosek and Lakens 2014</a>; <a href="references.html#ref-simmons2011" role="doc-biblioref">Simmons, Nelson, and Simonsohn 2011</a>; <a href="references.html#ref-wagenmakers2012" role="doc-biblioref">Wagenmakers et al. 2012</a>)</span> and in regard to its application in individual scientific fields <span class="citation" data-cites="charles2019 roettger2019a wicherts2016">(e.g., <a href="references.html#ref-charles2019" role="doc-biblioref">Charles et al. 2019</a>; <a href="references.html#ref-roettger2019a" role="doc-biblioref">Roettger, Winter, and Baayen 2019</a>; <a href="references.html#ref-wicherts2016" role="doc-biblioref">Wicherts et al. 2016</a>)</span>. This notwithstanding, there are still many unknowns regarding the extent of analytic plurality in practice.</p>
-<p>Consequently, a substantial body of published articles likely present overconfident interpretations of data and statistical results based on idiosyncratic analytic strategies (e.g., <span class="citation" data-cites="gelman2014a">Gelman and Loken (<a href="references.html#ref-gelman2014a" role="doc-biblioref">2014</a>)</span>; <span class="citation" data-cites="simmons2011">Simmons, Nelson, and Simonsohn (<a href="references.html#ref-simmons2011" role="doc-biblioref">2011</a>)</span>). These interpretations, and the conclusions that derive from them, are thus associated with an unknown degree of uncertainty (dependent on the strength of evidence provided) and with an unknown degree of generalizability (dependent on the chosen analysis). Moreover, the same data could lead to very different conclusions depending on the analytic path taken by the researcher. However, instead of being critically evaluated, scientific results often remain unchallenged in the publication record.</p>
+<p>This issue is particularly amplified in fields in which the raw data lend themselves to many possible ways of being measured <span class="citation" data-cites="roettger2019">(<a href="references.html#ref-roettger2019" role="doc-biblioref">Roettger 2019</a>)</span>. Combined with a wide variety of conceptual and methodological traditions as well as varying levels of quantitative training across sub-fields, the inherent flexibility of data analysis might lead to a vast plurality of analytic approaches that can itself lead to different scientific conclusions <span class="citation" data-cites="roettger2019a">(<a href="references.html#ref-roettger2019a" role="doc-biblioref">Roettger et al. 2019</a>)</span>. Analytic flexibility has been widely discussed from a conceptual point of view <span class="citation" data-cites="nosek2014 simmons2011 wagenmakers2012">(<a href="references.html#ref-nosek2014" role="doc-biblioref">Nosek and Lakens 2014</a>; <a href="references.html#ref-simmons2011" role="doc-biblioref">Simmons et al. 2011</a>; <a href="references.html#ref-wagenmakers2012" role="doc-biblioref">Wagenmakers et al. 2012</a>)</span> and in regard to its application in individual scientific fields <span class="citation" data-cites="charles2019 roettger2019a wicherts2016">(e.g., <a href="references.html#ref-charles2019" role="doc-biblioref">Charles et al. 2019</a>; <a href="references.html#ref-roettger2019a" role="doc-biblioref">Roettger et al. 2019</a>; <a href="references.html#ref-wicherts2016" role="doc-biblioref">Wicherts et al. 2016</a>)</span>. This notwithstanding, there are still many unknowns regarding the extent of analytic plurality in practice.</p>
+<p>Consequently, a substantial body of published articles likely present overconfident interpretations of data and statistical results based on idiosyncratic analytic strategies (e.g., <span class="citation" data-cites="gelman2014a">Gelman and Loken (<a href="references.html#ref-gelman2014a" role="doc-biblioref">2014</a>)</span>; <span class="citation" data-cites="simmons2011">Simmons et al. (<a href="references.html#ref-simmons2011" role="doc-biblioref">2011</a>)</span>). These interpretations, and the conclusions that derive from them, are thus associated with an unknown degree of uncertainty (dependent on the strength of evidence provided) and with an unknown degree of generalizability (dependent on the chosen analysis). Moreover, the same data could lead to very different conclusions depending on the analytic path taken by the researcher. However, instead of being critically evaluated, scientific results often remain unchallenged in the publication record.</p>
 </section>
 <section id="questionable-research-practices" class="level2" data-number="17.2">
 <h2 data-number="17.2" class="anchored" data-anchor-id="questionable-research-practices"><span class="header-section-number">17.2</span> Questionable Research Practices</h2>
@@ -786,11 +768,11 @@ Figure&nbsp;17.2: The research cycle and questionable research practices
 </figcaption>
 </figure>
 </div>
-<p><span class="smallcaps">Questionable research practices</span> are practices, whether intentional or not, that undermine the robustness of research <span class="citation" data-cites="simmons2011 morin2015 flake2020">(<a href="references.html#ref-simmons2011" role="doc-biblioref">Simmons, Nelson, and Simonsohn 2011</a>; <a href="references.html#ref-morin2015" role="doc-biblioref">Morin 2015</a>; <a href="references.html#ref-flake2020" role="doc-biblioref">Flake and Fried 2020</a>)</span>. Questionable research practices are practices that negatively affect the research enterprise, but that are employed (most of the time unintentionally) by a surprisingly high number of researchers <span class="citation" data-cites="john2012">(<a href="references.html#ref-john2012" role="doc-biblioref">John, Loewenstein, and Prelec 2012</a>)</span>. For each step in the research cycle, questionable practices are available to researchers. These are part of the researcher’s degrees of freedom, introduced in the previous section. In this section, we will briefly review some of the most common questionable research practices identified in the literature.</p>
-<p><span class="citation" data-cites="makel2012">Makel, Plucker, and Hegarty (<a href="references.html#ref-makel2012" role="doc-biblioref">2012</a>)</span> looked at the publication history of 100 psychological journals since 1900. They found that only 1.07% of the papers (that is, 1 in 100 papers) were replications of previous studies. This means that the vast majority of studies are run only once and the field moves on. As <span class="citation" data-cites="tukey1969">Tukey (<a href="references.html#ref-tukey1969" role="doc-biblioref">1969, 84</a>)</span> said, “Confirmation comes from repetition. Any attempt to avoid this statement leads to failure and more probably to destruction”. This lack of replication attempts is problematic, given than we can’t be certain the results obtain from the one study would replicate if the study is run again. While the study in <span class="citation" data-cites="makel2012">Makel, Plucker, and Hegarty (<a href="references.html#ref-makel2012" role="doc-biblioref">2012</a>)</span> focused on psychology, <span class="citation" data-cites="kobrock2023">Kobrock and Roettger (<a href="references.html#ref-kobrock2023" role="doc-biblioref">2023</a>)</span> find that linguistics shows a more dire situation: only 0.08% of experimental articles contains an independent direct replication (1 in 1250).</p>
+<p><span class="smallcaps">Questionable research practices</span> are practices, whether intentional or not, that undermine the robustness of research <span class="citation" data-cites="simmons2011 morin2015 flake2020">(<a href="references.html#ref-simmons2011" role="doc-biblioref">Simmons et al. 2011</a>; <a href="references.html#ref-morin2015" role="doc-biblioref">Morin 2015</a>; <a href="references.html#ref-flake2020" role="doc-biblioref">Flake and Fried 2020</a>)</span>. Questionable research practices are practices that negatively affect the research enterprise, but that are employed (most of the time unintentionally) by a surprisingly high number of researchers <span class="citation" data-cites="john2012">(<a href="references.html#ref-john2012" role="doc-biblioref">John et al. 2012</a>)</span>. For each step in the research cycle, questionable practices are available to researchers. These are part of the researcher’s degrees of freedom, introduced in the previous section. In this section, we will briefly review some of the most common questionable research practices identified in the literature.</p>
+<p><span class="citation" data-cites="makel2012">Makel et al. (<a href="references.html#ref-makel2012" role="doc-biblioref">2012</a>)</span> looked at the publication history of 100 psychological journals since 1900. They found that only 1.07% of the papers (that is, 1 in 100 papers) were replications of previous studies. This means that the vast majority of studies are run only once and the field moves on. As <span class="citation" data-cites="tukey1969">Tukey (<a href="references.html#ref-tukey1969" role="doc-biblioref">1969, 84</a>)</span> said, “Confirmation comes from repetition. Any attempt to avoid this statement leads to failure and more probably to destruction”. This lack of replication attempts is problematic, given than we can’t be certain the results obtain from the one study would replicate if the study is run again. While the study in <span class="citation" data-cites="makel2012">Makel et al. (<a href="references.html#ref-makel2012" role="doc-biblioref">2012</a>)</span> focused on psychology, <span class="citation" data-cites="kobrock2023">Kobrock and Roettger (<a href="references.html#ref-kobrock2023" role="doc-biblioref">2023</a>)</span> find that linguistics shows a more dire situation: only 0.08% of experimental articles contains an independent direct replication (1 in 1250).</p>
 <p>Another issue that affects modern research regards study design, including aspects related to sample size. Several studies have found that most research employs study designs that grant a 50% probability of being able to find effects of medium size <span class="citation" data-cites="cohen1962 sedlmeier1992 bezeau2001">(<a href="references.html#ref-cohen1962" role="doc-biblioref">Cohen 1962</a>; <a href="references.html#ref-sedlmeier1992" role="doc-biblioref">Sedlmeier and Gigerenzer 1992</a>; <a href="references.html#ref-bezeau2001" role="doc-biblioref">Bezeau and Graves 2001</a>)</span>. <span class="citation" data-cites="gaeta2020">Gaeta and Brydges (<a href="references.html#ref-gaeta2020" role="doc-biblioref">2020</a>)</span> find a similar scenario in speech, language and hearing research: the majority of studies they screened did not have an adequate sample size to be able to detect medium-sized effects.</p>
-<p>In a study about the prevalence of questionable research practices, <span class="citation" data-cites="john2012">John, Loewenstein, and Prelec (<a href="references.html#ref-john2012" role="doc-biblioref">2012</a>)</span> found that about 50% of the researchers interviewed admitted to selective reporting, i.e.&nbsp;reporting only some of the statistical analyses or studies conducted. Combined with a theoretical admission rate, the authors argue for a 100% rate of selective reporting (in other words, we can expect all published studies to be affected by selective reporting). They also found that about 35% of the researchers admitted to having changed the research question/hypothesis after seeing the results (or “claiming to have predicted an unexpected finding”), also known as HARKing <span class="citation" data-cites="kerr1998">(Hypothesising After the Results are Known, <a href="references.html#ref-kerr1998" role="doc-biblioref">Kerr 1998</a>)</span>. Combined with the theoretical admission rate, they estimate an actual rate of 90%.</p>
-<p>We will talk more about sharing research data when you will learn about Open Research practices in <a href="ch-open-research.html" class="quarto-xref"><span>Chapter 33</span></a>, but <span class="citation" data-cites="wicherts2006">Wicherts et al. (<a href="references.html#ref-wicherts2006" role="doc-biblioref">2006</a>)</span> contacted the authors of 141 articles in psychology asking to share the research data with them and a worrying 73% of the authors never shared their data. <span class="citation" data-cites="bochynska2023">Bochynska et al. (<a href="references.html#ref-bochynska2023" role="doc-biblioref">2023</a>)</span> surveyed 600 linguistic articles and less than 10% of them shared their data as part of the publication.</p>
+<p>In a study about the prevalence of questionable research practices, <span class="citation" data-cites="john2012">John et al. (<a href="references.html#ref-john2012" role="doc-biblioref">2012</a>)</span> found that about 50% of the researchers interviewed admitted to selective reporting, i.e.&nbsp;reporting only some of the statistical analyses or studies conducted. Combined with a theoretical admission rate, the authors argue for a 100% rate of selective reporting (in other words, we can expect all published studies to be affected by selective reporting). They also found that about 35% of the researchers admitted to having changed the research question/hypothesis after seeing the results (or “claiming to have predicted an unexpected finding”), also known as HARKing <span class="citation" data-cites="kerr1998">(Hypothesising After the Results are Known, <a href="references.html#ref-kerr1998" role="doc-biblioref">Kerr 1998</a>)</span>. Combined with the theoretical admission rate, they estimate an actual rate of 90%.</p>
+<p>We will talk more about sharing research data when you will learn about Open Research practices in <a href="ch-open-research.html" class="quarto-xref"><span>Chapter 32</span></a>, but <span class="citation" data-cites="wicherts2006">Wicherts et al. (<a href="references.html#ref-wicherts2006" role="doc-biblioref">2006</a>)</span> contacted the authors of 141 articles in psychology asking to share the research data with them and a worrying 73% of the authors never shared their data. <span class="citation" data-cites="bochynska2023">Bochynska et al. (<a href="references.html#ref-bochynska2023" role="doc-biblioref">2023</a>)</span> surveyed 600 linguistic articles and less than 10% of them shared their data as part of the publication.</p>
 <p>Publication bias is used to refer to the bias towards publishing “positive” results (i.e.&nbsp;results that indicate the presence of an effect). <span class="citation" data-cites="fanelli2010">Fanelli (<a href="references.html#ref-fanelli2010" role="doc-biblioref">2010</a>)</span>; <span class="citation" data-cites="fanelli2012">Fanelli (<a href="references.html#ref-fanelli2012" role="doc-biblioref">2012</a>)</span> found that about 80% of published results are positive results across disciplines, while the prevalence of positive results was higher in fields like psychology and economics (about 90%). Of course, the very high prevalence of positive results indicates that a lot of “negative” results (i.e.&nbsp;results that don’t suggest the presence of an effect) are not published, because in a neutral scenario (where researchers propose and test hypotheses, in an iterative process), there should be many more negative results. <span class="citation" data-cites="ioannidis2005">Ioannidis (<a href="references.html#ref-ioannidis2005" role="doc-biblioref">2005</a>)</span>, for example, shows through computational modelling that a prevalence rate of positive results of 50% or above would be very difficult to obtain and concludes that “most published research findings are false”. Relatedly, <span class="citation" data-cites="nissen2016">Nissen et al. (<a href="references.html#ref-nissen2016" role="doc-biblioref">2016</a>)</span> also use computational modelling to show how false claims can frequently become canonized as fact, in the absence of sufficient negative results. Further to these points, <span class="citation" data-cites="scheel2022">Scheel (<a href="references.html#ref-scheel2022" role="doc-biblioref">2022</a>)</span> stresses that “most psychological research findings are not even wrong”, in that most claims made in the literature are “so critically underspecified that attempts to empirically evaluate them are doomed to failure” <span class="citation" data-cites="scheel2022">(<a href="references.html#ref-scheel2022" role="doc-biblioref">Scheel 2022, 1</a>)</span>.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -809,19 +791,19 @@ Figure&nbsp;17.2: The research cycle and questionable research practices
 <li><p>Publication bias describes the tendency for journals to publish studies with negative results more often than those with positive results. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
 </ol>
 <strong>b. Which of the following is considered a Questionable Research Practice.</strong>
-<div id="radio_CVIIPRWWTD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CVIIPRWWTD" value=""> <span>Running a replication study to confirm findings.</span></label><label><input type="radio" autocomplete="off" name="radio_CVIIPRWWTD" value="answer"> <span>Selectively reporting only some of the analyses conducted.</span></label><label><input type="radio" autocomplete="off" name="radio_CVIIPRWWTD" value=""> <span>Increasing sample size to ensure adequate statistical power.</span></label><label><input type="radio" autocomplete="off" name="radio_CVIIPRWWTD" value=""> <span>Publishing negative results alongside positive ones.</span></label>
+<div id="radio_MYJJOVWYYD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MYJJOVWYYD" value=""> <span>Running a replication study to confirm findings.</span></label><label><input type="radio" autocomplete="off" name="radio_MYJJOVWYYD" value="answer"> <span>Selectively reporting only some of the analyses conducted.</span></label><label><input type="radio" autocomplete="off" name="radio_MYJJOVWYYD" value=""> <span>Increasing sample size to ensure adequate statistical power.</span></label><label><input type="radio" autocomplete="off" name="radio_MYJJOVWYYD" value=""> <span>Publishing negative results alongside positive ones.</span></label>
 </div>
 </div>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-bezeau2001" class="csl-entry" role="listitem">
 Bezeau, Scott, and Roger Graves. 2001. <span>“Statistical Power and Effect Sizes of Clinical Neuropsychology Research.”</span> <em>Journal of Clinical and Experimental Neuropsychology</em> 23 (3): 399–406. <a href="https://doi.org/10.1076/jcen.23.3.399.1181">https://doi.org/10.1076/jcen.23.3.399.1181</a>.
 </div>
 <div id="ref-bochynska2023" class="csl-entry" role="listitem">
-Bochynska, Agata, Liam Keeble, Caitlin Halfacre, Joseph V. Casillas, Irys-Amélie Champagne, Kaidi Chen, Melanie Röthlisberger, Erin M. Buchanan, and Timo B. Roettger. 2023. <span>“Reproducible Research Practices and Transparency Across Linguistics.”</span> <em>Glossa Psycholinguistics</em> 2 (1). <a href="https://doi.org/10.5070/g6011239">https://doi.org/10.5070/g6011239</a>.
+Bochynska, Agata, Liam Keeble, Caitlin Halfacre, et al. 2023. <span>“Reproducible Research Practices and Transparency Across Linguistics.”</span> <em>Glossa Psycholinguistics</em> 2 (1). <a href="https://doi.org/10.5070/g6011239">https://doi.org/10.5070/g6011239</a>.
 </div>
 <div id="ref-brugger2001" class="csl-entry" role="listitem">
 Brugger, Peter. 2001. <span>“From Haunted Brain to Haunted Science: A Cognitive Neuroscience View of Paranormal and Pseudoscientific Thought.”</span> <em>Hauntings and Poltergeists: Multidisciplinary Perspectives</em>, 195213.
@@ -833,16 +815,16 @@ Charles, Sarah J., James E. Bartlett, Kyle J. Messick, Thomas J. Coleman, and Al
 Cohen, Jacob. 1962. <span>“The Statistical Power of Abnormal-Social Psychological Research: A Review.”</span> <em>The Journal of Abnormal and Social Psychology</em> 65 (3): 145–53. <a href="https://doi.org/10.1037/h0045186">https://doi.org/10.1037/h0045186</a>.
 </div>
 <div id="ref-coretta2020b" class="csl-entry" role="listitem">
-Coretta, Stefano. 2020. <span>“Open Science in Phonetics and Phonology.”</span> <a href="https://doi.org/10.31219/osf.io/4dz5t">https://doi.org/10.31219/osf.io/4dz5t</a>.
+Coretta, Stefano. 2020. <em>Open Science in Phonetics and Phonology</em>. <a href="https://doi.org/10.31219/osf.io/4dz5t">https://doi.org/10.31219/osf.io/4dz5t</a>.
 </div>
 <div id="ref-coretta2023" class="csl-entry" role="listitem">
-Coretta, Stefano, Joseph V. Casillas, Simon Roessig, Michael Franke, Byron Ahn, Ali H. Al-Hoorie, Jalal Al-Tamimi, et al. 2023. <span>“Multidimensional Signals and Analytic Flexibility: Estimating Degrees of Freedom in Human-Speech Analyses.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 6 (3). <a href="https://doi.org/10.1177/25152459231162567">https://doi.org/10.1177/25152459231162567</a>.
+Coretta, Stefano, Joseph V. Casillas, Simon Roessig, et al. 2023. <span>“Multidimensional Signals and Analytic Flexibility: Estimating Degrees of Freedom in Human-Speech Analyses.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 6 (3). <a href="https://doi.org/10.1177/25152459231162567">https://doi.org/10.1177/25152459231162567</a>.
 </div>
 <div id="ref-fanelli2010" class="csl-entry" role="listitem">
-Fanelli, Daniele. 2010. <span>“Do Pressures to Publish Increase Scientists’ Bias? An Empirical Support from US States Data.”</span> Edited by Enrico Scalas. <em>PLoS ONE</em> 5 (4): e10271. <a href="https://doi.org/10.1371/journal.pone.0010271">https://doi.org/10.1371/journal.pone.0010271</a>.
+Fanelli, Daniele. 2010. <span>“Do Pressures to Publish Increase Scientists’ Bias? An Empirical Support from US States Data.”</span> <em>PLoS ONE</em> 5 (4): e10271. <a href="https://doi.org/10.1371/journal.pone.0010271">https://doi.org/10.1371/journal.pone.0010271</a>.
 </div>
 <div id="ref-fanelli2012" class="csl-entry" role="listitem">
-———. 2012. <span>“Negative Results Are Disappearing from Most Disciplines and Countries.”</span> <em>Scientometrics</em> 90 (3): 891–904. <a href="https://doi.org/10.1007/s11192-011-0494-7">https://doi.org/10.1007/s11192-011-0494-7</a>.
+Fanelli, Daniele. 2012. <span>“Negative Results Are Disappearing from Most Disciplines and Countries.”</span> <em>Scientometrics</em> 90 (3): 891–904. <a href="https://doi.org/10.1007/s11192-011-0494-7">https://doi.org/10.1007/s11192-011-0494-7</a>.
 </div>
 <div id="ref-fischhoff1975" class="csl-entry" role="listitem">
 Fischhoff, Baruch. 1975. <span>“Hindsight Is Not Equal to Foresight: The Effect of Outcome Knowledge on Judgment Under Uncertainty.”</span> <em>Journal of Experimental Psychology: Human Perception and Performance</em> 1 (3): 288.
@@ -896,7 +878,7 @@ Roettger, Timo B., Bodo Winter, and Harald Baayen. 2019. <span>“Emergent Data 
 Scheel, Anne M. 2022. <span>“Why Most Psychological Research Findings Are Not Even Wrong.”</span> <em>Infant and Child Development</em> 31 (1): e2295. <a href="https://doi.org/10.1002/icd.2295">https://doi.org/10.1002/icd.2295</a>.
 </div>
 <div id="ref-sedlmeier1992" class="csl-entry" role="listitem">
-Sedlmeier, Peter, and Gerd Gigerenzer. 1992. <span>“Do Studies of Statistical Power Have an Effect on the Power of Studies?”</span> In, 389–406. Washington: American Psychological Association. <a href="https://doi.org/10.1037/10109-032">https://doi.org/10.1037/10109-032</a>.
+Sedlmeier, Peter, and Gerd Gigerenzer. 1992. <em>Do Studies of Statistical Power Have an Effect on the Power of Studies?</em> American Psychological Association. <a href="https://doi.org/10.1037/10109-032">https://doi.org/10.1037/10109-032</a>.
 </div>
 <div id="ref-simmons2011" class="csl-entry" role="listitem">
 Simmons, Joseph P, Leif D Nelson, and Uri Simonsohn. 2011. <span>“False-Positive Psychology: Undisclosed Flexibility in Data Collection and Analysis Allows Presenting Anything as Significant.”</span> <em>Psychological Science</em> 22 (11): 13591366.
