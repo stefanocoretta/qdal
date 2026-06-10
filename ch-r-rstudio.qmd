@@ -24,6 +24,7 @@ There are several groups that promote R in minority/minoritised groups, like [R-
 
 Moreover, R is **open source and free** for anyone to use!
 
+::: callout-important
 ## Installing R and RStudio
 
 You should install R and RStudio before you keep reading.
@@ -37,6 +38,7 @@ You can find installation instructions for R and RStudio for your platform at th
 - For R: <https://cloud.r-project.org> (in "Download and Install R", click on the link for your platform).
 
 - For RStudio: <https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads> (choose download link for your platform).
+:::
 
 ## R vs RStudio
 
