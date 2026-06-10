@@ -2356,5 +2356,15 @@
       "Appendices",
       "<span class='chapter-number'>B</span>  <span class='chapter-title'>Regression models cheat sheet</span>"
     ]
+  },
+  {
+    "objectID": "index.html#acknowledgements",
+    "href": "index.html#acknowledgements",
+    "title": "Quantitative Data Analysis for Linguists in R",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\nI want to particularly thank the following students of the course cohort 2025/26, Rebecca Bull for her extensive editing and Aditya Dalmia and Aidan Lowrie for their contributions.",
+    "crumbs": [
+      "Welcome!"
+    ]
   }
 ]

@@ -19,3 +19,7 @@ Cite as:
 > 2025.
 > Quantitative data analysis for linguists in R \[v1.0\].
 > <https://stefanocoretta.github.io/qdal/>.
+
+## Acknowledgements
+
+I want to particularly thank the following students of the course cohort 2025/26, Rebecca Bull for her extensive editing and Aditya Dalmia and Aidan Lowrie for their contributions.
