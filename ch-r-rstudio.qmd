@@ -19,71 +19,98 @@ This course will focus on the analysis of tabular data, since all of the techniq
 
 ![](img/inclusive-community.png)
 
-The R community is a **very inclusive community** and it's easy to find help. There are several groups that promote R in minority/minoritised groups, like [R-Ladies](https://www.r-consortium.org/all-projects/r-ladies), [Africa R](https://r4africa.org), and [Rainbow R](https://rainbowr.netlify.app) just to mention a few.
+The R community is a **very inclusive community** and it's easy to find help.
+There are several groups that promote R in minority/minoritised groups, like [R-Ladies](https://www.r-consortium.org/all-projects/r-ladies), [Africa R](https://r4africa.org), and [Rainbow R](https://rainbowr.netlify.app) just to mention a few.
 
 Moreover, R is **open source and free** for anyone to use!
 
+## Installing R and RStudio
+
+You should install R and RStudio before you keep reading.
+It is important that you don't just read but that you also try things out yourself.
+I won't always explicitly ask you to do certain tasks, so when you encounter R code or RStudio instructions you should run the code and perform those tasks.
+
+R and RStudio have to be installed separately.
+It is best to install R first, then RStudio.
+You can find installation instructions for R and RStudio for your platform at the following links:
+
+- For R: <https://cloud.r-project.org> (in "Download and Install R", click on the link for your platform).
+
+- For RStudio: <https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads> (choose download link for your platform).
+
 ## R vs RStudio
 
-Beginners usually have trouble understanding the difference between R and RStudio. Let's use a car analogy. What makes the car go is the **engine** and you can control the engine through the **dashboard**. You can think of R as an engine and RStudio as the dashboard.
+Beginners usually have trouble understanding the difference between R and RStudio.
+Let's use a car analogy.
+What makes the car go is the **engine** and you can control the engine through the **dashboard**.
+You can think of R as an engine and RStudio as the dashboard.
 
 ![](img/R_vs_RStudio_1.png)
 
 ::: {.callout-tip icon="false"}
 ### R
 
--   R is a **programming language**.
+- R is a **programming language**.
 
--   We use programming languages to **interact** with computers.
+- We use programming languages to **interact** with computers.
 
--   You run **commands** written in a **console** and the related task is **executed**.
+- You run **commands** written in a **console** and the related task is **executed**.
 :::
 
 ::: {.callout-tip icon="false"}
 ### RStudio
 
--   RStudio is an Integrated Development Environment or **IDE**.
+- RStudio is an Integrated Development Environment or **IDE**.
 
--   It helps you using R more **efficiently**.
+- It helps you using R more **efficiently**.
 
--   It has a **graphical user interface** or GUI.
+- It has a **graphical user interface** or GUI.
 :::
 
 The next section will give you a tour of RStudio.
 
 ## RStudio
 
-Open RStudio on your computer and familiarise yourself with the different parts. When you open RStudio, you can see the window is divided into 3 panels:
+Open RStudio on your computer and familiarise yourself with the different parts.
+When you open RStudio, you can see the window is divided into 3 panels:
 
--   Blue (left): the **Console**.
+- Blue (left): the **Console**.
 
--   Green (top right): the **Environment tab**.
+- Green (top right): the **Environment tab**.
 
--   Purple (bottom right): the **Files tab**.
+- Purple (bottom right): the **Files tab**.
 
 ![](img/rstudio-1-2.png)
 
-The **Console** is where R commands can be executed. Think of this as the interface to R. Now, try to run (execute) some R code in the console:
+The **Console** is where R commands can be executed.
+Think of this as the interface to R.
+Now, try to run (execute) some R code in the console:
 
 ::: callout-warning
 ### Exercise 1
 
--   Write the following code in the Console:
+- Write the following code in the Console:
 
-    `sum(3, 1, 4)`
+  `sum(3, 1, 4)`
 
--   Press `ENTER/RETURN` on your keyboard. This will run (i.e. execute) the code. The code sums the numbers 3, 1, and 4.
+- Press `ENTER/RETURN` on your keyboard.
+  This will run (i.e. execute) the code.
+  The code sums the numbers 3, 1, and 4.
 
--   The output of the code is shown below it, in the Console. (Never mind the `[1]` for now).
+- The output of the code is shown below it, in the Console.
+  (Never mind the `[1]` for now).
 :::
 
 The **Environment tab** lists the objects created with R, while in the **Files tab** you can navigate folders on your computer to get to files and open them in the file Editor.
 
 ### RStudio and Quarto projects
 
-RStudio is an IDE (see above) which allows you to work efficiently with R, all in one place. **Note** that files and data live in folders on your computer, outside of RStudio: do not think of RStudio as an app that you can save files in. All the files that you see in the Files tab are files on your computer and you can access them from the Finder or File Explorer as you would with any other file.
+RStudio is an IDE (see above) which allows you to work efficiently with R, all in one place.
+**Note** that files and data live in folders on your computer, outside of RStudio: do not think of RStudio as an app that you can save files in.
+All the files that you see in the Files tab are files on your computer and you can access them from the Finder or File Explorer as you would with any other file.
 
-In principle, you can open RStudio and then navigate to any folder or file on your computer. However, there is a more efficient way of working with RStudio: **RStudio and Quarto Projects**.
+In principle, you can open RStudio and then navigate to any folder or file on your computer.
+However, there is a more efficient way of working with RStudio: **RStudio and Quarto Projects**.
 
 ::: callout-tip
 #### Projects
@@ -93,9 +120,12 @@ An **RStudio Project** is a folder on your computer that has an `.Rproj` file.
 A **Quarto Project** is an RStudio Project with a `_quarto.yml` file.
 :::
 
-You can create as many Quarto Projects as you wish, and I recommend to create one per project (your dissertation, a research project, a course, etc...). We will create a Quarto Project for this course (meaning, you will create a folder for the course which will be the Quarto Project). You will have to use this project/folder throughout the semester.
+You can create as many Quarto Projects as you wish, and I recommend to create one per project (your dissertation, a research project, a course, etc...).
+We will create a Quarto Project for this course (meaning, you will create a folder for the course which will be the Quarto Project).
+You will have to use this project/folder throughout the semester.
 
-To create a new Quarto Project, click on the button that looks like a transparent light blue box with a plus, in the top-left corner of RStudio. A window like the one below will pop up.
+To create a new Quarto Project, click on the button that looks like a transparent light blue box with a plus, in the top-left corner of RStudio.
+A window like the one below will pop up.
 
 ![](img/rstudio-3.png)
 
@@ -107,9 +137,12 @@ Now, this will create a new folder (aka directory) on your computer and will mak
 
 Give a name to your new project, something like the name of the course and year (e.g. `qml-2025`).
 
-Then you need to specify where to create this new folder/Project. Click on `Browse…` and navigate to the *folder you want to create the new folder/Project in*. This could be your Documents folder, or the Desktop (we had issues with OneDrive in the past, so we recommend you save the project outside of OneDrive).
+Then you need to specify where to create this new folder/Project.
+Click on `Browse…` and navigate to the *folder you want to create the new folder/Project in*.
+This could be your Documents folder, or the Desktop (we had issues with OneDrive in the past, so we recommend you save the project outside of OneDrive).
 
-When done, click on `Create Project`. RStudio will automatically open your new project.
+When done, click on `Create Project`.
+RStudio will automatically open your new project.
 
 ![](img/rstudio-quarto-project.png)
 
@@ -122,23 +155,25 @@ You know you are in an RStudio/Quarto Project because you can see the name of th
 
 If you see `Project (none)` in the top-right corner, that means you **are not** in a Quarto Project.
 
-An easy way to ensure that RStudio is opened from within a specific project, to open RStudio go to the project folder in File Explorer or Finder and double click on the `.Rproj` file. This will automatically open RStudio and set the project to that folder.
+An easy way to ensure that RStudio is opened from within a specific project, to open RStudio go to the project folder in File Explorer or Finder and double click on the `.Rproj` file.
+This will automatically open RStudio and set the project to that folder.
 :::
 
 There are several ways of opening a Quarto Project:
 
--   You can go to the Quarto Project folder in Finder or File Explorer and double click on the `.Rproj` file.
+- You can go to the Quarto Project folder in Finder or File Explorer and double click on the `.Rproj` file.
 
--   You can click on `File > Open Project` in the RStudio menu.
+- You can click on `File > Open Project` in the RStudio menu.
 
--   You can click on the project name in the top-right corner of RStudio, which will bring up a list of projects. Click on the desired project to open it.
+- You can click on the project name in the top-right corner of RStudio, which will bring up a list of projects.
+  Click on the desired project to open it.
 
 ::: callout-warning
 ### Exercise 2
 
--   Close RStudio.
+- Close RStudio.
 
--   Now re-open RStudio by double-clicking on the `.Rproj` file of the project you created.
+- Now re-open RStudio by double-clicking on the `.Rproj` file of the project you created.
 :::
 
 ### A few important settings
@@ -151,11 +186,11 @@ Before moving on, there are a few important settings that you need to change.
 
 2.  Un-tick `Restore .RData into workspace at startup`.
 
-    -   This mean that every time you start RStudio you are working with a clean Environment. Not restoring the workspace ensures that the code you write is fully reproducible. When this setting is enabled, your environment is saved in a hidden file called `.Rdata` and loaded every time you start RStudio. This very frequently leads to errors where the wrong variables/data is read or used by the code without you noticing, so always make sure the setting is disabled.
+    - This mean that every time you start RStudio you are working with a clean Environment. Not restoring the workspace ensures that the code you write is fully reproducible. When this setting is enabled, your environment is saved in a hidden file called `.Rdata` and loaded every time you start RStudio. This very frequently leads to errors where the wrong variables/data is read or used by the code without you noticing, so always make sure the setting is disabled.
 
 3.  Select `Never` in `Save workspace to .RData on exit`.
 
-    -   Since we are not restoring the workspace at startup, we don't need to save it. Remember that as long as you save the code, you will not lose any of your work! You will learn how to save code from next week.
+    - Since we are not restoring the workspace at startup, we don't need to save it. Remember that as long as you save the code, you will not lose any of your work! You will learn how to save code from next week.
 
 4.  Click `OK` to confirm the changes.
 
@@ -180,7 +215,10 @@ cat("h. I have disabled `Restore .RData` and `Save workspace` in the settings.",
 
 ## R basics
 
-In this part of the tutorial you will learn the very basics of R. If you have prior experience with programming, you should find all this familiar. If not, not to worry! Make sure you understand the concepts highlighted in the green boxes and practise the related skills.
+In this part of the tutorial you will learn the very basics of R.
+If you have prior experience with programming, you should find all this familiar.
+If not, not to worry!
+Make sure you understand the concepts highlighted in the green boxes and practise the related skills.
 
 In the following sections, you should just run code directly in the R Console in RStudio, i.e. you will type code in the Console and press `ENTER` to run it.
 
@@ -188,7 +226,9 @@ In later chapters, you will learn how to save your code in a script file or in Q
 
 ### R as a calculator
 
-Write this code `1 + 2` in the Console, then press `ENTER/RETURN` to run the code. Fantastic! You should see that the answer of the addition has been printed in the Console, like this:
+Write this code `1 + 2` in the Console, then press `ENTER/RETURN` to run the code.
+Fantastic!
+You should see that the answer of the addition has been printed in the Console, like this:
 
 ```         
 [1] 3
@@ -196,7 +236,8 @@ Write this code `1 + 2` in the Console, then press `ENTER/RETURN` to run the cod
 
 (Never mind the `[1]` for now).
 
-Now, try some more operations (write each of the following in the Console and press `ENTER`). Feel free to add your own operations to the mix!
+Now, try some more operations (write each of the following in the Console and press `ENTER`).
+Feel free to add your own operations to the mix!
 
 ```{r}
 #| label: operations
@@ -236,9 +277,9 @@ cat("b. `10 * 2 + 5 * 0.2` = `(10 * 2 + 5) * 0.2`", torf(FALSE), "\n\n")
 
 If you need a maths refresher, I recommend checking the following pages:
 
--   <https://www.mathsisfun.com/definitions/order-of-operations.html>
+- <https://www.mathsisfun.com/definitions/order-of-operations.html>
 
--   <https://www.mathsisfun.com/algebra/introduction.html>
+- <https://www.mathsisfun.com/algebra/introduction.html>
 :::
 
 ### Variables
@@ -265,9 +306,11 @@ Let's assign the value `156` to the variable `my_num`.
 my_num <- 156
 ```
 
-Now, check the list of variables in the `Environment` tab of the top-right panel of RStudio. You should see the `my_num` variable and its value there.
+Now, check the list of variables in the `Environment` tab of the top-right panel of RStudio.
+You should see the `my_num` variable and its value there.
 
-Now, you can just call the variable back when you need it! Write the following in the Console and press `ENTER`.
+Now, you can just call the variable back when you need it!
+Write the following in the Console and press `ENTER`.
 
 ```{r}
 #| label: print-my-num
@@ -283,7 +326,8 @@ A variable like `my_num` is also called a **numeric vector**: i.e. a vector that
 A **vector** is an R object that contains one or more values of the same type.
 :::
 
-A vector is a type of variable and a numeric vector is a type of vector. However, it's fine in most cases to use the word variable to mean vector (just note that a variable can also be something else than a vector; you will learn about other R objects in later chapters).
+A vector is a type of variable and a numeric vector is a type of vector.
+However, it's fine in most cases to use the word variable to mean vector (just note that a variable can also be something else than a vector; you will learn about other R objects in later chapters).
 
 Let's now try some operations using variables.
 
@@ -295,7 +339,9 @@ expenses <- 500
 income - expenses
 ```
 
-See? You can use operations with variables too! And you can also go all the way with variables.
+See?
+You can use operations with variables too!
+And you can also go all the way with variables.
 
 ```{r}
 #| label: variables-2
@@ -311,7 +357,9 @@ And check the value...
 savings
 ```
 
-Vectors can hold more than one item or value. Just use the combine `c()` function to create a vector containing multiple values. The following are all numeric vectors.
+Vectors can hold more than one item or value.
+Just use the combine `c()` function to create a vector containing multiple values.
+The following are all numeric vectors.
 
 ```{r}
 #| label: numeric
@@ -323,7 +371,9 @@ two_i <- c(6, 8)
 three_i <- c(6, 8, 42)
 ```
 
-Check the list of variables in the `Environment` tab. You will see now that before the values of `two_i` and `three_i` you get the vector type `num` for numeric. (If the vector has only one value, you don't see the type in the `Enviroment` list but it is still of a specific type.)
+Check the list of variables in the `Environment` tab.
+You will see now that before the values of `two_i` and `three_i` you get the vector type `num` for numeric.
+(If the vector has only one value, you don't see the type in the `Enviroment` list but it is still of a specific type.)
 
 ::: callout-tip
 #### Numeric vector
@@ -342,7 +392,9 @@ one_ii <- c(6)
 one_ii
 ```
 
-Another important aspect of variables is that they are... **variable**! Meaning that once you assign a value to one variable, you can overwrite the value by assigning a new one to the same variable.
+Another important aspect of variables is that they are...
+**variable**!
+Meaning that once you assign a value to one variable, you can overwrite the value by assigning a new one to the same variable.
 
 ```{r}
 #| label: numeric-3
@@ -369,7 +421,8 @@ cat("c. A numeric vector can only hold numeric values.", torf(TRUE), "\n\n")
 
 ### Functions
 
-> R cannot function without... functions.
+> R cannot function without...
+> functions.
 
 ::: callout-tip
 #### Function
@@ -379,8 +432,8 @@ A **function** usually runs an operation on one or more specified **arguments**.
 
 A function in R has the form `function()` where:
 
--   `function` is the name of the function, like `sum`.
--   `()` are round parentheses, inside of which you write arguments, separated by commas.
+- `function` is the name of the function, like `sum`.
+- `()` are round parentheses, inside of which you write arguments, separated by commas.
 
 Let's see an example:
 
@@ -390,7 +443,8 @@ Let's see an example:
 sum(3, 5)
 ```
 
-The `sum()` function sums the number listed as arguments. Above, the arguments are `3` and `5`.
+The `sum()` function sums the number listed as arguments.
+Above, the arguments are `3` and `5`.
 
 And of course arguments can be vectors!
 
@@ -429,7 +483,8 @@ The `Sys.Date()` function and other functions like it don't take any arguments.
 ::: {.callout-important collapse="true"}
 #### R Note: R vs Python
 
-If you are familiar with Python, you will soon realise that R and Python, although they share many concepts and types of objects, can differ substantially. This is because R is a **functional** programming language (based on *functions*) while Python is an **Object Oriented** programming language (based on *methods* applied on objects).
+If you are familiar with Python, you will soon realise that R and Python, although they share many concepts and types of objects, can differ substantially.
+This is because R is a **functional** programming language (based on *functions*) while Python is an **Object Oriented** programming language (based on *methods* applied on objects).
 
 Generally speaking, functions look like `print(x)` while methods look like `x.print()`
 :::
@@ -438,9 +493,14 @@ Generally speaking, functions look like `print(x)` while methods look like `x.pr
 
 > Not just numbers.
 
-We have seen that variables can hold numeric vectors. But vectors are not restricted to being numeric. They can also store **strings**. A string is basically a set of characters (a word, a sentence, a full text). In R, strings have to be **quoted** using double quotes `" "`.
+We have seen that variables can hold numeric vectors.
+But vectors are not restricted to being numeric.
+They can also store **strings**.
+A string is basically a set of characters (a word, a sentence, a full text).
+In R, strings have to be **quoted** using double quotes `" "`.
 
-Change the following strings to your name and surname. Remember to use the double quotes.
+Change the following strings to your name and surname.
+Remember to use the double quotes.
 
 ```{r}
 #| label: strings
@@ -485,9 +545,11 @@ fruit <- c("apple", "oranges", "bananas")
 fruit
 ```
 
-Check the Environment tab. Character vectors have `chr` before the list of values.
+Check the Environment tab.
+Character vectors have `chr` before the list of values.
 
-Another type of vector is one that contains either `TRUE` or `FALSE`. Vectors of this type are called **logical vectors** and they are listed as `logi` in the Environment tab.
+Another type of vector is one that contains either `TRUE` or `FALSE`.
+Vectors of this type are called **logical vectors** and they are listed as `logi` in the Environment tab.
 
 ::: callout-tip
 #### Logical vector
@@ -508,7 +570,7 @@ data.frame(groceries, in_pantry)
 
 (We will talk about data frames, another type of object in R, in the following chapters.)
 
-::::: callout-note
+::: callout-note
 #### Quiz 5
 
 ```{r}
@@ -534,8 +596,7 @@ opts_5b <- c(
 
 cat("b. Which of the following is **not** a logical vector.", longmcq(opts_5b))
 ```
-
-:::::
+:::
 
 ::: {.callout-tip collapse="true"}
 #### Hint
@@ -554,7 +615,7 @@ class(c("a", "b"))
 
 **5a**
 
--   `c(1, 2, "43")` is a character vector because the last number `"43"` is a string (it's between double quotes!). A vector cannot have a mix of types of elements: they have to be all numbers or all strings or else, but not some numbers and some strings. Numbers are special in that if you include a number in a character vector without quoting it, it is automatically converted into a string. Try the following:
+- `c(1, 2, "43")` is a character vector because the last number `"43"` is a string (it's between double quotes!). A vector cannot have a mix of types of elements: they have to be all numbers or all strings or else, but not some numbers and some strings. Numbers are special in that if you include a number in a character vector without quoting it, it is automatically converted into a string. Try the following:
 
 ```{r}
 #| eval: false
@@ -565,13 +626,13 @@ char
 class(char)
 ```
 
--   `c(letters)` is a character vector because `letters` contains the letters of the alphabet as strings (this vector comes with base R).
+- `c(letters)` is a character vector because `letters` contains the letters of the alphabet as strings (this vector comes with base R).
 
--   `c(apple)` is not a character vector because the variable `apple` holds a number, `45`!
+- `c(apple)` is not a character vector because the variable `apple` holds a number, `45`!
 
 **5b**
 
--   `"FALSE"` is **not** a logical vector because `FALSE` has been quoted (anything that is quoted is a string!).
+- `"FALSE"` is **not** a logical vector because `FALSE` has been quoted (anything that is quoted is a string!).
 :::
 
 ::: {.callout-important collapse="true"}
@@ -606,22 +667,23 @@ For more, check the [For loops](https://r4ds.hadley.nz/base-r#for-loops) section
 
 ## Summary
 
-You made it! You completed this chapter.
+You made it!
+You completed this chapter.
 
 Here's a summary of what you learned.
 
 ::: {.callout-note appearance="minimal"}
--   **R** is a programming language while **RStudio** is an IDE.
+- **R** is a programming language while **RStudio** is an IDE.
 
--   **RStudio projects** are folders with an `.Rproj` file (you can see the name of the project you are currently in in the top-right corner of RStudio).
+- **RStudio projects** are folders with an `.Rproj` file (you can see the name of the project you are currently in in the top-right corner of RStudio).
 
--   You can perform mathematical operations with `+, -, *, /.`
+- You can perform mathematical operations with `+, -, *, /.`
 
--   You can store values in **variables**.
+- You can store values in **variables**.
 
--   A typical object to be stored in a variable is a **vector**: there are different type of vectors, like **numeric**, **character** and **logical**.
+- A typical object to be stored in a variable is a **vector**: there are different type of vectors, like **numeric**, **character** and **logical**.
 
--   Functions are used to perform an operation on its arguments: `sum()` sums its arguments, `mean()` calculates the mean and `cat()` prints the arguments.
+- Functions are used to perform an operation on its arguments: `sum()` sums its arguments, `mean()` calculates the mean and `cat()` prints the arguments.
 :::
 
 ::: {.callout-important collapse="true"}

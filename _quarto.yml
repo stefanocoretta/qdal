@@ -109,3 +109,8 @@ execute:
 
 comments:
   hypothesis: true
+
+editor:
+  markdown:
+    wrap: sentence
+    canonical: true
