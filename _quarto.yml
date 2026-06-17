@@ -35,12 +35,12 @@ book:
     - ch-summarise.qmd
   - part: Week 4
     chapters:
+    - ch-research-cycle.qmd
     - ch-transform.qmd
     - ch-quarto.qmd
     - ch-viz-principles.qmd
     - ch-plotting.qmd
     - ch-more-plotting.qmd
-    - ch-research-cycle.qmd
   - part: Week 5
     chapters:
     - ch-probability.qmd
@@ -55,9 +55,9 @@ book:
     - ch-regression-draws.qmd
   - part: Week 7
     chapters:
+    - ch-null-ritual.qmd
     - ch-regression-cat.qmd
     - ch-regression-more.qmd
-    - ch-null-ritual.qmd
   - part: Week 8
     chapters:
       - ch-regression-bernoulli.qmd
