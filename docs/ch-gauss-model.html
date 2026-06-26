@@ -779,14 +779,29 @@ window.Quarto = {
 
 
 <p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
-<p>In the context of a quantitative research study, a simple objective is to figure out the values of the parameters of the probability distribution of the variable of interest: Voice Onset Time, number of telic verbs, informativity score, acceptability ratings, reaction times, and so on. Let’s imagine we are interested in understanding more about the nature of reaction times in auditory lexical decision tasks (lexical decision tasks in which the target is presented aurally rather than in writing). We can revisit the RT data from <span class="citation" data-cites="tucker2019">Tucker et al. (<a href="references.html#ref-tucker2019" role="doc-biblioref">2019</a>)</span> to try and address the following research question:</p>
+<p><img src="img/data-model.png" class="img-fluid"></p>
+<p>In the previous chapters, you have learned about two of the three main components of quantitative data analysis: data summaries and visualisation. In this chapter, you will encounter the fundamental concepts of the third component: statistical modelling. A <strong>statistical model</strong> is a simplified mathematical description of how observed data are generated, together with assumptions about uncertainty in relation to the data-generating process. In other words, a statistical model uses observed data (your sample) to identify the characteristic of the probability distribution that generates that data in the outside world.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Statistical model
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>statistical model</strong> is a simplified mathematical description of how observed data are generated, together with assumptions about uncertainty in relation to the data-generating process.</p>
+</div>
+</div>
+<p>In the context of a quantitative research study, a simple objective could be to figure out the values of the parameters of the probability distribution of a variable of interest: Voice Onset Time, number of telic verbs, informativity score, acceptability ratings, reaction times, and so on. Let’s imagine we are interested in understanding more about the nature of reaction times in auditory lexical decision tasks (lexical decision tasks in which the target is presented aurally rather than in writing). We can revisit the RT data from <span class="citation" data-cites="tucker2019">Tucker et al. (<a href="references.html#ref-tucker2019" role="doc-biblioref">2019</a>)</span> to try and address the following research question:</p>
 <blockquote class="blockquote">
 <p>RQ: In a typical auditory lexical decision task, what are the mean and standard deviation of reaction times (RTs)?</p>
 </blockquote>
-<p>Now, you might wonder why the mean and the standard deviation? This is because we are assuming that reaction times (i.e the population of reaction times, rather than our specific sample) are distributed according to a Gaussian probability distribution. It is usually the onus of the researcher to assume a probability distribution family. You will learn some heuristics for picking a distribution family later depending on the general type of the variable of interest, but for now the Gaussian family will be a safe assumption to make. In statistical notation, we can write:</p>
-<p><span class="math display">\[
-\text{RT} \sim Gaussian(\mu, \sigma)
-\]</span></p>
+<p>This might look like a trivial question, and in the realm of linguistic research it probably is, but to answer more complex questions, more complex extensions of the simplistic models covered in these chapters are needed. While all models start with at least a variable, a probability distribution and its parameters, more building blocks (or model components) will be necessary to address specific questions (for example, you might want to deal with predictor variables, non-linear effects, repeated measurements from multiple participants, and so on). We won’t be able to cover everything in here, but you will get at least a solid introduction to the more basic components.</p>
+<p>Going back to our research question on reaction times, you might wonder why the mean and the standard deviation? This is because we are assuming that reaction times (i.e the population of reaction times, rather than our specific sample) are distributed according to a Gaussian probability distribution. It is usually the onus of the researcher to assume a probability distribution family. You will learn some heuristics for picking a distribution family later depending on the general type of the variable of interest, but for now we will content ourselves with the Gaussian family. Learning about statistical modelling requires building your understanding from basic concepts, and it is pedagogically easier to illustrate these concepts with an admittedly simplistic model which uses a Gaussian family. Do not underestimate the importance of learning the mechanisms of statistical modelling in simple Gaussian models because we will be building on this knowledge in the rest of the textbook.</p>
+<p>In statistical notation, we can write:</p>
+<p><span class="math display">\[\text{RT} \sim Gaussian(\mu, \sigma)\]</span></p>
 <p>which you can read as: “reaction times are distributed according to a Gaussian distribution with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>”. So the research question above is about finding the values of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>.</p>
 <p>For illustration’s sake, let’s assume the sample mean and standard deviation are also the population <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>: <span class="math inline">\(Gaussian(\mu = 1010, \sigma = 318)\)</span> (we calculated these in <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a>). <a href="#fig-mald-rt-distr" class="quarto-xref">Figure&nbsp;<span>21.1</span></a> shows the empirical probability distribution (in grey, this is a density curve calculated with kernel density estimation) and the theoretical probability distribution (in purple) based on the sample mean and SD: in other words, the purple curve is the density curve of the theoretical probability distribution <span class="math inline">\(Gaussian(1010, 318)\)</span>. We know by now that any sample mean and SD is biased, due to uncertainty and variability. What we are really after is the values of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> which are the mean and standard deviation of the Gaussian distribution of the <em>population</em> of RTs in auditory lexical decision tasks. In other words, we want to make inference from the sample to the population of RTs.</p>
 <div class="cell">
@@ -844,26 +859,24 @@ Figure&nbsp;21.1: Empirical and theoretical density distribution of reaction tim
 </div>
 </div>
 </div>
+<p>You will also appreciate that the theoretical distribution doesn’t match well the empirical distribution. In real research contexts, there can be multiple reasons behind this. A common misconception is that the family distribution should be chosen on how well the theoretical family matches the empirical distribution. Sometimes, this can indeed indicate a problem with the chosen family, but in other cases the mismatch could be because of other aspects related to model specification. For the time being, let’s not worry about the potential cause of the mismatch and let’s proceed.</p>
 <section id="gaussian-models" class="level2" data-number="21.1">
 <h2 data-number="21.1" class="anchored" data-anchor-id="gaussian-models"><span class="header-section-number">21.1</span> Gaussian models</h2>
 <p>A statistical tool we can use to obtain an estimate of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> is a Gaussian model. A Gaussian model is a statistical model that estimates the values of the parameters of a (theoretical) Gaussian distribution, i.e.&nbsp;<span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>. We can provisionally describe the model using formulae, like this:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \text{RT} &amp; \sim Gaussian(\mu, \sigma)\\
 \mu &amp; = ...\\
 \sigma &amp; = ...\\
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
+<p>While you don’t need a full mathematical grasp of statistical models, it is useful to learn how to read and work with these formulae. They will make interpretation of the model output more straightforward.</p>
 <p>Now, here is where things get interesting. Bayesian approaches to statistics assume uncertainty in the parameters of the distribution one is estimating. So not only the observed values of RT are uncertain because they come from a probability distribution, but the parameters of the distribution are themselves uncertain. You can think of the mean and SD as uncertain variables that need to be estimated from the data. When we say a variable is uncertain, we describe it using a probability distribution. So the aim of a Gaussian model is to estimate the probability distributions of the parameters from the data (and the priors), rather than just their values.</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \text{RT} &amp; \sim Gaussian(\mu, \sigma)\\
 \mu &amp; \sim P(\mu_1, \sigma_1)\\
 \sigma &amp; \sim P_+(\mu_2, \sigma_2)\\
-\end{aligned}
-\]</span></p>
-<p>We say that <span class="math inline">\(\mu\)</span> comes from a probability distribution <span class="math inline">\(P(\mu_1, \sigma_1)\)</span>. We use a subscript <span class="math inline">\(1\)</span> to differentiate the mean and SD of the main <span class="math inline">\(Gaussian(\mu, \sigma)\)</span> distribution from the mean and SD of the probability distribution of the mean <span class="math inline">\(\mu\)</span>. Similarly, we say that <span class="math inline">\(\sigma\)</span> comes from a probability distribution <span class="math inline">\(P_+(\mu_2, \sigma_2)\)</span>: <span class="math inline">\(P_+()\)</span> is a (non-technical) way to indicate that the probability should include only positive values. Why? Because SDs can only be positive. By specifying <span class="math inline">\(P_+()\)</span> we are constraining the probability distribution of <span class="math inline">\(\sigma\)</span> to have positive values only. In sum, we need to estimate two probability distributions, <span class="math inline">\(P(\mu_1, \sigma_1)\)</span> and <span class="math inline">\(P_+(\mu_2, \sigma_2)\)</span>. These are <strong>posterior probability distributions</strong>. You will learn more about posterior probability distributions in the next chapter. For now, just keep in mind that they are called <em>posterior</em> because the come from the combination of priors and data.</p>
-<p>In the rest of this book, you will be using the default prior probability distributions, or priors for short, as set by brms, the R package we will use to fit Bayesian models. This means that you will not have to worry about priors while you dip your toes into the ocean of Bayesian statistics. However, it is helpful to learn a bit of context in relation to priors. After all, one of the big differences between frequentist and Bayesian statistics are indeed the priors (<span class="math inline">\(P(h)\)</span> in Bayes’ Theorem in <a href="#sec-gauss-model" class="quarto-xref"><span>Chapter 21</span></a>). After learning about priors in this chapter, you can safely assume that priors are handled by brms for you and you should not worry until after you completed this course. Note that in actual research, thinking about priors is a necessary step, even if one ends up using the default brms priors. Check out the Spotlight box to learn a bit more about priors.</p>
+\end{aligned}\]</span></p>
+<p>We say that <span class="math inline">\(\mu\)</span> comes from a probability distribution <span class="math inline">\(P(\mu_1, \sigma_1)\)</span>. We use a subscript <span class="math inline">\(1\)</span> to differentiate the mean and SD of the main <span class="math inline">\(Gaussian(\mu, \sigma)\)</span> distribution from the mean and SD of the probability distribution of the mean <span class="math inline">\(\mu\)</span>. Similarly, we say that <span class="math inline">\(\sigma\)</span> comes from a probability distribution <span class="math inline">\(P_+(\mu_2, \sigma_2)\)</span>: <span class="math inline">\(P_+()\)</span> is a (non-technical) way to indicate that the probability should include only positive values. Why? Because SDs can only be positive. By specifying <span class="math inline">\(P_+()\)</span> we are constraining the probability distribution of <span class="math inline">\(\sigma\)</span> to have positive values only. In sum, we need to estimate two probability distributions, <span class="math inline">\(P(\mu_1, \sigma_1)\)</span> and <span class="math inline">\(P_+(\mu_2, \sigma_2)\)</span>. These are <strong>posterior probability distributions</strong>. You will learn more about posterior probability distributions in the next chapter. For now, just keep in mind that they are called <em>posterior</em> because they come from the combination of priors and data.</p>
+<p>In the rest of this book, you will be using the default prior probability distributions, or priors for short, as set by brms, the R package we will use to fit Bayesian models. This means that you will not have to worry about priors while you start dipping your toes into the ocean of Bayesian statistics. However, it is helpful to learn a bit of context in relation to priors. After all, one of the big differences between frequentist and Bayesian statistics are indeed the priors (<span class="math inline">\(P(h)\)</span> in Bayes’ Theorem in <a href="#sec-gauss-model" class="quarto-xref"><span>Chapter 21</span></a>). You can learn more about priors in the Spotlight box at the end of this chapter, but after that you can safely assume that priors are handled by brms for you and you should not worry until after you completed this course. Note that in actual research, thinking about priors is a necessary step, even if one ends up using the default brms priors.</p>
 <p>In the next chapter you will fit the Gaussian model of RTs using brms, with the default priors as set by the package.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -877,31 +890,31 @@ Figure&nbsp;21.1: Empirical and theoretical density distribution of reaction tim
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li>Why is the distribution of <span class="math inline">\(\sigma\)</span> constrained to positive values only?
-<div id="radio_OVYNJRSLMJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OVYNJRSLMJ" value=""> <span>Because <span class="math inline">\(\sigma\)</span> is always zero.</span></label><label><input type="radio" autocomplete="off" name="radio_OVYNJRSLMJ" value="answer"> <span>Because <span class="math inline">\(\sigma\)</span> represents variability, which cannot be negative.</span></label><label><input type="radio" autocomplete="off" name="radio_OVYNJRSLMJ" value=""> <span>Because <span class="math inline">\(\mu\)</span> is also constrained to be positive.</span></label>
+<div id="radio_ZTAZATUHUM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZTAZATUHUM" value=""> <span>Because <span class="math inline">\(\sigma\)</span> is always zero.</span></label><label><input type="radio" autocomplete="off" name="radio_ZTAZATUHUM" value="answer"> <span>Because <span class="math inline">\(\sigma\)</span> represents variability, which cannot be negative.</span></label><label><input type="radio" autocomplete="off" name="radio_ZTAZATUHUM" value=""> <span>Because <span class="math inline">\(\mu\)</span> is also constrained to be positive.</span></label>
 </div></li>
 <li>Why have we assumed that reaction times are Gaussian?
-<div id="radio_ENGMAPYPXK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ENGMAPYPXK" value=""> <span>Because RTs are Gaussian.</span></label><label><input type="radio" autocomplete="off" name="radio_ENGMAPYPXK" value=""> <span>Because it is easier to run the model.</span></label><label><input type="radio" autocomplete="off" name="radio_ENGMAPYPXK" value="answer"> <span>Because a Gaussian distribution is a safe assumption to make.</span></label>
+<div id="radio_CXYSTIDDOK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CXYSTIDDOK" value=""> <span>Because RTs are Gaussian.</span></label><label><input type="radio" autocomplete="off" name="radio_CXYSTIDDOK" value=""> <span>Because it is easier to run the model.</span></label><label><input type="radio" autocomplete="off" name="radio_CXYSTIDDOK" value="answer"> <span>Because a Gaussian distribution is a safe assumption to make.</span></label>
 </div></li>
 <li>In Bayesian modeling, posterior probability distributions are described as:
-<div id="radio_KNQOUVHHIX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KNQOUVHHIX" value=""> <span>The data alone.</span></label><label><input type="radio" autocomplete="off" name="radio_KNQOUVHHIX" value=""> <span>Theoretical distributions chosen by the researcher before collecting data.</span></label><label><input type="radio" autocomplete="off" name="radio_KNQOUVHHIX" value="answer"> <span>The combination of priors and observed data.</span></label>
+<div id="radio_NBXEEJYOBF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NBXEEJYOBF" value=""> <span>The data alone.</span></label><label><input type="radio" autocomplete="off" name="radio_NBXEEJYOBF" value=""> <span>Theoretical distributions chosen by the researcher before collecting data.</span></label><label><input type="radio" autocomplete="off" name="radio_NBXEEJYOBF" value="answer"> <span>The combination of priors and observed data.</span></label>
 </div></li>
 </ol>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Prior probability distributions
+<span class="screen-reader-only">Important</span>Spotlight: Prior probability distributions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>How do we go about choosing priors for the model above? Once you know that you are trying to estimate the (posterior) probability distribution of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> you also know that you should choose a prior for each parameter. In other words, each parameter in the model gets its own prior. But what is a prior exactly? It is just a probability distribution! With Gaussian models, it is common to use Gaussian probability distributions as the priors for the mean and SD of the Gaussian distribution. Yes, you read right: we use Gaussian distributions as priors for the parameters of the Gaussian distribution. Note that priors should be chosen <em>before</em> seeing the data. Here, we have seen the data many times, so let’s just pretend we haven’t. For example, let’s say that we believe that, prior to seeing the data, the mean RT is a value from a Gaussian distribution with mean 900 ms and SD 200 ms: <span class="math inline">\(Gaussian(900, 200)\)</span>. Do not worry as to how I came up with those numbers. Since you will not need to choose priors yourself, for now just focus on understanding how priors fit in Gaussian models. The <span class="math inline">\(Gaussian(900, 200)\)</span> distribution is shown in <a href="#fig-prior-mu" class="quarto-xref">Figure&nbsp;<span>21.2</span></a>.</p>
 <div class="cell">
@@ -913,12 +926,9 @@ Figure&nbsp;21.1: Empirical and theoretical density distribution of reaction tim
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> xseq, <span class="at">y =</span> <span class="fu">dnorm</span>(xseq, <span class="dv">900</span>, <span class="dv">200</span>)) <span class="sc">+</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">colour =</span> <span class="st">"darkgreen"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">element_blank</span>(), <span class="at">y =</span> <span class="st">"Density"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Density"</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: `label` cannot be a &lt;ggplot2::element_blank&gt; object.</code></pre>
-</div>
 <div class="cell-output-display">
 <div id="fig-prior-mu" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -936,18 +946,15 @@ Figure&nbsp;21.2: The prior for <span class="math inline">\(\mu\)</span>.
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>xseq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">750</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> xseq, <span class="at">y =</span> <span class="fu">dnorm</span>(xseq, <span class="dv">0</span>, <span class="dv">200</span>)) <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">colour =</span> <span class="st">"darkorange"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">element_blank</span>(), <span class="at">y =</span> <span class="st">"Density"</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>xseq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">750</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> xseq, <span class="at">y =</span> <span class="fu">dnorm</span>(xseq, <span class="dv">0</span>, <span class="dv">200</span>)) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">colour =</span> <span class="st">"darkorange"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Density"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: `label` cannot be a &lt;ggplot2::element_blank&gt; object.</code></pre>
-</div>
 <div class="cell-output-display">
 <div id="fig-prior-sigma" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -962,13 +969,11 @@ Figure&nbsp;21.3: The prior for <span class="math inline">\(\sigma\)</span>.
 </div>
 </div>
 <p>The prior for <span class="math inline">\(\sigma\)</span> indicates that we expect values closer to zero to be more probable that larger values. We can rewrite the model formulae above as:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \text{RT}  &amp; \sim \text{Gaussian}(\mu, \sigma) \\
 \mu        &amp; \sim \text{Gaussian}(900, 200)   &amp; \text{[Prior for $\mu$]} \\
 \sigma     &amp; \sim \text{HalfGaussian}(0, 200) &amp; \text{[Prior for $\sigma$]}
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 </div>
 </div>
 </div>
