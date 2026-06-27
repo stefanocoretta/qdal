@@ -785,21 +785,15 @@ window.Quarto = {
 <section id="a-straight-line" class="level2" data-number="23.1">
 <h2 data-number="23.1" class="anchored" data-anchor-id="a-straight-line"><span class="header-section-number">23.1</span> A straight line</h2>
 <p>A regression model is a statistical model that estimates the relationship between an outcome variable and one or more predictor variables (more on outcome/predictor below). Regression models are based on the <strong>equation of a straight line</strong>.</p>
-<p><span class="math display">\[
-y = mx + c
-\]</span></p>
+<p><span class="math display">\[y = mx + c\]</span></p>
 <p>An alternative notation of the equation is:</p>
-<p><span class="math display">\[
-y = \beta_0 + \beta_1 x
-\]</span></p>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x\]</span></p>
 <p><span class="math inline">\(\beta\)</span> is the Greek letter beta [ˈbiːtə]: you can read <span class="math inline">\(\beta_0\)</span> as “beta zero” and <span class="math inline">\(\beta_1\)</span> “beta one”. In this formula, <span class="math inline">\(\beta_0\)</span> corresponds to <span class="math inline">\(c\)</span> and <span class="math inline">\(\beta_1\)</span> to <span class="math inline">\(m\)</span> in the first notation. We will use the second notation (with <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>) in this book, since using <span class="math inline">\(\beta\)</span>’s with subscript indexes will help understand the process of extracting information from regression models later.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 </section>
 <section id="back-to-school" class="level2" data-number="23.2">
 <h2 data-number="23.2" class="anchored" data-anchor-id="back-to-school"><span class="header-section-number">23.2</span> Back to school</h2>
 <p>You might remember from school when you were asked to find the values of <span class="math inline">\(y\)</span> given certain values of <span class="math inline">\(x\)</span> and specific values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. For example, you were given the following formula (the dot <span class="math inline">\(\cdot\)</span> stands for multiplication; it can be dropped so <span class="math inline">\(2 \cdot x\)</span> and <span class="math inline">\(2x\)</span> are equivalent):</p>
-<p><span class="math display">\[
-y = 3 + 2 \cdot x
-\]</span></p>
+<p><span class="math display">\[y = 3 + 2 \cdot x\]</span></p>
 <p>and the values <span class="math inline">\(x = (2, 4, 5, 8, 10, 23, 36)\)</span>. The homework was to calculate the values of <span class="math inline">\(y\)</span> and maybe plot them on a Cartesian coordinate space.</p>
 <div class="cell">
 <details class="code-fold">
@@ -825,13 +819,11 @@ y = 3 + 2 \cdot x
 </div>
 </div>
 <p>Using the provided formula, we are able to find the values of <span class="math inline">\(y\)</span>. Note that in <span class="math inline">\(y = 3 + 2 * x\)</span>, <span class="math inline">\(\beta_0 = 3\)</span> and <span class="math inline">\(\beta_1 = 2\)</span>. Importantly, <span class="math inline">\(\beta_0\)</span> is the value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x = 0\)</span>. <span class="math inline">\(\beta_0\)</span> is commonly called the <strong>intercept</strong> of the line. The intercept is the value where the line crosses the <em>y</em>-axis (the value where the line “intercepts” the <em>y</em>-axis).</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 y &amp; = 3 + 2 x\\
 &amp; = 3 + 2 \cdot 0\\
 &amp; = 3\\
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>And <span class="math inline">\(\beta_1\)</span> is the number to add to the intercept for each <strong>unit increase of</strong> <span class="math inline">\(x\)</span>. <span class="math inline">\(\beta_1\)</span> is commonly called the <strong>slope</strong> of the line.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <a href="#fig-unit-increase" class="quarto-xref">Figure&nbsp;<span>23.1</span></a> should clarify this. The dashed line indicates the increase in <span class="math inline">\(y\)</span> for every unit increase of <span class="math inline">\(x\)</span> (i.e., every time <span class="math inline">\(x\)</span> increases by 1, <span class="math inline">\(y\)</span> increases by 2).</p>
 <div class="cell">
 <details class="code-fold">
@@ -876,15 +868,12 @@ Figure&nbsp;23.1: Illustration of the meaning of the slope: with a slope of 2, f
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><span class="math display">\[
-y = \beta_0 + \beta_1 x
-\]</span></p>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x\]</span></p>
 <p>where <span class="math inline">\(\beta_0\)</span> is the line intercept and <span class="math inline">\(\beta_1\)</span> is the line slope.</p>
 </div>
 </div>
 <p>Of course, we can plug in any value of <span class="math inline">\(x\)</span> in the formula to obtain <span class="math inline">\(y\)</span>. The following equations show <span class="math inline">\(y\)</span> when <span class="math inline">\(x\)</span> is 1, 2, and 3. You see that when you go from <span class="math inline">\(x = 1\)</span> to <span class="math inline">\(x = 2\)</span> we go from <span class="math inline">\(y = 5\)</span> to <span class="math inline">\(y = 7\)</span>: <span class="math inline">\(7 - 5 =2\)</span>, our slope <span class="math inline">\(\beta_1\)</span>.</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 y &amp; = 3 + 2 \cdot 1\\
 &amp; = 3 + 2\\
 &amp; = 5\\
@@ -894,8 +883,7 @@ y &amp; = 3 + 2 \cdot 2\\
 y &amp; = 3 + 2 \cdot 3\\
 &amp; = 3 + 6\\
 &amp; = 9\\
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>Now, in the context of research, you usually start with a sample of measures (values) of <span class="math inline">\(x\)</span> (the predictor variable) and <span class="math inline">\(y\)</span> (the outcome variable), rather than having to calculate <span class="math inline">\(y\)</span>. Then you have to <strong>estimate</strong> (i.e.&nbsp;to find the values of) <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> of the model formula <span class="math inline">\(y = \beta_0 + \beta_1 x\)</span> . This is what regression models are for: given the sampled values of <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>, the model estimates <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -927,16 +915,16 @@ y &amp; = 3 + 2 \cdot 3\\
 <p>Use the <a href="https://stefanocoretta.shinyapps.io/lines/">Linear Models Illustrated</a> app to answer the following questions.</p>
 <ol type="a">
 <li>What happens to the line when you increase the intercept <span class="math inline">\(\beta_0\)</span>?
-<div id="radio_GSKBYEIJNK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GSKBYEIJNK" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_GSKBYEIJNK" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_GSKBYEIJNK" value="answer"> <span>The whole line shifts upwards.</span></label><label><input type="radio" autocomplete="off" name="radio_GSKBYEIJNK" value=""> <span>The line becomes flat.</span></label>
+<div id="radio_NSHSCPAKNR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NSHSCPAKNR" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_NSHSCPAKNR" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_NSHSCPAKNR" value="answer"> <span>The whole line shifts upwards.</span></label><label><input type="radio" autocomplete="off" name="radio_NSHSCPAKNR" value=""> <span>The line becomes flat.</span></label>
 </div></li>
 <li>What happens to the line when you set the slope <span class="math inline">\(\beta_1\)</span> to a negative number?
-<div id="radio_AXSSFARDML" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AXSSFARDML" value="answer"> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_AXSSFARDML" value=""> <span>The whole line becomes flat.</span></label><label><input type="radio" autocomplete="off" name="radio_AXSSFARDML" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_AXSSFARDML" value=""> <span>The line increases from left to right.</span></label>
+<div id="radio_SJFZNLTJOT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SJFZNLTJOT" value="answer"> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_SJFZNLTJOT" value=""> <span>The whole line becomes flat.</span></label><label><input type="radio" autocomplete="off" name="radio_SJFZNLTJOT" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_SJFZNLTJOT" value=""> <span>The line increases from left to right.</span></label>
 </div></li>
 <li>What happens to the line when you set the slope <span class="math inline">\(\beta_1\)</span> to <code>0</code> zero?
-<div id="radio_OPJAQBUFLH" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OPJAQBUFLH" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_OPJAQBUFLH" value=""> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_OPJAQBUFLH" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_OPJAQBUFLH" value="answer"> <span>The line becomes flat.</span></label>
+<div id="radio_CJEDEAMMCV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CJEDEAMMCV" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_CJEDEAMMCV" value=""> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_CJEDEAMMCV" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_CJEDEAMMCV" value="answer"> <span>The line becomes flat.</span></label>
 </div></li>
 </ol>
 </div>
@@ -981,20 +969,14 @@ Figure&nbsp;23.2: Illustration of residual error.
 </div>
 </div>
 <p>When taking into account error, the equation of a regression model becomes the following:</p>
-<p><span class="math display">\[
-y = \beta_0 + \beta_1 x + \epsilon
-\]</span></p>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x + \epsilon\]</span></p>
 <p>where <span class="math inline">\(\epsilon\)</span> is the error. In other words, <span class="math inline">\(y\)</span> is the sum of <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1 x\)</span> and some error. In regression modelling, the error <span class="math inline">\(\epsilon\)</span> is assumed to come from a Gaussian distribution with mean 0 and standard deviation <span class="math inline">\(\sigma\)</span> when <span class="math inline">\(y\)</span> is assumed to be generated by a Gaussian distribution: <span class="math inline">\(\epsilon \sim Gaussian(\mu = 0, \sigma)\)</span>. We can substitute <span class="math inline">\(\epsilon\)</span> for the distribution.</p>
-<p><span class="math display">\[
-y = \beta_0 + \beta_1 x + Gaussian(0, \sigma)
-\]</span></p>
+<p><span class="math display">\[y = \beta_0 + \beta_1 x + Gaussian(0, \sigma)\]</span></p>
 <p>Furthermore, this equation can be rewritten like so (since the mean of the Gaussian error is 0):</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 y &amp; \sim Gaussian(\mu, \sigma)\\
 \mu &amp; = \beta_0 + \beta_1 x\\
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>You can read those formulae like so: “The variable <span class="math inline">\(y\)</span> is distributed according to a Gaussian distribution with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>. The mean <span class="math inline">\(\mu\)</span> is equal to the intercept <span class="math inline">\(\beta_0\)</span> plus the slope <span class="math inline">\(\beta_1\)</span> times the variable <span class="math inline">\(x\)</span>.” This is a Gaussian regression model, because the assumed family of the outcome <span class="math inline">\(y\)</span> is Gaussian. Now, the goal of a (Gaussian) regression model is to estimate <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma\)</span> from the data (i.e.&nbsp;from the values of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>). In other words, regression models find the regression line based on the observations of <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>. We do not know what is the true regression line that has generated <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>, we just have <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> values.</p>
 <p>The <span class="math inline">\(y \sim Gaussian(\mu, \sigma)\)</span> line in the formulae above is exactly the formula you saw in <a href="ch-gauss-model.html" class="quarto-xref"><span>Chapter 21</span></a>. It is no coincidence: this is <em>Gaussian</em> regression model. The outcome variable <span class="math inline">\(y\)</span> is assumed to be Gaussian. The new building block we have added now is that <span class="math inline">\(\mu\)</span> depends on <span class="math inline">\(x\)</span>: this is because <span class="math inline">\(x\)</span> appears in the formula of <span class="math inline">\(\mu\)</span>. In other words, we are allowing the mean <span class="math inline">\(\mu\)</span> to vary with <span class="math inline">\(x\)</span>. This is expressed by the so-called <strong>regression equation</strong> (also linear equation): <span class="math inline">\(\mu = \beta_0 + \beta_1 x\)</span>. This is the core concept of regression models.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
@@ -1007,12 +989,10 @@ y &amp; \sim Gaussian(\mu, \sigma)\\
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 y &amp; \sim Gaussian(\mu, \sigma) &amp; \text{[Distribution of y]}\\
 \mu &amp; = \beta_0 + \beta_1 x &amp; \text{[Regression equation]}\\
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 </div>
 </div>
 <p>You perhaps realised this by now, but the regression equation implies that both <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are <em>numeric variables</em>. However, regression models can also be used with variables that are categorical. You will learn how to use categorical predictors (categorical <span class="math inline">\(x\)</span>’s) in regression models in Week 7’s chapters. Moreover, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family. The chapters of Week 8 will teach you how to fit two other useful distribution families: the log-normal family and the Bernoulli family. You will be able to learn about other families by checking the resources linked in <a href="app-reg-cheat-sheet.html" class="quarto-xref"><span>Appendix B</span></a>.</p>
@@ -1036,9 +1016,7 @@ y &amp; \sim Gaussian(\mu, \sigma) &amp; \text{[Distribution of y]}\\
 </figure>
 </div>
 <p>The core idea of Galton’s framework can be expressed as a <strong>regression model</strong>:</p>
-<p><span class="math display">\[
-y = \beta_0 + \beta_1 \cdot x + \epsilon
-\]</span></p>
+<p><span class="math display">\[y = \beta_0 + \beta_1 \cdot x + \epsilon\]</span></p>
 <p>where:</p>
 <ul>
 <li><span class="math inline">\(y\)</span>: the child’s height (response variable),</li>
