@@ -107,6 +107,10 @@ callout-icon: false
 execute:
   freeze: auto
 
+knitr:
+  opts_chunk:
+    fig.align: center
+
 comments:
   hypothesis: true
 

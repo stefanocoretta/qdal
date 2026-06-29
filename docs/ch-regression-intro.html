@@ -795,7 +795,7 @@ window.Quarto = {
 <p>You might remember from school when you were asked to find the values of <span class="math inline">\(y\)</span> given certain values of <span class="math inline">\(x\)</span> and specific values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. For example, you were given the following formula (the dot <span class="math inline">\(\cdot\)</span> stands for multiplication; it can be dropped so <span class="math inline">\(2 \cdot x\)</span> and <span class="math inline">\(2x\)</span> are equivalent):</p>
 <p><span class="math display">\[y = 3 + 2 \cdot x\]</span></p>
 <p>and the values <span class="math inline">\(x = (2, 4, 5, 8, 10, 23, 36)\)</span>. The homework was to calculate the values of <span class="math inline">\(y\)</span> and maybe plot them on a Cartesian coordinate space.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -811,9 +811,9 @@ window.Quarto = {
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">bquote</span>(<span class="fu">italic</span>(y) <span class="sc">==</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">italic</span>(x)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ch-regression-intro_files/figure-html/homerwork-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ch-regression-intro_files/figure-html/homerwork-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -825,7 +825,7 @@ y &amp; = 3 + 2 x\\
 &amp; = 3\\
 \end{aligned}\]</span></p>
 <p>And <span class="math inline">\(\beta_1\)</span> is the number to add to the intercept for each <strong>unit increase of</strong> <span class="math inline">\(x\)</span>. <span class="math inline">\(\beta_1\)</span> is commonly called the <strong>slope</strong> of the line.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> <a href="#fig-unit-increase" class="quarto-xref">Figure&nbsp;<span>23.1</span></a> should clarify this. The dashed line indicates the increase in <span class="math inline">\(y\)</span> for every unit increase of <span class="math inline">\(x\)</span> (i.e., every time <span class="math inline">\(x\)</span> increases by 1, <span class="math inline">\(y\)</span> increases by 2).</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>line <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
@@ -846,10 +846,10 @@ y &amp; = 3 + 2 x\\
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">bquote</span>(<span class="fu">italic</span>(y) <span class="sc">==</span> <span class="dv">3</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">italic</span>(x)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-unit-increase" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-unit-increase" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-unit-increase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-regression-intro_files/figure-html/fig-unit-increase-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-regression-intro_files/figure-html/fig-unit-increase-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unit-increase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;23.1: Illustration of the meaning of the slope: with a slope of 2, for each unit increase of <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> increases by 2.
@@ -913,27 +913,29 @@ y &amp; = 3 + 2 \cdot 3\\
 </div>
 <div class="callout-body-container callout-body">
 <p>Use the <a href="https://stefanocoretta.shinyapps.io/lines/">Linear Models Illustrated</a> app to answer the following questions.</p>
+<div class="cell" data-layout-align="center">
 <ol type="a">
 <li>What happens to the line when you increase the intercept <span class="math inline">\(\beta_0\)</span>?
-<div id="radio_NSHSCPAKNR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NSHSCPAKNR" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_NSHSCPAKNR" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_NSHSCPAKNR" value="answer"> <span>The whole line shifts upwards.</span></label><label><input type="radio" autocomplete="off" name="radio_NSHSCPAKNR" value=""> <span>The line becomes flat.</span></label>
+<div id="radio_SPFETZLODG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SPFETZLODG" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_SPFETZLODG" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_SPFETZLODG" value="answer"> <span>The whole line shifts upwards.</span></label><label><input type="radio" autocomplete="off" name="radio_SPFETZLODG" value=""> <span>The line becomes flat.</span></label>
 </div></li>
 <li>What happens to the line when you set the slope <span class="math inline">\(\beta_1\)</span> to a negative number?
-<div id="radio_SJFZNLTJOT" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SJFZNLTJOT" value="answer"> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_SJFZNLTJOT" value=""> <span>The whole line becomes flat.</span></label><label><input type="radio" autocomplete="off" name="radio_SJFZNLTJOT" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_SJFZNLTJOT" value=""> <span>The line increases from left to right.</span></label>
+<div id="radio_ZBGASKCKWB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZBGASKCKWB" value="answer"> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_ZBGASKCKWB" value=""> <span>The whole line becomes flat.</span></label><label><input type="radio" autocomplete="off" name="radio_ZBGASKCKWB" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_ZBGASKCKWB" value=""> <span>The line increases from left to right.</span></label>
 </div></li>
 <li>What happens to the line when you set the slope <span class="math inline">\(\beta_1\)</span> to <code>0</code> zero?
-<div id="radio_CJEDEAMMCV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CJEDEAMMCV" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_CJEDEAMMCV" value=""> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_CJEDEAMMCV" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_CJEDEAMMCV" value="answer"> <span>The line becomes flat.</span></label>
+<div id="radio_GEGNMBDIDD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GEGNMBDIDD" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_GEGNMBDIDD" value=""> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_GEGNMBDIDD" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_GEGNMBDIDD" value="answer"> <span>The line becomes flat.</span></label>
 </div></li>
 </ol>
+</div>
 </div>
 </div>
 </section>
 <section id="add-error" class="level2" data-number="23.3">
 <h2 data-number="23.3" class="anchored" data-anchor-id="add-error"><span class="header-section-number">23.3</span> Add error</h2>
 <p>Measurements are <strong>noisy</strong>: they usually contain errors. Error can have many different causes (for example, measurement error due to technical limitations or variability in human behaviour), but we are usually not that interested in learning about what causes the error. Rather, we just want our model to be able to deal with error. Let’s see what errors looks like. <a href="#fig-error" class="quarto-xref">Figure&nbsp;<span>23.2</span></a> shows values of <span class="math inline">\(y\)</span> simulated with the equation <span class="math inline">\(y = 1 + 1.5x\)</span> (with <span class="math inline">\(x\)</span> equal 1 to 10), to which the random error <span class="math inline">\(\epsilon\)</span> (the Greek letter epsilon [ˈɛpsɪlɒn]) was added. Due to the added error, the points are almost on the straight line defined by <span class="math inline">\(y = 1 + 1.5x\)</span>, but not quite. The vertical distance between the observed points and the expected line, called the <strong>regression line</strong>, is the <strong>residual error</strong> (red lines in the plot).</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">4321</span>)</span>
@@ -956,10 +958,10 @@ y &amp; = 3 + 2 \cdot 3\\
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="fu">bquote</span>(<span class="fu">italic</span>(y) <span class="sc">==</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">italic</span>(x) <span class="sc">+</span> epsilon))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-error" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-error" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-regression-intro_files/figure-html/fig-error-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-regression-intro_files/figure-html/fig-error-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-error-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;23.2: Illustration of residual error.
