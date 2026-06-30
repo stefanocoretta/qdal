@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>17&nbsp; More plotting – Quantitative Data Analysis for Linguists in R</title>
+<title>26&nbsp; Reporting Gaussian regression models – Quantitative Data Analysis for Linguists in R</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,42 +23,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
 }
-</style>
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -68,8 +52,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ch-probability.html" rel="next">
-<link href="./ch-plotting.html" rel="prev">
+<link href="./ch-null-ritual.html" rel="next">
+<link href="./ch-regression-draws.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -117,9 +101,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
-<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
-<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="include/webex.css">
 </head>
@@ -295,7 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-research-cycle.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-more-plotting.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">More plotting</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-intro.html">Week 6</a></li><li class="breadcrumb-item"><a href="./ch-regression-report.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Reporting Gaussian regression models</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -466,7 +477,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-more-plotting.html" class="sidebar-item-text sidebar-link active">
+  <a href="./ch-more-plotting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">More plotting</span></span></a>
   </div>
 </li>
@@ -537,12 +548,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-draws.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Working with MCMC draws</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-regression-report.html" class="sidebar-item-text sidebar-link">
+  <a href="./ch-regression-report.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Reporting Gaussian regression models</span></span></a>
   </div>
 </li>
@@ -709,21 +720,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#bar-charts" id="toc-bar-charts" class="nav-link active" data-scroll-target="#bar-charts"><span class="header-section-number">17.1</span> Bar charts</a></li>
-  <li><a href="#stacked-bar-charts" id="toc-stacked-bar-charts" class="nav-link" data-scroll-target="#stacked-bar-charts"><span class="header-section-number">17.2</span> Stacked bar charts</a></li>
-  <li><a href="#filled-stacked-bar-charts" id="toc-filled-stacked-bar-charts" class="nav-link" data-scroll-target="#filled-stacked-bar-charts"><span class="header-section-number">17.3</span> Filled stacked bar charts</a></li>
-  <li><a href="#faceting-and-panels" id="toc-faceting-and-panels" class="nav-link" data-scroll-target="#faceting-and-panels"><span class="header-section-number">17.4</span> Faceting and panels</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">17.5</span> Summary</a></li>
+  <li><a href="#reporting" id="toc-reporting" class="nav-link active" data-scroll-target="#reporting"><span class="header-section-number">26.1</span> Reporting</a></li>
+  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next"><span class="header-section-number">26.2</span> What’s next</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-more-plotting.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-report.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-research-cycle.html">Week 4</a></li><li class="breadcrumb-item"><a href="./ch-more-plotting.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">More plotting</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-intro.html">Week 6</a></li><li class="breadcrumb-item"><a href="./ch-regression-report.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Reporting Gaussian regression models</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-more-plotting" class="quarto-section-identifier"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">More plotting</span></span></h1>
+<h1 class="title"><span id="sec-regression-report" class="quarto-section-identifier"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Reporting Gaussian regression models</span></span></h1>
 </div>
 
 
@@ -740,271 +748,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><img src="./img/badge-r.png" class="img-fluid"></p>
-<section id="bar-charts" class="level2" data-number="17.1">
-<h2 data-number="17.1" class="anchored" data-anchor-id="bar-charts"><span class="header-section-number">17.1</span> Bar charts</h2>
-<p>In <a href="ch-transform.html#fig-status-bar-3" class="quarto-xref">Figure&nbsp;<span>13.1</span></a> from <a href="ch-transform.html" class="quarto-xref"><span>Chapter 13</span></a>, you saw how to visualise counts with a bar chart. In this chapter you will learn how to create bar charts with ggplot2. We will first create a plot with counts of the number of languages in <code>global_south</code> (filtered data from <code>coretta2022/glot_status.rds</code>) by their endangerment status and then a plot where we also split the counts by macro-area. To create a bar chart, you use the <code>geom_bar()</code> geometry.</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Bar charts
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Bar charts</strong> are useful when you are counting things. For example:</p>
-<ul>
-<li><p>Number of verbs vs nouns vs adjectives in a corpus.</p></li>
-<li><p>Number of languages by geographic area.</p></li>
-<li><p>Number of correct vs incorrect responses.</p></li>
-</ul>
-<p>The bar chart geometry is <code>geom_bar()</code>.</p>
-</div>
-</div>
-<p>Read the <code>coretta2022/glot_status.rds</code> data and filter it so that you include only languages from Africa, Australia, Papunesia and South America, with any status except not endangered and extinct.</p>
-<p>In a simple bar chart, <strong>you only need to specify one axis, the <em>x</em>-axis</strong>, in the aesthetics <code>aes()</code>. This is because the counts that are placed on the <em>y</em>-axis are calculated by the <code>geom_bar()</code> function under the hood. This quirk is something that confuses many new learners, so make sure you internalise this. Go ahead and complete the following code to create a bar chart.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>global_south <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> status)) <span class="sc">+</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The counting for the <em>y</em>-axis is done automatically. R looks in the <code>status</code> column and counts how many times each value in the column occurs in the data frame. The counts are then plotted as bars. If you did things correctly, you should get the following plot. The <em>x</em>-axis is now <code>status</code> and the <em>y</em>-axis corresponds to the number of languages by status (<code>count</code>).</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-status-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-status-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-more-plotting_files/figure-html/fig-status-bar-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-status-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17.1: Number of languages by endangerment status.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>You could write a description of the plot that goes like this:</p>
+<p><img src="./img/badge-stats.png" class="img-fluid"></p>
+<section id="reporting" class="level2" data-number="26.1">
+<h2 data-number="26.1" class="anchored" data-anchor-id="reporting"><span class="header-section-number">26.1</span> Reporting</h2>
+<p>You have seen an example of reporting in <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>. We can use that as a template for reporting a regression model, by reworking a few parts and adding information related to the numeric predictor in the regression. You could report the vowel duration regression model like so:</p>
 <blockquote class="blockquote">
-<p>The number of languages in the Global South by endangered status is shown as a bar chart in <a href="#fig-status-bar" class="quarto-xref">Figure&nbsp;<span>17.1</span></a>. Among the languages that are endangered, the majority are threatened or shifting.</p>
+<p>We fitted a Bayesian regression model using the brms package <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. We used a Gaussian distribution for the outcome variable, vowel duration (in milliseconds). We included speech rate (measured as syllables per second) as the regression predictor.</p>
+<p>Based on the model results, there is a 95% probability that the mean vowel duration, when speech rate is 0, is between <code>{r} round(brms::fixef(vow_bm)[1, 3])</code> and <code>{r} round(brms::fixef(vow_bm)[1, 4])</code> ms (mean = <code>{r} round(brms::fixef(vow_bm)[1, 1])</code>, SD = <code>{r} round(brms::fixef(vow_bm)[1, 2])</code>). For each unit increase of speech rate (i.e.&nbsp;for each one syllable per second added), vowel duration decreases by <code>{r} -round(brms::fixef(vow_bm)[2, 4])</code> to <code>{r} -round(brms::fixef(vow_bm)[2, 3])</code> ms (mean = <code>{r} round(brms::fixef(vow_bm)[2, 1])</code>, SD = <code>{r} round(brms::fixef(vow_bm)[2, 2])</code>). The residual standard deviation is between <code>{r} round(brms::posterior_summary(vow_bm)["sigma", "Q2.5"])</code> and <code>{r} round(brms::posterior_summary(vow_bm)["sigma", "Q97.5"])</code> ms (mean = <code>{r} round(brms::posterior_summary(vow_bm)["sigma", "Estimate"])</code>, SD = <code>{r} round(brms::posterior_summary(vow_bm)["sigma", "Est.Error"])</code>).</p>
 </blockquote>
-<p>What if we want to show the number of languages by endangerment status within each of the macro-areas that make up the Global South? Easy! You can make a stacked bar chart.</p>
+<p>Note the wording of the speech rate coefficient: “vowel duration decreases by <code>{r} -round(brms::fixef(vow_bm)[2, 4])</code> to <code>{r} -round(brms::fixef(vow_bm)[2, 3])</code> ms”. The speech rate coefficient 95% CrI is fully negative (i.e.&nbsp;both lower and upper limit are negative) so we can say that vowel duration <em>decreases</em>. Furthermore, since we say “decreases” then we should report the CrI limits as positive numbers. Think about it: we say “decrease X by 2” to mean “X - 2”, rather than “decrease X by -2”. Finally, given we flipped the signs of the CrI limits, it is clearer to write “<code>{r} -round(brms::fixef(vow_bm)[2, 4])</code> to <code>{r} -round(brms::fixef(vow_bm)[2, 3])</code> ms”, rather than the other way round as you would if you reported the interval as is: 95% CrI [<code>{r} round(brms::fixef(vow_bm)[2, 3])</code>, <code>{r} round(brms::fixef(vow_bm)[2, 4])</code>].</p>
+<p>Another point to note is that in the reporting style I am using in this book, we place more emphasis on the posterior CrI than on the posterior mean and SD. So the CrI is in the main text, while mean and SD are between parentheses. Other researchers might in fact do it the other way round. Whatever you decide to do, be consistent. Finally, it is unusual to report the coefficients of <span class="math inline">\(\sigma\)</span>: I have done it here for completeness, since it doesn’t hurt to do so.</p>
 </section>
-<section id="stacked-bar-charts" class="level2" data-number="17.2">
-<h2 data-number="17.2" class="anchored" data-anchor-id="stacked-bar-charts"><span class="header-section-number">17.2</span> Stacked bar charts</h2>
-<p>A special type of bar charts are the so-called stacked bar charts.</p>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Stacked bar chart
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>A <strong>stacked bar chart</strong> is a bar chart in which each bar contains a “stack” of shorter bars, each indicating the counts of some sub-groups.</p>
-<p>This type of plot is useful to show how counts of something vary depending on some other grouping (in other words, when you want to count the occurrences of a categorical variable based on another categorical variable). For example:</p>
-<ul>
-<li><p>Number of languages by endangerment status, grouped by geographic area.</p></li>
-<li><p>Number of infants by head-turning preference, grouped by first language.</p></li>
-<li><p>Number of past vs non-past verbs, grouped by verb class.</p></li>
-</ul>
-</div>
-</div>
-<p>To create a stacked bar chart, you just need to add a new aesthetic mapping to <code>aes()</code>: <code>fill</code>. The <code>fill</code> aesthetic lets you fill bars or areas with different colours depending on the values of a specified column. Let’s make a plot on language endangerment by macro-area. Complete the following code by specifying that <code>fill</code> should be based on <code>status</code>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>global_south <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Macroarea, ...)) <span class="sc">+</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>You should get the following.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-status-stacked" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-status-stacked-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-more-plotting_files/figure-html/fig-status-stacked-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-status-stacked-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17.2: Number of languages by macro-area and endangerment status.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>A write-up example:</p>
-<blockquote class="blockquote">
-<p><a href="#fig-status-stacked" class="quarto-xref">Figure&nbsp;<span>17.2</span></a> shows the number of languages by geographic macro-area, subdivided by endangerment status. Africa, Eurasia and Papunesia have substantially more languages than the other areas.</p>
-</blockquote>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Quiz 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What is wrong in the following code?</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gestures <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> status), <span class="at">fill =</span> Macroarea) <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</section>
-<section id="filled-stacked-bar-charts" class="level2" data-number="17.3">
-<h2 data-number="17.3" class="anchored" data-anchor-id="filled-stacked-bar-charts"><span class="header-section-number">17.3</span> Filled stacked bar charts</h2>
-<p>In the plot above it is difficult to assess whether different macro-areas have different proportions of endangerment. This is because the overall number of languages per area differs between areas. A solution to this is to plot <strong>proportions</strong> instead of raw counts. You could calculate the proportions yourself, but there is a quicker way: using the <code>position</code> argument in <code>geom_bar()</code>. You can plot proportions instead of counts by setting <code>position = "fill"</code> inside <code>geom_bar()</code>, like so:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>global_south <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Macroarea, <span class="at">fill =</span> status)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-status-stacked-2" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-status-stacked-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-more-plotting_files/figure-html/fig-status-stacked-2-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-status-stacked-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17.3: Proportion of languages by macro-area and endangerment status.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>The plot now shows proportions of languages by endangerment status for each area separately. Note that the <em>y</em>-axis label is still “count” but should be “proportion”. Use <code>labs()</code> to change the axes labels and the legend name.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>global_south <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Macroarea, <span class="at">fill =</span> status)) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="callout callout-style-default callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Hint
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>If to change the name of the <code>colour</code> legend, you use the <code>colour</code> argument in <code>labs()</code>, guess which argument you should use for <code>fill</code>?</p>
-</div>
-</div>
-</div>
-<p>You should get this.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-status-stacked-3" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-status-stacked-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-more-plotting_files/figure-html/fig-status-stacked-3-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-status-stacked-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17.4: Proportion of languages by macro-area and endangerment status.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>With this plot it is easier to see that different areas have different proportions of endangerment. In writing:</p>
-<blockquote class="blockquote">
-<p><a href="#fig-status-stacked-3" class="quarto-xref">Figure&nbsp;<span>17.4</span></a> shows proportions of languages by endangerment status for each macro-area. Australia, South and North America have a substantially higher proportion of extinct languages than the other areas. These areas also have a higher proportion of near extinct languages. On the other hand, Africa has the greatest proportion of non-endangered languages followed by Papunesia and Eurasia, while North and South America are among the areas with the lower proportion, together with Australia which has the lowest.</p>
-</blockquote>
-</section>
-<section id="faceting-and-panels" class="level2" data-number="17.4">
-<h2 data-number="17.4" class="anchored" data-anchor-id="faceting-and-panels"><span class="header-section-number">17.4</span> Faceting and panels</h2>
-<p>Sometimes we might want to separate the data into separate panels within the same plot. We can achieve that easily using <strong>faceting</strong>. Let’s revisit the plots from <a href="ch-plotting.html" class="quarto-xref"><span>Chapter 16</span></a>. We will use the <code>winter2012/polite.csv</code> data again. This is the plot you previously made. Try and reproduce it by writing the code yourself (you also have to read in the data!).</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-polite" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-polite-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-more-plotting_files/figure-html/fig-polite-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polite-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17.5: Scatter plot of mean f0 and H1-H2 difference.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>That looks great, but we want to know if being a music student has an effect on the relationship of <code>f0mn</code> and <code>H1H2</code>. In the plot above, the aesthetics mappings are the following: <code>f0mn</code> on the <em>x</em>-axis, <code>H1H2</code> on the <em>y</em>-axis, <code>gender</code> as colour. How can we separate data further depending on whether the participant is a music student or not (<code>musicstudent</code>)? We can create panels using <code>facet_grid()</code>. This function takes lists of variables to specify panels in rows and/or columns.</p>
-<p><strong>Faceting</strong> a plot allows to split the plot into multiple panels, arranged in rows and columns, based on one or more variables. To facet a plot, use the <code>facet_grid()</code> function. The syntax is a bit strange. You can specify rows of panels with the <code>rows</code> argument and columns of panels with <code>cols</code> argument, but you have to include column names inside <code>vars()</code>, like this:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2, <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">cols =</span> <span class="fu">vars</span>(musicstudent)) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Mean f0 (Hz)"</span>,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"H1-H2 difference (dB)"</span>,</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Gender"</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-polite-facet" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-polite-facet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-more-plotting_files/figure-html/fig-polite-facet-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polite-facet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;17.6: Scatter plot of mean f0 and H1-H2 difference in non-music students (left) vs music students (right).
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>You could write a description of this plot like this:</p>
-<blockquote class="blockquote">
-<p><a href="#fig-polite-facet" class="quarto-xref">Figure&nbsp;<span>17.6</span></a> shows mean f0 and H1-H2 difference as a scatter plot. The two panels indicate whether the participant was a student of music. Within each panel, the participant’s gender is represented by colour (red for female and blue for male). Male participants tend to have higher H1-H2 differences and lower mean f0 than females. From the plot it can also be seen that there is greater variability in H1-H2 difference in female music students compared to female non-music participants. Within each group of gender by music student there does not seem to be any specific relation between mean f0 and H1-H2 difference.</p>
-</blockquote>
-<p>The <code>polite</code> data also has a column <code>attitude</code> with values <code>inf</code> for informal and <code>pol</code> for polite. Subjects were asked to speak either as if they were talking to a friend (<code>inf</code> attitude) or to someone with a higher status (<code>pol</code> attitude). Recreate the last plot, this time faceting also by <code>attitude</code>. Use the <code>rows</code> column to create two separate rows for each value of <code>attitude</code>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2, <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">cols =</span> <span class="fu">vars</span>(musicstudent), <span class="at">rows =</span> ...)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Exercise 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Write a description for the last plot.</p>
-</div>
-</div>
-</section>
-<section id="summary" class="level2" data-number="17.5">
-<h2 data-number="17.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">17.5</span> Summary</h2>
-<div class="callout callout-style-simple callout-note no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<ul>
-<li><p>Create bar charts with <code>geom_bar()</code> to show counts.</p></li>
-<li><p>Use stacked bar charts to show groupings within counts and filled stacked bar charts to show proportions.</p></li>
-<li><p>You can create panels with <code>facet_grid()</code>.</p></li>
-</ul>
-</div>
-</div>
-</div>
+<section id="whats-next" class="level2" data-number="26.2">
+<h2 data-number="26.2" class="anchored" data-anchor-id="whats-next"><span class="header-section-number">26.2</span> What’s next</h2>
+<p>In this chapter you have learned the very basics of Bayesian regression models. As mentioned above, regression models with brms are very flexible and you can easily fit very complex models with a variety of distribution families (for a list of available families, see <code>?brmsfamily</code>; you can even define your own distributions!). The perk of using brms is that you can just learn the basics of one package and one approach and use it to fit a large variety of regression models. This is different from the standard frequentist approach, where different models require different packages or functions, with their different syntax and quirks. In the following weeks, you will build your understanding of Bayesian regression models, which will enable you to approach even the most complex models! However, due to time limits you won’t learn everything there is to learn in this course. Developing conceptual and practical skills in quantitative methods is a long-term process and unfortunately one semester will not be enough. So be prepared to continue your learning journey for years to come!</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-burkner2017" class="csl-entry" role="listitem">
+Bürkner, Paul-Christian. 2017. <span>“Brms: An r Package for Bayesian Multilevel Models Using Stan.”</span> <em>Journal of Statistical Software</em> 80 (1): 128. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>.
+</div>
+<div id="ref-rcoreteam2025" class="csl-entry" role="listitem">
+R Core Team. 2025. <em>R: A Language and Environment for Statistical Computing [Version 4.5.0]</em>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -1637,13 +1404,13 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ch-plotting.html" class="pagination-link" aria-label="Plotting">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Plotting</span></span>
+      <a href="./ch-regression-draws.html" class="pagination-link" aria-label="Wrangling MCMC draws">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch-probability.html" class="pagination-link" aria-label="Probability distributions">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Probability distributions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ch-null-ritual.html" class="pagination-link" aria-label="Frequentist statistics, the Null Ritual and *p*-values">
+        <span class="nav-page-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1652,4 +1419,4 @@ window.onload = function() {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-more-plotting.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-report.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

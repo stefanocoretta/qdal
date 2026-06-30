@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>25&nbsp; Wrangling MCMC draws – Quantitative Data Analysis for Linguists in R</title>
+<title>25&nbsp; Working with MCMC draws – Quantitative Data Analysis for Linguists in R</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -87,7 +87,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ch-null-ritual.html" rel="next">
+<link href="./ch-regression-report.html" rel="next">
 <link href="./ch-regression.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -343,7 +343,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-intro.html">Week 6</a></li><li class="breadcrumb-item"><a href="./ch-regression-draws.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-intro.html">Week 6</a></li><li class="breadcrumb-item"><a href="./ch-regression-draws.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Working with MCMC draws</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -585,7 +585,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-draws.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Working with MCMC draws</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-report.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Reporting Gaussian regression models</span></span></a>
   </div>
 </li>
       </ul>
@@ -602,19 +608,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-null-ritual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-more.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">More than two levels</span></span></a>
   </div>
 </li>
       </ul>
@@ -631,19 +637,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-bernoulli.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
   </div>
 </li>
       </ul>
@@ -660,19 +666,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
   </div>
 </li>
       </ul>
@@ -689,25 +695,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -763,9 +769,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-intro.html">Week 6</a></li><li class="breadcrumb-item"><a href="./ch-regression-draws.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-intro.html">Week 6</a></li><li class="breadcrumb-item"><a href="./ch-regression-draws.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Working with MCMC draws</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-regression-draws" class="quarto-section-identifier"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span></h1>
+<h1 class="title"><span id="sec-regression-draws" class="quarto-section-identifier"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Working with MCMC draws</span></span></h1>
 </div>
 
 
@@ -785,15 +791,32 @@ window.Quarto = {
 <p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
 <section id="mcmc-what" class="level2" data-number="25.1">
 <h2 data-number="25.1" class="anchored" data-anchor-id="mcmc-what"><span class="header-section-number">25.1</span> MCMC what?</h2>
-<p>Bayesian regression models fitted with brms/Stan use the Markov Chain Monte Carlo (MCMC) sampling algorithm to estimate the probability distributions of the model’s parameters. You have first encountered MCMC in <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>: the text printed when running <code>brm()</code> is about the MCMC. Bayesian models reconstruct the posterior probability distribution of a set of parameters. More precisely, they reconstruct (i.e.&nbsp;estimate) the <em>joint</em> probability distribution of the parameters. In other words, all parameters are estimated at the same time: think of this as a multidimensional space of probability, with one dimension per parameter. With two parameters, like intercept and slope, this is a 3-dimensional space, something we can imagine: think of a landscape with hills and valleys, where the <em>x</em>-axis are values for the intercept, the <em>y</em>-axis are values for the slope and the <em>z</em>-axis (the vertical axis) are probability densities. The hills represent high probability areas and valleys represent low probability areas. This landscape of hills and valleys is determined by the two components of the Bayes’ Theorem: the prior probability distribution <span class="math inline">\(P(h)\)</span> and the probability of the data given the prior, <span class="math inline">\(P(d | h)\)</span>.</p>
-<p>Constructing the landscape from the prior and data analytically (i.e.&nbsp;solving the mathematical equation of Bayes’ Theorem) is very often very hard or even impossible. The MCMC algorithm allows us to sample points in the landscape without actually mathematically reconstructing the landscape. In the Stan software, which brms uses to fit Bayesian models, the MCMC algorithm uses a specific implementation called Hamiltonian Monte Carlo (HMC). The HMC version of MCMC simulates physical particles rolling through the posterior landscape, using equations from physical mechanics. At each iteration, the algorithm “flicks” a particle (like a pinball ball) and then stops it in its tracks: the place on the posterior landscape where the particle stops is taken as a “draw”. In the 3-dimensional landscape of intercept and slope, the intercept and slope values corresponding to the spot the particle was stopped are recorded. So the draw from one iteration holds one value for the intercept and one for the slope. The algorithm proceeds for several iterations, thus creating a list of draws. These draws can be used to plot and summarise the posterior distributions of the parameters. The draws are called <strong>posterior draws</strong>, because they come from the posterior probability distribution.</p>
-<p>This is a bit abstract and if you want to learn more about MCMC, I recommend <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span>, Ch 9 and <span class="citation" data-cites="nicenboim2025">Nicenboim et al. (<a href="references.html#ref-nicenboim2025" role="doc-biblioref">2025</a>)</span>, Ch 3. Note that to be a proficient user of brms and Bayesian regression models, you don’t need to fully understand the mathematics behind MCMC algorithms, as long as you understand them conceptually.</p>
-<p>When you run a model with brms, the draws (i.e.&nbsp;the sampled values) are stored in the model object. All operations on a model, like obtaining the <code>summary()</code>, are actually operations on those draws. We normally fit regression models with four MCMC chains. The sampling algorithm within each chain runs for 2000 iterations by default. The first half (1000 iterations) are used to “warm up” the algorithm (i.e.&nbsp;tune certain parameters related to the mechanics equations that make the particles move) while the second half (1000 iterations) are the ones included in the actual posterior draws. Since four chains run with 2000 iterations of which 1000 are kept as posterior draws, we end up with 4000 draws we can use to learn details about the posterior. The rest of this chapter will teach you how to extract and manipulate the model’s draws. We will do so by revisiting the model fitted in <a href="ch-regression.html" class="quarto-xref"><span>Chapter 24</span></a>.</p>
+<p>Bayesian regression models aim to estimate the posterior probability distribution of all the model’s parameters. For example, in a simple regression, like the one from the previous chapter, we want to know which combinations of intercept, slope and <span class="math inline">\(\sigma\)</span> values are most plausible given our prior beliefs and the observed data. More generally, if a model has many parameters, we want to know which combinations of values are plausible for all of them simultaneously. This collection of probabilities is called the <strong>joint posterior probability distribution</strong> of the parameters.</p>
+<p>For realistic regression models, determining this joint posterior distribution analytically (i.e.&nbsp;by solving Bayes’ theorem mathematically) is often very difficult or even impossible. Instead of calculating the posterior distribution directly, Bayesian software uses the <strong>Markov Chain Monte Carlo (MCMC)</strong> sampling algorithm to generate sampled values from it. You first encountered MCMC in <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>: the text printed when running <code>brm()</code> is about the MCMC algorithm. In the Stan software, which brms uses to fit Bayesian models, MCMC uses a specific implementation called Hamiltonian Monte Carlo (HMC).</p>
+<p>The joint posterior distribution can be thought of as a multidimensional landscape, with one dimension for each parameter. Since we humans find it difficult to think in more than three dimensions, let’s stick with two of the three parameters, the intercept and the slope. With two parameters this is a three-dimensional landscape that we can imagine. The <em>x</em>-axis represents values of the intercept, the <em>y</em>-axis values of the slope, and the <em>z</em>-axis (the vertical axis) the posterior probability density. Hills correspond to highly probable combinations of intercept and slope values, whereas valleys correspond to unlikely combinations. This landscape is determined by the two components of Bayes’ theorem: the prior probability distribution, <span class="math inline">\(P(h)\)</span>, and the probability of the data given the prior, <span class="math inline">\(P(d \mid h)\)</span>. Regions of high posterior probability of the are sampled more often than regions of low posterior probability, so the collection of sampled values approximates the joint posterior distribution. The output of a Bayesian model is therefore not a single value for each parameter but a large collection of values, called the <strong>posterior draws</strong>, for each model parameter.</p>
+<p>Hamiltonian Monte Carlo imagines a particle moving through this posterior landscape. Its motion is guided by the shape of the landscape using equations from classical mechanics, allowing it to move efficiently between regions of high posterior probability. At each step of this simulated motion, the algorithm records the particle’s position as one <strong>posterior draw</strong>. Each of these steps is called an <strong>iteration</strong>. A sequence of iterations produced by the same simulation forms a <strong>Markov chain</strong> (or simply a chain). In the three-dimensional landscape of an intercept and a slope, each draw therefore contains one intercept value and one slope value sampled together from the joint posterior distribution. The algorithm repeats this process thousands of times, producing a large collection of posterior draws. Looking only at the intercept values across all draws gives the posterior distribution of the intercept, while looking only at the slope values gives the posterior distribution of the slope. Of course, in the type of regression model we have talked about in the previous chapter there are three parameters (intercept <span class="math inline">\(\beta_0\)</span>, slope <span class="math inline">\(\beta_1\)</span>, and <span class="math inline">\(\sigma\)</span>) but we humans are not good at imagining more than three dimensions at a time so we will not attempt it.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>MCMC
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <strong>joint posterior probability distribution</strong> is the collection of the posterior probability distributions of all the parameters in the model.</p>
+<p><strong>Markov Chain Monte Carlo</strong> (MCMC) is an algorithm used to sample values from a joint posterior distribution. Stan, used by brms, uses the Hamiltonian Monte Carlo implementation of MCMC.</p>
+<p>The MCMC algorithm generates a set of values sampled from the joint posterior, called <strong>posterior draws</strong>.</p>
+</div>
+</div>
+<p>This description is necessarily simplified. If you want to learn more about MCMC, I recommend <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span>, Ch. 9, and <span class="citation" data-cites="nicenboim2025">Nicenboim et al. (<a href="references.html#ref-nicenboim2025" role="doc-biblioref">2025</a>)</span>, Ch. 3. However, to be a proficient user of brms and Bayesian regression models, you do not need to fully understand the mathematics behind MCMC, as long as you understand the basic conceptual idea.</p>
+<p>When you run a model with brms, the posterior draws are stored in the model object. Every operation on a fitted model, such as obtaining the output of <code>summary()</code> and plotting posterior distributions, is ultimately an operation on those draws. By default, brms runs <em>four</em> MCMC chains. The sampling algorithm within each chain performs 2,000 iterations. The first half (1,000 iterations) are used to warm up the algorithm by tuning parameters that govern the Hamiltonian dynamics, while the second half (1,000 iterations) are retained as posterior draws. Since four chains each contribute 1,000 posterior draws, the fitted model contains 4,000 posterior draws that can be used to learn about the posterior distribution. The rest of this chapter shows how to extract and manipulate these draws by revisiting the model fitted in <a href="ch-regression.html" class="quarto-xref"><span>Chapter 24</span></a>.</p>
 </section>
 <section id="reproducible-model-fit" class="level2" data-number="25.2">
 <h2 data-number="25.2" class="anchored" data-anchor-id="reproducible-model-fit"><span class="header-section-number">25.2</span> Reproducible model fit</h2>
-<p>Before we move to the model, it is worth making a couple practical considerations. Fitting simple models with brms is relatively quick. However, more complex model using larger data sets can take some time for the MCMC to efficiently sample the posterior distribution (sometimes even hours!). It is useful to save the model fit to a file so that, once the model is fit once, you don’t have to fit it again. This can be done by specifying a file path in the <code>file</code> argument in the <code>brm()</code> function. I suggest developing the habit of having a dedicated <code>cache/</code> in your Quarto project to save all of the brms model objects in. Go ahead and create a <code>cache/</code> folder in your project. Then, in your <code>week-05.qmd</code> document, rewrite the model from the previous chapter like so:</p>
-<div class="cell">
+<p>Before we move to the model, it is worth making a couple practical considerations. Fitting simple models with brms is relatively quick. However, more complex models using larger data sets can take some time for the MCMC to efficiently sample the posterior distribution (sometimes even hours!). It is useful to save the model fit to a file so that, once the model is fit once, you don’t have to rune the MCMC algorithm again. This can be done by specifying a file path in the <code>file</code> argument in the <code>brm()</code> function. I suggest developing the habit of having a dedicated <code>cache/</code> in your Quarto project to save all of the brms model objects in. Go ahead and create a <code>cache/</code> folder in your project. Then, in your Quarto document, rewrite the model from the previous chapter like so:</p>
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vow_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># `1 +` can be omitted.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  v1_duration <span class="sc">~</span> speech_rate,</span>
@@ -823,7 +846,7 @@ Important
 <section id="extract-mcmc-posterior-draws" class="level2" data-number="25.3">
 <h2 data-number="25.3" class="anchored" data-anchor-id="extract-mcmc-posterior-draws"><span class="header-section-number">25.3</span> Extract MCMC posterior draws</h2>
 <p>There are different ways to extract the MCMC posterior draws from a fitted model. In this book, we will use the <code>as_draws_df()</code> function from the <a href="https://mc-stan.org/posterior/">posterior</a> package. The function extracts the draws from a Bayesian regression model and outputs them as a data frame. Before we extract the draws from the <code>vow_bm</code> model, let’s revisit the summary.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(vow_bm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: gaussian 
@@ -848,7 +871,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
 <p>The <code>Draws</code> information in the summary are exactly that: information on the MCMC draws of the model. It says 4 chains were run each with 2000 iterations of which 1000 used for warm-up. <code>thin = 1</code> just tells brms to keep all the post-warm up draws, and it’s fine as is so you can just ignore it. Then the summary tells us that there are 4000 total post-warm-up draws. We are good to go! We can extract the MCMC draws from the model using the <code>as_draws_df()</code> function. This function returns a data frame (more specifically a tidyverse tibble with class <code>draws_df</code>) with values from each draw of the MCMC algorithm. Since there are 4000 post-warm-up draws, the tibble has 4000 rows.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>vow_bm_draws <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(vow_bm)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>vow_bm_draws</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -866,12 +889,10 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <li><code>.draw</code>: The draw number across all chains (1 to 4000).</li>
 </ul>
 <p>Make sure that you understand these columns in light of the MCMC algorithm. The following columns contain the drawn values at each draw for three parameters of the model: <code>b_Intercept</code>, <code>b_speech_rate</code> and <code>sigma</code>. To remind yourself what these mean, let’s have a look at the mathematical formula of the model.</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 vdur &amp; \sim Gaussian(\mu, \sigma) \\
 \mu        &amp; = \beta_0 + \beta_1 \cdot sr \\
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So:</p>
 <ul>
 <li><code>b_Intercept</code> is <span class="math inline">\(\beta_0\)</span>. This is the mean vowel duration when speech rate is zero.</li>
@@ -883,7 +904,7 @@ vdur &amp; \sim Gaussian(\mu, \sigma) \\
 <section id="summary-measures-of-the-posterior-draws" class="level2" data-number="25.4">
 <h2 data-number="25.4" class="anchored" data-anchor-id="summary-measures-of-the-posterior-draws"><span class="header-section-number">25.4</span> Summary measures of the posterior draws</h2>
 <p>The <code>Regression Coefficients</code> table from the <code>summary()</code> of the model reports summary measures calculated from the drawn values of <code>b_Intercept</code> and <code>b_speech_rate</code>. These summary measures are the mean (<code>Estimate</code>), the standard deviation (<code>Est.error</code>) of the draws and the lower and upper limits of the 95% Credible Interval (CrI). We can obtain those same measures ourselves from the data frame with the draws. Let’s calculate the mean and SD of <code>b_Intercept</code> and <code>b_speech_rate</code> (we round to the second digit with <code>round(2)</code>).</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercept</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(vow_bm_draws<span class="sc">$</span>b_Intercept) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -904,7 +925,7 @@ vdur &amp; \sim Gaussian(\mu, \sigma) \\
 </div>
 </div>
 <p>Compare the values obtained now with the values in the model summary above. They are the same, because the summary measures in the model summary are simply summary measures of the draws. What if we want to calculate the Credible Intervals (CrIs)? In <a href="ch-gaussian.html" class="quarto-xref"><span>Chapter 19</span></a>, you learned about the quantile function (the inverse CDF) to calculate intervals from <em>theoretical</em> distributions. However, here we need to calculate intervals from a sample of posterior draws: the MCMC draws. Note that central probability intervals of posterior draws are called Credible Intervals in Bayesian statistics, so CrI is just a specific type of interval. To obtain intervals from samples we can use the <code>quantile2()</code> function from the posterior package. This function takes two arguments: <code>x</code>, a vector of values to calculate the interval of, and <code>probs</code>, a vector of probabilities, like <code>qnorm()</code>. By default, <code>probs = c(0.05, 0.95)</code>. This gives you a 90% CrI interval, but the model summary returns by default a 95% CrI. For a 95% CrI, we need the 2.5th percentile and the 97.5th percentile: <code>c(0.025, 0.975)</code>. Here’s the code:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercept</span></span>
@@ -936,7 +957,7 @@ vdur &amp; \sim Gaussian(\mu, \sigma) \\
 </div>
 <p>With this model, <code>vow_bm</code>, getting all of these CrIs might look trivial: the 95% CrIs are quite narrow, giving us quite a precise range of values for both the intercept and the coefficient of speech rate. This is because there is quite a lot of data and the model is quite simple, there is only one predictor. With more complex model and smaller data sets, uncertainty is greater and the intervals will span a large range of values. We will see examples later in the book. In those cases, it is helpful to be able to discuss CrIs at different levels of probability, since a lower-probability CrI might tell us something clearer about what we are investigating, while warning us of the increased uncertainty that comes with it.</p>
 <p>In the previous chapter, we mentioned that one can calculate the posterior probability of mean vowel duration <span class="math inline">\(vdur\)</span> based on a specific value of speech rate <span class="math inline">\(sr\)</span>, using the model. We also noted that since we are working with MCMC it is not just like plugging in numbers according to the model’s equation, but rather we need to use the entire probability distributions. In fact, we can use the MCMC draws and plug them in directly, as you would with a single number. However, with MCMC draws the operations in the equation are applied draw-wise. Let’s see what this means by means of code:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>vow_bm_draws <span class="ot">&lt;-</span> vow_bm_draws <span class="sc">|&gt;</span> </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">vdur_sr5 =</span> b_Intercept <span class="sc">+</span> b_speech_rate <span class="sc">*</span> <span class="dv">5</span></span>
@@ -947,7 +968,7 @@ vdur &amp; \sim Gaussian(\mu, \sigma) \\
 </div>
 </div>
 <p>The mutate code <code>vdur_sr5 = b_Intercept + b_speech_rate * 5</code> is based on <span class="math inline">\(\mu = \beta_0 + \beta_1 sr\)</span>. In the code, <span class="math inline">\(sr\)</span> is set to 5 (syllables per second). So the mean vowel duration when speech rate is 5 syl/s is the intercept <span class="math inline">\(\beta_0\)</span> plus the slope <span class="math inline">\(\beta_1\)</span> times 5. Since we are mutating a data frame where each row is one of the 4000 total draws, we are summing and multiplying the values within each row. This gives us a new column <code>vdur_sr5</code> with 4000 predicted values of vowel duration, one per draw. You can then get summary measures, CrIs and even plot the values of the predicted column, like you would with the coefficients columns. The following code calculates the 95% CrI of the predicted vowel duration when speech rate is 5 syl/s (note we took 5 syl/s just as an example, but you can get prediction for any value of speech rate).</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(vow_bm_draws<span class="sc">$</span>vdur_sr5, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> q2.5 q97.5 
@@ -959,16 +980,16 @@ vdur &amp; \sim Gaussian(\mu, \sigma) \\
 <section id="plotting-posterior-draws" class="level2" data-number="25.5">
 <h2 data-number="25.5" class="anchored" data-anchor-id="plotting-posterior-draws"><span class="header-section-number">25.5</span> Plotting posterior draws</h2>
 <p>Plotting posterior draws is as straightforward as plotting any data. You already have all of the tools to understand plotting draws with ggplot2. To plot the reconstructed posterior probability distribution of any parameter, we plot the probability density (with <code>geom_density()</code>) of the draws of that parameter. Let’s plot <code>b_speech_rate</code>. This will be the posterior probability density of the change in vowel duration for each increase of one syllable per second. <a href="#fig-vow-bm-sr" class="quarto-xref">Figure&nbsp;<span>25.1</span></a> shows the posterior probability density of <code>b_speech_rate</code>. If you compare this plot with the central panel of <a href="ch-regression.html#fig-vow-bm" class="quarto-xref">Figure&nbsp;<span>24.3</span></a>, the density curves are identical.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>vow_bm_draws <span class="sc">|&gt;</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(b_speech_rate)) <span class="sc">+</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-vow-bm-sr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-vow-bm-sr" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-vow-bm-sr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-regression-draws_files/figure-html/fig-vow-bm-sr-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-regression-draws_files/figure-html/fig-vow-bm-sr-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vow-bm-sr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;25.1: Posterior probability distribution of <code>b_speech_rate</code>.
@@ -978,7 +999,7 @@ Figure&nbsp;25.1: Posterior probability distribution of <code>b_speech_rate</cod
 </div>
 </div>
 <p>The <a href="https://mjskay.github.io/ggdist/index.html">ggdist</a> package has some convenience ggplot geometries and stats for plotting posterior densities with CrIs. The <code>stat_halfeye()</code> can shade the area under the curve depending on the specified interval levels, like in the code for <a href="#fig-vow-bm-sr-cris" class="quarto-xref">Figure&nbsp;<span>25.2</span></a> below, which shows 50%, 80% and 95% CrIs. Below the density curve there are error bars of increasing thickness, each corresponding to a CrI. The large dot represents the <em>median</em> of the draws (rather than the mean, like in the model summary). The median is another acceptable summary measure for posteriors.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdist)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>vow_bm_draws <span class="sc">|&gt;</span></span>
@@ -990,10 +1011,10 @@ Figure&nbsp;25.1: Posterior probability distribution of <code>b_speech_rate</cod
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">na.translate =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-vow-bm-sr-cris" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-vow-bm-sr-cris" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-vow-bm-sr-cris-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-regression-draws_files/figure-html/fig-vow-bm-sr-cris-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-regression-draws_files/figure-html/fig-vow-bm-sr-cris-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vow-bm-sr-cris-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;25.2: Posterior probability distribution of <code>b_speech_rate</code> with credible intervals.
@@ -1666,8 +1687,8 @@ window.onload = function() {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch-null-ritual.html" class="pagination-link" aria-label="Frequentist statistics, the Null Ritual and *p*-values">
-        <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Frequentist statistics, the Null Ritual and <em>p</em>-values</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ch-regression-report.html" class="pagination-link" aria-label="Reporting Gaussian regression models">
+        <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">Reporting Gaussian regression models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

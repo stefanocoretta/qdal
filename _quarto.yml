@@ -53,6 +53,7 @@ book:
     - ch-regression-intro.qmd
     - ch-regression.qmd
     - ch-regression-draws.qmd
+    - ch-regression-report.qmd
   - part: Week 7
     chapters:
     - ch-null-ritual.qmd

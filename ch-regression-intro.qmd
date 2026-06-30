@@ -131,8 +131,8 @@ y & = 3 + 2 \cdot 3\\
 & = 9\\
 \end{aligned}$$
 
-Now, in the context of research, you usually start with a sample of measures (values) of $x$ (the predictor variable) and $y$ (the outcome variable), rather than having to calculate $y$.
-Then you have to **estimate** (i.e. to find the values of) $\beta_0$ and $\beta_1$ of the model formula $y = \beta_0 + \beta_1 x$ .
+Now, in the context of research, you usually start with a sample of measures (values) of $x$ (the predictor variable) and $y$ (the outcome variable) and you want to find the intercept and the slope, rather than having to calculate $y$ from a known intercept and slope.
+In other words, you want to **estimate** (i.e. to find the values of) $\beta_0$ and $\beta_1$ of the model formula $y = \beta_0 + \beta_1 x$ .
 This is what regression models are for: given the sampled values of $y$ and $x$, the model estimates $\beta_0$ and $\beta_1$.
 
 ::: callout-warning
@@ -191,7 +191,7 @@ Measurements are **noisy**: they usually contain errors.
 Error can have many different causes (for example, measurement error due to technical limitations or variability in human behaviour), but we are usually not that interested in learning about what causes the error.
 Rather, we just want our model to be able to deal with error.
 Let's see what errors looks like.
-@fig-error shows values of $y$ simulated with the equation $y = 1 + 1.5x$ (with $x$ equal 1 to 10), to which the random error $\epsilon$ (the Greek letter epsilon \[ˈɛpsɪlɒn\]) was added.
+@fig-error shows values of $y$ simulated with the equation $y = 1 + 1.5x$ (with $x$ equal 1 to 10), to which the random error $\epsilon$ (noted with the Greek letter epsilon \[ˈɛpsɪlɒn\]) was added.
 Due to the added error, the points are almost on the straight line defined by $y = 1 + 1.5x$, but not quite.
 The vertical distance between the observed points and the expected line, called the **regression line**, is the **residual error** (red lines in the plot).
 
@@ -262,9 +262,8 @@ y & \sim Gaussian(\mu, \sigma) & \text{[Distribution of y]}\\
 
 You perhaps realised this by now, but the regression equation implies that both $y$ and $x$ are *numeric variables*.
 However, regression models can also be used with variables that are categorical.
-You will learn how to use categorical predictors (categorical $x$'s) in regression models in Week 7's chapters.
-Moreover, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family.
-The chapters of Week 8 will teach you how to fit two other useful distribution families: the log-normal family and the Bernoulli family.
+You will learn how to use categorical predictors (categorical $x$'s) in regression models in @sec-regression-cat. Moreover, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family.
+@sec-regression-lognorm and @sec-regression-bernoulli will teach you how to fit two other useful distribution families: the log-normal family and the Bernoulli family.
 You will be able to learn about other families by checking the resources linked in @sec-reg-cheat-sheet.
 
 ::: {.callout-important collapse="true"}
