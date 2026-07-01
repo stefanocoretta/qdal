@@ -22,14 +22,14 @@ This collection of probabilities is called the **joint posterior probability dis
 
 For realistic regression models, determining this joint posterior distribution analytically (i.e. by solving Bayes' theorem mathematically) is often very difficult or even impossible.
 Instead of calculating the posterior distribution directly, Bayesian software uses the **Markov Chain Monte Carlo (MCMC)** sampling algorithm to generate sampled values from it.
-You first encountered MCMC in @sec-fit-model: the text printed when running `brm()` is about the MCMC algorithm.
+You first encountered MCMC in @sec-fit-model, when we run a Gaussian model with `brm()`: the text printed when running `brm()` is about the MCMC algorithm.
 In the Stan software, which brms uses to fit Bayesian models, MCMC uses a specific implementation called Hamiltonian Monte Carlo (HMC).
 
 The joint posterior distribution can be thought of as a multidimensional landscape, with one dimension for each parameter.
-Since we humans find it difficult to think in more than three dimensions, let's stick with two of the three parameters, the intercept and the slope.
-With two parameters this is a three-dimensional landscape that we can imagine.
-The *x*-axis represents values of the intercept, the *y*-axis values of the slope, and the *z*-axis (the vertical axis) the posterior probability density.
-Hills correspond to highly probable combinations of intercept and slope values, whereas valleys correspond to unlikely combinations.
+Since we humans find it difficult to think in more than three dimensions, let's stick with a Gaussian model like the one from @sec-fit-model. This model had two parameters: the mean $\mu$ and the standard deviation $\sigma$.
+With two parameters, the joint posterior distribution can be thought of as a three-dimensional landscape.
+The *x*-axis represents values of the mean, the *y*-axis values of the standard deviation, and the *z*-axis (the vertical axis) the posterior probability density.
+Hills correspond to highly probable combinations of mean and standard deviation values, whereas valleys correspond to unlikely combinations.
 This landscape is determined by the two components of Bayes' theorem: the prior probability distribution, $P(h)$, and the probability of the data given the prior, $P(d \mid h)$.
 Regions of high posterior probability of the are sampled more often than regions of low posterior probability, so the collection of sampled values approximates the joint posterior distribution.
 The output of a Bayesian model is therefore not a single value for each parameter but a large collection of values, called the **posterior draws**, for each model parameter.
@@ -39,10 +39,10 @@ Its motion is guided by the shape of the landscape using equations from classica
 At each step of this simulated motion, the algorithm records the particle's position as one **posterior draw**.
 Each of these steps is called an **iteration**.
 A sequence of iterations produced by the same simulation forms a **Markov chain** (or simply a chain).
-In the three-dimensional landscape of an intercept and a slope, each draw therefore contains one intercept value and one slope value sampled together from the joint posterior distribution.
+In the three-dimensional landscape of an intercept and a slope, each draw therefore contains one mean value and one standard deviation value sampled together from the joint posterior distribution.
 The algorithm repeats this process thousands of times, producing a large collection of posterior draws.
-Looking only at the intercept values across all draws gives the posterior distribution of the intercept, while looking only at the slope values gives the posterior distribution of the slope.
-Of course, in the type of regression model we have talked about in the previous chapter there are three parameters (intercept $\beta_0$, slope $\beta_1$, and $\sigma$) but we humans are not good at imagining more than three dimensions at a time so we will not attempt it.
+Looking only at the mean values across all draws gives the posterior distribution of the mean, while looking only at the standard deviation values gives the posterior distribution of the standard deviation.
+Of course, in the type of regression model we have talked about in the previous chapter there are three parameters (intercept $\beta_0$, slope $\beta_1$, and $\sigma$) but we humans are not good at imagining more than three dimensions at a time so we will not attempt it, but the principle is the same.
 
 ::: callout-tip
 ## MCMC
@@ -61,11 +61,11 @@ If you want to learn more about MCMC, I recommend @mcelreath2020, Ch.
 3.
 However, to be a proficient user of brms and Bayesian regression models, you do not need to fully understand the mathematics behind MCMC, as long as you understand the basic conceptual idea.
 
-When you run a model with brms, the posterior draws are stored in the model object.
+When you run a model with brms, the posterior draws are stored in the model object returned by the `brm()` function.
 Every operation on a fitted model, such as obtaining the output of `summary()` and plotting posterior distributions, is ultimately an operation on those draws.
 By default, brms runs *four* MCMC chains.
 The sampling algorithm within each chain performs 2,000 iterations.
-The first half (1,000 iterations) are used to warm up the algorithm by tuning parameters that govern the Hamiltonian dynamics, while the second half (1,000 iterations) are retained as posterior draws.
+The first half (1,000 iterations) are used to warm-up the algorithm by tuning parameters that govern the Hamiltonian dynamics, while the second half (1,000 iterations) are retained as posterior draws.
 Since four chains each contribute 1,000 posterior draws, the fitted model contains 4,000 posterior draws that can be used to learn about the posterior distribution.
 The rest of this chapter shows how to extract and manipulate these draws by revisiting the model fitted in @sec-regression.
 
@@ -134,9 +134,25 @@ When you save the model fit to a file, R does not keep track of changes in the m
 
 ## Extract MCMC posterior draws
 
-There are different ways to extract the MCMC posterior draws from a fitted model.
+The draws are stored in the model object `vow_bm`.
+This object is actually a list of other objects, and you can inspect it by clicking on `vow_bm` in the Environment panel of RStudio.
+After clicking, the object will appear in the Viewer panel.
+You can see what looks like in @fig-brms-model-object. There, click on the blue arrow next to `fit`, more objects will be revealed.
+Then click on `sim` and `samples`.
+The samples object is a list of four objects (`[[1]]`, `[[2]]`, `[[3]]`, `[[4]]`: each object contains the draws from each Markov chain, for each parameter (plus other things you shall not worry about).
+The parameters of the model are `b_Intercept`, `b_speech_rate` and `sigma`.
+These correspond to $\beta_0$, $\beta_1$ and $\sigma$ in the model formulae.
+Notice that the first two parameters start with a `b_`.
+This is because we represent regression coefficients with $\beta$, so we can easily distinguish regression parameters in the object from other parameters.
+
+![brms model object in the RStudio Viewer.](img/brms-samples.png){#fig-brms-model-object fig-align="center" width="500"}
+
+Each parameter has 2000 draws (values): these are the 1000 draws from the 1000 warm-up iterations plus the 1000 draws from the 1000 sampling iterations.
+As mentioned above, all operations on draws are done on the post- warm-up draws (the warm-up draws are discarded).
+
+There are different ways to extract the (post- warm-up) MCMC posterior draws from a fitted model.
 In this book, we will use the `as_draws_df()` function from the [posterior](https://mc-stan.org/posterior/) package.
-The function extracts the draws from a Bayesian regression model and outputs them as a data frame.
+The function extracts the draws from a Bayesian regression model object and outputs them as a data frame.
 Before we extract the draws from the `vow_bm` model, let's revisit the summary.
 
 ```{r}
@@ -147,7 +163,7 @@ summary(vow_bm)
 
 The `Draws` information in the summary are exactly that: information on the MCMC draws of the model.
 It says 4 chains were run each with 2000 iterations of which 1000 used for warm-up.
-`thin = 1` just tells brms to keep all the post-warm up draws, and it's fine as is so you can just ignore it.
+`thin = 1` just tells brms to keep all the post-warm-up draws, and it's fine as is so you can just ignore it.
 Then the summary tells us that there are 4000 total post-warm-up draws.
 We are good to go!
 We can extract the MCMC draws from the model using the `as_draws_df()` function.
@@ -192,7 +208,7 @@ One could say that the model "results" are, to put it simply, these draws and th
 
 The `Regression Coefficients` table from the `summary()` of the model reports summary measures calculated from the drawn values of `b_Intercept` and `b_speech_rate`.
 These summary measures are the mean (`Estimate`), the standard deviation (`Est.error`) of the draws and the lower and upper limits of the 95% Credible Interval (CrI).
-We can obtain those same measures ourselves from the data frame with the draws.
+We can obtain those same measures ourselves from the data frame with the draws, `vow_bm_draws`.
 Let's calculate the mean and SD of `b_Intercept` and `b_speech_rate` (we round to the second digit with `round(2)`).
 
 ```{r}
@@ -252,42 +268,9 @@ Calculate the 90%, 80% and 60% CrIs of `b_Intecept` and `b_speech_rate`.
 
 With this model, `vow_bm`, getting all of these CrIs might look trivial: the 95% CrIs are quite narrow, giving us quite a precise range of values for both the intercept and the coefficient of speech rate.
 This is because there is quite a lot of data and the model is quite simple, there is only one predictor.
-With more complex model and smaller data sets, uncertainty is greater and the intervals will span a large range of values.
+With more complex models and smaller data sets, uncertainty is greater and the intervals will span a large range of values.
 We will see examples later in the book.
 In those cases, it is helpful to be able to discuss CrIs at different levels of probability, since a lower-probability CrI might tell us something clearer about what we are investigating, while warning us of the increased uncertainty that comes with it.
-
-In the previous chapter, we mentioned that one can calculate the posterior probability of mean vowel duration $vdur$ based on a specific value of speech rate $sr$, using the model.
-We also noted that since we are working with MCMC it is not just like plugging in numbers according to the model's equation, but rather we need to use the entire probability distributions.
-In fact, we can use the MCMC draws and plug them in directly, as you would with a single number.
-However, with MCMC draws the operations in the equation are applied draw-wise.
-Let's see what this means by means of code:
-
-```{r}
-#| label: vow-bm-pred
-
-vow_bm_draws <- vow_bm_draws |> 
-  mutate(
-    vdur_sr5 = b_Intercept + b_speech_rate * 5
-  )
-head(vow_bm_draws$vdur_sr5)
-```
-
-The mutate code `vdur_sr5 = b_Intercept + b_speech_rate * 5` is based on $\mu = \beta_0 + \beta_1 sr$.
-In the code, $sr$ is set to 5 (syllables per second).
-So the mean vowel duration when speech rate is 5 syl/s is the intercept $\beta_0$ plus the slope $\beta_1$ times 5.
-Since we are mutating a data frame where each row is one of the 4000 total draws, we are summing and multiplying the values within each row.
-This gives us a new column `vdur_sr5` with 4000 predicted values of vowel duration, one per draw.
-You can then get summary measures, CrIs and even plot the values of the predicted column, like you would with the coefficients columns.
-The following code calculates the 95% CrI of the predicted vowel duration when speech rate is 5 syl/s (note we took 5 syl/s just as an example, but you can get prediction for any value of speech rate).
-
-```{r}
-#| label: vow-bm-pred-cri
-
-quantile2(vow_bm_draws$vdur_sr5, c(0.025, 0.975)) |> round()
-
-```
-
-Based on the model and data, when speech rate is 5 syl/s, the predicted vowel duration is 89-91 ms, at 95% probability.
 
 ## Plotting posterior draws
 
@@ -319,6 +302,7 @@ The median is another acceptable summary measure for posteriors.
 #| label: fig-vow-bm-sr-cris
 #| fig-cap: "Posterior probability distribution of `b_speech_rate` with credible intervals."
 #| warning: false
+#| message: false
 
 library(ggdist)
 
@@ -345,14 +329,84 @@ You can learn more about ggdist visualisation tools on the [ggdist](https://mjsk
 Plot the half-eyes of `b_Intercept` and `sigma`.
 :::
 
-## Expected values of the posterior predictive distribution
+## Expected value of the posterior predictive distribution
 
-You should always also plot the model predictions, i.e. the predicted values of vowel duration based on the model predictors (here just `speech_rate`).
-You will learn more advanced methods later on, but for now you can use `conditional_effects()` from the brms package.
+In a regression model, the mean $\mu$ of the outcome variable $y$ depends on the value of the predictor $x$.
+In our `vot_bm` model, the mean of the vowel duration depends on the value of speech rate.
+
+$$\begin{aligned}
+vdur & \sim Gaussian(\mu, \sigma) \\
+\mu        & = \beta_0 + \beta_1 \cdot sr \\
+\end{aligned}$$
+
+Since $\mu$ is conditional on the value of $sr$, it is also called the **conditional mean** or **expected value** (in mathematical notation $\mu = E(y \mid x)$, i.e the expected value of $y$ conditional on $x$, where $y$ is $vdur$ and $x$ is $sr$ in our model).
+We can use the regression equation for $\mu$ to generate samples from the posterior distribution of $\mu$ by evaluating it at the posterior draws of $\beta_0$ and $\beta_1$ and at specific values of speech rate $sr$.
+The resulting values are posterior draws of the expected value (or conditional mean) of $vdur$ given $sr$.
+
+Here, evaluating means substituting specific numerical values into the regression equation.
+Concretely, for each posterior draw of $\beta_0$ and $\beta_1$ we take a chosen value of speech rate $sr$, like 4 syllables per second, plug these numbers into the regression equation $\mu = \beta_0 + \beta_1 \cdot sr$, and compute the resulting value of $\mu$.
+Repeating this for each posterior draw (there are 4000 in total) produces a set of values, each corresponding to one plausible realisation of the conditional mean implied by the model.
+This collection of calculated posterior draws forms the posterior distribution of the expected value $E(y \mid x)$.
+
+The expected value $E(vdur \mid sr)$ describes how the expected vowel duration varies as a function of speech rate, given the regression coefficients.
+This quantity is obtained by evaluating $\mu$ at posterior draws of $\beta_0$ and $\beta_1$, and it captures uncertainty about the regression coefficients themselves.
+However, this is not the same as the distribution of actual observed values of vowel duration.
+To move from expected values to predicted data, we also need to take into account the residual variability represented by $\sigma$.
+In brms, this leads to the **posterior predictive distribution**, which describes the distribution of possible values of $vdur$ for a given $sr$, combining uncertainty in the regression coefficients with the random variation around the mean captured by $\sigma$.
+The *expected value of the posterior predictive distribution* refers to the average of these predicted outcomes, which coincides with the model-implied conditional mean/expected value $E(vdur \mid sr)$.
+
+Let's calculate the posterior distribution of the expected value of vowel duration using the model draws and the speech rate values of 4 and 7, just as an example.
+These are more or less the minimum and maximum value of speech rate in the data, but we could use any value (of course, speech rate can't be negative so negative values wouldn't make sense, and very high values would also be physically impossible).
+We can use `mutate()` to calculate posterior draws of the expected value.[^ch-regression-draws-2]
+
+[^ch-regression-draws-2]: A terminological note: "posterior draws" is commonly used to refer both to the actual draws sampled by the MCMC algorithm, which you find in the model object, and to the values derived from the posterior draws (these are also called *derived quantities*).
+
+```{r}
+#| label: vow-bm-pred
+
+vow_bm_draws <- vow_bm_draws |> 
+  mutate(
+    vdur_sr_4 = b_Intercept + b_speech_rate * 4,
+    vdur_sr_7 = b_Intercept + b_speech_rate * 7,
+  )
+
+head(vow_bm_draws$vdur_sr_4)
+head(vow_bm_draws$vdur_sr_7)
+```
+
+The two new columns `vdur_sr_4` and `vdur_sr_7` contains posterior draws of the expected value of vowel duration when speech rate is 4 and 7 respectively.
+The `head()` code shows the first 10 values in the columns.
+The code `vdur_sr_4 = b_Intercept + b_speech_rate * 4` (and the respective code for $sr = 7$) is based on $\mu = \beta_0 + \beta_1 sr$.
+In the code, $sr$ is set to 4 (syllables per second).
+So the mean vowel duration when speech rate is 4 syl/s is the intercept $\beta_0$ plus the slope $\beta_1$ times 4.
+Since we are mutating a data frame where each row is one of the 4000 total draws, we are summing and multiplying the values within each row.
+This gives us a new column `vdur_sr_4` (and `vdur_sr_7` when $sr = 7$) with 4000 predicted values of vowel duration, one per draw.
+You can then get summary measures, CrIs and even plot the values of the predicted column, like you would with the coefficients columns `b_Intercept` and `b_speech_rate`.
+The following code calculates the 95% CrI of the expected vowel duration when speech rate is 4 and 7 syl/s.
+
+```{r}
+#| label: vow-bm-pred-cri
+
+quantile2(vow_bm_draws$vdur_sr_4, c(0.025, 0.975)) |> round()
+
+quantile2(vow_bm_draws$vdur_sr_7, c(0.025, 0.975)) |> round()
+
+```
+
+Based on the model and data, the conditional mean (i.e. expected value) of vowel duration is 110-113 ms when speech rate is 4 syl/s and 44-49 ms when speech rate is 7 syl/s, at 95% probability (because it is a 95% CrI).
+
+## Plotting the expected value of vowel duration
+
+It is common to plot the expected values of the outcome (here vowel duration) based on the value of the predictor (here speech rate).
+A quick way to achieve this is to use the `conditional_effects()` function from the brms package.
+The function calculates the expected values under the hood and plots a regression line of the mean expected value (the blue line) and a 95% CrI (the grey ribbon).
+The result is @fig-vow-bm-cond. The regression line has a negative slope: this means that with greater speech rate, vowel duration decreases.
+The 95% CrI of the regression line in the plot indicates that we can be 95% confident that the mean vowel duration for different values of speech rate is within that interval.
 
 ```{r}
 #| label: fig-vow-bm-cond
-#| fig-cap: "Posterior predictions of vowel duration based on speech rate from a regression model."
+#| fig-cap: "Conditional mean (expected value) of vowel duration based on speech rate from a regression model."
+#| message: false
 
 conditional_effects(vow_bm, effects = "speech_rate")
 ```
@@ -363,7 +417,8 @@ Here we are making the points transparent.
 
 ```{r}
 #| label: fig-vow-bm-cond-1
-#| fig-cap: "Posterior predictions of vowel duration based on speech rate from a regression model (repr.)."
+#| fig-cap: "Conditional mean (expected value) of vowel duration based on speech rate from a regression model (repr.)."
+#| message: false
 
 plot(
   conditional_effects(vow_bm, effects = "speech_rate"),
@@ -379,9 +434,10 @@ In the context of that plot, that means the smooth function fitted a regression 
 This is because the aesthetics are exactly `aes(x = speech_rate, y = v1_duration)` (we didn't write the `x =` and `y =` because they are implied).
 So `geom_smooth()` has fitted exactly the same model we have fitted with brms.
 It might look trivial to fit a full model when you can just look at the regression line of `geom_smooth()`.
-This is not the case for two reasons: first, you just see a regression line, but you don't know what the posterior distributions of the parameters are; second, with more complex scenarios, `geom_smooth()` falls short and can only produce regression lines based on very simple formulae like `y ~ x`.[^ch-regression-draws-2]
+This is not the case for two reasons: first, you just see a regression line, but you don't know what the posterior distributions of the parameters are; second, with more complex scenarios, `geom_smooth()` falls short and can only produce regression lines based on very simple formulae like `y ~ x`.[^ch-regression-draws-3]
 
-[^ch-regression-draws-2]: Technically, `geom_smooth()` uses `lm()` under the hood.
+[^ch-regression-draws-3]: Technically, `geom_smooth()` uses `lm()` under the hood.
     This is a base R function that fits regression models using [maximum likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation) (MLE).
     This way of estimating regression coefficients is common in frequentist approaches to regression modelling and we will not treat it here.
     If you are interested about `lm()` and MLE, you can learn about these in @winter2020.
+
