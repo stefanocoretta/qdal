@@ -329,7 +329,7 @@ You can learn more about ggdist visualisation tools on the [ggdist](https://mjsk
 Plot the half-eyes of `b_Intercept` and `sigma`.
 :::
 
-## Expected value of the posterior predictive distribution
+## Expected value of the posterior predictive distribution  {#sec-exp-val-ppd}
 
 In a regression model, the mean $\mu$ of the outcome variable $y$ depends on the value of the predictor $x$.
 In our `vot_bm` model, the mean of the vowel duration depends on the value of speech rate.
@@ -395,11 +395,15 @@ quantile2(vow_bm_draws$vdur_sr_7, c(0.025, 0.975)) |> round()
 
 Based on the model and data, the conditional mean (i.e. expected value) of vowel duration is 110-113 ms when speech rate is 4 syl/s and 44-49 ms when speech rate is 7 syl/s, at 95% probability (because it is a 95% CrI).
 
-## Plotting the expected value of vowel duration
+## Plotting the expected values of vowel duration
+
+<!-- TODO: add link to chapter that explains epred_draws() -->
 
 It is common to plot the expected values of the outcome (here vowel duration) based on the value of the predictor (here speech rate).
-A quick way to achieve this is to use the `conditional_effects()` function from the brms package.
+One could manually calculate the expected value at several values of speech rate using the code above and plot them, but it is not very practical.
+An alternative and quicker way to plot expected values is to use the `conditional_effects()` function from the brms package (you will learn how to calculate expected values efficiently in XXX).
 The function calculates the expected values under the hood and plots a regression line of the mean expected value (the blue line) and a 95% CrI (the grey ribbon).
+The range of values for the predictor is between the minimum and maximum values of the predictor in the data, and 100 equidistant values within the range are used by default (you can change this number with the `resolution` argument).
 The result is @fig-vow-bm-cond. The regression line has a negative slope: this means that with greater speech rate, vowel duration decreases.
 The 95% CrI of the regression line in the plot indicates that we can be 95% confident that the mean vowel duration for different values of speech rate is within that interval.
 
@@ -441,3 +445,70 @@ This is not the case for two reasons: first, you just see a regression line, but
     This way of estimating regression coefficients is common in frequentist approaches to regression modelling and we will not treat it here.
     If you are interested about `lm()` and MLE, you can learn about these in @winter2020.
 
+## Difference of expected values at specific predictor values
+
+In @sec-exp-val-ppd we calculated the posterior draws of the expected value of vowel duration when speech rate is 4 and 7.
+Assume we are interested in the *difference* between vowel duration when speech rate is 4 and when it is 7.
+The `b_speech_rate` draws tell us the difference for one unit change in speech rate, so for example from 4 to 5 or from 6 to 7.
+For the specific type of Gaussian regression model we fitted so far, you could multiply the draws of `b_speech_rate` by 3 to get the posterior draws of the difference of interest.
+The calculated posterior draws of the difference would apply to any speech rate comparison of 3 units (4 to 7, 0 to 3, 6.5 to 9.5), but this is true only in very specific cases (like the one we've been discussing here) and doesn't generalise to all model types (in particular, it would not work with models that use a different family distribution, models with interactions of transformed variables, and so on).
+
+Instead, since we have already calculated the posterior draws of the expected value of vowel duration above, we can simply take the difference of these: the resulting draws are the posterior draws of the difference in vowel duration when speech rate is 4 vs when it is 7.
+That's what the following code does:
+
+```{r}
+#| label: vow-bm-diff
+
+vow_bm_draws <- vow_bm_draws |> 
+  mutate(
+    diff_sr_4_7 = vdur_sr_7 - vdur_sr_4
+  )
+
+head(vow_bm_draws$diff_sr_4_7)
+```
+
+We can then calculate summary measures and CrIs and even plot the density of the posterior draws, as usual.
+The following code calculates a 99% CrI.
+
+```{r}
+#| label: vow-bm-diff-cri
+
+quantile2(vow_bm_draws$diff_sr_4_7, c(0.005, 0.995)) |> round()
+```
+
+The difference in vowel duration when speech rate is 4 vs 7 syl/s is -60 to -70 ms at 99% confidence (as always, conditional on the model and data).
+@fig-vow-diff shows the posterior distribution of the difference.
+
+```{r}
+#| label: fig-vow-diff
+#| fig-cap: "Posterior distribution of the difference in vowel duration at 4 vs 7 syl/s."
+
+vow_bm_draws |> 
+  ggplot(aes(diff_sr_4_7)) +
+  geom_density(fill = "darkblue", alpha = 0.5) +
+  labs(
+    x = "Vowel duration difference (ms)",
+    caption = "Difference when speech rate is 4 vs when it is 7 syl/s."
+  )
+
+```
+
+## Summary
+
+::: {.callout-note appearance="simple"}
+- brms samples from the **joint posterior distribution** of the model's parameters using the Hamiltonian Monte Carlo implementation of the Markov Chain Monte Carlo (**MCMC**) algorithm.
+
+- By default, 4 MCMC chains are run with 2000 iterations each, the first 1000 of which are for warm-up.
+
+- The sampled values from the MCMC chains are the **posterior draws**.
+
+- The posterior draws can be extracted from the model object with `as_draws_df()`.
+  The posterior draws can be summarised and plotted.
+
+- The **expected value** of the outcome is the mean of the outcome conditional on the value of the predictor, without the uncertainty from $\sigma$.
+  Posterior draws of the expected value can be calculated from the model's posterior draws.
+
+- The **posterior predictive distribution** describes the distribution of possible outcome variables based on the model, including the uncertainty from $\sigma$.
+
+- The model-based expected values can be plotted with `conditional_effects()`.
+:::
