@@ -258,11 +258,18 @@ $$\begin{aligned}
 y & \sim Gaussian(\mu, \sigma) & \text{[Distribution of y]}\\
 \mu & = \beta_0 + \beta_1 x & \text{[Regression equation]}\\
 \end{aligned}$$
+
+where:
+
+- $\beta_0$ is the mean $y$ when $x = 0$.
+
+- $\beta_1$ is the change in mean $y$ for each unit increase of $x$.
 :::
 
 You perhaps realised this by now, but the regression equation implies that both $y$ and $x$ are *numeric variables*.
 However, regression models can also be used with variables that are categorical.
-You will learn how to use categorical predictors (categorical $x$'s) in regression models in @sec-regression-cat. Moreover, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family.
+You will learn how to use categorical predictors (categorical $x$'s) in regression models in @sec-regression-cat.
+Moreover, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family.
 @sec-regression-lognorm and @sec-regression-bernoulli will teach you how to fit two other useful distribution families: the log-normal family and the Bernoulli family.
 You will be able to learn about other families by checking the resources linked in @sec-reg-cheat-sheet.
 

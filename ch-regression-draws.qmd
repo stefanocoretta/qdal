@@ -124,8 +124,9 @@ If you now re-run the same code again, you will notice that `brm()` does not fit
 This saves time: you fit the model once but you can read the output multiple times.
 This is also good for reproducibility: an independent researcher with access to your code and the cache folder can run your code and get the same results as yours.[^ch-regression-draws-1]
 
-[^ch-regression-draws-1]: In practice, even when setting the seed, you might get very slightly different results depending on the hardware and software.
+[^ch-regression-draws-1]: In practice, even when setting the seed, you might get very slightly different results depending on the hardware and operating system.
     These are usually minuscule and do not impact the overall results.
+    See <https://mc-stan.org/docs/reference-manual/reproducibility.html> if you are interested in the computational aspects.
 
 ::: callout-important
 When you save the model fit to a file, R does not keep track of changes in the model specification (like changes in formula or data and so on), so if you make changes to the model, you need to **delete the saved model file** before re-running the code for the changes to have effect!
@@ -343,3 +344,44 @@ You can learn more about ggdist visualisation tools on the [ggdist](https://mjsk
 
 Plot the half-eyes of `b_Intercept` and `sigma`.
 :::
+
+## Expected values of the posterior predictive distribution
+
+You should always also plot the model predictions, i.e. the predicted values of vowel duration based on the model predictors (here just `speech_rate`).
+You will learn more advanced methods later on, but for now you can use `conditional_effects()` from the brms package.
+
+```{r}
+#| label: fig-vow-bm-cond
+#| fig-cap: "Posterior predictions of vowel duration based on speech rate from a regression model."
+
+conditional_effects(vow_bm, effects = "speech_rate")
+```
+
+If you wish to include the raw data in the plot, you can wrap `conditional_effects()` in `plot()` and specify `points = TRUE`.
+Any argument that needs to be passed to `geom_point()` (these are all ggplot2 plots!) can be specified in a list as the argument `point_args`.
+Here we are making the points transparent.
+
+```{r}
+#| label: fig-vow-bm-cond-1
+#| fig-cap: "Posterior predictions of vowel duration based on speech rate from a regression model (repr.)."
+
+plot(
+  conditional_effects(vow_bm, effects = "speech_rate"),
+  points = TRUE,
+  point_args = list(alpha = 0.1)
+)
+```
+
+This plot looks basically the same as @fig-vow-rate-lm.
+Indeed, in @fig-vow-rate-lm we used `geom_smooth()` to add a regression line from a regression model.
+A warning told us that this formula was used: `y ~ x`.
+In the context of that plot, that means the smooth function fitted a regression model with speech rate as `x` and vowel duration as `y`.
+This is because the aesthetics are exactly `aes(x = speech_rate, y = v1_duration)` (we didn't write the `x =` and `y =` because they are implied).
+So `geom_smooth()` has fitted exactly the same model we have fitted with brms.
+It might look trivial to fit a full model when you can just look at the regression line of `geom_smooth()`.
+This is not the case for two reasons: first, you just see a regression line, but you don't know what the posterior distributions of the parameters are; second, with more complex scenarios, `geom_smooth()` falls short and can only produce regression lines based on very simple formulae like `y ~ x`.[^ch-regression-draws-2]
+
+[^ch-regression-draws-2]: Technically, `geom_smooth()` uses `lm()` under the hood.
+    This is a base R function that fits regression models using [maximum likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation) (MLE).
+    This way of estimating regression coefficients is common in frequentist approaches to regression modelling and we will not treat it here.
+    If you are interested about `lm()` and MLE, you can learn about these in @winter2020.
