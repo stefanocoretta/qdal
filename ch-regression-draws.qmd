@@ -26,7 +26,8 @@ You first encountered MCMC in @sec-fit-model, when we run a Gaussian model with 
 In the Stan software, which brms uses to fit Bayesian models, MCMC uses a specific implementation called Hamiltonian Monte Carlo (HMC).
 
 The joint posterior distribution can be thought of as a multidimensional landscape, with one dimension for each parameter.
-Since we humans find it difficult to think in more than three dimensions, let's stick with a Gaussian model like the one from @sec-fit-model. This model had two parameters: the mean $\mu$ and the standard deviation $\sigma$.
+Since we humans find it difficult to think in more than three dimensions, let's stick with a Gaussian model like the one from @sec-fit-model.
+This model had two parameters: the mean $\mu$ and the standard deviation $\sigma$.
 With two parameters, the joint posterior distribution can be thought of as a three-dimensional landscape.
 The *x*-axis represents values of the mean, the *y*-axis values of the standard deviation, and the *z*-axis (the vertical axis) the posterior probability density.
 Hills correspond to highly probable combinations of mean and standard deviation values, whereas valleys correspond to unlikely combinations.
@@ -137,7 +138,8 @@ When you save the model fit to a file, R does not keep track of changes in the m
 The draws are stored in the model object `vow_bm`.
 This object is actually a list of other objects, and you can inspect it by clicking on `vow_bm` in the Environment panel of RStudio.
 After clicking, the object will appear in the Viewer panel.
-You can see what looks like in @fig-brms-model-object. There, click on the blue arrow next to `fit`, more objects will be revealed.
+You can see what looks like in @fig-brms-model-object.
+There, click on the blue arrow next to `fit`, more objects will be revealed.
 Then click on `sim` and `samples`.
 The samples object is a list of four objects (`[[1]]`, `[[2]]`, `[[3]]`, `[[4]]`: each object contains the draws from each Markov chain, for each parameter (plus other things you shall not worry about).
 The parameters of the model are `b_Intercept`, `b_speech_rate` and `sigma`.
@@ -329,7 +331,7 @@ You can learn more about ggdist visualisation tools on the [ggdist](https://mjsk
 Plot the half-eyes of `b_Intercept` and `sigma`.
 :::
 
-## Expected value of the posterior predictive distribution  {#sec-exp-val-ppd}
+## Expected value of the posterior predictive distribution {#sec-exp-val-ppd}
 
 In a regression model, the mean $\mu$ of the outcome variable $y$ depends on the value of the predictor $x$.
 In our `vot_bm` model, the mean of the vowel duration depends on the value of speech rate.
@@ -404,7 +406,8 @@ One could manually calculate the expected value at several values of speech rate
 An alternative and quicker way to plot expected values is to use the `conditional_effects()` function from the brms package (you will learn how to calculate expected values efficiently in XXX).
 The function calculates the expected values under the hood and plots a regression line of the mean expected value (the blue line) and a 95% CrI (the grey ribbon).
 The range of values for the predictor is between the minimum and maximum values of the predictor in the data, and 100 equidistant values within the range are used by default (you can change this number with the `resolution` argument).
-The result is @fig-vow-bm-cond. The regression line has a negative slope: this means that with greater speech rate, vowel duration decreases.
+The result is @fig-vow-bm-cond.
+The regression line has a negative slope: this means that with greater speech rate, vowel duration decreases.
 The 95% CrI of the regression line in the plot indicates that we can be 95% confident that the mean vowel duration for different values of speech rate is within that interval.
 
 ```{r}

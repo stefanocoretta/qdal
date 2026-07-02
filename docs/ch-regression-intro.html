@@ -579,13 +579,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models with brms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-draws.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Working with MCMC draws</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -922,16 +922,16 @@ y &amp; = 3 + 2 \cdot 3\\
 <div class="cell" data-layout-align="center">
 <ol type="a">
 <li>What happens to the line when you increase the intercept <span class="math inline">\(\beta_0\)</span>?
-<div id="radio_PPGDKTODJD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PPGDKTODJD" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_PPGDKTODJD" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_PPGDKTODJD" value="answer"> <span>The whole line shifts upwards.</span></label><label><input type="radio" autocomplete="off" name="radio_PPGDKTODJD" value=""> <span>The line becomes flat.</span></label>
+<div id="radio_GACWVQQFMU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GACWVQQFMU" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_GACWVQQFMU" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_GACWVQQFMU" value="answer"> <span>The whole line shifts upwards.</span></label><label><input type="radio" autocomplete="off" name="radio_GACWVQQFMU" value=""> <span>The line becomes flat.</span></label>
 </div></li>
 <li>What happens to the line when you set the slope <span class="math inline">\(\beta_1\)</span> to a negative number?
-<div id="radio_OKUMODNJWS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OKUMODNJWS" value="answer"> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_OKUMODNJWS" value=""> <span>The whole line becomes flat.</span></label><label><input type="radio" autocomplete="off" name="radio_OKUMODNJWS" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_OKUMODNJWS" value=""> <span>The line increases from left to right.</span></label>
+<div id="radio_IEIVKAIRUY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IEIVKAIRUY" value="answer"> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_IEIVKAIRUY" value=""> <span>The whole line becomes flat.</span></label><label><input type="radio" autocomplete="off" name="radio_IEIVKAIRUY" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_IEIVKAIRUY" value=""> <span>The line increases from left to right.</span></label>
 </div></li>
 <li>What happens to the line when you set the slope <span class="math inline">\(\beta_1\)</span> to <code>0</code> zero?
-<div id="radio_QCECBZHSOQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QCECBZHSOQ" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_QCECBZHSOQ" value=""> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_QCECBZHSOQ" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_QCECBZHSOQ" value="answer"> <span>The line becomes flat.</span></label>
+<div id="radio_TXJYZSHLMC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TXJYZSHLMC" value=""> <span>The whole line shifts downwards.</span></label><label><input type="radio" autocomplete="off" name="radio_TXJYZSHLMC" value=""> <span>The line decreases from left to right.</span></label><label><input type="radio" autocomplete="off" name="radio_TXJYZSHLMC" value=""> <span>The line becomes steeper.</span></label><label><input type="radio" autocomplete="off" name="radio_TXJYZSHLMC" value="answer"> <span>The line becomes flat.</span></label>
 </div></li>
 </ol>
 </div>
@@ -1001,9 +1001,14 @@ y &amp; \sim Gaussian(\mu, \sigma)\\
 y &amp; \sim Gaussian(\mu, \sigma) &amp; \text{[Distribution of y]}\\
 \mu &amp; = \beta_0 + \beta_1 x &amp; \text{[Regression equation]}\\
 \end{aligned}\]</span></p>
+<p>where:</p>
+<ul>
+<li><p><span class="math inline">\(\beta_0\)</span> is the mean <span class="math inline">\(y\)</span> when <span class="math inline">\(x = 0\)</span>.</p></li>
+<li><p><span class="math inline">\(\beta_1\)</span> is the change in mean <span class="math inline">\(y\)</span> for each unit increase of <span class="math inline">\(x\)</span>.</p></li>
+</ul>
 </div>
 </div>
-<p>You perhaps realised this by now, but the regression equation implies that both <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are <em>numeric variables</em>. However, regression models can also be used with variables that are categorical. You will learn how to use categorical predictors (categorical <span class="math inline">\(x\)</span>’s) in regression models in <a href="ch-regression-cat.html" class="quarto-xref"><span>Chapter 27</span></a>. Moreover, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family. <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 30</span></a> and <a href="ch-regression-bernoulli.html" class="quarto-xref"><span>Chapter 29</span></a> will teach you how to fit two other useful distribution families: the log-normal family and the Bernoulli family. You will be able to learn about other families by checking the resources linked in <a href="app-reg-cheat-sheet.html" class="quarto-xref"><span>Appendix B</span></a>.</p>
+<p>You perhaps realised this by now, but the regression equation implies that both <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are <em>numeric variables</em>. However, regression models can also be used with variables that are categorical. You will learn how to use categorical predictors (categorical <span class="math inline">\(x\)</span>’s) in regression models in <a href="ch-regression-cat.html" class="quarto-xref"><span>Chapter 27</span></a>. Moreover, regression models are not limited to the Gaussian distribution family and in fact regression models can be fit with virtually any other distribution family. <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 31</span></a> and <a href="ch-regression-bernoulli.html" class="quarto-xref"><span>Chapter 30</span></a> will teach you how to fit two other useful distribution families: the log-normal family and the Bernoulli family. You will be able to learn about other families by checking the resources linked in <a href="app-reg-cheat-sheet.html" class="quarto-xref"><span>Appendix B</span></a>.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1695,8 +1700,8 @@ window.onload = function() {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch-regression.html" class="pagination-link" aria-label="Regression models">
-        <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ch-regression.html" class="pagination-link" aria-label="Regression models with brms">
+        <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models with brms</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

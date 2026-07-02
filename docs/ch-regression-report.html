@@ -101,6 +101,8 @@ div.csl-indent {
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -542,13 +544,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models with brms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-draws.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Working with MCMC draws</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -720,8 +722,7 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#reporting" id="toc-reporting" class="nav-link active" data-scroll-target="#reporting"><span class="header-section-number">26.1</span> Reporting</a></li>
-  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next"><span class="header-section-number">26.2</span> What’s next</a></li>
+  <li><a href="#whats-next" id="toc-whats-next" class="nav-link active" data-scroll-target="#whats-next"><span class="header-section-number">26.1</span> What’s next</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-report.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -749,18 +750,21 @@ window.Quarto = {
 
 
 <p><img src="./img/badge-stats.png" class="img-fluid"></p>
-<section id="reporting" class="level2" data-number="26.1">
-<h2 data-number="26.1" class="anchored" data-anchor-id="reporting"><span class="header-section-number">26.1</span> Reporting</h2>
-<p>You have seen an example of reporting in <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>. We can use that as a template for reporting a regression model, by reworking a few parts and adding information related to the numeric predictor in the regression. You could report the vowel duration regression model like so:</p>
+<p>You have seen an example of model reporting in <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>. We can use that as a template for reporting a regression model, by reworking a few parts and adding information related to the numeric predictor in the regression. You could report the vowel duration regression model like so:</p>
 <blockquote class="blockquote">
 <p>We fitted a Bayesian regression model using the brms package <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. We used a Gaussian distribution for the outcome variable, vowel duration (in milliseconds). We included speech rate (measured as syllables per second) as the regression predictor.</p>
-<p>Based on the model results, there is a 95% probability that the mean vowel duration, when speech rate is 0, is between <code>{r} round(brms::fixef(vow_bm)[1, 3])</code> and <code>{r} round(brms::fixef(vow_bm)[1, 4])</code> ms (mean = <code>{r} round(brms::fixef(vow_bm)[1, 1])</code>, SD = <code>{r} round(brms::fixef(vow_bm)[1, 2])</code>). For each unit increase of speech rate (i.e.&nbsp;for each one syllable per second added), vowel duration decreases by <code>{r} -round(brms::fixef(vow_bm)[2, 4])</code> to <code>{r} -round(brms::fixef(vow_bm)[2, 3])</code> ms (mean = <code>{r} round(brms::fixef(vow_bm)[2, 1])</code>, SD = <code>{r} round(brms::fixef(vow_bm)[2, 2])</code>). The residual standard deviation is between <code>{r} round(brms::posterior_summary(vow_bm)["sigma", "Q2.5"])</code> and <code>{r} round(brms::posterior_summary(vow_bm)["sigma", "Q97.5"])</code> ms (mean = <code>{r} round(brms::posterior_summary(vow_bm)["sigma", "Estimate"])</code>, SD = <code>{r} round(brms::posterior_summary(vow_bm)["sigma", "Est.Error"])</code>).</p>
+<p>Based on the model results, there is a 95% probability that the mean vowel duration, when speech rate is 0, is between 192 and 205 ms (mean = 198, SD = 3). For each unit increase of speech rate (i.e.&nbsp;for each one syllable per second added), vowel duration decreases by 20 to 23 ms (mean = -22, SD = 1). The residual standard deviation is between 21 and 22 ms (mean = 22, SD = 0). When comparing vowel duration at speech rate 4 syl/s vs 7 syl/s, the difference is between -69 and -61 ms, at 95% probability.</p>
 </blockquote>
-<p>Note the wording of the speech rate coefficient: “vowel duration decreases by <code>{r} -round(brms::fixef(vow_bm)[2, 4])</code> to <code>{r} -round(brms::fixef(vow_bm)[2, 3])</code> ms”. The speech rate coefficient 95% CrI is fully negative (i.e.&nbsp;both lower and upper limit are negative) so we can say that vowel duration <em>decreases</em>. Furthermore, since we say “decreases” then we should report the CrI limits as positive numbers. Think about it: we say “decrease X by 2” to mean “X - 2”, rather than “decrease X by -2”. Finally, given we flipped the signs of the CrI limits, it is clearer to write “<code>{r} -round(brms::fixef(vow_bm)[2, 4])</code> to <code>{r} -round(brms::fixef(vow_bm)[2, 3])</code> ms”, rather than the other way round as you would if you reported the interval as is: 95% CrI [<code>{r} round(brms::fixef(vow_bm)[2, 3])</code>, <code>{r} round(brms::fixef(vow_bm)[2, 4])</code>].</p>
+<p>Note the wording of the speech rate coefficient: “vowel duration decreases by 20 to 23 ms”. The speech rate coefficient 95% CrI is fully negative (i.e.&nbsp;both lower and upper limit are negative) so we can say that vowel duration <em>decreases</em>. Furthermore, since we say “decreases” then we should report the CrI limits as positive numbers. Think about it: we say “decrease X by 2” to mean “X - 2”, rather than “decrease X by -2”. Finally, given we flipped the signs of the CrI limits, it is clearer to write “20 to 23 ms”, rather than the other way round as you would if you reported the interval as is: 95% CrI [-23, -20].</p>
 <p>Another point to note is that in the reporting style I am using in this book, we place more emphasis on the posterior CrI than on the posterior mean and SD. So the CrI is in the main text, while mean and SD are between parentheses. Other researchers might in fact do it the other way round. Whatever you decide to do, be consistent. Finally, it is unusual to report the coefficients of <span class="math inline">\(\sigma\)</span>: I have done it here for completeness, since it doesn’t hurt to do so.</p>
-</section>
-<section id="whats-next" class="level2" data-number="26.2">
-<h2 data-number="26.2" class="anchored" data-anchor-id="whats-next"><span class="header-section-number">26.2</span> What’s next</h2>
+<p>Your modelling report should also include figures that show posterior distributions of parameters, of expected values and of other quantities of interest (like the comparison at different values of speech rate). What you include really depends on the research question, so there isn’t a single answer. Our research question was:</p>
+<blockquote class="blockquote">
+<p>What is the relationship between vowel duration and speech rate?</p>
+</blockquote>
+<p>We have answered that question by modelling the data with a regression model and reporting the results from the model. Specifically, we now know that for each unit increase of speech rate, vowel duration decreases by 20 to 23 ms at 95% confidence. Of course, what this means for our understanding of speech cannot be answered by the regression model (or statistics more generally): in other words, what the decrease means for speech is not a statistical question but a linguistic one. While statistical theory can help in the estimation, linguistic theory is needed to further interpret the outcomes of the estimation.</p>
+<p>Furthermore, a warning: the model we have used to answer the question is wrong. Vowel duration is not Gaussian and the relation between vowel duration and speech rate is very likely not linear (in other words, the effect of speech rate varies with the value of speech rate). Moreover, we are pooling data from different vowels and different speakers. The model is totally unaware of this, and this can lead to biased estimates. In the rest of the textbook you will encounter extensions of a regression model that allow you to address some of these issues, but we will not be able to cover everything. You might wonder, if the model is not appropriate, why did we go through the trouble? As mentioned in previous chapters, we do this for pedagogical reasons: you first need a solid understanding of the basics before we can move on to more realistic but more complex models. I appreciate this is not how statistical modelling is usually presented in research papers, where models are introduced in their most appropriate form. However, learning statistical modelling is much like learning linguistics: you start with simplified examples that isolate the key concepts before gradually adding complexity. The simplified models in this chapter are not intended as models you should use in practice, but as stepping stones towards understanding more realistic models.</p>
+<section id="whats-next" class="level2" data-number="26.1">
+<h2 data-number="26.1" class="anchored" data-anchor-id="whats-next"><span class="header-section-number">26.1</span> What’s next</h2>
 <p>In this chapter you have learned the very basics of Bayesian regression models. As mentioned above, regression models with brms are very flexible and you can easily fit very complex models with a variety of distribution families (for a list of available families, see <code>?brmsfamily</code>; you can even define your own distributions!). The perk of using brms is that you can just learn the basics of one package and one approach and use it to fit a large variety of regression models. This is different from the standard frequentist approach, where different models require different packages or functions, with their different syntax and quirks. In the following weeks, you will build your understanding of Bayesian regression models, which will enable you to approach even the most complex models! However, due to time limits you won’t learn everything there is to learn in this course. Developing conceptual and practical skills in quantitative methods is a long-term process and unfortunately one semester will not be enough. So be prepared to continue your learning journey for years to come!</p>
 
 
@@ -1404,8 +1408,8 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ch-regression-draws.html" class="pagination-link" aria-label="Wrangling MCMC draws">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Wrangling MCMC draws</span></span>
+      <a href="./ch-regression-draws.html" class="pagination-link" aria-label="Working with MCMC draws">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Working with MCMC draws</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
