@@ -792,7 +792,7 @@ window.Quarto = {
 <section id="mixean-basque-vot" class="level2" data-number="29.1">
 <h2 data-number="29.1" class="anchored" data-anchor-id="mixean-basque-vot"><span class="header-section-number">29.1</span> Mixean Basque VOT</h2>
 <p>The data <code>egurtzegi2020/eu_vot.csv</code> contains measurements of VOT from 10 speakers of Mixean Basque <span class="citation" data-cites="egurtzegi2020">(<a href="references.html#ref-egurtzegi2020" role="doc-biblioref">Egurtzegi and Carignan 2020</a>)</span>. Mixean Basque contrasts voiceless unaspirated, voiceless aspirated and voiced stops. Let’s read the data.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>eu_vot <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/egurtzegi2020/eu_vot.csv"</span>)</span>
@@ -807,7 +807,7 @@ window.Quarto = {
 </div>
 <p>Based on our general knowledge of VOT, the VOT should increase from voiced to voiceless unaspirated to voiceless aspirated stops. We can use a Gaussian regression model to assess whether our expectations are compatible with the data. The <code>eu_vot</code> data has a <code>voicing</code> column that tells only if the stop is voiceless or voiced, but we need a column that further differentiates between unaspirated and aspirated voiceless stops. We can create a new column, <code>phonation</code> depending on the <code>phone</code>, using the <code>case_when()</code> function inside <code>mutate()</code>.</p>
 <p><code>case_when()</code> works like an extended <code>ifelse()</code> function: while <code>ifelse()</code> is restricted to two conditions (i.e.&nbsp;when something is TRUE or FALSE), <code>chase_when()</code> allows you to specify many conditions. The general syntax for the conditions in <code>case_when()</code> is <code>condition ~ replacement</code> where <code>condition</code> is a matching statement and <code>replacement</code> is the value that should be returned when there is a match. In the following code, we use <code>case_when()</code> to match specific phones in the <code>phone</code> column and based on that we return <code>voiceless</code>, <code>voiced</code> or <code>aspirated</code>. These values are saved in the new column <code>phonation</code>. We also convert the VOT values from seconds to milliseconds by multiply the VOT by 1000 in a new column <code>VOT_ms</code>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>eu_vot <span class="ot">&lt;-</span> eu_vot <span class="sc">|&gt;</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">phonation =</span> <span class="fu">case_when</span>(</span>
@@ -820,7 +820,7 @@ window.Quarto = {
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><a href="#fig-eu-vot-dens" class="quarto-xref">Figure&nbsp;<span>29.1</span></a> shows the densities of the VOT values for voiced, voiceless (unaspirated) and (voiceless) aspirated stops separately. Do the densities match our expectations about VOT?</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>eu_vot <span class="sc">|&gt;</span> </span>
@@ -829,10 +829,10 @@ window.Quarto = {
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-eu-vot-dens" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-eu-vot-dens" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-eu-vot-dens-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-regression-more_files/figure-html/fig-eu-vot-dens-1.png" id="fig-eu-vot-dens" class="img-fluid figure-img" width="672">
+<img src="ch-regression-more_files/figure-html/fig-eu-vot-dens-1.png" id="fig-eu-vot-dens" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-eu-vot-dens-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;29.1
@@ -852,11 +852,11 @@ Figure&nbsp;29.1
 </div>
 <div class="callout-body-container callout-body">
 <p>Recreate the following plot.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ch-regression-more_files/figure-html/eu-vot-jit-ex-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ch-regression-more_files/figure-html/eu-vot-jit-ex-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -898,7 +898,7 @@ Figure&nbsp;29.1
 Show me
 </summary>
 <div class="markdown">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>eu_vot <span class="sc">|&gt;</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(phonation) <span class="sc">|&gt;</span> </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(phonation, VOT_ms, <span class="at">fill =</span> phonation)) <span class="sc">+</span></span>
@@ -930,14 +930,9 @@ Show me
 <h2 data-number="29.2" class="anchored" data-anchor-id="treatment-contrasts-with-three-levels"><span class="header-section-number">29.2</span> Treatment contrasts with three levels</h2>
 <p>Let’s proceed with modelling VOT. We will assume that VOT values follow a Gaussian distribution: as with reaction times, this is just a pedagogical step for you to get familiar with fitting models with categorical predictors, but other distribution families might be more appropriate. While for reaction times there are some recommended distributions (which you will learn about in <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 31</span></a>), there are really no recommendations for VOT, so a Gaussian distribution will have to do for now.</p>
 <p>Before fitting the model, it is important to go through the model’s mathematical formula and to pay particular attention to how phonation type is coded using treatment contrasts. The <code>phonation</code> predictor has three levels: aspirated, voiced and voiceless. The order of the levels follows the alphabetical order. You will remember from <a href="ch-regression-cat.html" class="quarto-xref"><span>Chapter 28</span></a> that the mean of the first level of a categorical predictor ends up being the intercept of the model while the difference of the second level relative to the first is the slope. With a third level, the model estimates another “slope”, which is the difference between the third level and the first. With treatment contrasts, the second and higher levels of a categorical predictor are compared (or contrasted) with the first level. With the default alphabetical order, this means that the intercept of the model will tell us the mean VOT of aspirated stops, and the mean of voiced and voiceless stops will be compared to that of aspirated stops.</p>
-<p>An other important aspect of treatment coding of categorical predictors that we haven’t discussed is the number of indicator variables needed: the number of indicator variables is always the number of the levels of the predictor minus one (<span class="math inline">\(N - 1\)</span>, where <span class="math inline">\(N\)</span> is the number of levels). It follows that a predictor with three levels needs two indicator variables (<span class="math inline">\(N = 3\)</span>, <span class="math inline">\(3 - 1 = 2\)</span>). This is illustrated in <a href="#tbl-phon-treat" class="quarto-xref">Table&nbsp;<span>29.1</span></a>. For each observation, <span class="math inline">\(ph_\text{VD}\)</span> indicates if the observation is from a voiced stop (1) or not (0), and <span class="math inline">\(ph_\text{VL}\)</span> indicates if the observation is from a voiceless (unaspirated) stop (1) or not (0). Of course, if the observation if from an aspirated stop, that is neither a voiced nor a voiceless (unaspirated) stop, so both <span class="math inline">\(ph_\text{VD}\)</span> and <span class="math inline">\(ph_\text{VL}\)</span> are 0.</p>
-<div id="tbl-phon-treat" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-phon-treat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;29.1: Treatment contrasts coding of the categorical predictor <code>phonation</code>.
-</figcaption>
-<div aria-describedby="tbl-phon-treat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p>An other important aspect of treatment coding of categorical predictors that we haven’t discussed is the number of indicator variables needed: the number of indicator variables is always the number of the levels of the predictor minus one (<span class="math inline">\(N - 1\)</span>, where <span class="math inline">\(N\)</span> is the number of levels). It follows that a predictor with three levels needs two indicator variables (<span class="math inline">\(N = 3\)</span>, <span class="math inline">\(3 - 1 = 2\)</span>). This is illustrated in <span class="quarto-unresolved-ref">?tbl-phon-treat</span>. For each observation, <span class="math inline">\(ph_\text{VD}\)</span> indicates if the observation is from a voiced stop (1) or not (0), and <span class="math inline">\(ph_\text{VL}\)</span> indicates if the observation is from a voiceless (unaspirated) stop (1) or not (0). Of course, if the observation if from an aspirated stop, that is neither a voiced nor a voiceless (unaspirated) stop, so both <span class="math inline">\(ph_\text{VD}\)</span> and <span class="math inline">\(ph_\text{VL}\)</span> are 0.</p>
 <table class="caption-top table">
+<caption>Treatment contrasts coding of the categorical predictor <code>phonation</code>.</caption>
 <thead>
 <tr class="header">
 <th><code>phonation</code></th>
@@ -963,16 +958,11 @@ Table&nbsp;29.1: Treatment contrasts coding of the categorical predictor <code>p
 </tr>
 </tbody>
 </table>
-</div>
-</figure>
-</div>
 <p>Now that we know how <code>phonation</code> is coded, we can look at the model formula.</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \text{VOT}_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 \mu_i &amp; = \beta_0 + \beta_1 \cdot ph_{\text{VD}[i]} + \beta_2 \cdot ph_{\text{VL}[i]}\\
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>The formula states that each observation of VOT come from a Gaussian distribution with a mean and standard deviation and that the mean depends on the value of the indicator variables <span class="math inline">\(ph_\text{VD}\)</span> and <span class="math inline">\(ph_\text{VL}\)</span>: that is what the subscript <span class="math inline">\(i\)</span> is for.</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1000,19 +990,17 @@ Table&nbsp;29.1: Treatment contrasts coding of the categorical predictor <code>p
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>For example, for <code>phonation</code> = <code>aspirated</code>:</p>
-<p><span class="math display">\[
-\begin{aligned}
+<p><span class="math display">\[\begin{aligned}
 \mu_i &amp; = \beta_0 + \beta_1 \cdot ph_{\text{VD}[i]} + \beta_2 \cdot ph_{\text{VL}[i]}\\
 &amp; = \beta_0 + \beta_1 \cdot 0 + \beta_2 \cdot 0\\
 &amp; = \beta_0
-\end{aligned}
-\]</span></p>
+\end{aligned}\]</span></p>
 <p>So the mean VOT with aspirated stops is <span class="math inline">\(\beta_0\)</span>.</p>
 </div>
 </div>
 </div>
 <p>The code below fits a Gaussian regression model, with VOT (in milliseconds) as the outcome variable and phonation type as the (categorical) predictor. Phonation type (<code>phonation</code>) is coded with treatment contrasts. Before fitting the model, answer the question in Quiz 1 below.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>vot_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
@@ -1033,9 +1021,11 @@ Table&nbsp;29.1: Treatment contrasts coding of the categorical predictor <code>p
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
 <strong>How many regression coefficients are there in the model above?</strong>
-<div id="radio_GBKVGDPJKR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GBKVGDPJKR" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_GBKVGDPJKR" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_GBKVGDPJKR" value=""> <span>4</span></label>
+<div id="radio_OZDQXADMFQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OZDQXADMFQ" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_OZDQXADMFQ" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_OZDQXADMFQ" value=""> <span>4</span></label>
+</div>
 </div>
 </div>
 </div>
@@ -1050,9 +1040,11 @@ Table&nbsp;29.1: Treatment contrasts coding of the categorical predictor <code>p
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
 <strong>Based on the density plots of VOT you made above, which of the following sets of expectations makes sense?</strong>
-<div id="radio_EJOIIMUKWL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_EJOIIMUKWL" value=""> <span><span class="math inline">\(\beta_0, \beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_EJOIIMUKWL" value="answer"> <span><span class="math inline">\(\beta_0\)</span> should have positive values and <span class="math inline">\(\beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_EJOIIMUKWL" value=""> <span><span class="math inline">\(\beta_0, \beta_1\)</span> should have positive values, <span class="math inline">\(\beta_2\)</span> should have negative values.</span></label>
+<div id="radio_JXZETJIGGO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JXZETJIGGO" value=""> <span><span class="math inline">\(\beta_0, \beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_JXZETJIGGO" value="answer"> <span><span class="math inline">\(\beta_0\)</span> should have positive values and <span class="math inline">\(\beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_JXZETJIGGO" value=""> <span><span class="math inline">\(\beta_0, \beta_1\)</span> should have positive values, <span class="math inline">\(\beta_2\)</span> should have negative values.</span></label>
+</div>
 </div>
 </div>
 </div>
@@ -1078,7 +1070,7 @@ Table&nbsp;29.1: Treatment contrasts coding of the categorical predictor <code>p
 <section id="posterior-predictions" class="level2" data-number="29.3">
 <h2 data-number="29.3" class="anchored" data-anchor-id="posterior-predictions"><span class="header-section-number">29.3</span> Posterior predictions</h2>
 <p>We can obtain the posterior predictions for the VOT of voiced and voiceless stops as we did in <a href="ch-regression-cat.html#sec-reg-cat-pred" class="quarto-xref"><span>Section 28.4</span></a>. If you have completed Exercise 3 above, the following code should have no surprises.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>vot_bm_draws <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(vot_bm) <span class="sc">|&gt;</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">aspirated =</span> b_Intercept,</span>
@@ -1087,7 +1079,7 @@ Table&nbsp;29.1: Treatment contrasts coding of the categorical predictor <code>p
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s also pivot the draws to a longer format with <code>pivot_longer()</code>. Ignore the warning about dropping the <code>draws_df</code> class.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>vot_bm_long <span class="ot">&lt;-</span> vot_bm_draws <span class="sc">|&gt;</span> </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(aspirated<span class="sc">:</span>voiceless) <span class="sc">|&gt;</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"phonation"</span>, <span class="at">values_to =</span> <span class="st">"pred"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1104,7 +1096,7 @@ Table&nbsp;29.1: Treatment contrasts coding of the categorical predictor <code>p
 </div>
 </div>
 <p>This time I will show you how to use the long draws tibble to create a summary table. This is what the following code does: the only new bit is the <code>paste(..., collapse = ", ")</code> part. This is needed because <code>quantile2()</code> returns a vector with two elements (one with the lower limit and one with the upper limit of the CrI) but we want to collapse that into a single string, with the two limits separated by a comma and space. The resulting string is wrapped between square brackets, a typical format for reporting CrIs.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>vot_bm_tab <span class="ot">&lt;-</span> vot_bm_long <span class="sc">|&gt;</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(phonation) <span class="sc">|&gt;</span> </span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
@@ -1122,8 +1114,8 @@ Table&nbsp;29.1: Treatment contrasts coding of the categorical predictor <code>p
 </div>
 </div>
 </div>
-<p>The function <code>kable()</code> from the knitr package provides us with a convenient way to output the table in <code>vot_bm_tab</code> as a nicely formatted table in a rendered Quarto file. <a href="#tbl-vot-bm-tab" class="quarto-xref">Table&nbsp;<span>29.2</span></a> is indeed the output of R code using <code>knitr::kable()</code>. Unfold the code to see it (click on the little triangle to the left of <code>Code</code> below). Check the documentation of <code>kable()</code> to learn about its arguments.</p>
-<div class="cell">
+<p>The function <code>kable()</code> from the knitr package provides us with a convenient way to output the table in <code>vot_bm_tab</code> as a nicely formatted table in a rendered Quarto file. <a href="#tbl-vot-bm-tab" class="quarto-xref">Table&nbsp;<span>29.1</span></a> is indeed the output of R code using <code>knitr::kable()</code>. Unfold the code to see it (click on the little triangle to the left of <code>Code</code> below). Check the documentation of <code>kable()</code> to learn about its arguments.</p>
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>vot_bm_tab <span class="sc">|&gt;</span> </span>
@@ -1132,10 +1124,10 @@ Table&nbsp;29.1: Treatment contrasts coding of the categorical predictor <code>p
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">digits =</span> <span class="dv">1</span>, <span class="at">align =</span> <span class="fu">c</span>(<span class="st">"rcccc"</span>)</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="tbl-vot-bm-tab" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<div id="tbl-vot-bm-tab" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-vot-bm-tab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;29.2: Posterior summaries from a Bayesian regression model of VOT.
+Table&nbsp;29.1: Posterior summaries from a Bayesian regression model of VOT.
 </figcaption>
 <div aria-describedby="tbl-vot-bm-tab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1178,14 +1170,14 @@ Table&nbsp;29.2: Posterior summaries from a Bayesian regression model of VOT.
 </figure>
 </div>
 </div>
-<p>In <a href="#tbl-vot-bm-tab" class="quarto-xref">Table&nbsp;<span>29.2</span></a>, I reported the posterior mean, SD and 99% and 60% CrIs of the posterior distributions of the predicted VOT of aspirated, voiced, and voiceless stops. Why 99% and 60%? There is nothing special with 95% CrIs and as mentioned in previous chapters you should report multiple levels. I admit that in this case, as in the models from previous chapters reporting more than one CrI is overkill, because our posteriors are so certain. So take this as just an example of how you could report results in a table. Probably, a 99% CrI would have sufficed.</p>
+<p>In <a href="#tbl-vot-bm-tab" class="quarto-xref">Table&nbsp;<span>29.1</span></a>, I reported the posterior mean, SD and 99% and 60% CrIs of the posterior distributions of the predicted VOT of aspirated, voiced, and voiceless stops. Why 99% and 60%? There is nothing special with 95% CrIs and as mentioned in previous chapters you should report multiple levels. I admit that in this case, as in the models from previous chapters reporting more than one CrI is overkill, because our posteriors are so certain. So take this as just an example of how you could report results in a table. Probably, a 99% CrI would have sufficed.</p>
 </section>
 <section id="reporting" class="level2" data-number="29.4">
 <h2 data-number="29.4" class="anchored" data-anchor-id="reporting"><span class="header-section-number">29.4</span> Reporting</h2>
 <p>The following paragraph shows you how you could write up the model and results in a paper.</p>
 <blockquote class="blockquote">
 <p>We fitted a Bayesian regression model to Voice Onset Time (VOT) of Mixean Basque stops. We used a Gaussian distribution for the outcome and phonation (aspirated, voiced, voiceless) as the only predictor. Phonation was coded using the default treatment coding.</p>
-<p>According to the model, the mean VOT of aspirated stops is between 29 and 37 ms, of voiced stops is between -47 and -42 ms, of voiceless stops is between 19 and 21 ms, at 99% probability. <a href="#tbl-vot-bm-tab" class="quarto-xref">Table&nbsp;<span>29.2</span></a> reports mean, SD, 99% and 60% CrIs. When comparing voiced and voiceless stops to aspirated stops, at 99% confidence, the VOT of voiced stops is 72-82 ms shorter than that of aspirated stops (mean = -77, SD = 1.86), while the VOT of voiceless stops is 9-17 ms shorter than that of aspirated stops (mean = -13, SD = 1.58).</p>
+<p>According to the model, the mean VOT of aspirated stops is between 29 and 37 ms, of voiced stops is between -47 and -42 ms, of voiceless stops is between 19 and 21 ms, at 99% probability. <a href="#tbl-vot-bm-tab" class="quarto-xref">Table&nbsp;<span>29.1</span></a> reports mean, SD, 99% and 60% CrIs. When comparing voiced and voiceless stops to aspirated stops, at 99% confidence, the VOT of voiced stops is 72-82 ms shorter than that of aspirated stops (mean = -77, SD = 1.86), while the VOT of voiceless stops is 9-17 ms shorter than that of aspirated stops (mean = -13, SD = 1.58).</p>
 </blockquote>
 <p>You might find that certain authors use <span class="math inline">\(\beta\)</span> instead of “mean” for the posterior mean reported between parentheses: for example, (<span class="math inline">\(\beta\)</span> = 33, SD = 1.5). The <span class="math inline">\(\beta\)</span> stands for <span class="math inline">\(\hat{\beta}\)</span>, which is a notation to indicate that the <span class="math inline">\(\beta\)</span> is estimated (that’s what the little hat on top of the letter signifies). This practice is probably more common in the frequentist approach than the Bayesian approach to inference. I find it more straightforward to say “mean” since that is what the estimand is: the mean of the posterior distribution of the coefficient. Similarly, some might use “SE” for standard error instead of SD. As long as one is consistent, it doesn’t matter much since there are indeed different traditions (and even different fields within linguistics might prefer different ways of reporting).</p>
 <p>Note that readers not used to Bayesian statistics might find the choice of CrI levels questionable or at least surprising. As said many times, there is nothing special about 95% CrI: it is a misguided historical accident from frequentist approaches to default to 95%. The next chapter is dedicated precisely to frequentist statistics and how this approach is misused in research. Most of the current research in linguistics is conducted using problematic frequentist methods, so the only thing you can do is learn where the problems lie and do your best to avoid them in your own research.</p>

@@ -760,7 +760,7 @@ window.Quarto = {
   <li><a href="#revisiting-reaction-times" id="toc-revisiting-reaction-times" class="nav-link active" data-scroll-target="#revisiting-reaction-times"><span class="header-section-number">28.1</span> Revisiting reaction times</a></li>
   <li><a href="#treatment-contrasts" id="toc-treatment-contrasts" class="nav-link" data-scroll-target="#treatment-contrasts"><span class="header-section-number">28.2</span> Treatment contrasts</a></li>
   <li><a href="#model-rts-by-word-type" id="toc-model-rts-by-word-type" class="nav-link" data-scroll-target="#model-rts-by-word-type"><span class="header-section-number">28.3</span> Model RTs by word type</a></li>
-  <li><a href="#sec-reg-cat-pred" id="toc-sec-reg-cat-pred" class="nav-link" data-scroll-target="#sec-reg-cat-pred"><span class="header-section-number">28.4</span> Expected predictions</a></li>
+  <li><a href="#sec-reg-cat-pred" id="toc-sec-reg-cat-pred" class="nav-link" data-scroll-target="#sec-reg-cat-pred"><span class="header-section-number">28.4</span> Expected values</a></li>
   <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">28.5</span> Reporting</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">28.6</span> Conclusion</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">28.7</span> Summary</a></li>
@@ -1037,6 +1037,20 @@ Table&nbsp;28.2: Treatment contrasts coding of the categorical predictor <code>I
 </div>
 </figure>
 </div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Categorical predictors
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Categorical predictors can be numerically coded using contrasts. The default type of coding/contrasts is <strong>treatment contrasts/coding</strong>. In treatment coding, one level of the predictor is picked as the <strong>reference level</strong>, and the other levels are compared (contrasted) to the reference level.</p>
+<p><strong>Indicator variables</strong> are used for categorical predictors in the mathematical formulation of regression models. When an indicator variable can take the values 0 or 1 it is called a dummy variable and the coding is also known as <strong>dummy coding</strong>.</p>
+</div>
+</div>
 <p>We can now update the equation of <span class="math inline">\(\mu\)</span>:</p>
 <p><span class="math display">\[\begin{aligned}
 RT_i &amp; \sim Gaussian(\mu_i, \sigma)\\
@@ -1180,7 +1194,7 @@ Figure&nbsp;28.4: Density plots of the posterior probability distributions of th
 <p>So here we have our answer: at 95% confidence (another way of saying at 95% probability), based on the model and data, RTs for non-words are 99 to 134 ms longer than RTs for real words. What about the expected value of RTs for non-words?</p>
 </section>
 <section id="sec-reg-cat-pred" class="level2" data-number="28.4">
-<h2 data-number="28.4" class="anchored" data-anchor-id="sec-reg-cat-pred"><span class="header-section-number">28.4</span> Expected predictions</h2>
+<h2 data-number="28.4" class="anchored" data-anchor-id="sec-reg-cat-pred"><span class="header-section-number">28.4</span> Expected values</h2>
 <p>The coefficients are just telling us the difference in RT between non- and real words, but not the expected mean RT for non-words. As in <a href="ch-regression-draws.html" class="quarto-xref"><span>Chapter 25</span></a>, we can simply plug in the draws from the model according to the model formulae to obtain any estimand of interest, like the expected value of RTs when the word is not a real word. Remember, for non-words (<span class="math inline">\(w_i = 1\)</span>):</p>
 <p><span class="math display">\[\begin{aligned}
 \mu_{\text{F}} &amp; = \beta_0 + \beta_1 \cdot 1 = \beta_0 + \beta_1
