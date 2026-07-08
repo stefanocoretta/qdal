@@ -427,6 +427,7 @@ You can learn more about pivoting in the package vignette [Pivoting](https://tid
 We first select the two columns we want to pivot, `real` and `non_real` with `select()`, then we pivot with `pivot_longer()`: the function needs to know which columns to pivot and here we are saying to pivot all columns with the special tidyverse function `everything()` (note that this only works with certain tidyverse functions).
 Then we need to tell `pivot_longer()` what we want to name the column with the original column names and what name we want for the column with the values of the original columns.
 Check the result and play around with the code to understand how pivoting works.
+(You can discard the warning about dropping the 'draws_df' class.)
 
 ```{r}
 #| label: rt-bm-1-long
