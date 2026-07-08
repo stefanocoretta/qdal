@@ -13,6 +13,8 @@ set_up <- function() {
 
   # Get list of necessary packages
   deps <- unique(renv::dependencies()[,2])
+  # Add extra packages needed for brms
+  deps <- c(deps, "BH", "RcppEigen")
 
   # Drop GitHub packages from deps list. pak doesn't know where to find them.
   deps <- setdiff(
