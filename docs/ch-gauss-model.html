@@ -579,7 +579,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models</span></span></a>
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models with brms</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -810,7 +810,7 @@ window.Quarto = {
 <p><span class="math display">\[\text{RT} \sim Gaussian(\mu, \sigma)\]</span></p>
 <p>which you can read as: “reaction times are distributed according to a Gaussian distribution with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>”. So the research question above is about finding the values of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>.</p>
 <p>For illustration’s sake, let’s assume the sample mean and standard deviation are also the population <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>: <span class="math inline">\(Gaussian(\mu = 1010, \sigma = 318)\)</span> (we calculated these in <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a>). <a href="#fig-mald-rt-distr" class="quarto-xref">Figure&nbsp;<span>21.1</span></a> shows the empirical probability distribution (in grey, this is a density curve calculated with kernel density estimation) and the theoretical probability distribution (in purple) based on the sample mean and SD: in other words, the purple curve is the density curve of the theoretical probability distribution <span class="math inline">\(Gaussian(1010, 318)\)</span>. We know by now that any sample mean and SD is biased, due to uncertainty and variability. What we are really after is the values of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> which are the mean and standard deviation of the Gaussian distribution of the <em>population</em> of RTs in auditory lexical decision tasks. In other words, we want to make inference from the sample to the population of RTs.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mald <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/tucker2019/mald_1_1.rds"</span>)</span>
@@ -853,10 +853,10 @@ window.Quarto = {
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-mald-rt-distr" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-mald-rt-distr" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mald-rt-distr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-gauss-model_files/figure-html/fig-mald-rt-distr-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-gauss-model_files/figure-html/fig-mald-rt-distr-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mald-rt-distr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;21.1: Empirical and theoretical density distribution of reaction times.
@@ -910,20 +910,22 @@ y &amp; \sim Gaussian(\mu, \sigma)\\
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
 <ol type="a">
 <li>Why is the distribution of <span class="math inline">\(\sigma\)</span> constrained to positive values only?
-<div id="radio_OXSFLZNHGC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OXSFLZNHGC" value=""> <span>Because <span class="math inline">\(\sigma\)</span> is always zero.</span></label><label><input type="radio" autocomplete="off" name="radio_OXSFLZNHGC" value="answer"> <span>Because <span class="math inline">\(\sigma\)</span> represents variability, which cannot be negative.</span></label><label><input type="radio" autocomplete="off" name="radio_OXSFLZNHGC" value=""> <span>Because <span class="math inline">\(\mu\)</span> is also constrained to be positive.</span></label>
+<div id="radio_OYOMZAYHOY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OYOMZAYHOY" value=""> <span>Because <span class="math inline">\(\sigma\)</span> is always zero.</span></label><label><input type="radio" autocomplete="off" name="radio_OYOMZAYHOY" value="answer"> <span>Because <span class="math inline">\(\sigma\)</span> represents variability, which cannot be negative.</span></label><label><input type="radio" autocomplete="off" name="radio_OYOMZAYHOY" value=""> <span>Because <span class="math inline">\(\mu\)</span> is also constrained to be positive.</span></label>
 </div></li>
 <li>Why have we assumed that reaction times are Gaussian?
-<div id="radio_OLCCPIVWYQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OLCCPIVWYQ" value=""> <span>Because RTs are Gaussian.</span></label><label><input type="radio" autocomplete="off" name="radio_OLCCPIVWYQ" value=""> <span>Because it is easier to run the model.</span></label><label><input type="radio" autocomplete="off" name="radio_OLCCPIVWYQ" value="answer"> <span>Because a Gaussian distribution is a safe assumption to make.</span></label>
+<div id="radio_YHXGHJFTHG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YHXGHJFTHG" value=""> <span>Because RTs are Gaussian.</span></label><label><input type="radio" autocomplete="off" name="radio_YHXGHJFTHG" value=""> <span>Because it is easier to run the model.</span></label><label><input type="radio" autocomplete="off" name="radio_YHXGHJFTHG" value="answer"> <span>Because a Gaussian distribution is a safe assumption to make.</span></label>
 </div></li>
 <li>In Bayesian modeling, posterior probability distributions are described as:
-<div id="radio_MVADCQTEYO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MVADCQTEYO" value=""> <span>The data alone.</span></label><label><input type="radio" autocomplete="off" name="radio_MVADCQTEYO" value=""> <span>Theoretical distributions chosen by the researcher before collecting data.</span></label><label><input type="radio" autocomplete="off" name="radio_MVADCQTEYO" value="answer"> <span>The combination of priors and observed data.</span></label>
+<div id="radio_NIWNRIKIAB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NIWNRIKIAB" value=""> <span>The data alone.</span></label><label><input type="radio" autocomplete="off" name="radio_NIWNRIKIAB" value=""> <span>Theoretical distributions chosen by the researcher before collecting data.</span></label><label><input type="radio" autocomplete="off" name="radio_NIWNRIKIAB" value="answer"> <span>The combination of priors and observed data.</span></label>
 </div></li>
 </ol>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
@@ -932,32 +934,63 @@ y &amp; \sim Gaussian(\mu, \sigma)\\
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Spotlight: Choosing priors for Gaussian models
+<span class="screen-reader-only">Important</span>R note: Writing maths in Quarto
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>Quarto supports LaTeX mathematical notation. Inline maths can be written by surrounding maths expression with dollar signs <code>$</code>. For example, if you write <code>$y \sim Gaussian(\mu, \sigma)$</code> you get <span class="math inline">\(y \sim Gaussian(\mu, \sigma)\)</span>.</p>
+<p>For display maths, use two dollar signs <code>$$</code>. For example:</p>
+<pre><code>$$
+\begin{aligned}
+\text{RT} &amp; \sim Gaussian(\mu, \sigma)\\
+\mu &amp; \sim P(\mu_1, \sigma_1)\\
+\sigma &amp; \sim P_+(\mu_2, \sigma_2)\\
+\end{aligned}
+$$</code></pre>
+<p>gives you</p>
+<p><span class="math display">\[\begin{aligned}
+\text{RT} &amp; \sim Gaussian(\mu, \sigma)\\
+\mu &amp; \sim P(\mu_1, \sigma_1)\\
+\sigma &amp; \sim P_+(\mu_2, \sigma_2)\\
+\end{aligned}\]</span></p>
+<p>You can find a full list of symbols here: <a href="https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf" class="uri">https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf</a>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Spotlight: Choosing priors for Gaussian models
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>How do we go about choosing priors for the model above? Once you know that you are trying to estimate the (posterior) probability distribution of <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> you also know that you should choose a prior for each of these two parameters. In other words, each parameter in the model gets its own prior. But what is a prior exactly? It is just a probability distribution!</p>
 <p>With Gaussian models, it is common to use Gaussian probability distributions as the priors for the mean and SD of the Gaussian distribution. Yes, you read right: we use Gaussian distributions as priors for the parameters of the Gaussian distribution. Note that priors should be chosen <em>before</em> seeing the data. Here, we have seen the data many times, so let’s just pretend we haven’t. For example, let’s say that we believe that, prior to seeing the data, we are 95% confident that the mean RT is a value between 500 and 1300 ms. Why this range? Well, it seems reasonable based on my experience with reaction times, but in actual research your would put much more thought into this. We can now find the value of the mean and SD of a Gaussian distribution the 95% interval of which is between 500 and 1300. This is fairly easy: according to the so-called empirical rule, a 95% (central) interval of a Gaussian distribution is approximately the interval defined by <span class="math inline">\(mu - 2 \sigma\)</span> (lower boundary) and <span class="math inline">\(\mu + 2 \sigma\)</span> (upper boundary).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Between the lower and upper boundary of a 95% interval we thus have 4 times the SD <span class="math inline">\(\sigma\)</span>. We can thus take the range <span class="math inline">\(1300 - 500 = 800\)</span> and divide that by 4, <span class="math inline">\(800 / 4 = 200\)</span>. 200 is our <span class="math inline">\(\sigma\)</span>. We can easily get the mean by taking the mean of the lower and upper boundary: <span class="math inline">\((500 + 1300) / 2 = 900\)</span>, our <span class="math inline">\(\mu\)</span>.</p>
 <p>In sum, our prior expectation is that the mean RT is a value from a Gaussian distribution <span class="math inline">\(Gaussian(900, 200)\)</span>. This distribution is shown in <a href="#fig-prior-mu" class="quarto-xref">Figure&nbsp;<span>21.2</span></a>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>xseq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2000</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> xseq, <span class="at">y =</span> <span class="fu">dnorm</span>(xseq, <span class="dv">900</span>, <span class="dv">200</span>)) <span class="sc">+</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">colour =</span> <span class="st">"darkgreen"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Density"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>xseq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2000</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> xseq, <span class="at">y =</span> <span class="fu">dnorm</span>(xseq, <span class="dv">900</span>, <span class="dv">200</span>)) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">colour =</span> <span class="st">"darkgreen"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Density"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-prior-mu" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-prior-mu" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-prior-mu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-gauss-model_files/figure-html/fig-prior-mu-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-gauss-model_files/figure-html/fig-prior-mu-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prior-mu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;21.2: The prior for <span class="math inline">\(\mu\)</span>.
@@ -968,23 +1001,23 @@ Figure&nbsp;21.2: The prior for <span class="math inline">\(\mu\)</span>.
 </div>
 <p>Once you have the lower and upper boundaries of your prior for the mean it is easy to find the mean and SD of the prior. In practice, deciding on the boundaries is the hardest part.</p>
 <p>We can now pick a prior for <span class="math inline">\(\sigma\)</span>, the overall standard deviation. Let’s say the SD can be described by a truncated Gaussian prior probability with mean 0 and SD 200. Why truncated? Because as we said earlier, SDs can only be positive so we truncate the distribution to include only the positive side. It is also common for priors on standard deviations to set the mean to 0 (to understand the reason, you will have to learn more about priors, so we won’t delve into this). As a rough rule, the 95% interval of a half-Gaussian distribution with mean 0 is between 0 and twice the SD <span class="math inline">\(2 \sigma\)</span>, so in our case between 0 and 400 ms.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Our truncated Gaussian prior distribution is shown in <a href="#fig-prior-sigma" class="quarto-xref">Figure&nbsp;<span>21.3</span></a>. As in the previous chapter, we can signal that the distribution is truncated to positive values by adding a subscript <span class="math inline">\(+\)</span>: <span class="math inline">\(Gaussian_+\)</span>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>xseq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">750</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> xseq, <span class="at">y =</span> <span class="fu">dnorm</span>(xseq, <span class="dv">0</span>, <span class="dv">200</span>)) <span class="sc">+</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">colour =</span> <span class="st">"darkorange"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Density"</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>xseq <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">750</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> xseq, <span class="at">y =</span> <span class="fu">dnorm</span>(xseq, <span class="dv">0</span>, <span class="dv">200</span>)) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">colour =</span> <span class="st">"darkorange"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Density"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-prior-sigma" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-prior-sigma" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-prior-sigma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-gauss-model_files/figure-html/fig-prior-sigma-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-gauss-model_files/figure-html/fig-prior-sigma-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prior-sigma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;21.3: The prior for <span class="math inline">\(\sigma\)</span>.

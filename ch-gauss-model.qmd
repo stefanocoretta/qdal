@@ -195,6 +195,37 @@ cat("c. In Bayesian modeling, posterior probability distributions are described 
 :::
 
 ::: {.callout-important collapse="true"}
+## R note: Writing maths in Quarto
+
+Quarto supports LaTeX mathematical notation.
+Inline maths can be written by surrounding maths expression with dollar signs `$`.
+For example, if you write `$y \sim Gaussian(\mu, \sigma)$` you get $y \sim Gaussian(\mu, \sigma)$.
+
+For display maths, use two dollar signs `$$`.
+For example:
+
+```         
+$$
+\begin{aligned}
+\text{RT} & \sim Gaussian(\mu, \sigma)\\
+\mu & \sim P(\mu_1, \sigma_1)\\
+\sigma & \sim P_+(\mu_2, \sigma_2)\\
+\end{aligned}
+$$
+```
+
+gives you
+
+$$\begin{aligned}
+\text{RT} & \sim Gaussian(\mu, \sigma)\\
+\mu & \sim P(\mu_1, \sigma_1)\\
+\sigma & \sim P_+(\mu_2, \sigma_2)\\
+\end{aligned}$$
+
+You can find a full list of symbols here: <https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf>.
+:::
+
+::: {.callout-important collapse="true"}
 ## Spotlight: Choosing priors for Gaussian models
 
 How do we go about choosing priors for the model above?
