@@ -16,8 +16,8 @@ library(ggdist)
 
 In @sec-probability, we talked about skewness of distributions in relation to the density plots of reaction times.
 In @sec-gauss-model, we further explained that it is the onus of the researcher to decide on a distribution family when fitting regression models and we said that, in the absence of more specific knowledge, the Gaussian distribution is a safe assumption to make.
-Note that the choice of distribution family should be based as much as possible on theoretical grounds (as opposed to empirical).
-In other words, you shouldn't plot the variable to check which distribution it might follow (more on this in the Important box below).
+Note that the choice of distribution family should be based as much as possible on theoretical (as opposed to empirical) grounds.
+In other words, you shouldn't just plot the variable to check which distribution it might follow (more on this below).
 
 There are heuristics one can follow to pick a theoretically grounded distribution.
 The major ones are listed in @sec-outcome, so you can refer to that section in the appendix, but in this chapter we will focus on one type of variables and the default distribution choice: i.e. variables that can only take on values that are positive numbers.
@@ -35,9 +35,7 @@ Mathematically, we represent the log-normal distribution with $LogNormal(\mu, \s
 ::: callout-tip
 ## Log-normal distribution
 
-$$
-LogNormal(\mu, \sigma)
-$$
+$$LogNormal(\mu, \sigma)$$
 
 The **log-normal** distribution is a continuous probability distribution with a mean $\mu$ and standard deviation $\sigma$, measured on the log scale.
 
@@ -46,15 +44,26 @@ Continuous variables that can only be positive (and not zero) tend to be log-nor
 
 Typical examples of continuous variables that can only be positive and not zero are:
 
--   Phonetic durations (segments, words, sentences, pauses, ...).
+- Phonetic durations (segments, words, sentences, pauses, ...).
 
--   Frequencies like f0 and formants.
-    Speech rate.
+- Frequencies like f0 and formants.
+  Speech rate.
 
--   Reaction times.
+- Reaction times.
 
 I will illustrate the nature of log-normal variables using reaction times (RT) from @tucker2019.
-Let's read the data and plot RTs depending on the word type.
+First, attach the packages.
+
+``` r
+library(tidyverse)
+theme_set(theme_light())
+library(brms)
+library(posterior)
+library(bayesplot)
+library(ggdist)
+```
+
+Let's read the data and plot the density of RTs.
 Recall we ran a Gaussian regression model of the data in @sec-regression-cat.
 
 ```{r}
@@ -70,10 +79,9 @@ mald <- readRDS("data/tucker2019/mald_1_1.rds")
 #| code-fold: true
 
 mald |> 
-  ggplot(aes(RT, fill = IsWord)) +
-  geom_density(alpha = 0.8) +
-  geom_rug(alpha = 0.1) +
-  scale_fill_brewer(palette = "Dark2")
+  ggplot(aes(RT)) +
+  geom_density(fill = "antiquewhite") +
+  geom_rug(alpha = 0.1)
 ```
 
 We have already observed in @sec-regression-cat that the distribution of RTs is right-skewed: which is, there are more extreme values to the right of the distribution than what would be expected if this were a Gaussian variable.
@@ -87,14 +95,13 @@ In R, the logarithm function is simply applied with `log()` (this uses the natur
 #| code-fold: true
 
 mald |> 
-  ggplot(aes(log(RT), fill = IsWord)) +
-  geom_density(alpha = 0.8) +
-  geom_rug(alpha = 0.5) +
-  scale_fill_brewer(palette = "Dark2")
+  ggplot(aes(log(RT))) +
+  geom_density(fill = "antiquewhite") +
+  geom_rug(alpha = 0.1)
 ```
 
-@fig-rt-gaussian-log shows the densities of logged RTs for real and nonce words.
-Note how the density curves are less skewed now compared to @fig-rt-lognorm.
+@fig-rt-gaussian-log shows the density of logged RTs.
+Note how the density curve is less skewed now compared to @fig-rt-lognorm.
 You will also note that the some lower RTs values now look more extreme than in the first figure: logging a variable compresses the scale more at higher values and spreads the scale more at lower values, which results in the reduction of right-skew, but also in making very low values look more extreme.
 Before moving onto discussing what to do with outliers, an important clarification is due.
 
@@ -159,7 +166,7 @@ The definition of outlier is quite vague and there are different ways of operati
 There are also different camps as to what to do with outliers, particularly in regard to inclusion/exclusion criteria.
 I side with the camp that suggests not to exclude outliers, if they are real outliers.
 In most cases, thinking about errors is a much more useful way of deciding which values to include or exclude.
-For example, in our RT data there is one observation of 34 ms. The second lowest RT is 200 ms. Given the task participants had to complete, a lexical decision task, it is unlikely that they could thoughfully answer after only 34 ms (that is a very short time, a vowel is usually longer than that!).
+For example, in our RT data there is one observation of 34 ms. The second lowest RT is 200 ms. Given the task participants had to complete, a lexical decision task, it is unlikely that they could thoughtfully answer after only 34 ms (that is a very short time).
 So we could argue that that was an error: the participant mistakenly pressed the button before thinking about the answer.
 
 We have a good theoretical reason to exclude that observation.
@@ -179,20 +186,20 @@ mald_filt <- mald |>
 
 ```
 
-## Modelling RTs with a log-normal regression
+## Modelling RTs with a log-normal family
 
 The problems arising from assuming a Gaussian distribution for RTs is visually obvious when comparing the empirical distribution of the observed RTs with the predicted distribution from a Gaussian model.
-Let's reload the Gaussian model from @sec-regression-cat.
+Let's reload the Gaussian model from @sec-fit-model.
 
 ```{r}
-#| label: rt-bm-1
+#| label: rt-bm
 
-rt_bm_1 <- brm(
-  RT ~ IsWord,
+rt_bm <- brm(
+  RT ~ 1,
   family = gaussian,
   data = mald,
   seed = 6725,
-  file = "cache/ch-regression-cat-rt_bm_1"
+  file = "cache/ch-fit-model-rt_bm"
 )
 ```
 
@@ -201,15 +208,12 @@ The function name stands for posterior predictive check: in other words, we are 
 The joint posterior probability distribution is simply the probability of the outcome variable as predicted by the posterior probability distributions of the parameters of the model.
 The Gaussian regression above correspond to the following mathematical equations:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 RT_i & \sim Gaussian(\mu_i, \sigma)\\
-\mu_i & = \beta_0 + \beta_1 \cdot w_i\\
-\end{aligned}
-$$
+\end{aligned}$$
 
 The joint posterior distribution of the outcome $RT$ is the $Gaussian(\mu, \sigma)$ distribution in the model.
-This is based on the posterior probability of the regression coefficients $\beta_0, \beta_1$ and the overall standard deviation $\sigma$.
+This is based on the posterior probability of the mean $\mu$ and the overall standard deviation $\sigma$.
 Remember that inference in the context of Bayesian regression models using MCMC is based on the MCMC draws.
 Each draw has sampled a value for the model parameters.
 So for each draw we can reconstruct one joint posterior distribution based on the specific parameter values of that draw.
@@ -218,7 +222,7 @@ There isn't a specific number and by default `pp_check()` uses 10 draws.
 In most cases these suffice.
 In the following code I set the number of draws to 50 just to illustrate how to use the `ndraws` argument.
 
-@fig-rt-bm-1-pp shows the output of the `pp_check()` function.
+@fig-rt-bm-pp shows the output of the `pp_check()` function.
 The first argument of the function is simply the model object, `rt_bm_1`.
 We set `ndraws = 50` to use 50 random draws from the MCMC draws to reconstruct joint posteriors.
 These are in light blue in the figure.
@@ -228,32 +232,61 @@ Values below 500 ms are over-estimated by the model (in other words, the model o
 The empirical density of the data is much more compact around the peak of the distribution, compare to the posteriors from the model.
 
 ```{r}
-#| label: fig-rt-bm-1-pp
+#| label: fig-rt-bm-pp
 #| fig-cap: "Posterior predictive checks for a Gaussian regression model of RTs."
 
-pp_check(rt_bm_1, ndraws = 50)
+pp_check(rt_bm, ndraws = 50)
 ```
 
 A common reason for the failure of the posterior probability to correctly reconstruct the empirical distribution is the incorrect choice of the distribution family (another notable reason is not including important predictors in the model, like in the three Gaussian groups from the example above: a Gaussian model of that data without group as a predictor will incorrectly estimate values).
 We have learned above that RT values can be assumed to be log-normal, rather than Gaussian, because they are continuous and can only be positive.
 
+Let's fit a log-normal model instead and check the posterior predictive distribution with `pp_check()`.
+
+```{r}
+#| label: rt-bm-log
+
+rt_bm_log <- brm(
+  RT ~ 1,
+  family = lognormal,
+  data = mald,
+  seed = 6725,
+  cores = 4,
+  file = "cache/ch-fit-model-rt_bm_log"
+)
+```
+
+```{r}
+#| label: fig-rt-bm-log-pp
+#| fig-cap: "Posterior predictive checks for a lognormal model of RTs."
+
+pp_check(rt_bm_log, ndraws = 50)
+```
+
+The posterior predictive distributions in @fig-rt-bm-log-pp (light blue) now are much more similar to the empirical distribution (dark blue).
+This is because a log-normal distribution better captures the distribution of RTs, which are bounded to positive numbers and cannot be 0.
+
+In the following sections we will fit a log-normal regression model to RTs to answer the following research question:
+
+> Does phoneme-level Levenshtein distance of the target word have an effect on the response reaction times?
+
+## A log-normal regression model of RTs and Levenshtein distance
+
 We will proceed then with modelling RTs using a log-normal regression model.
 This is just a regression model with a log-normal family as the distribution family for the outcome variable, here RTs.
 Here are the model formulae:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 RT_i & \sim LogNormal(\mu_i, \sigma)\\
 \mu_i & = \beta_0 + \beta_1 \cdot w_i\\
-\end{aligned}
-$$
+\end{aligned}$$
 
--   Reaction times $RT$ are distributed according to a log-normal distribution with mean $\mu$ and SD $\sigma$.
+- Reaction times $RT$ are distributed according to a log-normal distribution with mean $\mu$ and SD $\sigma$.
 
--   The mean $\mu$ depends on the word type of the observation ($w$).
+- The mean $\mu$ depends on the word type of the observation ($w$).
 
--   Since we are using a log-normal distribution, $\mu$ and $\sigma$ are on the log scale.
-    In other words, the log-transformation of the outcome variable is handled by the model, so you don't have to log RTs yourself.
+- Since we are using a log-normal distribution, $\mu$ and $\sigma$ are on the log scale.
+  In other words, the log-transformation of the outcome variable is handled by the model, so you don't have to log RTs yourself.
 
 The estimates of the regression coefficients $\beta_0, \beta_1$ and the $\sigma$ parameter will be in logged milliseconds (because the RTs in the data are measured in milliseconds).
 The following code fits a log-normal regression to the RT values from the filtered MALD data.
@@ -322,9 +355,9 @@ fixef(rt_bm_2, probs = c(0.1, 0.9)) |> round(2)
 
 ```
 
--   `Intecept` is $\beta_0$: the mean log-RTs when the word is real.
+- `Intecept` is $\beta_0$: the mean log-RTs when the word is real.
 
--   `IsWordFALSE` is $\beta_1$: the difference in log-RTs between nonce and real words.
+- `IsWordFALSE` is $\beta_1$: the difference in log-RTs between nonce and real words.
 
 You see that, apart from the fact that the estimates are about log-RTs rather than RTs in milliseconds, the interpretation of the estimates is the same as in the Gaussian regression model you fitted in @sec-regression-cat.
 The model suggests that the log-RTs of nonce words are 0.1-0.12 higher than the log-RTs of real words.
@@ -465,13 +498,13 @@ quantile2(rt_bm_2_draws$nonce_real, probs = c(0.01, 0.9)) |> round()
 ## Summary
 
 ::: {.callout-note appearance="simple"}
--   Continuous variables that can only be positive numbers, like segment duration and reaction times, usually follow a log-normal distribution.
+- Continuous variables that can only be positive numbers, like segment duration and reaction times, usually follow a log-normal distribution.
 
--   These variables can be modelled with log-normal regression models (`family = lognormal`).
+- These variables can be modelled with log-normal regression models (`family = lognormal`).
 
--   Estimates in log-normal models are in logs.
+- Estimates in log-normal models are in logs.
 
--   Coefficients that represent differences between levels can be transformed to ratio differences by exponentiating the coefficient with `exp()`.
+- Coefficients that represent differences between levels can be transformed to ratio differences by exponentiating the coefficient with `exp()`.
 
--   Predictions can be converted back to the original scale with `exp()` as well (for predictions, you should *always* include the intercept; exponentiating difference coefficients alone gives you for example the ratio difference in RTs, not the predicted RTs in milliseconds).
+- Predictions can be converted back to the original scale with `exp()` as well (for predictions, you should *always* include the intercept; exponentiating difference coefficients alone gives you for example the ratio difference in RTs, not the predicted RTs in milliseconds).
 :::
