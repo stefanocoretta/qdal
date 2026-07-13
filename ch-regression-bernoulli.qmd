@@ -20,11 +20,11 @@ library(ggdist)
 **Binary outcome variables** are very common in linguistics.
 These are categorical variable that have **two levels**, e.g.:
 
--   yes / no
--   grammatical / ungrammatical
--   Spanish / English
--   direct object (*gave the girl the book*) / prepositional phrase (*gave the book to the girl*)
--   correct / incorrect
+- yes / no
+- grammatical / ungrammatical
+- Spanish / English
+- direct object (*gave the girl the book*) / prepositional phrase (*gave the book to the girl*)
+- correct / incorrect
 
 So far you have been fitting regression models in which the outcome variable was numeric and continuous.
 However, a lot of studies use binary outcome variables and it thus important to learn how to deal with those.
@@ -35,24 +35,20 @@ For example, in a lexical decision task one might want to know the probability t
 Let's say there is an 80% probability of responding correctly.
 So ($p()$ stands for "probability of"):
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 p(\text{correct}) & = 0.8\\
 p(\text{incorrect}) & = 1 - p(\text{correct}) = 0.2
-\end{aligned}
-$$
+\end{aligned}$$
 
 You see that if you know the probability of one level (correct) you automatically know the probability of the other level, since there are only two levels and the total probability has to sum to 1.
 The distribution family for binary probabilities is the **Bernoulli family**.
 The Bernoulli family has only one parameter, $p$, which is the probability of obtaining one of the two levels (one can pick which level).
 With our lexical decision task example, we can write:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 resp_{\text{correct}} & \sim Bernoulli(p) \\
 p & = 0.8
-\end{aligned}
-$$
+\end{aligned}$$
 
 You can read it as:
 
@@ -66,9 +62,7 @@ The function generates random observations from a binomial distribution: the bin
 It has two parameters, $n$ the number of trials and $p$ the "success" probability of each trial.
 If we code each level in the binary variable as 0 and 1, $p$ is the probability of getting 1 (that's why it is called the "success" probability).
 
-$$
-Binomial(n, p)
-$$
+$$Binomial(n, p)$$
 
 Think of a coin: you flip it 10 times so $n = 10$ (ten trials).
 If this is a fair coin, then $p$ should be 0.5: 50% of the times you get head (1) and 50% of the times you get tail (0).
@@ -129,10 +123,17 @@ The following section explains how.
 
 As we have just learned, probabilities are bounded between 0 and 1 but we need something that is not bounded because regression models don't work with bounded numeric variables.
 This is where the **logit function** comes in: the logit function (from "*log*istic un*it*") is a mathematical function that transforms probabilities into log-odds.
-The logit function is the quantile function (the function that returns quantiles, the value below which a given proportion of a probability distribution lies) of the **logistic distribution**.
-The logit function is the quantile of a logistic function with mean 0 and standard deviation 1 (a standard logistic distribution).
-In R, the logit function is `qlogis()`.
-The default mean and SD in `qlogis()` are 0 and 1 respectively, so you can just input the first argument, `p` which is the probability you want to transform into log-odds.
+The log-odds is the logarithm of the odds of an event occurring (for example, the odds of an accurate response).
+The logit function is:
+
+$$\text{logit}(p) = ln(\frac{p}{1-p})$$
+
+where $ln$ is the natural logarithm (the logarithm with base $e$ (Euler's number, approximately 2.71828), simply `log()` in R) and $p$ is a probability.
+
+The logit function is also the quantile function (the function that returns quantiles, i.e. the value below which a given proportion of a probability distribution lies) of the **logistic distribution**.
+More specifically, the logit function is the quantile of a logistic distribution with mean 0 and standard deviation 1 (a standard logistic distribution).
+In R, the logit function can be applied using the function `qlogis()`.
+The default mean and SD in `qlogis()` are 0 and 1 respectively, so you can just input the first argument to obtain log-odds from a probability `p`.
 
 ```{r}
 #| label: qlogis
@@ -181,8 +182,11 @@ log_odds_p
 ```
 
 To go back from log-odds to probabilities, we use the inverse logit function.
-This is the CDF of the standard logistic distribution.
-In R, you apply the inverse logit function (also called the logistic function, because it is the CDF of the standard logistic distribution) with `plogis()`.
+This is the CDF of the standard logistic distribution:
+
+$$F(x) = \frac{e^x}{1 + e^x}$$
+
+In R, you can apply the inverse logit function (also called the logistic function, because it is the CDF of the standard logistic distribution) with `plogis()`.
 As with `qnorm()`, the default mean and SD are 0 and 1 respectively so you can just input the log-odds you want to transform into probabilities as the first argument `q`.
 
 ```{r}
@@ -248,14 +252,25 @@ The **inverse logit** (aka logistic) **function** is the CDF of the standard log
 
 Calculate the following:
 
--   The log-odds corresponding to $p = 0.12, 0.66, 0.9999$.
+- The log-odds corresponding to $p = 0.12, 0.66, 0.9999$.
 
--   The probabilities corresponding to log-odds $= -6, 0.5, 15$.
+- The probabilities corresponding to log-odds $= -6, 0.5, 15$.
 :::
 
 ## Nicaraguan Sign Language single and multi-verb predicates
 
 To illustrate how to fit a Bernoulli model, we will use data from @brentari2024 on the emergent Nicaraguan Sign Language (*Lengua de Señas Nicaragüense*, NSL).
+First let's attach the necessary packages.
+
+``` r
+library(tidyverse)
+theme_set(theme_light())
+library(brms)
+library(posterior)
+library(ggdist)
+```
+
+Now, let's read the data.
 
 ```{r}
 #| label: verb-org
@@ -268,8 +283,11 @@ verb_org
 
 `verb_org` contains information on predicates as signed by three groups (`Group`): home-signers (`homesign`), first generation NSL signers (`NSL1`) and second generation NSL signers (`NSL2`).
 Specifically, the data coded in `Num_Predicates` whether the predicates uttered by the signer were single-verb predicates (`single`) or a multi-verb predicates (`multiple`).
-The hypothesis of the study is that use of multi-verb predicates would increase with each generation, i.e. that NSL1 signers would use more multi-verb predicates than home-signers and that NSL2 signers would use more multi-verb predicates than home-signers and NSL1 signers.
-(For the linguistic reasons behind this hypothesis, check the paper linked above).
+The hypothesis of the study is the following:
+
+> The use of multi-verb predicates would increase with each generation, i.e. that NSL1 signers use more multi-verb predicates than home-signers and that NSL2 signers use more multi-verb predicates than home-signers and NSL1 signers.
+
+For the linguistic reasons behind this hypothesis, check the paper linked above.
 @fig-verb-org shows the proportion of single vs multiple predicates in the three groups.
 
 ```{r}
@@ -341,7 +359,7 @@ verb_org |>
   )
 ```
 
-THE HORROR. Alas, this is a very bad way of processing proportion data.
+Alas, this is a very bad way of processing proportion data.
 You can learn why in @holtz2019.[^ch-regression-bernoulli-1]
 The alternative (robust) way to plot proportion data is to show the proportion for individual participants.
 To do so we can use a combination of `summarise()`, `geom_jitter()` and `stat_summary()`. First, we need to compute the proportion of multi-verb predicates by participant.
@@ -410,7 +428,7 @@ This also creates a nice opportunity to mention one shortcoming of the models we
 When you have multiple observations from each participant, we call this a *repeated measure* design.
 This is a problem because it breaks one assumption of regression models: that all the observations are independent from each other.
 Of course, if they come from the same participant, they are not independent.
-We won't have time in this course to learn about the solution (i.e. hierarchical regression models, also known as multi-level, mixed-effects, nested-effects, or random-effects models; these are just regression models that are set up so they can account for hierarchical grouping in the data, like multiple observations from multiple participants, or multiple pupils from multiple classes from multiple schools), but I point you to further resources in @sec-next (TBA).
+We won't have time in this course to learn about the solution (i.e. hierarchical regression models, also known as multi-level, mixed-effects, nested-effects, or random-effects models; these are just regression models that are set up so they can account for hierarchical grouping in the data, like multiple observations from multiple participants, or multiple pupils from multiple classes from multiple schools), but I point you to further resources in @sec-next.
 
 ## Bernoulli model of NSL predicates
 
@@ -419,7 +437,7 @@ To statistically assess this hypothesis and obtain estimates of the proportion o
 Before we move on onto fitting the model, it is useful to transform `Num_Predicates` into a factor and specify the order of the levels so that `single` is the first level and `multiple` is the second level.
 We need this because Bernoulli models estimate the probability (the parameter $p$ in $Bernoulli(p)$) of obtaining the *second* level in the outcome variable (remember, $p$ is the probability of success, i.e. of obtaining $1$ in a 0/1 coded binary variable).
 The first level in the factor corresponds to `0` and the second level to `1`.
-We want to set this order because the hypothesis states that multi-verb predicates should increase, and by modelling the probability of multi-verb predicates we can more straightforwardly address the hypothesis (of course, if the probability of multi-verb predicates increases, the probability of single-verb predicates decreases, because $q = 1 - p$).
+We want to set the order with multiple as the second level because the hypothesis states that multi-verb predicates should increase, and by modelling the probability of multi-verb predicates we can more straightforwardly address the hypothesis (of course, if the probability of multi-verb predicates increases, the probability of single-verb predicates decreases, because $q = 1 - p$).
 Complete the following code to make `Num_Predicates` into a factor.
 
 ```{r}
@@ -461,20 +479,28 @@ verb_org |>
 Now we can move on onto modelling.
 Here is the mathematical formula of the model we will fit.
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 MVP_i & \sim Bernoulli(p_i) \\
 logit(p_i) & = \beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i \\
-\end{aligned}
-$$
+\end{aligned}$$
 
 The probability of using an multi-verb predicate follows a Bernoulli distribution with probability $p$, which is the only parameter.
 The logit function is applied to the parameter $p$ as discussed in @sec-prob-log.
 Functions applied to model parameters are known as **link functions**.
-Bernoulli models use the logit link (i.e. the logit function).
+Bernoulli models use the **logit link** (i.e. the logit function).
+Gaussian model use the *identity link function*, in other words, the response values are not transformed (remember, we were modelling RTs with Gaussian models and the estimates were in milliseconds, the same unit of RTs).
+
+::: callout-tip
+## Link function
+
+The **link function** of a regression model is a mathematical function that transforms the parameter of interest of a response distribution onto an unrestricted scale, allowing it to take any real value.
+
+Gaussian models use the **identity link function** (i.e. no transformation) while Bernoulli models use the **logit link function**.
+:::
+
 Because the logit link returns log-odds from probabilities, the log-odds of $p$, rather than just the probability $p$, are equal to the regression equation $\beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i$.
 This model has three regression coefficients: $\beta_0, \beta_1, \beta_2$.
-With one categorical predictor, regression models need one coefficient for each level in the predictor: since we have three levels in `Group`, we need three coefficients.
+With one categorical predictor, regression models need one intercept coefficient and $N -  1$ coefficients corresponding to indicator variables where $N$ is the number of levels in the predictor: since we have three levels in `Group`, we need two indicator variables, for a total of three coefficients.
 
 ::: callout-note
 ### Quiz 1
@@ -518,7 +544,7 @@ The dummy $NSL1$ is `0` if group is either home-signers or NSL2.
 ## Fit the Bernoulli model with brms
 
 We can now fit the model with `brm()`.
-The model formula has no surprises: `Num_Predicates ~ Group`.
+The model's R formula has no surprises: `Num_Predicates ~ Group`.
 This looks like the formula of the model in @sec-regression-more: `VOT_ms ~ phonation`.
 We are modelling `Num_Predicates` as a function of `Group`, like we modelled `VOT_ms` as a function of phonation.
 In this model, you have to set the family to `bernoulli` to fit a Bernoulli model.
@@ -549,6 +575,7 @@ The summary informs us that we used a Bernoulli family and that the link for the
 The formula, data and draws parts don't need explanation.
 Since the model has only one parameter $p$, to which we apply the regression equation, we only have a `Regression Coefficients` table, without a `Further Distributional Parameters` table.
 Let's focus on the regression coefficients.
+Remember that the regression coefficients estimates are in log-odds, not probabilities.
 
 ```{r}
 #| label: mvp-bm-fixef
@@ -563,7 +590,23 @@ Finally, `GroupNSL2` ($\beta_2$) indicates a difference between +0.3 and +0.83 b
 In other words, the log-odds of multi-verb predicates is lower in NSL1 and higher in NSL2 compared to home-signers.
 
 It's easier to understand the results if we convert the log-odds to probabilities.
-First, we need to calculate the predicted log-odds for each group and then we can use `plogis()`, the inverse logit, to transform log-odds to probabilities.
+First, we need to calculate the posterior draws of the log-odds for each group.
+The posterior draws of the log-odds are known as the **posterior draws of the linear predictor**.
+The linear predictor in Bernoulli models is $\text{logit}(p)$, so the linear predictor is in log-odds.
+We can then apply `plogis()` (the inverse logit) on the draws of the linear predictor, to obtain the posterior draws of the expected value (in probability) of the posterior predictive distribution.
+
+::: callout-tip
+### The linear predictor
+
+The **linear predictor** is the regression component of a regression model.
+
+In a *Bernoulli model*, the linear predictor is $\text{logit}(p)$ (where $logit$ is the logit function), so that its units are log-odds.
+Applying the inverse logit function to the linear predictor of a Bernoulli model gives you the expected value of $p$ in probabilities.
+
+In a *Gaussian model*, the linear predictor and expected value are the same, because Gaussian models use the identity link function.
+
+The link function of a regression model maps the expected value to the linear predictor.
+:::
 
 ```{r}
 #| label: mvp-bm-p
@@ -572,7 +615,7 @@ First, we need to calculate the predicted log-odds for each group and then we ca
 # Get draws
 mvp_bm_draws <- as_draws_df(mvp_bm)
 
-# Calculate predicted log-odds by group
+# Calculate posterior draws of log-odds by group
 mvp_bm_draws <- mvp_bm_draws |> 
   mutate(
     homesign = b_Intercept,
@@ -607,11 +650,11 @@ The predicted probability of multi-verb predicates in home-signers is 32-41%, fo
 Based on these results, we can see more clearly that the hypothesis of the study is not fully borne out by the data: we do not observe an increase in probability of multi-verb predicates from home-signers to NSL1 to NSL2.
 Instead, there is a decrease from home-signers to NSL1 and an increase from NSL1 to NSL2.
 Moreover, the predicted probability of multi-verb predicates in NSL2, 45-54%, indicates that NSL2 possibly use either single and multi-verb predicates with equal probability.
-@fig-mvp-bm-pred plots the predicted posterior probabilities of multi-verb predicates.
+@fig-mvp-bm-pred plots the expected probabilities of multi-verb predicates.
 
 ```{r}
 #| label: fig-mvp-bm-pred
-#| fig-cap: "Predicted probabilities of multi-verb predicates by group as per a Bernoulli regression model."
+#| fig-cap: "Expected probabilities of multi-verb predicates by group as per a Bernoulli regression model."
 #| code-fold: true
 
 mvp_bm_draws_long |> 
@@ -621,9 +664,9 @@ mvp_bm_draws_long |>
   labs(x = "Probability of multi-verb predicate")
 ```
 
-Very often, we also want to know the posterior probability of the difference between a level and another level that is not the reference: here for example we might want to know the difference between NSL1 and NSL2.
-It is easy: we just take the difference of the log-odds predicted draws columns `NSL1` and `NSL2` in `mpv_bm_draws`.
-If we want to know the difference between the probabilities rather than the log-odds, we use the inverse-logit-transformed predicted draws.
+Very often, we also want to know the posterior probability of the difference of expected probabilities between a level and another level that is not the reference: here for example we might want to know the difference between NSL1 and NSL2.
+It is easy: we just take the difference of the log-odds expected draws columns `NSL1` and `NSL2` in `mpv_bm_draws`.
+If we want to know the difference between the probabilities rather than the log-odds, we use the inverse-logit-transformed (`plogis()`) draws.
 
 ```{r}
 #| label: mvp-bm-draws-diff
@@ -631,22 +674,32 @@ If we want to know the difference between the probabilities rather than the log-
 mvp_bm_draws <- mvp_bm_draws |> 
   mutate(
     NSL2_NSL1_log = NSL2 - NSL1,
-    NSL1_homesign_p = plogis(NSL1) - plogis(homesign),
     NSL2_NSL1_p = plogis(NSL2) - plogis(NSL1)
   )
 
-quantile2(mvp_bm_draws$NSL1_homesign_p, c(0.1, 0.9)) |> round(2)
 quantile2(mvp_bm_draws$NSL2_NSL1_log, c(0.1, 0.9)) |> round(2)
 quantile2(mvp_bm_draws$NSL2_NSL1_p, c(0.1, 0.9)) |> round(2)
 ```
 
 The log-odds in NSL2 are 1.17-1.73 units higher than in NSL1, at 80% probability.
-The probability of a multi-verb predicate is 11 to 22 percentage points lower in NSL1 than home-signers and it is 25 to 36 percentage points higher in NSL2 than NSL1, at 80% confidence.
+The probability of a multi-verb predicate is 25 to 36 percentage points higher in NSL2 than NSL1, at 80% confidence.
 Note how we say *percentage points* and not percent.
 There isn't a 25-36% increase, but the probability increases by 25-36 units, which for probabilities expressed as percentages are called percentage points.
 Mixing these things up is a common mistake, so be careful.
 
 ## Reporting
+
+```{r}
+#| label: mvp-bm-draws-diff-2
+#| include: false
+
+mvp_bm_draws <- mvp_bm_draws |> 
+  mutate(
+    NSL1_homesign_p = plogis(NSL1) - plogis(homesign)
+  )
+
+quantile2(mvp_bm_draws$NSL1_homesign_p, c(0.1, 0.9)) |> round(2)
+```
 
 > We fitted a Bayesian Bernoulli regression model to assess the probability of multi-verb predicates in NSL.
 > The model was fitted with brms @burkner2017 in R @rcoreteam2025, with the default priors, four chains with 2000 iterations each, of which 1000 for warm-up.
