@@ -357,6 +357,14 @@ To move from expected values to predicted data, we also need to take into accoun
 In brms, this leads to the **posterior predictive distribution**, which describes the distribution of possible values of $vdur$ for a given $sr$, combining uncertainty in the regression coefficients with the random variation around the mean captured by $\sigma$.
 The *expected value of the posterior predictive distribution* refers to the average of these predicted outcomes, which coincides with the model-implied conditional mean/expected value $E(vdur \mid sr)$.
 
+::: callout-tip
+### Posterior predictive distribution and expected value of the posterior predictive distribution
+
+The **posterior predictive distribution** is the distribution of possible observed values of the outcome for a given value of the predictor, obtained by combining uncertainty in the model parameters with the residual variability in the data.
+
+The **expected value of the posterior predictive distribution** is the mean of the posterior predictive distribution for a given value of the predictor, which is equal to the model-implied conditional mean $E(y \mid x)$.
+:::
+
 Let's calculate the posterior distribution of the expected value of vowel duration using the model draws and the speech rate values of 4 and 7, just as an example.
 These are more or less the minimum and maximum value of speech rate in the data, but we could use any value (of course, speech rate can't be negative so negative values wouldn't make sense, and very high values would also be physically impossible).
 We can use `mutate()` to calculate posterior draws of the expected value.[^ch-regression-draws-2]
@@ -396,6 +404,14 @@ quantile2(vow_bm_draws$vdur_sr_7, c(0.025, 0.975)) |> round()
 ```
 
 Based on the model and data, the conditional mean (i.e. expected value) of vowel duration is 110-113 ms when speech rate is 4 syl/s and 44-49 ms when speech rate is 7 syl/s, at 95% probability (because it is a 95% CrI).
+
+::: callout-tip
+## Posterior draws of the expected value
+
+In a Gaussian regression model, the **posterior draws of the posterior predictive distribution** are draws evaluated with the posterior distribution $Gaussian(\mu, \sigma)$ (these draws take into account the variability produced by $\sigma$ and include the uncertainty of the regression coefficients that make up $\mu$ and the uncertainty of $\sigma$).
+
+The **posterior draws of the expected value** $E$ of the posterior predictive distribution are draws of $\mu$ (these draws do not take into account the variability produced by $\sigma$ and only include the uncertainty of the regression coefficients that make up $\mu$).
+:::
 
 ## Plotting the expected values of vowel duration
 

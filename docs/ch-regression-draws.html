@@ -1044,6 +1044,20 @@ vdur &amp; \sim Gaussian(\mu, \sigma) \\
 <p>Since <span class="math inline">\(\mu\)</span> is conditional on the value of <span class="math inline">\(sr\)</span>, it is also called the <strong>conditional mean</strong> or <strong>expected value</strong> (in mathematical notation <span class="math inline">\(\mu = E(y \mid x)\)</span>, i.e the expected value of <span class="math inline">\(y\)</span> conditional on <span class="math inline">\(x\)</span>, where <span class="math inline">\(y\)</span> is <span class="math inline">\(vdur\)</span> and <span class="math inline">\(x\)</span> is <span class="math inline">\(sr\)</span> in our model). We can use the regression equation for <span class="math inline">\(\mu\)</span> to generate samples from the posterior distribution of <span class="math inline">\(\mu\)</span> by evaluating it at the posterior draws of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> and at specific values of speech rate <span class="math inline">\(sr\)</span>. The resulting values are posterior draws of the expected value (or conditional mean) of <span class="math inline">\(vdur\)</span> given <span class="math inline">\(sr\)</span>.</p>
 <p>Here, evaluating means substituting specific numerical values into the regression equation. Concretely, for each posterior draw of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> we take a chosen value of speech rate <span class="math inline">\(sr\)</span>, like 4 syllables per second, plug these numbers into the regression equation <span class="math inline">\(\mu = \beta_0 + \beta_1 \cdot sr\)</span>, and compute the resulting value of <span class="math inline">\(\mu\)</span>. Repeating this for each posterior draw (there are 4000 in total) produces a set of values, each corresponding to one plausible realisation of the conditional mean implied by the model. This collection of calculated posterior draws forms the posterior distribution of the expected value <span class="math inline">\(E(y \mid x)\)</span>.</p>
 <p>The expected value <span class="math inline">\(E(vdur \mid sr)\)</span> describes how the expected vowel duration varies as a function of speech rate, given the regression coefficients. This quantity is obtained by evaluating <span class="math inline">\(\mu\)</span> at posterior draws of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, and it captures uncertainty about the regression coefficients themselves. However, this is not the same as the distribution of actual observed values of vowel duration. To move from expected values to predicted data, we also need to take into account the residual variability represented by <span class="math inline">\(\sigma\)</span>. In brms, this leads to the <strong>posterior predictive distribution</strong>, which describes the distribution of possible values of <span class="math inline">\(vdur\)</span> for a given <span class="math inline">\(sr\)</span>, combining uncertainty in the regression coefficients with the random variation around the mean captured by <span class="math inline">\(\sigma\)</span>. The <em>expected value of the posterior predictive distribution</em> refers to the average of these predicted outcomes, which coincides with the model-implied conditional mean/expected value <span class="math inline">\(E(vdur \mid sr)\)</span>.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Posterior predictive distribution and expected value of the posterior predictive distribution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <strong>posterior predictive distribution</strong> is the distribution of possible observed values of the outcome for a given value of the predictor, obtained by combining uncertainty in the model parameters with the residual variability in the data.</p>
+<p>The <strong>expected value of the posterior predictive distribution</strong> is the mean of the posterior predictive distribution for a given value of the predictor, which is equal to the model-implied conditional mean <span class="math inline">\(E(y \mid x)\)</span>.</p>
+</div>
+</div>
 <p>Let’s calculate the posterior distribution of the expected value of vowel duration using the model draws and the speech rate values of 4 and 7, just as an example. These are more or less the minimum and maximum value of speech rate in the data, but we could use any value (of course, speech rate can’t be negative so negative values wouldn’t make sense, and very high values would also be physically impossible). We can use <code>mutate()</code> to calculate posterior draws of the expected value.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>vow_bm_draws <span class="ot">&lt;-</span> vow_bm_draws <span class="sc">|&gt;</span> </span>
@@ -1075,6 +1089,20 @@ vdur &amp; \sim Gaussian(\mu, \sigma) \\
 </div>
 </div>
 <p>Based on the model and data, the conditional mean (i.e.&nbsp;expected value) of vowel duration is 110-113 ms when speech rate is 4 syl/s and 44-49 ms when speech rate is 7 syl/s, at 95% probability (because it is a 95% CrI).</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Posterior draws of the expected value
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In a Gaussian regression model, the <strong>posterior draws of the posterior predictive distribution</strong> are draws evaluated with the posterior distribution <span class="math inline">\(Gaussian(\mu, \sigma)\)</span> (these draws take into account the variability produced by <span class="math inline">\(\sigma\)</span> and include the uncertainty of the regression coefficients that make up <span class="math inline">\(\mu\)</span> and the uncertainty of <span class="math inline">\(\sigma\)</span>).</p>
+<p>The <strong>posterior draws of the expected value</strong> <span class="math inline">\(E\)</span> of the posterior predictive distribution are draws of <span class="math inline">\(\mu\)</span> (these draws do not take into account the variability produced by <span class="math inline">\(\sigma\)</span> and only include the uncertainty of the regression coefficients that make up <span class="math inline">\(\mu\)</span>).</p>
+</div>
+</div>
 </section>
 <section id="plotting-the-expected-values-of-vowel-duration" class="level2" data-number="25.7">
 <h2 data-number="25.7" class="anchored" data-anchor-id="plotting-the-expected-values-of-vowel-duration"><span class="header-section-number">25.7</span> Plotting the expected values of vowel duration</h2>
