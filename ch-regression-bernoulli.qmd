@@ -119,6 +119,19 @@ But there is a catch: probabilities are bounded between 0 and 1 and regression m
 Bounded probabilities are transformed into an unbounded numeric variable.
 The following section explains how.
 
+::: callout-tip
+## Bernoulli and binomial distributions
+
+$$Bernoulli(p)$$
+
+The **Bernoulli distribution** is the discrete probability distribution of a random variable which takes the value 1 with probability $p$ and the value 0 with probability $q = 1 - p$.
+
+$$Binomial(n, p)$$
+
+The **binomial distribution** is the discrete probability distribution of the number of successes in a sequence of $n$ observations, where each observation can either be a success (with probability $p$) or a failure (with probability $q = 1 - p$).
+When $n = 1$, a Binomial distribution is equivalent to a Bernoulli distribution.
+:::
+
 ## Probability and log-odds {#sec-prob-log}
 
 As we have just learned, probabilities are bounded between 0 and 1 but we need something that is not bounded because regression models don't work with bounded numeric variables.
