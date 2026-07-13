@@ -491,7 +491,7 @@ Bernoulli models use the **logit link** (i.e. the logit function).
 Gaussian model use the *identity link function*, in other words, the response values are not transformed (remember, we were modelling RTs with Gaussian models and the estimates were in milliseconds, the same unit of RTs).
 
 ::: callout-tip
-## Link function
+### Link function
 
 The **link function** of a regression model is a mathematical function that transforms the parameter of interest of a response distribution onto an unrestricted scale, allowing it to take any real value.
 
@@ -718,4 +718,19 @@ Please, note that these are exactly equivalent: they refer to a model with a Ber
 It is just that different research traditions call them differently.
 
 So if somebody asks you to run a logistic regression, or if you read a paper that reports one, what they just mean is to run a regression with a binary outcome variable and a Bernoulli distribution!
+:::
+
+## Summary
+
+::: {.callout-note appearance="simple"}
+- In R, use `qlogis()` to apply the logit function to transform probabilities to log-odds and `plogis()` to apply the inverse logit function (aka logistic function) to transform log-odds to probabilities.
+
+- Binary outcome variables can be modelled with a Bernoulli distribution.
+  In brms, use `family = bernoulli` to fit a Bernoulli regression model.
+
+- Bernoulli regression models use the logit link function to map the model's expected value (in probabilities) to the linear predictor (in log-odds).
+
+- The regression coefficients of a Bernoulli regression model are estimated in log-odds.
+
+- In a Bernoulli model, the posterior draws of the linear predictor are in log-odds while the posterior draws of the expected value are probabilities.
 :::
