@@ -9,7 +9,6 @@
 library(tidyverse)
 theme_set(theme_light())
 library(brms)
-library(tidybayes)
 library(posterior)
 ```
 
