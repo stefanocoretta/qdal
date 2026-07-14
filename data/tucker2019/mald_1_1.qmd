@@ -10,7 +10,7 @@ description: |
   This is an updated version of the MALD dataset. This new dataset almost doubles the total number of participants in the dataset, providing more responses per item. We have also updated the item data set to include a calculation of the phonotactic probability of all words and pseudowords and the temporal uniqueness point of the words and pseudowords
 ---
 
-## Description
+## Variables
 
 `Subject`
 
@@ -28,6 +28,10 @@ description: |
 
 :   Mean phoneme-level Levenshtein distance.
 
+`FreqSUBTLEX`
+
+:   Word frequency from the SUBTLEX corpus.
+
 `RT`
 
 :   Reaction times (ms).
@@ -39,3 +43,12 @@ description: |
 `RT_log`
 
 :   Logged reaction times.
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readRDS("data/tucker2019/mald_1_1.rds")
+dat
+```

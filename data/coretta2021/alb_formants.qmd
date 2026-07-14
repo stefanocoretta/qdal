@@ -74,11 +74,11 @@ data-entry:
 
 `times_orig`
 
-: [Unknown.]
+:   \[Unknown.\]
 
 `vowel`
 
-: IPA vowel.
+:   IPA vowel.
 
 `F1.z`
 
@@ -107,3 +107,12 @@ data-entry:
 `F2_F1.z.hz`
 
 :   F2-F1 difference (normalised Hz).
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readRDS("data/coretta2021/alb_formants.rds")
+dat
+```

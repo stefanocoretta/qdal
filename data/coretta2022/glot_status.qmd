@@ -6,7 +6,7 @@ doi: "10.1017/S0025100322000044"
 url: "https://osf.io/vry3h/"
 ---
 
-## Description
+## Variables
 
 `ID`
 
@@ -79,3 +79,12 @@ url: "https://osf.io/vry3h/"
 `Language_ID.y`
 
 :   Language ID.
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readRDS("data/coretta2022/glot_status.rds")
+dat
+```

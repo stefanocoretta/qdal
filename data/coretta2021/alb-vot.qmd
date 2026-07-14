@@ -47,3 +47,12 @@ data-entry:
 `consonant`
 
 :   IPA consonant.
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readr::read_csv("data/coretta2021/alb-vot.csv")
+dat
+```

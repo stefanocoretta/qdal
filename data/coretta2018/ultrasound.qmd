@@ -86,3 +86,12 @@ There are two files per speaker:
 :   tongue root absolute velocity
 
 The remaining columns are the X and Y coordinates of the spline along the 42 fan lines (X_1, Y_1, X_2, Y_2, ..., X_42, Y_42)
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readr::read_csv("data/coretta2018/ultrasound/it01-tongue-cart.tsv")
+dat
+```

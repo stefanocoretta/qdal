@@ -50,3 +50,12 @@ This data set contains a subset of the data from [OneStop Eye Movements](https:/
 `word_length`
 
 :   Length in number of characters of the word being fixated.
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readr::read_csv("data/berzak2025/fix-dur.csv")
+dat
+```

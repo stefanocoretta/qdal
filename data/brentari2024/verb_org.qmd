@@ -25,6 +25,8 @@ data-entry:
     doi: "10.16995/glossa.10342"
 ---
 
+## Variables
+
 `Group`
 
 :   Signer's group ("homesign", "NSL1", "NSL2").
@@ -48,3 +50,12 @@ data-entry:
 `Num_Predicates`
 
 :   Number of predicates ("single", "multiple").
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readr::read_csv("data/brentari2024/verb_org.csv")
+dat
+```

@@ -10,3 +10,12 @@ url: "https://osf.io/download/h2vub/"
 abstract: |
   The [Morphology and dialectology in the Linguistic Survey of Scotland](https://osf.io/4bp2y) contains a portion of the morphological questionnaire returns collected for the Linguistic Survey of Scotland (Gaelic). The data have been transcribed and coded from questionnaire slips by Will Lamb.
 ---
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readr::read_csv("data/iosad2020/gael_morph.csv")
+dat
+```

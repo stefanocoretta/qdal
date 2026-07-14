@@ -36,12 +36,21 @@ abstract: |
 
 `weak_pol`
 
-: A continuous measure of a weak adjective's polarity; Principle Component 1 in a Principle Component Analysis which synthesised each adjective's emotional valence from [Mohammad (2018)](https://doi.org/10.18653/v1/P18-1017).
+:   A continuous measure of a weak adjective's polarity; Principle Component 1 in a Principle Component Analysis which synthesised each adjective's emotional valence from [Mohammad (2018)](https://doi.org/10.18653/v1/P18-1017).
 
 `bounded`
 
-: Output of a random forest classifier that classified scales as bounded (`1`) or unbounded (`0`).
+:   Output of a random forest classifier that classified scales as bounded (`1`) or unbounded (`0`).
 
 `extreme`
 
-: Output of a random forest classifier that classified strong adjectives as extreme (`1`) or non-extreme (`0`).
+:   Output of a random forest classifier that classified strong adjectives as extreme (`1`) or non-extreme (`0`).
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readr::read_csv("data/pankratz2021/si.csv")
+dat
+```

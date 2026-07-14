@@ -101,3 +101,12 @@ data-entry:
 `c2_place`
 
 :   place of C2 (`coronal`, \`velar\`\`)
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readr::read_csv("data/coretta2018/formants.csv")
+dat
+```

@@ -11,9 +11,7 @@ abstract: |
   In this exploratory sociophonetic study, we investigated the properties of formal and informal speech registers in Korean. We found that in formal speech, Korean male and female speakers lowered their average fundamental frequency and pitch range. The acoustic signal furthermore exhibited overall less variability, as evidenced by decreased fundamental frequency and intensity standard deviations, and decreased period and amplitude perturbations. Differences in speech registers affected Harmonics-to-Noise-ratio and the difference between the first and second harmonic as well, suggesting breathiness-related changes, and the speech was slower and included more non-lexical fillers such as ah and oh. Unexpectedly, formality also affected breathing patterns, leading to a noticeable increase in the amount of loud “hissing” breath intakes in formal speech. We thus show that a variety of different means of vocal expression play a role in signaling formality in Korean. Further, we outline the implications of this study for phonetic theory and discuss our results with respect to the Frequency Code and research on clear speech.
 ---
 
-
-
-## Description
+## Variables
 
 `subject`
 
@@ -118,3 +116,12 @@ abstract: |
 `yey_count`
 
 :   Number of occurences of interjection "yey" (polite) (count).
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readr::read_csv("data/winter2012/polite.csv")
+dat
+```

@@ -9,3 +9,167 @@ url: "https://github.com/stefanocoretta/coretta2018itaegg"
 abstract: |
   A dataset with EGG data from 19 speakers of Italian.
 ---
+
+## Variables
+
+`speaker`
+
+:   Speaker's ID.
+
+`ipu`
+
+:   Sentence ID.
+
+`stimulus`
+
+:   Sentence.
+
+`sentence_ons`
+
+:   Onset time of the sentence (s).
+
+`sentence_off`
+
+:   Offset time of the sentence (s).
+
+`word_ons`
+
+:   Onset time of the target word (s).
+
+`word_off`
+
+:   Offset time of the target word (s).
+
+`v1_ons`
+
+:   Onset time of the first vowel (s).
+
+`c1_ons`
+
+:   Onset time of the first consonant (s).
+
+`v2_ons`
+
+:   Onset time of the second vowel (s).
+
+`voice_ons`
+
+:   Voice onset of the first vowel (s).
+
+`voice_off`
+
+:   Voice offset of the first vowel (s).
+
+`c1_rel`
+
+:   Time of C1 release (s).
+
+`c2_rel`
+
+:   Time of C2 release (s).
+
+`stimulus ID`
+
+:   Stimulus unique ID.
+
+`sentence`
+
+:   Stimulus sentence frame.
+
+`word`
+
+:   Target word, embedded in `sentence`.
+
+`c1`
+
+:   First consonant of the target word.
+
+`vowel`
+
+:   First vowel of the target word.
+
+`c2`
+
+:   Second consonant of the target word.
+
+`backness`
+
+:   Backness of the vowel (`back`, `central`, \`front).
+
+`height`
+
+:   Height of the vowel (`high`, `mid-high`, `mid-low`, `low`).
+
+`c1_place`
+
+:   Place of articulation of C1.
+
+`c2_place`
+
+:   Place of articulation of C2.
+
+`v1_duration`
+
+:   Duration of V1 (ms).
+
+`c2_clos_duration`
+
+:   Closure duration of C2 (ms).
+
+`rel_voff`
+
+:   Time lag between C1 release and voice offset of V1 (ms).
+
+`sent_duration`
+
+:   Sentence duration (ms).
+
+`speech_rate`
+
+:   Speech rate as syllables per second
+
+`speech_rate_c`
+
+:   Centred speech rate calculated as syllables per second minus mean syllables per second.
+
+`voice_duration`
+
+:   Duration of vocal fold vibration (voicing) between C1 and C2 (`voice_off` - `voice_ons`, ms).
+
+`vot`
+
+:   Voice onset time of C1 (ms).
+
+`voi_clo`
+
+:   Duration during closure of C2 (ms).
+
+`rel_rel`
+
+:   Time lag between release of C1 and release of C2 (ms).
+
+`file`
+
+:   Sound file name.
+
+`f0`
+
+:   Mean fundamental frequency of V1 (Hz).
+
+`cutoff`
+
+:   \[FastTrack setting\].
+
+`f11`-`f35`
+
+:   Formant values from FastTrack for the first three formants at 5 equidistant timepoints within V1.
+    `f11` = F1 at time point 1, `f21` = F2 at time point 1, and so on.
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+load("data/coretta2018a/ita_egg.rda")
+ita_egg
+```

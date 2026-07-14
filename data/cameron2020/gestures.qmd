@@ -60,3 +60,12 @@ abstract: |
 `id`
 
 :   Unique numeric ID.
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readr::read_csv("data/cameron2020/gestures.csv")
+dat
+```

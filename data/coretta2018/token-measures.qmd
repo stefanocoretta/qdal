@@ -69,7 +69,7 @@ data-entry:
 
 `word_off`
 
-:   offset time of the target word (= C1 onset) (s)
+:   offset time of the target word (= V2 offset) (s)
 
 `v1_ons`
 
@@ -234,3 +234,12 @@ data-entry:
 `speech_rate_c`
 
 :   centred speech rate as syllables per second
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readr::read_csv("data/coretta2018/token-measures.csv")
+dat
+```

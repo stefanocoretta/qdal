@@ -16,6 +16,8 @@ abstract: |
 
 The data contains only trials from the Japanese participants.
 
+## Variables
+
 `Subject`
 
 :   Participant ID.
@@ -30,7 +32,7 @@ The data contains only trials from the Japanese participants.
 
 `Contrast`
 
-:   Type of contrast (`F` filler, `H` homophone, `LR` /l~r/, `P` phonological, `PB` /p~b/).
+:   Type of contrast (`F` filler, `H` homophone, `LR` /l\~r/, `P` phonological, `PB` /p\~b/).
 
 `Item`
 
@@ -55,3 +57,12 @@ The data contains only trials from the Japanese participants.
 `Words.RT`
 
 :   Reaction time of response in milliseconds.
+
+## Preview
+
+```{r}
+#| label: dat
+#| message: false
+dat <- readr::read_csv("data/ota2009/key-rock.csv")
+dat
+```
