@@ -14,14 +14,12 @@ library(ggdist)
 
 So far, we fitted regressions with a single predictor, like the following Gaussian model of reaction times from @sec-regression-cat using the data from @tucker2019:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 RT_i & \sim Gaussian(\mu_i, \sigma)\\
 \mu_i & = \beta_0 + \beta_1 \cdot w_i\\
-\end{aligned}
-$$
+\end{aligned}$$
 
-The categorical predictor $W$ (`IsWord` in the data) has two levels (`TRUE` and `FALSE`), so there is one intercept and one coefficient for the dummy variable $w_i$: $\beta_0$ and $\beta_1$.
+The categorical predictor $W$ (`IsWord` in the data) has two levels (`TRUE` and `FALSE`), so there is one intercept coefficient and one coefficient for the dummy variable $w_i$: $\beta_0$ and $\beta_1$.
 In most context, however, you will want to investigate the effects of more than one predictor.
 Regression models can be fit with multiple predictors.
 Traditionally, regression models with a single predictor were called "simple regression" and models with more than one "multiple regression", but it doesn't make sense to have a specific name: they are all regression models.
@@ -32,7 +30,14 @@ In this chapter, we will discuss regression models with two categorical predicto
 To illustrate how to fit and interpret models with two categorical predictors, we will use the `winter2012/polite.csv` data from @winter2012.
 The data contains several acoustic measures from the speech of Korean speakers.
 The participants of the study were asked to make a request imagining they were speaking either to a friend or to someone of higher status, thus producing speech in both an informal and polite condition, respectively.
-This is coded in the `attitude` column of the `polite` data, which we read in the code below.
+This is coded in the `attitude` column of the `polite` data, which we read in the code below (after attaching the necessary packages first).
+
+``` r
+library(tidyverse)
+theme_set(theme_light())
+library(brms)
+library(ggdist)
+```
 
 ```{r}
 #| label: polite
@@ -43,7 +48,10 @@ polite
 ```
 
 The `polite` data also contains information about the gender of the participant: in the data there are female and male participants.
-In this chapter we will model the mean fundamental frequency (f0) of each utterance depending on gender and attitude.
+In this chapter we will model the mean fundamental frequency (f0) of each utterance (`f0mn`) depending on gender and attitude to answer the following research question:
+
+> Do condition and gender affect the mean fundamental frequency (f0) of the utterance?
+
 The data contains some missing f0 data, so we filter it out first.
 
 ```{r}
@@ -94,12 +102,10 @@ Set it so that there is greater visual separation between the informal and polit
 We can now move onto fitting a regression model to `f0mn`, with `gender` and `attitude` as two categorical predictors.
 Here is what the model formula would look like:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 f0mn_i & \sim Gaussian(\mu_i, \sigma) \\
 \mu_i & = \beta_0 + \beta_1 \cdot gen_{\text{M}[i]} + \beta_2 \cdot att_{\text{POL}[i]}
-\end{aligned}
-$$
+\end{aligned}$$
 
 The formula has two indicator variables: $gen_{\text{M}}$ and $att_{\text{POL}}$.
 The first variable states if the $f0mn$ value is from a female participant ($gen_{\text{M}} = 0$) or a male participant ($gen_{\text{M}} = 1$).
@@ -107,7 +113,7 @@ The second variable states if the $f0mn$ value is from the informal condition ($
 @tbl-gen-att-contrasts shows the treatment contrasts table.
 
 |                                            | $gen_\text{M}$ | $att_\text{POL}$ |
-|:------------------------------------------:|:--------------:|:----------------:|
+|:------------------------------------:|:---------------:|:---------------:|
 | `gender` = `F` and `attitude` = `informal` |       0        |        0         |
 |  `gender` = `F` and `attitude` = `polite`  |       0        |        1         |
 | `gender` = `M` and `attitude` = `informal` |       1        |        0         |
@@ -118,7 +124,7 @@ The second variable states if the $f0mn$ value is from the informal condition ($
 ::: callout-warning
 ### Exercise 2
 
-Work out the formula for $\mu$ depending on each value combination of `gender` and `attitude`.
+Work out the mathematical formula for $\mu$ depending on each value combination of `gender` and `attitude`.
 :::
 
 ::: {.callout-tip collapse="true"}
@@ -129,7 +135,7 @@ You want four formulae (one per gender/attitude combination).
 :::
 
 Fitting a regression model with multiple predictors is as easy as just adding the predictors in the formula using a `+`: `f0mn ~ gender + attitude`.
-Note that from this point on we won't include the `1 +` any more, since it's implicit, but you can still write it out if you wish.
+Note that we won't include the `1 +` for the intercept, since it's implicit, but you can still write it out if you wish.
 The rest of the code has no surprises.
 
 ```{r}
@@ -155,30 +161,40 @@ If you look at the `Regression Coefficients` table, you will find three coeffici
 summary(f0_bm)
 ```
 
--   `Intercept` is $\beta_0$: this is the mean `f0mn` when `gender` = `F` and `attitude` = `informal`.
+- `Intercept` is $\beta_0$: this is the mean `f0mn` when `gender` = `F` and `attitude` = `informal`.
 
--   `genderM` is $\beta_1$: this is the *difference* in mean `f0mn` between `gender` = `M` and `gender` = `F`, *averaged* across the levels of `attitude`.
+- `genderM` is $\beta_1$: this is the *difference* in mean `f0mn` between `gender` = `M` and `gender` = `F`, while controlling for `attitude`.
 
--   `attitudepol` is $\beta_2$: this is the *difference* in mean `f0mn` between `attitude` = `polite` and `attitude` = `informal`, *averaged* across the levels of `gender`.
+- `attitudepol` is $\beta_2$: this is the *difference* in mean `f0mn` between `attitude` = `polite` and `attitude` = `informal`, while controlling for `gender`.
 
-The interpretation of the `Intercept` is straightforward, but you should not the "averaged across the levels of" part in the other two coefficients.
-Since the model now has more than one parameter, the difference estimated between the levels of one predictor is the average (i.e. the mean) of the difference in each level of the other predictor(s).
-In other words, the difference expressed by $\beta_1$ for `gender` is the average of (a) the difference between `gender` = `M` and `gender` = `F` when `attitude` = `informal` and (b) the difference between `gender` = `M` and `gender` = `F` when `attitude` = `polite`.
-Same thing for $\beta_2$ for `attitude`: this is the average of (a) the difference between `attitude` = `polite` and `attitude` = `informal` when `gender` = `F` and (b) the difference between `attitude` = `polite` and `attitude` = `informal` when `gender` = `M`.
-It sounds complicated, but in practice it makes sense: the model gives you an estimated difference for one predictor averaged across the levels of the other predictor.
+The interpretation of the `Intercept` is straightforward, but you should note the "while controlling for" part in the other two coefficients.
+When we say that the model controls for attitude, we mean that the estimated difference between genders is adjusted for the fact that speakers also differ in the type of speech they produced (polite and informal).
+The model accounts for the variation associated with attitude separately from the variation associated with gender.
+The difference between genders is estimated by comparing males and females when producing the same type of speech.
+In other words, the model asks: how different is the mean f0 of males compared with females when attitude is held constant?
+Because both genders produced both polite and informal speech, the model can make this comparison separately for informal speech and for polite speech, and then combine these comparisons into a single estimate of the gender difference.
+The same logic applies to attitude: the difference associated with attitude is estimated by comparing polite and informal speech while holding gender constant.
+The model asks: how different is the mean f0 in polite speech compared with informal speech, after accounting for differences between genders?
+
+Another way to understand what "controlling for" means is that the model combines the comparisons made at each level of the other predictor into a single estimate.
+For example, the gender difference while controlling for attitude is based on the difference between males and females in informal speech and the difference between males and females in polite speech.
+The coefficient for gender $\beta_1$ is a weighted average of these two differences, where the weights depend on the structure of the data.
+In a balanced design, where there are equal numbers of observations in each condition, this weighted average gives equal importance to each comparison.
+Similarly, the attitude difference $\beta_2$ while controlling for gender is a weighted average of the difference between polite and informal speech for males and the difference between polite and informal speech for females.
+Thus, a regression coefficient with multiple predictors can be understood as an adjusted difference: it combines comparisons made while keeping the other predictors constant into a single estimate.
 
 Here is how we interpret the results of this model (based on the 95% CrIs):
 
--   `Intercept`: the mean `f0mn` with female participants in the informal condition is between 246 and 264 Hz at 95% confidence.
+- `Intercept`: the mean `f0mn` with female participants in the informal condition (the reference levels) is between 246 and 264 Hz at 95% confidence.
 
--   `genderM`: the mean `f0mn` is between 106 and 126 Hz lower in male participants than female participants (averaged across the levels of attitude), at 95% confidence.
+- `genderM`: the mean `f0mn` is between 106 and 126 Hz lower in male participants than female participants (when controlling for attitude), at 95% confidence.
 
--   `attitudepol`: the mean `f0mn` is between 4 and 25 Hz lower in the polite condition than in the informal condition (averaged across genders), at 95% probability.
+- `attitudepol`: the mean `f0mn` is between 4 and 25 Hz lower in the polite condition than in the informal condition (when controlling for gender), at 95% probability.
 
-It is worth stressing here that, because of the "averaging across levels" of the "other" predictor, the estimated difference of each predictor is expected to be the same in all levels of the other predictor.
-We can see this by plotting the expected `f0mn` based on the model.
+It is worth stressing here that, because of the "averaging across levels" of the "other" predictor, the estimated difference of each predictor is implied to be the same in all levels of the other predictor.
+We can see this by plotting the expected `f0mn` based on both predictors.
 We use `conditional_effects()` here for convenience (you will have to plot the posterior distributions from the draws in the exercise below).
-@fig-f0-bm-cond shows the expected predictions of `f0mn` depending on gender and attitude, separately.
+First, @fig-f0-bm-cond shows the expected values of `f0mn` depending on gender and attitude, separately.
 
 ```{r}
 #| label: fig-f0-bm-cond
@@ -242,11 +258,13 @@ f0_bm_epred |>
 ::: {.callout-tip collapse="true"}
 ## Hint
 
--   You need `mutate()` to create new columns with the expected draws for each gender/attitude combination.
+- You need `mutate()` to create new columns with the expected draws for each gender/attitude combination.
 
--   Then you can pivot the new columns so that you get two columns: one which states the gender/attitude combination and one that holds the calculated expected draw.
+- Then you can pivot the new columns so that you get two columns: one which states the gender/attitude combination and one that holds the calculated expected draw.
 
--   You can then plot the pivoted data.
+- You can then plot the pivoted data.
+
+- Alternatively, you can use `epred_draws()` from tidybayes and plot the resulting draws.
 :::
 
 The fact that the model is estimating the coefficients for gender and attitude independently from each other begs the question: what if the effect of attitude is *not* the same in both genders?
