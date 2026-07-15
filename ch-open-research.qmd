@@ -3,7 +3,7 @@
 ![](/img/badge-resmethods.png)
 
 @sec-res-cycle introduced the concept of Questionable Research Practices: these are practices that, whether intentionally or not, negatively affect the research enterprise [@simmons2011; @morin2015; @flake2020].
-These, combined with theoretical underspecification typical of most research [@devezer2021; @scheel2022], have contributed towards what we can call a "research crisis" [@pashler2012; @gelman2014a; @schooler2014; @fanelli2017; @amrhein2019; @starns2019; @yarkoni2022].
+These, combined with theoretical underspecification typical of most research [@yarkoni2022; @scheel2022; @frankenhuis2023], have contributed towards what we can call a "research crisis" [@pashler2012; @gelman2014a; @schooler2014; @fanelli2017; @amrhein2019; @starns2019; @yarkoni2022].
 In response to this research crisis, or crises, researchers have initiated a movement known as Open Research [@munafo2017; @cruwell2019], also called Open Scholarship and Open Science (some researchers find Open Science less inclusive, because of how loaded the term "science" is, so Open Research or Scholarship are now preferred).
 Open Research is a movement that stresses the importance of a more honest and transparent research by promoting a series of research principles and by warning from common, although not necessarily intentional, questionable practices and misconceptions.
 This chapter explains what Open Research entails.
@@ -19,7 +19,7 @@ As far as the data are concerned, they can re-use the same data of the original 
 In terms of data analysis, they can use the same analysis pipeline of the original study or use a different method.
 When you combine data and analysis choice together, you get a matrix of criteria for reliable results, as shown in @fig-reliable.
 
-![The four criteria for reliable results, by [The Turing Way](https://book.the-turing-way.org/reproducible-research/overview/overview-definitions) (CC BY 4.0).](img/reproducible-matrix-e570d1a3271ef48dd15c45fe8dc1693a.jpg){#fig-reliable fig-align="center"}
+![The four criteria for reliable results, by [The Turing Way](https://book.the-turing-way.org/reproducible-research/overview/overview-definitions) (CC BY 4.0).](img/repli-matrix.png){#fig-reliable fig-align="center"}
 
 When an independent researcher takes the data of the original study, applies the same analytical pipeline and obtains the same results as reported in the original study, we say that the results are **reproducible**.
 There is also a more specific meaning, which is computational reproducibility, by which the same data and computer code produce the same results.
@@ -39,10 +39,12 @@ Overall, we are facing several reliability crises, which are part of the wider r
 A **research compendium** is collection of files, data, materials, images, computer code, analysis outputs, research notebooks, etc. of a research project.
 A simple practice encouraged by Open Research advocates is to openly share a project's research compendium so that independent researchers can access it and re-use its components.
 Sharing a research compendium, especially data, of course is intertwined with ethics and obtaining proper consent from participants or any other source.
+@bochynska2023 report that only less than 10% of the surveyed linguistic papers shared a compendium and @laurinavichyute2022 urge authors to share not only data but also the analysis code.
+In other words, there is a lot of room for improving the sharing of research compendia in linguistics.
 
 There are many online repositories that allow researchers to share their research compendia.
 A commonly used service is the Open Science Framework: <https://osf.io/>.
-An example of research compendium on OSF can be found here: <https://osf.io/3bmcp/> (this is the compendium of @coretta2023).
+An example of research compendium on OSF can be found here: <https://osf.io/3bmcp/> [this is the compendium of @coretta2023].
 Zenodo also allows you to upload research compendia: <https://zenodo.org>.
 There are other specialised repositories like the Tromsø Repository of Language and Linguistics (TROLLing): <https://dataverse.no/dataverse/trolling>.
 
@@ -52,27 +54,30 @@ There are other specialised repositories like the Tromsø Repository of Language
 The pre-registration is time-stamped and can be linked in the final publication.
 The aim of a pre-registration is to make the research process more transparent, since the study plan is shared in advance [@haven2019; @kavanagh2019; @claesen2021; @roettger2021].
 
-A more involved alternative to pre-registration is a new academic article format: Registered Reports [@chambers2015; @karhulahti2022a; @karhulahti2023; @lakens2024].
-@fig-rr shows the entire process of the Registered Report format.
-Registered Reports are peer-reviewed in two stages.
+A more involved alternative to pre-registration is a new academic article format: Registered Reports [@chambers2015; @karhulahti2022a; @karhulahti2023; @lakens2024; @liu2025].
+@fig-rr compares traditional publishing with publishing with Registered Reports.
+In traditional publishing, you plan and conduct a study, write the paper and submit that to a journal for peer-review.
+After one or more rounds of review, if the paper is accepted, it is published in the journal.
+On the ohter hand, Registered Reports are peer-reviewed in two stages.
 The Stage 1 manuscript contains a literature review and a methodology that details the research background and the study plan.
 The Stage 1 manuscript is submitted to a journal for peer-review.
 If granted In Principle Acceptance, the authors carry out the study and then complete the writing of the paper resulting in a Stage 2 manuscript.
 This is peer-reviewed to check that the original protocol has been followed by the authors, and if so the paper is accepted for publication, independent of the results.
 
-![The process of the Registered Report article format.](img/registered_reports.png){#fig-rr fig-align="center"}
+![A comparison of traditional publishing vs registered reports.](img/rr-timeline.png){#fig-rr fig-align="center"}
 
 Register Reports work for a variety of research types, from quantitative to qualitative, from exploratory to corroboratory.
 Note that authors do have the chance to perform analyses that were not planned in the Stage 1 manuscript, as long as they are clearly labelled as exploratory or not pre-registered.
 There is hope that Registered Reports can positively contribute to making research more robust and mitigate the effects of the researchers' degrees of freedom.
 Of course, they are not a one-shot solution, but just one tool among many that have been proposed to improve the quality of research.
+As of today, several linguistic journals accept Registered Reports, but the format is still not widely adopted.
 
 ## Version control systems
 
 A version control system is software that allows users to take incremental "snapshots" of computer files and to revert to any snapshot in time.
 Versioning systems are primarily thought for programming work (developing software) but they have been increasingly adopted in (knowledge-oriented, non-applied) research given that a lot of the research process is based on computational aspects (managing data, analysing data with code, writing manuscripts, etc).
 A commonly used version control system is git (<https://git-scm.com>).
-git allows you to track changes in files, commit those changes into "snapshots" and also maintaining multiple branches of the same repository.
+git allows you to track changes in files, commit those changes into "snapshots" and also maintain multiple branches of the same repository.
 Note that git is software that runs on your computer.
 git repositories can be shared and managed online with other services, like GitHub (<https://github.com>) or GitLab (<https://about.gitlab.com>).
 The code and the website of this textbook are hosted on GitHub: <https://github.com/stefanocoretta/qdal>.
@@ -95,9 +100,9 @@ When sharing compendia you should carefully think about which licence to distrib
 ## Summary
 
 ::: {.callout-note appearance="simple"}
--   Open Research is a movement that stresses the importance of a more honest and transparent research.
+- Open Research is a movement that stresses the importance of a more honest and transparent research.
 
--   Core principles of Open Research are sharing research compendia under permissive licences, ensuring computational reproducibility, and registering study plans with pre-registrations or Registered Reports.
+- Core principles of Open Research are sharing research compendia under permissive licences, ensuring computational reproducibility, and registering study plans with pre-registrations or Registered Reports.
 
--   @cruwell2019 is a review of Open Research principles and resources.
+- @cruwell2019 is a review of Open Research principles and resources.
 :::
