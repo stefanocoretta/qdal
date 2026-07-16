@@ -1,0 +1,156 @@
+# Interactions in regression: one categorical and one numeric predictor {#sec-regression-cat-num}
+
+![](/img/badge-stats.png) ![](/img/badge-r.png)
+
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+theme_set(theme_light())
+library(brms)
+library(ggdist)
+```
+
+In @sec-regression-interaction, you learned how to include and interpret interactions between two categorical predictors: we modelled mean f0 in female vs male speakers in informal vs polite attitude.
+In this chapter, we will look at a model with an interaction between a categorical and a numeric predictor instead.
+Interactions between categorical and numeric predictors work on the same principles of interactions between two categorical predictors, but it is worth going through an example.
+We will revisit the model of reaction times from @sec-regression-lognorm, but this time we will model RTs based on both mean phoneme-level Levenshtein distance and word type (real vs non-real).
+
+## The data
+
+As usual, let's attach the necessary packages and read the data.
+We filter RTs to include only values above 34 ms, as we have done in @sec-regression-lognorm.
+
+``` r
+library(tidyverse)
+theme_set(theme_light())
+library(brms)
+library(ggdist)
+```
+
+```{r}
+#| label: mald
+
+mald_filt <- readRDS("data/tucker2019/mald_1_1.rds") |> 
+  filter(RT > 34)
+```
+
+We want to answer the following research question:
+
+> Does the effect of Levenshtein distance on RTs differ in real and non-real words?
+
+To address this question we will need to model an interaction between distance and word type.
+Before we move onto modelling, let's plot the data.
+@fig-phonlev-isword shows a scatter plot with mean phoneme-level Levenshtein distance on the *x*-axis and logged reaction times on the *y*-axis.
+The plot also includes two regression lines: one for real words (in green) and one for non-real words (in orange).
+
+```{r}
+#| label: fig-phonlev-isword
+#| fig-cap: "Scatter plot of Levenshtein distance vs RTs in real and non-real words."
+#| code-fold: true
+#| message: false
+
+mald_filt |> 
+  ggplot(aes(PhonLev, RT_log)) +
+  geom_point(alpha = 0.05) +
+  geom_smooth(aes(colour = IsWord), method = "lm") +
+  scale_color_brewer(palette = "Dark2") +
+  labs(x = "Levenshtein distance", y = "RT (ms)")
+```
+
+From glancing at the plot, it looks like the regression line is steeper in real words relative to non-real words, although they do end up overlapping at higher Levenshtein distance, thus potentially indicating a ceiling effect of Levenshtein distance.
+Independent of the reason behind this pattern (which statistics *per se* cannot answer), we can run a regression model to quantify differences.
+
+## One categorical and one numeric predictor (no interaction)
+
+Let's start by figuring out what the model mathematical formula looks like.
+First, let's build the formula without the interaction term.
+
+$$\begin{aligned}
+RT_i & \sim LogNormal(\mu_i, \sigma)\\
+\mu_i & = \beta_0 + \beta_1 \cdot l_i + \beta_2 \cdot w_i\\
+\end{aligned}$$
+
+- $l$ is Levenshtein distance and $w$ is the indicator variable for `IsWord`.
+  $w=0$ is `TRUE` and $w=1$ is `FALSE`.
+  (The reference level of `IsWord` is `TRUE.`)
+
+- $\beta_0$ is the intercept, i.e. the mean logged RTs (logged because it is a log-normal model) when `PhonLev` is 0 and `IsWord` is the reference level, `TRUE`.
+
+- $\beta_1$ is the difference in outcome (i.e. mean logged RTs) for each unit increase of `PhonLev`, while controlling for `IsWord`.
+
+- $\beta_2$ is the difference in outcome when the word is a non-real word compared to when it is a real word, while controlling for `PhonLev`.
+
+Since there is no interaction between distance and word type, the effect of distance on RTs is estimated to be the same independent of which word type the observation comes from and vice versa, the effect of word type on RTs is estimated to be the same independent of the value of distance.
+We will run this model and inspect the expected values to see what this looks like.
+
+```{r}
+#| label: rt-lw
+
+rt_lw <- brm(
+  RT ~ PhonLev + IsWord,
+  family = lognormal,
+  data = mald_filt,
+  cores = 4,
+  seed = 1927,
+  file = "cache/ch-regression-cat-num-rt_lw"
+)
+
+```
+
+```{r}
+#| label: fig-rt-lw-cond
+#| fig-cap: "Expected values from a model without interactions."
+#| code-fold: true
+
+conditional_effects(rt_lw, "PhonLev:IsWord")
+```
+
+```{r}
+#| label: rt-lw-int
+
+rt_lw_int <- brm(
+  RT ~ PhonLev + IsWord + PhonLev:IsWord,
+  family = lognormal,
+  data = mald_filt,
+  cores = 4,
+  seed = 1927,
+  file = "cache/ch-regression-cat-num-rt_lw_int"
+)
+```
+
+```{r}
+epred_grid <- expand_grid(
+  PhonLev = seq(min(mald_filt$PhonLev), max(mald_filt$PhonLev), by = 0.1),
+  IsWord = c("TRUE", "FALSE")
+) |> 
+  mutate(
+    IsWord = factor(IsWord, levels = c("TRUE", "FALSE"))
+  )
+```
+
+```{r}
+rt_lw_int_epred <- epred_draws(
+  rt_lw_int,
+  epred_grid
+)
+```
+
+```{r}
+rt_lw_int_epred_cri <- rt_lw_int_epred |> 
+  summarise(
+    mean = mean(.epred),
+    lower = quantile2(.epred, probs = 0.025),
+    upper = quantile2(.epred, probs = 0.975)
+  )
+```
+
+```{r}
+rt_lw_int_epred_cri |> 
+  ggplot(aes(PhonLev, mean)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper, fill = IsWord), alpha = 0.2) +
+  geom_line(aes(colour = IsWord), linewidth = 1) +
+  scale_fill_brewer(palette = "Dark2") +
+  scale_colour_brewer(palette = "Dark2")
+```

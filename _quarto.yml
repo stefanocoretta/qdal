@@ -69,6 +69,7 @@ book:
       - ch-open-research.qmd
       - ch-regression-cat-cat.qmd
       - ch-regression-interaction.qmd
+      - ch-regression-cat-num.qmd
   - part: Week 10
     chapters:
       - ch-learned.qmd
