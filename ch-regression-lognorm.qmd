@@ -655,26 +655,29 @@ rt_bm_2_epred
 `rt_bm_2_epred` is a tibble itself, with the expected values listed in the `.epred` column.
 These values are the posterior draws of the expected values: since there are 4000 draws in the model, for each value of `PhonLev` we get 4000 values of `.epred`.
 The `.row` column is an index of each `PhonLev` value (there are 85 values, so it goes from 1 to 85), while `.draw` indexes the number of the draw (from 1 to 4000).
-To plot the regression line with the CrIs as in `conditional_effects()`, we need to calculate the mean, lower and upper CrI from the draws, like so:
+The tibble is grouped by `PhonLev` (and `.row`) automatically.
+All operations on this tibble will be applied within each value of `PhonLev` which is what we need.
+To plot the regression line with the CrIs as in `conditional_effects()`, we need to first calculate the mean, lower and upper CrI from the draws, like so:
 
 ```{r}
 #| label: rt-epred-cris
 
-rt_bm_2_epred <- rt_bm_2_epred |> 
-  mutate(
+rt_bm_2_epred_cri <- rt_bm_2_epred |> 
+  summarise(
     mean = mean(.epred),
     lower = quantile2(.epred, probs = 0.025),
     upper = quantile2(.epred, probs = 0.975)
   )
 ```
 
+Since the tibble is grouped by value of `PhonLev`, we get one mean, lower and upper interval value for each `PhonLev` value.
 We can finally plot the expected values with the following code.
 
 ```{r}
 #| label: fig-rt-epred
 #| fig-cap: "Expected values from a log-normal regression model of RTs as a function of mean phoneme-level distance."
 
-rt_bm_2_epred |> 
+rt_bm_2_epred_cri |> 
   ggplot(aes(PhonLev, mean)) +
   geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2) +
   geom_line(linewidth = 1, colour = "tomato4")
@@ -705,15 +708,16 @@ We can reuse the code above to get the mean and CrIs and plot the linear predict
 #| label: fig-rt-linpred
 #| fig-cap: "Linear predictor values from a log-normal model of RTs with mean distance as predictor."
 #| code-fold: true
+#| message: false
 
-rt_bm_2_linpred <- rt_bm_2_linpred |> 
-  mutate(
+rt_bm_2_linpred_cri <- rt_bm_2_linpred |> 
+  summarise(
     mean = mean(.linpred),
     lower = quantile2(.linpred, probs = 0.025),
     upper = quantile2(.linpred, probs = 0.975)
   )
 
-rt_bm_2_linpred |> 
+rt_bm_2_linpred_cri |> 
   ggplot(aes(PhonLev, mean)) +
   geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.2) +
   geom_line(linewidth = 1, colour = "tomato4")
