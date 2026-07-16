@@ -1,4 +1,4 @@
-# Regression models: interactions {#sec-regression-interaction}
+# Interactions in regression: two categorical predictors {#sec-regression-interaction}
 
 ![](/img/badge-stats.png) ![](/img/badge-r.png)
 

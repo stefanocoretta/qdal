@@ -672,13 +672,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Multiple predictors in regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Interactions in regression: two categorical predictors</span></span></a>
   </div>
 </li>
       </ul>
@@ -976,7 +976,7 @@ RT &amp; \sim Gaussian(\mu, \sigma)\\
 </div>
 </div>
 </div>
-<p>There are two priors, one for the intercept (<span class="math inline">\(\mu\)</span>) and one for <span class="math inline">\(\sigma\)</span> (see <code>class</code> column). For both <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, brms sets a Student-<em>t</em> prior probability distribution. The Student-<em>t</em> distribution is a continuous probability distribution with three parameters: the degrees of freedom, the mean and the standard deviation. You will encounter the Student-<em>t</em> distribution in <a href="ch-null-ritual.html" class="quarto-xref"><span>Chapter 26</span></a>, where you will learn about frequentist <em>p</em>-values. For now, it will suffice to say that a Student-<em>t</em> distribution (also simply called a <em>t</em>-distribution) is similar to a Gaussian distribution (hence the presence of the two parameters mean and SD in both families).</p>
+<p>There are two priors, one for the intercept (<span class="math inline">\(\mu\)</span>) and one for <span class="math inline">\(\sigma\)</span> (see <code>class</code> column). For both <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, brms sets a Student-<em>t</em> prior probability distribution. The Student-<em>t</em> distribution is a continuous probability distribution with three parameters: the degrees of freedom, the mean and the standard deviation. You will encounter the Student-<em>t</em> distribution in <a href="ch-null-ritual.html" class="quarto-xref"><span>Chapter 27</span></a>, where you will learn about frequentist <em>p</em>-values. For now, it will suffice to say that a Student-<em>t</em> distribution (also simply called a <em>t</em>-distribution) is similar to a Gaussian distribution (hence the presence of the two parameters mean and SD in both families).</p>
 <p>Normally, you would choose priors <em>before</em> collecting/seeing the data. Here, brms actually uses the data to come up with generic priors that cover a wide range of values without including very unlikely values. Yet, the priors set by brms are so generic that, as said above, they bear very little effect on the posterior. So they are safe to use, even if they are based on the data itself. Just remember, thought, that if you do want to specify your own priors, you must do so independent of the data (ideally, even before you have access to the data, whether you collect it yourself or whether it is pre-existing).</p>
 <p>For this model and data, brms sets a <em>t-</em>distribution for the prior of the mean <span class="math inline">\(\mu\)</span>, with mean 935.5 and SD 220.2, and a <em>t</em>-distribution for the SD <span class="math inline">\(\sigma\)</span>, with mean 0 and SD 220.2. You will notice that the SDs of both priors are the same. The following figures illustrate the density curve of the priors.</p>
 <details class="code-fold">
@@ -1110,7 +1110,7 @@ sigma        317.8845  3.171714  313.8399  321.8941</code></pre>
 </section>
 <section id="reporting" class="level2" data-number="22.4">
 <h2 data-number="22.4" class="anchored" data-anchor-id="reporting"><span class="header-section-number">22.4</span> Reporting</h2>
-<p>What about reporting the model in writing? We could report the model and the results like this (for simplicity, we report only the 95% CrIs here. You will learn how to report multiple CrIs in tables in <a href="ch-regression-more.html" class="quarto-xref"><span>Chapter 28</span></a>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>What about reporting the model in writing? We could report the model and the results like this (for simplicity, we report only the 95% CrIs here. You will learn how to report multiple CrIs in tables in <a href="ch-regression-more.html" class="quarto-xref"><span>Chapter 29</span></a>).<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <blockquote class="blockquote">
 <p>We fitted a Bayesian Gaussian model of reaction times (RTs) using the brms package (Bürkner 2017) in R (R Core Team 2024). The model estimates the mean and standard deviation of RTs.</p>
 <p>Based on the model results, there is a 95% probability that the mean is between 1002 and 1019 ms (mean = 1011, SD = 4) and that the standard deviation is between 312 and 324 ms (mean = 318, SD = 3).</p>

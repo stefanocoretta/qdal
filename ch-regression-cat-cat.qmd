@@ -1,4 +1,4 @@
-# Regression models: multiple predictors {#sec-regression-cat-cat}
+# Multiple predictors in regression {#sec-regression-cat-cat}
 
 ![](/img/badge-stats.png) ![](/img/badge-r.png)
 
@@ -113,7 +113,7 @@ The second variable states if the $f0mn$ value is from the informal condition ($
 @tbl-gen-att-contrasts shows the treatment contrasts table.
 
 |                                            | $gen_\text{M}$ | $att_\text{POL}$ |
-|:------------------------------------:|:---------------:|:---------------:|
+|:-----------------------------------:|:----------------:|:----------------:|
 | `gender` = `F` and `attitude` = `informal` |       0        |        0         |
 |  `gender` = `F` and `attitude` = `polite`  |       0        |        1         |
 | `gender` = `M` and `attitude` = `informal` |       1        |        0         |

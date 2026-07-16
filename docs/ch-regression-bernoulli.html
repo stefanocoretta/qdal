@@ -674,13 +674,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Regression models: multiple predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Multiple predictors in regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Regression models: interactions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Interactions in regression: two categorical predictors</span></span></a>
   </div>
 </li>
       </ul>
@@ -894,7 +894,7 @@ p &amp; = 0.8
 <pre><code>[1] 1.386294</code></pre>
 </div>
 </div>
-<p><a href="#fig-p-log-odds" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-p-log-odds</span></a> shows the logit function (the quantile function of the standard logistic distribution). The probabilities on the <em>x</em>-axis are transformed into log-odds on the <em>y</em> axis. When you fit a regression model with a binary outcome and a Bernoulli family, the estimates of the regression coefficients are in log-odds.</p>
+<p><a href="#fig-p-log-odds" class="quarto-xref">Figure&nbsp;<span>30.1</span></a> shows the logit function (the quantile function of the standard logistic distribution). The probabilities on the <em>x</em>-axis are transformed into log-odds on the <em>y</em> axis. When you fit a regression model with a binary outcome and a Bernoulli family, the estimates of the regression coefficients are in log-odds.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -963,7 +963,7 @@ Figure&nbsp;30.1: The logit function (quantile function): from probabilities to 
 <pre><code>[1] 0.2</code></pre>
 </div>
 </div>
-<p><a href="#fig-p-log-odds" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-p-log-odds</span></a> shows the inverse logit transformation of log-odds (on the <em>x</em>-axis) into probabilities (on the <em>y</em>-axis). The inverse logit constructs the typical S-shaped curve (black thick line) of the CDF of the standard logistic distribution. Since probabilities can’t be smaller than 0 and greater than 1, the black line slopes in either direction and it approaches 0 and 1 on the <em>y</em>-axis without ever reaching them (in mathematical terms, it’s an <em>asymptotic</em> line). It is helpful to just memorise that log-odds 0 corresponds to probability 0.5 (and vice versa of course).</p>
+<p><a href="#fig-p-log-odds" class="quarto-xref">Figure&nbsp;<span>30.1</span></a> shows the inverse logit transformation of log-odds (on the <em>x</em>-axis) into probabilities (on the <em>y</em>-axis). The inverse logit constructs the typical S-shaped curve (black thick line) of the CDF of the standard logistic distribution. Since probabilities can’t be smaller than 0 and greater than 1, the black line slopes in either direction and it approaches 0 and 1 on the <em>y</em>-axis without ever reaching them (in mathematical terms, it’s an <em>asymptotic</em> line). It is helpful to just memorise that log-odds 0 corresponds to probability 0.5 (and vice versa of course).</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1040,7 +1040,7 @@ Figure&nbsp;30.2: The inverse logit function (CDF function): from log-odds to pr
 </section>
 <section id="nicaraguan-sign-language-single-and-multi-verb-predicates" class="level2" data-number="30.2">
 <h2 data-number="30.2" class="anchored" data-anchor-id="nicaraguan-sign-language-single-and-multi-verb-predicates"><span class="header-section-number">30.2</span> Nicaraguan Sign Language single and multi-verb predicates</h2>
-<p>To illustrate how to fit a Bernoulli model, we will use data from <span class="citation" data-cites="brentari2024">Brentari et al. (<a href="#ref-brentari2024" role="doc-biblioref">2024</a>)</span> on the emergent Nicaraguan Sign Language (<em>Lengua de Señas Nicaragüense</em>, NSL). First let’s attach the necessary packages.</p>
+<p>To illustrate how to fit a Bernoulli model, we will use data from <span class="citation" data-cites="brentari2024">Brentari et al. (<a href="references.html#ref-brentari2024" role="doc-biblioref">2024</a>)</span> on the emergent Nicaraguan Sign Language (<em>Lengua de Señas Nicaragüense</em>, NSL). First let’s attach the necessary packages.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_light</span>())</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
@@ -1063,7 +1063,7 @@ Figure&nbsp;30.2: The inverse logit function (CDF function): from log-odds to pr
 <blockquote class="blockquote">
 <p>The use of multi-verb predicates would increase with each generation, i.e.&nbsp;that NSL1 signers use more multi-verb predicates than home-signers and that NSL2 signers use more multi-verb predicates than home-signers and NSL1 signers.</p>
 </blockquote>
-<p>For the linguistic reasons behind this hypothesis, check the paper linked above. <a href="#fig-verb-org" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-verb-org</span></a> shows the proportion of single vs multiple predicates in the three groups.</p>
+<p>For the linguistic reasons behind this hypothesis, check the paper linked above. <a href="#fig-verb-org" class="quarto-xref">Figure&nbsp;<span>30.3</span></a> shows the proportion of single vs multiple predicates in the three groups.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1088,7 +1088,7 @@ Figure&nbsp;30.3: Proportion of single vs multiple predicates in three groups of
 </div>
 </div>
 </div>
-<p>What do you notice about the type of predicates in the three groups? Does it match the hypothesis put forward by the paper? We can calculate the proportion of multi-verb predicates by creating a column which codes <code>Num_Predicates</code> with <code>0</code> for single and <code>1</code> for multi-verbs predicates. This is the same dummy coding we encountered in <a href="#sec-regression-cat" class="quarto-xref"><span class="quarto-unresolved-ref">sec-regression-cat</span></a> for categorical predictors, but now we apply that to a binary outcome variable. Then you just take the mean of the dummy column by group, to obtain the proportion of multi-verb predicates for each group. Note that since we code multi-verb predicates with <code>1</code>, taking the mean gives you the proportion of multi-verb predicates and the proportion of single predicates is just <span class="math inline">\(1 - p\)</span> where <span class="math inline">\(p\)</span> is the proportion of multi-verb predicates.</p>
+<p>What do you notice about the type of predicates in the three groups? Does it match the hypothesis put forward by the paper? We can calculate the proportion of multi-verb predicates by creating a column which codes <code>Num_Predicates</code> with <code>0</code> for single and <code>1</code> for multi-verbs predicates. This is the same dummy coding we encountered in <a href="ch-regression-cat.html" class="quarto-xref"><span>Chapter 28</span></a> for categorical predictors, but now we apply that to a binary outcome variable. Then you just take the mean of the dummy column by group, to obtain the proportion of multi-verb predicates for each group. Note that since we code multi-verb predicates with <code>1</code>, taking the mean gives you the proportion of multi-verb predicates and the proportion of single predicates is just <span class="math inline">\(1 - p\)</span> where <span class="math inline">\(p\)</span> is the proportion of multi-verb predicates.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>verb_org <span class="ot">&lt;-</span> verb_org <span class="sc">|&gt;</span> </span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -1112,7 +1112,7 @@ Figure&nbsp;30.3: Proportion of single vs multiple predicates in three groups of
 </section>
 <section id="sec-plot-prop" class="level2" data-number="30.3">
 <h2 data-number="30.3" class="anchored" data-anchor-id="sec-plot-prop"><span class="header-section-number">30.3</span> Plotting proportions, percentages and accuracy data</h2>
-<p>A common (but incorrect) way of plotting proportion/percentage data (like accuracy, or the single vs multi-verb predicates of the <code>verb_org</code> dataset) is to calculate the proportion of each participant and then produce a bar chart with error bars that indicate the mean proportion (i.e.&nbsp;the mean of the proportions of each participant) and the dispersion around the mean accuracy. You might have seen something like <a href="#fig-prop-bad" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-prop-bad</span></a> in many papers. This type of plot is called “bars and whiskers” because the error bars look like cat whiskers.</p>
+<p>A common (but incorrect) way of plotting proportion/percentage data (like accuracy, or the single vs multi-verb predicates of the <code>verb_org</code> dataset) is to calculate the proportion of each participant and then produce a bar chart with error bars that indicate the mean proportion (i.e.&nbsp;the mean of the proportions of each participant) and the dispersion around the mean accuracy. You might have seen something like <a href="#fig-prop-bad" class="quarto-xref">Figure&nbsp;<span>30.4</span></a> in many papers. This type of plot is called “bars and whiskers” because the error bars look like cat whiskers.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>verb_org <span class="sc">|&gt;</span> </span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Participant, Group) <span class="sc">|&gt;</span> </span>
@@ -1142,7 +1142,7 @@ Figure&nbsp;30.4: The bad way of plotting proportions.
 </div>
 </div>
 </div>
-<p>Alas, this is a very bad way of processing proportion data. You can learn why in <span class="citation" data-cites="holtz2019">Holtz (<a href="#ref-holtz2019" role="doc-biblioref">2019</a>)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The alternative (robust) way to plot proportion data is to show the proportion for individual participants. To do so we can use a combination of <code>summarise()</code>, <code>geom_jitter()</code> and <code>stat_summary()</code>. First, we need to compute the proportion of multi-verb predicates by participant. The procedure is the same as calculating the proportion for the three signer groups, but now we do it for each participant. Note that participants only have a unique ID within group, so we need to group by participant and group (we need the group information any way to be able to plot participants by group below). We save the output to a new tibble <code>verb_part</code>.</p>
+<p>Alas, this is a very bad way of processing proportion data. You can learn why in <span class="citation" data-cites="holtz2019">Holtz (<a href="references.html#ref-holtz2019" role="doc-biblioref">2019</a>)</span>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The alternative (robust) way to plot proportion data is to show the proportion for individual participants. To do so we can use a combination of <code>summarise()</code>, <code>geom_jitter()</code> and <code>stat_summary()</code>. First, we need to compute the proportion of multi-verb predicates by participant. The procedure is the same as calculating the proportion for the three signer groups, but now we do it for each participant. Note that participants only have a unique ID within group, so we need to group by participant and group (we need the group information any way to be able to plot participants by group below). We save the output to a new tibble <code>verb_part</code>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>verb_part <span class="ot">&lt;-</span> verb_org <span class="sc">|&gt;</span> </span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Participant, Group) <span class="sc">|&gt;</span> </span>
@@ -1188,7 +1188,7 @@ Figure&nbsp;30.5: How to plot participants’ proportions and overall proportion
 </div>
 </div>
 <p>In this data we don’t have many participants for group, but you can immediately appreciate the variability between participants. You will notice something new in the code: we have specified the data inside <code>geom_jitter()</code> and <code>stat_summary()</code> instead of inside <code>ggplot()</code>. This is because the two functions need different data: <code>geom_jitter()</code> needs the data with the proportion we calculated for each participant and group; <code>stat_summary()</code> needs to calculate the mean and CIs from the overall data, rather than from the proportion data we created. This is the aspect that a lot of researchers get wrong: you should <strong>not</strong> take the mean of the participant proportions, unless all participants have exactly the same number of observations. In the <code>verb_org</code> data specifically, the number of observations do indeed differ for each participant. You can check this yourself by getting the number of observations per participant per group with the <code>count()</code> function. We are also specifying the aesthetics within each geom/stat function, because while <code>x</code> is the same, the <code>y</code> differs! In <code>stat_summary()</code>, the <code>fun.data</code> argument lets you specify the function you want to use for the summary statistics to be added. Here we are using the <code>mean_cl_boot</code> function, which returns the mean proportion of <code>Response_num</code> and the 95% Confidence Intervals (CIs) of that mean. The CIs are calculated using a bootstrapping procedure (if you are interested in learning what that is, check the documentation of <code>smean.sd</code> from the Hmisc package).</p>
-<p>This also creates a nice opportunity to mention one shortcoming of the models we are fitting, thinking a bit ahead of ourselves: the regression models we cover in Week 4 to 10 do not account for the fact that the data comes from multiple participants and instead they just assume that each observation in the data set is from a different participant. When you have multiple observations from each participant, we call this a <em>repeated measure</em> design. This is a problem because it breaks one assumption of regression models: that all the observations are independent from each other. Of course, if they come from the same participant, they are not independent. We won’t have time in this course to learn about the solution (i.e.&nbsp;hierarchical regression models, also known as multi-level, mixed-effects, nested-effects, or random-effects models; these are just regression models that are set up so they can account for hierarchical grouping in the data, like multiple observations from multiple participants, or multiple pupils from multiple classes from multiple schools), but I point you to further resources in <a href="#sec-next" class="quarto-xref"><span class="quarto-unresolved-ref">sec-next</span></a>.</p>
+<p>This also creates a nice opportunity to mention one shortcoming of the models we are fitting, thinking a bit ahead of ourselves: the regression models we cover in Week 4 to 10 do not account for the fact that the data comes from multiple participants and instead they just assume that each observation in the data set is from a different participant. When you have multiple observations from each participant, we call this a <em>repeated measure</em> design. This is a problem because it breaks one assumption of regression models: that all the observations are independent from each other. Of course, if they come from the same participant, they are not independent. We won’t have time in this course to learn about the solution (i.e.&nbsp;hierarchical regression models, also known as multi-level, mixed-effects, nested-effects, or random-effects models; these are just regression models that are set up so they can account for hierarchical grouping in the data, like multiple observations from multiple participants, or multiple pupils from multiple classes from multiple schools), but I point you to further resources in <a href="ch-next.html" class="quarto-xref"><span>Chapter 37</span></a>.</p>
 </section>
 <section id="bernoulli-model-of-nsl-predicates" class="level2" data-number="30.4">
 <h2 data-number="30.4" class="anchored" data-anchor-id="bernoulli-model-of-nsl-predicates"><span class="header-section-number">30.4</span> Bernoulli model of NSL predicates</h2>
@@ -1199,7 +1199,7 @@ Figure&nbsp;30.5: How to plot participants’ proportions and overall proportion
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>If you reproduce <a href="#fig-verb-org" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-verb-org</span></a> now, you will see that the order of <code>Num_Predicates</code> in the legend is “single” then “multiple” and that the order of the proportions in the bar chart have flipped.</p>
+<p>If you reproduce <a href="#fig-verb-org" class="quarto-xref">Figure&nbsp;<span>30.3</span></a> now, you will see that the order of <code>Num_Predicates</code> in the legend is “single” then “multiple” and that the order of the proportions in the bar chart have flipped.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1229,7 +1229,7 @@ Figure&nbsp;30.6: Proportion of single vs multiple predicates in three groups of
 MVP_i &amp; \sim Bernoulli(p_i) \\
 logit(p_i) &amp; = \beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i \\
 \end{aligned}\]</span></p>
-<p>The probability of using an multi-verb predicate follows a Bernoulli distribution with probability <span class="math inline">\(p\)</span>, which is the only parameter. The logit function is applied to the parameter <span class="math inline">\(p\)</span> as discussed in <a href="#sec-prob-log" class="quarto-xref"><span class="quarto-unresolved-ref">sec-prob-log</span></a>. Functions applied to model parameters are known as <strong>link functions</strong>. Bernoulli models use the <strong>logit link</strong> (i.e.&nbsp;the logit function). Gaussian model use the <em>identity link function</em>, in other words, the response values are not transformed (remember, we were modelling RTs with Gaussian models and the estimates were in milliseconds, the same unit of RTs).</p>
+<p>The probability of using an multi-verb predicate follows a Bernoulli distribution with probability <span class="math inline">\(p\)</span>, which is the only parameter. The logit function is applied to the parameter <span class="math inline">\(p\)</span> as discussed in <a href="#sec-prob-log" class="quarto-xref"><span>Section 30.1</span></a>. Functions applied to model parameters are known as <strong>link functions</strong>. Bernoulli models use the <strong>logit link</strong> (i.e.&nbsp;the logit function). Gaussian model use the <em>identity link function</em>, in other words, the response values are not transformed (remember, we were modelling RTs with Gaussian models and the estimates were in milliseconds, the same unit of RTs).</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1291,7 +1291,7 @@ logit(p_i) &amp; = \beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i \\
 </section>
 <section id="fit-the-bernoulli-model-with-brms" class="level2" data-number="30.5">
 <h2 data-number="30.5" class="anchored" data-anchor-id="fit-the-bernoulli-model-with-brms"><span class="header-section-number">30.5</span> Fit the Bernoulli model with brms</h2>
-<p>We can now fit the model with <code>brm()</code>. The model’s R formula has no surprises: <code>Num_Predicates ~ Group</code>. This looks like the formula of the model in <a href="#sec-regression-more" class="quarto-xref"><span class="quarto-unresolved-ref">sec-regression-more</span></a>: <code>VOT_ms ~ phonation</code>. We are modelling <code>Num_Predicates</code> as a function of <code>Group</code>, like we modelled <code>VOT_ms</code> as a function of phonation. In this model, you have to set the family to <code>bernoulli</code> to fit a Bernoulli model. We also set the number of cores, seed and file as usual.</p>
+<p>We can now fit the model with <code>brm()</code>. The model’s R formula has no surprises: <code>Num_Predicates ~ Group</code>. This looks like the formula of the model in <a href="ch-regression-more.html" class="quarto-xref"><span>Chapter 29</span></a>: <code>VOT_ms ~ phonation</code>. We are modelling <code>Num_Predicates</code> as a function of <code>Group</code>, like we modelled <code>VOT_ms</code> as a function of phonation. In this model, you have to set the family to <code>bernoulli</code> to fit a Bernoulli model. We also set the number of cores, seed and file as usual.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>mvp_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  Num_Predicates <span class="sc">~</span> Group,</span>
@@ -1391,7 +1391,7 @@ GroupNSL2     0.56      0.21  0.30  0.83</code></pre>
 </div>
 </div>
 </div>
-<p>The predicted probability of multi-verb predicates in home-signers is 32-41%, for NSL1 it is 16-22% and for NSL2 it is 45-54%, at 80% confidence. Based on these results, we can see more clearly that the hypothesis of the study is not fully borne out by the data: we do not observe an increase in probability of multi-verb predicates from home-signers to NSL1 to NSL2. Instead, there is a decrease from home-signers to NSL1 and an increase from NSL1 to NSL2. Moreover, the predicted probability of multi-verb predicates in NSL2, 45-54%, indicates that NSL2 possibly use either single and multi-verb predicates with equal probability. <a href="#fig-mvp-bm-pred" class="quarto-xref">Figure&nbsp;<span class="quarto-unresolved-ref">fig-mvp-bm-pred</span></a> plots the expected probabilities of multi-verb predicates.</p>
+<p>The predicted probability of multi-verb predicates in home-signers is 32-41%, for NSL1 it is 16-22% and for NSL2 it is 45-54%, at 80% confidence. Based on these results, we can see more clearly that the hypothesis of the study is not fully borne out by the data: we do not observe an increase in probability of multi-verb predicates from home-signers to NSL1 to NSL2. Instead, there is a decrease from home-signers to NSL1 and an increase from NSL1 to NSL2. Moreover, the predicted probability of multi-verb predicates in NSL2, 45-54%, indicates that NSL2 possibly use either single and multi-verb predicates with equal probability. <a href="#fig-mvp-bm-pred" class="quarto-xref">Figure&nbsp;<span>30.7</span></a> plots the expected probabilities of multi-verb predicates.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1438,7 +1438,7 @@ Figure&nbsp;30.7: Expected probabilities of multi-verb predicates by group as pe
 <section id="reporting" class="level2" data-number="30.6">
 <h2 data-number="30.6" class="anchored" data-anchor-id="reporting"><span class="header-section-number">30.6</span> Reporting</h2>
 <blockquote class="blockquote">
-<p>We fitted a Bayesian Bernoulli regression model to assess the probability of multi-verb predicates in NSL. The model was fitted with brms <span class="citation" data-cites="burkner2017">Bürkner (<a href="#ref-burkner2017" role="doc-biblioref">2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">R Core Team (<a href="#ref-rcoreteam2025" role="doc-biblioref">2025</a>)</span>, with the default priors, four chains with 2000 iterations each, of which 1000 for warm-up. We included group (home-signers, NSL1 and NSL2) as the only predictor, which was coded with the default treatment contrasts (home-signers as the reference level).</p>
+<p>We fitted a Bayesian Bernoulli regression model to assess the probability of multi-verb predicates in NSL. The model was fitted with brms <span class="citation" data-cites="burkner2017">Bürkner (<a href="references.html#ref-burkner2017" role="doc-biblioref">2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">R Core Team (<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">2025</a>)</span>, with the default priors, four chains with 2000 iterations each, of which 1000 for warm-up. We included group (home-signers, NSL1 and NSL2) as the only predictor, which was coded with the default treatment contrasts (home-signers as the reference level).</p>
 <p>According to the model, there is a 32-41% probability of multi-verb predicates in home-signers, for NSL1 it is 16-22% and for NSL2 it is 45-54%, at 80% confidence. The results indicate that the hypothesis that the probability of multi-verb predicates should increase from home-signers to NSL1 to NSL2 is not borne out. The probability decreases by 11-22 percentage points from home-signers to NSL1, and increases by 25-36 points from NSL1 to NSL2. Moreover, the probability of multi-verb predicates in NSL2 indicates that single and multi-verb predicates are equally probable in NSL2.</p>
 </blockquote>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
@@ -1479,7 +1479,7 @@ Figure&nbsp;30.7: Expected probabilities of multi-verb predicates by group as pe
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
 <div id="ref-brentari2024" class="csl-entry" role="listitem">
 Brentari, Diane, Susan Goldin-Meadow, Laura Horton, Ann Senghas, and Marie Coppola. 2024. <span>“The Organization of Verb Meaning in Lengua de Señas Nicaragüense (LSN): Sequential or Simultaneous Structures?”</span> <em>Glossa: A Journal of General Linguistics</em> 9 (1). <a href="https://doi.org/10.16995/glossa.10342">https://doi.org/10.16995/glossa.10342</a>.
 </div>
