@@ -9,6 +9,8 @@
 library(tidyverse)
 theme_set(theme_light())
 library(brms)
+library(posterior)
+library(tidybayes)
 library(ggdist)
 ```
 
@@ -26,6 +28,8 @@ We filter RTs to include only values above 34 ms, as we have done in @sec-regres
 library(tidyverse)
 theme_set(theme_light())
 library(brms)
+library(posterior)
+library(tidybayes)
 library(ggdist)
 ```
 
@@ -83,7 +87,7 @@ RT_i & \sim LogNormal(\mu_i, \sigma)\\
 - $\beta_2$ is the difference in outcome when the word is a non-real word compared to when it is a real word, while controlling for `PhonLev`.
 
 Since there is no interaction between distance and word type, the effect of distance on RTs is estimated to be the same independent of which word type the observation comes from and vice versa, the effect of word type on RTs is estimated to be the same independent of the value of distance.
-We will run this model and inspect the expected values to see what this looks like.
+Let's run this model so we can inspect the estimates of the regression coefficients and plot the results to see what the estimated effects look like.
 
 ```{r}
 #| label: rt-lw
@@ -99,18 +103,64 @@ rt_lw <- brm(
 
 ```
 
+The model has three regression coefficients, as you would expect (in the following, the 80% CrI are shown).
+
+```{r}
+#| label: rt-lw-fixef
+
+fixef(rt_lw, probs = c(0.1, 0.9)) |> round(2)
+```
+
+- The `Intercept` corresponds to the logged RTs when `PhonLev` is 0 and `IsWord` is `TRUE`.
+  At 80% probability, the logged RTs in these conditions are between 6.55 and 6.61.
+
+- According to the `PhonLev` estimate, for each unit increase of `PhonLev` the logged RTs increase by 0.03 to 0.04 (when controlling for word type) at 80% confidence.
+
+- `IsWordFalse` indicates that the logged RTs are 0.1 to 0.12 higher in non-words than in real words (when controlling for distance).
+
+The estimated effect of `PhonLev` is the same in both real words (the reference level of `IsWord`) and in non-words.
+Vice versa, the estimated effect of `IsWord` is the same independent of the value of `PhonLev`.
+We can confirm this visually by plotting the expected values.
+For convenience, we use `conditional_effects()`.
+This time we use the `method` argument to tell the function to plot the linear predictor (`method = "posterior_linpred"`) rather than the expected values (`method = "posterior_epred"`).
+We do this so that we can see the effects on the linear scale of logged RTs, rather than on the original scale (since we are using a log-normal model, which makes effects on the original scale log-linear rather than simply linear).
+
 ```{r}
 #| label: fig-rt-lw-cond
-#| fig-cap: "Expected values from a model without interactions."
-#| code-fold: true
+#| fig-cap: "Posterior draws of the linear predictor from a model without interactions (mean and 95% CrI)."
+#| fig-subcap: 
+#|   - "Effect of mean phoneme-level distance in real words and non-words."
+#|   - "Effect of word type at three values of mean distance."
+#| layout-ncol: 2
 
-conditional_effects(rt_lw, "PhonLev:IsWord")
+conditional_effects(rt_lw, "PhonLev:IsWord", method = "posterior_linpred")
+conditional_effects(rt_lw, "IsWord:PhonLev", method = "posterior_linpred")
 ```
+
+In @fig-rt-lw-cond-1, logged RT increase with greater mean phoneme-level Levenshtein distance in both real and non-words.
+If you look closely, you will also notice that the two regression lines are parallel.
+In other words, the slope of the lines is the same: this is because the model estimates a single effect of mean distance for both real and non-words.
+There is no other way this can be, because the model does not include an interaction between word type and distance.
+Conversely, if we look at @fig-rt-lw-cond-2, we can see that the effect of mean distance within real and non-words is the same in both word types.
+Note that `conditional_effects()` automatically picks "representative" values of the numeric predictor in this plot: by default, the representative values are the mean and mean $\pm$ 1 SD of the observed values in the data for that predictor.
+If you compare, within each word type, the distances between the posterior logged RTs for the three values of distance, their distances are the same in both word types.
+
+However, we have reasons to believe that the effects of word type and mean phoneme-level distance are not totally independent from each other.
+Why?
+Because this is the default assumption: from a linguistic point of view, we know that non-words behave differently from real words, so it makes sense to expect that the effect of phoneme-level distance might also be different.
+So what we really need is a model with an interaction between the two predictors.
+Note that we only fitted a model without an interaction for pedagogical reasons, but you should not fit a model without interactions if you intend to fit one with interactions.
+
+## One categorical and one numeric predictor in interaction
+
+The R syntax for interactions between predictors of different type is the same as with two categorical predictors: you include an interaction term by adding the two predictors separated by a colon, like `PhonLev:IsWord`.
+We have also seen the syntactic sugar `*` which automatically includes the main coefficients and the interaction term, but for clarity we use the full syntax here.
 
 ```{r}
 #| label: rt-lw-int
 
 rt_lw_int <- brm(
+  # Equivalent: RT ~ PhonLev * IsWord
   RT ~ PhonLev + IsWord + PhonLev:IsWord,
   family = lognormal,
   data = mald_filt,
@@ -120,24 +170,106 @@ rt_lw_int <- brm(
 )
 ```
 
+Now that we have included an interaction, the interpretation of the `PhonLev` and `IsWordFALSE` coefficients changes.
+
 ```{r}
+#| label: rt-lw-int-fixef
+
+fixef(rt_lw_int, probs = c(0.1, 0.9)) |> round(2)
+```
+
+- The `Intercept` is still the logged RTs when phoneme-level distance is 0 and the word is real, but you will notice that the estimate is slightly different now.
+  This is common when including an interaction between predictors.
+  Since the effects of each predictor are allowed to differ depending on the value of the other predictor, the intercept might be affected.
+
+- Now, the `PhonLev` coefficient is the effect of `PhonLev` *when the word is real*.
+  In other words, the estimate of this coefficient applies exclusively to real words.
+  Why real words?
+  Because that's the reference level of `IsWord`.
+  According to the model, for each unit increase of phoneme-level distance in real words, logged RTs increase by 0.04 to 0.05 (at 80% probability).
+  This is a slightly larger difference than that estimated by the model without the interaction.
+
+- `IsWordFALSE` tells us the difference between non-words and real words *when phoneme-level distance is 0*.
+  Why 0?
+  Because that's the "default" value of a numeric predictor.
+  Non-words elicit logged RTs that are 0.18 to 0.29 longer than real words, when distance is 0.
+  This difference is much larger than the one suggested by the model without an interaction.
+
+- `PhonLev:IsWordFALSE` is the coefficient of the interaction term.
+  This coefficient tells us how the effect of `PhonLev` differs in non-words vs real words.
+  In other words, it tells us what we need to add or subtract to the phoneme-level distance effect of real words to get that effect in non-words.
+  According to the model, the effect of distance in non-words on logged RTs is between 0.01 and 0.02 units smaller than the effect in real words, at 80% confidence.
+  This is because the 80% CrI of the posterior distribution of the coefficient is \[-0.02, -0.01\].
+
+So what is the effect of phoneme-level distance in non-words?
+Easy, we can compute that using the posterior draws of the `PhonLev` and `PhonLev:IsWordFALSE` coefficients.
+We simply sum them to obtain the effect of mean distance on logged RTs when the word is a non-word.
+
+```{r}
+#| label: rt-lw-int-phonlev-false
+
+rt_lw_int_draws <- as_draws_df(rt_lw_int) |> 
+  mutate(
+    # Remember to use backticks `` with column names that have colons.
+    PhonLev_false = b_PhonLev + `b_PhonLev:IsWordFALSE`
+  )
+
+quantile2(rt_lw_int_draws$PhonLev_false, probs = c(0.1, 0.9)) |> round(2)
+```
+
+The 80% CrI of the posterior draws of the effect of distance in non-words is between 0.02 and 0.03.
+Compare it with the effect in real words, \[0.04, 0.05\].
+The slope of the regression line of the effect of phoneme-level distance on logged RTs is thus less steep in non-words than in real words.
+How less steep is quantified by the `PhonLev:IsWordFALSE` coefficient.
+How does all this look like?
+Let's plot the posterior draws of the linear predictor using `conditional_effects()`.
+
+```{r}
+#| label: fig-rt-lw-int-cond
+#| fig-cap: "Posterior draws of the linear predictor from a model with an interaction (mean and 95% CrI)."
+
+conditional_effects(rt_lw_int, "PhonLev:IsWord", method = "posterior_linpred")
+
+```
+
+@fig-rt-lw-int-cond shows the regression lines for real and non-words.
+The line is steeper in real words than in non-words.
+In other words, for each unit increase of phoneme-level distance, the logged RTs increase more in real than in non-words.
+Let's plot the expected values now, but instead of using `conditional_effects()`, let's use `epred_draws()`.
+First, we need the grid:
+
+```{r}
+#| label: rt-lw-int-grid
+
 epred_grid <- expand_grid(
   PhonLev = seq(min(mald_filt$PhonLev), max(mald_filt$PhonLev), by = 0.1),
   IsWord = c("TRUE", "FALSE")
 ) |> 
   mutate(
+    # We convert IsWord to factor so we can specify the order of the levels.
     IsWord = factor(IsWord, levels = c("TRUE", "FALSE"))
   )
 ```
 
+Now, we can calculate the expected values.
+
 ```{r}
+#| label: rt-lw-int-epred
+
 rt_lw_int_epred <- epred_draws(
   rt_lw_int,
   epred_grid
 )
+
+rt_lw_int_epred
 ```
 
+For plotting effects of numeric predictors, we need to calculate the mean and lower and upper limits of the credible interval.
+
 ```{r}
+#| label: rt-lw-int-cri
+#| message: false
+
 rt_lw_int_epred_cri <- rt_lw_int_epred |> 
   summarise(
     mean = mean(.epred),
@@ -146,11 +278,23 @@ rt_lw_int_epred_cri <- rt_lw_int_epred |>
   )
 ```
 
+Finally, we can plot the expected values.
+
 ```{r}
+#| label: fig-rt-lw-int
+#| fig-cap: "Expected values of RT from a model with a phoneme-level distance/word type interaction."
+
 rt_lw_int_epred_cri |> 
   ggplot(aes(PhonLev, mean)) +
   geom_ribbon(aes(ymin = lower, ymax = upper, fill = IsWord), alpha = 0.2) +
   geom_line(aes(colour = IsWord), linewidth = 1) +
   scale_fill_brewer(palette = "Dark2") +
-  scale_colour_brewer(palette = "Dark2")
+  scale_colour_brewer(palette = "Dark2") +
+  labs(x = "Phoneme-level distance", y = "Expected RTs (ms)", colour = "Real word?", fill = "Real word?")
 ```
+
+::: callout-warning
+### Exercise 1
+
+Reproduce @fig-rt-lw-int-cond using `linpred_draws()` to calculate the posterior draws of the linear predictor and then plot them with ggplot2 (like we did now with the expected values).
+:::

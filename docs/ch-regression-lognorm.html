@@ -681,6 +681,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Interactions in regression: two categorical predictors</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-cat-num.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Interactions in regression: one categorical and one numeric predictor</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -695,25 +701,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -1334,21 +1340,29 @@ Figure&nbsp;31.10: Posterior predictions of RTs based on a log-normal regression
 </div>
 </div>
 </div>
-<p><code>rt_bm_2_epred</code> is a tibble itself, with the expected values listed in the <code>.epred</code> column. These values are the posterior draws of the expected values: since there are 4000 draws in the model, for each value of <code>PhonLev</code> we get 4000 values of <code>.epred</code>. The <code>.row</code> column is an index of each <code>PhonLev</code> value (there are 85 values, so it goes from 1 to 85), while <code>.draw</code> indexes the number of the draw (from 1 to 4000). To plot the regression line with the CrIs as in <code>conditional_effects()</code>, we need to calculate the mean, lower and upper CrI from the draws, like so:</p>
+<p><code>rt_bm_2_epred</code> is a tibble itself, with the expected values listed in the <code>.epred</code> column. These values are the posterior draws of the expected values: since there are 4000 draws in the model, for each value of <code>PhonLev</code> we get 4000 values of <code>.epred</code>. The <code>.row</code> column is an index of each <code>PhonLev</code> value (there are 85 values, so it goes from 1 to 85), while <code>.draw</code> indexes the number of the draw (from 1 to 4000). The tibble is grouped by <code>PhonLev</code> (and <code>.row</code>) automatically. All operations on this tibble will be applied within each value of <code>PhonLev</code> which is what we need. To plot the regression line with the CrIs as in <code>conditional_effects()</code>, we need to first calculate the mean, lower and upper CrI from the draws, like so:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>rt_bm_2_epred <span class="ot">&lt;-</span> rt_bm_2_epred <span class="sc">|&gt;</span> </span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>rt_bm_2_epred_cri <span class="ot">&lt;-</span> rt_bm_2_epred <span class="sc">|&gt;</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(.epred),</span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">lower =</span> <span class="fu">quantile2</span>(.epred, <span class="at">probs =</span> <span class="fl">0.025</span>),</span>
 <span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper =</span> <span class="fu">quantile2</span>(.epred, <span class="at">probs =</span> <span class="fl">0.975</span>)</span>
 <span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has regrouped the output.
+ℹ Summaries were computed grouped by PhonLev and .row.
+ℹ Output is grouped by PhonLev.
+ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+ℹ Use `summarise(.by = c(PhonLev, .row))` for per-operation grouping
+  (`?dplyr::dplyr_by`) instead.</code></pre>
 </div>
-<p>We can finally plot the expected values with the following code.</p>
+</div>
+<p>Since the tibble is grouped by value of <code>PhonLev</code>, we get one mean, lower and upper interval value for each <code>PhonLev</code> value. We can finally plot the expected values with the following code.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>rt_bm_2_epred <span class="sc">|&gt;</span> </span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(PhonLev, mean)) <span class="sc">+</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"tomato4"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>rt_bm_2_epred_cri <span class="sc">|&gt;</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(PhonLev, mean)) <span class="sc">+</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"tomato4"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-rt-epred" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1364,12 +1378,12 @@ Figure&nbsp;31.11: Expected values from a log-normal regression model of RTs as 
 </div>
 <p>Since we used a log-normal family, the regression line of the effect of mean distance on RTs is not a perfect straight line (it is subtle, but it is true). This is because the effect of mean distance depends on the baseline RTs, as we said above: with higher baseline RTs the effect is larger, so the regression line is in fact a curve. It becomes steeper with higher mean distances. If you plotted the regression line of the linear predictor of the model (i.e.&nbsp;logged RTs) then it would be a nice straight line: the effect of the predictor is <em>log-linear</em>, i.e.&nbsp;it is linear on the log scale of the outcome variable. Let’s try that: we can use another function from tidybayes, <code>linpred_draws()</code>. This is like <code>epred_draws()</code>, but it returns the outcome on the linear predictor scale (here logged ms) rather than on the original scale.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>rt_bm_2_linpred <span class="ot">&lt;-</span> <span class="fu">linpred_draws</span>(</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  rt_bm_2,</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  epred_grid</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>rt_bm_2_linpred</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>rt_bm_2_linpred <span class="ot">&lt;-</span> <span class="fu">linpred_draws</span>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  rt_bm_2,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  epred_grid</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>rt_bm_2_linpred</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
@@ -1382,17 +1396,17 @@ Figure&nbsp;31.11: Expected values from a log-normal regression model of RTs as 
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>rt_bm_2_linpred <span class="ot">&lt;-</span> rt_bm_2_linpred <span class="sc">|&gt;</span> </span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(.linpred),</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">lower =</span> <span class="fu">quantile2</span>(.linpred, <span class="at">probs =</span> <span class="fl">0.025</span>),</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper =</span> <span class="fu">quantile2</span>(.linpred, <span class="at">probs =</span> <span class="fl">0.975</span>)</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>rt_bm_2_linpred <span class="sc">|&gt;</span> </span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(PhonLev, mean)) <span class="sc">+</span></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"tomato4"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>rt_bm_2_linpred_cri <span class="ot">&lt;-</span> rt_bm_2_linpred <span class="sc">|&gt;</span> </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(.linpred),</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">lower =</span> <span class="fu">quantile2</span>(.linpred, <span class="at">probs =</span> <span class="fl">0.025</span>),</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">upper =</span> <span class="fu">quantile2</span>(.linpred, <span class="at">probs =</span> <span class="fl">0.975</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>rt_bm_2_linpred_cri <span class="sc">|&gt;</span> </span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(PhonLev, mean)) <span class="sc">+</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower, <span class="at">ymax =</span> upper), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">colour =</span> <span class="st">"tomato4"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-rt-linpred" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
