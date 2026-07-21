@@ -747,6 +747,7 @@ window.Quarto = {
   <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data"><span class="header-section-number">36.1</span> The data</a></li>
   <li><a href="#one-categorical-and-one-numeric-predictor-no-interaction" id="toc-one-categorical-and-one-numeric-predictor-no-interaction" class="nav-link" data-scroll-target="#one-categorical-and-one-numeric-predictor-no-interaction"><span class="header-section-number">36.2</span> One categorical and one numeric predictor (no interaction)</a></li>
   <li><a href="#one-categorical-and-one-numeric-predictor-in-interaction" id="toc-one-categorical-and-one-numeric-predictor-in-interaction" class="nav-link" data-scroll-target="#one-categorical-and-one-numeric-predictor-in-interaction"><span class="header-section-number">36.3</span> One categorical and one numeric predictor in interaction</a></li>
+  <li><a href="#calculating-posterior-draws-at-specific-predictor-values" id="toc-calculating-posterior-draws-at-specific-predictor-values" class="nav-link" data-scroll-target="#calculating-posterior-draws-at-specific-predictor-values"><span class="header-section-number">36.4</span> Calculating posterior draws at specific predictor values</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-cat-num.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -900,6 +901,12 @@ Figure&nbsp;36.2: Posterior draws of the linear predictor from a model without i
 </section>
 <section id="one-categorical-and-one-numeric-predictor-in-interaction" class="level2" data-number="36.3">
 <h2 data-number="36.3" class="anchored" data-anchor-id="one-categorical-and-one-numeric-predictor-in-interaction"><span class="header-section-number">36.3</span> One categorical and one numeric predictor in interaction</h2>
+<p>The model with an interaction between phoneme-level distance and word type can be represented with the following formula:</p>
+<p><span class="math display">\[\begin{aligned}
+RT_i &amp; \sim LogNormal(\mu_i, \sigma)\\
+\mu_i &amp; = \beta_0 + \beta_1 \cdot l_i + \beta_2 \cdot w_i + \beta_3 \cdot l_i \cdot w_i\\
+\end{aligned}\]</span></p>
+<p>Because of the interaction term <span class="math inline">\(\beta_3 \cdot l_i \cdot w_i\)</span>, now the effect of the each predictor depends on the value of the other. When distance <span class="math inline">\(l = 0\)</span> and word type is non-word, the regression formula simplifies to <span class="math inline">\(\beta_0 + \beta_2\)</span> (all terms with <span class="math inline">\(l\)</span> are dropped). When distance <span class="math inline">\(l \neq 0\)</span> and word type is non-word, then all terms are preserved and whatever value <span class="math inline">\(l\)</span> takes is plugged in: <span class="math inline">\(\beta_0 + \beta_1 \cdot l_i + \beta_2 + \beta_3 \cdot l_i\)</span>.</p>
 <p>The R syntax for interactions between predictors of different type is the same as with two categorical predictors: you include an interaction term by adding the two predictors separated by a colon, like <code>PhonLev:IsWord</code>. We have also seen the syntactic sugar <code>*</code> which automatically includes the main coefficients and the interaction term, but for clarity we use the full syntax here.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rt_lw_int <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
@@ -1028,6 +1035,93 @@ Figure&nbsp;36.4: Expected values of RT from a model with a phoneme-level distan
 </div>
 <div class="callout-body-container callout-body">
 <p>Reproduce <a href="#fig-rt-lw-int-cond" class="quarto-xref">Figure&nbsp;<span>36.3</span></a> using <code>linpred_draws()</code> to calculate the posterior draws of the linear predictor and then plot them with ggplot2 (like we did now with the expected values).</p>
+</div>
+</div>
+</section>
+<section id="calculating-posterior-draws-at-specific-predictor-values" class="level2" data-number="36.4">
+<h2 data-number="36.4" class="anchored" data-anchor-id="calculating-posterior-draws-at-specific-predictor-values"><span class="header-section-number">36.4</span> Calculating posterior draws at specific predictor values</h2>
+<p>With categorical/numeric interactions, it is often useful to calculate and report differences (aka comparisons) between the levels of the categorical predictor at different values of the numeric predictor. There isn’t a specific recipe to follow when it comes to calculating specific comparisons: it depends on the research question/hypothesis. Here, I illustrate how to calculate specific comparisons using three values of mean phoneme-level distance based on the range of values in the data. We can use 7, 10 and 12. From <a href="#fig-rt-lw-int" class="quarto-xref">Figure&nbsp;<span>36.4</span></a>, we should see a decreasing difference in logged RTs between non- and real words from distance 7 to 10 to 12.</p>
+<p>We can calculate this difference using the posterior draws (and plugging in 7, 10, 12 in the regression formula) or use <code>linpred_draws()</code>. I will show you the former and you will do the latter as an exercise below. Before we get to the code, answer the following question.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Quiz 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+Which is the correct regression formula to get the linear predictor of non-words when phoneme-level distance is 10?
+<div id="radio_DVXYFWGPGE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DVXYFWGPGE" value=""> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_DVXYFWGPGE" value="answer"> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10 + \beta_2 + \beta_3 \cdot 10\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_DVXYFWGPGE" value=""> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10 + \beta_3 \cdot 10\)</span></span></label>
+</div>
+</div>
+</div>
+</div>
+<p>The following code calculates the posterior draws of the linear predictor when distance is 7, 10, 12. Then, it gets the posterior draws of the difference between non-words and real words at those values of phoneme-level distance.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>rt_lw_int_draws <span class="ot">&lt;-</span> rt_lw_int_draws <span class="sc">|&gt;</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Posterior draws of the linear predictor</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">rt_log_7_true =</span> b_Intercept <span class="sc">+</span> b_PhonLev <span class="sc">*</span> <span class="dv">7</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">rt_log_7_false =</span> b_Intercept <span class="sc">+</span> b_PhonLev <span class="sc">*</span> <span class="dv">7</span> <span class="sc">+</span> b_IsWordFALSE <span class="sc">+</span> <span class="st">`</span><span class="at">b_PhonLev:IsWordFALSE</span><span class="st">`</span> <span class="sc">*</span> <span class="dv">7</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">rt_log_10_true =</span> b_Intercept <span class="sc">+</span> b_PhonLev <span class="sc">*</span> <span class="dv">10</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">rt_log_10_false =</span> b_Intercept <span class="sc">+</span> b_PhonLev <span class="sc">*</span> <span class="dv">10</span> <span class="sc">+</span> b_IsWordFALSE <span class="sc">+</span> <span class="st">`</span><span class="at">b_PhonLev:IsWordFALSE</span><span class="st">`</span> <span class="sc">*</span> <span class="dv">10</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">rt_log_12_true =</span> b_Intercept <span class="sc">+</span> b_PhonLev <span class="sc">*</span> <span class="dv">12</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">rt_log_12_false =</span> b_Intercept <span class="sc">+</span> b_PhonLev <span class="sc">*</span> <span class="dv">12</span> <span class="sc">+</span> b_IsWordFALSE <span class="sc">+</span> <span class="st">`</span><span class="at">b_PhonLev:IsWordFALSE</span><span class="st">`</span> <span class="sc">*</span> <span class="dv">12</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Posterior draws of the difference</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">rt_log_7 =</span> rt_log_7_false <span class="sc">-</span> rt_log_7_true,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">rt_log_10 =</span> rt_log_10_false <span class="sc">-</span> rt_log_10_true,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">rt_log_12 =</span> rt_log_12_false <span class="sc">-</span> rt_log_12_true,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Get 90% CrI of the differences</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(rt_lw_int_draws<span class="sc">$</span>rt_log_7, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> q10  q90 
+0.10 0.12 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(rt_lw_int_draws<span class="sc">$</span>rt_log_10, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> q10  q90 
+0.03 0.08 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(rt_lw_int_draws<span class="sc">$</span>rt_log_12, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  q10   q90 
+-0.02  0.06 </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Exercise 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Calculate the posterior draws of the linear predictor at phoneme-level distance 7, 10 and 12 for real and non-words using <code>linpred_draws()</code>. Then calculate the difference between real and non-words.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You should set up a prediction grid as usual, but this time you list the specific values of distance you want.</p>
+</div>
 </div>
 </div>
 

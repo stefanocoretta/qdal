@@ -153,6 +153,17 @@ Note that we only fitted a model without an interaction for pedagogical reasons,
 
 ## One categorical and one numeric predictor in interaction
 
+The model with an interaction between phoneme-level distance and word type can be represented with the following formula:
+
+$$\begin{aligned}
+RT_i & \sim LogNormal(\mu_i, \sigma)\\
+\mu_i & = \beta_0 + \beta_1 \cdot l_i + \beta_2 \cdot w_i + \beta_3 \cdot l_i \cdot w_i\\
+\end{aligned}$$
+
+Because of the interaction term $\beta_3 \cdot l_i \cdot w_i$, now the effect of the each predictor depends on the value of the other.
+When distance $l = 0$ and word type is non-word, the regression formula simplifies to $\beta_0 + \beta_2$ (all terms with $l$ are dropped).
+When distance $l \neq 0$ and word type is non-word, then all terms are preserved and whatever value $l$ takes is plugged in: $\beta_0 + \beta_1 \cdot l_i + \beta_2 + \beta_3 \cdot l_i$.
+
 The R syntax for interactions between predictors of different type is the same as with two categorical predictors: you include an interaction term by adding the two predictors separated by a colon, like `PhonLev:IsWord`.
 We have also seen the syntactic sugar `*` which automatically includes the main coefficients and the interaction term, but for clarity we use the full syntax here.
 
@@ -297,4 +308,75 @@ rt_lw_int_epred_cri |>
 ### Exercise 1
 
 Reproduce @fig-rt-lw-int-cond using `linpred_draws()` to calculate the posterior draws of the linear predictor and then plot them with ggplot2 (like we did now with the expected values).
+:::
+
+## Calculating posterior draws at specific predictor values
+
+With categorical/numeric interactions, it is often useful to calculate and report differences (aka comparisons) between the levels of the categorical predictor at different values of the numeric predictor.
+There isn't a specific recipe to follow when it comes to calculating specific comparisons: it depends on the research question/hypothesis.
+Here, I illustrate how to calculate specific comparisons using three values of mean phoneme-level distance based on the range of values in the data.
+We can use 7, 10 and 12.
+From @fig-rt-lw-int, we should see a decreasing difference in logged RTs between non- and real words from distance 7 to 10 to 12.
+
+We can calculate this difference using the posterior draws (and plugging in 7, 10, 12 in the regression formula) or use `linpred_draws()`.
+I will show you the former and you will do the latter as an exercise below.
+Before we get to the code, answer the following question.
+
+::: callout-note
+## Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+  "$\\beta_0 + \\beta_1 \\cdot 10$",
+  answer = "$\\beta_0 + \\beta_1 \\cdot 10 + \\beta_2 + \\beta_3 \\cdot 10$",
+  "$\\beta_0 + \\beta_1 \\cdot 10 + \\beta_3 \\cdot 10$"
+)
+
+cat("Which is the correct regression formula to get the linear predictor of non-words when phoneme-level distance is 10?", longmcq(opts_1))
+```
+:::
+
+The following code calculates the posterior draws of the linear predictor when distance is 7, 10, 12.
+Then, it gets the posterior draws of the difference between non-words and real words at those values of phoneme-level distance.
+
+```{r}
+#| label: linpred
+
+rt_lw_int_draws <- rt_lw_int_draws |> 
+  mutate(
+    # Posterior draws of the linear predictor
+    rt_log_7_true = b_Intercept + b_PhonLev * 7,
+    rt_log_7_false = b_Intercept + b_PhonLev * 7 + b_IsWordFALSE + `b_PhonLev:IsWordFALSE` * 7,
+    rt_log_10_true = b_Intercept + b_PhonLev * 10,
+    rt_log_10_false = b_Intercept + b_PhonLev * 10 + b_IsWordFALSE + `b_PhonLev:IsWordFALSE` * 10,
+    rt_log_12_true = b_Intercept + b_PhonLev * 12,
+    rt_log_12_false = b_Intercept + b_PhonLev * 12 + b_IsWordFALSE + `b_PhonLev:IsWordFALSE` * 12,
+    
+    # Posterior draws of the difference
+    rt_log_7 = rt_log_7_false - rt_log_7_true,
+    rt_log_10 = rt_log_10_false - rt_log_10_true,
+    rt_log_12 = rt_log_12_false - rt_log_12_true,
+  )
+
+# Get 90% CrI of the differences
+quantile2(rt_lw_int_draws$rt_log_7, probs = c(0.1, 0.9)) |> round(2)
+quantile2(rt_lw_int_draws$rt_log_10, probs = c(0.1, 0.9)) |> round(2)
+quantile2(rt_lw_int_draws$rt_log_12, probs = c(0.1, 0.9)) |> round(2)
+```
+
+::: callout-warning
+### Exercise 2
+
+Calculate the posterior draws of the linear predictor at phoneme-level distance 7, 10 and 12 for real and non-words using `linpred_draws()`.
+Then calculate the difference between real and non-words.
+:::
+
+::: {.callout-tip collapse="true"}
+### Hint
+
+You should set up a prediction grid as usual, but this time you list the specific values of distance you want.
 :::
