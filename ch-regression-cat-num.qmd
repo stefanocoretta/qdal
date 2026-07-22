@@ -368,6 +368,9 @@ quantile2(rt_lw_int_draws$rt_log_10, probs = c(0.1, 0.9)) |> round(2)
 quantile2(rt_lw_int_draws$rt_log_12, probs = c(0.1, 0.9)) |> round(2)
 ```
 
+The just calculated 80% CrIs of the posterior draws indicate that, at 80% probability, the logged RTs of non-words are 0.1 to 0.12 longer than those of real words when mean phoneme-level distance is 7, 0.03 to 0.08 longer when mean distance is 10 and they are -0.02 shorter to 0.06 longer when mean distance is 12.
+Indeed, the difference between real and non-words decreases with increasing mean distance, to the point where with mean distance 12 it is even possible that logged RTs are slightly faster in non-words than in real words (note however that the CrI spans both negative and positive values, with the majority of the CrI being along positive values).
+
 ::: callout-warning
 ### Exercise 2
 
@@ -379,4 +382,52 @@ Then calculate the difference between real and non-words.
 ### Hint
 
 You should set up a prediction grid as usual, but this time you list the specific values of distance you want.
+:::
+
+## Ratio effects
+
+Let's go back to our initial research question, *Does the effect of Levenshtein distance on RTs differ in real and non-real words?* Since the model uses a log-normal family, it is more straightforward to answer the question using ratios rather than logged milliseconds (on the linear predictor scale, i.e. logged RTs) or milliseconds (on the response scale, i.e. RTs).
+As we've done in @sec-regression-lognorm, ratios can be calculated by exponentiating the log differences.
+
+```{r}
+#| label: rt-lw-int-ratios
+
+# Real words
+quantile2(exp(rt_lw_int_draws$b_PhonLev), probs = c(0.1, 0.9)) |> round(2)
+
+# Non-words
+quantile2(exp(rt_lw_int_draws$b_PhonLev + rt_lw_int_draws$`b_PhonLev:IsWordFALSE`), probs = c(0.1, 0.9)) |> round(2)
+```
+
+At 80% probability, RTs increase by a factor of 1.04-1.05 for each unit increase of mean phoneme-level Levenshtein distance in real words, while in non-words they increase by a factor of 1.02-1.03.
+In percentages, that is a 4-5% increase in real words and a 2-3% increase in non-words.
+We can also calculate ratios for more than one unit increase: let's say for example we want the ratio between RTs when distance is 12 and when it is 7, in real and non-words.
+First, we need the number of units: $12-7=5$.
+So between distance 7 and 12 there is an increase of 5 units.
+Now we can obtain the ratio of RTs at Levenshtein distance 12 to RTs at Levenshtein distance 5 by multiplying the posterior draws of the relevant coefficients by 5.
+Note that for non-words we need to multiply both `b_PhonLev` and `b_PhonLev:IsWordFalse`.
+
+```{r}
+#| label: rt-lw-int-ratios-5
+
+# Real words
+quantile2(exp(rt_lw_int_draws$b_PhonLev * 5), probs = c(0.1, 0.9)) |> round(2)
+
+# Non-words
+quantile2(exp(rt_lw_int_draws$b_PhonLev * 5 + rt_lw_int_draws$`b_PhonLev:IsWordFALSE` * 5), probs = c(0.1, 0.9)) |> round(2)
+```
+
+The RTs increase by 21-27% from distance 7 to distance 12 in real words, but only by 11-17% in non-words, at 80% confidence.
+
+## Summary
+
+::: {.callout-note appearance="simple"}
+- An interaction between a categorical and numeric predictor can be included in a model with the same syntax as a categorical/categorical interaction: `cat + num + cat:num` or equivalently `cat * num`.
+
+- The interaction coefficient indicates the adjustment to the main coefficient for each unit increase of the numeric predictor, at the other level of the categorical predictor.
+
+- Estimates for more than one unit increase of the numeric predictor can be calculated by multiply the posterior draws of both the main coefficient of the numeric predictor and the interaction coefficient by the desired value.
+
+- Categorical/numeric interactions are easily extended to categorical predictors with more than one level.
+  There will be $N - 1$ interaction terms, where $N$ is the number of levels in the categorical predictor.
 :::

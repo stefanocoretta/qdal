@@ -748,6 +748,8 @@ window.Quarto = {
   <li><a href="#one-categorical-and-one-numeric-predictor-no-interaction" id="toc-one-categorical-and-one-numeric-predictor-no-interaction" class="nav-link" data-scroll-target="#one-categorical-and-one-numeric-predictor-no-interaction"><span class="header-section-number">36.2</span> One categorical and one numeric predictor (no interaction)</a></li>
   <li><a href="#one-categorical-and-one-numeric-predictor-in-interaction" id="toc-one-categorical-and-one-numeric-predictor-in-interaction" class="nav-link" data-scroll-target="#one-categorical-and-one-numeric-predictor-in-interaction"><span class="header-section-number">36.3</span> One categorical and one numeric predictor in interaction</a></li>
   <li><a href="#calculating-posterior-draws-at-specific-predictor-values" id="toc-calculating-posterior-draws-at-specific-predictor-values" class="nav-link" data-scroll-target="#calculating-posterior-draws-at-specific-predictor-values"><span class="header-section-number">36.4</span> Calculating posterior draws at specific predictor values</a></li>
+  <li><a href="#ratio-effects" id="toc-ratio-effects" class="nav-link" data-scroll-target="#ratio-effects"><span class="header-section-number">36.5</span> Ratio effects</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">36.6</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-cat-num.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1054,8 +1056,8 @@ Figure&nbsp;36.4: Expected values of RT from a model with a phoneme-level distan
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
 Which is the correct regression formula to get the linear predictor of non-words when phoneme-level distance is 10?
-<div id="radio_DVXYFWGPGE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DVXYFWGPGE" value=""> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_DVXYFWGPGE" value="answer"> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10 + \beta_2 + \beta_3 \cdot 10\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_DVXYFWGPGE" value=""> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10 + \beta_3 \cdot 10\)</span></span></label>
+<div id="radio_ROSYFYUXTF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ROSYFYUXTF" value=""> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_ROSYFYUXTF" value="answer"> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10 + \beta_2 + \beta_3 \cdot 10\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_ROSYFYUXTF" value=""> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10 + \beta_3 \cdot 10\)</span></span></label>
 </div>
 </div>
 </div>
@@ -1095,6 +1097,7 @@ Which is the correct regression formula to get the linear predictor of non-words
 -0.02  0.06 </code></pre>
 </div>
 </div>
+<p>The just calculated 80% CrIs of the posterior draws indicate that, at 80% probability, the logged RTs of non-words are 0.1 to 0.12 longer than those of real words when mean phoneme-level distance is 7, 0.03 to 0.08 longer when mean distance is 10 and they are -0.02 shorter to 0.06 longer when mean distance is 12. Indeed, the difference between real and non-words decreases with increasing mean distance, to the point where with mean distance 12 it is even possible that logged RTs are slightly faster in non-words than in real words (note however that the CrI spans both negative and positive values, with the majority of the CrI being along positive values).</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1121,6 +1124,58 @@ Which is the correct regression formula to get the linear predictor of non-words
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>You should set up a prediction grid as usual, but this time you list the specific values of distance you want.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ratio-effects" class="level2" data-number="36.5">
+<h2 data-number="36.5" class="anchored" data-anchor-id="ratio-effects"><span class="header-section-number">36.5</span> Ratio effects</h2>
+<p>Let’s go back to our initial research question, <em>Does the effect of Levenshtein distance on RTs differ in real and non-real words?</em> Since the model uses a log-normal family, it is more straightforward to answer the question using ratios rather than logged milliseconds (on the linear predictor scale, i.e.&nbsp;logged RTs) or milliseconds (on the response scale, i.e.&nbsp;RTs). As we’ve done in <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 31</span></a>, ratios can be calculated by exponentiating the log differences.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Real words</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(<span class="fu">exp</span>(rt_lw_int_draws<span class="sc">$</span>b_PhonLev), <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> q10  q90 
+1.04 1.05 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Non-words</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(<span class="fu">exp</span>(rt_lw_int_draws<span class="sc">$</span>b_PhonLev <span class="sc">+</span> rt_lw_int_draws<span class="sc">$</span><span class="st">`</span><span class="at">b_PhonLev:IsWordFALSE</span><span class="st">`</span>), <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> q10  q90 
+1.02 1.03 </code></pre>
+</div>
+</div>
+<p>At 80% probability, RTs increase by a factor of 1.04-1.05 for each unit increase of mean phoneme-level Levenshtein distance in real words, while in non-words they increase by a factor of 1.02-1.03. In percentages, that is a 4-5% increase in real words and a 2-3% increase in non-words. We can also calculate ratios for more than one unit increase: let’s say for example we want the ratio between RTs when distance is 12 and when it is 7, in real and non-words. First, we need the number of units: <span class="math inline">\(12-7=5\)</span>. So between distance 7 and 12 there is an increase of 5 units. Now we can obtain the ratio of RTs at Levenshtein distance 12 to RTs at Levenshtein distance 5 by multiplying the posterior draws of the relevant coefficients by 5. Note that for non-words we need to multiply both <code>b_PhonLev</code> and <code>b_PhonLev:IsWordFalse</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Real words</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(<span class="fu">exp</span>(rt_lw_int_draws<span class="sc">$</span>b_PhonLev <span class="sc">*</span> <span class="dv">5</span>), <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> q10  q90 
+1.21 1.27 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Non-words</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(<span class="fu">exp</span>(rt_lw_int_draws<span class="sc">$</span>b_PhonLev <span class="sc">*</span> <span class="dv">5</span> <span class="sc">+</span> rt_lw_int_draws<span class="sc">$</span><span class="st">`</span><span class="at">b_PhonLev:IsWordFALSE</span><span class="st">`</span> <span class="sc">*</span> <span class="dv">5</span>), <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> q10  q90 
+1.11 1.17 </code></pre>
+</div>
+</div>
+<p>The RTs increase by 21-27% from distance 7 to distance 12 in real words, but only by 11-17% in non-words, at 80% confidence.</p>
+</section>
+<section id="summary" class="level2" data-number="36.6">
+<h2 data-number="36.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">36.6</span> Summary</h2>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul>
+<li><p>An interaction between a categorical and numeric predictor can be included in a model with the same syntax as a categorical/categorical interaction: <code>cat + num + cat:num</code> or equivalently <code>cat * num</code>.</p></li>
+<li><p>The interaction coefficient indicates the adjustment to the main coefficient for each unit increase of the numeric predictor, at the other level of the categorical predictor.</p></li>
+<li><p>Estimates for more than one unit increase of the numeric predictor can be calculated by multiply the posterior draws of both the main coefficient of the numeric predictor and the interaction coefficient by the desired value.</p></li>
+<li><p>Categorical/numeric interactions are easily extended to categorical predictors with more than one level. There will be <span class="math inline">\(N - 1\)</span> interaction terms, where <span class="math inline">\(N\)</span> is the number of levels in the categorical predictor.</p></li>
+</ul>
 </div>
 </div>
 </div>
