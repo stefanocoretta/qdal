@@ -681,6 +681,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Interactions in regression: two categorical predictors</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-cat-num.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Interactions in regression: one categorical and one numeric predictor</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -695,25 +701,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -1106,8 +1112,7 @@ vdur &amp; \sim Gaussian(\mu, \sigma) \\
 </section>
 <section id="plotting-the-expected-values-of-vowel-duration" class="level2" data-number="25.7">
 <h2 data-number="25.7" class="anchored" data-anchor-id="plotting-the-expected-values-of-vowel-duration"><span class="header-section-number">25.7</span> Plotting the expected values of vowel duration</h2>
-<!-- TODO: add link to chapter that explains epred_draws() -->
-<p>It is common to plot the expected values of the outcome (here vowel duration) based on the value of the predictor (here speech rate). One could manually calculate the expected value at several values of speech rate using the code above and plot them, but it is not very practical. An alternative and quicker way to plot expected values is to use the <code>conditional_effects()</code> function from the brms package (you will learn how to calculate expected values efficiently in XXX). The function calculates the expected values under the hood and plots a regression line of the mean expected value (the blue line) and a 95% CrI (the grey ribbon). The range of values for the predictor is between the minimum and maximum values of the predictor in the data, and 100 equidistant values within the range are used by default (you can change this number with the <code>resolution</code> argument). The result is <a href="#fig-vow-bm-cond" class="quarto-xref">Figure&nbsp;<span>25.4</span></a>. The regression line has a negative slope: this means that with greater speech rate, vowel duration decreases. The 95% CrI of the regression line in the plot indicates that we can be 95% confident that the mean vowel duration for different values of speech rate is within that interval.</p>
+<p>It is common to plot the expected values of the outcome (here vowel duration) based on the value of the predictor (here speech rate). One could manually calculate the expected value at several values of speech rate using the code above and plot them, but it is not very practical. An alternative and quicker way to plot expected values is to use the <code>conditional_effects()</code> function from the brms package (you will learn how to easily calculate expected values in <a href="ch-regression-lognorm.html#sec-epred-draws" class="quarto-xref"><span>Section 31.8</span></a>). The function calculates the expected values under the hood and plots a regression line of the mean expected value (the blue line) and a 95% CrI (the grey ribbon). The range of values for the predictor is between the minimum and maximum values of the predictor in the data, and 100 equidistant values within the range are used by default (you can change this number with the <code>resolution</code> argument). The result is <a href="#fig-vow-bm-cond" class="quarto-xref">Figure&nbsp;<span>25.4</span></a>. The regression line has a negative slope: this means that with greater speech rate, vowel duration decreases. The 95% CrI of the regression line in the plot indicates that we can be 95% confident that the mean vowel duration for different values of speech rate is within that interval.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(vow_bm, <span class="at">effects =</span> <span class="st">"speech_rate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">

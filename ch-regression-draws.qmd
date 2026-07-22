@@ -414,11 +414,9 @@ The **posterior draws of the expected value** $E$ of the posterior predictive di
 
 ## Plotting the expected values of vowel duration
 
-<!-- TODO: add link to chapter that explains epred_draws() -->
-
 It is common to plot the expected values of the outcome (here vowel duration) based on the value of the predictor (here speech rate).
 One could manually calculate the expected value at several values of speech rate using the code above and plot them, but it is not very practical.
-An alternative and quicker way to plot expected values is to use the `conditional_effects()` function from the brms package (you will learn how to calculate expected values efficiently in XXX).
+An alternative and quicker way to plot expected values is to use the `conditional_effects()` function from the brms package (you will learn how to easily calculate expected values in @sec-epred-draws).
 The function calculates the expected values under the hood and plots a regression line of the mean expected value (the blue line) and a 95% CrI (the grey ribbon).
 The range of values for the predictor is between the minimum and maximum values of the predictor in the data, and 100 equidistant values within the range are used by default (you can change this number with the `resolution` argument).
 The result is @fig-vow-bm-cond.

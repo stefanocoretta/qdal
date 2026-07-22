@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>38&nbsp; A workflow for quantitative studies – Quantitative Data Analysis for Linguists in R</title>
+<title>39&nbsp; A workflow for quantitative studies – Quantitative Data Analysis for Linguists in R</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -277,7 +277,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-learned.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-workflow.html"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-learned.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-workflow.html"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -615,6 +615,12 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Interactions in regression: two categorical predictors</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-regression-cat-num.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Interactions in regression: one categorical and one numeric predictor</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -629,25 +635,25 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -691,15 +697,15 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#define-your-research-questionshypotheses" id="toc-define-your-research-questionshypotheses" class="nav-link active" data-scroll-target="#define-your-research-questionshypotheses"><span class="header-section-number">38.1</span> Define your research questions/hypotheses</a></li>
-  <li><a href="#build-a-causal-graph" id="toc-build-a-causal-graph" class="nav-link" data-scroll-target="#build-a-causal-graph"><span class="header-section-number">38.2</span> Build a causal graph</a></li>
-  <li><a href="#simulation-prior-specification-and-model-checks" id="toc-simulation-prior-specification-and-model-checks" class="nav-link" data-scroll-target="#simulation-prior-specification-and-model-checks"><span class="header-section-number">38.3</span> Simulation, prior specification and model checks</a></li>
-  <li><a href="#sample-size-estimation" id="toc-sample-size-estimation" class="nav-link" data-scroll-target="#sample-size-estimation"><span class="header-section-number">38.4</span> Sample size estimation</a></li>
-  <li><a href="#registered-reports-or-pre-registration" id="toc-registered-reports-or-pre-registration" class="nav-link" data-scroll-target="#registered-reports-or-pre-registration"><span class="header-section-number">38.5</span> Registered Reports or pre-registration</a></li>
-  <li><a href="#run-your-planned-analysis" id="toc-run-your-planned-analysis" class="nav-link" data-scroll-target="#run-your-planned-analysis"><span class="header-section-number">38.6</span> Run your planned analysis</a></li>
-  <li><a href="#model-diagnostics-posterior-predictive-checks-and-prior-sensitivity-analysis" id="toc-model-diagnostics-posterior-predictive-checks-and-prior-sensitivity-analysis" class="nav-link" data-scroll-target="#model-diagnostics-posterior-predictive-checks-and-prior-sensitivity-analysis"><span class="header-section-number">38.7</span> Model diagnostics, posterior predictive checks and prior sensitivity analysis</a></li>
-  <li><a href="#interpret-the-results" id="toc-interpret-the-results" class="nav-link" data-scroll-target="#interpret-the-results"><span class="header-section-number">38.8</span> Interpret the results</a></li>
-  <li><a href="#the-cycle-begins-again" id="toc-the-cycle-begins-again" class="nav-link" data-scroll-target="#the-cycle-begins-again"><span class="header-section-number">38.9</span> The cycle begins again</a></li>
+  <li><a href="#define-your-research-questionshypotheses" id="toc-define-your-research-questionshypotheses" class="nav-link active" data-scroll-target="#define-your-research-questionshypotheses"><span class="header-section-number">39.1</span> Define your research questions/hypotheses</a></li>
+  <li><a href="#build-a-causal-graph" id="toc-build-a-causal-graph" class="nav-link" data-scroll-target="#build-a-causal-graph"><span class="header-section-number">39.2</span> Build a causal graph</a></li>
+  <li><a href="#simulation-prior-specification-and-model-checks" id="toc-simulation-prior-specification-and-model-checks" class="nav-link" data-scroll-target="#simulation-prior-specification-and-model-checks"><span class="header-section-number">39.3</span> Simulation, prior specification and model checks</a></li>
+  <li><a href="#sample-size-estimation" id="toc-sample-size-estimation" class="nav-link" data-scroll-target="#sample-size-estimation"><span class="header-section-number">39.4</span> Sample size estimation</a></li>
+  <li><a href="#registered-reports-or-pre-registration" id="toc-registered-reports-or-pre-registration" class="nav-link" data-scroll-target="#registered-reports-or-pre-registration"><span class="header-section-number">39.5</span> Registered Reports or pre-registration</a></li>
+  <li><a href="#run-your-planned-analysis" id="toc-run-your-planned-analysis" class="nav-link" data-scroll-target="#run-your-planned-analysis"><span class="header-section-number">39.6</span> Run your planned analysis</a></li>
+  <li><a href="#model-diagnostics-posterior-predictive-checks-and-prior-sensitivity-analysis" id="toc-model-diagnostics-posterior-predictive-checks-and-prior-sensitivity-analysis" class="nav-link" data-scroll-target="#model-diagnostics-posterior-predictive-checks-and-prior-sensitivity-analysis"><span class="header-section-number">39.7</span> Model diagnostics, posterior predictive checks and prior sensitivity analysis</a></li>
+  <li><a href="#interpret-the-results" id="toc-interpret-the-results" class="nav-link" data-scroll-target="#interpret-the-results"><span class="header-section-number">39.8</span> Interpret the results</a></li>
+  <li><a href="#the-cycle-begins-again" id="toc-the-cycle-begins-again" class="nav-link" data-scroll-target="#the-cycle-begins-again"><span class="header-section-number">39.9</span> The cycle begins again</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-workflow.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -707,9 +713,9 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-learned.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-workflow.html"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-learned.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-workflow.html"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-workflow" class="quarto-section-identifier"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></h1>
+<h1 class="title"><span id="sec-workflow" class="quarto-section-identifier"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></h1>
 </div>
 
 
@@ -728,8 +734,8 @@ div.csl-indent {
 
 <p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
 <p>This chapter is an overview of a workflow we suggest researchers follow while planning and executing quantitative studies. Note that the proposed workflow also includes concepts and procedures that have not been treated in the textbook. In such cases, references to relevant resources are provided. The workflow assumes a Bayesian inference approach. We also recommend <span class="citation" data-cites="gelman2020">Gelman et al. (<a href="references.html#ref-gelman2020" role="doc-biblioref">2020</a>)</span> and <span class="citation" data-cites="schad2021">Schad et al. (<a href="references.html#ref-schad2021" role="doc-biblioref">2021</a>)</span> as complementing approaches.</p>
-<section id="define-your-research-questionshypotheses" class="level2" data-number="38.1">
-<h2 data-number="38.1" class="anchored" data-anchor-id="define-your-research-questionshypotheses"><span class="header-section-number">38.1</span> Define your research questions/hypotheses</h2>
+<section id="define-your-research-questionshypotheses" class="level2" data-number="39.1">
+<h2 data-number="39.1" class="anchored" data-anchor-id="define-your-research-questionshypotheses"><span class="header-section-number">39.1</span> Define your research questions/hypotheses</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="img/research-topic.png" class="img-fluid figure-img"></p>
@@ -738,38 +744,38 @@ div.csl-indent {
 </div>
 <p>In <a href="ch-research-context.html" class="quarto-xref"><span>Chapter 2</span></a>, we introduced the research context framework proposed by <span class="citation" data-cites="ellis2008">Ellis and Levy (<a href="references.html#ref-ellis2008" role="doc-biblioref">2008</a>)</span>. The framework is an aid to defining the object of study, from a more general perspective (the topic) down to a specific research question and hypothesis. This step normally takes up a large chunk of research time, since this is when researchers spend time reading and synthesising relevant literature. At the end of this stage, you should have <em>precise and testable research questions</em> and, if appropriate, <em>research hypotheses</em>. This includes carefully thinking about the definition of the words and concepts in the RQs/RHs <span class="citation" data-cites="morin2015 flake2020 devezer2019 devezer2021">(<a href="references.html#ref-morin2015" role="doc-biblioref">Morin 2015</a>; <a href="references.html#ref-flake2020" role="doc-biblioref">Flake and Fried 2020</a>; for a realistic-positivistic view, see <a href="references.html#ref-devezer2019" role="doc-biblioref">Devezer et al. 2019</a>, <a href="references.html#ref-devezer2021" role="doc-biblioref">2021</a>)</span>, what your population is, and how your positionality informs all this <span class="citation" data-cites="jafar2018 darwinholmes2020 castanelli2024">(<a href="references.html#ref-jafar2018" role="doc-biblioref">Jafar 2018</a>; <a href="references.html#ref-darwinholmes2020" role="doc-biblioref">Darwin Holmes 2020</a>; <a href="references.html#ref-castanelli2024" role="doc-biblioref">Castanelli 2024</a>)</span>.</p>
 </section>
-<section id="build-a-causal-graph" class="level2" data-number="38.2">
-<h2 data-number="38.2" class="anchored" data-anchor-id="build-a-causal-graph"><span class="header-section-number">38.2</span> Build a causal graph</h2>
-<p>Correlation is not causation, but it is if one adopts a Causal Inference approach (<a href="ch-next.html#sec-next-causal" class="quarto-xref"><span>Section 37.3</span></a>). Most quantitative research, while not mecessarily framed in causal terms, is ultimately about causality <span class="citation" data-cites="mcelreath2020">(<a href="references.html#ref-mcelreath2020" role="doc-biblioref">McElreath 2020</a>)</span>. Statistical model are often used as a substitute to proper causal thinking: this approach can however lead to biased estimates <span class="citation" data-cites="arif2022 lewer2025">(<a href="references.html#ref-arif2022" role="doc-biblioref">Arif and MacNeil 2022</a>; <a href="references.html#ref-lewer2025" role="doc-biblioref">Lewer et al. 2025</a>)</span>. Directed Acyclic Graphs (DAGs) are a formalised way of visually laying out causal relationships between variables. DAGs can be used to inform statistical modelling in a principled way, by allowing researchers to identify necessary outcome and predictors variables that should be included in the model. A useful tool for the development of DAGs is DAGitty, available at <a href="https://www.dagitty.net" class="uri">https://www.dagitty.net</a>. This online software allows you to input variables and link them based on causality. The software also provides you with so-called “adjustment sets” based on the specified DAG: adjustment sets are sets of variables that should be included as predictors in a regression model to estimate specified direct causal effects. As mentioned in <a href="ch-next.html#sec-next-causal" class="quarto-xref"><span>Section 37.3</span></a>, to learn about Causal Inference and Directed Acyclic Graphs, see <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span> Ch 5-6 (and subsequent) and the YouTube video-lectures: <a href="https://www.youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus" class="uri">https://www.youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus</a>.</p>
+<section id="build-a-causal-graph" class="level2" data-number="39.2">
+<h2 data-number="39.2" class="anchored" data-anchor-id="build-a-causal-graph"><span class="header-section-number">39.2</span> Build a causal graph</h2>
+<p>Correlation is not causation, but it is if one adopts a Causal Inference approach (<a href="ch-next.html#sec-next-causal" class="quarto-xref"><span>Section 38.3</span></a>). Most quantitative research, while not mecessarily framed in causal terms, is ultimately about causality <span class="citation" data-cites="mcelreath2020">(<a href="references.html#ref-mcelreath2020" role="doc-biblioref">McElreath 2020</a>)</span>. Statistical model are often used as a substitute to proper causal thinking: this approach can however lead to biased estimates <span class="citation" data-cites="arif2022 lewer2025">(<a href="references.html#ref-arif2022" role="doc-biblioref">Arif and MacNeil 2022</a>; <a href="references.html#ref-lewer2025" role="doc-biblioref">Lewer et al. 2025</a>)</span>. Directed Acyclic Graphs (DAGs) are a formalised way of visually laying out causal relationships between variables. DAGs can be used to inform statistical modelling in a principled way, by allowing researchers to identify necessary outcome and predictors variables that should be included in the model. A useful tool for the development of DAGs is DAGitty, available at <a href="https://www.dagitty.net" class="uri">https://www.dagitty.net</a>. This online software allows you to input variables and link them based on causality. The software also provides you with so-called “adjustment sets” based on the specified DAG: adjustment sets are sets of variables that should be included as predictors in a regression model to estimate specified direct causal effects. As mentioned in <a href="ch-next.html#sec-next-causal" class="quarto-xref"><span>Section 38.3</span></a>, to learn about Causal Inference and Directed Acyclic Graphs, see <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span> Ch 5-6 (and subsequent) and the YouTube video-lectures: <a href="https://www.youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus" class="uri">https://www.youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus</a>.</p>
 </section>
-<section id="simulation-prior-specification-and-model-checks" class="level2" data-number="38.3">
-<h2 data-number="38.3" class="anchored" data-anchor-id="simulation-prior-specification-and-model-checks"><span class="header-section-number">38.3</span> Simulation, prior specification and model checks</h2>
-<p>Once you have clearly defined RQs/RHs and have built a DAG, you should simulate data based on the implied generative process (the real-world process that you think produces the target behaviour being investigated) and check that the specified statistical model correctly recovers the parameter values used in simulating data. Model checks require that you first specify prior probability distributions for each parameter in the statistical model. Priors should be defined based on previous studies and/or expert knowledge (see <a href="ch-next.html#sec-next-priors" class="quarto-xref"><span>Section 37.4</span></a> for relevant references). Prior predictive checks involve assessing whether the defined priors produce data whose joint posterior distribution is qualitatively similar to the expected distribution based on prior studies and expert knowledge. This usually requires iterating over several steps of setting priors and checking the resulting joint posterior, refining priors if necessary and checking the joint posterior again, and so on.</p>
+<section id="simulation-prior-specification-and-model-checks" class="level2" data-number="39.3">
+<h2 data-number="39.3" class="anchored" data-anchor-id="simulation-prior-specification-and-model-checks"><span class="header-section-number">39.3</span> Simulation, prior specification and model checks</h2>
+<p>Once you have clearly defined RQs/RHs and have built a DAG, you should simulate data based on the implied generative process (the real-world process that you think produces the target behaviour being investigated) and check that the specified statistical model correctly recovers the parameter values used in simulating data. Model checks require that you first specify prior probability distributions for each parameter in the statistical model. Priors should be defined based on previous studies and/or expert knowledge (see <a href="ch-next.html#sec-next-priors" class="quarto-xref"><span>Section 38.4</span></a> for relevant references). Prior predictive checks involve assessing whether the defined priors produce data whose joint posterior distribution is qualitatively similar to the expected distribution based on prior studies and expert knowledge. This usually requires iterating over several steps of setting priors and checking the resulting joint posterior, refining priors if necessary and checking the joint posterior again, and so on.</p>
 <p>Once the resercher is satisfied with the prior predictive checks, then they can use the chosen priors in the chosen regression model to check that the model works as expected. “Working as expected” means two things: first, the model should run and converge without issues from a purely computational perspective; second, the model should correctly recover the parameters values used in the data simulation. Non-converging models might require adjustments in prior or model structure specification. Models that do not recover the original parameter values used in the data simulation should be adjusted until they do.</p>
 </section>
-<section id="sample-size-estimation" class="level2" data-number="38.4">
-<h2 data-number="38.4" class="anchored" data-anchor-id="sample-size-estimation"><span class="header-section-number">38.4</span> Sample size estimation</h2>
-<p>Estimating the sample size necessary to reach the desired precision in the estimates of interests (these are determined by the DAG) is not necessarily a separate step than the data simulation and model checks from the previous section, but it is worth mentioning it separately. Data simulation can be used for this purpose. See <a href="ch-next.html#sec-next-size" class="quarto-xref"><span>Section 37.7</span></a> for an overview of approaches. The outcome of the procedure is an estimate of how much data you need to collect to reach the desired precision.</p>
+<section id="sample-size-estimation" class="level2" data-number="39.4">
+<h2 data-number="39.4" class="anchored" data-anchor-id="sample-size-estimation"><span class="header-section-number">39.4</span> Sample size estimation</h2>
+<p>Estimating the sample size necessary to reach the desired precision in the estimates of interests (these are determined by the DAG) is not necessarily a separate step than the data simulation and model checks from the previous section, but it is worth mentioning it separately. Data simulation can be used for this purpose. See <a href="ch-next.html#sec-next-size" class="quarto-xref"><span>Section 38.7</span></a> for an overview of approaches. The outcome of the procedure is an estimate of how much data you need to collect to reach the desired precision.</p>
 </section>
-<section id="registered-reports-or-pre-registration" class="level2" data-number="38.5">
-<h2 data-number="38.5" class="anchored" data-anchor-id="registered-reports-or-pre-registration"><span class="header-section-number">38.5</span> Registered Reports or pre-registration</h2>
+<section id="registered-reports-or-pre-registration" class="level2" data-number="39.5">
+<h2 data-number="39.5" class="anchored" data-anchor-id="registered-reports-or-pre-registration"><span class="header-section-number">39.5</span> Registered Reports or pre-registration</h2>
 <p>At this point, you have two options: you can preregister your study design and analysis plan or you can proceed with writing a Stage 1 manuscript and go the Registered Report route (see <a href="ch-open-research.html" class="quarto-xref"><span>Chapter 33</span></a>). You will have to consider sharing and licensing the research compendium (at the current stage and especially at study completion).</p>
 <p>If you are just preregistering the study, you can start data collection after the registration. If you went the RR route, you need to wait for In Principle Acceptance. The following steps will imply either of these events have taken place and that you completed data collection.</p>
 </section>
-<section id="run-your-planned-analysis" class="level2" data-number="38.6">
-<h2 data-number="38.6" class="anchored" data-anchor-id="run-your-planned-analysis"><span class="header-section-number">38.6</span> Run your planned analysis</h2>
+<section id="run-your-planned-analysis" class="level2" data-number="39.6">
+<h2 data-number="39.6" class="anchored" data-anchor-id="run-your-planned-analysis"><span class="header-section-number">39.6</span> Run your planned analysis</h2>
 <p>You now run your planned (registered) analysis. Exploratory (non-registered analyses) are allowed, provided they are flagged as such in your manuscript.</p>
 </section>
-<section id="model-diagnostics-posterior-predictive-checks-and-prior-sensitivity-analysis" class="level2" data-number="38.7">
-<h2 data-number="38.7" class="anchored" data-anchor-id="model-diagnostics-posterior-predictive-checks-and-prior-sensitivity-analysis"><span class="header-section-number">38.7</span> Model diagnostics, posterior predictive checks and prior sensitivity analysis</h2>
+<section id="model-diagnostics-posterior-predictive-checks-and-prior-sensitivity-analysis" class="level2" data-number="39.7">
+<h2 data-number="39.7" class="anchored" data-anchor-id="model-diagnostics-posterior-predictive-checks-and-prior-sensitivity-analysis"><span class="header-section-number">39.7</span> Model diagnostics, posterior predictive checks and prior sensitivity analysis</h2>
 <p>At this point, you should check the model diagnostics, run posterior predictive checks (for example, with <code>pp_check()</code>) and a prior sensitivity analysis to determine the goodness of fit of the model. A principled way to run a prior sensitivity analysis is described in <span class="citation" data-cites="betancourt2018">Betancourt (<a href="references.html#ref-betancourt2018" role="doc-biblioref">2018</a>)</span> and <span class="citation" data-cites="schad2021">Schad et al. (<a href="references.html#ref-schad2021" role="doc-biblioref">2021</a>)</span>.</p>
 </section>
-<section id="interpret-the-results" class="level2" data-number="38.8">
-<h2 data-number="38.8" class="anchored" data-anchor-id="interpret-the-results"><span class="header-section-number">38.8</span> Interpret the results</h2>
+<section id="interpret-the-results" class="level2" data-number="39.8">
+<h2 data-number="39.8" class="anchored" data-anchor-id="interpret-the-results"><span class="header-section-number">39.8</span> Interpret the results</h2>
 <p>The results can now be interpret based on the RQs/RHs. The key concept at this stage is “epistemic humility”: interpretation should be commensurate to the degree of precision obtained and the strength of the evidence (mainly based on precision, but for alternatives see <span class="citation" data-cites="gelman2020">Gelman et al. (<a href="references.html#ref-gelman2020" role="doc-biblioref">2020</a>)</span> and <span class="citation" data-cites="schad2021">Schad et al. (<a href="references.html#ref-schad2021" role="doc-biblioref">2021</a>)</span>). If you are following an RR route, you would write your Stage 2 manuscript and submit it for stage 2 review.</p>
 </section>
-<section id="the-cycle-begins-again" class="level2" data-number="38.9">
-<h2 data-number="38.9" class="anchored" data-anchor-id="the-cycle-begins-again"><span class="header-section-number">38.9</span> The cycle begins again</h2>
+<section id="the-cycle-begins-again" class="level2" data-number="39.9">
+<h2 data-number="39.9" class="anchored" data-anchor-id="the-cycle-begins-again"><span class="header-section-number">39.9</span> The cycle begins again</h2>
 <p>Your study is completed and published. Most often than not, the results open up other venues for investigation and follow-up studies can be developed. The research cycle begins once again.</p>
 
 
@@ -1450,12 +1456,12 @@ window.onload = function() {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./ch-next.html" class="pagination-link" aria-label="What's next?">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What’s next?</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ch-end.html" class="pagination-link" aria-label="A new beginning">
-        <span class="nav-page-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A new beginning</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A new beginning</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

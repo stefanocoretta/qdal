@@ -372,7 +372,7 @@ rt_bm_2 <- brm(
 ```
 
 Before we learn how to interpret the model summary of a log-normal regression, let's check the posterior predictive plot, shown in @fig-rt-bm-2-pp.
-Look at how the posterior predictive distributions match the empirical distribution much better, compared to @fig-rt-bm-1-pp.
+Look at how the posterior predictive distributions match the empirical distribution much better, compared to @fig-rt-bm-pp.
 They are not perfect, but there is indeed much improvement with a log-normal model, as we have also seen in @fig-rt-bm-log-pp.
 The remaining differences are probably because RTs are not specifically log-normal, and other distributions have been proposed, like the exponential-Gaussian, or ex-Gaussian distribution.
 We will not treat these alternatives here: just remember that a log-normal distribution is a good initial assumption for continuous variables that are bounded to positive numbers and cannot be 0.
@@ -578,7 +578,7 @@ quantile2(rt_bm_2_draws$rt_14_13, probs = c(0.1, 0.9)) |> round()
 
 ```
 
-## Using `epred_draws()` and `linpred_draws()` from tidybayes
+## Using `epred_draws()` and `linpred_draws()` from tidybayes {#sec-epred-draws}
 
 We can plot the expected values easily as per usual, using the `conditional_effect()` function.
 @fig-rt-bm-2-cond shows the output of the function.
