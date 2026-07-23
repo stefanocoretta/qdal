@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Appendix B — Regression models cheat sheet – Quantitative Data Analysis for Linguists in R</title>
+<title>Appendix A — Regression models cheat sheet – Quantitative Data Analysis for Linguists in R</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -52,7 +52,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./app-computer-basics.html" rel="prev">
+<link href="./references.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -305,7 +305,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app-computer-basics.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app-reg-cheat-sheet.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Regression models cheat sheet</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app-reg-cheat-sheet.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app-reg-cheat-sheet.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Regression models cheat sheet</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -703,14 +703,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-computer-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Basic computer literacy</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./app-reg-cheat-sheet.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Regression models cheat sheet</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Regression models cheat sheet</span></span></a>
   </div>
 </li>
       </ul>
@@ -725,15 +719,15 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#step-0-number-of-outcome-variables" id="toc-step-0-number-of-outcome-variables" class="nav-link active" data-scroll-target="#step-0-number-of-outcome-variables"><span class="header-section-number">B.1</span> Step 0: Number of outcome variables</a></li>
-  <li><a href="#sec-outcome" id="toc-sec-outcome" class="nav-link" data-scroll-target="#sec-outcome"><span class="header-section-number">B.2</span> Step 1: Choose a distribution for your outcome variable</a>
+  <li><a href="#step-0-number-of-outcome-variables" id="toc-step-0-number-of-outcome-variables" class="nav-link active" data-scroll-target="#step-0-number-of-outcome-variables"><span class="header-section-number">A.1</span> Step 0: Number of outcome variables</a></li>
+  <li><a href="#sec-outcome" id="toc-sec-outcome" class="nav-link" data-scroll-target="#sec-outcome"><span class="header-section-number">A.2</span> Step 1: Choose a distribution for your outcome variable</a>
   <ul class="collapse">
-  <li><a href="#sec-cont" id="toc-sec-cont" class="nav-link" data-scroll-target="#sec-cont"><span class="header-section-number">B.2.1</span> Continuous outcome variable</a></li>
-  <li><a href="#sec-disc" id="toc-sec-disc" class="nav-link" data-scroll-target="#sec-disc"><span class="header-section-number">B.2.2</span> Discrete outcome variable</a></li>
+  <li><a href="#sec-cont" id="toc-sec-cont" class="nav-link" data-scroll-target="#sec-cont"><span class="header-section-number">A.2.1</span> Continuous outcome variable</a></li>
+  <li><a href="#sec-disc" id="toc-sec-disc" class="nav-link" data-scroll-target="#sec-disc"><span class="header-section-number">A.2.2</span> Discrete outcome variable</a></li>
   </ul></li>
-  <li><a href="#step-2-are-there-hierarchical-groupings-andor-repeated-measures" id="toc-step-2-are-there-hierarchical-groupings-andor-repeated-measures" class="nav-link" data-scroll-target="#step-2-are-there-hierarchical-groupings-andor-repeated-measures"><span class="header-section-number">B.3</span> Step 2: Are there hierarchical groupings and/or repeated measures?</a></li>
-  <li><a href="#step-3-are-there-non-linear-effects" id="toc-step-3-are-there-non-linear-effects" class="nav-link" data-scroll-target="#step-3-are-there-non-linear-effects"><span class="header-section-number">B.4</span> Step 3: Are there non-linear effects?</a></li>
-  <li><a href="#step-0-bis-number-of-outcome-variables" id="toc-step-0-bis-number-of-outcome-variables" class="nav-link" data-scroll-target="#step-0-bis-number-of-outcome-variables"><span class="header-section-number">B.5</span> Step 0-bis: Number of outcome variables</a></li>
+  <li><a href="#step-2-are-there-hierarchical-groupings-andor-repeated-measures" id="toc-step-2-are-there-hierarchical-groupings-andor-repeated-measures" class="nav-link" data-scroll-target="#step-2-are-there-hierarchical-groupings-andor-repeated-measures"><span class="header-section-number">A.3</span> Step 2: Are there hierarchical groupings and/or repeated measures?</a></li>
+  <li><a href="#step-3-are-there-non-linear-effects" id="toc-step-3-are-there-non-linear-effects" class="nav-link" data-scroll-target="#step-3-are-there-non-linear-effects"><span class="header-section-number">A.4</span> Step 3: Are there non-linear effects?</a></li>
+  <li><a href="#step-0-bis-number-of-outcome-variables" id="toc-step-0-bis-number-of-outcome-variables" class="nav-link" data-scroll-target="#step-0-bis-number-of-outcome-variables"><span class="header-section-number">A.5</span> Step 0-bis: Number of outcome variables</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/app-reg-cheat-sheet.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -741,9 +735,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app-computer-basics.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app-reg-cheat-sheet.html"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Regression models cheat sheet</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./app-reg-cheat-sheet.html">Appendices</a></li><li class="breadcrumb-item"><a href="./app-reg-cheat-sheet.html"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Regression models cheat sheet</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-reg-cheat-sheet" class="quarto-section-identifier">Appendix B — Regression models cheat sheet</span></h1>
+<h1 class="title"><span id="sec-reg-cheat-sheet" class="quarto-section-identifier">Appendix A — Regression models cheat sheet</span></h1>
 </div>
 
 
@@ -774,12 +768,12 @@ In the Land of Inference where the distributions lie.</p>
 </blockquote>
 <p>Ehm… perhaps this is not going to win a poetry context, but… the message is that with a single tool, i.e.&nbsp;regression models, you can go a long way!</p>
 <p>Each of the following sections asks you about the nature of your data and/or experimental design. By answering each, you will find out which “pieces” you need to add to your model structure.</p>
-<section id="step-0-number-of-outcome-variables" class="level2" data-number="B.1">
-<h2 data-number="B.1" class="anchored" data-anchor-id="step-0-number-of-outcome-variables"><span class="header-section-number">B.1</span> Step 0: Number of outcome variables</h2>
+<section id="step-0-number-of-outcome-variables" class="level2" data-number="A.1">
+<h2 data-number="A.1" class="anchored" data-anchor-id="step-0-number-of-outcome-variables"><span class="header-section-number">A.1</span> Step 0: Number of outcome variables</h2>
 <p>We will get back to this step at the end of this post, since it makes things a bit more complex.</p>
 </section>
-<section id="sec-outcome" class="level2" data-number="B.2">
-<h2 data-number="B.2" class="anchored" data-anchor-id="sec-outcome"><span class="header-section-number">B.2</span> Step 1: Choose a distribution for your outcome variable</h2>
+<section id="sec-outcome" class="level2" data-number="A.2">
+<h2 data-number="A.2" class="anchored" data-anchor-id="sec-outcome"><span class="header-section-number">A.2</span> Step 1: Choose a distribution for your outcome variable</h2>
 <p>The first step towards building a regression model is to choose the <strong>family of distributions</strong> you believe the outcome variable belongs to. You can start by answering the following question.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -794,9 +788,9 @@ In the Land of Inference where the distributions lie.</p>
 <p>Is the outcome variable continuous or discrete?</p>
 </div>
 </div>
-<p>Depending on the answer, check out <a href="#sec-cont" class="quarto-xref"><span>Section B.2.1</span></a> or <a href="#sec-disc" class="quarto-xref"><span>Section B.2.2</span></a>.</p>
-<section id="sec-cont" class="level3" data-number="B.2.1">
-<h3 data-number="B.2.1" class="anchored" data-anchor-id="sec-cont"><span class="header-section-number">B.2.1</span> Continuous outcome variable</h3>
+<p>Depending on the answer, check out <a href="#sec-cont" class="quarto-xref"><span>Section A.2.1</span></a> or <a href="#sec-disc" class="quarto-xref"><span>Section A.2.2</span></a>.</p>
+<section id="sec-cont" class="level3" data-number="A.2.1">
+<h3 data-number="A.2.1" class="anchored" data-anchor-id="sec-cont"><span class="header-section-number">A.2.1</span> Continuous outcome variable</h3>
 <ul>
 <li><p>The variable can take on <em>any positive and negative real number, including 0</em>: <strong>Gaussian</strong> (aka normal) distribution.</p>
 <ul>
@@ -825,8 +819,8 @@ In the Land of Inference where the distributions lie.</p>
 </ul></li>
 </ul>
 </section>
-<section id="sec-disc" class="level3" data-number="B.2.2">
-<h3 data-number="B.2.2" class="anchored" data-anchor-id="sec-disc"><span class="header-section-number">B.2.2</span> Discrete outcome variable</h3>
+<section id="sec-disc" class="level3" data-number="A.2.2">
+<h3 data-number="A.2.2" class="anchored" data-anchor-id="sec-disc"><span class="header-section-number">A.2.2</span> Discrete outcome variable</h3>
 <ul>
 <li><p>The variable is <em>dichotomous</em>, i.e.&nbsp;it can take one of two levels: <strong>Bernoulli</strong> distribution.</p>
 <ul>
@@ -855,8 +849,8 @@ In the Land of Inference where the distributions lie.</p>
 </ul>
 </section>
 </section>
-<section id="step-2-are-there-hierarchical-groupings-andor-repeated-measures" class="level2" data-number="B.3">
-<h2 data-number="B.3" class="anchored" data-anchor-id="step-2-are-there-hierarchical-groupings-andor-repeated-measures"><span class="header-section-number">B.3</span> Step 2: Are there hierarchical groupings and/or repeated measures?</h2>
+<section id="step-2-are-there-hierarchical-groupings-andor-repeated-measures" class="level2" data-number="A.3">
+<h2 data-number="A.3" class="anchored" data-anchor-id="step-2-are-there-hierarchical-groupings-andor-repeated-measures"><span class="header-section-number">A.3</span> Step 2: Are there hierarchical groupings and/or repeated measures?</h2>
 <p>The second step is to ensure that, if the data is structured hierarchically or repeated measures were taken, this is taken into account in the model. Here is where so-called varying terms (aka random effects, group-level effects/terms) come in <span class="citation" data-cites="gelman2005">(<a href="references.html#ref-gelman2005" role="doc-biblioref">Gelman 2005</a>)</span>. Models that include random effects/group-level terms are called: random-effects models, mixed-effects models, hierarchical models, nested models, multilevel models. These terms are for all intents and purposes equivalent (it just happens that different traditions use different terms).</p>
 <p>As an example, let’s assume you asked a number of participants to read a list of words and each word was repeated 5 times by each participant. You then took f0 measurements from the stressed vowel of each word, of each repetition. Now, the data has a “hierarchical” structure to it:</p>
 <ul>
@@ -868,12 +862,12 @@ In the Land of Inference where the distributions lie.</p>
 <p>In the toy-example of f0 measurements, you will want to include varying terms for <em>participant</em> and <em>word</em>. These will take care to let the model know of the structure of the data mentioned above. If you have other predictors in the model, you should also add them as (varying) slopes in the varying terms. For example: <code>(question | participant) + (question | word)</code> (where <code>question</code> = statement vs question).</p>
 <p>Here are some tutorials: <span class="citation" data-cites="winter2013">Winter (<a href="references.html#ref-winter2013" role="doc-biblioref">2013</a>)</span>, <span class="citation" data-cites="debruine2021">DeBruine and Barr (<a href="references.html#ref-debruine2021" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="kirby2018">Kirby and Sonderegger (<a href="references.html#ref-kirby2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="burkner2018">Bürkner (<a href="references.html#ref-burkner2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="veenman2023">Veenman et al. (<a href="references.html#ref-veenman2023" role="doc-biblioref">2023</a>)</span>, <span class="citation" data-cites="pedersen2019">Pedersen et al. (<a href="references.html#ref-pedersen2019" role="doc-biblioref">2019</a>)</span>.</p>
 </section>
-<section id="step-3-are-there-non-linear-effects" class="level2" data-number="B.4">
-<h2 data-number="B.4" class="anchored" data-anchor-id="step-3-are-there-non-linear-effects"><span class="header-section-number">B.4</span> Step 3: Are there non-linear effects?</h2>
+<section id="step-3-are-there-non-linear-effects" class="level2" data-number="A.4">
+<h2 data-number="A.4" class="anchored" data-anchor-id="step-3-are-there-non-linear-effects"><span class="header-section-number">A.4</span> Step 3: Are there non-linear effects?</h2>
 <p>A typical use-case of non-linear terms is when you are dealing with time-series data or spatial data (i.e.&nbsp;geographic coordinates). Generalised Additive Models (GAMs) allow you to fit non-linear effects using so called “smooth” (or “smoother”) terms. You can fit a regression model with smooth terms with <code>brms::brm(y ~ s(x))</code> or with <code>mgcv:gam(y ~ s(x))</code>, among others. See <span class="citation" data-cites="simpson2018">Simpson (<a href="references.html#ref-simpson2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="soskuthy2017a">Sóskuthy (<a href="references.html#ref-soskuthy2017a" role="doc-biblioref">n.d.</a>)</span>, <span class="citation" data-cites="soskuthy2021">Sóskuthy (<a href="references.html#ref-soskuthy2021" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="wieling2018">Wieling (<a href="references.html#ref-wieling2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="pedersen2019">Pedersen et al. (<a href="references.html#ref-pedersen2019" role="doc-biblioref">2019</a>)</span>.</p>
 </section>
-<section id="step-0-bis-number-of-outcome-variables" class="level2" data-number="B.5">
-<h2 data-number="B.5" class="anchored" data-anchor-id="step-0-bis-number-of-outcome-variables"><span class="header-section-number">B.5</span> Step 0-bis: Number of outcome variables</h2>
+<section id="step-0-bis-number-of-outcome-variables" class="level2" data-number="A.5">
+<h2 data-number="A.5" class="anchored" data-anchor-id="step-0-bis-number-of-outcome-variables"><span class="header-section-number">A.5</span> Step 0-bis: Number of outcome variables</h2>
 <p>If you want to model just one outcome variable, you are already covered if you went through steps 1-3. If instead your design has two or more outcome variables (for example F1 and F2, or duration of the stressed and unstressed vowel of a word) which you want to model together, then you want to fit a <strong>multivariate model</strong> (i.e.&nbsp;a model with <em>multiple outcome variables</em>). The same steps we went through before can be applied to multiple outcome variables. In some cases, you will want to use the same model structure for all the outcome variables, while in others you might want to use a different model structure for each.</p>
 <p>To learn more about multivariate models, I really recommend <span class="citation" data-cites="burkner2024a">Bürkner (<a href="references.html#ref-burkner2024a" role="doc-biblioref">2024</a>)</span>.</p>
 
@@ -1573,8 +1567,8 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./app-computer-basics.html" class="pagination-link" aria-label="Basic computer literacy">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Basic computer literacy</span></span>
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">References</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

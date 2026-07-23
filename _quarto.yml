@@ -78,7 +78,6 @@ book:
       - ch-end.qmd
   - references.qmd
   appendices:
-    - app-computer-basics.qmd
     - app-reg-cheat-sheet.qmd
 
 bibliography: references.bib

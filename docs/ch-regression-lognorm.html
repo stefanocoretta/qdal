@@ -741,14 +741,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-computer-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Basic computer literacy</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./app-reg-cheat-sheet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Regression models cheat sheet</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Regression models cheat sheet</span></span></a>
   </div>
 </li>
       </ul>
@@ -801,7 +795,7 @@ window.Quarto = {
 
 <p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
 <p>In <a href="ch-probability.html" class="quarto-xref"><span>Chapter 18</span></a>, we talked about skewness of distributions in relation to the density plots of reaction times. In <a href="ch-gauss-model.html" class="quarto-xref"><span>Chapter 21</span></a>, we further explained that it is the onus of the researcher to decide on a distribution family when fitting regression models and we said that, in the absence of more specific knowledge, the Gaussian distribution is a safe assumption to make. Note that the choice of distribution family should be based as much as possible on theoretical (as opposed to empirical) grounds. In other words, you shouldn’t just plot the variable to check which distribution it might follow (more on this below).</p>
-<p>There are heuristics one can follow to pick a theoretically grounded distribution. The major ones are listed in <a href="app-reg-cheat-sheet.html#sec-outcome" class="quarto-xref"><span>Section B.2</span></a>, so you can refer to that section in the appendix, but in this chapter we will focus on one type of variables and the default distribution choice: i.e.&nbsp;variables that can only take on values that are positive numbers. These variables, in the absence of more specific knowledge, can be assumed to be from a log-normal distribution.</p>
+<p>There are heuristics one can follow to pick a theoretically grounded distribution. The major ones are listed in <a href="app-reg-cheat-sheet.html#sec-outcome" class="quarto-xref"><span>Section A.2</span></a>, so you can refer to that section in the appendix, but in this chapter we will focus on one type of variables and the default distribution choice: i.e.&nbsp;variables that can only take on values that are positive numbers. These variables, in the absence of more specific knowledge, can be assumed to be from a log-normal distribution.</p>
 <section id="log-normal-distribution" class="level2" data-number="31.1">
 <h2 data-number="31.1" class="anchored" data-anchor-id="log-normal-distribution"><span class="header-section-number">31.1</span> Log-normal distribution</h2>
 <p>The log-normal distribution is a continuous probability distribution of variables that can only be positive and not zero. It has two parameters: the mean <span class="math inline">\(\mu\)</span> and the standard deviation <span class="math inline">\(\sigma\)</span>. These are the same parameters of the Gaussian distribution, but the parameters of the log-normal distribution are in logged units. The name log-normal comes from the fact that variables that are log-normal approximate a Gaussian (aka normal) distribution when we take the logarithm (log) of the values. In other words, the variable is assumed to be Gaussian on the log scale, rather than on the natural scale. Mathematically, we represent the log-normal distribution with <span class="math inline">\(LogNormal(\mu, \sigma)\)</span>.</p>

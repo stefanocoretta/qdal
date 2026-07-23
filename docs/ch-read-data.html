@@ -712,14 +712,8 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./app-computer-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Basic computer literacy</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./app-reg-cheat-sheet.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">B</span>&nbsp; <span class="chapter-title">Regression models cheat sheet</span></span></a>
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Regression models cheat sheet</span></span></a>
   </div>
 </li>
       </ul>
@@ -734,19 +728,23 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#tabular-data" id="toc-tabular-data" class="nav-link active" data-scroll-target="#tabular-data"><span class="header-section-number">9.1</span> Tabular data</a>
+  <li><a href="#files-folder-and-file-extensions" id="toc-files-folder-and-file-extensions" class="nav-link active" data-scroll-target="#files-folder-and-file-extensions"><span class="header-section-number">9.1</span> Files, folder and file extensions</a>
   <ul class="collapse">
-  <li><a href="#non-tabular-data" id="toc-non-tabular-data" class="nav-link" data-scroll-target="#non-tabular-data"><span class="header-section-number">9.1.1</span> Non-tabular data</a></li>
-  <li><a href="#rds-files" id="toc-rds-files" class="nav-link" data-scroll-target="#rds-files"><span class="header-section-number">9.1.2</span> <code>.rds</code> files</a></li>
+  <li><a href="#file-paths" id="toc-file-paths" class="nav-link" data-scroll-target="#file-paths"><span class="header-section-number">9.1.1</span> File paths</a></li>
   </ul></li>
-  <li><a href="#get-the-data" id="toc-get-the-data" class="nav-link" data-scroll-target="#get-the-data"><span class="header-section-number">9.2</span> Get the data</a></li>
-  <li><a href="#organising-your-files" id="toc-organising-your-files" class="nav-link" data-scroll-target="#organising-your-files"><span class="header-section-number">9.3</span> Organising your files</a></li>
-  <li><a href="#read-.csv-files" id="toc-read-.csv-files" class="nav-link" data-scroll-target="#read-.csv-files"><span class="header-section-number">9.4</span> Read <code>.csv</code> files</a>
+  <li><a href="#tabular-data" id="toc-tabular-data" class="nav-link" data-scroll-target="#tabular-data"><span class="header-section-number">9.2</span> Tabular data</a>
   <ul class="collapse">
-  <li><a href="#relative-paths" id="toc-relative-paths" class="nav-link" data-scroll-target="#relative-paths"><span class="header-section-number">9.4.1</span> Relative paths</a></li>
+  <li><a href="#non-tabular-data" id="toc-non-tabular-data" class="nav-link" data-scroll-target="#non-tabular-data"><span class="header-section-number">9.2.1</span> Non-tabular data</a></li>
+  <li><a href="#rds-files" id="toc-rds-files" class="nav-link" data-scroll-target="#rds-files"><span class="header-section-number">9.2.2</span> <code>.rds</code> files</a></li>
   </ul></li>
-  <li><a href="#read-excel-sheets" id="toc-read-excel-sheets" class="nav-link" data-scroll-target="#read-excel-sheets"><span class="header-section-number">9.5</span> Read Excel sheets</a></li>
-  <li><a href="#import-.rds-files" id="toc-import-.rds-files" class="nav-link" data-scroll-target="#import-.rds-files"><span class="header-section-number">9.6</span> Import <code>.rds</code> files</a></li>
+  <li><a href="#get-the-data" id="toc-get-the-data" class="nav-link" data-scroll-target="#get-the-data"><span class="header-section-number">9.3</span> Get the data</a></li>
+  <li><a href="#organising-your-files" id="toc-organising-your-files" class="nav-link" data-scroll-target="#organising-your-files"><span class="header-section-number">9.4</span> Organising your files</a></li>
+  <li><a href="#read-.csv-files" id="toc-read-.csv-files" class="nav-link" data-scroll-target="#read-.csv-files"><span class="header-section-number">9.5</span> Read <code>.csv</code> files</a>
+  <ul class="collapse">
+  <li><a href="#relative-paths" id="toc-relative-paths" class="nav-link" data-scroll-target="#relative-paths"><span class="header-section-number">9.5.1</span> Relative paths</a></li>
+  </ul></li>
+  <li><a href="#read-excel-sheets" id="toc-read-excel-sheets" class="nav-link" data-scroll-target="#read-excel-sheets"><span class="header-section-number">9.6</span> Read Excel sheets</a></li>
+  <li><a href="#import-.rds-files" id="toc-import-.rds-files" class="nav-link" data-scroll-target="#import-.rds-files"><span class="header-section-number">9.7</span> Import <code>.rds</code> files</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-read-data.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -774,8 +772,143 @@ div.csl-indent {
 
 
 <p><img src="./img/badge-r.png" class="img-fluid"></p>
-<section id="tabular-data" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="tabular-data"><span class="header-section-number">9.1</span> Tabular data</h2>
+<section id="files-folder-and-file-extensions" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="files-folder-and-file-extensions"><span class="header-section-number">9.1</span> Files, folder and file extensions</h2>
+<p>Files saved on your computer live in a specific place. For example, if you download a file from a browser (like Google Chrome, Safari or Firefox), the file is normally saved in the <code>Download</code> folder. But where does the <code>Download</code> folder live? Usually, in your user folder! The user folder normally is the name of your account or a name you picked when you created your computer account. In my case, my user folder is simply called <code>ste</code>.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>User folder
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <strong>user folder</strong> is the folder with the name of your account.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>How to find your user folder name
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>On macOS</strong></p>
+<ul>
+<li><p>Go to Finder &gt; Preferences/Settings.</p></li>
+<li><p>Go to <code>Sidebar</code>.</p></li>
+<li><p>The name next to the house icon is the name of your home folder.</p></li>
+</ul>
+<p><strong>On Windows</strong></p>
+<ul>
+<li><p>Right-click an empty area on the navigation panel in File Explorer.</p></li>
+<li><p>From the context menu, select the ‘Show all folders’ and your user profile will be added as a location in the navigation bar.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Enable all extensions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before moving on, we recommend you enable the option to show all file extensions in the File Explorer/Finder.</p>
+<p>Follow the instructions here:</p>
+<ul>
+<li><p>Windows: <a href="https://support.microsoft.com/en-us/windows/common-file-name-extensions-in-windows-da4a4430-8e76-89c5-59f7-1cdbbc75cb01" class="uri">show extensions</a>.</p></li>
+<li><p>macOS (For all files): <a href="https://support.apple.com/en-gb/guide/mac-help/mchlp2304/mac#:~:text=In%20the%20Finder%20on%20your,“Show%20all%20filename%20extensions”." class="uri">show extensions</a>.</p></li>
+</ul>
+</div>
+</div>
+<p>So, let’s assume I download a file, let’s say <code>big_data.csv</code>, in the <code>Download</code> folder of my user folder. Now we can represent the location of the <code>big_data.csv</code> file like so:</p>
+<pre><code>ste/
+└── Downloads/
+    └── big_data.csv</code></pre>
+<p>To mark that <code>ste</code> and <code>Downloads</code> are folders, we add a final forward slash <code>/</code>. That simply means “hey! I am a folder!”. <code>big_data.csv</code> is a file, so it doesn’t have a final <code>/</code>. Instead, the file name <code>big_data.csv</code> has a <strong>file extension</strong>. The file extension is <code>.csv</code>. A file extension marks the type of file: in this the <code>big_data</code> file is a <code>.csv</code> file, a comma separated value file (we will see an example of what that looks like later). The name of the file is of course up to the user, but if you change the file extension you might have trouble later reading the file, so don’t change the file extension part yourself!</p>
+<p>Different file types have different file extensions:</p>
+<ul>
+<li>Excel files: <code>.xlsx</code>.</li>
+<li>Plain text files: <code>.txt</code>.</li>
+<li>Images: <code>.png</code>, <code>.jpg</code>, <code>.gif</code>.</li>
+<li>Audio: <code>.mp3</code>, <code>.wav</code>.</li>
+<li>Video: <code>.mp4</code>, <code>.mov</code>, <code>.avi</code>.</li>
+<li>Etc…</li>
+</ul>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>File extension
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A file extension is a sequence of letters that indicates the type of a file and it’s separated with a <code>.</code> from the file name.</p>
+</div>
+</div>
+<section id="file-paths" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="file-paths"><span class="header-section-number">9.1.1</span> File paths</h3>
+<p>Now, we can use an alternative, more succinct way, to represent the location of the <code>big_data.csv</code>:</p>
+<p><code>ste/Downloads/big_data.csv</code></p>
+<p>This is called a <strong>file path</strong>! It’s the path through folders that lead you to the file. Folders are separated by <code>/</code> and the file is marked with the extension <code>.csv</code>.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>File path
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>file path</strong> indicates the location of a file on a computer as a path through folders that lead you to the file.</p>
+</div>
+</div>
+<p>Now the million pound question: where does <code>ste/</code> live on my computer??? User folders are located in different places depending on the operating system you are using:</p>
+<ul>
+<li><p>On <strong>macOS</strong>: the user folder is in <code>/Users/</code>.</p>
+<ul>
+<li>You will notice that there is a forward slash also before the name of the folder. That is because the <code>/Users/</code> folder is a top folder, i.e.&nbsp;there are no folders further up in the hierarchy of folders.</li>
+<li>This means that the full path for the <code>big_data.csv</code> file on a computer running macOS would be: <code>/Users/ste/Downloads/big_data.csv</code>.</li>
+</ul></li>
+<li><p>On <strong>Windows</strong>: the user folder is in usually <code>C:/Users/</code>, but the drive letter might not be <code>C</code>. We will use <code>C</code> for convenience here.</p>
+<ul>
+<li>You will notice that <code>C</code> is followed by a colon <code>:</code>. That is because <code>C</code> is a drive, which contains files and folders. <code>C:</code> is not contained by any other folder, i.e.&nbsp;there are no other folders above <code>C:</code> in the hierarchy of folders.</li>
+<li>This means that the full path for the <code>big_data.csv</code> file on a Windows computer would be: <code>C:/Users/ste/Downloads/big_data.csv</code>.</li>
+</ul></li>
+</ul>
+<p>When a file path starts from a top-most folder, we call that path the <strong>absolute</strong> file path.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Absolute path
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An <strong>absolute path</strong> is a file path that starts with a top-most folder.</p>
+</div>
+</div>
+<p>There is another type of file paths, called <strong>relative</strong> paths. A relative path is a partial file path, relative to a specific folder. You can learn how to use relative paths in <a href="#sec-read-data" class="quarto-xref"><span>Chapter 9</span></a>. Importing files in R is very easy with the tidyverse packages. You just need to know the file type (very often the file extension helps) and the location of the file (i.e.&nbsp;the file path).</p>
+</section>
+</section>
+<section id="tabular-data" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="tabular-data"><span class="header-section-number">9.2</span> Tabular data</h2>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -805,11 +938,11 @@ div.csl-indent {
 </div>
 <p>Tabular data can be saved in different file formats. Different file formats have different file extensions. The <strong>comma separated values format</strong> (file extension <code>.csv</code>) is the best format to save data in because it is basically a plain text file, it’s quick to parse, and can be opened and edited with any software (plus, it’s not a proprietary format like <code>.docx</code> or <code>.xlsx</code>—these formats are specific to particular commercial software).</p>
 <p>This is what a <code>.csv</code> file looks like when you open it in a text editor (showing only the first few lines). The file contains tabular data (data that is structured as columns and rows, like a spreadsheet).</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,banoshment,1,423,6.0474,Filler,Nonword,Phonological,NA</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unawareness,1,603,6.4019,Critical,Word,Unrelated,Left</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unholiness,1,739,6.6053,Critical,Word,Constituent,Left</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,banoshment,1,423,6.0474,Filler,Nonword,Phonological,NA</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unawareness,1,603,6.4019,Critical,Word,Unrelated,Left</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unholiness,1,739,6.6053,Critical,Word,Constituent,Left</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This is what the file would look like when layed out as a table.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -817,20 +950,20 @@ div.csl-indent {
 </figure>
 </div>
 <p>To separate the values of each column, a <code>.csv</code> file uses a comma <code>,</code> (hence the name “comma separated values”) to separate the values in every row. The first line of the file indicates the names of the columns of the table:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Group,ID,List,Target,ACC,RT,logRT,Critical_Filler,Word_Nonword,Relation_type,Branching</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>There are 11 columns. The rest of the rows is the data, i.e.&nbsp;the values of each column separated by commas.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,banoshment,1,423,6.0474,Filler,Nonword,Phonological,NA</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unawareness,1,603,6.4019,Critical,Word,Unrelated,Left</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unholiness,1,739,6.6053,Critical,Word,Constituent,Left</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,banoshment,1,423,6.0474,Filler,Nonword,Phonological,NA</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unawareness,1,603,6.4019,Critical,Word,Unrelated,Left</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,unholiness,1,739,6.6053,Critical,Word,Constituent,Left</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>L1,L1_01,A,bictimize,1,510,6.2344,Filler,Nonword,Phonological,NA</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>This might look a bit confusing, but you will see later that, after importing this type of file, you can view it as a nice spreadsheet (as you would in Excel), like in the figure above.</p>
 <p>Another common type of tabular data file is <strong>spreadsheets</strong>, like spreadsheets created by Microsoft Excel or Apple Numbers. These are all proprietary formats that require you to have the software that were created with if you want to modify them. Portability and openness are important aspects of conducting research, so that using open and non-proprietary file types makes your research more accessible and doesn’t privilege those who have access to specific software (remember, R is free!). Despite of this, a lot of data is shared as Excel files.</p>
 <p>There are also variations of the comma separated values type, like <strong>tab separated values</strong> files (<code>.tsv</code>, which uses tab characters instead of commas) and <strong>fixed-width</strong> files (usually <code>.txt</code>, where columns are separated by as many white spaces as needed so that the columns align).</p>
-<section id="non-tabular-data" class="level3" data-number="9.1.1">
-<h3 data-number="9.1.1" class="anchored" data-anchor-id="non-tabular-data"><span class="header-section-number">9.1.1</span> Non-tabular data</h3>
+<section id="non-tabular-data" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="non-tabular-data"><span class="header-section-number">9.2.1</span> Non-tabular data</h3>
 <p>Of course, R can import also data that is not tabular, like map data and complex hierarchical data, including XML, HTML and json data. We will not cover these types of data, but you can check out the resources in the Extra box.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -839,7 +972,7 @@ div.csl-indent {
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><p>See Chapters 21-24 of <a href="https://r4ds.hadley.nz">R for Data Science</a>.</p></li>
@@ -849,8 +982,8 @@ div.csl-indent {
 </div>
 </div>
 </section>
-<section id="rds-files" class="level3" data-number="9.1.2">
-<h3 data-number="9.1.2" class="anchored" data-anchor-id="rds-files"><span class="header-section-number">9.1.2</span> <code>.rds</code> files</h3>
+<section id="rds-files" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="rds-files"><span class="header-section-number">9.2.2</span> <code>.rds</code> files</h3>
 <p>R has a special way of saving data: <code>.rds</code> files. <code>.rds</code> files allow you to save an R object to a file on your computer, so that you can read that file back in when you need it. A common use for <code>.rds</code> files is to save tabular data that you have processed so that it can be readily used in many different scripts or even by other people, but <code>.rds</code> files can contain any type of R objects, also lists (so not only tabular data). In the following sections you will learn how to import (aka read) three types of data: <code>.csv</code>, Excel and <code>.rds</code> files.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -862,19 +995,21 @@ div.csl-indent {
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
 <ol type="a">
 <li>Which of the following is not tabular data.
-<div id="radio_MUQIXHQKFU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MUQIXHQKFU" value=""> <span>a. A file with 3 columns and 100 rows.</span></label><label><input type="radio" autocomplete="off" name="radio_MUQIXHQKFU" value="answer"> <span>b. An HTML file.</span></label><label><input type="radio" autocomplete="off" name="radio_MUQIXHQKFU" value=""> <span>c.&nbsp;An Excel spreadsheet.</span></label>
+<div id="radio_HOFCUVKXGI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HOFCUVKXGI" value=""> <span>a. A file with 3 columns and 100 rows.</span></label><label><input type="radio" autocomplete="off" name="radio_HOFCUVKXGI" value="answer"> <span>b. An HTML file.</span></label><label><input type="radio" autocomplete="off" name="radio_HOFCUVKXGI" value=""> <span>c.&nbsp;An Excel spreadsheet.</span></label>
 </div></li>
 <li>Non-tabular data can be saved to <code>.rds</code> files. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></li>
 </ol>
 </div>
 </div>
+</div>
 </section>
 </section>
-<section id="get-the-data" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="get-the-data"><span class="header-section-number">9.2</span> Get the data</h2>
+<section id="get-the-data" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="get-the-data"><span class="header-section-number">9.3</span> Get the data</h2>
 <p>The data used in this textbook come from a variety of published and unpublished linguistic studies. You can download the data files from the <a href="https://uoelel.github.io/qml-data/">QML Data</a> website according to the following instructions.</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -910,8 +1045,8 @@ div.csl-indent {
 └── ...</code></pre>
 <p>I recommend that you start being very organised with your files in other projects from now on, whether it’s for a course or your dissertation or anything else. I also suggest to avoid overly nested structures (folders in folders in folders in folders…), unless strictly necessary.</p>
 </section>
-<section id="organising-your-files" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="organising-your-files"><span class="header-section-number">9.3</span> Organising your files</h2>
+<section id="organising-your-files" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="organising-your-files"><span class="header-section-number">9.4</span> Organising your files</h2>
 <p>The <a href="https://osf.io">Open Science Framework</a> has the <a href="https://help.osf.io/article/147-organizing-files">following recommendations</a> that can be applied to any type of research project.</p>
 <ul>
 <li><p>Use <strong>one folder</strong> per project. The project folder will also be your RStudio/Quarto project folder. Ideally, the project folder should have all the files related to the project (one exception is PDFs of papers that form the literature background of the project: for those I recommend using bibliography managing software, like the free <a href="https://www.zotero.org">Zotero</a> or <a href="https://www.jabref.org">JabRef</a>).</p></li>
@@ -922,8 +1057,8 @@ div.csl-indent {
 <p>To summarise, these recommendations suggest to have a folder for your research project/course/else, and inside the folder two more folders: one for data and one for code. The <code>data/</code> folder could further contain <code>raw/</code> for raw data (data that should not be lost or changed, for example collected data or annotations) and <code>derived/</code> for data that derives from the raw data, for example through automated data processing.</p>
 <p>It might be useful to also have a separate folder called <code>figs/</code> or <code>img/</code> to save figures and plots. Of course which folders you will have it’s ultimately up to you and needs will vary depending on the nature and practical aspects of each study.</p>
 </section>
-<section id="read-.csv-files" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="read-.csv-files"><span class="header-section-number">9.4</span> Read <code>.csv</code> files</h2>
+<section id="read-.csv-files" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="read-.csv-files"><span class="header-section-number">9.5</span> Read <code>.csv</code> files</h2>
 <p>In this section, you will learn how to read <code>.csv</code> files. Reading <code>.csv</code> files is very easy. You can use the <code>read_csv()</code> function from a collection of R packages known as the <a href="https://www.tidyverse.org">tidyverse</a>. Specifically, the <code>read_csv()</code> function is from the <a href="https://readr.tidyverse.org">readr</a> package, one of the tidyverse packages. If you are learning R for the first time, then you won’t already have the tidyverse packages installed (you can check in the <code>Packages</code> tab in the bottom-right panel). Installing the tidyverse packages is easy: you just need to install the <strong>tidyverse</strong> package and that will take care of installing the most important packages in the collection (called the <a href="https://www.tidyverse.org/packages/">“core” tidyverse packages</a>). Note that installation of the core tidyverse packages can take some time (but remember that you do this only <em>once</em>). If you need to install the tidyverse packages, do it now.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -965,10 +1100,10 @@ project:
 -->
 <p>Note that while the <code>read_csv()</code> function does read the data in R, you must assign the output of the <code>read_csv()</code> function (i.e.&nbsp;the data we are reading) to a variable, using the assignment arrow <code>&lt;-</code>, just like we were assigning values to R variables in previous chapters. And since the <code>read_csv()</code> is a function from the tidyverse, you first need to attach the tidyverse packages with <code>library(tidyverse)</code> (remember, you need to attach packages <strong>only once</strong> per session). This will attach the core tidyverse packages, including readr. Of course, you can also attach the individual packages directly: <code>library(readr)</code>. If you use <code>library(tidyverse)</code> there is no need to attach individual tidyverse packages.</p>
 <p>Open your <code>week-02.R</code> script. Add the following lines in the script (don’t change the file path! explanation below) and run the code (you might want to put the <code>library()</code> line at the top of the script, with the other packages). The <code>read_csv()</code> line will print information about the data and read the data into <code>shallow</code>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>shallow <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/song2020/shallow.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>shallow <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/song2020/shallow.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 6500 Columns: 11
 ── Column specification ────────────────────────────────────────────────────────
@@ -997,8 +1132,8 @@ dbl (3): ACC, RT, logRT
 </div>
 </div>
 <p>But wait, what is that <code>"./data/song2020/shallow.csv"</code>? That’s a <strong>relative path</strong>. Let’s understand the concept of relative paths now.</p>
-<section id="relative-paths" class="level3" data-number="9.4.1">
-<h3 data-number="9.4.1" class="anchored" data-anchor-id="relative-paths"><span class="header-section-number">9.4.1</span> Relative paths</h3>
+<section id="relative-paths" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="relative-paths"><span class="header-section-number">9.5.1</span> Relative paths</h3>
 <p>File paths can be specified in two formats. One format is called <strong>absolute</strong> file path. An absolute file path include <em>all</em> folders from the top-most folder, which is normally your computer’s hard drive. For example, <code>/Users/ste/qdal/data/song2020/shallow.csv</code> from above is an absolute path. You know it’s an absolute path because it starts with the forward slash <code>/</code>. This means that there isn’t anything above <code>Users/</code>: it’s the top-most folder. A downside of absolute paths is that they are not portable: if I move the <code>qdal/</code> folder to <code>ste/Documents</code> then I need to change every occurrence in my scripts to <code>/Users/ste/Documents/qdal/data/song2020/shallow.csv</code>. Moreover, when you share your research code (and you should!), using absolute paths means that each person that wants to run the code has to update the absolute path to reflect their own.</p>
 <p>A solution is to use <strong>relative paths</strong>. Relative paths work by including the path only from within a specific folder. Whichever folders contain that specific folder do not matter. The specific folder is called the <strong>working directory</strong>. When you are using Quarto projects, the working directory is the project folder, i.e.&nbsp;the folder with the <code>.Rproj</code> and <code>_quarto.yml</code> files.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
@@ -1056,12 +1191,14 @@ dbl (3): ACC, RT, logRT
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
 <ol type="1">
 <li>Given the following absolute path <code>/Users/raj/projects/thesis/data/raw/data.csv</code> and the working directory <code>/Users/raj/projects/</code>, which of the following paths is the correct one to read the <code>data.csv</code> file?
-<div id="radio_WXVWVOEBNF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WXVWVOEBNF" value=""> <span>a. <code>/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_WXVWVOEBNF" value=""> <span>b. <code>./projects/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_WXVWVOEBNF" value=""> <span>c.&nbsp;<code>./data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_WXVWVOEBNF" value="answer"> <span>d.&nbsp;<code>./thesis/data/raw/data.csv</code></span></label>
+<div id="radio_RYCDGXUGMB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RYCDGXUGMB" value=""> <span>a. <code>/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_RYCDGXUGMB" value=""> <span>b. <code>./projects/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_RYCDGXUGMB" value=""> <span>c.&nbsp;<code>./data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_RYCDGXUGMB" value="answer"> <span>d.&nbsp;<code>./thesis/data/raw/data.csv</code></span></label>
 </div></li>
 </ol>
+</div>
 </div>
 </div>
 <!--
@@ -1083,32 +1220,36 @@ The `shallow` data frame contains 11 columns (called variables in the `Environme
 ::: callout-note
 ### Quiz 3
 
-How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_EZYUKJJLOB'><label><input type="radio" autocomplete="off" name="radio_EZYUKJJLOB" value=""></input> <span>11</span></label><label><input type="radio" autocomplete="off" name="radio_EZYUKJJLOB" value=""></input> <span>650</span></label><label><input type="radio" autocomplete="off" name="radio_EZYUKJJLOB" value="answer"></input> <span>6500</span></label></div>
+
+::: {.cell layout-align="center"}
+How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_UJTDSVJCPI'><label><input type="radio" autocomplete="off" name="radio_UJTDSVJCPI" value=""></input> <span>11</span></label><label><input type="radio" autocomplete="off" name="radio_UJTDSVJCPI" value=""></input> <span>650</span></label><label><input type="radio" autocomplete="off" name="radio_UJTDSVJCPI" value="answer"></input> <span>6500</span></label></div>
+:::
+
 :::
 -->
 </section>
 </section>
-<section id="read-excel-sheets" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="read-excel-sheets"><span class="header-section-number">9.5</span> Read Excel sheets</h2>
+<section id="read-excel-sheets" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="read-excel-sheets"><span class="header-section-number">9.6</span> Read Excel sheets</h2>
 <p>To read an Excel file we need first to attach the <a href="https://readxl.tidyverse.org/index.html">readxl</a> package. It should already be installed, because it comes with the tidyverse. If not, install it. Then add the following line to the script.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now we can use the <code>read_excel()</code> function. Let’s read the file.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>relatives <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"./data/los2023/relatives.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>relatives <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"./data/los2023/relatives.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now you can view the tibble <code>relatives</code> in the RStudio Viewer. Note that if the Excel file has more than one sheet, you can specify the sheet number when reading the file (the default is <code>sheet = 1</code>).</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>relatives_2 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"./data/los2023/relatives.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>relatives_2 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"./data/los2023/relatives.xlsx"</span>, <span class="at">sheet =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The second sheet in <code>los2023/relatives.xlx</code> contains the description of the columns in the first sheet.</p>
 </section>
-<section id="import-.rds-files" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="import-.rds-files"><span class="header-section-number">9.6</span> Import <code>.rds</code> files</h2>
+<section id="import-.rds-files" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="import-.rds-files"><span class="header-section-number">9.7</span> Import <code>.rds</code> files</h2>
 <p>Another useful type of data files is a file type specifically designed for R: <code>.rds</code> files. Each <code>.rds</code> file can only contain a single R object, like a tibble. You can read <code>.rds</code> files with the <code>readRDS()</code> function.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/coretta2022/glot_status.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/coretta2022/glot_status.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>As always, you need to assign the output of the function to a variable, here <code>glot_status</code>.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
@@ -1126,8 +1267,8 @@ How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_EZYUK
 </div>
 </div>
 <p>View the <code>glot_status</code> tibble now. It is also very easy to save a tibble to an <code>.rds</code> file with the <code>saveRDS()</code> function. For example:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(shallow, <span class="st">"./data/song2020/shallow.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(shallow, <span class="st">"./data/song2020/shallow.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The first argument is the name of the tibble object and the second argument is the file path to save the object to.</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
