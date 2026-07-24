@@ -31,7 +31,7 @@ With two parameters, the joint posterior distribution can be thought of as a thr
 The *x*-axis represents values of the mean, the *y*-axis values of the standard deviation, and the *z*-axis (the vertical axis) the posterior probability density.
 Hills correspond to highly probable combinations of mean and standard deviation values, whereas valleys correspond to unlikely combinations.
 This landscape is determined by the two components of Bayes' theorem: the prior probability distribution, $P(h)$, and the probability of the data given the prior, $P(d \mid h)$.
-Regions of high posterior probability of the are sampled more often than regions of low posterior probability, so the collection of sampled values approximates the joint posterior distribution.
+Regions of high posterior probability are sampled more often than regions of low posterior probability, so the collection of sampled values approximates the joint posterior distribution.
 The output of a Bayesian model is therefore not a single value for each parameter but a large collection of values, called the **posterior draws**, for each model parameter.
 
 Hamiltonian Monte Carlo imagines a particle moving through this posterior landscape.

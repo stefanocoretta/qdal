@@ -199,7 +199,8 @@ The orange bars show that a unit increase between 1 and 2 on the log scale corre
 
 ## Data visualisation
 
-In @sec-regression-bernoulli, we plotted the proportion of single and multiple predicates in the three signing groups in @fig-verb-org. The signing group variable in that figure is categorical and we just needed to use `geom_bar()` with `position = "fill"` to plot the proportion of single and multiple predicates, rather than just the counts.
+In @sec-regression-bernoulli, we plotted the proportion of single and multiple predicates in the three signing groups in @fig-verb-org.
+The signing group variable in that figure is categorical and we just needed to use `geom_bar()` with `position = "fill"` to plot the proportion of single and multiple predicates, rather than just the counts.
 With the scalar inference data, we have two numeric predictors and `geom_bar()` would not do what you want.
 Instead, we need a different approach, using `geom_smooth()`.
 
@@ -291,7 +292,8 @@ si |>
 :::
 
 Since our research question is about the interaction between frequency and semantic distance, it is a good idea to plot these together with proportion of scalar inference in a single plot.
-We need to calculate the mean proportion of scalar inference for each adjective as we have done for @fig-si-freq-scatter. We will do this in a pipe chain in the figure code below rather than in separate steps, just for illustration purposes.
+We need to calculate the mean proportion of scalar inference for each adjective as we have done for @fig-si-freq-scatter.
+We will do this in a pipe chain in the figure code below rather than in separate steps, just for illustration purposes.
 The `pch` argument selects the point symbol (or character) by its number (you can search for the list of available symbols online).
 `scale_fill_distiller()` allows us to select a palette for filling the points with colour depending on the value of `prop_si`.
 The distiller palettes are continuous versions of the *colorBrewer* palettes (see the [colorBrewer](https://colorbrewer2.org/#type=sequential&scheme=RdPu&n=3) website).
@@ -357,7 +359,7 @@ si_bm <- brm(
   data = si,
   seed = 5243,
   file = 'cache/ch-regression-num-num_si_bm'
-)xw
+)
 ```
 :::
 
