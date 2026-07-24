@@ -465,7 +465,7 @@ This is not the case for two reasons: first, you just see a regression line, but
 
 In @sec-exp-val-ppd we calculated the posterior draws of the expected value of vowel duration when speech rate is 4 and 7.
 Assume we are interested in the *difference* between vowel duration when speech rate is 4 and when it is 7.
-The `b_speech_rate` draws tell us the difference for one unit change in speech rate, so for example from 4 to 5 or from 6 to 7.
+The `b_speech_rate` draws tell us the difference for one unit increase in speech rate, so for example from 4 to 5 or from 6 to 7.
 For the specific type of Gaussian regression model we fitted so far, you could multiply the draws of `b_speech_rate` by 3 to get the posterior draws of the difference of interest.
 The calculated posterior draws of the difference would apply to any speech rate comparison of 3 units (4 to 7, 0 to 3, 6.5 to 9.5), but this is true only in very specific cases (like the one we've been discussing here) and doesn't generalise to all model types (in particular, it would not work with models that use a different family distribution, models with interactions of transformed variables, and so on).
 
