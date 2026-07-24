@@ -444,56 +444,29 @@ This is indeed what we see in @fig-si-bm-cond-0.
 conditional_effects(si_bm, "semdist", conditions = list(logfreq = 0))
 ```
 
-### Conditional posterior probabilities
-
-In previous weeks, to compute conditional posterior probabilities for categorical predictors, we would take the model equation, substitute the $\beta$ coefficients with the estimates of the model and then calculate the posterior probabilities by substituting the predictor variables with 0 or 1s depending on the level we wanted to predict for.
-
-Back then, it was easy to know which values to set the predictors equal to.
-But what do we do now that we have a numeric predictor that can, in principle, take on any value?
-
-Rather than looking at the full range of values that the numeric predictor can take on, **in practice we still choose just a few representative values to set the predictor to.**
-
-A common practice is to use the mean of the predictor and then the value that corresponds to 1 standard deviation above the mean and 1 standard deviation below the mean.
-
-If you wish you can try and work out how to do the calculations yourself using the draws, but luckily there is a function from the brms package that simplifies things.
-
-The function is `conditional_effects()` (aptly named!).
-It takes the model as the first argument and then a string specifying the effects to plot, here `"logfreq:semdist"` for "`logfreq`, `semdist` and their interaction".
+The interaction term in the model is allowing the effect of semantic distance to vary depending on the value of frequency (and vice versa).
+We can thus use `conditional_effects()` to plot the interaction.
+With two numeric predictors, the function picks three value of the other predictor for plotting: the mean and ±1 SD from the mean.
 
 ```{r}
-#| label: condeff
+#| label: fig-si-bm-cond-sd-f
 
-conditional_effects(si_bm, effects = "logfreq:semdist")
+conditional_effects(si_bm, "semdist:logfreq")
 
 ```
 
-You will see that the plot has picked representative values for `semdist` (by default these are the mean, and mean $\pm$ 1 standard deviation. You can calculate the mean and SD of `semdist` yourself to compare).
-Since we have listed `logfreq` first, the plot shows the entire range of values in `logfreq`.
-
-**The effect of log frequency gets stronger with increasing semantic distance.**
-
-We can invert the predictors to see the effect of semantic distance at representative values of log frequency.
-
 ```{r}
-#| label: condeff-2
+#| label: fig-si-bm-cond-sd-f-cond
 
-conditional_effects(si_bm, effects = "semdist:logfreq")
+conditional_effects(si_bm, "semdist:logfreq", int_conditions = list(logfreq = seq(0, 8, by = 2)))
+
 ```
 
-Here we see that, equivalently, the effect of semantic distance increases with increasing log frequency.
+```{r}
+conditional_effects(si_bm, "logfreq:semdist", int_conditions = list(semdist = seq(-10, 15, by = 5)))
+```
 
-::: {.callout-note collapse="true"}
-#### Using `conditional_effects()`
-
-Prior to this week, we've been calculating and plotting posterior probabilities ourselves using the draws obtained with `as_draws_df()`.
-
-The `conditional_effects()` function is a great way of quickly plotting conditional posterior probabilities.
-If you feel like, go back to the models from previous weeks and try the function with those!
-
-There is also a package, [bayesplot](http://mc-stan.org/bayesplot/), that has a lot of function that make plotting easier, so feel free to have a look at it if you wish.
-
-Finally, [tidybayes](http://mjskay.github.io/tidybayes/) can also be helpful to work with draws and plotting and it's worth looking.
-:::
+## Expected values with numeric/numeric interactions
 
 ## Reporting
 
