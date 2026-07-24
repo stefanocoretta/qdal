@@ -60,26 +60,7 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -766,14 +747,13 @@ window.Quarto = {
    
   <ul>
   <li><a href="#the-data" id="toc-the-data" class="nav-link active" data-scroll-target="#the-data"><span class="header-section-number">37.1</span> The data</a></li>
-  <li><a href="#data-transformation" id="toc-data-transformation" class="nav-link" data-scroll-target="#data-transformation"><span class="header-section-number">37.2</span> Data transformation</a></li>
-  <li><a href="#data-visualisation" id="toc-data-visualisation" class="nav-link" data-scroll-target="#data-visualisation"><span class="header-section-number">37.3</span> Data visualisation</a></li>
-  <li><a href="#fitting-the-model" id="toc-fitting-the-model" class="nav-link" data-scroll-target="#fitting-the-model"><span class="header-section-number">37.4</span> Fitting the model</a>
+  <li><a href="#visualise-the-data" id="toc-visualise-the-data" class="nav-link" data-scroll-target="#visualise-the-data"><span class="header-section-number">37.2</span> Visualise the data</a></li>
+  <li><a href="#fitting-the-model" id="toc-fitting-the-model" class="nav-link" data-scroll-target="#fitting-the-model"><span class="header-section-number">37.3</span> Fitting the model</a>
   <ul class="collapse">
-  <li><a href="#interpreting-the-estimates" id="toc-interpreting-the-estimates" class="nav-link" data-scroll-target="#interpreting-the-estimates"><span class="header-section-number">37.4.1</span> Interpreting the estimates</a></li>
-  <li><a href="#conditional-posterior-probabilities" id="toc-conditional-posterior-probabilities" class="nav-link" data-scroll-target="#conditional-posterior-probabilities"><span class="header-section-number">37.4.2</span> Conditional posterior probabilities</a></li>
+  <li><a href="#interpreting-the-estimates" id="toc-interpreting-the-estimates" class="nav-link" data-scroll-target="#interpreting-the-estimates"><span class="header-section-number">37.3.1</span> Interpreting the estimates</a></li>
+  <li><a href="#conditional-posterior-probabilities" id="toc-conditional-posterior-probabilities" class="nav-link" data-scroll-target="#conditional-posterior-probabilities"><span class="header-section-number">37.3.2</span> Conditional posterior probabilities</a></li>
   </ul></li>
-  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">37.5</span> Reporting</a></li>
+  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">37.4</span> Reporting</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-num-num.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -811,296 +791,120 @@ window.Quarto = {
 <p><a href="ch-regression-cat-cat.html" class="quarto-xref"><span>Chapter 34</span></a> and <a href="ch-regression-cat-num.html" class="quarto-xref"><span>Chapter 36</span></a> introduced interactions between two categorical predictors and between a categorical and a numeric predictor respectively. In this chapter, we will learn about the last type of so-called two-way interactions (i.e.&nbsp;interactions with two predictors): an interaction between two numeric predictors. Relative to the other combination of predictor types, numeric-numeric interactions are a bit more difficult to interpret: this is because numeric predictors can take on many numeric values, and the number of combinations of values from two numeric predictors is even larger.</p>
 <section id="the-data" class="level2" data-number="37.1">
 <h2 data-number="37.1" class="anchored" data-anchor-id="the-data"><span class="header-section-number">37.1</span> The data</h2>
-<p>We will use the data from <span class="citation" data-cites="pankratz2021">Pankratz and Van Tiel (<a href="references.html#ref-pankratz2021" role="doc-biblioref">2021</a>)</span> on scalar diversity. Scalar inferences arise when a speaker chooses a weaker expression, such as <em>It’s warm</em>, despite the availability of a stronger alternative, such as <em>It’s hot</em>. This choice often leads listeners to infer that the speaker believes the stronger statement is false. The likelihood of deriving this inference differs across scalar expressions, a phenomenon known as <em>scalar diversity</em>. The original study investigated the effect of several variables on whether participants presented with utterances made a scalar inference or not, but in this chapter we will focus on two: (1) relevance of the scalar inference operationalised as the frequency of co-occurrence of the weak and strong adjectives, and (2) semantic distance between the weak and strong adjectives in the scale. Let’s attach the packages and read the data.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_light</span>())</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidybayes)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdist)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Let’s read the data.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>si <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/pankratz2021/si.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>si <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/pankratz2021/si.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The variables in this data frame that we’ll refer to in this tutorial are:</p>
 <ul>
 <li><code>weak_adj</code>: The weaker adjective on the tested scale (paired with the stronger adjective in <code>strong_adj</code>).</li>
-<li><code>strong_adj</code>: The stronger adjective on the tested scale.</li>
 <li><code>SI</code>: Whether or not a participant made a scalar inference for the pair of adjectives in <code>weak_adj</code> and <code>strong_adj</code> (<code>no_scalar</code> if no, <code>scalar</code> if yes).</li>
 <li><code>freq</code>: How frequently the <code>weak_adj</code> co-occurred with a stronger adjective on the same scale in a large corpus.</li>
 <li><code>semdist</code>: A measure of the semantic distance between <code>weak_adj</code> and <code>strong_adj</code>. A negative score indicates that the words are semantically closer; a positive score indicates that the words are semantically more distant (the units are arbitrary).</li>
 </ul>
-<p>We will fit a regression model to test the following hypotheses (from <span class="citation" data-cites="pankratz2021">Pankratz and Van Tiel (<a href="references.html#ref-pankratz2021" role="doc-biblioref">2021</a>)</span>):</p>
-<blockquote class="blockquote">
-<p>H1: Higher co-occurrence frequency increases the probability of a scalar inference.</p>
-<p>H2: Greater semantic distance increases the probability of a scalar inference.</p>
-</blockquote>
-<p>Since this chapter is about interactions, we will also assess the following research question (the original study did not include specific hypotheses regarding interactions):</p>
-<blockquote class="blockquote">
-<p>RQ: How does the effect of frequency vary depending on semantic distance and vice versa?</p>
-</blockquote>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Quiz 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<p>Before we leap into modelling, though, let’s look in more detail at our predictors <code>freq</code> and <code>semdist</code>. A little bit of pre-processing is needed here, and the next sections will walk you through it.</p>
+<section id="recoding-si" class="level4" data-number="37.1.0.1">
+<h4 data-number="37.1.0.1" class="anchored" data-anchor-id="recoding-si"><span class="header-section-number">37.1.0.1</span> Recoding <code>SI</code></h4>
+<p>Now <code>SI</code> is coded with <code>no_scalar</code> for “participant did not make a scalar inference” and <code>scalar</code> for “participant made a scalar inference”.</p>
+<p>Let’s convert <code>SI</code> into a factor with levels in the order <code>c("no_scalar", "scalar")</code> (note that this is the same order as the default alphabetical order, but it does not hurt to specify it ourselves).</p>
 <div class="cell" data-layout-align="center">
-<ol type="a">
-<li>Which is the outcome variable of the regression model needed to assess the research hypotheses and question above?
-<div id="radio_ZFJVBKJPWZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZFJVBKJPWZ" value="answer"> <span>Presence of a scalar inference.</span></label><label><input type="radio" autocomplete="off" name="radio_ZFJVBKJPWZ" value=""> <span>Semantic distance.</span></label><label><input type="radio" autocomplete="off" name="radio_ZFJVBKJPWZ" value=""> <span>Co-occurrence frequency.</span></label>
-</div></li>
-<li>Which distribution family should be used in this regression model?
-<div id="radio_HKMVFYYPBX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HKMVFYYPBX" value=""> <span>Log-normal.</span></label><label><input type="radio" autocomplete="off" name="radio_HKMVFYYPBX" value=""> <span>Gaussian.</span></label><label><input type="radio" autocomplete="off" name="radio_HKMVFYYPBX" value="answer"> <span>Bernoulli.</span></label>
-</div></li>
-</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>si <span class="ot">&lt;-</span> si <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">SI =</span> <span class="fu">factor</span>(SI, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"no_scalar"</span>, <span class="st">"scalar"</span>))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<p>Before we leap into modelling, though, let’s look in more detail at the variables needed for the regression model, <code>SI</code>, <code>freq</code> and <code>semdist</code>. A little bit of pre-processing is needed here, and the next sections will walk you through it.</p>
 </section>
-<section id="data-transformation" class="level2" data-number="37.2">
-<h2 data-number="37.2" class="anchored" data-anchor-id="data-transformation"><span class="header-section-number">37.2</span> Data transformation</h2>
-<p>Now <code>SI</code> is coded with <code>no_scalar</code> for “participant did not make a scalar inference” and <code>scalar</code> for “participant made a scalar inference”. Let’s convert <code>SI</code> into a factor with levels in the order <code>c("no_scalar", "scalar")</code> (note that this is the same order as the default alphabetical order, but it does not hurt to specify it ourselves). This is needed to use <code>SI</code> as outcome in a Bernoulli model, as we have done with number of predicates in <a href="ch-regression-bernoulli.html" class="quarto-xref"><span>Chapter 30</span></a>.</p>
+<section id="transforming-and-centring-freq" class="level4" data-number="37.1.0.2">
+<h4 data-number="37.1.0.2" class="anchored" data-anchor-id="transforming-and-centring-freq"><span class="header-section-number">37.1.0.2</span> Transforming and centring <code>freq</code></h4>
+<p>Frequencies notoriously yield an extremely skewed distribution, so it’s common practice in corpus linguistics to log-transform them before including them in an analysis.</p>
+<p>Here’s how the frequencies look right out of the box:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>si <span class="ot">&lt;-</span> si <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">SI =</span> <span class="fu">factor</span>(SI, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"no_scalar"</span>, <span class="st">"scalar"</span>))</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Since <code>SI</code> is now a factor with <code>scalar</code> as the second level, a Bernoulli model of this variable would estimate the probability of getting a <code>scalar</code> response. In other words, the model will estimate the probability of a scalar inference.</p>
-<p>Frequencies notoriously yield an extremely skewed distribution, so it’s common practice in linguistics to log-transform them before including them in an analysis. We have encountered another type of frequency, lexical frequency in <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 31</span></a>. In that chapter, we did not log-transform lexical frequency to keep things simple, but we will log co-occurrence frequency in this chapter. Here’s how the frequencies look right out of the box:</p>
-<div class="cell" data-layout-align="center">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>si <span class="sc">|&gt;</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> freq)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">'grey'</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>() <span class="sc">+</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Frequency of co-occurrence"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
 <div class="cell-output-display">
-<div id="fig-freq-skew-plot" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-freq-skew-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-regression-num-num_files/figure-html/fig-freq-skew-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-freq-skew-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;37.1: Density of frequency of co-occurrence of weak and strong adjective in the same scale.
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ch-regression-num-num_files/figure-html/freq-skew-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Log-transforming the frequencies helps to reduce the skewness. Use <code>mutate()</code> to take the log of <code>freq</code> and store the result in a new column called <code>logfreq</code>.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>si <span class="ot">&lt;-</span> si <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">logfreq =</span> <span class="fu">log</span>(freq)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>si <span class="ot">&lt;-</span> si <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">logfreq =</span> <span class="fu">log</span>(freq)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This is how the distribution of logged frequency looks like:</p>
-<div class="cell" data-layout-align="center">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>si <span class="sc">|&gt;</span> </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> logfreq)) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">'grey'</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>() <span class="sc">+</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Frequency of co-occurrence (logged)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-logfreq" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-logfreq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-regression-num-num_files/figure-html/fig-logfreq-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-logfreq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;37.2: Density of log-transformed frequency of co-occurrence.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>When we’re interpreting the model estimates below, we’ll be talking about the effect on scalar inference of <em>one unit increase on the log frequency scale</em><strong>.</strong> When working with logged-transformed variables, you should keep in mind that a unit increase on the logged scale does not corresponds to a unit increase on the original scale. Because the log transformation is <strong>non-linear</strong>, a unit increase on the log frequency scale (e.g., going from 0 to 1, or going from 2 to 3) corresponds to different magnitudes of increase on the frequency scale <em>depending on which unit increase we evaluate on the log scale</em><strong>.</strong> This is the same principle that applies to log estimates in log-normal models: while the difference on the log scale stays the same along all values of a numeric predictor, the difference on the original (un-logged scale) varies depending on the baseline value. <a href="#fig-log-nonlinear" class="quarto-xref">Figure&nbsp;<span>37.3</span></a> illustrates the correspondence between changes in the original frequency scale (<em>x</em>-axis) vs changes on the log-frequency scale (<em>y</em>-axis).</p>
-<div class="cell" data-layout-align="center">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun =</span> log, <span class="at">colour =</span> <span class="st">'#8856a7'</span>, <span class="at">linewidth=</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">25</span>), <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.01</span>))) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))) <span class="sc">+</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">22.5</span>, <span class="at">y =</span> <span class="fl">3.3</span>), <span class="at">label =</span> <span class="st">"y = log(x)"</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">colour =</span> <span class="st">'#8856a7'</span>) <span class="sc">+</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">'The logarithmic scale'</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">'The original scale (e.g., frequency)'</span>) <span class="sc">+</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Horizontal line segments at log = 1, 2, 3</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> <span class="fu">exp</span>(<span class="dv">1</span>), <span class="at">y =</span> <span class="dv">1</span>, <span class="at">yend =</span> <span class="dv">1</span>), <span class="at">linetype =</span> <span class="st">'dotted'</span>) <span class="sc">+</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> <span class="fu">exp</span>(<span class="dv">2</span>), <span class="at">y =</span> <span class="dv">2</span>, <span class="at">yend =</span> <span class="dv">2</span>), <span class="at">linetype =</span> <span class="st">'dotted'</span>) <span class="sc">+</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> <span class="fu">exp</span>(<span class="dv">3</span>), <span class="at">y =</span> <span class="dv">3</span>, <span class="at">yend =</span> <span class="dv">3</span>), <span class="at">linetype =</span> <span class="st">'dotted'</span>) <span class="sc">+</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Vertical line segments descending from exp(1), exp(2), exp(3)</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">exp</span>(<span class="dv">1</span>), <span class="at">xend =</span> <span class="fu">exp</span>(<span class="dv">1</span>), <span class="at">y =</span> <span class="dv">1</span>, <span class="at">yend =</span> <span class="dv">0</span>), <span class="at">linetype =</span> <span class="st">'dotted'</span>) <span class="sc">+</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">exp</span>(<span class="dv">2</span>), <span class="at">xend =</span> <span class="fu">exp</span>(<span class="dv">2</span>), <span class="at">y =</span> <span class="dv">2</span>, <span class="at">yend =</span> <span class="dv">0</span>), <span class="at">linetype =</span> <span class="st">'dotted'</span>) <span class="sc">+</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">exp</span>(<span class="dv">3</span>), <span class="at">xend =</span> <span class="fu">exp</span>(<span class="dv">3</span>), <span class="at">y =</span> <span class="dv">3</span>, <span class="at">yend =</span> <span class="dv">0</span>), <span class="at">linetype =</span> <span class="st">'dotted'</span>) <span class="sc">+</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Vertical line segments illustrating unit increases on log scale</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">0.1</span>, <span class="at">xend =</span> <span class="fl">0.1</span>, <span class="at">y =</span> <span class="dv">1</span>, <span class="at">yend =</span> <span class="dv">2</span>), <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">'orange'</span>) <span class="sc">+</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">1.5</span>), <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">'2 – 1 = 1'</span>), <span class="at">colour =</span> <span class="st">'orange'</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">0.1</span>, <span class="at">xend =</span> <span class="fl">0.1</span>, <span class="at">y =</span> <span class="dv">2</span>, <span class="at">yend =</span> <span class="dv">3</span>), <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">'#404040'</span>) <span class="sc">+</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">2.5</span>), <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">'3 – 2 = 1'</span>), <span class="at">colour =</span> <span class="st">'#404040'</span>, <span class="at">hjust =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Horizontal line segments illustrating diff diffs on freq scale</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">exp</span>(<span class="dv">1</span>), <span class="at">xend =</span> <span class="fu">exp</span>(<span class="dv">2</span>), <span class="at">y =</span> <span class="fl">0.1</span>, <span class="at">yend =</span> <span class="fl">0.1</span>), <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">'orange'</span>) <span class="sc">+</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">5</span>, <span class="at">y =</span> <span class="fl">0.4</span>), <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">'exp(2) –</span><span class="sc">\n</span><span class="st"> exp(1) = 4.7'</span>), <span class="at">colour =</span> <span class="st">'orange'</span>) <span class="sc">+</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">exp</span>(<span class="dv">2</span>), <span class="at">xend =</span> <span class="fu">exp</span>(<span class="dv">3</span>), <span class="at">y =</span> <span class="fl">0.1</span>, <span class="at">yend =</span> <span class="fl">0.1</span>), <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">'#404040'</span>) <span class="sc">+</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">13.5</span>, <span class="at">y =</span> <span class="fl">0.3</span>), <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">'exp(3) – exp(2) = 12.7'</span>), <span class="at">colour =</span> <span class="st">'#404040'</span>) <span class="sc">+</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div id="fig-log-nonlinear" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-log-nonlinear-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-regression-num-num_files/figure-html/fig-log-nonlinear-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-log-nonlinear-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;37.3: Relationship between frequency of co-occurrence and logged frequency.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>The orange bars show that a unit increase between 1 and 2 on the log scale corresponds to a change of 4.7 on the frequency scale, while the grey bars show that a unit increase between 2 and 3 on the log scale corresponds to a change of 12.7 on the frequency scale.</p>
-<!-- A good rule of thumb is to compute and report the change in the original scale that is associated with a unit increase from the mean on the transformed scale to one unit above or below the mean. -->
-</section>
-<section id="data-visualisation" class="level2" data-number="37.3">
-<h2 data-number="37.3" class="anchored" data-anchor-id="data-visualisation"><span class="header-section-number">37.3</span> Data visualisation</h2>
-<p>In <a href="ch-regression-bernoulli.html" class="quarto-xref"><span>Chapter 30</span></a>, we plotted the proportion of single and multiple predicates in the three signing groups in <a href="ch-regression-bernoulli.html#fig-verb-org" class="quarto-xref">Figure&nbsp;<span>30.3</span></a>. The signing group variable in that figure is categorical and we just needed to use <code>geom_bar()</code> with <code>position = "fill"</code> to plot the proportion of single and multiple predicates, rather than just the counts. With the scalar inference data, we have two numeric predictors and <code>geom_bar()</code> would not do what you want. Instead, we need a different approach, using <code>geom_smooth()</code>.</p>
-<p>The variable <code>SI</code> is binary: <code>no_scalar</code> if a scalar inference was not made, <code>scalar</code> if it was. Let’s start with a plot to visualise this binary outcome as a proportion of scalar inference being present on the <em>y</em>-axis and log frequency on the <em>x</em>-axis. <code>SI</code> is categorical, but we want to show the <em>proportion</em> of <code>scalar</code> vs <code>no_scalar</code> across values of log frequency. We can achieve this by temporarily converting <code>SI</code> to a <em>numeric</em> variable and subtract <code>1</code>, and then using <code>geom_smooth()</code> with a binomial family (which will indicate the proportion of <code>scalar</code> responses), like so:</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>si <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SI =</span> <span class="fu">as.numeric</span>(SI) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(logfreq, SI)) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"glm"</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family =</span> <span class="st">"binomial"</span>)) <span class="sc">+</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Frequency of co-occurrence (logged)"</span>, <span class="at">y =</span> <span class="st">"Proportion of scalar inferences"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-si-freq" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-si-freq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-regression-num-num_files/figure-html/fig-si-freq-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-si-freq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;37.4: Regression line of log-frequency of co-occurrence on the proportion of scalar inferences.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>The function <code>as.numeric()</code> works with factors by converting each level into a number: try <code>as.numeric(si$SI)</code> to see what it does. Then, we subtract <code>1</code> so that <code>1</code> becomes <code>0</code> and <code>2</code> becomes <code>1</code>. The binomial family in <code>geom_smooth()</code> adds a regression line which represents the effect of logged frequency on the proportion of scalar inferences (on the <em>y</em>-axis, where 0 means no scalar inference and 1 means the participant did a scalar inference). We have also included points corresponding to the actual observed <code>SI</code>: of course, these can only be 0 or 1. <a href="#fig-si-freq" class="quarto-xref">Figure&nbsp;<span>37.4</span></a> suggests that there is a somewhat positive relationship between log-frequency and probability of the participant making a scalar implication. In other words, the higher the log frequency, the higher the probability of a scalar inference.</p>
-<p><a href="#fig-si-freq-scatter" class="quarto-xref">Figure&nbsp;<span>37.5</span></a> shows the relationship between log-frequency and proportion of scalar inference for each individual adjective. To achieve this, it is necessary to first calculate ourselves the proportion of scalar inference for each adjective separately Then we can use <code>geom_text()</code> to add the corresponding <code>weak_adj</code> on the plot. The following code performs the first step: we can obtain the mean proportion for each adjective by grouping the data by <code>weak_adj</code> and by taking the mean of <code>SI</code> recoded as 0/1 as above. Since we need <code>logfreq</code> for plotting, we need to also group by this variable.</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>si_summary <span class="ot">&lt;-</span> si <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(weak_adj, logfreq) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_si =</span> <span class="fu">mean</span>(<span class="fu">as.numeric</span>(SI) <span class="sc">-</span> <span class="dv">1</span>),</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># logfreq = mean(logfreq)</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has regrouped the output.
-ℹ Summaries were computed grouped by weak_adj and logfreq.
-ℹ Output is grouped by weak_adj.
-ℹ Use `summarise(.groups = "drop_last")` to silence this message.
-ℹ Use `summarise(.by = c(weak_adj, logfreq))` for per-operation grouping
-  (`?dplyr::dplyr_by`) instead.</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>si_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["weak_adj"],"name":[1],"type":["chr"],"align":["left"]},{"label":["logfreq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["prop_si"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"amazing","2":"3.135494","3":"0.36363636"},{"1":"angry","2":"3.367296","3":"0.17647059"},{"1":"big","2":"4.204693","3":"0.21052632"},{"1":"bizarre","2":"3.332205","3":"0.26086957"},{"1":"bright","2":"3.178054","3":"0.12500000"},{"1":"busy","2":"3.931826","3":"0.20000000"},{"1":"calm","2":"3.496508","3":"0.05714286"},{"1":"casual","2":"3.332205","3":"0.51724138"},{"1":"cold","2":"3.583519","3":"0.23529412"},{"1":"comfortable","2":"4.304065","3":"0.50000000"},{"1":"cool","2":"5.837730","3":"0.35714286"},{"1":"cute","2":"2.833213","3":"0.13513514"},{"1":"damp","2":"4.969813","3":"0.11111111"},{"1":"dark","2":"5.298317","3":"0.22727273"},{"1":"decent","2":"6.066108","3":"0.50000000"},{"1":"dry","2":"2.890372","3":"0.13725490"},{"1":"elegant","2":"3.218876","3":"0.55263158"},{"1":"emotional","2":"3.218876","3":"0.05882353"},{"1":"enjoyable","2":"3.555348","3":"0.13513514"},{"1":"evil","2":"2.397895","3":"0.25000000"},{"1":"fat","2":"2.079442","3":"0.10714286"},{"1":"funny","2":"1.609438","3":"0.22916667"},{"1":"grey","2":"5.762051","3":"0.93478261"},{"1":"happy","2":"2.995732","3":"0.24324324"},{"1":"honest","2":"2.197225","3":"0.19148936"},{"1":"hot","2":"3.401197","3":"0.55319149"},{"1":"mysterious","2":"3.258097","3":"0.51111111"},{"1":"nice","2":"5.187386","3":"0.20512821"},{"1":"odd","2":"3.713572","3":"0.20000000"},{"1":"okay","2":"5.662960","3":"0.71794872"},{"1":"painful","2":"4.290459","3":"0.76744186"},{"1":"pale","2":"4.406719","3":"0.48648649"},{"1":"polite","2":"1.791759","3":"0.16666667"},{"1":"pretty","2":"3.367296","3":"0.09756098"},{"1":"quiet","2":"3.637586","3":"0.37837838"},{"1":"red","2":"2.197225","3":"0.23255814"},{"1":"rough","2":"3.218876","3":"0.50000000"},{"1":"sad","2":"3.951244","3":"0.26190476"},{"1":"smart","2":"2.708050","3":"0.06896552"},{"1":"soft","2":"4.663439","3":"0.31250000"},{"1":"thick","2":"2.397895","3":"0.43137255"},{"1":"thin","2":"4.532599","3":"0.90243902"},{"1":"tiny","2":"4.343805","3":"0.55882353"},{"1":"tough","2":"4.653960","3":"0.87096774"},{"1":"uncomfortable","2":"5.087596","3":"0.25000000"},{"1":"warm","2":"6.935370","3":"0.38095238"},{"1":"weird","2":"3.583519","3":"0.13043478"},{"1":"wet","2":"2.995732","3":"0.32500000"},{"1":"wonderful","2":"3.465736","3":"0.13513514"},{"1":"wrong","2":"3.828641","3":"0.32758621"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-</div>
-<p>We can now plot <code>si_summary</code>. To include the adjective in the plot, we need to specify the <code>label</code> aesthetic in <code>geom_text()</code>. Note that the main x and y aesthetics must be <code>logfreq</code> and <code>prop_si</code>. We also set the <em>y</em>-axis range to be between 0 and 1 for clarity.</p>
-<div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>si_summary <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> logfreq, <span class="at">y =</span> prop_si)) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> weak_adj)) <span class="sc">+</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Frequency of co-occurrence (logged)"</span>,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion of scalar inferences"</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div id="fig-si-freq-scatter" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-si-freq-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-regression-num-num_files/figure-html/fig-si-freq-scatter-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-si-freq-scatter-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;37.5: Scatterplot of mean scalar inference proportion by adjective.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p><a href="#fig-si-freq-scatter" class="quarto-xref">Figure&nbsp;<span>37.5</span></a> shows logged frequency of co-occurrence on the <em>x</em>-axis and proportion of scalar inferences on the <em>y</em>-axis. Each word is plotted on the graph based on their frequency and the mean proportion of scalar inferences. In line with <span class="quarto-unresolved-ref">?fig-si-fred</span>, adjectives with higher frequency elicit higher proportions of scalar inferences.</p>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Exercise 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Write the code for the following plot.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ch-regression-num-num_files/figure-html/si-semd-ex-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+<p><img src="ch-regression-num-num_files/figure-html/logfreq-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>When we’re interpreting the model estimates below, we’ll be talking about the effect on scalar inferencing of <strong>one unit change on the log frequency scale.</strong> One unit change corresponds to moving from 0 to 1, from 1 to 2, 3 to 4, and so on…</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Extra: Unit changes and non-linear transformations
 </div>
-<p>Since our research question is about the interaction between frequency and semantic distance, it is a good idea to plot these together with proportion of scalar inference in a single plot. We need to calculate the mean proportion of scalar inference for each adjective as we have done for <a href="#fig-si-freq-scatter" class="quarto-xref">Figure&nbsp;<span>37.5</span></a>. We will do this in a pipe chain in the figure code below rather than in separate steps, just for illustration purposes. The <code>pch</code> argument selects the point symbol (or character) by its number (you can search for the list of available symbols online). <code>scale_fill_distiller()</code> allows us to select a palette for filling the points with colour depending on the value of <code>prop_si</code>. The distiller palettes are continuous versions of the <em>colorBrewer</em> palettes (see the <a href="https://colorbrewer2.org/#type=sequential&amp;scheme=RdPu&amp;n=3">colorBrewer</a> website). We select the red-purple palette (<code>palette = "RdPu"</code>) and we set the direction to 1 so that darker colours correspond to higher values.</p>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>When working with logged-transformed variables, you should keep in mind that a unit change on the logged scale does not corresponds to a unit change on the original scale.</p>
+<p>Because the log transformation is <strong>non-linear</strong>, a unit change on the log frequency scale (e.g., going from 0 to 1, or going from 2 to 3) corresponds to different changes on the frequency scale, <strong>depending on which unit change on the log scale we evaluate.</strong></p>
+<p>To illustrate this:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>si <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(weak_adj, logfreq, semdist) <span class="sc">|&gt;</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_si =</span> <span class="fu">mean</span>(<span class="fu">as.numeric</span>(SI) <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(logfreq, semdist, <span class="at">fill =</span> prop_si)) <span class="sc">+</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">pch =</span> <span class="dv">21</span>) <span class="sc">+</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"RdPu"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Frequency of co-occurrence (logged)"</span>,</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Semantid distance"</span>,</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Proportion of</span><span class="sc">\n</span><span class="st">scalar inference"</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-si-freq-semd" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-si-freq-semd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-regression-num-num_files/figure-html/fig-si-freq-semd-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-si-freq-semd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;37.6: Mean semantic distance as a function of adjective log-frequency. Each point represents a weak adjective. Point colour indicates the proportion of scalar inferences, with darker colours corresponding to higher proportions scalar responses.
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ch-regression-num-num_files/figure-html/log-nonlinear-plot-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>The orange bars show that a unit change between 1 and 2 on the log scale corresponds to a change of 4.7 on the frequency scale, while the grey bars show that a unit change between 2 and 3 on the log scale corresponds to a change of 12.7 on the frequency scale.</p>
+<p>We won’t be back-transforming log frequencies into plain old frequencies in this tutorial, but if you ever do, bear this in mind.</p>
+<p>A good rule of thumb is to compute and report the change in the original scale that is associated with <strong>a unit change from the mean on the transformed scale to one unit above or below the mean.</strong></p>
+</div>
+</div>
+</div>
+<p>We’re nearly done with <code>logfreq</code>—all that’s left is to centre it. To centre a variable, we compute its mean and subtract that from every observation of the variable. The goal is to get a new version of variable that has a mean of zero.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>si <span class="ot">&lt;-</span> si <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">logfreq_c =</span> logfreq <span class="sc">-</span> <span class="fu">mean</span>(logfreq)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Don’t take our word! If you take the mean of the centred variable, it will be 0.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(si<span class="sc">$</span>logfreq_c))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p>The <code>round()</code> function is included because, for technical computational reasons, the mean actually comes out as an <em>incredibly</em> small number near 0, rather than 0 precisely. But in practice we can consider this incredibly small number near 0 to be 0. If you want to know why it is not precisely 0, see <a href="https://docs.python.org/3/tutorial/floatingpoint.html">Floating Point Arithmetic</a>.</p>
+<p><code>logfreq_c</code> is now ready to be used in our analyses. Next, you’ll take care of semantic distance on your own, and then we’ll move on to the modelling.</p>
 </section>
-<section id="fitting-the-model" class="level2" data-number="37.4">
-<h2 data-number="37.4" class="anchored" data-anchor-id="fitting-the-model"><span class="header-section-number">37.4</span> Fitting the model</h2>
+<section id="centring-semdist" class="level4" data-number="37.1.0.3">
+<h4 data-number="37.1.0.3" class="anchored" data-anchor-id="centring-semdist"><span class="header-section-number">37.1.0.3</span> Centring <code>semdist</code></h4>
+<p>Use <code>mutate()</code> to create a new, centred variable based on <code>semdist</code> that is called <code>semdist_c</code>. Verify that the mean of <code>semdist_c</code> is 0, and display <code>semdist_c</code> using a density plot with a rug, as above.</p>
+</section>
+</section>
+<section id="visualise-the-data" class="level2" data-number="37.2">
+<h2 data-number="37.2" class="anchored" data-anchor-id="visualise-the-data"><span class="header-section-number">37.2</span> Visualise the data</h2>
+<p>Check <a href="plot-advanced.qmd#pankratz-2021">Advanced plotting</a> for a tutorial on how to plot the data.</p>
+</section>
+<section id="fitting-the-model" class="level2" data-number="37.3">
+<h2 data-number="37.3" class="anchored" data-anchor-id="fitting-the-model"><span class="header-section-number">37.3</span> Fitting the model</h2>
 <p>Here’s the mathematical specification of the model we’ll fit:</p>
 <p><span class="math display">\[\begin{aligned}
 \text{SI} &amp; \sim Bernoulli(p) \\
@@ -1108,42 +912,152 @@ logit(p) &amp; = \beta_0 + (\beta_1 \cdot logfreq\_c) + (\beta_2 \cdot semdist\_
 \end{aligned}\]</span></p>
 <p>Write <code>brm()</code> code for this model, and name the variable you assign the model output to as <code>si_bm</code>.</p>
 <ul>
-<li>The model formula should specify that we are predicting <code>SI</code> as a function of <code>logfreq</code>, <code>semdist</code>, and their interaction.</li>
+<li>The model formula should specify that we are predicting <code>SI</code> as a function of <code>logfreq_c</code>, <code>semdist_c</code>, and their interaction.</li>
 <li>Use the appropriate model family.</li>
 <li>The data comes from <code>si</code>.</li>
 <li>Specify a seed for reproducibility.</li>
 <li>Specify a file path to save the model fit to a file.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
 </ul>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>si_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  ...</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>si_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stderr">
+<pre><code>Compiling Stan program...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Start sampling</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 1).
+Chain 1: 
+Chain 1: Gradient evaluation took 4.2e-05 seconds
+Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.42 seconds.
+Chain 1: Adjust your expectations accordingly!
+Chain 1: 
+Chain 1: 
+Chain 1: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 1: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 1: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 1: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 1: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 1: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 1: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 1: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 1: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 1: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 1: 
+Chain 1:  Elapsed Time: 0.154 seconds (Warm-up)
+Chain 1:                0.142 seconds (Sampling)
+Chain 1:                0.296 seconds (Total)
+Chain 1: 
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 2).
+Chain 2: 
+Chain 2: Gradient evaluation took 2.4e-05 seconds
+Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.24 seconds.
+Chain 2: Adjust your expectations accordingly!
+Chain 2: 
+Chain 2: 
+Chain 2: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 2: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 2: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 2: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 2: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 2: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 2: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 2: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 2: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 2: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 2: 
+Chain 2:  Elapsed Time: 0.15 seconds (Warm-up)
+Chain 2:                0.134 seconds (Sampling)
+Chain 2:                0.284 seconds (Total)
+Chain 2: 
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 3).
+Chain 3: 
+Chain 3: Gradient evaluation took 2.3e-05 seconds
+Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.23 seconds.
+Chain 3: Adjust your expectations accordingly!
+Chain 3: 
+Chain 3: 
+Chain 3: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 3: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 3: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 3: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 3: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 3: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 3: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 3: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 3: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 3: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 3: 
+Chain 3:  Elapsed Time: 0.155 seconds (Warm-up)
+Chain 3:                0.155 seconds (Sampling)
+Chain 3:                0.31 seconds (Total)
+Chain 3: 
+
+SAMPLING FOR MODEL 'anon_model' NOW (CHAIN 4).
+Chain 4: 
+Chain 4: Gradient evaluation took 2.3e-05 seconds
+Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.23 seconds.
+Chain 4: Adjust your expectations accordingly!
+Chain 4: 
+Chain 4: 
+Chain 4: Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 4: Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 4: Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 4: Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 4: Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 4: Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 4: Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 4: Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 4: Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 4: Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
+Chain 4: 
+Chain 4:  Elapsed Time: 0.157 seconds (Warm-up)
+Chain 4:                0.135 seconds (Sampling)
+Chain 4:                0.292 seconds (Total)
+Chain 4: </code></pre>
+</div>
 </div>
 <p>Your model summary should look similar to this one.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(si_bm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(si_bm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: bernoulli 
   Links: mu = logit 
-Formula: SI ~ logfreq + semdist + logfreq:semdist 
+Formula: SI ~ logfreq_c + semdist_c + logfreq_c:semdist_c 
    Data: si (Number of observations: 2006) 
   Draws: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;
          total post-warmup draws = 4000
 
 Regression Coefficients:
-                Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-Intercept          -2.66      0.21    -3.06    -2.24 1.00     1908     2060
-logfreq             0.52      0.05     0.42     0.63 1.00     1949     2033
-semdist            -0.10      0.05    -0.21    -0.00 1.00     1437     1667
-logfreq:semdist     0.05      0.01     0.03     0.08 1.00     1428     1644
+                    Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
+Intercept              -0.70      0.05    -0.80    -0.60 1.00     3766     2804
+logfreq_c               0.53      0.05     0.43     0.62 1.00     3289     2973
+semdist_c               0.08      0.01     0.06     0.11 1.00     3785     3235
+logfreq_c:semdist_c     0.05      0.01     0.03     0.08 1.00     3592     2768
 
 Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
-<section id="interpreting-the-estimates" class="level3" data-number="37.4.1">
-<h3 data-number="37.4.1" class="anchored" data-anchor-id="interpreting-the-estimates"><span class="header-section-number">37.4.1</span> Interpreting the estimates</h3>
+<section id="interpreting-the-estimates" class="level3" data-number="37.3.1">
+<h3 data-number="37.3.1" class="anchored" data-anchor-id="interpreting-the-estimates"><span class="header-section-number">37.3.1</span> Interpreting the estimates</h3>
 <p>Before we move to interpreting the estimate of this model, let’s just clarify something about numeric predictors and centred numeric predictors.</p>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
@@ -1156,8 +1070,8 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
 </div>
-<p>The numeric predictor gets one coefficient estimate: this is the <strong>change in the outcome value when the numeric predictor goes from 0 to 1</strong> (referred to as a <strong>unit increase</strong>).</p>
-<p>Note that the same estimate applies when going from 1 to 2, 2 to 3, 4.5 to 5.5 and so on. In other words, the change in the outcome value applies across any unit increase of the numeric predictor.</p>
+<p>The numeric predictor gets one coefficient estimate: this is the <strong>change in the outcome value when the numeric predictor goes from 0 to 1</strong> (referred to as a <strong>unit change</strong>).</p>
+<p>Note that the same estimate applies when going from 1 to 2, 2 to 3, 4.5 to 5.5 and so on. In other words, the change in the outcome value applies across any unit change of the numeric predictor.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1168,7 +1082,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The estimated coefficient of a numeric predictor corresponds to the <strong>change in the outcome value for each unit increase</strong> in the predictor.</p>
+<p>The estimated coefficient of a numeric predictor corresponds to the <strong>change in the outcome value for each unit change</strong> in the predictor.</p>
 </div>
 </div>
 <p>Now, when a continuous predictor is centred, <code>0</code> corresponds to whatever value is the mean of the non-centred predictor (<code>1</code> in the centred predictor corresponds to the non-centred predictor mean + 1 unit, <code>-3</code> corresponds to the mean - 3 units, whatever the units of the non-centred predictor are, and so on).</p>
@@ -1184,32 +1098,49 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>Now, let’s interpret the model estimates.</p>
 <ul>
-<li><code>Intercept</code>, <span class="math inline">\(\beta_0\)</span>: When <strong>log frequency and centred semantic distance are 0</strong>, there is a 95% probability that the log-odds of a scalar inference being made lie between –0.80 and –0.59.</li>
-<li><code>logfreq</code>, <span class="math inline">\(\beta_1\)</span>: When <strong>semantic distance is 0</strong>, for a <strong>unit increase in log frequency</strong>, the change in log-odds of making a scalar inference is between 0.42 and 0.63 at 95% probability.</li>
-<li><code>semdist</code>, <span class="math inline">\(\beta_2\)</span>: When <strong>log frequency is 0</strong>, for a <strong>unit increase in semantic distance</strong>, the change in the log-odds of making a scalar inference is between 0.06 and 0.11, at 95% confidence.</li>
+<li><code>Intercept</code>, <span class="math inline">\(\beta_0\)</span>: When <strong>centred log frequency and centred semantic distance are 0</strong>, there is a 95% probability that the log-odds of a scalar inference being made lie between –0.80 and –0.59.</li>
+<li><code>logfreq_c</code>, <span class="math inline">\(\beta_1\)</span>: When <strong>centred</strong> <strong>semantic distance is 0</strong>, for a <strong>unit change in (centred) log frequency</strong>, the change in log-odds of making a scalar inference is between 0.42 and 0.63 at 95% probability.</li>
+<li><code>semdist_c</code>, <span class="math inline">\(\beta_2\)</span>: When <strong>centred</strong> <strong>log frequency is 0</strong>, for a <strong>unit change in (centred) semantic distance</strong>, the change in the log-odds of making a scalar inference is between 0.06 and 0.11, at 95% confidence.</li>
 </ul>
-<p>As for <code>logfreq:semdist</code>, <span class="math inline">\(\beta_3\)</span>: As usual, this coefficient has <strong>two interpretations.</strong></p>
+<p>Since semantic distance and log frequency are <strong>centred</strong>, 0 on the centred predictors corresponds to the mean of the non-centred versions of the predictors. So we can also say:</p>
+<ul>
+<li><code>Intercept</code>, <span class="math inline">\(\beta_0\)</span>: When <strong>log frequency and semantic distance are at their mean</strong>, there is a 95% probability that the log-odds of a scalar inference being made lie between –0.80 and –0.59.</li>
+<li><code>logfreq_c</code>, <span class="math inline">\(\beta_1\)</span>: When <strong>semantic distance is at its mean</strong>, for a <strong>unit change in log frequency</strong>, the change in log-odds of making a scalar inference is between 0.42 and 0.63 at 95% probability.</li>
+<li><code>semdist_c</code>, <span class="math inline">\(\beta_2\)</span>: When <strong>log frequency is at its mean</strong>, for a <strong>unit change in semantic distance</strong>, the change in the log-odds of making a scalar inference is between 0.06 and 0.11, at 95% confidence.</li>
+</ul>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Note how now we say “log frequency” and “semantic distance”, instead of “centred log frequency” and “centred semantic distance”</p>
+</div>
+</div>
+</div>
+<p>It is customary, when reporting results with centred predictors, to use the “non-centred” version of the report (so you would write e.g.&nbsp;“when log frequency is at its mean” rather than “when centred log frequency is at 0”).</p>
+<p>As for <code>logfreq_c:semdist_c</code>, <span class="math inline">\(\beta_3\)</span>: As usual, this coefficient has <strong>two interpretations.</strong></p>
 <p>Interpreting the interaction between two numeric predictors:</p>
-<p><strong>(1) A unit increase in log frequency is associated with a positive adjustment to the effect of (centred) semantic distance</strong> between 0.03 and 0.08 log-odds, at 95% probability.</p>
+<p><strong>(1) A unit change in (centred) log frequency is associated with a positive adjustment to the effect of (centred) semantic distance</strong> between 0.03 and 0.08 log-odds, at 95% probability.</p>
 <ul>
 <li>In other words: As centred log frequency increases, the effect of semantic distance on the probability of a scalar inference being made increases as well.</li>
 </ul>
-<p><strong>(2) A unit increase in semantic distance is associated with a positive adjustment to the effect of log frequency</strong> between 0.03 and 0.08 log-odds at 95% confidence.</p>
+<p><strong>(2) A unit change in (centred) semantic distance is associated with a positive adjustment to the effect of (centred) log frequency</strong> between 0.03 and 0.08 log-odds at 95% confidence.</p>
 <ul>
 <li>In other words: As semantic distance increases, the effect of log frequency on the probability of a scalar inference being made increases as well.</li>
 </ul>
 <p>The next section will walk you through how you can calculate conditional posterior probabilities when the model contains continuous predictors.</p>
 </section>
-<section id="conditional-posterior-probabilities" class="level3" data-number="37.4.2">
-<h3 data-number="37.4.2" class="anchored" data-anchor-id="conditional-posterior-probabilities"><span class="header-section-number">37.4.2</span> Conditional posterior probabilities</h3>
+<section id="conditional-posterior-probabilities" class="level3" data-number="37.3.2">
+<h3 data-number="37.3.2" class="anchored" data-anchor-id="conditional-posterior-probabilities"><span class="header-section-number">37.3.2</span> Conditional posterior probabilities</h3>
 <p>In previous weeks, to compute conditional posterior probabilities for categorical predictors, we would take the model equation, substitute the <span class="math inline">\(\beta\)</span> coefficients with the estimates of the model and then calculate the posterior probabilities by substituting the predictor variables with 0 or 1s depending on the level we wanted to predict for.</p>
 <p>Back then, it was easy to know which values to set the predictors equal to. But what do we do now that we have a numeric predictor that can, in principle, take on any value?</p>
 <p>Rather than looking at the full range of values that the numeric predictor can take on, <strong>in practice we still choose just a few representative values to set the predictor to.</strong></p>
 <p>A common practice is to use the mean of the predictor and then the value that corresponds to 1 standard deviation above the mean and 1 standard deviation below the mean.</p>
 <p>If you wish you can try and work out how to do the calculations yourself using the draws, but luckily there is a function from the brms package that simplifies things.</p>
-<p>The function is <code>conditional_effects()</code> (aptly named!). It takes the model as the first argument and then a string specifying the effects to plot, here <code>"logfreq:semdist"</code> for “<code>logfreq</code>, <code>semdist</code> and their interaction”.</p>
+<p>The function is <code>conditional_effects()</code> (aptly named!). It takes the model as the first argument and then a string specifying the effects to plot, here <code>"logfreq_c:semdist_c"</code> for “<code>logfreq_c</code>, <code>semdist_c</code> and their interaction”.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(si_bm, <span class="at">effects =</span> <span class="st">"logfreq:semdist"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(si_bm, <span class="at">effects =</span> <span class="st">"logfreq_c:semdist_c"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1218,11 +1149,11 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
 </div>
-<p>You will see that the plot has picked representative values for <code>semdist</code> (by default these are the mean, and mean <span class="math inline">\(\pm\)</span> 1 standard deviation. You can calculate the mean and SD of <code>semdist</code> yourself to compare). Since we have listed <code>logfreq</code> first, the plot shows the entire range of values in <code>logfreq</code>.</p>
+<p>You will see that the plot has picked representative values for <code>semdist_c</code> (by default these are the mean, and mean <span class="math inline">\(\pm\)</span> 1 standard deviation. You can calculate the mean and SD of <code>semdist_c</code> yourself to compare). Since we have listed <code>logfreq_c</code> first, the plot shows the entire range of values in <code>logfreq_c</code>.</p>
 <p><strong>The effect of log frequency gets stronger with increasing semantic distance.</strong></p>
 <p>We can invert the predictors to see the effect of semantic distance at representative values of log frequency.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(si_bm, <span class="at">effects =</span> <span class="st">"semdist:logfreq"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(si_bm, <span class="at">effects =</span> <span class="st">"semdist_c:logfreq_c"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -1233,7 +1164,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>Here we see that, equivalently, the effect of semantic distance increases with increasing log frequency.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1242,7 +1173,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Prior to this week, we’ve been calculating and plotting posterior probabilities ourselves using the draws obtained with <code>as_draws_df()</code>.</p>
 <p>The <code>conditional_effects()</code> function is a great way of quickly plotting conditional posterior probabilities. If you feel like, go back to the models from previous weeks and try the function with those!</p>
@@ -1253,8 +1184,8 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </section>
 </section>
-<section id="reporting" class="level2" data-number="37.5">
-<h2 data-number="37.5" class="anchored" data-anchor-id="reporting"><span class="header-section-number">37.5</span> Reporting</h2>
+<section id="reporting" class="level2" data-number="37.4">
+<h2 data-number="37.4" class="anchored" data-anchor-id="reporting"><span class="header-section-number">37.4</span> Reporting</h2>
 <p>Now, let’s write a full report of model and results. Fill in the blanks yourself.</p>
 <blockquote class="blockquote">
 <p>We fitted a Bayesian model to scalar inference (absent vs present), using a Bernoulli distribution. We included logged word frequency and semantic distance, and their interaction as predictors. Both predictors were centred.</p>
@@ -1276,11 +1207,6 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
-<div id="ref-pankratz2021" class="csl-entry" role="listitem">
-Pankratz, Elizabeth, and Bob Van Tiel. 2021. <span>“The Role of Relevance for Scalar Diversity: A Usage-Based Approach.”</span> <em>Language and Cognition</em> 13 (4): 562–94. <a href="https://doi.org/10.1017/langcog.2021.13">https://doi.org/10.1017/langcog.2021.13</a>.
-</div>
-</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>

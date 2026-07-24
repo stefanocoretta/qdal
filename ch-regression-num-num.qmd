@@ -210,7 +210,7 @@ We can achieve this by temporarily converting `SI` to a *numeric* variable and s
 
 ```{r}
 #| label: fig-si-freq
-#| fig-cap: "Regression line of log-frequency of co-occurrence on the proportion of scalar inferences."
+#| fig-cap: "Regression line of log-frequency of co-occurrence on the proportion of scalar inference."
 #| message: false
 #| warning: false
 
@@ -219,12 +219,12 @@ si |>
   ggplot(aes(logfreq, SI)) +
   geom_point() +
   geom_smooth(method = "glm", method.args = list(family = "binomial")) +
-  labs(x = "Frequency of co-occurrence (logged)", y = "Proportion of scalar inferences")
+  labs(x = "Frequency of co-occurrence (logged)", y = "Proportion of scalar inference")
 ```
 
 The function `as.numeric()` works with factors by converting each level into a number: try `as.numeric(si$SI)` to see what it does.
 Then, we subtract `1` so that `1` becomes `0` and `2` becomes `1`.
-The binomial family in `geom_smooth()` adds a regression line which represents the effect of logged frequency on the proportion of scalar inferences (on the *y*-axis, where 0 means no scalar inference and 1 means the participant did a scalar inference).
+The binomial family in `geom_smooth()` adds a regression line which represents the effect of logged frequency on the proportion of scalar inference (on the *y*-axis, where 0 means no scalar inference and 1 means the participant did a scalar inference).
 We have also included points corresponding to the actual observed `SI`: of course, these can only be 0 or 1.
 @fig-si-freq suggests that there is a somewhat positive relationship between log-frequency and probability of the participant making a scalar implication.
 In other words, the higher the log frequency, the higher the probability of a scalar inference.
@@ -261,13 +261,13 @@ si_summary |>
   geom_text(aes(label = weak_adj)) +
   labs(
     x = "Frequency of co-occurrence (logged)",
-    y = "Proportion of scalar inferences"
+    y = "proportion of scalar inference"
   ) +
   ylim(0, 1)
 ```
 
-@fig-si-freq-scatter shows logged frequency of co-occurrence on the *x*-axis and proportion of scalar inferences on the *y*-axis.
-Each word is plotted on the graph based on their frequency and the mean proportion of scalar inferences.
+@fig-si-freq-scatter shows logged frequency of co-occurrence on the *x*-axis and proportion of scalar inference on the *y*-axis.
+Each word is plotted on the graph based on their frequency and the mean proportion of scalar inference.
 In line with @fig-si-fred, adjectives with higher frequency elicit higher proportions of scalar inferences.
 
 ::: callout-warning
@@ -286,7 +286,7 @@ si |>
   ggplot(aes(semdist, SI)) +
   geom_point(colour = "indianred4") +
   geom_smooth(method = "glm", method.args = list(family = "binomial"), colour = "indianred4") +
-  labs(x = "Semantic distance", y = "Proportion of scalar inferences")
+  labs(x = "Semantic distance", y = "proportion of scalar inference")
 ```
 :::
 
@@ -299,7 +299,7 @@ We select the red-purple palette (`palette = "RdPu"`) and we set the direction t
 
 ```{r}
 #| label: fig-si-freq-semd
-#| fig-cap: "Mean semantic distance as a function of adjective log-frequency. Each point represents a weak adjective. Point colour indicates the proportion of scalar inferences, with darker colours corresponding to higher proportions scalar responses."
+#| fig-cap: "Mean semantic distance as a function of adjective log-frequency. Each point represents a weak adjective. Point colour indicates the proportion of scalar inference, with darker colours corresponding to higher proportions scalar responses."
 #| message: false
 
 si |>
@@ -317,24 +317,27 @@ si |>
   )
 ```
 
-## Fitting the model
+@fig-si-freq-semd suggests that higher frequency and higher semantic distance correspond to a higher proportion of scalar inference: the dots in top right corner are darker that the dots in the bottom left corner.
 
+## Modelling the data
+
+We can now model the data to assess the hypotheses and question.
+We want to model the probabiilty of scalar inference as a function of logged frequency ($f$) and semantic distance ($sd$).
 Here's the mathematical specification of the model we'll fit:
 
 $$\begin{aligned}
 \text{SI} & \sim Bernoulli(p) \\
-logit(p) & = \beta_0 + (\beta_1 \cdot logfreq\_c) + (\beta_2 \cdot semdist\_c) + (\beta_3 \cdot logfreq\_c \cdot semdist\_c)\\
+logit(p) & = \beta_0 \\
+& + \beta_1 \cdot f \\
+& + \beta_2 \cdot sd \\
+& + \beta_3 \cdot f \cdot sd\\
 \end{aligned}$$
 
-Write `brm()` code for this model, and name the variable you assign the model output to as `si_bm`.
+::: callout-warning
+### Exercise 1
 
-- The model formula should specify that we are predicting `SI` as a function of `logfreq`, `semdist`, and their interaction.
-- Use the appropriate model family.
-- The data comes from `si`.
-- Specify a seed for reproducibility.
-- Specify a file path to save the model fit to a file.[^ch-regression-num-num-1]
-
-[^ch-regression-num-num-1]: **The first time you run a model with this argument, that's the version of the model that will be saved and loaded every time after.** Beware of this if you use the same `file` argument to run a model that's different from the final one you'll want to run!
+Write `brm()` code for this model (assign the output to `si_bm`).
+Remember to set the seed and specify the file path to save the model fit to a file.
 
 ```{r}
 #| label: si-freq-semdist-bm-ex
@@ -347,68 +350,99 @@ si_bm <- brm(
 ```{r}
 #| label: si-freq-semdist-bm
 #| echo: false
+
 si_bm <- brm(
   SI ~ logfreq + semdist + logfreq:semdist,
   family = bernoulli(),
   data = si,
+  seed = 5243,
   file = 'cache/ch-regression-num-num_si_bm'
-)
+)xw
 ```
+:::
 
-Your model summary should look similar to this one.
+Your model summary should look similar to this one (small deviations are normal).
 
 ```{r}
 #| label: si-freq-semdist-summ
 summary(si_bm)
 ```
 
-### Interpreting the estimates
-
-Before we move to interpreting the estimate of this model, let's just clarify something about numeric predictors and centred numeric predictors.
-
-::: {.callout-note appearance="minimal"}
-When a predictor is categorical and any contrast coding is used, the intercept of the model indicates the mean outcome value at the reference level of that predictor, and the other coefficients estimate the difference in mean outcome value between the other levels of the predictor and the value at the reference.
-If using indexing, rather than contrast coding, as we are in this course, then you get a coefficient for each level of the categorical predictor which is the estimate of the mean for that level.
-
-With **numeric predictors**, the **intercept indicates the mean outcome value when the numeric predictor is at 0**.
-:::
-
-The numeric predictor gets one coefficient estimate: this is the **change in the outcome value when the numeric predictor goes from 0 to 1** (referred to as a **unit increase**).
-
-Note that the same estimate applies when going from 1 to 2, 2 to 3, 4.5 to 5.5 and so on.
-In other words, the change in the outcome value applies across any unit increase of the numeric predictor.
-
-::: callout-tip
-#### Numeric predictors
-
-The estimated coefficient of a numeric predictor corresponds to the **change in the outcome value for each unit increase** in the predictor.
-:::
-
-Now, when a continuous predictor is centred, `0` corresponds to whatever value is the mean of the non-centred predictor (`1` in the centred predictor corresponds to the non-centred predictor mean + 1 unit, `-3` corresponds to the mean - 3 units, whatever the units of the non-centred predictor are, and so on).
-
-::: {.callout-tip appearance="minimal"}
-This means that the **intercept of a model with centred numeric predictors corresponds to the outcome value when the numeric predictors are at their mean**.
-:::
-
 Now, let's interpret the model estimates.
 
-- `Intercept`, $\beta_0$: When **log frequency and centred semantic distance are 0**, there is a 95% probability that the log-odds of a scalar inference being made lie between --0.80 and --0.59.
-- `logfreq`, $\beta_1$: When **semantic distance is 0**, for a **unit increase in log frequency**, the change in log-odds of making a scalar inference is between 0.42 and 0.63 at 95% probability.
-- `semdist`, $\beta_2$: When **log frequency is 0**, for a **unit increase in semantic distance**, the change in the log-odds of making a scalar inference is between 0.06 and 0.11, at 95% confidence.
+- `Intercept`, $\beta_0$: When **log frequency and semantic distance are 0**, there is a 95% probability that the log-odds of a scalar inference being made lie between -3.06 and -2.24.
+- `logfreq`, $\beta_1$: When **semantic distance is 0**, each **unit increase in log frequency**, corresponds to an *increase* in log-odds (of making a scalar inference) of 0.42 and 0.63 at 95% probability.
+- `semdist`, $\beta_2$: When **log frequency is 0**, each **unit increase in semantic distance**, corresponds to a *decrease* in log-odds of 0 to 0.21, at 95% confidence.
 
-As for `logfreq:semdist`, $\beta_3$: As usual, this coefficient has **two interpretations.**
+You might be inclined to believe that semantic distance has a negative effect on probability of semantic inference, which is at odds with the plot above that showed a positive effect of semantic distance.
+However, the estimate in the model is giving us the effect of semantic distance *when logged frequency is 0.* Crucially, the interaction coefficient is positive.
 
-Interpreting the interaction between two numeric predictors:
+- `logfreq:semdist`, $\beta3$: a unit increase in log frequency is associated with a positive adjustment to the effect of (centred) semantic distance between 0.03 and 0.08 log-odds, at 95% probability.
 
-**(1) A unit increase in log frequency is associated with a positive adjustment to the effect of (centred) semantic distance** between 0.03 and 0.08 log-odds, at 95% probability.
+In other words, as centred log frequency increases, the effect of semantic distance on the probability of a scalar inference being made increases as well (and conversely, as semantic distance increases, the effect of log frequency on the probability of a scalar inference being made increases, given the fact that interactions are symmetric).
+What this means is that at a certain value of logged frequency, the negative effect of semantic distance becomes positive.
+We can find the value of logged frequency at which the effect of semantic distance goes to 0 (meaning no effect): above that value of logged frequency, the effect of semantic distance will be positive.
 
-- In other words: As centred log frequency increases, the effect of semantic distance on the probability of a scalar inference being made increases as well.
+To find the logged frequency value at which the effect of semantic distance is 0, we need the formula of the conditional effect of semantic distance.
+Why is it conditional?
+Because it is conditional of the value of logged frequency, given we have included an interaction in the model.
+The conditional formula is the following:
 
-**(2) A unit increase in semantic distance is associated with a positive adjustment to the effect of log frequency** between 0.03 and 0.08 log-odds at 95% confidence.
+$$\beta_2 + \beta_3 \cdot f$$
 
-- In other words: As semantic distance increases, the effect of log frequency on the probability of a scalar inference being made increases as well.
+When $f = 0$, the effect is $\beta_2$: that is why we say above that `semdist` is the effect of semantic distance when logged frequency is 0.
+To find the value of logged frequency where the effect of semantic distance is zero we just set the conditional effect to 0 and solve it for $f$.
 
-The next section will walk you through how you can calculate conditional posterior probabilities when the model contains continuous predictors.
+$$\begin{aligned}
+\beta_2 + \beta_3 \cdot f & = 0\\
+f & = -\frac{\beta_2}{\beta_3}
+\end{aligned}$$
+
+Let's take the means of the posterior distributions of $\beta_2$ and $\beta_3$ (the `Estimate` column in the model summary) for simplicity, although we could do it with the entire posterior draws (and we would obtain posterior draws of $f$ rather than a single value).
+
+$$\begin{aligned}
+f & = -\frac{\beta_2}{\beta_3} = \frac{-0.1}{0.05} = 2
+\end{aligned}$$
+
+So when logged frequency is 2, the mean effect of semantic distance is 0.
+For values of logged frequency below 2, the mean effect of semantic distance is negative; for values of logged frequency above 2, the mean effect of semantic distance is positive.
+In the data, the range of logged frequency is between 1.6 and 6.9, so most of the data has logged frequency 2.
+Thus, for most of the data the effect of semantic distance will be positive.
+We can plot the expected values with `conditional_effects()` to verify this.
+
+By default, `conditional_effects()` plots the effect of the specified predictor when the other numeric predictors are at their *mean* (in our data, the mean is 3.7), not at 0.
+@fig-si-bm-cond shows the resulting plot.
+In this figure, the effect of semantic distance is clearly positive: the greater the semantic distance the higher the probability of scalar inference.
+
+```{r}
+#| label: fig-si-bm-cond
+#| fig-cap: ""
+
+conditional_effects(si_bm, "semdist")
+
+```
+
+We can tell `conditional_effects()` to show the effect conditional on logged frequency being 2, rather than its mean.
+We can achieve this by specifying the `conditions` argument using a list, like in the following code.
+
+```{r}
+#| label: fig-si-bm-cond-2
+#| fig-cap: ""
+
+conditional_effects(si_bm, "semdist", conditions = list(logfreq = 2))
+```
+
+At logged frequency 2, there is no clear effect of semantic distance.
+Let's try now with logged frequency 0.
+Here, the effect of semantic distance should be negative, because that is what the coefficient tells us.
+This is indeed what we see in @fig-si-bm-cond-0.
+
+```{r}
+#| label: fig-si-bm-cond-0
+#| fig-cap: ""
+
+conditional_effects(si_bm, "semdist", conditions = list(logfreq = 0))
+```
 
 ### Conditional posterior probabilities
 
