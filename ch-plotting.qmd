@@ -402,7 +402,7 @@ polite |>
 ```
 
 ::: {.callout-important collapse="true"}
-#### R Note: The default colour palette
+#### Going further: The default colour palette
 
 If you want to know more about the default colour palette, check this [blog post](https://www.statology.org/ggplot-default-colors/) out.
 :::

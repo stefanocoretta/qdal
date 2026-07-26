@@ -250,7 +250,7 @@ The combination of coefficient and basis/predictor is known as a **predictor ter
 :::
 
 ::: {.callout-important collapse="true"}
-### R Note: The rethinking package
+### Going further: The rethinking package
 
 McElreath's textbook *Statistical Rethinking* [@mcelreath2020] comes with an R package, [rethinking](https://github.com/rmcelreath/rethinking), that lets you fit data using R formulae that resemble the mathematical formulae more closely.
 For example, in rethinking the model formula of our model of vowel duration would look like the code below.

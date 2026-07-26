@@ -155,7 +155,7 @@ y & \sim Gaussian(\mu, \sigma)\\
 
 In the rest of this book, you will be using the default prior probability distributions, or priors for short, as set by brms, the R package we will use to fit Bayesian models.
 This means that you will not have to worry about choosing priors while you start dipping your toes into the ocean of Bayesian statistics.
-However, you can learn about priors of Gaussian models in the Spotlight box at the end of this chapter, but after that you can safely assume that priors are handled by brms for you and you should not worry until after you completed this course.
+However, you can learn about priors of Gaussian models in the Going further box at the end of this chapter, but after that you can safely assume that priors are handled by brms for you and you should not worry until after you completed this course.
 Note that in actual research, thinking about priors is a necessary step, even if one ends up using the default brms priors.
 
 In the next chapter you will fit the Gaussian model of RTs using brms, with the default priors as set by the package.
@@ -195,7 +195,7 @@ cat("c. In Bayesian modeling, posterior probability distributions are described 
 :::
 
 ::: {.callout-important collapse="true"}
-## R note: Writing maths in Quarto
+## Aside: Writing maths in Quarto
 
 Quarto supports LaTeX mathematical notation.
 Inline maths can be written by surrounding maths expression with dollar signs `$`.
@@ -226,7 +226,7 @@ You can find a full list of symbols here: <https://www.cmor-faculty.rice.edu/~he
 :::
 
 ::: {.callout-important collapse="true"}
-## Spotlight: Choosing priors for Gaussian models
+## Going further: Choosing priors for Gaussian models
 
 How do we go about choosing priors for the model above?
 Once you know that you are trying to estimate the (posterior) probability distribution of $\mu$ and $\sigma$ you also know that you should choose a prior for each of these two parameters.

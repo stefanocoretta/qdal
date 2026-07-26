@@ -700,26 +700,32 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-regression-num-num.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -822,6 +828,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
 <p><strong>True or false?</strong></p>
 <ol type="a">
 <li><p>Inference is not needed if you gather data from the entire population. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
@@ -831,13 +838,14 @@ window.Quarto = {
 </ol>
 </div>
 </div>
+</div>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Spotlight: Science is wrong
+<span class="screen-reader-only">Important</span>Going further: Science is wrong
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -881,7 +889,7 @@ window.Quarto = {
 </div>
 <p>The moral of the story is that at any point in history we are like Galileo in at least some of our research: we might be close to understanding something but not quite yet.</p>
 <p>To give a more concrete example of how each sample is but an imperfect represetation of the population it is taken from, let’s look at reaction times (RTs) data from the MALD dataset <span class="citation" data-cites="tucker2019">(<a href="references.html#ref-tucker2019" role="doc-biblioref">Tucker et al. 2019</a>)</span>. The study the data comes from used an auditory lexical decision task to elicit RTs and accuracy data. In each trial, participants listened to a word and pressed a button to say if the word is a real English word or not. The RT is the time lag between the offset of the auditory stimulus (the target word) and the button press. Note that to keep things more manageable, the data we will read is just a subset of the full data. <a href="#fig-mald-rt" class="quarto-xref">Figure&nbsp;<span>6.1</span></a> shows a density plot of the data: the <em>x</em>-axis is the range of RTs (in logged milliseconds), while the <em>y</em>-axis shows the “density” of the data. Higher density means that the data contains a lot of observations in that region. Conversely, low density means that the data does not contain a lot of observations in that range. You will learn more about density plots in <a href="ch-probability.html" class="quarto-xref"><span>Chapter 18</span></a>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mald <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/tucker2019/mald_1_1.rds"</span>)</span>
@@ -894,10 +902,10 @@ window.Quarto = {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reaction Times (logged ms)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-mald-rt" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-mald-rt" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mald-rt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-inference_files/figure-html/fig-mald-rt-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-inference_files/figure-html/fig-mald-rt-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mald-rt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;6.1: Distribution of logged RT values from the MALD data set. The density is a relative measure of how many observations for particular values there are in the data.
@@ -907,7 +915,7 @@ Figure&nbsp;6.1: Distribution of logged RT values from the MALD data set. The de
 </div>
 </div>
 <p>The mean logged RT is 6.88 and the standard deviation (a measure of dispersion around the mean, you will learn about them in <a href="ch-sum-measures.html" class="quarto-xref"><span>Chapter 10</span></a>) is 0.28. We might take these values as the mean and standard deviation of the population of logged RTs. But this would not be correct: these are the <em>sample</em> mean and standard deviation. To show why we cannot take these to be the mean and standard deviation of the population, we can simulate RT data based on those values (you will understand the details of this later on, when you learn about probability distributions in <a href="ch-probability.html" class="quarto-xref"><span>Chapter 18</span></a>, so for now just stay for the ride).</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9899</span>)</span>
@@ -917,9 +925,9 @@ Figure&nbsp;6.1: Distribution of logged RT values from the MALD data set. The de
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>We sample 20 randomly generated values from a distribution with mean 6.88 and standard deviation 0.28. We then can take the mean and SD of these generated values and compare them to the original distribution’s mean and SD. But we can go further and sample 20 values 10 times. This procedure gives us 10 means and standard deviations, one for each sample of 20 values. The means and standard deviations of these 10 random samples are shown in <a href="ch-regression-cat.html#tbl-rt-1" class="quarto-xref">Table&nbsp;<span>28.3</span></a>.</p>
-<div class="cell">
-<div id="tbl-rt-l" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<p>We sample 20 randomly generated values from a distribution with mean 6.88 and standard deviation 0.28. We then can take the mean and SD of these generated values and compare them to the original distribution’s mean and SD. But we can go further and sample 20 values 10 times. This procedure gives us 10 means and standard deviations, one for each sample of 20 values. The means and standard deviations of these 10 random samples are shown in <a href="ch-regression-cat.html#tbl-rt-1" class="quarto-xref">Table&nbsp;<span>28.2</span></a>.</p>
+<div class="cell" data-layout-align="center">
+<div id="tbl-rt-l" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl quarto-uncaptioned" id="tbl-rt-l-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;6.1
@@ -1036,7 +1044,7 @@ Table&nbsp;6.1
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Spotlight: Etymology
+<span class="screen-reader-only">Important</span>Aside: Etymology
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -1070,6 +1078,7 @@ Table&nbsp;6.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
 <p><strong>True or false?</strong></p>
 <ol type="a">
 <li><p>Statistics is necessary if one wants to know the truth. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
@@ -1079,11 +1088,12 @@ Table&nbsp;6.1
 </ol>
 </div>
 </div>
+</div>
 </section>
 <section id="many-analysts-one-data-set-subjectivity-exposed" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="many-analysts-one-data-set-subjectivity-exposed"><span class="header-section-number">6.3</span> Many Analysts, One Data Set: subjectivity exposed</h2>
 <p>In <span class="citation" data-cites="silberzahn2018">Silberzahn et al. (<a href="references.html#ref-silberzahn2018" role="doc-biblioref">2018</a>)</span>, a group of researchers asked 29 independent analysis teams to answer the following question based on provided data: Is there a link between player skin tone and number of red cards in soccer? Crucially, <strong>69% of the teams reported an effect of player skin tone, and 31% did not</strong>. In total, the 29 teams came up with 21 unique types of statistical analysis. These results clearly show how subjective statistics is and how even a straightforward question can lead to a multitude of answers. To put it in Silberzahn et al’s words: “The observed results from analyzing a complex data set can be highly contingent on <strong>justifiable, but subjective</strong>, analytic decisions. This is why you should always be somewhat <strong>sceptical of the results of any single study</strong>: you never know what results might have been found if another research team did the study. This is one of the reasons why replicating research is very important. You will learn about replication and related concepts in <a href="ch-research-cycle.html" class="quarto-xref"><span>Chapter 12</span></a>.</p>
-<p><span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span> tried something similar, but in the context of the speech sciences: they asked 30 independent analysis teams (84 signed up, 46 submitted an analysis, 30 submitted usable analyses) to answer the question: Do speakers acoustically modify utterances to signal atypical word combinations? Outstandingly, the 30 teams submitted 109 individual analyses—a bit more than 3 analyses per team!—and 52 unique measurement specifications in 47 unique model specifications. <span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span> say: “<strong>Nine teams out of the thirty (30%) reported to have found at least one statistically reliable effect</strong> (based on the inferential criteria they specified). Of the 170 critical model coefficients, 37 were claimed to show a statistically reliable effect (21.8%).” <a href="#fig-flex" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> illustrates the analytic flexibility typical of acoustic analyses. (A) shows the pipeline of decision a researcher would have to do: which linguistic unit, which temporal window, which acoustic parameters and how to measure those. You can appreciate that there are potentially many combinations. (B) illustrates the fundamental frequency (f0) contour of the sentences “I can’t bear ANOTHER meeting on Zoom” and “I can’t bear another meeting on ZOOM”. In both sentences, the green shaded area marks the word “another”. Finally, in (C) you see the different parameters that can be extracted from the f0 contour of the word “another”. In sum, there are many choices a researcher is faced with and, while most of these choices might be justifiable, they are still subjective, as shown by the large variability of actual analyses carried out by the analysis teams in <span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span>.</p>
+<p><span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span> tried something similar, but in the context of the speech sciences: they asked 30 independent analysis teams (84 signed up, 46 submitted an analysis, 30 submitted usable analyses) to answer the question: Do speakers acoustically modify utterances to signal atypical word combinations? Outstandingly, the 30 teams submitted 109 individual analyses—a bit more than 3 analyses per team!— and 52 unique measurement specifications in 47 unique model specifications. <span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span> say: “<strong>Nine teams out of the thirty (30%) reported to have found at least one statistically reliable effect</strong> (based on the inferential criteria they specified). Of the 170 critical model coefficients, 37 were claimed to show a statistically reliable effect (21.8%).” <a href="#fig-flex" class="quarto-xref">Figure&nbsp;<span>6.2</span></a> illustrates the analytic flexibility typical of acoustic analyses. (A) shows the pipeline of decision a researcher would have to do: which linguistic unit, which temporal window, which acoustic parameters and how to measure those. You can appreciate that there are potentially many combinations. (B) illustrates the fundamental frequency (f0) contour of the sentences “I can’t bear ANOTHER meeting on Zoom” and “I can’t bear another meeting on ZOOM”. In both sentences, the green shaded area marks the word “another”. Finally, in (C) you see the different parameters that can be extracted from the f0 contour of the word “another”. In sum, there are many choices a researcher is faced with and, while most of these choices might be justifiable, they are still subjective, as shown by the large variability of actual analyses carried out by the analysis teams in <span class="citation" data-cites="coretta2023">Coretta et al. (<a href="references.html#ref-coretta2023" role="doc-biblioref">2023</a>)</span>.</p>
 <div id="fig-flex" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-flex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1110,9 +1120,11 @@ Figure&nbsp;6.2: Illustration of the analytic flexibility associated with acoust
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
 Three researchers meet at a coffee shop. Each of them tells the other two about their recent findings. Below, you can find what each said. Based on how they talk about the results, which one among them aligns with the New Statistics approach and recognises the shortcomings of research?
 <div id="radio_JEKMZANLVJ" class="webex-radiogroup">
 <label><input type="radio" autocomplete="off" name="radio_JEKMZANLVJ" value=""> <span>Researcher A. My team investigated the effect of emotional dysregulation on speaking rate and they found a significant effect. We have ultimately shown that people with emotional dysregulation speak faster.</span></label><label><input type="radio" autocomplete="off" name="radio_JEKMZANLVJ" value=""> <span>Researcher B. I wanted to know if it is true that languages with morphologically rich grammars are more difficult to learn than isolating languages. We tested several measures of learning difficulty in two groups of infants, one learning a morphologically rich language and one learning an isolating language. We found that two measures were significantly higher for the morphologically rich language group than the isolating language group. Hence we have found solid evidence that morphologically rich grammars are more difficult to learn.</span></label><label><input type="radio" autocomplete="off" name="radio_JEKMZANLVJ" value="answer"> <span>Researcher C. We compared reaction times (RTs) of chimpanzees looking at videos of humans vs chimpanzees signing. If low-level motor perception is mostly affected by the conspecificity (human vs conspecific), we should see differences in RTs of 20-70 ms. If motor resonance is mostly affected (activation of the observer’s own motor system when seeing an action they could perform themselves), we should find differences in RTs of 80-200 ms. We found that in the conspecific condition, RTs were 74-98 ms shorter at 95% probability. This range mostly overlaps with the motor resonance hypothesis (80-200) but it also lies outside of it, somewhat close to the higher end of the low-level perception range (20-70). In sum, we could not establish which hypothesis could better explain the data.</span></label>
+</div>
 </div>
 </div>
 </div>

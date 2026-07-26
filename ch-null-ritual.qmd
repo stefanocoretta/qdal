@@ -28,7 +28,7 @@ It gained widespread traction in the 1990s with advances in computational method
 However, modern frequentist statistics is attributed to three statisticians whose lives span several decades before the time Bayesianism found a place in statistical debates: Ronald Fisher (1890-1926), Jerzy Neyman (1894-1981) and Egon Pearson (1895-1980, the son of another statistician, Karl Pearson 1857-1936).
 
 The history of frequentist statistics is a tale of heated debates, feuds and the now discredited field of eugenics (a colonial movement with the aim of improving the genetic "quality" of human populations).
-[Francis Galton](https://en.wikipedia.org/wiki/Francis_Galton) (1822-1911) is considered the originator of eugenics: this is the same Galton who came up with the idea of "regression toward mediocrity" which gives the name to regression models (see Spotlight box in @sec-reg-intro).
+[Francis Galton](https://en.wikipedia.org/wiki/Francis_Galton) (1822-1911) is considered the originator of eugenics: this is the same Galton who came up with the idea of "regression toward mediocrity" which gives the name to regression models (see Going further box in @sec-reg-intro).
 [Karl Pearson](https://en.wikipedia.org/wiki/Karl_Pearson) was deeply influenced by Galton and saw statistics as a tool for improving racial fitness.
 Pearson's Biometric School in Britain was explicitly tied to eugenics research.
 [Ronald Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher) was another British statistician who strongly believed in eugenics and racial differences.

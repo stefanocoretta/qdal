@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>37&nbsp; What you’ve learned – Quantitative Data Analysis for Linguists in R</title>
+<title>38&nbsp; What you’ve learned – Quantitative Data Analysis for Linguists in R</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -34,7 +34,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./ch-next.html" rel="next">
-<link href="./ch-regression-cat-num.html" rel="prev">
+<link href="./ch-regression-num-num.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -287,7 +287,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-learned.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-learned.html"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-num-num.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-learned.html"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -644,26 +644,32 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-regression-num-num.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -701,8 +707,8 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#research-methods" id="toc-research-methods" class="nav-link active" data-scroll-target="#research-methods"><span class="header-section-number">37.1</span> Research methods</a></li>
-  <li><a href="#statistics-and-r" id="toc-statistics-and-r" class="nav-link" data-scroll-target="#statistics-and-r"><span class="header-section-number">37.2</span> Statistics and R</a></li>
+  <li><a href="#research-methods" id="toc-research-methods" class="nav-link active" data-scroll-target="#research-methods"><span class="header-section-number">38.1</span> Research methods</a></li>
+  <li><a href="#statistics-and-r" id="toc-statistics-and-r" class="nav-link" data-scroll-target="#statistics-and-r"><span class="header-section-number">38.2</span> Statistics and R</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-learned.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -710,9 +716,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-learned.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-learned.html"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-num-num.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-learned.html"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-learned" class="quarto-section-identifier"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></h1>
+<h1 class="title"><span id="sec-learned" class="quarto-section-identifier"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></h1>
 </div>
 
 
@@ -729,9 +735,9 @@ window.Quarto = {
 </header>
 
 
-<p>This chapter summarises the concepts, methods and skills that were covered in the textbook. You can use this as a final check that you didn’t miss anything important. <a href="ch-next.html" class="quarto-xref"><span>Chapter 38</span></a> lists further topics you could read about to continue your learning process, <a href="ch-workflow.html" class="quarto-xref"><span>Chapter 39</span></a> is an overview of a possible workflow for quantitative studies (note that it covers steps and topics that you have not learned, but references are given when necessary), and finally <a href="ch-end.html" class="quarto-xref"><span>Chapter 40</span></a> concludes the textbook.</p>
-<section id="research-methods" class="level2" data-number="37.1">
-<h2 data-number="37.1" class="anchored" data-anchor-id="research-methods"><span class="header-section-number">37.1</span> Research methods</h2>
+<p>This chapter summarises the concepts, methods and skills that were covered in the textbook. You can use this as a final check that you didn’t miss anything important. <a href="ch-next.html" class="quarto-xref"><span>Chapter 39</span></a> lists further topics you could read about to continue your learning process, <a href="ch-workflow.html" class="quarto-xref"><span>Chapter 40</span></a> is an overview of a possible workflow for quantitative studies (note that it covers steps and topics that you have not learned, but references are given when necessary), and finally <a href="ch-end.html" class="quarto-xref"><span>Chapter 41</span></a> concludes the textbook.</p>
+<section id="research-methods" class="level2" data-number="38.1">
+<h2 data-number="38.1" class="anchored" data-anchor-id="research-methods"><span class="header-section-number">38.1</span> Research methods</h2>
 <ul>
 <li><p>Research methods comprises of the research process, project management, digital skills, philosophy, ethics.</p></li>
 <li><p>The research process is made up of context, data acquisition, data analysis, communication.</p></li>
@@ -744,8 +750,8 @@ window.Quarto = {
 <li><p>Open Research is a movement that stresses the importance of a more honest and transparent research by promoting a series of research principles and by warning from common, although not necessarily intentional, questionable practices and misconceptions.</p></li>
 </ul>
 </section>
-<section id="statistics-and-r" class="level2" data-number="37.2">
-<h2 data-number="37.2" class="anchored" data-anchor-id="statistics-and-r"><span class="header-section-number">37.2</span> Statistics and R</h2>
+<section id="statistics-and-r" class="level2" data-number="38.2">
+<h2 data-number="38.2" class="anchored" data-anchor-id="statistics-and-r"><span class="header-section-number">38.2</span> Statistics and R</h2>
 <ul>
 <li><p>R is a statistical programming language, RStudio is an IDE.</p></li>
 <li><p>RStudio/Quarto projects allow you to organise your data and code. Quarto documents allow you to include formatted text, code and output in a single file.</p></li>
@@ -1438,13 +1444,13 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ch-regression-cat-num.html" class="pagination-link" aria-label="Interactions in regression: one categorical and one numeric predictor">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Interactions in regression: one categorical and one numeric predictor</span></span>
+      <a href="./ch-regression-num-num.html" class="pagination-link" aria-label="Interactions in regression: two numeric predictors">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ch-next.html" class="pagination-link" aria-label="What's next?">
-        <span class="nav-page-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

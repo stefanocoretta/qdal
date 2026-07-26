@@ -652,26 +652,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-regression-num-num.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -777,7 +783,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>R Note: Where is my R library?
+<span class="screen-reader-only">Important</span>Aside: Where is my R library?
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -858,9 +864,12 @@ Important
 </div>
 </div>
 <p>Let’s attach the cowsay and fortunes packages. Run the following code in the Console.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowsay)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fortunes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'fortunes' was built under R version 4.6.1</code></pre>
+</div>
 </div>
 <p>Note that <code>library(cowsay)</code> takes the name of the package without quotes, although if you put the name in quotes it also works. You need one <code>library()</code> function per package (there are other ways, but we will stick with this one).</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
@@ -877,8 +886,8 @@ Important
 </div>
 </div>
 <p>Now you can use the functions provided by the attached packages. Try out the <code>say()</code> function from the cowsay package.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">say</span>(<span class="st">"hot diggity"</span>, <span class="st">"frog"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">say</span>(<span class="st">"hot diggity"</span>, <span class="st">"frog"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>(I know, the usefulness of the package might be questionable, but it is fun!)</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
@@ -921,11 +930,13 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
 Which of the following statements is wrong?
-<div id="radio_HZVJXJBXZN" class="webex-radiogroup">
-<p><label><input type="radio" autocomplete="off" name="radio_HZVJXJBXZN" value="answer"> <span>You attach libraries with <code>library()</code>.</span></label></p>
-<p><label><input type="radio" autocomplete="off" name="radio_HZVJXJBXZN" value=""> <span><code>install.packages()</code> does not load packages.</span></label></p>
-<label><input type="radio" autocomplete="off" name="radio_HZVJXJBXZN" value=""> <span>The R library is a folder.</span></label>
+<div id="radio_IKIJYBAJQZ" class="webex-radiogroup">
+<p><label><input type="radio" autocomplete="off" name="radio_IKIJYBAJQZ" value="answer"> <span>You attach libraries with <code>library()</code>.</span></label></p>
+<p><label><input type="radio" autocomplete="off" name="radio_IKIJYBAJQZ" value=""> <span><code>install.packages()</code> does not load packages.</span></label></p>
+<label><input type="radio" autocomplete="off" name="radio_IKIJYBAJQZ" value=""> <span>The R library is a folder.</span></label>
+</div>
 </div>
 </div>
 </div>

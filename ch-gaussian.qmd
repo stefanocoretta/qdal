@@ -271,7 +271,7 @@ The quantile function is the inverse of the Cumulative Distribution Function (CD
 :::
 
 ::: {.callout-important collapse="true"}
-### Spotlight: PDF, CDF and quantile function of Gaussian distributions
+### Going further: PDF, CDF and quantile function of Gaussian distributions
 
 You don't really have to know the actual mathematical formulae of the PDF, CDF and quantile function of a distribution, because the computation is done for you by the respective R functions, but if you are mathematically inclined, here are the PDF, CDF and quantile function of a Gaussian distribution.
 

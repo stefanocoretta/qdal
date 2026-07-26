@@ -154,7 +154,7 @@ We can use regression models to do that.
 The next sections will teach you how to model the RTs with regression models in brms.
 
 ::: {.callout-important collapse="true"}
-### R Note: Tables with `kable()`
+### Aside: Tables with `kable()`
 
 With Quarto, you can output the summaries as a table, using `knitr::kable()`.
 You can learn more about this [here](https://quarto.org/docs/authoring/tables.html#computations).
@@ -227,7 +227,7 @@ See @tbl-treat for the correspondence between the predictor `IsWord` and the val
 | IsWord = TRUE  |  0  |
 | IsWord = FALSE |  1  |
 
-: Treatment contrasts coding of the categorical predictor `IsWord`. {#tbl-treat}
+: Treatment contrasts coding of the categorical predictor `IsWord`.
 
 ::: callout-tip
 ## Categorical predictors
@@ -337,7 +337,7 @@ summary(rt_bm_1)
 
 The first few lines should be familiar: they report information about the model, like the distribution family, the formula, the MCMC draws and so on.
 Then we have the `Regression Coefficients` table, just like in the model of @sec-regression.
-The estimates of the coefficients and the 95% Credible Intervals (CrIs) are reported in @tbl-rt-1 (the table was generated with `knitr::kable()` from the R Note above!
+The estimates of the coefficients and the 95% Credible Intervals (CrIs) are reported in @tbl-rt-1 (the table was generated with `knitr::kable()` from the Aside box above!
 Expand the code to see it).
 
 ```{r}

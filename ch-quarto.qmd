@@ -127,7 +127,7 @@ A Quarto file usually has three main parts:
 Each Quarto file has to start with a YAML header, but you can include as many code chunks and as much text as you wish, in any order.
 You can also show the document outline, marked as a dashed yellow box in the figure above.
 To show/hide the outline, just click on the `Outline` button.
-See the R Note box below for tips.
+See the Aside box below for tips.
 
 ::: callout-tip
 #### Quarto: YAML header
@@ -147,7 +147,7 @@ Settings can be specified inside the chunk with the `#|` prefix: for example `#|
 :::
 
 ::: {.callout-important collapse="true"}
-#### R Note: Quarto outline and chunk labels
+#### Aside: Quarto outline and chunk labels
 
 By default, the Quarto outline only shows the Markdown section headers.
 I find it very useful to also see the code chunks in the outline and if they have a label, that will be shown in italics.
@@ -273,7 +273,7 @@ Note that if you are enrolled in the QML course, you will be asked to render you
 ## Render Quarto files to PDF
 
 Rendering a Quarto file to PDF is done through LaTeX, a typesetting system with its own programming language.
-You don't really need to learn LaTeX to render to PDF, because the conversion is handles by Quarto, but since usually computers don't come with LaTeX you will have to install it (you can learn more about LaTeX in the Spotlight box below).
+You don't really need to learn LaTeX to render to PDF, because the conversion is handles by Quarto, but since usually computers don't come with LaTeX you will have to install it (you can learn more about LaTeX in the Going further box below).
 Do this now, by **running the following code in the `Terminal` in RStudio**.
 
 ::: callout-important
@@ -305,7 +305,7 @@ If all is well, you should soon see your Quarto file rendered to PDF!
 ![](img/quarto-pdf.png){fig-align="center" width="500"}
 
 ::: {.callout-important collapse="true"}
-### Spotlight: LaTeX
+### Going further: LaTeX
 
 LaTeX is a mark-up language for writing beautifully typeset documents, like academic articles and books.
 It is very popular in disciplines that make heavy use of maths or statistics and it has been adopted by a lot of researchers working in linguistics, although adoption rates vary by sub-field.

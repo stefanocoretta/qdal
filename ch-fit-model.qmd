@@ -76,8 +76,8 @@ Let's revisit the research question from the previous chapter:
 
 > RQ: In a typical auditory lexical decision task, what are the mean and standard deviation of reaction times (RTs)?
 
-To answer this question, we can fit a Gaussian model to the RT data from @tucker2019, since this model will inded estimate the mean and the SD of the RTs.
-Here is the mathematical formula of the model from @sec-gauss-model (let's discard the priors; see the R Note box below):
+To answer this question, we can fit a Gaussian model to the RT data from @tucker2019, since this model will indeed estimate the mean and the SD of the RTs.
+Here is the mathematical formula of the model from @sec-gauss-model (let's discard the priors; see the Going further box below):
 
 $$RT \sim Gaussian(\mu, \sigma)$$
 
@@ -258,7 +258,7 @@ The model has quantified the uncertainty around the value of the $\mu$ and $\sig
 We don't know *exactly* the values of the parameters of the Gaussian distribution assumed to have generated the sampled RTs.
 
 ::: {.callout-important collapse="true"}
-### R Note: Default priors in brms
+### Going further: Default priors in brms
 
 One major aspect of Bayesian modelling is the combination of prior knowledge with evidence from the observed data.
 As introduced in @sec-gauss-model, choosing priors is an important step in conducting Bayesian analyses.

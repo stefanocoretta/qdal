@@ -274,7 +274,7 @@ Moreover, regression models are not limited to the Gaussian distribution family 
 You will be able to learn about other families by checking the resources linked in @sec-reg-cheat-sheet.
 
 ::: {.callout-important collapse="true"}
-## Spotlight: Regression, eugenics and racism
+## Aside: Regression, eugenics and racism
 
 **Galton and regression**
 

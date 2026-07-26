@@ -18,9 +18,9 @@ Research questions are **questions** whose answers directly address the research
 They take the form of actual *questions*.
 For example:
 
--   What is the average speech rate of adolescents vs that of older adults?
--   What happens to infants' syntactic processing when they move from a monolingual to a multilingual environment?
--   Is the morphological complexity of languages spoken by larger populations different from that of languages spoken by smaller populations?
+- What is the average speech rate of adolescents vs that of older adults?
+- What happens to infants' syntactic processing when they move from a monolingual to a multilingual environment?
+- Is the morphological complexity of languages spoken by larger populations different from that of languages spoken by smaller populations?
 
 Research questions are always necessary, independent of the type and objective of the research.
 While there is an undue pressure on researcher to come up with "novel" research questions all the time, it is perfectly fine to ask the same question multiple times.
@@ -69,7 +69,7 @@ At best, we can normally come up with vague hypotheses that state whether a diff
 This state of affairs makes testing hypotheses using statistical methods less straightforward, because of the non-straightforward mapping of (vague) hypotheses to statistical models.
 
 ::: {.callout-important collapse="true"}
-### Spotlight: Falsificationism and falsifiability
+### Aside: Falsificationism and falsifiability
 
 **Falsification** is a procedure proposed by philosopher Karl Popper in relation to the "problem of induction".
 Induction is based on observations.
@@ -89,14 +89,14 @@ John Spacey defines statement falsificability in his blog post [Seven examples o
 
 Some examples of falsifiable hypotheses:
 
--   "Life only exists on Earth." (it would be falsified by the observation of life somewhere else).
--   "If there is a 1st person exclusive dual, then there is also a 1st person inclusive dual." [\[Universal 1871\]](https://typo.uni-konstanz.de/rara/universals-archive/1876/) (it would be falsified by the observation of languages with a 1st person exclusive dual but without the inclusive alternative).
--   "Infants start uttering full sentences only after their 12th month of life." (it would be falsified by the observation of infants uttering full sentences before their 12th month of life).
+- "Life only exists on Earth." (it would be falsified by the observation of life somewhere else).
+- "If there is a 1st person exclusive dual, then there is also a 1st person inclusive dual." [\[Universal 1871\]](https://typo.uni-konstanz.de/rara/universals-archive/1876/) (it would be falsified by the observation of languages with a 1st person exclusive dual but without the inclusive alternative).
+- "Infants start uttering full sentences only after their 12th month of life." (it would be falsified by the observation of infants uttering full sentences before their 12th month of life).
 
 The following are some examples of non-falsifiable hypotheses:
 
--   "Life might exist outside of the Solar system." (if we observe life outside the Solar system or we don't, the statement is still true, because of the *might exist*).
--   "Languages with a 1st person inclusive dual can have a 1st person exclusive dual." (whether we observe a language with both 1st inclusive and exclusive dual or not, the statement is still true, because of the *can have*.)
+- "Life might exist outside of the Solar system." (if we observe life outside the Solar system or we don't, the statement is still true, because of the *might exist*).
+- "Languages with a 1st person inclusive dual can have a 1st person exclusive dual." (whether we observe a language with both 1st inclusive and exclusive dual or not, the statement is still true, because of the *can have*.)
 
 Falsification has become a tenet of a lot of modern quantitative research and has become what could be regarded as *falsificationism*, but falsification is not the only approach to quantitative research, as you have learned in this chapter: precision and testability are two other equally valid criteria to follow when formulating hypotheses.
 

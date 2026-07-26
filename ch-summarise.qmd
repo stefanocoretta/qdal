@@ -12,7 +12,18 @@ library(webexercises)
 
 ## Summarise with `summarise()`
 
-Now that you have learned about summary measures, we can talk about how to summarise data in R, rather than just vectors as we did in the previous chapter. When you work with data, you always want to get summary measures for most of the variables in the data. Data reports usually include summary measures. It is also important to understand which summary measure is appropriate for which type of variable, which was covered in the previous section. Now, you will learn how to obtain summary measures using the `summarise()` function from the [dplyr](https://dplyr.tidyverse.org) tidyverse package. Let's practice with the data from @song2020 you read in @sec-read-data. We want to get a measure of central tendency and dispersion for the reaction times, in the `RT` column. In order to decide which measures to pick, think about the nature of the `RT` variable. Reaction times is a numeric and continuous statistical variable, and it can only have positive values. So the mean and standard deviations are appropriate measures. Let's start with the mean of the reaction time column `RT`. Go to your `week-02.R` script: if you followed @sec-read-data (and you should have), the script should already have the code to attach the tidyverse and read the `song2020/shallow.csv` file into a variable called `shallow`.
+Now that you have learned about summary measures, we can talk about how to summarise data in R, rather than just vectors as we did in the previous chapter.
+When you work with data, you always want to get summary measures for most of the variables in the data.
+Data reports usually include summary measures.
+It is also important to understand which summary measure is appropriate for which type of variable, which was covered in the previous section.
+Now, you will learn how to obtain summary measures using the `summarise()` function from the [dplyr](https://dplyr.tidyverse.org) tidyverse package.
+Let's practice with the data from @song2020 you read in @sec-read-data.
+We want to get a measure of central tendency and dispersion for the reaction times, in the `RT` column.
+In order to decide which measures to pick, think about the nature of the `RT` variable.
+Reaction times is a numeric and continuous statistical variable, and it can only have positive values.
+So the mean and standard deviations are appropriate measures.
+Let's start with the mean of the reaction time column `RT`.
+Go to your `week-02.R` script: if you followed @sec-read-data (and you should have), the script should already have the code to attach the tidyverse and read the `song2020/shallow.csv` file into a variable called `shallow`.
 
 ```{r}
 #| label: shallow
@@ -23,7 +34,13 @@ library(tidyverse)
 shallow <- read_csv("data/song2020/shallow.csv")
 ```
 
-Now let's calculate the mean of `RT` with `summarise()`. The `summarise()` function takes at least two arguments: (1) the tibble to summarise, (2) one or more summary functions applied to columns in the tibble. In this case we just want the mean RTs. To get this, you write `RT_mean = mean(RT)` which tells the function to calculate the mean of the `RT` column and save the result in a new column called `RT_mean`. Yes, `summarise()` returns a tibble (a data frame)! It might seem overkill now, but you will see below that it is useful when you are grouping the data, so that for example you can get the mean of different groups in the data. Here is the code with its output:
+Now let's calculate the mean of `RT` with `summarise()`.
+The `summarise()` function takes at least two arguments: (1) the tibble to summarise, (2) one or more summary functions applied to columns in the tibble.
+In this case we just want the mean RTs.
+To get this, you write `RT_mean = mean(RT)` which tells the function to calculate the mean of the `RT` column and save the result in a new column called `RT_mean`.
+Yes, `summarise()` returns a tibble (a data frame)!
+It might seem overkill now, but you will see below that it is useful when you are grouping the data, so that for example you can get the mean of different groups in the data.
+Here is the code with its output:
 
 ```{r}
 #| label: mean-3
@@ -32,7 +49,10 @@ summarise(shallow, RT_mean = mean(RT))
 
 ```
 
-Great! The mean reaction times of the entire sample is 867.3592 ms. Sometimes you might want to round the numbers. You can round numbers with the `round()` function. For example:
+Great!
+The mean reaction times of the entire sample is 867.3592 ms. Sometimes you might want to round the numbers.
+You can round numbers with the `round()` function.
+For example:
 
 ```{r}
 #| label: round
@@ -44,7 +64,8 @@ round(num, 2)
 
 ```
 
-The second argument of the `round()` function sets the number of decimals to round to (by default, it is `0`, so the number is rounded to the nearest integer, that is, to the nearest whole number with no decimal values). Let's recalculate the mean by rounding it this time.
+The second argument of the `round()` function sets the number of decimals to round to (by default, it is `0`, so the number is rounded to the nearest integer, that is, to the nearest whole number with no decimal values).
+Let's recalculate the mean by rounding it this time.
 
 ```{r}
 #| label: mean-4
@@ -52,7 +73,9 @@ The second argument of the `round()` function sets the number of decimals to rou
 summarise(shallow, RT_mean = round(mean(RT)))
 ```
 
-What if we want also the standard deviation? Easy: we use the `sd()` function. Round the mean and SD with the `round()` function when you write the code in your `week-02.R` script.
+What if we want also the standard deviation?
+Easy: we use the `sd()` function.
+Round the mean and SD with the `round()` function when you write the code in your `week-02.R` script.
 
 ```{r}
 #| label: sd
@@ -63,7 +86,8 @@ summarise(shallow, RT_mean = mean(RT), RT_sd = sd(RT))
 
 ```
 
-Now we know that reaction times are on average 867 ms long and have a standard deviation of about 293 ms (rounded to the nearest integer). Let's go all the way and also get the minimum and maximum RT values with the `min()` and `max()` functions (again, round all the summary measures).
+Now we know that reaction times are on average 867 ms long and have a standard deviation of about 293 ms (rounded to the nearest integer).
+Let's go all the way and also get the minimum and maximum RT values with the `min()` and `max()` functions (again, round all the summary measures).
 
 ::: callout-warning
 ### Exercise 1
@@ -86,7 +110,8 @@ summarise(
 :::: {.callout-important collapse="true"}
 ### Solution
 
-The functions for minimum and maximum are just a few lines above! Have you tried it yourself before seeing the solution?
+The functions for minimum and maximum are just a few lines above!
+Have you tried it yourself before seeing the solution?
 
 <details>
 
@@ -109,11 +134,16 @@ summarise(
 </details>
 ::::
 
-Fab! When writing a data report, you could write something like this.
+Fab!
+When writing a data report, you could write something like this.
 
 > Reaction times are on average 867 ms long (SD = 293 ms), with values ranging from 0 to 1994 ms.
 
-Remember that standard deviations are a *relative* measure of how dispersed the data are around the mean: the higher the SD, the greater the dispersion around the mean, i.e. the greater the variability in the data. However, you won't be able to compare standard deviations across different measures: for example, you can't compare the standard deviation of reaction times and of vowel formants because the first is in milliseconds and the second in Hertz; these are two different numeric scales. When required, you can use the `median()` function to calculate the median, instead of the `mean()`. Go ahead and calculate the median reaction times in the data. Is it similar to the mean?
+Remember that standard deviations are a *relative* measure of how dispersed the data are around the mean: the higher the SD, the greater the dispersion around the mean, i.e. the greater the variability in the data.
+However, you won't be able to compare standard deviations across different measures: for example, you can't compare the standard deviation of reaction times and of vowel formants because the first is in milliseconds and the second in Hertz; these are two different numeric scales.
+When required, you can use the `median()` function to calculate the median, instead of the `mean()`.
+Go ahead and calculate the median reaction times in the data.
+Is it similar to the mean?
 
 ::: callout-warning
 ### Exercise 2
@@ -123,7 +153,9 @@ Calculate the median of RTs in the `shallow` data.
 
 ## `NA`: Not Available
 
-Most base R functions, like `mean()`, `sd()`, `median()` and so on, behave unexpectedly if the vector they are used on contains `NA` values. `NA` is a special object in R, that indicates that a value is **N**ot **A**vailable, meaning that that observation does not have a value (or that the value was not observed in that case). For example, in the following numeric vector, there are 5 objects:
+Most base R functions, like `mean()`, `sd()`, `median()` and so on, behave unexpectedly if the vector they are used on contains `NA` values.
+`NA` is a special object in R, that indicates that a value is **N**ot **A**vailable, meaning that that observation does not have a value (or that the value was not observed in that case).
+For example, in the following numeric vector, there are 5 objects:
 
 ```{r}
 #| label: a
@@ -131,7 +163,8 @@ Most base R functions, like `mean()`, `sd()`, `median()` and so on, behave unexp
 a <- c(3, 5, 3, NA, 4)
 ```
 
-Four are numbers and one is `NA`. If you calculate the mean of `a` with `mean()` something strange happens.
+Four are numbers and one is `NA`.
+If you calculate the mean of `a` with `mean()` something strange happens.
 
 ```{r}
 #| label: a-mean
@@ -139,7 +172,8 @@ Four are numbers and one is `NA`. If you calculate the mean of `a` with `mean()`
 mean(a)
 ```
 
-The functions returns `NA`. This is because by default when just one value in the vector is `NA` then operations on the vector will return `NA`.
+The functions returns `NA`.
+This is because by default when just one value in the vector is `NA` then operations on the vector will return `NA`.
 
 ```{r}
 #| label: a-mss
@@ -193,7 +227,9 @@ Check the documentation of `?mean`.
 
 ## Grouping data with `group_by()`
 
-More often, you will want to calculate summary measures for specific subsets of the data. An elegant way of doing this is with the `group_by()` function from dplyr. This function takes a tibble, groups the data based on the specified columns, and returns another tibble with the grouping.
+More often, you will want to calculate summary measures for specific subsets of the data.
+An elegant way of doing this is with the `group_by()` function from dplyr.
+This function takes a tibble, groups the data based on the specified columns, and returns another tibble with the grouping.
 
 ```{r}
 #| label: group-by
@@ -201,7 +237,9 @@ More often, you will want to calculate summary measures for specific subsets of 
 shallow_g <- group_by(shallow, Group)
 ```
 
-It looks as if nothing happened, but now the rows in the `shallow_g` tibble are grouped depending on the value of `Group` (`L1` or `L2`). If you print out the tibble in the console (just write `shallow_g` in the Console and press enter), you will notice that the second line of the output says `Groups: Group [2]`, like in the output below. This line tells you how the tibble is grouped: here it is grouped by `Group` and there are two groups.
+It looks as if nothing happened, but now the rows in the `shallow_g` tibble are grouped depending on the value of `Group` (`L1` or `L2`).
+If you print out the tibble in the console (just write `shallow_g` in the Console and press enter), you will notice that the second line of the output says `Groups: Group [2]`, like in the output below.
+This line tells you how the tibble is grouped: here it is grouped by `Group` and there are two groups.
 
 ```{r}
 #| label: group-by-print
@@ -211,7 +249,12 @@ print(shallow_g)
 
 ```
 
-The grouping information is stored as an "attribute" in the tibble, named `groups`. You can check this attribute with `attr()`. You get a tibble with the groupings. Hopefully now you understand that, even if nothing seems to have happened, the tibble has been grouped. Since you saved the output of `group_by()` into a new variable `shallow_g`, note that `shallow` was not affected (try running `attr(shallow, "groups")` and you will get a `NULL`). Here's the output:
+The grouping information is stored as an "attribute" in the tibble, named `groups`.
+You can check this attribute with `attr()`.
+You get a tibble with the groupings.
+Hopefully now you understand that, even if nothing seems to have happened, the tibble has been grouped.
+Since you saved the output of `group_by()` into a new variable `shallow_g`, note that `shallow` was not affected (try running `attr(shallow, "groups")` and you will get a `NULL`).
+Here's the output:
 
 ```{r}
 #| label: group-by-attr
@@ -221,7 +264,8 @@ print(attr(shallow_g, "groups"))
 
 ```
 
-There are 2,900 rows in Group = L1 and 3,600 rows in Group = L2. Now let's take the `shallow_g` data and calculate summary measures for L1 and L2 participants separately (as per the `Group` column).
+There are 2,900 rows in Group = L1 and 3,600 rows in Group = L2.
+Now let's take the `shallow_g` data and calculate summary measures for L1 and L2 participants separately (as per the `Group` column).
 
 ::: callout-warning
 ### Exercise 3
@@ -232,7 +276,9 @@ Get the rounded mean, median, SD, minimum and maximum of RTs for L1 and L2 parti
 :::: {.callout-important collapse="true"}
 ### Solution
 
-You can do it! You've done this above but with `shallow`. Now you just need to use `shallow_g` plus get the mininimum and maximum.
+You can do it!
+You've done this above but with `shallow`.
+Now you just need to use `shallow_g` plus get the mininimum and maximum.
 
 <details>
 
@@ -256,11 +302,17 @@ summarise(
 </details>
 ::::
 
-This way of grouping the data first with `group_by()` first and then using `summarise()` on the grouped tibble works, but it can become tedious if you want to get summaries for different groups and/or combinations of groups. There is a more succinct way of doing this using the pipe `|>`. Read on to learn about it.
+This way of grouping the data first with `group_by()` first and then using `summarise()` on the grouped tibble works, but it can become tedious if you want to get summaries for different groups and/or combinations of groups.
+There is a more succinct way of doing this using the pipe `|>`.
+Read on to learn about it.
 
 ### What the pipe!?
 
-Think of a pipe `|>` as a teleporter. The pipe `|>` teleports whatever is on its left into whatever is on its right. The pipe allows you to "stack" multiple operations into a pipeline, without the need to assign each output to a variable. This means that the code is more succinct and even more readable because the way you write code follows exactly the pipeline. So we can get summary measures for each group in `Group` like so:
+Think of a pipe `|>` as a teleporter.
+The pipe `|>` teleports whatever is on its left into whatever is on its right.
+The pipe allows you to "stack" multiple operations into a pipeline, without the need to assign each output to a variable.
+This means that the code is more succinct and even more readable because the way you write code follows exactly the pipeline.
+So we can get summary measures for each group in `Group` like so:
 
 ```{r}
 #| label: pipe
@@ -273,20 +325,23 @@ shallow |>
 
 The code says:
 
--   Take the `shallow` data.
+- Take the `shallow` data.
 
--   Pipe it into `group_by()` and group it by `Group`.
+- Pipe it into `group_by()` and group it by `Group`.
 
--   Summarise the grouped data with `summarise()`.
+- Summarise the grouped data with `summarise()`.
 
-Hopefully this just makes sense, but check the R Note box below if you want more details.
+Hopefully this just makes sense, but check the Going further box below if you want more details.
 
-`group_by()` can group according to more than one column, by listing the columns separated by commas (like `group_by(Col1, Col2, Col3)`). When you list more than one column, the grouping is fully crossed: you get a group for each combination of the grouping columns. Try to group the data by `Group` and `Word_Nonword` and get summary measures.
+`group_by()` can group according to more than one column, by listing the columns separated by commas (like `group_by(Col1, Col2, Col3)`).
+When you list more than one column, the grouping is fully crossed: you get a group for each combination of the grouping columns.
+Try to group the data by `Group` and `Word_Nonword` and get summary measures.
 
 ::: callout-warning
 ### Exercise 4
 
-Group `shallow` by `Group` and `Word_Nonword` and get summary measures of RTs. Use the pipe.
+Group `shallow` by `Group` and `Word_Nonword` and get summary measures of RTs.
+Use the pipe.
 :::
 
 ::: {.callout-tip collapse="true"}
@@ -297,7 +352,12 @@ Group `shallow` by `Group` and `Word_Nonword` and get summary measures of RTs. U
 
 ## Counting observations with `count()`
 
-If you want to count observations you can use the `summarise()` function with `n()`, another dplyr function that returns the group size. For example, let's count the number of languages by their endangerment status. The data in `coretta2022/glot_status.rds` contains the endangerment status for 7,845 languages from [Glottolog](https://glottolog.org). There are thousands of languages in the world, but most of them are losing speakers, and some are already no longer spoken. The column `status` contains the endangerment status of a language in the data, on a scale from `not endangered` (languages with large populations of speakers) through `threatened`, `shifting` and `nearly extinct`, to `extinct` (languages that have no living speakers left). Read the `coretta2022/glot_status.rds` data and check it out.
+If you want to count observations you can use the `summarise()` function with `n()`, another dplyr function that returns the group size.
+For example, let's count the number of languages by their endangerment status.
+The data in `coretta2022/glot_status.rds` contains the endangerment status for 7,845 languages from [Glottolog](https://glottolog.org).
+There are thousands of languages in the world, but most of them are losing speakers, and some are already no longer spoken.
+The column `status` contains the endangerment status of a language in the data, on a scale from `not endangered` (languages with large populations of speakers) through `threatened`, `shifting` and `nearly extinct`, to `extinct` (languages that have no living speakers left).
+Read the `coretta2022/glot_status.rds` data and check it out.
 
 ```{r}
 #| label: glot-status
@@ -318,7 +378,11 @@ glot_status |>
 
 ```
 
-This approach works. However, dplyr offers a more compact way to get counts with the `count()` function! You can think of this function as a `group_by/summarise` combo. You list the columns you want to group by as arguments to `count()` and the output gives you a column `n` with the counts. It works with a single column or more than one, like `group_by()`.
+This approach works.
+However, dplyr offers a more compact way to get counts with the `count()` function!
+You can think of this function as a `group_by/summarise` combo.
+You list the columns you want to group by as arguments to `count()` and the output gives you a column `n` with the counts.
+It works with a single column or more than one, like `group_by()`.
 
 ```{r}
 #| label: glot-count
@@ -335,17 +399,23 @@ Get the number of languages by status and `Macroarea`.
 :::
 
 ::: {.callout-important collapse="true"}
-### R Note: Piping
+### Going further: Piping
 
-With the release of **R 4.1.0**, a new feature was introduced to the base language that has significantly improved the readability and expressiveness of R code: the **native pipe operator**, written as `|>`. The native pipe allows the result of one expression to be passed automatically as the **first argument** to another function. This simple idea has a profound impact on how we write R code, particularly when we are performing a sequence of data transformations.
+With the release of **R 4.1.0**, a new feature was introduced to the base language that has significantly improved the readability and expressiveness of R code: the **native pipe operator**, written as `|>`.
+The native pipe allows the result of one expression to be passed automatically as the **first argument** to another function.
+This simple idea has a profound impact on how we write R code, particularly when we are performing a sequence of data transformations.
 
-Before the native pipe, it was common to see deeply nested function calls that could be difficult to read and reason about. For example, consider the task of computing the square root of the sum of a vector:
+Before the native pipe, it was common to see deeply nested function calls that could be difficult to read and reason about.
+For example, consider the task of computing the square root of the sum of a vector:
 
 ``` r
 sqrt(sum(c(1, 2, 3, 4)))
 ```
 
-While this is relatively simple, as functions become more complex and more transformations are chained together, nested calls quickly become cumbersome. The native pipe solves this by allowing you to write each operation in a **left-to-right, stepwise manner**, which mirrors the logical flow of data. The key principle of the native pipe is that the **left-hand side (LHS) is evaluated first**, and its result is automatically passed as the **first argument** to the right-hand side (RHS). This means that for a simple pipe like:
+While this is relatively simple, as functions become more complex and more transformations are chained together, nested calls quickly become cumbersome.
+The native pipe solves this by allowing you to write each operation in a **left-to-right, stepwise manner**, which mirrors the logical flow of data.
+The key principle of the native pipe is that the **left-hand side (LHS) is evaluated first**, and its result is automatically passed as the **first argument** to the right-hand side (RHS).
+This means that for a simple pipe like:
 
 ``` r
 x |> f()
@@ -357,7 +427,10 @@ it is equivalent to writing:
 f(x)
 ```
 
-This principle is important because it defines the natural behavior of the pipe: whatever computation you produce on the LHS will be injected as the first input to the next function. Consider the `mtcars` dataset, which is built into R. Suppose we want to compute the average miles per gallon (`mpg`) for each number of cylinders (`cyl`). Using the native pipe in combination with `tidyverse` functions, the code is straightforward and highly readable:
+This principle is important because it defines the natural behavior of the pipe: whatever computation you produce on the LHS will be injected as the first input to the next function.
+Consider the `mtcars` dataset, which is built into R.
+Suppose we want to compute the average miles per gallon (`mpg`) for each number of cylinders (`cyl`).
+Using the native pipe in combination with `tidyverse` functions, the code is straightforward and highly readable:
 
 ``` r
 library(dplyr)
@@ -373,11 +446,14 @@ Let's break this down:
 2.  `group_by(cyl)` receives the dataset as its **first argument**, groups the data by the `cyl` column, and returns a grouped dataframe.
 3.  The grouped dataframe is then piped into `summarise(avg_mpg = mean(mpg))`, which calculates the mean `mpg` for each cylinder group.
 
-Notice that each step receives the output from the previous step as its first argument. This eliminates the need for intermediate variables and nested function calls, creating a natural, readable sequence of transformations.
+Notice that each step receives the output from the previous step as its first argument.
+This eliminates the need for intermediate variables and nested function calls, creating a natural, readable sequence of transformations.
 
 #### Comparison with the `magrittr` pipe (`%>%`) {.unnumbered}
 
-Before R introduced the native pipe, the `magrittr` package popularized piping with the `%>%` operator. Functionally, it achieves a very similar goal: passing the result of one expression to another function. For example, the earlier `group_by` and `summarise` operation can be written with `magrittr` as:
+Before R introduced the native pipe, the `magrittr` package popularized piping with the `%>%` operator.
+Functionally, it achieves a very similar goal: passing the result of one expression to another function.
+For example, the earlier `group_by` and `summarise` operation can be written with `magrittr` as:
 
 ``` r
 library(magrittr)
@@ -394,5 +470,6 @@ Some differences between the native pipe and `magrittr`:
 3.  `magrittr` allows more flexibility via the `.` placeholder, which can inject the LHS value into **any argument**.
 4.  Performance-wise, the native pipe has minimal overhead compared to `%>%`, which is a function call.
 
-Overall, the native pipe provides a simple, consistent, and readable way to chain operations, especially when working with `tidyverse` workflows. For users already familiar with `%>%`, the transition is intuitive, with the added benefit that this feature is now a part of base R.
+Overall, the native pipe provides a simple, consistent, and readable way to chain operations, especially when working with `tidyverse` workflows.
+For users already familiar with `%>%`, the transition is intuitive, with the added benefit that this feature is now a part of base R.
 :::

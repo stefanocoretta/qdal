@@ -700,26 +700,32 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-regression-num-num.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -800,7 +806,7 @@ window.Quarto = {
 <section id="frequentist-statistics-feuds-and-eugenics-a-brief-history" class="level2" data-number="27.1">
 <h2 data-number="27.1" class="anchored" data-anchor-id="frequentist-statistics-feuds-and-eugenics-a-brief-history"><span class="header-section-number">27.1</span> Frequentist statistics, feuds and eugenics: a brief history</h2>
 <p>A lot of current research is carried out with frequentist methods. This is a historical accident, based on both an initial misunderstanding of Bayesian statistics (which is, by the way, older than frequentist statistics) and the fact that frequentist maths was much easier to deal with (and personal computers did not exist at the time). Bayesian statistics, rooted in <a href="https://en.wikipedia.org/wiki/Thomas_Bayes">Thomas Bayes</a>‘s (1701-1771) work on updating probabilities with new evidence based on a specific interpretation of Bayes’ Theorem, remained largely dormant until the 20th century due to computational difficulties and philosophical debates. It gained widespread traction in the 1990s with advances in computational methods, especially the development of Markov Chain Monte Carlo (<a href="ch-regression-draws.html" class="quarto-xref"><span>Chapter 25</span></a>). However, modern frequentist statistics is attributed to three statisticians whose lives span several decades before the time Bayesianism found a place in statistical debates: Ronald Fisher (1890-1926), Jerzy Neyman (1894-1981) and Egon Pearson (1895-1980, the son of another statistician, Karl Pearson 1857-1936).</p>
-<p>The history of frequentist statistics is a tale of heated debates, feuds and the now discredited field of eugenics (a colonial movement with the aim of improving the genetic “quality” of human populations). <a href="https://en.wikipedia.org/wiki/Francis_Galton">Francis Galton</a> (1822-1911) is considered the originator of eugenics: this is the same Galton who came up with the idea of “regression toward mediocrity” which gives the name to regression models (see Spotlight box in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>). <a href="https://en.wikipedia.org/wiki/Karl_Pearson">Karl Pearson</a> was deeply influenced by Galton and saw statistics as a tool for improving racial fitness. Pearson’s Biometric School in Britain was explicitly tied to eugenics research. <a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a> was another British statistician who strongly believed in eugenics and racial differences. While both K. Pearson and Fisher were proponents of eugenics, they differed in their understanding of statistics. Fisher criticised K. Pearson’s approach as too mechanic and simplistic (thus earning the elder statistician’s lasting disapproval). Fisher came up with the concept of <strong>statistical significance</strong> and devised the famous <strong><em>p</em>-value</strong> as a way to quantify statistical significance based on data, against a hypothesis (to be nullified) of how the researcher thought the data were produced.</p>
+<p>The history of frequentist statistics is a tale of heated debates, feuds and the now discredited field of eugenics (a colonial movement with the aim of improving the genetic “quality” of human populations). <a href="https://en.wikipedia.org/wiki/Francis_Galton">Francis Galton</a> (1822-1911) is considered the originator of eugenics: this is the same Galton who came up with the idea of “regression toward mediocrity” which gives the name to regression models (see Going further box in <a href="ch-regression-intro.html" class="quarto-xref"><span>Chapter 23</span></a>). <a href="https://en.wikipedia.org/wiki/Karl_Pearson">Karl Pearson</a> was deeply influenced by Galton and saw statistics as a tool for improving racial fitness. Pearson’s Biometric School in Britain was explicitly tied to eugenics research. <a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a> was another British statistician who strongly believed in eugenics and racial differences. While both K. Pearson and Fisher were proponents of eugenics, they differed in their understanding of statistics. Fisher criticised K. Pearson’s approach as too mechanic and simplistic (thus earning the elder statistician’s lasting disapproval). Fisher came up with the concept of <strong>statistical significance</strong> and devised the famous <strong><em>p</em>-value</strong> as a way to quantify statistical significance based on data, against a hypothesis (to be nullified) of how the researcher thought the data were produced.</p>
 <p>Fisher’s contemporaries <a href="https://en.wikipedia.org/wiki/Jerzy_Neyman">Jerzy Neyman</a> and <a href="https://en.wikipedia.org/wiki/Egon_Pearson">Egon Pearson</a> (the son of K. Pearson), who both rejected eugenics, found Fisher’s critiques to K. Pearson’s (the father) approach well-founded, but they themselves thought Fisher’s significance testing fell short. While Fisher’s significance testing was based on quantifying significance in light of a single hypothesis, Neyman and E. Pearson (the son) argued that one should contrast two opposing hypotheses and control for error rates in rejecting one and accepting the other. They thus introduced the idea of “<strong>significance level</strong>”, a threshold which determined if one accepted a result as statistically significant or not. In sum, while Fisher’s approach was focused on estimating the <em>degree</em> of statistical significance, Neyman and Pearson’s approach was more interested in <em>decision-making</em> under uncertainty. “Fisherian frequentism” and “Neyman–Pearson frequentism”, as they later became to be known, are incompatible approaches, despite both being based on the same statistical concept of the <em>p</em>-value, because they entail two very different interpretations of statistical significance (and the objective of research more generally).</p>
 </section>
 <section id="null-hypothesis-significance-testing" class="level2" data-number="27.2">

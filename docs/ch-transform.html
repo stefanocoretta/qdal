@@ -652,26 +652,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-regression-num-num.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -746,7 +752,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="filter-rows" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="filter-rows"><span class="header-section-number">13.1</span> Filter rows</h2>
 <p>Filtering is normally used to filter rows in the data according to specific criteria: in other words, keep certain rows and drop others. Filtering data couldn’t be easier with <code>filter()</code>, from the <a href="https://dplyr.tidyverse.org">dplyr</a> package (one of the tidyverse core packages), Let’s work with the <code>coretta2022/glot_status.rds</code> data. Below you can find a preview of the data. Create a new R script called <code>week-03.R</code> and save it in <code>code/</code>. Read the <code>coretta2022/glot_status.rds</code> data.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>glot_status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
@@ -782,7 +788,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Logical operators return <code>TRUE</code> or <code>FALSE</code> depending on whether the statement they convey is true or false. Remember, <code>TRUE</code> and <code>FALSE</code> are logical values.</p>
 <p>Try the following code in the <code>Console</code>:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This will return FALSE</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">==</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -819,16 +825,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
 <ol type="a">
 <li>Which of the following does not contain a logical operator?
-<div id="radio_ANRXZKQBLO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ANRXZKQBLO" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_ANRXZKQBLO" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_ANRXZKQBLO" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_ANRXZKQBLO" value=""> <span><code>19 &lt; 2</code></span></label>
+<div id="radio_LDELCQGESK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_LDELCQGESK" value=""> <span><code>3 &gt; 1</code></span></label><label><input type="radio" autocomplete="off" name="radio_LDELCQGESK" value="answer"> <span><code>"a" = "a"</code></span></label><label><input type="radio" autocomplete="off" name="radio_LDELCQGESK" value=""> <span><code>"b" != "b"</code></span></label><label><input type="radio" autocomplete="off" name="radio_LDELCQGESK" value=""> <span><code>19 &lt; 2</code></span></label>
 </div></li>
 <li>Which of the following returns <code>c(FALSE, TRUE)</code>?
-<div id="radio_IZJWKKOZHY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IZJWKKOZHY" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_IZJWKKOZHY" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_IZJWKKOZHY" value=""> <span><code>"apple" != "apple"</code></span></label>
+<div id="radio_VHUHELJWNV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VHUHELJWNV" value=""> <span><code>3 &gt; c(1, 5)</code></span></label><label><input type="radio" autocomplete="off" name="radio_VHUHELJWNV" value="answer"> <span><code>c("a", "b") != c("a")</code></span></label><label><input type="radio" autocomplete="off" name="radio_VHUHELJWNV" value=""> <span><code>"apple" != "apple"</code></span></label>
 </div></li>
 </ol>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
@@ -873,8 +881,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-filter-function" class="level3" data-number="13.1.2">
 <h3 data-number="13.1.2" class="anchored" data-anchor-id="the-filter-function"><span class="header-section-number">13.1.2</span> The <code>filter()</code> function</h3>
-<p>Filtering in R with the tidyverse is straightforward. You can use the <code>filter()</code> function. <code>filter()</code> takes one or more statements that return <code>TRUE</code> or <code>FALSE</code>. A common use case is with logical operators. The following code filters the <code>status</code> column so that only the <code>extinct</code> status is included in the new data frame <code>extinct</code>. You’ll notice we are using the pipe <code>|&gt;</code> to transfer the data into the <code>filter()</code> function (you learned about the pipe in <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a>). The output of the filter function is assigned <code>&lt;-</code> to <code>extinct</code>. The flow might seem a bit counter-intuitive but you will get used to think like this when writing R code soon enough (although see the R Note box on assignment direction)!</p>
-<div class="cell">
+<p>Filtering in R with the tidyverse is straightforward. You can use the <code>filter()</code> function. <code>filter()</code> takes one or more statements that return <code>TRUE</code> or <code>FALSE</code>. A common use case is with logical operators. The following code filters the <code>status</code> column so that only the <code>extinct</code> status is included in the new data frame <code>extinct</code>. You’ll notice we are using the pipe <code>|&gt;</code> to transfer the data into the <code>filter()</code> function (you learned about the pipe in <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a>). The output of the filter function is assigned <code>&lt;-</code> to <code>extinct</code>. The flow might seem a bit counter-intuitive but you will get used to think like this when writing R code soon enough (although see the Going further box on assignment direction)!</p>
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>extinct <span class="ot">&lt;-</span> glot_status <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(status <span class="sc">==</span> <span class="st">"extinct"</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -888,12 +896,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Neat! <code>extinct</code> contains only those languages whose status is <code>extinct</code>. What if we want to include <em>all statuses except</em> <code>extinct</code>? Easy, we use the non-equal operator <code>!=</code>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>not_extinct <span class="ot">&lt;-</span> glot_status <span class="sc">|&gt;</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(status <span class="sc">!=</span> <span class="st">"extinct"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>not_extinct</code> contains all languages whose status is <em>not</em> <code>extinct</code>. And if we want only non-extinct languages from <code>South America</code>? We can include multiple statements separated by a comma!</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>south_america <span class="ot">&lt;-</span> glot_status <span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(status <span class="sc">!=</span> <span class="st">"extinct"</span>, Macroarea <span class="sc">==</span> <span class="st">"South America"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -942,7 +950,7 @@ Important
 </div>
 </div>
 <p>Try these in the <code>Console</code>:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># TRUE</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -955,7 +963,7 @@ Important
 </div>
 </div>
 <p>But <code>%in%</code> is even more powerful because the value on the left does not have to be a single value, but it can also be a vector! We say <code>%in%</code> is <em>vectorised</em> because it can work with vectors (most functions and operators in R are vectorised).</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># TRUE, TRUE</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">5</span>, <span class="dv">8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -983,7 +991,7 @@ Important
 </div>
 <div class="callout-body-container callout-body">
 <p>Filter <code>glot_status</code> to include only the macro-areas (<code>Macroarea</code>) of the Global South and only languages that are either “threatened”, “shifting”, “moribund” or “nearly_extinct”. I have started the code for you, you just need to write the line for filtering <code>status</code>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>global_south <span class="ot">&lt;-</span> glot_status <span class="sc">|&gt;</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    Macroarea <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Africa"</span>, <span class="st">"Australia"</span>, <span class="st">"Papunesia"</span>, <span class="st">"South America"</span>),</span>
@@ -1005,7 +1013,7 @@ Important
 </div>
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>global_south <span class="ot">&lt;-</span> glot_status <span class="sc">|&gt;</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    Macroarea <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Africa"</span>, <span class="st">"Australia"</span>, <span class="st">"Papunesia"</span>, <span class="st">"South America"</span>),</span>
@@ -1020,7 +1028,7 @@ Important
 <section id="mutate-columns" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="mutate-columns"><span class="header-section-number">13.2</span> Mutate columns</h2>
 <p>To change existing columns or create new columns, we can use the <code>mutate()</code> function from the <a href="https://dplyr.tidyverse.org">dplyr</a> package. To learn how to use <code>mutate()</code>, we will re-create the <code>status</code> column (let’s call it <code>Status</code> this time) from the <code>Code_ID</code> column in <code>glot_status</code>. The <code>Code_ID</code> column contains the status of each language in the form <code>aes-STATUS</code> where <code>STATUS</code> is one of <code>not_endangered</code>, <code>threatened</code>, <code>shifting</code>, <code>moribund</code>, <code>nearly_extinct</code> and <code>extinct</code>. You can check the labels in a column with the <code>unique()</code> function. This function is not from the tidyverse, but it is a base R function, so you need to extract the column from the tibble with <code>$</code> (the dollar-sign operator). <code>unique()</code> will list all the unique labels in the column (note that it works with numbers too).</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(glot_status<span class="sc">$</span>Code_ID)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "aes-shifting"       "aes-extinct"        "aes-moribund"      
@@ -1041,7 +1049,7 @@ Important
 </div>
 </div>
 <p>We want to create a new column called <code>Status</code> which has only the status part of the label without the <code>aes-</code> part. To remove <code>aes-</code> from the <code>Code_ID</code> column we can use the <code>str_remove()</code> function from the <a href="https://stringr.tidyverse.org">stringr</a> package. Check the documentation of <code>?str_remove</code> to learn which arguments it uses.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="ot">&lt;-</span> glot_status <span class="sc">|&gt;</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Status =</span> <span class="fu">str_remove</span>(Code_ID, <span class="st">"aes-"</span>)</span>
@@ -1049,7 +1057,7 @@ Important
 </div>
 <p>If you check <code>glot_status</code> now you will find that a new column, <code>Status</code>, has been added. This column is a character column (<code>chr</code>). You see that, as with <code>filter()</code>, you have to assign the output of <code>mutate()</code> to a variable. In the code above we are re-assigning the output to the <code>glot_status</code> variable which we started with. This means that we are <em>overwriting</em> the original <code>glot_status</code>. However, since we have added a new column, we have in practice only added the new column to the old data. If you use the name of an existing column, you will be effectively overwriting that column, so you must be careful with <code>mutate()</code>.</p>
 <p>Let’s count the number of languages for each endangerment status using the new <code>Status</code> column. You learned about the <code>count()</code> feature in <a href="ch-summarise.html" class="quarto-xref"><span>Chapter 11</span></a>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">|&gt;</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Status) <span class="sc">|&gt;</span> </span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1077,7 +1085,7 @@ Important
 </div>
 </div>
 <p>A vector/column can be mutated into a factor column with the <code>as.factor()</code> function. In the following code, we change the existing column <code>Status</code>, in other words we overwrite it (this happens automatically, because the <code>Status</code> column already exists, so it is replaced).</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="ot">&lt;-</span> glot_status <span class="sc">|&gt;</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Status =</span> <span class="fu">as.factor</span>(Status)</span>
@@ -1090,7 +1098,7 @@ Important
 </div>
 </div>
 <p>The <code>levels()</code> functions returns the levels of a factor column in the order they are stored in the factor: as mentioned above, by default the order is alphabetical. What if we want the levels of <code>Status</code> to be ordered in a more logical manner: <code>not_endangered</code>, <code>threatened</code>, <code>shifting</code>, <code>moribund</code>, <code>nearly_extinct</code> and <code>extinct</code>? Easy! We can use the <code>factor()</code> function instead of <code>as.factor()</code> and specify the levels and their order in the <code>levels</code> argument.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="ot">&lt;-</span> glot_status <span class="sc">|&gt;</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Status =</span> <span class="fu">factor</span>(</span>
@@ -1120,7 +1128,7 @@ Important
 </div>
 </div>
 <p>Here is a preview of data plotting in R, which you will learn in <a href="ch-plotting.html" class="quarto-xref"><span>Chapter 16</span></a>, with the status in the logical order from least to most endangered and extinct.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">|&gt;</span></span>
@@ -1128,10 +1136,10 @@ Important
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-status-bar-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-status-bar-3" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-status-bar-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-transform_files/figure-html/fig-status-bar-3-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-transform_files/figure-html/fig-status-bar-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-status-bar-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;13.1: Number of languages by endangerment status (repeated).
@@ -1146,7 +1154,7 @@ Figure&nbsp;13.1: Number of languages by endangerment status (repeated).
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>R Note: Assignment direction
+<span class="screen-reader-only">Important</span>Going further: Assignment direction
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>

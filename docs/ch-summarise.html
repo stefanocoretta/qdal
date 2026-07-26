@@ -671,26 +671,32 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-regression-num-num.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -766,7 +772,7 @@ div.csl-indent {
 <h2 data-number="11.1" class="anchored" data-anchor-id="summarise-with-summarise"><span class="header-section-number">11.1</span> Summarise with <code>summarise()</code></h2>
 <p>Now that you have learned about summary measures, we can talk about how to summarise data in R, rather than just vectors as we did in the previous chapter. When you work with data, you always want to get summary measures for most of the variables in the data. Data reports usually include summary measures. It is also important to understand which summary measure is appropriate for which type of variable, which was covered in the previous section. Now, you will learn how to obtain summary measures using the <code>summarise()</code> function from the <a href="https://dplyr.tidyverse.org">dplyr</a> tidyverse package. Let’s practice with the data from <span class="citation" data-cites="song2020">Song et al. (<a href="references.html#ref-song2020" role="doc-biblioref">2020</a>)</span> you read in <a href="ch-read-data.html" class="quarto-xref"><span>Chapter 9</span></a>. We want to get a measure of central tendency and dispersion for the reaction times, in the <code>RT</code> column. In order to decide which measures to pick, think about the nature of the <code>RT</code> variable. Reaction times is a numeric and continuous statistical variable, and it can only have positive values. So the mean and standard deviations are appropriate measures. Let’s start with the mean of the reaction time column <code>RT</code>. Go to your <code>week-02.R</code> script: if you followed <a href="ch-read-data.html" class="quarto-xref"><span>Chapter 9</span></a> (and you should have), the script should already have the code to attach the tidyverse and read the <code>song2020/shallow.csv</code> file into a variable called <code>shallow</code>.</p>
 <p>Now let’s calculate the mean of <code>RT</code> with <code>summarise()</code>. The <code>summarise()</code> function takes at least two arguments: (1) the tibble to summarise, (2) one or more summary functions applied to columns in the tibble. In this case we just want the mean RTs. To get this, you write <code>RT_mean = mean(RT)</code> which tells the function to calculate the mean of the <code>RT</code> column and save the result in a new column called <code>RT_mean</code>. Yes, <code>summarise()</code> returns a tibble (a data frame)! It might seem overkill now, but you will see below that it is useful when you are grouping the data, so that for example you can get the mean of different groups in the data. Here is the code with its output:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(shallow, <span class="at">RT_mean =</span> <span class="fu">mean</span>(RT))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
@@ -777,7 +783,7 @@ div.csl-indent {
 </div>
 </div>
 <p>Great! The mean reaction times of the entire sample is 867.3592 ms. Sometimes you might want to round the numbers. You can round numbers with the <code>round()</code> function. For example:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>num <span class="ot">&lt;-</span> <span class="fl">867.3592</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(num)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -793,7 +799,7 @@ div.csl-indent {
 </div>
 </div>
 <p>The second argument of the <code>round()</code> function sets the number of decimals to round to (by default, it is <code>0</code>, so the number is rounded to the nearest integer, that is, to the nearest whole number with no decimal values). Let’s recalculate the mean by rounding it this time.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(shallow, <span class="at">RT_mean =</span> <span class="fu">round</span>(<span class="fu">mean</span>(RT)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
@@ -804,7 +810,7 @@ div.csl-indent {
 </div>
 </div>
 <p>What if we want also the standard deviation? Easy: we use the <code>sd()</code> function. Round the mean and SD with the <code>round()</code> function when you write the code in your <code>week-02.R</code> script.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># round the mean and SD</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(shallow, <span class="at">RT_mean =</span> <span class="fu">mean</span>(RT), <span class="at">RT_sd =</span> <span class="fu">sd</span>(RT))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -820,7 +826,7 @@ div.csl-indent {
 </div>
 <div class="callout-body-container callout-body">
 <p>Complete this code to also get the minimum and maximum RT and round all measures to the nearest integer.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  shallow,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">RT_mean =</span> <span class="fu">mean</span>(RT), <span class="at">RT_sd =</span> <span class="fu">sd</span>(RT),</span>
@@ -847,7 +853,7 @@ div.csl-indent {
 Show me
 </summary>
 <div class="markdown">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  shallow,</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">RT_mean =</span> <span class="fu">round</span>(<span class="fu">mean</span>(RT)), <span class="at">RT_sd =</span> <span class="fu">round</span>(<span class="fu">sd</span>(RT)),</span>
@@ -881,18 +887,18 @@ Show me
 <section id="na-not-available" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="na-not-available"><span class="header-section-number">11.2</span> <code>NA</code>: Not Available</h2>
 <p>Most base R functions, like <code>mean()</code>, <code>sd()</code>, <code>median()</code> and so on, behave unexpectedly if the vector they are used on contains <code>NA</code> values. <code>NA</code> is a special object in R, that indicates that a value is <strong>N</strong>ot <strong>A</strong>vailable, meaning that that observation does not have a value (or that the value was not observed in that case). For example, in the following numeric vector, there are 5 objects:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Four are numbers and one is <code>NA</code>. If you calculate the mean of <code>a</code> with <code>mean()</code> something strange happens.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
 </div>
 <p>The functions returns <code>NA</code>. This is because by default when just one value in the vector is <code>NA</code> then operations on the vector will return <code>NA</code>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
@@ -907,7 +913,7 @@ Show me
 </div>
 </div>
 <p>If you want to discard the <code>NA</code> values when operating on a vector that contains them, you have to set the <code>na.rm</code> (for “<code>NA</code> remove”) argument to <code>TRUE</code>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(a, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.75</code></pre>
@@ -931,16 +937,18 @@ Show me
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
 <ol type="a">
 <li>What does the <code>na.rm</code> argument of <code>mean()</code> do?
-<div id="radio_OOAYWQXXHU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OOAYWQXXHU" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_OOAYWQXXHU" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_OOAYWQXXHU" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
+<div id="radio_MUQTXNLGKK" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_MUQTXNLGKK" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_MUQTXNLGKK" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_MUQTXNLGKK" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
 </div></li>
 <li>Which is the mean of <code>c(4, 23, NA, 5)</code> when <code>na.rm</code> has the default value?
-<div id="radio_SGVRSJIHEU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SGVRSJIHEU" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_SGVRSJIHEU" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_SGVRSJIHEU" value=""> <span><code>10.66</code>.</span></label>
+<div id="radio_QLHMZUVRUL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QLHMZUVRUL" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_QLHMZUVRUL" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_QLHMZUVRUL" value=""> <span><code>10.66</code>.</span></label>
 </div></li>
 </ol>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
@@ -963,11 +971,11 @@ Show me
 <section id="grouping-data-with-group_by" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="grouping-data-with-group_by"><span class="header-section-number">11.3</span> Grouping data with <code>group_by()</code></h2>
 <p>More often, you will want to calculate summary measures for specific subsets of the data. An elegant way of doing this is with the <code>group_by()</code> function from dplyr. This function takes a tibble, groups the data based on the specified columns, and returns another tibble with the grouping.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>shallow_g <span class="ot">&lt;-</span> <span class="fu">group_by</span>(shallow, Group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>It looks as if nothing happened, but now the rows in the <code>shallow_g</code> tibble are grouped depending on the value of <code>Group</code> (<code>L1</code> or <code>L2</code>). If you print out the tibble in the console (just write <code>shallow_g</code> in the Console and press enter), you will notice that the second line of the output says <code>Groups: Group [2]</code>, like in the output below. This line tells you how the tibble is grouped: here it is grouped by <code>Group</code> and there are two groups.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6,500 × 11
 # Groups:   Group [2]
@@ -988,7 +996,7 @@ Show me
 </div>
 </div>
 <p>The grouping information is stored as an “attribute” in the tibble, named <code>groups</code>. You can check this attribute with <code>attr()</code>. You get a tibble with the groupings. Hopefully now you understand that, even if nothing seems to have happened, the tibble has been grouped. Since you saved the output of <code>group_by()</code> into a new variable <code>shallow_g</code>, note that <code>shallow</code> was not affected (try running <code>attr(shallow, "groups")</code> and you will get a <code>NULL</code>). Here’s the output:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   Group       .rows
@@ -1029,7 +1037,7 @@ Show me
 Show me
 </summary>
 <div class="markdown">
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  shallow_g,</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="fu">round</span>(<span class="fu">mean</span>(RT)),</span>
@@ -1046,7 +1054,7 @@ Show me
 <section id="what-the-pipe" class="level3" data-number="11.3.1">
 <h3 data-number="11.3.1" class="anchored" data-anchor-id="what-the-pipe"><span class="header-section-number">11.3.1</span> What the pipe!?</h3>
 <p>Think of a pipe <code>|&gt;</code> as a teleporter. The pipe <code>|&gt;</code> teleports whatever is on its left into whatever is on its right. The pipe allows you to “stack” multiple operations into a pipeline, without the need to assign each output to a variable. This means that the code is more succinct and even more readable because the way you write code follows exactly the pipeline. So we can get summary measures for each group in <code>Group</code> like so:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>shallow <span class="sc">|&gt;</span> </span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Group) <span class="sc">|&gt;</span> </span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">round</span>(<span class="fu">mean</span>(RT)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1064,7 +1072,7 @@ Show me
 <li><p>Pipe it into <code>group_by()</code> and group it by <code>Group</code>.</p></li>
 <li><p>Summarise the grouped data with <code>summarise()</code>.</p></li>
 </ul>
-<p>Hopefully this just makes sense, but check the R Note box below if you want more details.</p>
+<p>Hopefully this just makes sense, but check the Going further box below if you want more details.</p>
 <p><code>group_by()</code> can group according to more than one column, by listing the columns separated by commas (like <code>group_by(Col1, Col2, Col3)</code>). When you list more than one column, the grouping is fully crossed: you get a group for each combination of the grouping columns. Try to group the data by <code>Group</code> and <code>Word_Nonword</code> and get summary measures.</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1101,7 +1109,7 @@ Show me
 <h2 data-number="11.4" class="anchored" data-anchor-id="counting-observations-with-count"><span class="header-section-number">11.4</span> Counting observations with <code>count()</code></h2>
 <p>If you want to count observations you can use the <code>summarise()</code> function with <code>n()</code>, another dplyr function that returns the group size. For example, let’s count the number of languages by their endangerment status. The data in <code>coretta2022/glot_status.rds</code> contains the endangerment status for 7,845 languages from <a href="https://glottolog.org">Glottolog</a>. There are thousands of languages in the world, but most of them are losing speakers, and some are already no longer spoken. The column <code>status</code> contains the endangerment status of a language in the data, on a scale from <code>not endangered</code> (languages with large populations of speakers) through <code>threatened</code>, <code>shifting</code> and <code>nearly extinct</code>, to <code>extinct</code> (languages that have no living speakers left). Read the <code>coretta2022/glot_status.rds</code> data and check it out.</p>
 <p>To count the number of languages by status, we group the data by <code>status</code> and we summarise with <code>n()</code>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">|&gt;</span> </span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(status) <span class="sc">|&gt;</span> </span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1114,7 +1122,7 @@ Show me
 </div>
 </div>
 <p>This approach works. However, dplyr offers a more compact way to get counts with the <code>count()</code> function! You can think of this function as a <code>group_by/summarise</code> combo. You list the columns you want to group by as arguments to <code>count()</code> and the output gives you a column <code>n</code> with the counts. It works with a single column or more than one, like <code>group_by()</code>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">|&gt;</span> </span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(status)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -1144,7 +1152,7 @@ Show me
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>R Note: Piping
+<span class="screen-reader-only">Important</span>Going further: Piping
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>

@@ -72,10 +72,11 @@ The title in the box will specify what type of content.
 :::
 
 ::: callout-important
-## R Note, Spotlight or solutions
+## Aside, Going further or solutions
 
-Red boxes called "R Note" explain something about R or contain R tips that don't quite fit in the main text.
-Spotlight" boxes focus on statistical concepts, historical context or philosophy. Red boxes called "Solutions" are solutions to the exercises.
+Red boxes called "Aside" explain something that doesn't quite fit in the main text but that are important to understand the topics of that chapter.
+"Going further" boxes contain more advanced information or point you to extra resources.
+Red boxes called "Solutions" are solutions to the exercises.
 :::
 
 The textbook will teach how to use R.

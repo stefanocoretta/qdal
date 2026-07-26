@@ -724,7 +724,7 @@ quantile2(mvp_bm_draws$NSL1_homesign_p, c(0.1, 0.9)) |> round(2)
 > Moreover, the probability of multi-verb predicates in NSL2 indicates that single and multi-verb predicates are equally probable in NSL2.
 
 ::: {.callout-warning collapse="true"}
-### Spotlight: Bernoulli, binomial and logistic regression
+### Aside: Bernoulli, binomial and logistic regression
 
 A lot of researchers know Bernoulli models under the name "binomial" or "logistic" regression.
 Please, note that these are exactly equivalent: they refer to a model with a Bernoulli distribution for the outcome variable.

@@ -385,7 +385,7 @@ pp_check(rt_bm_2, ndraws = 50)
 ```
 
 ::: {.callout-important collapse="true"}
-## R note: Logging predictors
+## Going further: Logging predictors
 
 We are using a log-normal family to model RTs, since we are assuming them to be log-normal.
 In fact, numeric predictors that are assumed to be log-normal can be logged when entered in a regression model.

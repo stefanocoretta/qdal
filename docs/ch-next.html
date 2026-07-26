@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>38&nbsp; What’s next? – Quantitative Data Analysis for Linguists in R</title>
+<title>39&nbsp; What’s next? – Quantitative Data Analysis for Linguists in R</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -341,7 +341,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-learned.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-next.html"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-num-num.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-next.html"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -698,26 +698,32 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-regression-num-num.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -755,14 +761,14 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#further-interactions" id="toc-further-interactions" class="nav-link active" data-scroll-target="#further-interactions"><span class="header-section-number">38.1</span> Further interactions</a></li>
-  <li><a href="#multilevel-regression-models-aka-mixed-effects" id="toc-multilevel-regression-models-aka-mixed-effects" class="nav-link" data-scroll-target="#multilevel-regression-models-aka-mixed-effects"><span class="header-section-number">38.2</span> Multilevel regression models (aka mixed-effects)</a></li>
-  <li><a href="#sec-next-causal" id="toc-sec-next-causal" class="nav-link" data-scroll-target="#sec-next-causal"><span class="header-section-number">38.3</span> Causal inference</a></li>
-  <li><a href="#sec-next-priors" id="toc-sec-next-priors" class="nav-link" data-scroll-target="#sec-next-priors"><span class="header-section-number">38.4</span> Prior probability distributions and sensitivity analyses</a></li>
-  <li><a href="#further-distribution-families" id="toc-further-distribution-families" class="nav-link" data-scroll-target="#further-distribution-families"><span class="header-section-number">38.5</span> Further distribution families</a></li>
-  <li><a href="#non-linear-modelling" id="toc-non-linear-modelling" class="nav-link" data-scroll-target="#non-linear-modelling"><span class="header-section-number">38.6</span> Non-linear modelling</a></li>
-  <li><a href="#sec-next-size" id="toc-sec-next-size" class="nav-link" data-scroll-target="#sec-next-size"><span class="header-section-number">38.7</span> Sample size determination</a></li>
-  <li><a href="#dimensionality-reduction-approaches" id="toc-dimensionality-reduction-approaches" class="nav-link" data-scroll-target="#dimensionality-reduction-approaches"><span class="header-section-number">38.8</span> Dimensionality reduction approaches</a></li>
+  <li><a href="#further-interactions" id="toc-further-interactions" class="nav-link active" data-scroll-target="#further-interactions"><span class="header-section-number">39.1</span> Further interactions</a></li>
+  <li><a href="#multilevel-regression-models-aka-mixed-effects" id="toc-multilevel-regression-models-aka-mixed-effects" class="nav-link" data-scroll-target="#multilevel-regression-models-aka-mixed-effects"><span class="header-section-number">39.2</span> Multilevel regression models (aka mixed-effects)</a></li>
+  <li><a href="#sec-next-causal" id="toc-sec-next-causal" class="nav-link" data-scroll-target="#sec-next-causal"><span class="header-section-number">39.3</span> Causal inference</a></li>
+  <li><a href="#sec-next-priors" id="toc-sec-next-priors" class="nav-link" data-scroll-target="#sec-next-priors"><span class="header-section-number">39.4</span> Prior probability distributions and sensitivity analyses</a></li>
+  <li><a href="#further-distribution-families" id="toc-further-distribution-families" class="nav-link" data-scroll-target="#further-distribution-families"><span class="header-section-number">39.5</span> Further distribution families</a></li>
+  <li><a href="#non-linear-modelling" id="toc-non-linear-modelling" class="nav-link" data-scroll-target="#non-linear-modelling"><span class="header-section-number">39.6</span> Non-linear modelling</a></li>
+  <li><a href="#sec-next-size" id="toc-sec-next-size" class="nav-link" data-scroll-target="#sec-next-size"><span class="header-section-number">39.7</span> Sample size determination</a></li>
+  <li><a href="#dimensionality-reduction-approaches" id="toc-dimensionality-reduction-approaches" class="nav-link" data-scroll-target="#dimensionality-reduction-approaches"><span class="header-section-number">39.8</span> Dimensionality reduction approaches</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-next.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -770,9 +776,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-learned.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-next.html"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-num-num.html">Week 10</a></li><li class="breadcrumb-item"><a href="./ch-next.html"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-next" class="quarto-section-identifier"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></h1>
+<h1 class="title"><span id="sec-next" class="quarto-section-identifier"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></h1>
 </div>
 
 
@@ -792,27 +798,27 @@ window.Quarto = {
 <p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
 <p>You made it! You completed your journey in learning the basics of quantitative research methods, R and Open Research principles and practices. This is not the end, of course. Becoming proficient in quantitative methods requires years of practices and one semester is just not enough. While everything we covered in this course is a necessary pre-requisite, most research will require you to learn much much more.</p>
 <p>This section gives you a glimpse of other topics you could learn about and topics you might need for your research (including your dissertation/thesis if you will be doing that soon). For each topic I will point you to some resources, but note that in some cases you might have to do some preliminary readings to be able to consume the contents of the linked resources. I am planning to add extra chapters in this textbook to cover these topics in the future, but until I have time to do that, you will have to make do with external resources.</p>
-<section id="further-interactions" class="level2" data-number="38.1">
-<h2 data-number="38.1" class="anchored" data-anchor-id="further-interactions"><span class="header-section-number">38.1</span> Further interactions</h2>
+<section id="further-interactions" class="level2" data-number="39.1">
+<h2 data-number="39.1" class="anchored" data-anchor-id="further-interactions"><span class="header-section-number">39.1</span> Further interactions</h2>
 <p>In <a href="ch-regression-interaction.html" class="quarto-xref"><span>Chapter 35</span></a>, you learned how to model an interaction between two categorical predictors in data from <span class="citation" data-cites="winter2012">Winter and Grawunder (<a href="references.html#ref-winter2012" role="doc-biblioref">2012</a>)</span>: gender and attitude (and their effect on mean f0). While categorical/categorical interactions are quite straightforward, the other combinations are also very common but they tend to be more involved because of the presence of a numeric predictor: the other two-way interactions are categorical/numeric and numeric/numeric. Interactions are not restricted to two-way combinations: in certain cases you might need three-way, four-way interactions or higher.</p>
 <p>Linguistic theory should determine which interactions are needed in your model, but when in doubt or when doing exploratory research it doesn’t hurt to include interactions so that these can be estimated. The posterior of the interaction will provide you with an estimate of the interaction. Sometimes it is fine to assume that the estimate of one predictor is independent from other predictors and in that case you can do without interactions. In other cases your research question will require you to include interaction. There isn’t a cookbook for interactions and you will just have to think about them on a case-by-case basis.</p>
 <p>To learn more about interactions, see <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>, Ch. 8)</span>. Within the Null Ritualistic approach, it has become popular to drop interactions if they are not significant, but this is very problematic because a non-significant interaction doesn’t automatically mean that there isn’t one (the usual problem of <em>p</em>-values).</p>
 </section>
-<section id="multilevel-regression-models-aka-mixed-effects" class="level2" data-number="38.2">
-<h2 data-number="38.2" class="anchored" data-anchor-id="multilevel-regression-models-aka-mixed-effects"><span class="header-section-number">38.2</span> Multilevel regression models (aka mixed-effects)</h2>
+<section id="multilevel-regression-models-aka-mixed-effects" class="level2" data-number="39.2">
+<h2 data-number="39.2" class="anchored" data-anchor-id="multilevel-regression-models-aka-mixed-effects"><span class="header-section-number">39.2</span> Multilevel regression models (aka mixed-effects)</h2>
 <p>Most research in linguistics involves multiple observations from different participants, items, texts, corpora, schools, and so on (this design is known as <em>repeated measures</em>). Unless you instruct them so, regression models will not be aware of hierarchy in the data (like different participants or texts). Instead, the model will work on the assumption that each data point is independent. Estimates obtained through regression modelling will be biased because of this wrong assumption. A solution is to include variables like participant or item in the model as “varying” terms.</p>
 <p>Models with variables entered as varying terms are known variably as multilevel, hierarchical, nested, mixed-effects, random-effects models. As always, don’t let the different terms fool you: they all refer to the same type of regression model. In linguistics, it is common to call them <em>mixed-effects linear</em> models, but they are not a special class of regression models. Varying terms are also commonly called “random effects”. However, randomness is not a characterising feature of varying terms and the same variable could in principle be entered as a varying or constant term depending on the study design and research question.</p>
 <p>To learn about hierarchical models and varying terms, see <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>, Ch 13-14)</span>, <span class="citation" data-cites="nalborczyk2019">Nalborczyk et al. (<a href="references.html#ref-nalborczyk2019" role="doc-biblioref">2019</a>)</span>, <span class="citation" data-cites="burkner2018">Bürkner (<a href="references.html#ref-burkner2018" role="doc-biblioref">2018</a>)</span> and <span class="citation" data-cites="veenman2023">Veenman et al. (<a href="references.html#ref-veenman2023" role="doc-biblioref">2023</a>)</span>. For an introduction to multilevel models fitted within the Null Ritual approach, see <span class="citation" data-cites="winter2013">Winter (<a href="references.html#ref-winter2013" role="doc-biblioref">2013</a>)</span>. On terminology and definitions, see the following blog post <a href="https://stefanocoretta.github.io/posts/2021-03-15-on-random-effects/" class="uri">https://stefanocoretta.github.io/posts/2021-03-15-on-random-effects/</a> and <span class="citation" data-cites="gelman2005">Gelman (<a href="references.html#ref-gelman2005" role="doc-biblioref">2005</a>)</span>.</p>
 </section>
-<section id="sec-next-causal" class="level2" data-number="38.3">
-<h2 data-number="38.3" class="anchored" data-anchor-id="sec-next-causal"><span class="header-section-number">38.3</span> Causal inference</h2>
+<section id="sec-next-causal" class="level2" data-number="39.3">
+<h2 data-number="39.3" class="anchored" data-anchor-id="sec-next-causal"><span class="header-section-number">39.3</span> Causal inference</h2>
 <p>One maxim any researcher knows about is “correlation is not causation”. This is the idea that statistical correlation between two or more variables (e.g.&nbsp;<em>x</em> and <em>y</em> are correlated) should not be interpreted causally (<em>x</em> causes <em>y</em>). However, in explanatory research we are truly not just interested in correlations, but explanatory questions are ultimately about causation. The language we use also reflects a causal interest: “the effect of <em>x</em> on <em>y</em>”. For example, when we investigate whether inclusive language policies improve language revitalisation efforts, we are interested in the <em>causal</em> relationship between inclusive language policies and language revitalisation, not just in their numeric correlation.</p>
 <p>Correlation is not causation, unless one adopts a causal approach. <strong>Causal Inference</strong> is one such approach, based on work by Judea Pearl on <em>do-</em>calculus (a branch of mathematics and logic for the estimation of causal effects). An applied extension of <em>do</em>-calculus is the use of <strong>Directed Acyclic Graphs</strong>. These graphs are created by the research to layout the causal relationships between variables. Estimation without causal inference can be biased, because of relationships between variables like mediation, confounding and colliding.</p>
 <p><strong>Mediation</strong> is when a variable <span class="math inline">\(M\)</span> is caused by <span class="math inline">\(X\)</span> and it causes <span class="math inline">\(Y\)</span> but <span class="math inline">\(X\)</span> doesn’t directly cause <span class="math inline">\(Y\)</span>: <span class="math inline">\(X \rightarrow M \rightarrow Y\)</span>. If you fit a regression model <span class="math inline">\(Y \sim X\)</span> you might find a correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> even if there is none because of the mediating effect of <span class="math inline">\(M\)</span>. In other words, once you account for the effect <span class="math inline">\(X\)</span> on <span class="math inline">\(M\)</span>, <span class="math inline">\(X\)</span> has no further direct effect on <span class="math inline">\(Y\)</span>. Confounding is when a variable <span class="math inline">\(C\)</span> causes both <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> but <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have no causal relationship: <span class="math inline">\(X \leftarrow C \rightarrow Y\)</span>. A regression model <span class="math inline">\(Y \sim X\)</span> will find a correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> even if there is none, because of the confounding effect of <span class="math inline">\(C\)</span>. Colliding is conceptually the reverse of confounding: <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> both cause <span class="math inline">\(K\)</span>, but they are not directly causally linked, <span class="math inline">\(X \rightarrow K \leftarrow Y\)</span>. A regression model <span class="math inline">\(Y \sim X\)</span> will find a correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> even if there is none.</p>
 <p>To learn about Causal Inference and Directed Acyclic Graphs, see <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span> Ch 5-6 (and subsequent). The YouTube video-lectures by McElreath are also useful: <a href="https://www.youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus" class="uri">https://www.youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVSus</a>. Check out <span class="citation" data-cites="rohrer2018">Rohrer (<a href="references.html#ref-rohrer2018" role="doc-biblioref">2018</a>)</span> for a paper-format introduction.</p>
 </section>
-<section id="sec-next-priors" class="level2" data-number="38.4">
-<h2 data-number="38.4" class="anchored" data-anchor-id="sec-next-priors"><span class="header-section-number">38.4</span> Prior probability distributions and sensitivity analyses</h2>
+<section id="sec-next-priors" class="level2" data-number="39.4">
+<h2 data-number="39.4" class="anchored" data-anchor-id="sec-next-priors"><span class="header-section-number">39.4</span> Prior probability distributions and sensitivity analyses</h2>
 <p>You have encountered priors in <a href="ch-bayes.html" class="quarto-xref"><span>Chapter 20</span></a>, but we have been using brms default priors through the course. In most context the default priors will be enough, but it is worth thinking about priors even when you use the default priors.</p>
 <p>Priors are probability distributions, like the other probability distributions you’ve been working with so far. They define the probability of a specific model parameter taking certain values: in other words, you define a probability distribution over a range of values to express your prior belief in relation to which values you believe the parameter could take. In the simplest of cases, prior probability distributions can be expressed as Gaussian distributions, where you specify a prior mean and a standard deviation for a specific parameter. Each model parameter requires a prior (brms sets default priors for any parameter the model you are fitting has). For example, for a simple Gaussian model of reaction times (you have learned in <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 31</span></a> that RTs are not Gaussian, but let’s use the Gaussian distribution to make things easier) <span class="math inline">\(RT \sim Gaussian(\mu, \sigma)\)</span>, we could set the following priors for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>:</p>
 <p><span class="math display">\[
@@ -834,23 +840,23 @@ window.Quarto = {
 <p>The best way to learn about priors is to read through <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span> (there isn’t a single chapter that deals with them, instead they are explained throughout the book). Practical suggestions for common priors can be found in <span class="citation" data-cites="standevelopmentteam2025 mikkola2024">Gelman (<a href="references.html#ref-gelman2006" role="doc-biblioref">2006</a>)</span>.</p>
 <p>Common steps in Bayesian analyses related to priors specification are prior predictive checks <span class="citation" data-cites="mcelreath2020">(or simulations, see <a href="references.html#ref-mcelreath2020" role="doc-biblioref">McElreath 2020</a>, Ch. 4 and subsequent)</span> and prior sensitivity analyses, like those based on posterior shrinkage and the posterior <em>z-</em>score <span class="citation" data-cites="betancourt2018">(<a href="references.html#ref-betancourt2018" role="doc-biblioref">Betancourt 2018</a>)</span>. Also see <span class="citation" data-cites="gelman2020">Gelman et al. (<a href="references.html#ref-gelman2020" role="doc-biblioref">2020</a>)</span> and <span class="citation" data-cites="schad2021">Schad et al. (<a href="references.html#ref-schad2021" role="doc-biblioref">2021</a>)</span> for an overview of the Bayesian workflow and <span class="citation" data-cites="veenman2023">Veenman et al. (<a href="references.html#ref-veenman2023" role="doc-biblioref">2023</a>)</span> for prior specification in the context of hierarchical/multilevel/mixed-effects models.</p>
 </section>
-<section id="further-distribution-families" class="level2" data-number="38.5">
-<h2 data-number="38.5" class="anchored" data-anchor-id="further-distribution-families"><span class="header-section-number">38.5</span> Further distribution families</h2>
+<section id="further-distribution-families" class="level2" data-number="39.5">
+<h2 data-number="39.5" class="anchored" data-anchor-id="further-distribution-families"><span class="header-section-number">39.5</span> Further distribution families</h2>
 <p>The textbook covered the Gaussian, Bernoulli and log-normal (log-Gaussian) distribution families. Remember that the distribution family of a regression model is decided by the nature of the outcome variable. Other common families are the beta (for 0-1 variables), Poisson (for counts), ordinal (for Likert-scale data), categorical (for multinomial variables, i.e.&nbsp;variables with more than two unordered levels). See <a href="app-reg-cheat-sheet.html" class="quarto-xref"><span>Appendix A</span></a> for resources on these and other families.</p>
 </section>
-<section id="non-linear-modelling" class="level2" data-number="38.6">
-<h2 data-number="38.6" class="anchored" data-anchor-id="non-linear-modelling"><span class="header-section-number">38.6</span> Non-linear modelling</h2>
+<section id="non-linear-modelling" class="level2" data-number="39.6">
+<h2 data-number="39.6" class="anchored" data-anchor-id="non-linear-modelling"><span class="header-section-number">39.6</span> Non-linear modelling</h2>
 <p>Regression models are built on the equation of a straight line. This is true even when it looks as if we are modelling non-linear effects in models like Bernoulli or Poisson. The predicted relationships between numeric predictors and Bernoulli or Poisson outcomes looks non-linear because the linearity is applied to the linear term of the model (the parameter that is expressed with a linear equation). For example, in Bernoulli models the linear equation is applied to the logit transformation of the parameter <em>p</em>.</p>
 <p>However, all regression models assume a linear relationship between a predictor and an outcome at the level of the linear term. In some cases, a linear relationship might not make sense. For example, if you are modelling change in probability of a morphological form across time, it is possible that the change is not linear even in log-odds, and maybe the probability first rises but then gets lower. This type of non-linear relationship can be modelled in Bayesian regression models using smoothers, <code>s()</code> in the model’s formula.</p>
 <p>You can check out the tutorials on non-linear models and smoothers with brms in <span class="citation" data-cites="franke2025">Franke (<a href="references.html#ref-franke2025" role="doc-biblioref">2025</a>, Ch 10)</span>.</p>
 </section>
-<section id="sec-next-size" class="level2" data-number="38.7">
-<h2 data-number="38.7" class="anchored" data-anchor-id="sec-next-size"><span class="header-section-number">38.7</span> Sample size determination</h2>
+<section id="sec-next-size" class="level2" data-number="39.7">
+<h2 data-number="39.7" class="anchored" data-anchor-id="sec-next-size"><span class="header-section-number">39.7</span> Sample size determination</h2>
 <p>Determining sample size is an important step in any quantitative analysis. Sample size determination is necessary to ensure one has enough data to estimate parameters to the desired level of precision. In the Null Ritual approach, sample size determination is based on the so-called “power analysis”: this type of analysis lets you calculate the sample size required for you to be able to detect a significant effect based on a pre-determined minimum effect size. Check <span class="citation" data-cites="green2016">Green and MacLeod (<a href="references.html#ref-green2016" role="doc-biblioref">2016</a>)</span> and <span class="citation" data-cites="brysbaert2018 brysbaert2020">(<a href="references.html#ref-brysbaert2018" role="doc-biblioref">Brysbaert and Stevens 2018</a>; also see <a href="references.html#ref-brysbaert2020" role="doc-biblioref">Brysbaert 2020</a> for bilingualism research)</span>.</p>
 <p>A framework for the justification of sample size can be found in <span class="citation" data-cites="lakens2021">Lakens (<a href="references.html#ref-lakens2021" role="doc-biblioref">2021</a>)</span> (while it focusses on Null Hypothesis Significance Testing, it can be helpful for Bayesian approaches too). For a simple way to determine sample size based on pre-existing data, check out <span class="citation" data-cites="coretta2022a">Coretta (<a href="references.html#ref-coretta2022a" role="doc-biblioref">2022</a>)</span>. A theoretical discussion of sample size for clinical trials is available in <span class="citation" data-cites="halpern2001">Halpern et al. (<a href="references.html#ref-halpern2001" role="doc-biblioref">2001</a>)</span>.</p>
 </section>
-<section id="dimensionality-reduction-approaches" class="level2" data-number="38.8">
-<h2 data-number="38.8" class="anchored" data-anchor-id="dimensionality-reduction-approaches"><span class="header-section-number">38.8</span> Dimensionality reduction approaches</h2>
+<section id="dimensionality-reduction-approaches" class="level2" data-number="39.8">
+<h2 data-number="39.8" class="anchored" data-anchor-id="dimensionality-reduction-approaches"><span class="header-section-number">39.8</span> Dimensionality reduction approaches</h2>
 <p>Regression models work best when you have a clear theoretical view on the variables of interest. Some times, you might be working with multi-dimensional data, with a large number of variables and not enough theory to be able to determine which variables are relevant (for example, as determined through Causal Inference).</p>
 <p>In these cases, it is useful to reduce the dimensionality of the data: in other words, it is useful to capture covariance between variables using dimensionality reduction approaches, like Principal Component Analysis, Multiple Correspondence Analysis and and Cluster Analysis.</p>
 <p>Principal Component Analysis (PCA) finds numeric components, called principal components (PCs), that can capture the covariation of the numeric variables in the data set. The scores of the principal components capturing variation in the data can be used for further analysis. You can find information about PCA <a href="https://www.sthda.com/english/articles/index.php?url=/31-principal-component-methods-in-r-practical-guide/#google_vignette">here</a>. Multiple Correspondence Analysis (McA) is the discrete equivalent of PCA, i.e.&nbsp;it can be used with discrete/categorical variables. See <a href="https://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/114-mca-multiple-correspondence-analysis-in-r-essentials/">here</a> for an introduction. Another dimensionality reduction technique is Cluster Analysis (CA, aka hierarchical clustering). <a href="https://www.datanovia.com/en/blog/cluster-analysis-in-r-practical-guide/">This tutorial</a> guides you through a CA in R. For a detailed treatment of these techniques see <span class="citation" data-cites="kassambara2017a">Kassambara (<a href="references.html#ref-kassambara2017a" role="doc-biblioref">2017b</a>)</span> and <span class="citation" data-cites="kassambara2017">Kassambara (<a href="references.html#ref-kassambara2017" role="doc-biblioref">2017a</a>)</span>.</p>
@@ -1569,12 +1575,12 @@ window.onload = function() {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./ch-learned.html" class="pagination-link" aria-label="What you've learned">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ch-workflow.html" class="pagination-link" aria-label="A workflow for quantitative studies">
-        <span class="nav-page-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

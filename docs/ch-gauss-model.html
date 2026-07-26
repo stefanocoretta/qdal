@@ -700,26 +700,32 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-regression-num-num.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
   </div>
 </li>
       </ul>
@@ -898,7 +904,7 @@ y &amp; \sim Gaussian(\mu, \sigma)\\
 \end{aligned}\]</span></p>
 </div>
 </div>
-<p>In the rest of this book, you will be using the default prior probability distributions, or priors for short, as set by brms, the R package we will use to fit Bayesian models. This means that you will not have to worry about choosing priors while you start dipping your toes into the ocean of Bayesian statistics. However, you can learn about priors of Gaussian models in the Spotlight box at the end of this chapter, but after that you can safely assume that priors are handled by brms for you and you should not worry until after you completed this course. Note that in actual research, thinking about priors is a necessary step, even if one ends up using the default brms priors.</p>
+<p>In the rest of this book, you will be using the default prior probability distributions, or priors for short, as set by brms, the R package we will use to fit Bayesian models. This means that you will not have to worry about choosing priors while you start dipping your toes into the ocean of Bayesian statistics. However, you can learn about priors of Gaussian models in the Going further box at the end of this chapter, but after that you can safely assume that priors are handled by brms for you and you should not worry until after you completed this course. Note that in actual research, thinking about priors is a necessary step, even if one ends up using the default brms priors.</p>
 <p>In the next chapter you will fit the Gaussian model of RTs using brms, with the default priors as set by the package.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -913,16 +919,16 @@ y &amp; \sim Gaussian(\mu, \sigma)\\
 <div class="cell" data-layout-align="center">
 <ol type="a">
 <li>Why is the distribution of <span class="math inline">\(\sigma\)</span> constrained to positive values only?
-<div id="radio_OYOMZAYHOY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OYOMZAYHOY" value=""> <span>Because <span class="math inline">\(\sigma\)</span> is always zero.</span></label><label><input type="radio" autocomplete="off" name="radio_OYOMZAYHOY" value="answer"> <span>Because <span class="math inline">\(\sigma\)</span> represents variability, which cannot be negative.</span></label><label><input type="radio" autocomplete="off" name="radio_OYOMZAYHOY" value=""> <span>Because <span class="math inline">\(\mu\)</span> is also constrained to be positive.</span></label>
+<div id="radio_WHTPWZARWV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WHTPWZARWV" value=""> <span>Because <span class="math inline">\(\sigma\)</span> is always zero.</span></label><label><input type="radio" autocomplete="off" name="radio_WHTPWZARWV" value="answer"> <span>Because <span class="math inline">\(\sigma\)</span> represents variability, which cannot be negative.</span></label><label><input type="radio" autocomplete="off" name="radio_WHTPWZARWV" value=""> <span>Because <span class="math inline">\(\mu\)</span> is also constrained to be positive.</span></label>
 </div></li>
 <li>Why have we assumed that reaction times are Gaussian?
-<div id="radio_YHXGHJFTHG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YHXGHJFTHG" value=""> <span>Because RTs are Gaussian.</span></label><label><input type="radio" autocomplete="off" name="radio_YHXGHJFTHG" value=""> <span>Because it is easier to run the model.</span></label><label><input type="radio" autocomplete="off" name="radio_YHXGHJFTHG" value="answer"> <span>Because a Gaussian distribution is a safe assumption to make.</span></label>
+<div id="radio_WGWEYNFRNQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WGWEYNFRNQ" value=""> <span>Because RTs are Gaussian.</span></label><label><input type="radio" autocomplete="off" name="radio_WGWEYNFRNQ" value=""> <span>Because it is easier to run the model.</span></label><label><input type="radio" autocomplete="off" name="radio_WGWEYNFRNQ" value="answer"> <span>Because a Gaussian distribution is a safe assumption to make.</span></label>
 </div></li>
 <li>In Bayesian modeling, posterior probability distributions are described as:
-<div id="radio_NIWNRIKIAB" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NIWNRIKIAB" value=""> <span>The data alone.</span></label><label><input type="radio" autocomplete="off" name="radio_NIWNRIKIAB" value=""> <span>Theoretical distributions chosen by the researcher before collecting data.</span></label><label><input type="radio" autocomplete="off" name="radio_NIWNRIKIAB" value="answer"> <span>The combination of priors and observed data.</span></label>
+<div id="radio_FPWRTGBAIZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FPWRTGBAIZ" value=""> <span>The data alone.</span></label><label><input type="radio" autocomplete="off" name="radio_FPWRTGBAIZ" value=""> <span>Theoretical distributions chosen by the researcher before collecting data.</span></label><label><input type="radio" autocomplete="off" name="radio_FPWRTGBAIZ" value="answer"> <span>The combination of priors and observed data.</span></label>
 </div></li>
 </ol>
 </div>
@@ -934,7 +940,7 @@ y &amp; \sim Gaussian(\mu, \sigma)\\
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>R note: Writing maths in Quarto
+<span class="screen-reader-only">Important</span>Aside: Writing maths in Quarto
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
@@ -965,7 +971,7 @@ $$</code></pre>
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Spotlight: Choosing priors for Gaussian models
+<span class="screen-reader-only">Important</span>Going further: Choosing priors for Gaussian models
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
