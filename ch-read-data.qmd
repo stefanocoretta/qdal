@@ -594,3 +594,83 @@ You can write your code in the `week-02.R` script.
   Any issues?
   (I suggest looking at the spreadsheet in Excel).
 :::
+
+## Reading multiple tabular files
+
+Depending on how the tabular data is output or created, you might at times have data that is split into multiple files.
+This is common for example when each file is from a single participant.
+Reading multiple files in R is easy, assuming that each file has exactly the same structure.
+
+We will read files from Coretta [-@coretta2018l; -@coretta2020c; -@coretta2020a].
+The files can be found in the textbook data, in `coretta2018/ultrasound/`.
+The folder contains ultrasound tongue imaging (tongue contours) from several participants.
+We will read the files that end with `-tongue-cart.tsv`.
+TSV files are *t*ab *s*eparated *v*alues files, as mentioned above.
+They are like CSV files, but a tab character is used as the separator, instead of a comma.
+R has a function to list all files in a specific folder that match a pattern: `list.files()`.
+This function takes at least a path to list files from, like in the following example.
+
+```{r}
+#| label: list-files
+
+list.files("data/coretta2018/ultrasound/")
+```
+
+The function lists all files in the given folder.
+Both `-tongue-cart` and `-vowel-series` files are shown, but we want only the `-tongue-cart` files.
+We can specify the `pattern` argument to only include files that contain the string `-tongue-cart`.
+
+```{r}
+#| label: list-files-pattern
+
+list.files("data/coretta2018/ultrasound/", pattern = "-tongue-cart")
+
+```
+
+Now only the `-tongue-cart` files are listed.
+To read the files, however, we need the full path to the file, not just the file name.
+We can set the `full.names` argument to `TRUE` to return the full path (note that this will still be a relative path, relative to the project folder).
+
+```{r}
+#| label: list-files-full
+
+tongue_files <- list.files("data/coretta2018/ultrasound/", pattern = "-tongue-cart", full.names = TRUE)
+tongue_files
+```
+
+Now we can just pass the `tongue_files` list as the first argument to `read_delim()` to read all the files together.
+There is catch though: these files do not have column headings.
+This is just a quirk of how the files were created, but it is a good excuse to show you how to manually set column names when reading tabular data.
+In the code below, we save a list of column names in the `columns` vector.
+Note that the data has extra columns after `TR_velocity_abs`, but I don't include them here because they are just the X and Y coordinates of the 42 points on the tongue surface and we would need some R tricks to get the names for those columns without writing them one by one in `columns`.
+
+```{r}
+#| label: tongue
+
+columns <- c(
+  "speaker",
+  "seconds",
+  "rec_date",
+  "prompt",
+  "label",
+  "TT_displacement_sm",
+  "TT_velocity",
+  "TT_velocity_abs",
+  "TD_displacement_sm",
+  "TD_velocity",
+  "TD_velocity_abs",
+  "TR_displacement_sm",
+  "TR_velocity",
+  "TR_velocity_abs"
+)
+
+tongue <- read_delim(tongue_files, col_names = columns)
+
+tongue
+```
+
+Now `tongue` has the data from the `-tongue_cart` files in `coretta2018/ultrasound`.
+Since each data has exactly the same columns, the code just works.
+If you are wondering what happened to the columns for which we did not specify a name, those just got named with `X` followed by the column number (the first unnamed column is column 15 so it is now named `X15` and so on).
+
+Passing a list of files to a reading function works for all the `read_*` functions from the tidyverse (but be careful, this does not work with the `read.*` functions from base R, like `read.csv()`, although we are not really using those in this textbook).

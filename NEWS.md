@@ -17,6 +17,8 @@
 
 - Embedded basic computer literacy in Read data chapter.
 
+- Added reading multiple files in the Read data in R chapter.
+
 # QDAL v1.1
 
 - Add license.
