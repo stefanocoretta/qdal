@@ -274,7 +274,7 @@ cat("b. `10 * 2 + 5 * 0.2` = `(10 * 2 + 5) * 0.2`", torf(FALSE), "\n\n")
 ```
 :::
 
-::: {.callout-important collapse="true"}
+::: callout-important
 ## Aside: Arithmetic
 
 If you need a maths refresher, I recommend checking the following pages:

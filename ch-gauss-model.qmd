@@ -194,7 +194,7 @@ cat("c. In Bayesian modeling, posterior probability distributions are described 
 ```
 :::
 
-::: {.callout-important collapse="true"}
+::: callout-important
 ## Aside: Writing maths in Quarto
 
 Quarto supports LaTeX mathematical notation.

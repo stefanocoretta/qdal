@@ -215,7 +215,7 @@ H.
 C. Tippett
 :::
 
-::: {.callout-important collapse="true"}
+::: callout-important
 #### Aside: Etymology
 
 The word *statistics* is related to *state* and it is no coincidence.

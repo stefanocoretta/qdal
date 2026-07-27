@@ -269,7 +269,7 @@ si_summary |>
 
 @fig-si-freq-scatter shows logged frequency of co-occurrence on the *x*-axis and proportion of scalar inference on the *y*-axis.
 Each word is plotted on the graph based on their frequency and the mean proportion of scalar inference.
-In line with @fig-si-fred, adjectives with higher frequency elicit higher proportions of scalar inferences.
+In line with @fig-si-freq, adjectives with higher frequency elicit higher proportions of scalar inferences.
 
 ::: callout-warning
 ### Exercise 1

@@ -68,7 +68,7 @@ It is difficult to come by precise *and* testable hypotheses in linguistics just
 At best, we can normally come up with vague hypotheses that state whether a difference between two conditions is expected or not and, if we are lucky, the direction of the difference (i.e. "A is greater than B" or vice versa).
 This state of affairs makes testing hypotheses using statistical methods less straightforward, because of the non-straightforward mapping of (vague) hypotheses to statistical models.
 
-::: {.callout-important collapse="true"}
+::: callout-important
 ### Aside: Falsificationism and falsifiability
 
 **Falsification** is a procedure proposed by philosopher Karl Popper in relation to the "problem of induction".

@@ -930,16 +930,14 @@ Figure&nbsp;28.3: Jitter and violin plot of reactions times for real and non-wor
 </div>
 <p>The mean and median RTs for non-words (<code>IsWord = FALSE</code>) are about 100 ms higher than the mean and median of real words. We could stop here and call it a day, but we would make the mistake of not considering uncertainty and variability: this is just one (admittedly large) sample of all the RT values that could be produced by the entire English-speaking population. So we should apply inference from the sample to the population to obtain an estimate of the difference in RTs that accounts for that uncertainty and variability. We can use regression models to do that. The next sections will teach you how to model the RTs with regression models in brms.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
 <span class="screen-reader-only">Important</span>Aside: Tables with <code>kable()</code>
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>With Quarto, you can output the summaries as a table, using <code>knitr::kable()</code>. You can learn more about this <a href="https://quarto.org/docs/authoring/tables.html#computations">here</a>.</p>
 <div class="cell" data-layout-align="center">
@@ -986,7 +984,6 @@ Table&nbsp;28.1: Mean, median and standard deviation of RTs for real and non-wor
 </div>
 </div>
 </div>
-</div>
 </section>
 <section id="treatment-contrasts" class="level2" data-number="28.2">
 <h2 data-number="28.2" class="anchored" data-anchor-id="treatment-contrasts"><span class="header-section-number">28.2</span> Treatment contrasts</h2>
@@ -1015,9 +1012,14 @@ Table&nbsp;28.1: Mean, median and standard deviation of RTs for real and non-wor
 <pre><code>[1] "b" "a"</code></pre>
 </div>
 </div>
-<p>We will use <code>IsWord</code> with the order <code>TRUE</code> and <code>FALSE</code>. This means that <code>TRUE</code> will be the reference level and the RTs when <code>IsWord</code> is <code>FALSE</code> will be compared to the RTs of when <code>IsWord</code> is <code>TRUE</code>. In other words, now the mean <span class="math inline">\(\mu\)</span> varies depending on the level of <code>IsWord</code>. We need to numerically code <code>IsWord</code> (i.e.&nbsp;use numbers to refer to the levels of the categorical predictor) to be able to allow the mean to vary by the word type in the model formula. With treatment contrasts, treatment coding is used to numerically code categorical predictors. Treatment coding uses <strong>indicator variables</strong> which take the values 0 or 1. Let’s make an indicator variable <span class="math inline">\(w\)</span> that is 0 when <code>IsWord</code> is <code>TRUE</code>, or 1 when <code>IsWord</code> is <code>FALSE</code>. We only need one indicator variable because there are only two levels and they can be coded with a 0 and a 1 respectively. This way of setting up indicator variables (using 0/1) is called <strong>dummy coding</strong>. See <span class="quarto-unresolved-ref">?tbl-treat</span> for the correspondence between the predictor <code>IsWord</code> and the value of the indicator variable <span class="math inline">\(w\)</span>.</p>
+<p>We will use <code>IsWord</code> with the order <code>TRUE</code> and <code>FALSE</code>. This means that <code>TRUE</code> will be the reference level and the RTs when <code>IsWord</code> is <code>FALSE</code> will be compared to the RTs of when <code>IsWord</code> is <code>TRUE</code>. In other words, now the mean <span class="math inline">\(\mu\)</span> varies depending on the level of <code>IsWord</code>. We need to numerically code <code>IsWord</code> (i.e.&nbsp;use numbers to refer to the levels of the categorical predictor) to be able to allow the mean to vary by the word type in the model formula. With treatment contrasts, treatment coding is used to numerically code categorical predictors. Treatment coding uses <strong>indicator variables</strong> which take the values 0 or 1. Let’s make an indicator variable <span class="math inline">\(w\)</span> that is 0 when <code>IsWord</code> is <code>TRUE</code>, or 1 when <code>IsWord</code> is <code>FALSE</code>. We only need one indicator variable because there are only two levels and they can be coded with a 0 and a 1 respectively. This way of setting up indicator variables (using 0/1) is called <strong>dummy coding</strong>. See <a href="#tbl-treat" class="quarto-xref">Table&nbsp;<span>28.2</span></a> for the correspondence between the predictor <code>IsWord</code> and the value of the indicator variable <span class="math inline">\(w\)</span>.</p>
+<div id="tbl-treat" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-treat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;28.2: Treatment contrasts coding of the categorical predictor <code>IsWord</code>.
+</figcaption>
+<div aria-describedby="tbl-treat-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
-<caption>Treatment contrasts coding of the categorical predictor <code>IsWord</code>.</caption>
 <thead>
 <tr class="header">
 <th><code>IsWord</code></th>
@@ -1035,6 +1037,9 @@ Table&nbsp;28.1: Mean, median and standard deviation of RTs for real and non-wor
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1116,7 +1121,7 @@ and Tail_ESS are effective sample size measures, and Rhat is the potential
 scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 </div>
-<p>The first few lines should be familiar: they report information about the model, like the distribution family, the formula, the MCMC draws and so on. Then we have the <code>Regression Coefficients</code> table, just like in the model of <a href="ch-regression.html" class="quarto-xref"><span>Chapter 24</span></a>. The estimates of the coefficients and the 95% Credible Intervals (CrIs) are reported in <a href="#tbl-rt-1" class="quarto-xref">Table&nbsp;<span>28.2</span></a> (the table was generated with <code>knitr::kable()</code> from the Aside box above! Expand the code to see it).</p>
+<p>The first few lines should be familiar: they report information about the model, like the distribution family, the formula, the MCMC draws and so on. Then we have the <code>Regression Coefficients</code> table, just like in the model of <a href="ch-regression.html" class="quarto-xref"><span>Chapter 24</span></a>. The estimates of the coefficients and the 95% Credible Intervals (CrIs) are reported in <a href="#tbl-rt-1" class="quarto-xref">Table&nbsp;<span>28.3</span></a> (the table was generated with <code>knitr::kable()</code> from the Aside box above! Expand the code to see it).</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1125,7 +1130,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <div id="tbl-rt-1" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rt-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;28.2: Regression coefficients from a model of RTs by word type.
+Table&nbsp;28.3: Regression coefficients from a model of RTs by word type.
 </figcaption>
 <div aria-describedby="tbl-rt-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">

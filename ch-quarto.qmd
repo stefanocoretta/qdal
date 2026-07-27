@@ -146,7 +146,7 @@ YAML headers start and end with three dashes `---`.
 Settings can be specified inside the chunk with the `#|` prefix: for example `#| label: setup` sets the name of the chunk (the label) to `setup`.
 :::
 
-::: {.callout-important collapse="true"}
+::: {.callout-important"}
 #### Aside: Quarto outline and chunk labels
 
 By default, the Quarto outline only shows the Markdown section headers.

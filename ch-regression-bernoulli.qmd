@@ -723,7 +723,7 @@ quantile2(mvp_bm_draws$NSL1_homesign_p, c(0.1, 0.9)) |> round(2)
 > The probability decreases by 11-22 percentage points from home-signers to NSL1, and increases by 25-36 points from NSL1 to NSL2.
 > Moreover, the probability of multi-verb predicates in NSL2 indicates that single and multi-verb predicates are equally probable in NSL2.
 
-::: {.callout-warning collapse="true"}
+::: callout-warning
 ### Aside: Bernoulli, binomial and logistic regression
 
 A lot of researchers know Bernoulli models under the name "binomial" or "logistic" regression.

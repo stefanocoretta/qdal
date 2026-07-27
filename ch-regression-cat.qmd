@@ -153,7 +153,7 @@ So we should apply inference from the sample to the population to obtain an esti
 We can use regression models to do that.
 The next sections will teach you how to model the RTs with regression models in brms.
 
-::: {.callout-important collapse="true"}
+::: callout-important
 ### Aside: Tables with `kable()`
 
 With Quarto, you can output the summaries as a table, using `knitr::kable()`.
@@ -222,12 +222,14 @@ We only need one indicator variable because there are only two levels and they c
 This way of setting up indicator variables (using 0/1) is called **dummy coding**.
 See @tbl-treat for the correspondence between the predictor `IsWord` and the value of the indicator variable $w$.
 
+::: {#tbl-treat}
 | `IsWord`       | $w$ |
 |----------------|:---:|
 | IsWord = TRUE  |  0  |
 | IsWord = FALSE |  1  |
 
 : Treatment contrasts coding of the categorical predictor `IsWord`.
+:::
 
 ::: callout-tip
 ## Categorical predictors

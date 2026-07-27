@@ -273,7 +273,7 @@ Moreover, regression models are not limited to the Gaussian distribution family 
 @sec-regression-lognorm and @sec-regression-bernoulli will teach you how to fit two other useful distribution families: the log-normal family and the Bernoulli family.
 You will be able to learn about other families by checking the resources linked in @sec-reg-cheat-sheet.
 
-::: {.callout-important collapse="true"}
+::: callout-important
 ## Aside: Regression, eugenics and racism
 
 **Galton and regression**
