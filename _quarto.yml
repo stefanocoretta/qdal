@@ -73,10 +73,8 @@ book:
   - part: Week 10
     chapters:
       - ch-regression-num-num.qmd
-      - ch-learned.qmd
       - ch-next.qmd
       - ch-workflow.qmd
-      - ch-end.qmd
   - references.qmd
   appendices:
     - app-reg-cheat-sheet.qmd

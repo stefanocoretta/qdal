@@ -708,26 +708,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
       </ul>
@@ -1199,7 +1187,7 @@ Figure&nbsp;30.5: How to plot participants’ proportions and overall proportion
 </div>
 </div>
 <p>In this data we don’t have many participants for group, but you can immediately appreciate the variability between participants. You will notice something new in the code: we have specified the data inside <code>geom_jitter()</code> and <code>stat_summary()</code> instead of inside <code>ggplot()</code>. This is because the two functions need different data: <code>geom_jitter()</code> needs the data with the proportion we calculated for each participant and group; <code>stat_summary()</code> needs to calculate the mean and CIs from the overall data, rather than from the proportion data we created. This is the aspect that a lot of researchers get wrong: you should <strong>not</strong> take the mean of the participant proportions, unless all participants have exactly the same number of observations. In the <code>verb_org</code> data specifically, the number of observations do indeed differ for each participant. You can check this yourself by getting the number of observations per participant per group with the <code>count()</code> function. We are also specifying the aesthetics within each geom/stat function, because while <code>x</code> is the same, the <code>y</code> differs! In <code>stat_summary()</code>, the <code>fun.data</code> argument lets you specify the function you want to use for the summary statistics to be added. Here we are using the <code>mean_cl_boot</code> function, which returns the mean proportion of <code>Response_num</code> and the 95% Confidence Intervals (CIs) of that mean. The CIs are calculated using a bootstrapping procedure (if you are interested in learning what that is, check the documentation of <code>smean.sd</code> from the Hmisc package).</p>
-<p>This also creates a nice opportunity to mention one shortcoming of the models we are fitting, thinking a bit ahead of ourselves: the regression models we cover in Week 4 to 10 do not account for the fact that the data comes from multiple participants and instead they just assume that each observation in the data set is from a different participant. When you have multiple observations from each participant, we call this a <em>repeated measure</em> design. This is a problem because it breaks one assumption of regression models: that all the observations are independent from each other. Of course, if they come from the same participant, they are not independent. We won’t have time in this course to learn about the solution (i.e.&nbsp;hierarchical regression models, also known as multi-level, mixed-effects, nested-effects, or random-effects models; these are just regression models that are set up so they can account for hierarchical grouping in the data, like multiple observations from multiple participants, or multiple pupils from multiple classes from multiple schools), but I point you to further resources in <a href="ch-next.html" class="quarto-xref"><span>Chapter 39</span></a>.</p>
+<p>This also creates a nice opportunity to mention one shortcoming of the models we are fitting, thinking a bit ahead of ourselves: the regression models we cover in Week 4 to 10 do not account for the fact that the data comes from multiple participants and instead they just assume that each observation in the data set is from a different participant. When you have multiple observations from each participant, we call this a <em>repeated measure</em> design. This is a problem because it breaks one assumption of regression models: that all the observations are independent from each other. Of course, if they come from the same participant, they are not independent. We won’t have time in this course to learn about the solution (i.e.&nbsp;hierarchical regression models, also known as multi-level, mixed-effects, nested-effects, or random-effects models; these are just regression models that are set up so they can account for hierarchical grouping in the data, like multiple observations from multiple participants, or multiple pupils from multiple classes from multiple schools), but I point you to further resources in <a href="ch-next.html" class="quarto-xref"><span>Chapter 38</span></a>.</p>
 </section>
 <section id="bernoulli-model-of-nsl-predicates" class="level2" data-number="30.4">
 <h2 data-number="30.4" class="anchored" data-anchor-id="bernoulli-model-of-nsl-predicates"><span class="header-section-number">30.4</span> Bernoulli model of NSL predicates</h2>

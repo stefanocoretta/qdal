@@ -677,26 +677,14 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch-learned.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What you’ve learned</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-end.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">A new beginning</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
       </ul>
@@ -741,6 +729,8 @@ div.csl-indent {
   <li><a href="#what-the-pipe" id="toc-what-the-pipe" class="nav-link" data-scroll-target="#what-the-pipe"><span class="header-section-number">11.3.1</span> What the pipe!?</a></li>
   </ul></li>
   <li><a href="#counting-observations-with-count" id="toc-counting-observations-with-count" class="nav-link" data-scroll-target="#counting-observations-with-count"><span class="header-section-number">11.4</span> Counting observations with <code>count()</code></a></li>
+  <li><a href="#getting-unique-values-with-distinct" id="toc-getting-unique-values-with-distinct" class="nav-link" data-scroll-target="#getting-unique-values-with-distinct"><span class="header-section-number">11.5</span> Getting unique values with <code>distinct()</code></a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">11.6</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-summarise.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -940,12 +930,12 @@ Show me
 <div class="cell" data-layout-align="center">
 <ol type="a">
 <li>What does the <code>na.rm</code> argument of <code>mean()</code> do?
-<div id="radio_MUQTXNLGKK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MUQTXNLGKK" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_MUQTXNLGKK" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_MUQTXNLGKK" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
+<div id="radio_TCQYJRVZLD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TCQYJRVZLD" value=""> <span>It changes <code>NA</code>s to <code>FALSE</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_TCQYJRVZLD" value=""> <span>It converts <code>NA</code>s to <code>0</code>s.</span></label><label><input type="radio" autocomplete="off" name="radio_TCQYJRVZLD" value="answer"> <span>It removes <code>NA</code>s before taking the mean.</span></label>
 </div></li>
 <li>Which is the mean of <code>c(4, 23, NA, 5)</code> when <code>na.rm</code> has the default value?
-<div id="radio_QLHMZUVRUL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QLHMZUVRUL" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_QLHMZUVRUL" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_QLHMZUVRUL" value=""> <span><code>10.66</code>.</span></label>
+<div id="radio_WZSFOSRTOC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WZSFOSRTOC" value="answer"> <span><code>NA</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_WZSFOSRTOC" value=""> <span><code>0</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_WZSFOSRTOC" value=""> <span><code>10.66</code>.</span></label>
 </div></li>
 </ol>
 </div>
@@ -1108,7 +1098,7 @@ Show me
 <section id="counting-observations-with-count" class="level2" data-number="11.4">
 <h2 data-number="11.4" class="anchored" data-anchor-id="counting-observations-with-count"><span class="header-section-number">11.4</span> Counting observations with <code>count()</code></h2>
 <p>If you want to count observations you can use the <code>summarise()</code> function with <code>n()</code>, another dplyr function that returns the group size. For example, let’s count the number of languages by their endangerment status. The data in <code>coretta2022/glot_status.rds</code> contains the endangerment status for 7,845 languages from <a href="https://glottolog.org">Glottolog</a>. There are thousands of languages in the world, but most of them are losing speakers, and some are already no longer spoken. The column <code>status</code> contains the endangerment status of a language in the data, on a scale from <code>not endangered</code> (languages with large populations of speakers) through <code>threatened</code>, <code>shifting</code> and <code>nearly extinct</code>, to <code>extinct</code> (languages that have no living speakers left). Read the <code>coretta2022/glot_status.rds</code> data and check it out.</p>
-<p>To count the number of languages by status, we group the data by <code>status</code> and we summarise with <code>n()</code>.</p>
+<p>To count the number of languages by status, we group the data by <code>status</code> and we summarise with <code>n()</code>. This works because each row in the data is one language, and <code>n()</code> counts the number of rows, within each status and since each row is one language the number of rows corresponds to the number of languages.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">|&gt;</span> </span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(status) <span class="sc">|&gt;</span> </span>
@@ -1121,7 +1111,7 @@ Show me
 </div>
 </div>
 </div>
-<p>This approach works. However, dplyr offers a more compact way to get counts with the <code>count()</code> function! You can think of this function as a <code>group_by/summarise</code> combo. You list the columns you want to group by as arguments to <code>count()</code> and the output gives you a column <code>n</code> with the counts. It works with a single column or more than one, like <code>group_by()</code>.</p>
+<p>This approach works. However, dplyr offers a more compact way to get counts with the <code>count()</code> function! You can think of this function as a <code>group_by/summarise</code> combo. You list the columns you want to group by as arguments to <code>count()</code> and the output gives you a column <code>n</code> with the counts. Note that <code>count()</code> returns the <em>number or rows</em> in each group, like <code>n()</code>. It also works with a single column or more than one, like <code>group_by()</code>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">|&gt;</span> </span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(status)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1165,7 +1155,7 @@ Show me
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">|&gt;</span> <span class="fu">f</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>it is equivalent to writing:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">f</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This principle is important because it defines the natural behavior of the pipe: whatever computation you produce on the LHS will be injected as the first input to the next function. Consider the <code>mtcars</code> dataset, which is built into R. Suppose we want to compute the average miles per gallon (<code>mpg</code>) for each number of cylinders (<code>cyl</code>). Using the native pipe in combination with <code>tidyverse</code> functions, the code is straightforward and highly readable:</p>
+<p>This principle is important because it defines the natural behaviour of the pipe: whatever computation you produce on the LHS will be injected as the first input to the next function. Consider the <code>mtcars</code> dataset, which is built into R. Suppose we want to compute the average miles per gallon (<code>mpg</code>) for each number of cylinders (<code>cyl</code>). Using the native pipe in combination with <code>tidyverse</code> functions, the code is straightforward and highly readable:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span></span>
@@ -1174,8 +1164,8 @@ Show me
 <p>Let’s break this down:</p>
 <ol type="1">
 <li>The <code>mtcars</code> dataset is the left-hand side. It is evaluated first and becomes the input for the next function.</li>
-<li><code>group_by(cyl)</code> receives the dataset as its <strong>first argument</strong>, groups the data by the <code>cyl</code> column, and returns a grouped dataframe.</li>
-<li>The grouped dataframe is then piped into <code>summarise(avg_mpg = mean(mpg))</code>, which calculates the mean <code>mpg</code> for each cylinder group.</li>
+<li><code>group_by(cyl)</code> receives the dataset as its <strong>first argument</strong>, groups the data by the <code>cyl</code> column, and returns a grouped tibble.</li>
+<li>The grouped tibble is then piped into <code>summarise(avg_mpg = mean(mpg))</code>, which calculates the mean <code>mpg</code> for each cylinder group.</li>
 </ol>
 <p>Notice that each step receives the output from the previous step as its first argument. This eliminates the need for intermediate variables and nested function calls, creating a natural, readable sequence of transformations.</p>
 <section id="comparison-with-the-magrittr-pipe" class="level4 unnumbered">
@@ -1190,11 +1180,83 @@ Show me
 <ol type="1">
 <li>The native pipe is built into base R, so no external package is required.</li>
 <li>The native pipe always passes the LHS value to the <strong>first argument</strong> of the RHS function.</li>
-<li><code>magrittr</code> allows more flexibility via the <code>.</code> placeholder, which can inject the LHS value into <strong>any argument</strong>.</li>
+<li><code>magrittr</code> allows more flexibility via the <code>.</code> place-holder, which can inject the LHS value into <strong>any argument</strong>.</li>
 <li>Performance-wise, the native pipe has minimal overhead compared to <code>%&gt;%</code>, which is a function call.</li>
 </ol>
 <p>Overall, the native pipe provides a simple, consistent, and readable way to chain operations, especially when working with <code>tidyverse</code> workflows. For users already familiar with <code>%&gt;%</code>, the transition is intuitive, with the added benefit that this feature is now a part of base R.</p>
 </section>
+</div>
+</div>
+</div>
+</section>
+<section id="getting-unique-values-with-distinct" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="getting-unique-values-with-distinct"><span class="header-section-number">11.5</span> Getting unique values with <code>distinct()</code></h2>
+<p><code>count()</code> (like <code>n()</code>) returns the number of rows. Sometimes, this can lead to unexpected results. For example, let’s say we want to calculate the number of participants by language group in <code>shallow</code>. Let’s try first with <code>count(Group)</code> (<code>Group</code> is the column that tells us if the participant is an L1 or L2 speaker).</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>shallow <span class="sc">|&gt;</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Group"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"L1","2":"2900"},{"1":"L2","2":"3600"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Each participant has multiple observation in the data and the number we are getting is the number of observations in each group, not the number of participants. To really get the number of participants we first need to transform the data by extracting the unique participant IDs (<code>ID</code>) and so that one participant gets only one row. We achieve this with <code>distinct()</code> from dplyr.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>shallow <span class="sc">|&gt;</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(ID)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["ID"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"L1_01"},{"1":"L1_02"},{"1":"L1_03"},{"1":"L1_05"},{"1":"L1_06"},{"1":"L1_07"},{"1":"L1_08"},{"1":"L1_09"},{"1":"L1_10"},{"1":"L1_11"},{"1":"L1_12"},{"1":"L1_13"},{"1":"L1_14"},{"1":"L1_15"},{"1":"L1_16"},{"1":"L1_17"},{"1":"L1_18"},{"1":"L1_19"},{"1":"L1_20"},{"1":"L1_21"},{"1":"L1_22"},{"1":"L1_23"},{"1":"L1_24"},{"1":"L1_25"},{"1":"L1_26"},{"1":"L1_27"},{"1":"L1_28"},{"1":"L1_29"},{"1":"L1_30"},{"1":"L2_01"},{"1":"L2_02"},{"1":"L2_03"},{"1":"L2_04"},{"1":"L2_05"},{"1":"L2_06"},{"1":"L2_07"},{"1":"L2_08"},{"1":"L2_10"},{"1":"L2_11"},{"1":"L2_12"},{"1":"L2_13"},{"1":"L2_14"},{"1":"L2_16"},{"1":"L2_17"},{"1":"L2_18"},{"1":"L2_19"},{"1":"L2_20"},{"1":"L2_21"},{"1":"L2_22"},{"1":"L2_23"},{"1":"L2_24"},{"1":"L2_25"},{"1":"L2_26"},{"1":"L2_27"},{"1":"L2_28"},{"1":"L2_29"},{"1":"L2_30"},{"1":"L2_31"},{"1":"L2_32"},{"1":"L2_33"},{"1":"L2_34"},{"1":"L2_35"},{"1":"L2_36"},{"1":"L2_37"},{"1":"L2_38"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>The code above extracts the unique IDs from the data and you can see there are 65 rows, meaning there are 65 participants. For each participant we know whether they are L1 or L2 based on the ID itself, but we need a separate column to group by to get the number of participants in each language group. So we can add <code>Group</code> in <code>distinct()</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>shallow <span class="sc">|&gt;</span> </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Group, ID)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Group"],"name":[1],"type":["chr"],"align":["left"]},{"label":["ID"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"L1","2":"L1_01"},{"1":"L1","2":"L1_02"},{"1":"L1","2":"L1_03"},{"1":"L1","2":"L1_05"},{"1":"L1","2":"L1_06"},{"1":"L1","2":"L1_07"},{"1":"L1","2":"L1_08"},{"1":"L1","2":"L1_09"},{"1":"L1","2":"L1_10"},{"1":"L1","2":"L1_11"},{"1":"L1","2":"L1_12"},{"1":"L1","2":"L1_13"},{"1":"L1","2":"L1_14"},{"1":"L1","2":"L1_15"},{"1":"L1","2":"L1_16"},{"1":"L1","2":"L1_17"},{"1":"L1","2":"L1_18"},{"1":"L1","2":"L1_19"},{"1":"L1","2":"L1_20"},{"1":"L1","2":"L1_21"},{"1":"L1","2":"L1_22"},{"1":"L1","2":"L1_23"},{"1":"L1","2":"L1_24"},{"1":"L1","2":"L1_25"},{"1":"L1","2":"L1_26"},{"1":"L1","2":"L1_27"},{"1":"L1","2":"L1_28"},{"1":"L1","2":"L1_29"},{"1":"L1","2":"L1_30"},{"1":"L2","2":"L2_01"},{"1":"L2","2":"L2_02"},{"1":"L2","2":"L2_03"},{"1":"L2","2":"L2_04"},{"1":"L2","2":"L2_05"},{"1":"L2","2":"L2_06"},{"1":"L2","2":"L2_07"},{"1":"L2","2":"L2_08"},{"1":"L2","2":"L2_10"},{"1":"L2","2":"L2_11"},{"1":"L2","2":"L2_12"},{"1":"L2","2":"L2_13"},{"1":"L2","2":"L2_14"},{"1":"L2","2":"L2_16"},{"1":"L2","2":"L2_17"},{"1":"L2","2":"L2_18"},{"1":"L2","2":"L2_19"},{"1":"L2","2":"L2_20"},{"1":"L2","2":"L2_21"},{"1":"L2","2":"L2_22"},{"1":"L2","2":"L2_23"},{"1":"L2","2":"L2_24"},{"1":"L2","2":"L2_25"},{"1":"L2","2":"L2_26"},{"1":"L2","2":"L2_27"},{"1":"L2","2":"L2_28"},{"1":"L2","2":"L2_29"},{"1":"L2","2":"L2_30"},{"1":"L2","2":"L2_31"},{"1":"L2","2":"L2_32"},{"1":"L2","2":"L2_33"},{"1":"L2","2":"L2_34"},{"1":"L2","2":"L2_35"},{"1":"L2","2":"L2_36"},{"1":"L2","2":"L2_37"},{"1":"L2","2":"L2_38"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>Now each row in the tibble is one participant and we have a way of grouping the tibble by language group to count the number of rows and hence the number of participants per group. This is what the following code does, in a chain.</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>shallow <span class="sc">|&gt;</span> </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(Group, ID) <span class="sc">|&gt;</span> </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Group)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Group"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"L1","2":"29"},{"1":"L2","2":"36"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>So there are 29 participants in the L1 group and 36 in the L2 group. When you need to count things, remember that you might have to first transform the data by extracting unique values with <code>distinct()</code> because <code>count()</code> counts the number of rows without checking the values in each row.</p>
+</section>
+<section id="summary" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">11.6</span> Summary</h2>
+<div class="callout callout-style-simple callout-note no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul>
+<li><p>Use <code>summarise()</code> to summarise data, like when calculating measures of central tendency and dispersion.</p></li>
+<li><p>You can group data with <code>group_by()</code> which returns a grouped tibble.</p></li>
+<li><p><code>n()</code> returns the number of rows.</p></li>
+<li><p>You can group and count rows with <code>count()</code>.</p></li>
+<li><p>Use <code>distinct()</code> to extract distinct values in the specified columns.</p></li>
+</ul>
 </div>
 </div>
 </div>
