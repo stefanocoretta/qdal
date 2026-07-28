@@ -17,13 +17,12 @@ When you work with data, you always want to get summary measures for most of the
 Data reports usually include summary measures.
 It is also important to understand which summary measure is appropriate for which type of variable, which was covered in the previous section.
 Now, you will learn how to obtain summary measures using the `summarise()` function from the [dplyr](https://dplyr.tidyverse.org) tidyverse package.
-Let's practice with the data from @song2020 you read in @sec-read-data.
+Let's practice with the data from @song2020 you read in @sec-scripts.
 We want to get a measure of central tendency and dispersion for the reaction times, in the `RT` column.
 In order to decide which measures to pick, think about the nature of the `RT` variable.
 Reaction times is a numeric and continuous statistical variable, and it can only have positive values.
 So the mean and standard deviations are appropriate measures.
 Let's start with the mean of the reaction time column `RT`.
-Go to your `week-02.R` script: if you followed @sec-read-data (and you should have), the script should already have the code to attach the tidyverse and read the `song2020/shallow.csv` file into a variable called `shallow`.
 
 ```{r}
 #| label: shallow
@@ -34,6 +33,8 @@ library(tidyverse)
 shallow <- read_csv("data/song2020/shallow.csv")
 ```
 
+Go to your `week-03.R` script: the script should already have the code to attach the tidyverse and read the `song2020/shallow.csv` file into a variable called `shallow`.
+You should keep writing new code in that script for the rest of this chapter.
 Now let's calculate the mean of `RT` with `summarise()`.
 The `summarise()` function takes at least two arguments: (1) the tibble to summarise, (2) one or more summary functions applied to columns in the tibble.
 In this case we just want the mean RTs.
@@ -75,7 +76,7 @@ summarise(shallow, RT_mean = round(mean(RT)))
 
 What if we want also the standard deviation?
 Easy: we use the `sd()` function.
-Round the mean and SD with the `round()` function when you write the code in your `week-02.R` script.
+Round the mean and SD with the `round()` function when you write the code in your `week-03.R` script.
 
 ```{r}
 #| label: sd
@@ -278,7 +279,7 @@ Get the rounded mean, median, SD, minimum and maximum of RTs for L1 and L2 parti
 
 You can do it!
 You've done this above but with `shallow`.
-Now you just need to use `shallow_g` plus get the mininimum and maximum.
+Now you just need to use `shallow_g` plus get the minimum and maximum.
 
 <details>
 
