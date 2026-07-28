@@ -674,11 +674,6 @@ Read the following files in R, making sure you use the right `read_*()` function
 - `data/koppensteiner2016/takete_maluma.txt` (a tab separated file).
 
 - `data/pankratz2021/si.csv`.
-
-- Go to <https://datashare.ed.ac.uk/handle/10283/4006>, download the file `conflict_data_.xlsx`, and save it in `data/`.
-  Read both sheets ("conflict_data2" and "demographics").
-  Any issues?
-  (I suggest looking at the spreadsheet in Excel).
 :::
 
 ## Summary
