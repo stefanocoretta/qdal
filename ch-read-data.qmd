@@ -312,10 +312,9 @@ In this section, you will learn how to read `.csv` files.
 Reading `.csv` files is very easy.
 You can use the `read_csv()` function from a collection of R packages known as the [tidyverse](https://www.tidyverse.org).
 Specifically, the `read_csv()` function is from the [readr](https://readr.tidyverse.org) package, one of the tidyverse packages.
-If you are learning R for the first time, then you won't already have the tidyverse packages installed (you can check in the `Packages` tab in the bottom-right panel).
 Installing the tidyverse packages is easy: you just need to install the **tidyverse** package and that will take care of installing the most important packages in the collection (called the ["core" tidyverse packages](https://www.tidyverse.org/packages/)).
 Note that installation of the core tidyverse packages can take some time (but remember that you do this only *once*).
-If you need to install the tidyverse packages, do it now.
+Install the tidyverse packages now with `install.packages("tidyverse")`.
 
 ::: callout-important
 ### Did you open the Quarto project?
@@ -638,7 +637,7 @@ tongue_files <- list.files("data/coretta2018/ultrasound/", pattern = "-tongue-ca
 tongue_files
 ```
 
-Now we can just pass the `tongue_files` list as the first argument to `read_delim()` to read all the files together.
+Now we can just pass the `tongue_files` list as the first argument to `read_tsv()` to read all the TSV files together.
 There is catch though: these files do not have column headings.
 This is just a quirk of how the files were created, but it is a good excuse to show you how to manually set column names when reading tabular data.
 In the code below, we save a list of column names in the `columns` vector.
@@ -664,7 +663,7 @@ columns <- c(
   "TR_velocity_abs"
 )
 
-tongue <- read_delim(tongue_files, col_names = columns)
+tongue <- read_tsv(tongue_files, col_names = columns)
 
 tongue
 ```
@@ -674,3 +673,20 @@ Since each data has exactly the same columns, the code just works.
 If you are wondering what happened to the columns for which we did not specify a name, those just got named with `X` followed by the column number (the first unnamed column is column 15 so it is now named `X15` and so on).
 
 Passing a list of files to a reading function works for all the `read_*` functions from the tidyverse (but be careful, this does not work with the `read.*` functions from base R, like `read.csv()`, although we are not really using those in this textbook).
+
+@sec-r-basics, @sec-packages and this chapter introduced you to the basics of R, including how to use variables and functions, install and use packages and read data.
+Now that you know how to import data in R, in the following chapters you will start working with the data and you will learn how to summarise, transform, plot and model data in R.
+A lot of new packages and functions will be introduced, so before moving onto the Week 3 chapters make sure you have mastered the contents of the Week 2 chapters.
+
+## Summary
+
+::: {.callout-note appearance="simple"}
+- In this chapter, you have learned about different types of data, like **tabular** and **non-tabular** data and **`.rds`** **files**.
+
+- The **tidyverse** is a collection of R packages for reading, processing and plotting data in R using a consistent set of functions and principles.
+
+- To read tabular data in R you can use the `read_*` functions from the tidyverse: `read_csv()` for CSV files, `read_tsv()` for TSV files, and `read_excel()` for Excel spreadsheets.
+  You can read `.rds` files with `readRDS()` and you can save any R object to an `.rds` file with `saveRDS()`.
+
+- To read multiple files into a single tibble pass a list of files obtained with `list.files()` to the `read_*` functions.
+:::

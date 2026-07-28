@@ -21,6 +21,8 @@
 
 - Added `distinct()` in the Summarise data chapter.
 
+- Moved the Read data chapter to Week 2.
+
 # QDAL v1.1
 
 - Add license.

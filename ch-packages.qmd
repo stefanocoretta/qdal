@@ -174,4 +174,3 @@ cat("Which of the following statements is wrong?", longmcq(opts_1))
 This was a question about terminology.
 In R, you attach packages from the library using (confusingly) the `library()` function.
 :::
-

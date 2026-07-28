@@ -395,6 +395,12 @@ div.csl-indent {
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R packages</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch-read-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Read data in R</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -409,25 +415,19 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Inference</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-scripts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">R scripts</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">R scripts</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-statistical-vars.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./ch-read-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Read data in R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Statistical variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -760,7 +760,7 @@ div.csl-indent {
 <p><img src="./img/badge-r.png" class="img-fluid"></p>
 <section id="summarise-with-summarise" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="summarise-with-summarise"><span class="header-section-number">11.1</span> Summarise with <code>summarise()</code></h2>
-<p>Now that you have learned about summary measures, we can talk about how to summarise data in R, rather than just vectors as we did in the previous chapter. When you work with data, you always want to get summary measures for most of the variables in the data. Data reports usually include summary measures. It is also important to understand which summary measure is appropriate for which type of variable, which was covered in the previous section. Now, you will learn how to obtain summary measures using the <code>summarise()</code> function from the <a href="https://dplyr.tidyverse.org">dplyr</a> tidyverse package. Let’s practice with the data from <span class="citation" data-cites="song2020">Song et al. (<a href="references.html#ref-song2020" role="doc-biblioref">2020</a>)</span> you read in <a href="ch-read-data.html" class="quarto-xref"><span>Chapter 9</span></a>. We want to get a measure of central tendency and dispersion for the reaction times, in the <code>RT</code> column. In order to decide which measures to pick, think about the nature of the <code>RT</code> variable. Reaction times is a numeric and continuous statistical variable, and it can only have positive values. So the mean and standard deviations are appropriate measures. Let’s start with the mean of the reaction time column <code>RT</code>. Go to your <code>week-02.R</code> script: if you followed <a href="ch-read-data.html" class="quarto-xref"><span>Chapter 9</span></a> (and you should have), the script should already have the code to attach the tidyverse and read the <code>song2020/shallow.csv</code> file into a variable called <code>shallow</code>.</p>
+<p>Now that you have learned about summary measures, we can talk about how to summarise data in R, rather than just vectors as we did in the previous chapter. When you work with data, you always want to get summary measures for most of the variables in the data. Data reports usually include summary measures. It is also important to understand which summary measure is appropriate for which type of variable, which was covered in the previous section. Now, you will learn how to obtain summary measures using the <code>summarise()</code> function from the <a href="https://dplyr.tidyverse.org">dplyr</a> tidyverse package. Let’s practice with the data from <span class="citation" data-cites="song2020">Song et al. (<a href="references.html#ref-song2020" role="doc-biblioref">2020</a>)</span> you read in <a href="ch-read-data.html" class="quarto-xref"><span>Chapter 6</span></a>. We want to get a measure of central tendency and dispersion for the reaction times, in the <code>RT</code> column. In order to decide which measures to pick, think about the nature of the <code>RT</code> variable. Reaction times is a numeric and continuous statistical variable, and it can only have positive values. So the mean and standard deviations are appropriate measures. Let’s start with the mean of the reaction time column <code>RT</code>. Go to your <code>week-02.R</code> script: if you followed <a href="ch-read-data.html" class="quarto-xref"><span>Chapter 6</span></a> (and you should have), the script should already have the code to attach the tidyverse and read the <code>song2020/shallow.csv</code> file into a variable called <code>shallow</code>.</p>
 <p>Now let’s calculate the mean of <code>RT</code> with <code>summarise()</code>. The <code>summarise()</code> function takes at least two arguments: (1) the tibble to summarise, (2) one or more summary functions applied to columns in the tibble. In this case we just want the mean RTs. To get this, you write <code>RT_mean = mean(RT)</code> which tells the function to calculate the mean of the <code>RT</code> column and save the result in a new column called <code>RT_mean</code>. Yes, <code>summarise()</code> returns a tibble (a data frame)! It might seem overkill now, but you will see below that it is useful when you are grouping the data, so that for example you can get the mean of different groups in the data. Here is the code with its output:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(shallow, <span class="at">RT_mean =</span> <span class="fu">mean</span>(RT))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>

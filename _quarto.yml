@@ -25,12 +25,12 @@ book:
     - ch-quantitative.qmd
     - ch-r-rstudio.qmd
     - ch-packages.qmd
+    - ch-read-data.qmd
   - part: Week 3
     chapters:
     - ch-inference.qmd
     - ch-scripts.qmd
     - ch-statistical-vars.qmd
-    - ch-read-data.qmd
     - ch-sum-measures.qmd
     - ch-summarise.qmd
   - part: Week 4
