@@ -251,7 +251,12 @@ You can download the data files from the [QML Data](https://uoelel.github.io/qml
     (If you don't know how to do this, search for it online for your operating system! Zip archives are a very common way of distributing data and it is important to know how to use them).
 
 3.  Create a folder called `data/` (the slash is there just to remind you that it's a folder, but you don't have to include it in the name) in the Quarto project you are using for the course.
-    You know how to do this from @sec-scripts.
+    You can do so in two different ways:
+
+    - You can click on the `New Folder` button in the `Files` panel (bottom-right) in RStudio, set the name to `data` (do not include the slash `/`) and click `OK`.
+      The folder will be created within the current folder shown in the Files list.
+
+    - Since Quarto Projects are just folders on your computer, you can create a new folder as you would with any other folder from your computer File Explorer/Finder.
 
 4.  Move the contents of the `data.zip` archive into the `data/` folder.
 
@@ -290,7 +295,7 @@ The [Open Science Framework](https://osf.io) has the [following recommendations]
   Ideally, the project folder should have all the files related to the project (one exception is PDFs of papers that form the literature background of the project: for those I recommend using bibliography managing software, like the free [Zotero](https://www.zotero.org) or [JabRef](https://www.jabref.org)).
 
 - Separate **code** from **data**.
-  A general recommendation is to have a folder `code/` or `scripts/` with all the code files of the project and a folder `data/` that has all the data.
+  A general recommendation is to have a folder `code/` or `scripts/` with all the code files (you will start writing your code in script files from @sec-scripts) of the project and a folder `data/` that has all the data.
   This makes keeping files in order easier, since everything has its natural place.
 
 - Separate **raw data** from **derived data**.
@@ -364,8 +369,7 @@ This will attach the core tidyverse packages, including readr.
 Of course, you can also attach the individual packages directly: `library(readr)`.
 If you use `library(tidyverse)` there is no need to attach individual tidyverse packages.
 
-Open your `week-02.R` script.
-Add the following lines in the script (don't change the file path! explanation below) and run the code (you might want to put the `library()` line at the top of the script, with the other packages).
+Run the code below in the R Console.
 The `read_csv()` line will print information about the data and read the data into `shallow`.
 
 ```{r}
@@ -513,7 +517,7 @@ cat("How many rows does `shallow` have?", longmcq(opts_3))
 To read an Excel file we need first to attach the [readxl](https://readxl.tidyverse.org/index.html) package.
 It should already be installed, because it comes with the tidyverse.
 If not, install it.
-Then add the following line to the script.
+Run the following code in the Console to attach the package.
 
 ```{r}
 #| label: readxl
@@ -577,22 +581,6 @@ saveRDS(shallow, "./data/song2020/shallow.rds")
 ```
 
 The first argument is the name of the tibble object and the second argument is the file path to save the object to.
-
-::: callout-warning
-## Exercise 2
-
-Read the following files in R, making sure you use the right `read_*()` function.
-You can write your code in the `week-02.R` script.
-
-- `data/koppensteiner2016/takete_maluma.txt` (a tab separated file).
-
-- `data/pankratz2021/si.csv`.
-
-- Go to <https://datashare.ed.ac.uk/handle/10283/4006>, download the file `conflict_data_.xlsx`, and save it in `data/`.
-  Read both sheets ("conflict_data2" and "demographics").
-  Any issues?
-  (I suggest looking at the spreadsheet in Excel).
-:::
 
 ## Reading multiple tabular files
 
@@ -677,6 +665,21 @@ Passing a list of files to a reading function works for all the `read_*` functio
 @sec-r-basics, @sec-packages and this chapter introduced you to the basics of R, including how to use variables and functions, install and use packages and read data.
 Now that you know how to import data in R, in the following chapters you will start working with the data and you will learn how to summarise, transform, plot and model data in R.
 A lot of new packages and functions will be introduced, so before moving onto the Week 3 chapters make sure you have mastered the contents of the Week 2 chapters.
+
+::: callout-warning
+## Exercise 2
+
+Read the following files in R, making sure you use the right `read_*()` function.
+
+- `data/koppensteiner2016/takete_maluma.txt` (a tab separated file).
+
+- `data/pankratz2021/si.csv`.
+
+- Go to <https://datashare.ed.ac.uk/handle/10283/4006>, download the file `conflict_data_.xlsx`, and save it in `data/`.
+  Read both sheets ("conflict_data2" and "demographics").
+  Any issues?
+  (I suggest looking at the spreadsheet in Excel).
+:::
 
 ## Summary
 

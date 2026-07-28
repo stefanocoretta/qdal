@@ -994,8 +994,8 @@ div.csl-indent {
 <div class="cell" data-layout-align="center">
 <ol type="a">
 <li>Which of the following is not tabular data.
-<div id="radio_QJWYRHYDKD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QJWYRHYDKD" value=""> <span>a. A file with 3 columns and 100 rows.</span></label><label><input type="radio" autocomplete="off" name="radio_QJWYRHYDKD" value="answer"> <span>b. An HTML file.</span></label><label><input type="radio" autocomplete="off" name="radio_QJWYRHYDKD" value=""> <span>c.&nbsp;An Excel spreadsheet.</span></label>
+<div id="radio_HJRKXNWFAH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HJRKXNWFAH" value=""> <span>a. A file with 3 columns and 100 rows.</span></label><label><input type="radio" autocomplete="off" name="radio_HJRKXNWFAH" value="answer"> <span>b. An HTML file.</span></label><label><input type="radio" autocomplete="off" name="radio_HJRKXNWFAH" value=""> <span>c.&nbsp;An Excel spreadsheet.</span></label>
 </div></li>
 <li>Non-tabular data can be saved to <code>.rds</code> files. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></li>
 </ol>
@@ -1020,7 +1020,11 @@ div.csl-indent {
 <ol type="1">
 <li><p>Download the zip archive with all the data by clicking on the following link (if this doesn’t work, right-click and choose “Save linked file” or similar): <a href="https://uoelel.github.io/qml-data/data.zip">data.zip</a>. The data is in a zip archive.</p></li>
 <li><p>Unzip the zip file to extract the contents. (If you don’t know how to do this, search for it online for your operating system! Zip archives are a very common way of distributing data and it is important to know how to use them).</p></li>
-<li><p>Create a folder called <code>data/</code> (the slash is there just to remind you that it’s a folder, but you don’t have to include it in the name) in the Quarto project you are using for the course. You know how to do this from <a href="ch-scripts.html" class="quarto-xref"><span>Chapter 8</span></a>.</p></li>
+<li><p>Create a folder called <code>data/</code> (the slash is there just to remind you that it’s a folder, but you don’t have to include it in the name) in the Quarto project you are using for the course. You can do so in two different ways:</p>
+<ul>
+<li><p>You can click on the <code>New Folder</code> button in the <code>Files</code> panel (bottom-right) in RStudio, set the name to <code>data</code> (do not include the slash <code>/</code>) and click <code>OK</code>. The folder will be created within the current folder shown in the Files list.</p></li>
+<li><p>Since Quarto Projects are just folders on your computer, you can create a new folder as you would with any other folder from your computer File Explorer/Finder.</p></li>
+</ul></li>
 <li><p>Move the contents of the <code>data.zip</code> archive into the <code>data/</code> folder.</p>
 <ol type="1">
 <li><p>Open a Finder or File Explorer window.</p></li>
@@ -1046,7 +1050,7 @@ div.csl-indent {
 <p>The <a href="https://osf.io">Open Science Framework</a> has the <a href="https://help.osf.io/article/147-organizing-files">following recommendations</a> that can be applied to any type of research project.</p>
 <ul>
 <li><p>Use <strong>one folder</strong> per project. The project folder will also be your RStudio/Quarto project folder. Ideally, the project folder should have all the files related to the project (one exception is PDFs of papers that form the literature background of the project: for those I recommend using bibliography managing software, like the free <a href="https://www.zotero.org">Zotero</a> or <a href="https://www.jabref.org">JabRef</a>).</p></li>
-<li><p>Separate <strong>code</strong> from <strong>data</strong>. A general recommendation is to have a folder <code>code/</code> or <code>scripts/</code> with all the code files of the project and a folder <code>data/</code> that has all the data. This makes keeping files in order easier, since everything has its natural place.</p></li>
+<li><p>Separate <strong>code</strong> from <strong>data</strong>. A general recommendation is to have a folder <code>code/</code> or <code>scripts/</code> with all the code files (you will start writing your code in script files from <a href="ch-scripts.html" class="quarto-xref"><span>Chapter 8</span></a>) of the project and a folder <code>data/</code> that has all the data. This makes keeping files in order easier, since everything has its natural place.</p></li>
 <li><p>Separate <strong>raw data</strong> from <strong>derived data</strong>. Raw data is data that you have gathered that, if lost, is lost for ever. Derived data is any data that is derived from raw data and that can be derived again (for example by running a script) if it’s deleted or corrupted.</p></li>
 <li><p>Make <strong>raw data read-only</strong>. You should assume that anything can happen to raw data, so you should treat it as “read-only”.</p></li>
 </ul>
@@ -1095,7 +1099,7 @@ project:
 :::
 -->
 <p>Note that while the <code>read_csv()</code> function does read the data in R, you must assign the output of the <code>read_csv()</code> function (i.e.&nbsp;the data we are reading) to a variable, using the assignment arrow <code>&lt;-</code>, just like we were assigning values to R variables in previous chapters. And since the <code>read_csv()</code> is a function from the tidyverse, you first need to attach the tidyverse packages with <code>library(tidyverse)</code> (remember, you need to attach packages <strong>only once</strong> per session). This will attach the core tidyverse packages, including readr. Of course, you can also attach the individual packages directly: <code>library(readr)</code>. If you use <code>library(tidyverse)</code> there is no need to attach individual tidyverse packages.</p>
-<p>Open your <code>week-02.R</code> script. Add the following lines in the script (don’t change the file path! explanation below) and run the code (you might want to put the <code>library()</code> line at the top of the script, with the other packages). The <code>read_csv()</code> line will print information about the data and read the data into <code>shallow</code>.</p>
+<p>Run the code below in the R Console. The <code>read_csv()</code> line will print information about the data and read the data into <code>shallow</code>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1190,8 +1194,8 @@ dbl (3): ACC, RT, logRT
 <div class="cell" data-layout-align="center">
 <ol type="1">
 <li>Given the following absolute path <code>/Users/raj/projects/thesis/data/raw/data.csv</code> and the working directory <code>/Users/raj/projects/</code>, which of the following paths is the correct one to read the <code>data.csv</code> file?
-<div id="radio_DRHAOATHEF" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DRHAOATHEF" value=""> <span>a. <code>/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_DRHAOATHEF" value=""> <span>b. <code>./projects/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_DRHAOATHEF" value=""> <span>c.&nbsp;<code>./data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_DRHAOATHEF" value="answer"> <span>d.&nbsp;<code>./thesis/data/raw/data.csv</code></span></label>
+<div id="radio_VVNKDIEBUY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VVNKDIEBUY" value=""> <span>a. <code>/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_VVNKDIEBUY" value=""> <span>b. <code>./projects/thesis/data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_VVNKDIEBUY" value=""> <span>c.&nbsp;<code>./data/raw/data.csv</code></span></label><label><input type="radio" autocomplete="off" name="radio_VVNKDIEBUY" value="answer"> <span>d.&nbsp;<code>./thesis/data/raw/data.csv</code></span></label>
 </div></li>
 </ol>
 </div>
@@ -1218,7 +1222,7 @@ The `shallow` data frame contains 11 columns (called variables in the `Environme
 
 
 ::: {.cell layout-align="center"}
-How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_BJSXVAUGAW'><label><input type="radio" autocomplete="off" name="radio_BJSXVAUGAW" value=""></input> <span>11</span></label><label><input type="radio" autocomplete="off" name="radio_BJSXVAUGAW" value=""></input> <span>650</span></label><label><input type="radio" autocomplete="off" name="radio_BJSXVAUGAW" value="answer"></input> <span>6500</span></label></div>
+How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_HJCORIYOWR'><label><input type="radio" autocomplete="off" name="radio_HJCORIYOWR" value=""></input> <span>11</span></label><label><input type="radio" autocomplete="off" name="radio_HJCORIYOWR" value=""></input> <span>650</span></label><label><input type="radio" autocomplete="off" name="radio_HJCORIYOWR" value="answer"></input> <span>6500</span></label></div>
 :::
 
 :::
@@ -1227,7 +1231,7 @@ How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_BJSXV
 </section>
 <section id="read-excel-sheets" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="read-excel-sheets"><span class="header-section-number">6.6</span> Read Excel sheets</h2>
-<p>To read an Excel file we need first to attach the <a href="https://readxl.tidyverse.org/index.html">readxl</a> package. It should already be installed, because it comes with the tidyverse. If not, install it. Then add the following line to the script.</p>
+<p>To read an Excel file we need first to attach the <a href="https://readxl.tidyverse.org/index.html">readxl</a> package. It should already be installed, because it comes with the tidyverse. If not, install it. Run the following code in the Console to attach the package.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1267,24 +1271,6 @@ How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_BJSXV
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(shallow, <span class="st">"./data/song2020/shallow.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The first argument is the name of the tibble object and the second argument is the file path to save the object to.</p>
-<div class="callout callout-style-default callout-warning no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Exercise 2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Read the following files in R, making sure you use the right <code>read_*()</code> function. You can write your code in the <code>week-02.R</code> script.</p>
-<ul>
-<li><p><code>data/koppensteiner2016/takete_maluma.txt</code> (a tab separated file).</p></li>
-<li><p><code>data/pankratz2021/si.csv</code>.</p></li>
-<li><p>Go to <a href="https://datashare.ed.ac.uk/handle/10283/4006" class="uri">https://datashare.ed.ac.uk/handle/10283/4006</a>, download the file <code>conflict_data_.xlsx</code>, and save it in <code>data/</code>. Read both sheets (“conflict_data2” and “demographics”). Any issues? (I suggest looking at the spreadsheet in Excel).</p></li>
-</ul>
-</div>
-</div>
 </section>
 <section id="reading-multiple-tabular-files" class="level2" data-number="6.8">
 <h2 data-number="6.8" class="anchored" data-anchor-id="reading-multiple-tabular-files"><span class="header-section-number">6.8</span> Reading multiple tabular files</h2>
@@ -1385,6 +1371,24 @@ dbl (10): seconds, TT_displacement_sm, TT_velocity, TT_velocity_abs, TD_disp...
 <p>Now <code>tongue</code> has the data from the <code>-tongue_cart</code> files in <code>coretta2018/ultrasound</code>. Since each data has exactly the same columns, the code just works. If you are wondering what happened to the columns for which we did not specify a name, those just got named with <code>X</code> followed by the column number (the first unnamed column is column 15 so it is now named <code>X15</code> and so on).</p>
 <p>Passing a list of files to a reading function works for all the <code>read_*</code> functions from the tidyverse (but be careful, this does not work with the <code>read.*</code> functions from base R, like <code>read.csv()</code>, although we are not really using those in this textbook).</p>
 <p><a href="ch-r-rstudio.html" class="quarto-xref"><span>Chapter 4</span></a>, <a href="ch-packages.html" class="quarto-xref"><span>Chapter 5</span></a> and this chapter introduced you to the basics of R, including how to use variables and functions, install and use packages and read data. Now that you know how to import data in R, in the following chapters you will start working with the data and you will learn how to summarise, transform, plot and model data in R. A lot of new packages and functions will be introduced, so before moving onto the Week 3 chapters make sure you have mastered the contents of the Week 2 chapters.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Exercise 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Read the following files in R, making sure you use the right <code>read_*()</code> function.</p>
+<ul>
+<li><p><code>data/koppensteiner2016/takete_maluma.txt</code> (a tab separated file).</p></li>
+<li><p><code>data/pankratz2021/si.csv</code>.</p></li>
+<li><p>Go to <a href="https://datashare.ed.ac.uk/handle/10283/4006" class="uri">https://datashare.ed.ac.uk/handle/10283/4006</a>, download the file <code>conflict_data_.xlsx</code>, and save it in <code>data/</code>. Read both sheets (“conflict_data2” and “demographics”). Any issues? (I suggest looking at the spreadsheet in Excel).</p></li>
+</ul>
+</div>
+</div>
 </section>
 <section id="summary" class="level2" data-number="6.9">
 <h2 data-number="6.9" class="anchored" data-anchor-id="summary"><span class="header-section-number">6.9</span> Summary</h2>
