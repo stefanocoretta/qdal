@@ -820,7 +820,7 @@ window.Quarto = {
 <p>Let’s see a practical example of Bayesian updating based on the “globe-tossing” scenario described in <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span>, Ch 2 <span class="citation" data-cites="gelman2011">(originally from <a href="references.html#ref-gelman2011" role="doc-biblioref">Gelman et al. 2011</a>)</span>. Imagine holding a small globe that represents Earth. You want to know what fraction of its surface is covered by water. To estimate this, you adopt a simple method: toss the globe into the air, and when you catch it, note whether the spot under your right index finger is water (W) or land (L). Then toss it again and repeat. This process produces a sequence of observations. For example, the first nine outcomes might be: WLWWWLWLW. In this sequence, six outcomes are water and three are land. We call this sequence the data, i.e.&nbsp;<span class="math inline">\(d\)</span>. What we are trying to estimate here is the true proportion of water.</p>
 <p>So what about our prior beliefs about the true proportion of water, i.e.&nbsp;<span class="math inline">\(P(h)\)</span>? Let’s say that our prior belief (assuming complete ignorance about the true proportion of water) is that all proportions of water are equally probable. This is called a <strong>uniform prior</strong>, or a <strong>flat</strong> prior. You can see why in <a href="#fig-prior-update" class="quarto-xref">Figure&nbsp;<span>20.1</span></a>. If you look at the top-left panel (the one with “n = 1”), the dashed line represents our prior belief: all proportions of water (on the <em>x</em>-axis) are equally probable, so that the prior probability distribution is flat. Note that a probability of 0 means Earth is all land, and a probability of 1 means Earth is all water.</p>
 <p>Now, let’s update the flat prior distribution with the first observation in the globe-tossing exercise: the first outcome was W, water. This observations corresponds to a distribution in which 1 has the greatest probability and values below it have decreasing probability. This is represented in the top-left panel of <a href="#fig-prior-update" class="quarto-xref">Figure&nbsp;<span>20.1</span></a> as the solid slanted line. This is <span class="math inline">\(P(d | h)\)</span>. If we combine the flat prior and the probability of the data we get the dashed line in the second top panel (with “n = 2”). That is the posterior probability distribution resulting from the Bayesian update at step “n = 1”. This becomes the prior probability distribution at step “n = 2”.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code adapted from: https://bookdown.org/content/4857/small-worlds-and-large-worlds.html#bayesian-updating.</span></span>
@@ -865,10 +865,10 @@ window.Quarto = {
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> strip, <span class="at">scales =</span> <span class="st">"free_y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-prior-update" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-prior-update" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-prior-update-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-bayes_files/figure-html/fig-prior-update-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-bayes_files/figure-html/fig-prior-update-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-prior-update-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;20.1: Bayesian updating of a prior based on observations. From <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span> and <span class="citation" data-cites="kurtz2023">Kurtz (<a href="references.html#ref-kurtz2023" role="doc-biblioref">2023</a>)</span>.
@@ -889,20 +889,22 @@ Figure&nbsp;20.1: Bayesian updating of a prior based on observations. From <span
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
 <ol type="a">
 <li>What is the main conceptual difference between the frequentist and Bayesian interpretations of probability?
-<div id="radio_MKHNMXRSJY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_MKHNMXRSJY" value=""> <span>Frequentist probability is about the likelihood of a hypothesis being true, while Bayesian probability is about repeating an experiment infinitely.</span></label><label><input type="radio" autocomplete="off" name="radio_MKHNMXRSJY" value="answer"> <span>Frequentist probability is about the frequency of outcomes in repeated trials, while Bayesian probability is about the degree of certainty in an event given conditions.</span></label><label><input type="radio" autocomplete="off" name="radio_MKHNMXRSJY" value=""> <span>Frequentist probability uses prior beliefs, while Bayesian probability ignores them.</span></label><label><input type="radio" autocomplete="off" name="radio_MKHNMXRSJY" value=""> <span>Frequentist and Bayesian probability are mathematically identical and differ only in terminology.</span></label>
+<div id="radio_JFJNVTZIIC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JFJNVTZIIC" value=""> <span>Frequentist probability is about the likelihood of a hypothesis being true, while Bayesian probability is about repeating an experiment infinitely.</span></label><label><input type="radio" autocomplete="off" name="radio_JFJNVTZIIC" value="answer"> <span>Frequentist probability is about the frequency of outcomes in repeated trials, while Bayesian probability is about the degree of certainty in an event given conditions.</span></label><label><input type="radio" autocomplete="off" name="radio_JFJNVTZIIC" value=""> <span>Frequentist probability uses prior beliefs, while Bayesian probability ignores them.</span></label><label><input type="radio" autocomplete="off" name="radio_JFJNVTZIIC" value=""> <span>Frequentist and Bayesian probability are mathematically identical and differ only in terminology.</span></label>
 </div></li>
 <li>In the ‘globe-tossing’ example, what does a uniform prior (or flat prior) mean?
-<div id="radio_JBQPEJCHOZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JBQPEJCHOZ" value="answer"> <span>All proportions of water are considered equally probable before any data is observed.</span></label><label><input type="radio" autocomplete="off" name="radio_JBQPEJCHOZ" value=""> <span>The Earth is assumed to be exactly 50% water and 50% land.</span></label><label><input type="radio" autocomplete="off" name="radio_JBQPEJCHOZ" value=""> <span>The probability of land is always higher than the probability of water.</span></label><label><input type="radio" autocomplete="off" name="radio_JBQPEJCHOZ" value=""> <span>The prior distribution automatically adjusts after the first observation.</span></label>
+<div id="radio_GVTSEOUXOG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GVTSEOUXOG" value="answer"> <span>All proportions of water are considered equally probable before any data is observed.</span></label><label><input type="radio" autocomplete="off" name="radio_GVTSEOUXOG" value=""> <span>The Earth is assumed to be exactly 50% water and 50% land.</span></label><label><input type="radio" autocomplete="off" name="radio_GVTSEOUXOG" value=""> <span>The probability of land is always higher than the probability of water.</span></label><label><input type="radio" autocomplete="off" name="radio_GVTSEOUXOG" value=""> <span>The prior distribution automatically adjusts after the first observation.</span></label>
 </div></li>
 <li>Which element is present in Bayesian inference but absent in the frequentist approach?
-<div id="radio_ESDGHPECNW" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ESDGHPECNW" value=""> <span>The probability of the data given the hypothesis, <span class="math inline">\(P(d|h)\)</span>.</span></label><label><input type="radio" autocomplete="off" name="radio_ESDGHPECNW" value="answer"> <span>The updating of prior beliefs in light of new data.</span></label><label><input type="radio" autocomplete="off" name="radio_ESDGHPECNW" value=""> <span>The concept of hypothesis testing with a null hypothesis.</span></label><label><input type="radio" autocomplete="off" name="radio_ESDGHPECNW" value=""> <span>The use of repeated replications of a study.</span></label>
+<div id="radio_RTWJEIQKHI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RTWJEIQKHI" value=""> <span>The probability of the data given the hypothesis, <span class="math inline">\(P(d|h)\)</span>.</span></label><label><input type="radio" autocomplete="off" name="radio_RTWJEIQKHI" value="answer"> <span>The updating of prior beliefs in light of new data.</span></label><label><input type="radio" autocomplete="off" name="radio_RTWJEIQKHI" value=""> <span>The concept of hypothesis testing with a null hypothesis.</span></label><label><input type="radio" autocomplete="off" name="radio_RTWJEIQKHI" value=""> <span>The use of repeated replications of a study.</span></label>
 </div></li>
 </ol>
+</div>
 </div>
 </div>
 

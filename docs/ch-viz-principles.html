@@ -787,7 +787,7 @@ div.csl-indent {
 <section id="information-is-not-reliable" class="level2" data-number="15.2">
 <h2 data-number="15.2" class="anchored" data-anchor-id="information-is-not-reliable"><span class="header-section-number">15.2</span> Information is (not) reliable</h2>
 <p>Let’s use the <code>coretta2022/glot_status</code> data. to create the plots because you will learn about it later. The following plot is titled <em>Number of endangered languages by macroarea and status</em>, but the plot contains both endangered and non-endangered languages.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">%&gt;%</span></span>
@@ -801,15 +801,15 @@ div.csl-indent {
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ch-viz-principles_files/figure-html/status-bar-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ch-viz-principles_files/figure-html/status-bar-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>We can fix that by filtering the data so that it contains only endangered languages.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>glot_status <span class="sc">%&gt;%</span></span>
@@ -823,9 +823,9 @@ div.csl-indent {
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ch-viz-principles_files/figure-html/status-bar-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ch-viz-principles_files/figure-html/status-bar-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -834,7 +834,7 @@ div.csl-indent {
 <section id="patterns-are-not-noticeable" class="level2" data-number="15.3">
 <h2 data-number="15.3" class="anchored" data-anchor-id="patterns-are-not-noticeable"><span class="header-section-number">15.3</span> Patterns are (not) noticeable</h2>
 <p>The <code>coretta2021/albvot</code> data contains data on VOT in Albanian. It has data from 6 speakers <span class="citation" data-cites="coretta2022">(<a href="references.html#ref-coretta2022" role="doc-biblioref">Coretta et al. 2022</a>)</span>. The following plot uses a bar chart to show the VOT of different stops, but what you can’t really see is that there is a lot of variability within and among stops and within and among speakers.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>albvot <span class="sc">%&gt;%</span></span>
@@ -846,15 +846,15 @@ div.csl-indent {
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ch-viz-principles_files/figure-html/alb-vot-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ch-viz-principles_files/figure-html/alb-vot-1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>We can do better. The following plot shows individual measurements of VOT for different stops and speakers. Now an interesting pattern emerges: speaker 5 (<code>s05</code>) has particularly long VOT for /t/ and /k/ relative to the other speakers.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>albvot <span class="sc">%&gt;%</span></span>
@@ -877,9 +877,9 @@ div.csl-indent {
 • ttile : "Albanian Voice Onset Time"</code></pre>
 </div>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ch-viz-principles_files/figure-html/alb-vot-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ch-viz-principles_files/figure-html/alb-vot-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -905,7 +905,7 @@ div.csl-indent {
 <section id="does-not-enable-exploration" class="level2" data-number="15.5">
 <h2 data-number="15.5" class="anchored" data-anchor-id="does-not-enable-exploration"><span class="header-section-number">15.5</span> Does (not) enable exploration</h2>
 <p>The plot below shows the number of gestures enacted by infants of English, Bengali and Chinese background as recorded during a controlled session <span class="citation" data-cites="cameronfaulkner2020">(<a href="references.html#ref-cameronfaulkner2020" role="doc-biblioref">Cameron-Faulkner et al. 2020</a>)</span>. Three different types of gestures are shown: hold out and give gestures (<code>ho_gv</code>), index-finger pointing (<code>point</code>) and reach out gestures (<code>reach</code>). Moreover the plot shows the number of gestures at 10 and 12 months.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>gestures <span class="sc">%&gt;%</span></span>
@@ -925,16 +925,16 @@ div.csl-indent {
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ch-viz-principles_files/figure-html/gest-bar-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ch-viz-principles_files/figure-html/gest-bar-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>A bar chart is appropriate with count data, like in this case, but it does not allow for much exploration. Each infant was recorded at 10 and 12 months of age, but in the plot you don’t see whether individual infants changed their number of gestures. We can only notice that overall the number of gestures increases from 10 to 12 months old.</p>
 <p>We can use a “connected point” plot: each infant is represented by a dot at 10 and 12 months and the dots of the same infant are connected by a line. This allows us to see whether an individual infant uses more gestures at 12 months.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>gestures <span class="sc">%&gt;%</span></span>
@@ -951,9 +951,9 @@ div.csl-indent {
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ch-viz-principles_files/figure-html/gest-line-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ch-viz-principles_files/figure-html/gest-line-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
 </figure>
 </div>
 </div>

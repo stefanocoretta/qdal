@@ -759,18 +759,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Read the <code>coretta2022/glot_status.rds</code> data and filter it so that you include only languages from Africa, Australia, Papunesia and South America, with any status except not endangered and extinct.</p>
 <p>In a simple bar chart, <strong>you only need to specify one axis, the <em>x</em>-axis</strong>, in the aesthetics <code>aes()</code>. This is because the counts that are placed on the <em>y</em>-axis are calculated by the <code>geom_bar()</code> function under the hood. This quirk is something that confuses many new learners, so make sure you internalise this. Go ahead and complete the following code to create a bar chart.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>global_south <span class="sc">|&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> status)) <span class="sc">+</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  ...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The counting for the <em>y</em>-axis is done automatically. R looks in the <code>status</code> column and counts how many times each value in the column occurs in the data frame. The counts are then plotted as bars. If you did things correctly, you should get the following plot. The <em>x</em>-axis is now <code>status</code> and the <em>y</em>-axis corresponds to the number of languages by status (<code>count</code>).</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-status-bar" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-status-bar" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-status-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-more-plotting_files/figure-html/fig-status-bar-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-more-plotting_files/figure-html/fig-status-bar-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-status-bar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;17.1: Number of languages by endangerment status.
@@ -808,18 +808,18 @@ Figure&nbsp;17.1: Number of languages by endangerment status.
 </div>
 </div>
 <p>To create a stacked bar chart, you just need to add a new aesthetic mapping to <code>aes()</code>: <code>fill</code>. The <code>fill</code> aesthetic lets you fill bars or areas with different colours depending on the values of a specified column. Let’s make a plot on language endangerment by macro-area. Complete the following code by specifying that <code>fill</code> should be based on <code>status</code>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>global_south <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Macroarea, ...)) <span class="sc">+</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You should get the following.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-status-stacked" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-status-stacked" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-status-stacked-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-more-plotting_files/figure-html/fig-status-stacked-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-more-plotting_files/figure-html/fig-status-stacked-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-status-stacked-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;17.2: Number of languages by macro-area and endangerment status.
@@ -852,15 +852,15 @@ Figure&nbsp;17.2: Number of languages by macro-area and endangerment status.
 <section id="filled-stacked-bar-charts" class="level2" data-number="17.3">
 <h2 data-number="17.3" class="anchored" data-anchor-id="filled-stacked-bar-charts"><span class="header-section-number">17.3</span> Filled stacked bar charts</h2>
 <p>In the plot above it is difficult to assess whether different macro-areas have different proportions of endangerment. This is because the overall number of languages per area differs between areas. A solution to this is to plot <strong>proportions</strong> instead of raw counts. You could calculate the proportions yourself, but there is a quicker way: using the <code>position</code> argument in <code>geom_bar()</code>. You can plot proportions instead of counts by setting <code>position = "fill"</code> inside <code>geom_bar()</code>, like so:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>global_south <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Macroarea, <span class="at">fill =</span> status)) <span class="sc">+</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-status-stacked-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-status-stacked-2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-status-stacked-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-more-plotting_files/figure-html/fig-status-stacked-2-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-more-plotting_files/figure-html/fig-status-stacked-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-status-stacked-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;17.3: Proportion of languages by macro-area and endangerment status.
@@ -870,7 +870,7 @@ Figure&nbsp;17.3: Proportion of languages by macro-area and endangerment status.
 </div>
 </div>
 <p>The plot now shows proportions of languages by endangerment status for each area separately. Note that the <em>y</em>-axis label is still “count” but should be “proportion”. Use <code>labs()</code> to change the axes labels and the legend name.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>global_south <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Macroarea, <span class="at">fill =</span> status)) <span class="sc">+</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
@@ -895,12 +895,12 @@ Figure&nbsp;17.3: Proportion of languages by macro-area and endangerment status.
 </div>
 </div>
 <p>You should get this.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-status-stacked-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-status-stacked-3" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-status-stacked-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-more-plotting_files/figure-html/fig-status-stacked-3-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-more-plotting_files/figure-html/fig-status-stacked-3-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-status-stacked-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;17.4: Proportion of languages by macro-area and endangerment status.
@@ -917,12 +917,12 @@ Figure&nbsp;17.4: Proportion of languages by macro-area and endangerment status.
 <section id="faceting-and-panels" class="level2" data-number="17.4">
 <h2 data-number="17.4" class="anchored" data-anchor-id="faceting-and-panels"><span class="header-section-number">17.4</span> Faceting and panels</h2>
 <p>Sometimes we might want to separate the data into separate panels within the same plot. We can achieve that easily using <strong>faceting</strong>. Let’s revisit the plots from <a href="ch-plotting.html" class="quarto-xref"><span>Chapter 16</span></a>. We will use the <code>winter2012/polite.csv</code> data again. This is the plot you previously made. Try and reproduce it by writing the code yourself (you also have to read in the data!).</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-polite" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-polite" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-polite-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-more-plotting_files/figure-html/fig-polite-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-more-plotting_files/figure-html/fig-polite-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polite-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;17.5: Scatter plot of mean f0 and H1-H2 difference.
@@ -933,7 +933,7 @@ Figure&nbsp;17.5: Scatter plot of mean f0 and H1-H2 difference.
 </div>
 <p>That looks great, but we want to know if being a music student has an effect on the relationship of <code>f0mn</code> and <code>H1H2</code>. In the plot above, the aesthetics mappings are the following: <code>f0mn</code> on the <em>x</em>-axis, <code>H1H2</code> on the <em>y</em>-axis, <code>gender</code> as colour. How can we separate data further depending on whether the participant is a music student or not (<code>musicstudent</code>)? We can create panels using <code>facet_grid()</code>. This function takes lists of variables to specify panels in rows and/or columns.</p>
 <p><strong>Faceting</strong> a plot allows to split the plot into multiple panels, arranged in rows and columns, based on one or more variables. To facet a plot, use the <code>facet_grid()</code> function. The syntax is a bit strange. You can specify rows of panels with the <code>rows</code> argument and columns of panels with <code>cols</code> argument, but you have to include column names inside <code>vars()</code>, like this:</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2, <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -944,10 +944,10 @@ Figure&nbsp;17.5: Scatter plot of mean f0 and H1-H2 difference.
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Gender"</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-polite-facet" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-polite-facet" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-polite-facet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-more-plotting_files/figure-html/fig-polite-facet-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-more-plotting_files/figure-html/fig-polite-facet-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polite-facet-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;17.6: Scatter plot of mean f0 and H1-H2 difference in non-music students (left) vs music students (right).
@@ -961,7 +961,7 @@ Figure&nbsp;17.6: Scatter plot of mean f0 and H1-H2 difference in non-music stud
 <p><a href="#fig-polite-facet" class="quarto-xref">Figure&nbsp;<span>17.6</span></a> shows mean f0 and H1-H2 difference as a scatter plot. The two panels indicate whether the participant was a student of music. Within each panel, the participant’s gender is represented by colour (red for female and blue for male). Male participants tend to have higher H1-H2 differences and lower mean f0 than females. From the plot it can also be seen that there is greater variability in H1-H2 difference in female music students compared to female non-music participants. Within each group of gender by music student there does not seem to be any specific relation between mean f0 and H1-H2 difference.</p>
 </blockquote>
 <p>The <code>polite</code> data also has a column <code>attitude</code> with values <code>inf</code> for informal and <code>pol</code> for polite. Subjects were asked to speak either as if they were talking to a friend (<code>inf</code> attitude) or to someone with a higher status (<code>pol</code> attitude). Recreate the last plot, this time faceting also by <code>attitude</code>. Use the <code>rows</code> column to create two separate rows for each value of <code>attitude</code>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>polite <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(f0mn, H1H2, <span class="at">colour =</span> gender)) <span class="sc">+</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>

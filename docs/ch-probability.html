@@ -796,6 +796,7 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
 <p><strong>True or false?</strong></p>
 <ol type="a">
 <li><p>A certain event is an event that has a probability equal to or greater than 1. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
@@ -803,6 +804,7 @@ window.Quarto = {
 <li><p>Probabilities are expressed with a number between 0 and 1 (inclusive). <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
 <li><p>When one event cannot occur if another does occur, these are called equally likely events. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
 </ol>
+</div>
 </div>
 </div>
 </section>
@@ -849,11 +851,11 @@ window.Quarto = {
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-distr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-distr" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-distr-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-distr" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-distr-1" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-distr-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-probability_files/figure-html/fig-distr-1.png" class="img-fluid figure-img" data-ref-parent="fig-distr" width="672">
+<img src="ch-probability_files/figure-html/fig-distr-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" data-ref-parent="fig-distr" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-distr-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Categorical probability distribution.
@@ -861,11 +863,11 @@ window.Quarto = {
 </figure>
 </div>
 </div>
-<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-distr" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-distr-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-distr" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-distr-2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-distr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-probability_files/figure-html/fig-distr-2.png" class="img-fluid figure-img" data-ref-parent="fig-distr" width="672">
+<img src="ch-probability_files/figure-html/fig-distr-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" data-ref-parent="fig-distr" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-distr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Continuous probability distribution.
@@ -931,7 +933,7 @@ Figure&nbsp;18.1: Example of a categorical probability distributiona and a conti
 <section id="density-plots" class="level2" data-number="18.4">
 <h2 data-number="18.4" class="anchored" data-anchor-id="density-plots"><span class="header-section-number">18.4</span> Density plots</h2>
 <p>You can create a density plot (i.e.&nbsp;a plot that shows the density curve as obtained from KDE) of sample values from a continuous variable with the density geometry: <code>geom_density()</code>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First read the data</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mald <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/tucker2019/mald_1_1.rds"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -940,10 +942,10 @@ Figure&nbsp;18.1: Example of a categorical probability distributiona and a conti
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reaction Times (ms)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-density-rt" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-density-rt" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-density-rt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-probability_files/figure-html/fig-density-rt-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-probability_files/figure-html/fig-density-rt-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-rt-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;18.2: Density plot of reaction times.
@@ -953,17 +955,17 @@ Figure&nbsp;18.2: Density plot of reaction times.
 </div>
 </div>
 <p><a href="#fig-density-rt" class="quarto-xref">Figure&nbsp;<span>18.2</span></a> shows the density of reaction times from the MALD data set, in milliseconds. The higher the curve, the higher the density around the values below that part of the curve. In this sample of RTs, the density is high around about 900 ms. It drops quite sharply below 900 ms to about 500, while on the other side of 900 it has a more gentle slope. When a density plot looks like that, we say the distribution is <strong>right-skewed</strong> or that is has <strong>positive skew</strong>. This is because the distribution is skewed towards larger values. We can visualise this better by adding a “rug” to the plot with <code>geom_rug()</code>. This geometry adds a tick below the curve, on the <em>x</em>-axis, for each value in the sample. Look at <a href="#fig-density-rt-rug" class="quarto-xref">Figure&nbsp;<span>18.3</span></a>. Note how dense the ticks are where the density is high, and how sparse the ticks are where the density is lower. This makes sense, that’s what the density represents. Setting <code>alpha = 0.1</code> makes the ticks transparent so that the denseness is even more obvious (darker areas mean greater density because the ticks overlap, thus becoming darker). Now also notice how there are many more ticks to the right of the highest part of the density than to the left. This is the right-skewness we were talking about. This aspect will be relevant when you will learn about regression models in later chapters, but in fact we will not directly address this again until <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 31</span></a>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mald <span class="sc">|&gt;</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(RT)) <span class="sc">+</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rug</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reaction Times (ms)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-density-rt-rug" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-density-rt-rug" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-density-rt-rug-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-probability_files/figure-html/fig-density-rt-rug-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-probability_files/figure-html/fig-density-rt-rug-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-rt-rug-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;18.3: Density plot of reaction times with rug.
@@ -973,7 +975,7 @@ Figure&nbsp;18.3: Density plot of reaction times with rug.
 </div>
 </div>
 <p>Density plots can also be made for different groupings, like in the following plot where we show the density of RTs depending on the lexical status of the word (real or non-real). You can use the <code>fill</code> aesthetics to fill the area under the density curve with colour by <code>IsWord</code>. <a href="#fig-density-rt-word" class="quarto-xref">Figure&nbsp;<span>18.4</span></a> shows the densities of RTs depending on lexical status. It is subtle, but we can see that the density peak for nonce words (<code>IsWord = FALSE</code>) is to the right of the peak for real words. This means that we can expect on average higher RTs for nonce words than for real words. Moreover, the curve for nonce words is overall lower than that for real words: this means that RTs with real words are more tightly concentrated around the peak, while RTs with nonce words are more spread.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mald <span class="sc">|&gt;</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(RT, <span class="at">fill =</span> IsWord)) <span class="sc">+</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
@@ -982,10 +984,10 @@ Figure&nbsp;18.3: Density plot of reaction times with rug.
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">type =</span> <span class="st">"qual"</span>) <span class="sc">+</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Reaction Times (ms)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div id="fig-density-rt-word" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-density-rt-word" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-density-rt-word-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-probability_files/figure-html/fig-density-rt-word-1.png" class="img-fluid figure-img" width="672">
+<img src="ch-probability_files/figure-html/fig-density-rt-word-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-rt-word-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;18.4: Density plot of reaction times by lexical status.

@@ -786,12 +786,12 @@ window.Quarto = {
 <li><p><strong>Measures of dispersion</strong> indicate the <strong>spread or dispersion</strong> of the variable values around the central tendency value.</p></li>
 </ul>
 <p><strong>Always report a measure of central tendency together with its measure of dispersion!</strong> A central tendency measure captures only one aspect of the “distribution” of the values and variables with the same central tendency value could have very different dispersion, and hence be very different in nature. For example, look at the density plot in <a href="#fig-same-mean" class="quarto-xref">Figure&nbsp;<span>10.1</span></a> (you will learn more about them in <a href="ch-probability.html" class="quarto-xref"><span>Chapter 18</span></a>). These plots are good at showing the distribution of values of numeric variables. The higher the density the curve, the more the values under that part of the curve are represented in the sample. Variable <code>a</code> and <code>b</code> have the same mean (central tendency): the mean is 0. But <code>a</code> has a standard deviation (measure of dispersion, more on this below) of 1 while <code>b</code>’s standard deviation is 3. You can appreciate how different <code>a</code> and <code>b</code> are, despite having exactly the same mean. This should show how important it is to not only report (and think about) central tendencies, like the mean, but also the dispersion of the data around the central tendency.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-same-mean" class="quarto-float quarto-figure quarto-figure-center anchored" width="672">
+<div id="fig-same-mean" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-same-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="ch-sum-measures_files/figure-html/fig-same-mean-1.png" id="fig-same-mean" class="img-fluid figure-img" width="672">
+<img src="ch-sum-measures_files/figure-html/fig-same-mean-1.png" id="fig-same-mean" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-same-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;10.1
@@ -848,7 +848,7 @@ Figure&nbsp;10.1
 <ul>
 <li>The variable can take on any positive and negative number, including 0.</li>
 </ul>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.12</span>, <span class="fl">0.95</span>, <span class="fl">0.41</span>, <span class="sc">-</span><span class="fl">2.1</span>, <span class="fl">0.09</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -0.354</code></pre>
@@ -857,7 +857,7 @@ Figure&nbsp;10.1
 <ul>
 <li>The variable can take on any positive number only.</li>
 </ul>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="fl">0.32</span>, <span class="fl">2.58</span>, <span class="fl">1.5</span>, <span class="fl">0.12</span>, <span class="fl">1.09</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.122</code></pre>
@@ -881,7 +881,7 @@ Important
 <section id="median" class="level3" data-number="10.2.2">
 <h3 data-number="10.2.2" class="anchored" data-anchor-id="median"><span class="header-section-number">10.2.2</span> Median</h3>
 <p>Use the median with <strong>numeric (continuous and discrete) variables</strong>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># odd N</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.12</span>, <span class="fl">0.95</span>, <span class="fl">0.41</span>, <span class="sc">-</span><span class="fl">2.1</span>, <span class="fl">0.09</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -919,7 +919,7 @@ Important
 <li><p>The median is <strong>not</strong>.</p></li>
 </ul>
 <p>The following list of numbers does not have obvious outliers. The mean and median are not to different.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># no outliers</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">15</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -931,7 +931,7 @@ Important
 </div>
 </div>
 <p>In the following case, there is quite a clear outlier, <code>40</code>. Look how the mean is higher than the median. This is because the outlier <code>40</code> pulls the mean towards it.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># one outlier</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">9</span>, <span class="dv">7</span>, <span class="dv">40</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -949,7 +949,7 @@ Important
 <h3 data-number="10.2.3" class="anchored" data-anchor-id="mode"><span class="header-section-number">10.2.3</span> Mode</h3>
 <p>Use the mode with <strong>categorical (discrete) variables</strong>. Unfortunately the <code>mode()</code> function in R is not the <em>statistical</em> mode, but rather it returns the R object type.</p>
 <p>You can use the <code>table()</code> function to “table” out the number of occurrences of elements in a vector.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"yellow"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"yellow"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -980,7 +980,7 @@ Important
 <section id="minimum-and-maximum" class="level3" data-number="10.3.1">
 <h3 data-number="10.3.1" class="anchored" data-anchor-id="minimum-and-maximum"><span class="header-section-number">10.3.1</span> Minimum and maximum</h3>
 <p>You can report minimum and maximum values for any <strong>numeric variable</strong>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x_1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.12</span>, <span class="fl">0.95</span>, <span class="fl">0.41</span>, <span class="sc">-</span><span class="fl">2.1</span>, <span class="fl">0.09</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(x_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1001,7 +1001,7 @@ Important
 <section id="range" class="level3" data-number="10.3.2">
 <h3 data-number="10.3.2" class="anchored" data-anchor-id="range"><span class="header-section-number">10.3.2</span> Range</h3>
 <p>Use the range with any <strong>numeric variable</strong>.</p>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>x_1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.12</span>, <span class="fl">0.95</span>, <span class="fl">0.41</span>, <span class="sc">-</span><span class="fl">2.1</span>, <span class="fl">0.09</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(x_1) <span class="sc">-</span> <span class="fu">min</span>(x_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1025,7 +1025,7 @@ Important
 <ul>
 <li>The variable can take on any positive and negative number, including 0.</li>
 </ul>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fl">1.12</span>, <span class="fl">0.95</span>, <span class="fl">0.41</span>, <span class="sc">-</span><span class="fl">2.1</span>, <span class="fl">0.09</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.23658</code></pre>
@@ -1034,7 +1034,7 @@ Important
 <ul>
 <li>The variable can take on any positive number only.</li>
 </ul>
-<div class="cell">
+<div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(<span class="fu">c</span>(<span class="fl">0.32</span>, <span class="fl">2.58</span>, <span class="fl">1.5</span>, <span class="fl">0.12</span>, <span class="fl">1.09</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9895555</code></pre>
