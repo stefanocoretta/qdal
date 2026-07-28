@@ -368,6 +368,7 @@ glot_status <- readRDS("data/coretta2022/glot_status.rds")
 ```
 
 To count the number of languages by status, we group the data by `status` and we summarise with `n()`.
+This works because each row in the data is one language, and `n()` counts the number of rows, within each status and since each row is one language the number of rows corresponds to the number of languages.
 
 ```{r}
 #| label: glot-n
@@ -382,7 +383,8 @@ This approach works.
 However, dplyr offers a more compact way to get counts with the `count()` function!
 You can think of this function as a `group_by/summarise` combo.
 You list the columns you want to group by as arguments to `count()` and the output gives you a column `n` with the counts.
-It works with a single column or more than one, like `group_by()`.
+Note that `count()` returns the *number or rows* in each group, like `n()`.
+It also works with a single column or more than one, like `group_by()`.
 
 ```{r}
 #| label: glot-count
@@ -427,7 +429,7 @@ it is equivalent to writing:
 f(x)
 ```
 
-This principle is important because it defines the natural behavior of the pipe: whatever computation you produce on the LHS will be injected as the first input to the next function.
+This principle is important because it defines the natural behaviour of the pipe: whatever computation you produce on the LHS will be injected as the first input to the next function.
 Consider the `mtcars` dataset, which is built into R.
 Suppose we want to compute the average miles per gallon (`mpg`) for each number of cylinders (`cyl`).
 Using the native pipe in combination with `tidyverse` functions, the code is straightforward and highly readable:
@@ -443,8 +445,8 @@ mtcars |>
 Let's break this down:
 
 1.  The `mtcars` dataset is the left-hand side. It is evaluated first and becomes the input for the next function.
-2.  `group_by(cyl)` receives the dataset as its **first argument**, groups the data by the `cyl` column, and returns a grouped dataframe.
-3.  The grouped dataframe is then piped into `summarise(avg_mpg = mean(mpg))`, which calculates the mean `mpg` for each cylinder group.
+2.  `group_by(cyl)` receives the dataset as its **first argument**, groups the data by the `cyl` column, and returns a grouped tibble.
+3.  The grouped tibble is then piped into `summarise(avg_mpg = mean(mpg))`, which calculates the mean `mpg` for each cylinder group.
 
 Notice that each step receives the output from the previous step as its first argument.
 This eliminates the need for intermediate variables and nested function calls, creating a natural, readable sequence of transformations.
@@ -467,9 +469,76 @@ Some differences between the native pipe and `magrittr`:
 
 1.  The native pipe is built into base R, so no external package is required.
 2.  The native pipe always passes the LHS value to the **first argument** of the RHS function.
-3.  `magrittr` allows more flexibility via the `.` placeholder, which can inject the LHS value into **any argument**.
+3.  `magrittr` allows more flexibility via the `.` place-holder, which can inject the LHS value into **any argument**.
 4.  Performance-wise, the native pipe has minimal overhead compared to `%>%`, which is a function call.
 
 Overall, the native pipe provides a simple, consistent, and readable way to chain operations, especially when working with `tidyverse` workflows.
 For users already familiar with `%>%`, the transition is intuitive, with the added benefit that this feature is now a part of base R.
+:::
+
+## Getting unique values with `distinct()`
+
+`count()` (like `n()`) returns the number of rows.
+Sometimes, this can lead to unexpected results.
+For example, let's say we want to calculate the number of participants by language group in `shallow`.
+Let's try first with `count(Group)` (`Group` is the column that tells us if the participant is an L1 or L2 speaker).
+
+```{r}
+#| label: shallow-part
+
+shallow |> 
+  count(Group)
+
+```
+
+Each participant has multiple observation in the data and the number we are getting is the number of observations in each group, not the number of participants.
+To really get the number of participants we first need to transform the data by extracting the unique participant IDs (`ID`) and so that one participant gets only one row.
+We achieve this with `distinct()` from dplyr.
+
+```{r}
+#| label: shallow-dist
+
+shallow |> 
+  distinct(ID)
+
+```
+
+The code above extracts the unique IDs from the data and you can see there are 65 rows, meaning there are 65 participants.
+For each participant we know whether they are L1 or L2 based on the ID itself, but we need a separate column to group by to get the number of participants in each language group.
+So we can add `Group` in `distinct()`.
+
+```{r}
+#| label: shallow-dist-2
+
+shallow |> 
+  distinct(Group, ID)
+```
+
+Now each row in the tibble is one participant and we have a way of grouping the tibble by language group to count the number of rows and hence the number of participants per group.
+This is what the following code does, in a chain.
+
+```{r}
+#| label: shallow-part-n
+
+shallow |> 
+  distinct(Group, ID) |> 
+  count(Group)
+
+```
+
+So there are 29 participants in the L1 group and 36 in the L2 group.
+When you need to count things, remember that you might have to first transform the data by extracting unique values with `distinct()` because `count()` counts the number of rows without checking the values in each row.
+
+## Summary
+
+::: {.callout-note appearance="simple"}
+- Use `summarise()` to summarise data, like when calculating measures of central tendency and dispersion.
+
+- You can group data with `group_by()` which returns a grouped tibble.
+
+- `n()` returns the number of rows.
+
+- You can group and count rows with `count()`.
+
+- Use `distinct()` to extract distinct values in the specified columns.
 :::

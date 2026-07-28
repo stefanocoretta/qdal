@@ -19,6 +19,8 @@
 
 - Added reading multiple files in the Read data in R chapter.
 
+- Added `distinct()` in the Summarise data chapter.
+
 # QDAL v1.1
 
 - Add license.
