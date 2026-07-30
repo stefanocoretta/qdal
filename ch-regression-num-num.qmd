@@ -637,17 +637,41 @@ Let's repeat the two research hypotheses and the research question from above.
 >
 > RQ: How does the effect of frequency vary depending on semantic distance and vice versa?
 
+```{r}
+#| label: summaries
+#| code-fold: true
+#| include: false
+
+si_draws <- as_draws_df(si_bm)
+
+quantile2(plogis(si_draws$b_Intercept)) |> round(2)
+quantile2(exp(si_draws$b_logfreq)) |> round(2)
+quantile2(exp(si_draws$b_semdist)) |> round(2)
+quantile2(exp(si_draws$b_semdist + si_draws$`b_logfreq:semdist` * mean(si$logfreq))) |> round(2)
+
+
+```
+
 We fitted a Bayesian model to scalar inference (absent vs present), using a Bernoulli distribution.
 We included logged co-occurrence frequency and semantic distance, and their interaction as predictors.
+In the following paragraph, we report 90% CrI as ranges, plus the mean and SD of the posterior distribution of the relevant regression coefficients).
+See @tbl-coefs for the full coefficient table.
 
-The model's results suggest that, when logged frequency and semantic distance are at 0, the probability of a scalar inference being present is between ...
-and ...% ($\beta$ = ..., SD = ...).
-For each unit increase of logged frequency, when semantic distance is at 0, the probability increases by ...
-to ...
-log-odds ($\beta$ = ..., SD = ...).
-For each unit increase of semantic distance, when logged frequency is at its mean, the probability increases by ...
-to ...
-log-odds ($\beta$ = ..., SD = ...).
-The positive effect of logged word frequency increases with increasing semantic distance, by ...
-to ...
-log-odds ($\beta$ = ..., SD = ...).
+The model's results suggest that, when logged frequency and semantic distance are at 0, the probability of a scalar inference being present is 5-9% at 90% probability (intercept, $\beta$ = -2.66, SD = 0.19).
+For each unit increase of log-frequency when semantic distance is 0, the log-odds of the probability of a scalar inference increase by a factor of 1.56-1.84 ($\beta$ = 0.53, SD = 0.05).
+For each unit increase of semantic distance when log-frequency is 0, the log-odds decrease by 2-17% ($\beta$ = -0.1, SD = 0.05).
+However, at mean log-frequency, the effect of semantic distance is positive: for each unit increase of semantic distance, the log-odds of the probability of a scalar inference increase by 7-11%.
+Indeed, the interaction term of the model indicate a positive interaction between log-frequency and semantic distance: with greater log-frequency, the effect of semantic distance increases and, equivalently, with greater semantic distance, the effect of log-frequency increases.
+
+In sum, the model's result are generally compatible with H1 and H2, i.e. that the effect of log-frequency and semantic distance are positive.
+However, as an answer to our research question about the interaction between log-frequency and semantic distance, we found a positive interaction between the two predictors ($\beta$ = 0.05, SD = 0.01) so that at lower values of log-frequency the effect of semantic distance is somewhat negative and conversely, the effect becomes more positive at greater values of log-frequency.
+
+```{r}
+#| label: tbl-coefs
+#| tbl-cap: "Regression coefficients of a Bayesian model of the probability of scalar inference."
+#| code-fold: true
+
+fixef(si_bm) |> 
+  knitr::kable(digits = 2)
+
+```
