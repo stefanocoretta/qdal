@@ -12,10 +12,15 @@ This section gives you a glimpse of other topics you could learn about and topic
 For each topic I will point you to some resources, but note that in some cases you might have to do some preliminary readings to be able to consume the contents of the linked resources.
 I am planning to add extra chapters in this textbook to cover these topics in the future, but until I have time to do that, you will have to make do with external resources.
 
+## Advanced plotting
+
+We covered a variety of plots across several chapters, but there are other type of plots that we haven't discussed that might be useful depending on the type of data you are working with.
+The website [R Graph Gallery](https://r-graph-gallery.com) has a useful catalogue of plot types organised by theme.
+I also recommend Wilke's *Fundamentals of Data Visualization* [@wilke2019].
+
 ## Further interactions
 
-In @sec-regression-interaction, you learned how to model an interaction between two categorical predictors in data from @winter2012: gender and attitude (and their effect on mean f0).
-While categorical/categorical interactions are quite straightforward, the other combinations are also very common but they tend to be more involved because of the presence of a numeric predictor: the other two-way interactions are categorical/numeric and numeric/numeric.
+In @sec-regression-interaction, @sec-regression-cat-num and @sec-regression-num-num you learned how to model an interaction between two categorical predictors, a categorical and a numeric predictor, and two numeric predictors.
 Interactions are not restricted to two-way combinations: in certain cases you might need three-way, four-way interactions or higher.
 
 Linguistic theory should determine which interactions are needed in your model, but when in doubt or when doing exploratory research it doesn't hurt to include interactions so that these can be estimated.
@@ -82,12 +87,10 @@ In the simplest of cases, prior probability distributions can be expressed as Ga
 Each model parameter requires a prior (brms sets default priors for any parameter the model you are fitting has).
 For example, for a simple Gaussian model of reaction times (you have learned in @sec-regression-lognorm that RTs are not Gaussian, but let's use the Gaussian distribution to make things easier) $RT \sim Gaussian(\mu, \sigma)$, we could set the following priors for $\mu$ and $\sigma$:
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \mu & \sim Gaussian(1000, 250)\\
 \sigma & \sim Gaussian_+(0, 250)
-\end{aligned}
-$$
+\end{aligned}$$
 
 The prior for the mean $\mu$, $Gaussian(1000, 250)$ states that we believe the mean RTs to be between 500 and 1500 ms at 95% confidence.
 This is because the 95% interval of $Gaussian(1000, 250)$ is approximately $[500, 1500]$.
