@@ -112,14 +112,16 @@ The first variable states if the $f0mn$ value is from a female participant ($gen
 The second variable states if the $f0mn$ value is from the informal condition ($att_{\text{POL}} = 0$) or the polite condition ($att_{\text{POL}} = 1$).
 @tbl-gen-att-contrasts shows the treatment contrasts table.
 
+::: {#tbl-gen-att-contrasts}
 |                                            | $gen_\text{M}$ | $att_\text{POL}$ |
-|:-----------------------------------:|:----------------:|:----------------:|
+|:------------------------------------------:|:--------------:|:----------------:|
 | `gender` = `F` and `attitude` = `informal` |       0        |        0         |
 |  `gender` = `F` and `attitude` = `polite`  |       0        |        1         |
 | `gender` = `M` and `attitude` = `informal` |       1        |        0         |
 |  `gender` = `M` and `attitude` = `polite`  |       1        |        1         |
 
-: Treatment contrasts coding of the categorical predictors gender and attitude. {#tbl-gen-att-contrasts}
+: Treatment contrasts coding of the categorical predictors gender and attitude.
+:::
 
 ::: callout-warning
 ### Exercise 2

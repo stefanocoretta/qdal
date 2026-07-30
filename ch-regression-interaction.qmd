@@ -80,6 +80,7 @@ f0mn_i & \sim Gaussian(\mu_i, \sigma)\\
 There are now not just three $\beta$ coefficients, but four: $\beta_0, \beta_1, \beta_2, \beta_3$.
 The new coefficient that we haven't seen before is $\beta_3$.
 This is the coefficient of the interaction term of gender and attitude.
+It is common to refer to the coefficients $\beta_1$ and $\beta_2$ as the coefficients of the **main effects** of gender and attitude respectively, and to $\beta_3$ as the coefficient of the **interaction** between gender and attitude.
 Let's work out the formula of $\mu$ depending on the combinations gender and attitude: remember that $gen_\text{M}$ is 0 for female and 1 for male, and $att_\text{POL}$ is 0 for informal and 1 for polite.
 
 |                     |                                         |
@@ -102,6 +103,7 @@ Go to [Regression Models Illustrated](https://stefanocoretta.shinyapps.io/lines/
 :::
 
 Moving on to R, we can include an interaction term between `gender` and `attitude` in the R formula with `gender:attitude` (the two predictors separated by a colon `:`).
+Similarly to how we refer to the coefficients in a model with interactions, we call the `gender` and `attitude` terms in the R formula the **main terms** and `gender:attitude` as the **interaction term**.
 
 ```{r}
 #| label: f0-bm-int
@@ -136,11 +138,11 @@ summary(f0_bm_int)
 - `Intercept` is $\beta_0$: this is, as you would expect, the mean f0 when gender and attitude are at their reference levels, i.e. female and informal.
   According to the model, there is a 95% probability that the mean f0 is between 246 and 267 Hz with female speakers and informal attitude.
 
-- `genderM` is $\beta_1$: this is the difference in mean f0 between male and female gender, *when attitude is informal* (i.e. at the reference level of attitude).
+- `genderM` is $\beta_1$, the coefficient of the main effect of gender: this is the difference in mean f0 between male and female gender, *when attitude is informal* (i.e. at the reference level of attitude).
   This differs from the interpretation in models with no interactions where instead the coefficient would capture the *average* difference between male and female gender.
   According to the model, the mean f0 is 105 to 134 Hz lower in male than in female participants, when the attitude is informal.
 
-- `attitudepol` is $\beta_2$: this is the difference in mean f0 between polite and informal attitude, *when gender is female* (i.e. at the reference level of gender).
+- `attitudepol` is $\beta_2$, the coefficient of the main effect of attitude: this is the difference in mean f0 between polite and informal attitude, *when gender is female* (i.e. at the reference level of gender).
   This also differs from the interpretation in models with no interactions where instead the coefficient would capture the *average* difference between polite and informal attitude.
   According to the model, the mean f0 is 3 to 32 Hz lower in polite than in informal speech, in female speakers.
 
