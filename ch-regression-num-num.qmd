@@ -675,3 +675,15 @@ fixef(si_bm) |>
   knitr::kable(digits = 2)
 
 ```
+
+## Summary
+
+::: {.callout-note appearance="simple"}
+- You can include a numeric/numeric interaction in a regression model as usual, with the `num + num + num:num` syntax or equivalently with `num * num`.
+
+- Remember that, with interactions, the coefficient for the main effect of each predictor indicates the effect of that predictor when the other predictor is at 0.
+
+- The interaction coefficient indicates the adjustment to make to the main effect of each predictor for each unit increase of the other.
+
+- Be careful when interpreting the coefficients of the main effects because the interaction coefficients can flip the sign.
+:::
