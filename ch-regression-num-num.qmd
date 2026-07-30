@@ -16,6 +16,7 @@ library(brms)
 library(posterior)
 library(tidybayes)
 library(ggdist)
+library(plotly)
 ```
 
 @sec-regression-cat-cat and @sec-regression-cat-num introduced interactions between two categorical predictors and between a categorical and a numeric predictor respectively.
@@ -336,7 +337,7 @@ logit(p) & = \beta_0 \\
 \end{aligned}$$
 
 ::: callout-warning
-### Exercise 1
+### Exercise 2
 
 Write `brm()` code for this model (assign the output to `si_bm`).
 Remember to set the seed and specify the file path to save the model fit to a file.
@@ -418,7 +419,7 @@ In this figure, the effect of semantic distance is clearly positive: the greater
 
 ```{r}
 #| label: fig-si-bm-cond
-#| fig-cap: ""
+#| fig-cap: "Mean and 95% CrI of the probability of scalar inference as a function of semantic distance (at mean log-frequency)."
 
 conditional_effects(si_bm, "semdist")
 
@@ -429,7 +430,7 @@ We can achieve this by specifying the `conditions` argument using a list, like i
 
 ```{r}
 #| label: fig-si-bm-cond-2
-#| fig-cap: ""
+#| fig-cap: "Mean and 95% CrI of the probability of scalar inference as a function of semantic distance (at log-frequency = 2)."
 
 conditional_effects(si_bm, "semdist", conditions = list(logfreq = 2))
 ```
@@ -441,7 +442,7 @@ This is indeed what we see in @fig-si-bm-cond-0.
 
 ```{r}
 #| label: fig-si-bm-cond-0
-#| fig-cap: ""
+#| fig-cap: "Mean and 95% CrI of the probability of scalar inference as a function of semantic distance (at log-frequency = 0)."
 
 conditional_effects(si_bm, "semdist", conditions = list(logfreq = 0))
 ```
@@ -449,57 +450,204 @@ conditional_effects(si_bm, "semdist", conditions = list(logfreq = 0))
 The interaction term in the model is allowing the effect of semantic distance to vary depending on the value of frequency (and vice versa).
 We can thus use `conditional_effects()` to plot the interaction.
 With two numeric predictors, the function picks three value of the other predictor for plotting: the mean and ±1 SD from the mean.
+Also, let's use 90% CrI instead of the default 95%.
 
 ```{r}
 #| label: fig-si-bm-cond-sd-f
+#| fig-cap: "Mean and 90% CrI of the probability of scalar inference as a function of semantic distance (at mean log-frequency ±1SD)."
 
-conditional_effects(si_bm, "semdist:logfreq")
+conditional_effects(si_bm, "semdist:logfreq", prob = 0.9)
 
 ```
+
+The plot suggests that the effect of semantic distance on the probability of a scalar inference being made becomes more positive with increasing log-frequency.
+In other words, adjectives with greater co-occurrence have a higher probability of scalar inference the higher their semantic distance.
+`conditional_effects()` also allows us to list specific values for the predictor using the `int_conditions` argument.
+In the following code, we set the values for log-frequency, at which the expected values are evaluated along semantic distance.
 
 ```{r}
 #| label: fig-si-bm-cond-sd-f-cond
+#| fig-cap: "Mean and 95% CrI of the probability of scalar inference as a function of semantic distance (at representative values of log-frequency)."
 
-conditional_effects(si_bm, "semdist:logfreq", int_conditions = list(logfreq = seq(0, 8, by = 2)))
+conditional_effects(si_bm, "semdist:logfreq", int_conditions = list(logfreq = c(1, 2, 4, 6, 8)), prob = 0.9)
 
 ```
+
+We can see now in this plot not only that the effect of semantic distance on the probability of a scalar inference depends on the value of log-frequency, but that at log-frequency values of 2 or lower the effect disappears or is reversed).
+We can also look at this from the log-frequency perspective.
+In the following plot, log-frequency is on the *x*-axis and we plot the expected values at representative values of semantic distance.
 
 ```{r}
-conditional_effects(si_bm, "logfreq:semdist", int_conditions = list(semdist = seq(-10, 15, by = 5)))
+#| label: fig-si-bm-cond-f-sd-cond
+#| fig-cap: "Mean and 95% CrI of the probability of scalar inference as a function of log-frequency (at representative values of semantic distance)."
+
+conditional_effects(si_bm, "logfreq:semdist", int_conditions = list(semdist = seq(-10, 15, by = 5)), prob = 0.9)
 ```
+
+When semantic distance is -10, there is virtually no effect of log-frequency on the probability of a scalar inference, but as semantic distance increases then the effect of log-frequency becomes more positive.
+Plotting numeric/numeric interactions like this really helps with their interpretation.
 
 ## Expected values with numeric/numeric interactions
 
+Calculating the posterior draws of the expected values with numeric/numeric interactions would be very tedious to do manually (by adding the draws of the various regression coefficients), so I will show you how to get them with `epred_draws()`.
+The first step is to make a prediction grid.
+We use the `seq()` function to get a sequence of values from the minimum to the maximum value of `logfreq` and `semdist` in the data.
+I set the `by` argument to 0.5 for both variables to get enough values along the range without going too granular.
+
+```{r}
+#| label: epred-grid
+
+epred_grid <- expand_grid(
+  logfreq = seq(min(si$logfreq), max(si$logfreq), length.out = 10),
+  semdist = seq(min(si$semdist), max(si$semdist), length.out = 10)
+)
+
+epred_grid
+```
+
+The grid has 495 rows now.
+For each of these rows, we will get 4000 expected values (one per posterior draw) so that will be a large tibble.
+Let's get the posterior draws of the expected values with `epred_draws()` now.
+
+```{r}
+#| label: si_epred
+
+si_epred <- epred_draws(si_bm, epred_grid)
+
+si_epred
+```
+
+Now we can plot and take summary measures of the expected values.
+An underrated way to plot numeric/numeric interactions is with a 3D plot.
+3D plots are hard to interpret when they are static, so we can make it interactive instead.
+The package [plotly](https://plotly.com/r/) allows us to plot interactive plots, including 3D plots.
+We won't go into the details of plotly, but it is good to know that it is out there.
+Of course, interactive plots only work on the web (or RStudio) and they are not usually included in papers or reports, which are normally in the PDF format, so we are using a 3D plot here more as a pedagogical device to hopefully demystify numeric/numeric interactions.
+You should install plotly now if it's not already installed.
+As we have done in @sec-regression-cat-num, we need to summarise the posterior draws so that we have a mean (for the 3D plot we will not need the CrIs because it is not straightforward to represent those in this type of plot).
+
+```{r}
+#| label: si-epred-summary
+
+si_epred_summary <- si_epred |> 
+  group_by(.row, logfreq, semdist) |> 
+  summarise(
+    mean = mean(.epred)
+  )
+
+```
+
+We can now plot the mean expected values as a 3D scatter plot.
+You can click and drag on the plot to rotate the plot and scroll up or down to zoom in and out.
+If you want to reset the plot, click on the little house icon in the top right corner of the plot.
+
+```{r}
+#| label: si-3d
+
+library(plotly)
+
+si_epred_summary |> 
+  plot_ly(
+    x = ~logfreq,
+    y = ~semdist,
+    z = ~mean,
+    marker = list(color = ~mean, size = 4),
+    type = "scatter3d", mode = "markers"
+  )
+
+```
+
+We plotted log-frequency and semantic distance on the *x* and *y*-axes (the horizontal axes) and the mean of the expected values on the *z*-axis (the vertical axis).
+The points are also coloured based on the value of the mean of the expected values.
+When both log-frequency and semantic distance are low, the expected value of the probability of a scalar inference is low, while when both log-frequency and semantic distance are high the expected value of the probability of a scalar inference is high.
+This is what we saw in the conditional plots above.
+However, those plots just showed a "slice" of the 3D plot above, either taken at representative log-frequency values or at representative semantic distance values.
+
+Now, let's try to reproduce @fig-si-bm-cond-sd-f-cond using the posterior draws of the expected values, rather than `conditional_effects()`.
+In that plot, we saw the effect of semantic distance at 5 values of log-frequency.
+We can use those values in the prediction grid, while keep a sequence of values for semantic distance as we have done above.
+
+```{r}
+#| label: epred-grid-2
+
+epred_grid_2 <- expand_grid(
+  logfreq = c(1, 2, 4, 6, 8),
+  semdist = seq(min(si$semdist), max(si$semdist), length.out = 15)
+)
+
+si_epred_2 <- epred_draws(si_bm, epred_grid_2)
+
+si_epred_2
+```
+
+We need to summarise the posterior draws to get a mean and 90% CrI for plotting.
+
+```{r}
+#| label: epred-draws-2-summary
+
+si_epred_2_summary <- si_epred_2 |> 
+  group_by(.row, semdist, logfreq) |> 
+  mutate(
+    mean = mean(.epred),
+    lo = quantile2(.epred, probs = 0.05),
+    hi = quantile2(.epred, probs = 0.95),
+  )
+
+```
+
+Finally, we plot the mean and 90% CrI of the posterior draws of the expected values.
+
+```{r}
+#| label: fig-epred
+
+si_epred_2_summary |> 
+  mutate(
+    logfreq = factor(logfreq, levels = c(8, 6, 4, 2, 1))
+  ) |>
+  ggplot(aes(semdist, mean)) +
+  geom_ribbon(aes(ymin = lo, ymax = hi, fill = logfreq), alpha = 0.4) +
+  geom_line(aes(colour = logfreq), linewidth = 1) +
+  labs(
+    x = "Semantic distance",
+    y = "Probability of scalar inference",
+    fill = "Log-freq", colour = "Log-freq"
+  )
+
+```
+
+@fig-epred is the same as @fig-si-bm-cond-sd-f-cond (perhaps the latter has smoother lines than the former, but we could achieve the same level of smoothness by using more representative values of semantic distance when calculating the expected predictions).
+
+::: callout-warning
+### Exercise 3
+
+- Calculate the 90-80-60% CrIs of the effect (in log-odds and odds ratio) of log-frequency when semantic distance is at its mean, minimum and maximum in the data.
+
+- Calculate the 90-80-60% CrIs of the effect (in log-odds and odds ratio) of semantic distance when log-frequency is at its mean, minimum and maximum in the data.
+:::
+
 ## Reporting
 
-Now, let's write a full report of model and results.
-Fill in the blanks yourself.
+Reporting models with numeric/numeric interactions can be convoluted.
+Often, what you report in the text depends on the specific research questions or hypotheses.
+Let's repeat the two research hypotheses and the research question from above.
 
-> We fitted a Bayesian model to scalar inference (absent vs present), using a Bernoulli distribution.
-> We included logged word frequency and semantic distance, and their interaction as predictors.
-> Both predictors were centred.
+> H1: Higher co-occurrence frequency increases the probability of a scalar inference.
 >
-> The model's results suggest that, when logged frequency and semantic distance are at their mean, the probability of a scalar inference being present is between ...
-> and ...% ($\beta$ = ..., SD = ...).
-> For each unit increase of logged frequency, when semantic distance is at its mean, the probability increases by ...
-> to ...
-> log-odds ($\beta$ = ..., SD = ...).
-> For each unit increase of semantic distance, when logged frequency is at its mean, the probability increases by ...
-> to ...
-> log-odds ($\beta$ = ..., SD = ...).
-> The positive effect of logged word frequency increases with increasing semantic distance, by ...
-> to ...
-> log-odds ($\beta$ = ..., SD = ...).
+> H2: Greater semantic distance increases the probability of a scalar inference.
+>
+> RQ: How does the effect of frequency vary depending on semantic distance and vice versa?
 
-::: {.callout-warning appearance="minimal"}
-In the report we are just reporting log-odds for the continuous predictors.
-This is because the change in percent points depends on where on the continuous predictor scale you are calculating the change in percent points.
+We fitted a Bayesian model to scalar inference (absent vs present), using a Bernoulli distribution.
+We included logged co-occurrence frequency and semantic distance, and their interaction as predictors.
 
-In real research contexts you would also report percent points at representative values of the continuous predictor (or values that are relevant for the research question).
-
-Typical representative values are mean and mean $\pm$ 1SD, as with the plots.
-
-Things get much more complicated when working with the interaction term and generally percent points are not reported in that context.
-
-Especially with Bernoulli models that include continuous predictors, the best way to understand and present the model results is by plotting them!
-:::
+The model's results suggest that, when logged frequency and semantic distance are at 0, the probability of a scalar inference being present is between ...
+and ...% ($\beta$ = ..., SD = ...).
+For each unit increase of logged frequency, when semantic distance is at 0, the probability increases by ...
+to ...
+log-odds ($\beta$ = ..., SD = ...).
+For each unit increase of semantic distance, when logged frequency is at its mean, the probability increases by ...
+to ...
+log-odds ($\beta$ = ..., SD = ...).
+The positive effect of logged word frequency increases with increasing semantic distance, by ...
+to ...
+log-odds ($\beta$ = ..., SD = ...).
