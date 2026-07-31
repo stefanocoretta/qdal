@@ -62,6 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -1275,7 +1276,7 @@ How many rows does `shallow` have? <div class='webex-radiogroup' id='radio_OQNLP
 <section id="reading-multiple-tabular-files" class="level2" data-number="6.8">
 <h2 data-number="6.8" class="anchored" data-anchor-id="reading-multiple-tabular-files"><span class="header-section-number">6.8</span> Reading multiple tabular files</h2>
 <p>Depending on how the tabular data is output or created, you might at times have data that is split into multiple files. This is common for example when each file is from a single participant. Reading multiple files in R is easy, assuming that each file has exactly the same structure.</p>
-<p>We will read files from Coretta <span class="citation" data-cites="coretta2018l coretta2020c coretta2020a">(<a href="references.html#ref-coretta2018l" role="doc-biblioref">2018</a>, <a href="references.html#ref-coretta2020c" role="doc-biblioref">2020a</a>, <a href="references.html#ref-coretta2020a" role="doc-biblioref">2020b</a>)</span>. The files can be found in the textbook data, in <code>coretta2018/ultrasound/</code>. The folder contains ultrasound tongue imaging (tongue contours) from several participants. We will read the files that end with <code>-tongue-cart.tsv</code>. TSV files are <em>t</em>ab <em>s</em>eparated <em>v</em>alues files, as mentioned above. They are like CSV files, but a tab character is used as the separator, instead of a comma. R has a function to list all files in a specific folder that match a pattern: <code>list.files()</code>. This function takes at least a path to list files from, like in the following example.</p>
+<p>We will read files from Coretta <span class="citation" data-cites="coretta2018l coretta2020c coretta2020a">(<a href="references.html#ref-coretta2018l" role="doc-biblioref">2018</a>; <a href="references.html#ref-coretta2020c" role="doc-biblioref">2020b</a>; <a href="references.html#ref-coretta2020a" role="doc-biblioref">2020a</a>)</span>. The files can be found in the textbook data, in <code>coretta2018/ultrasound/</code>. The folder contains ultrasound tongue imaging (tongue contours) from several participants. We will read the files that end with <code>-tongue-cart.tsv</code>. TSV files are <em>t</em>ab <em>s</em>eparated <em>v</em>alues files, as mentioned above. They are like CSV files, but a tab character is used as the separator, instead of a comma. R has a function to list all files in a specific folder that match a pattern: <code>list.files()</code>. This function takes at least a path to list files from, like in the following example.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">"data/coretta2018/ultrasound/"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1408,18 +1409,18 @@ dbl (10): seconds, TT_displacement_sm, TT_velocity, TT_velocity_abs, TD_disp...
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-coretta2018l" class="csl-entry" role="listitem">
-Coretta, Stefano. 2018. <em>An Exploratory Study of the Voicing Effect in Italian and Polish</em>. <a href="https://doi.org/10.17605/OSF.IO/XQ8K3">https://doi.org/10.17605/OSF.IO/XQ8K3</a>.
+Coretta, Stefano. 2018. An exploratory study of the voicing effect in italian and polish. <a href="https://doi.org/10.17605/OSF.IO/XQ8K3">https://doi.org/10.17605/OSF.IO/XQ8K3</a>.
 </div>
 <div id="ref-coretta2020c" class="csl-entry" role="listitem">
-Coretta, Stefano. 2020a. <span>“Longer Vowel Duration Correlates with Greater Tongue Root Advancement at Vowel Offset: Acoustic and Articulatory Data from Italian and Polish.”</span> <em>The Journal of the Acoustical Society of America</em> 147: 245–59. <a href="https://doi.org/10.1121/10.0000556">https://doi.org/10.1121/10.0000556</a>.
+Coretta, Stefano. 2020b. Longer vowel duration correlates with greater tongue root advancement at vowel offset: Acoustic and articulatory data from italian and polish. <em>The Journal of the Acoustical Society of America</em> 147. 245–259. <a href="https://doi.org/10.1121/10.0000556">https://doi.org/10.1121/10.0000556</a>.
 </div>
 <div id="ref-coretta2020a" class="csl-entry" role="listitem">
-Coretta, Stefano. 2020b. <span>“Vowel Duration and Consonant Voicing: A Production Study.”</span> PhD thesis, The University of Manchester.
+Coretta, Stefano. 2020a. <em>Vowel duration and consonant voicing: A production study</em>. The University of Manchester PhD thesis.
 </div>
 <div id="ref-song2020" class="csl-entry" role="listitem">
-Song, Yoonsang, Youngah Do, Arthur L. Thompson, Eileen R. Waegemaekers, and Jongbong Lee. 2020. <span>“Second Language Users Exhibit Shallow Morphological Processing.”</span> <em>Studies in Second Language Acquisition</em> 42 (5): 11211136. <a href="https://doi.org/10.1017/s0272263120000170">https://doi.org/10.1017/s0272263120000170</a>.
+Song, Yoonsang, Youngah Do, Arthur L. Thompson, Eileen R. Waegemaekers &amp; Jongbong Lee. 2020. Second language users exhibit shallow morphological processing. <em>Studies in Second Language Acquisition</em> 42(5). 11211136. <a href="https://doi.org/10.1017/s0272263120000170">https://doi.org/10.1017/s0272263120000170</a>.
 </div>
 </div>
 </section>

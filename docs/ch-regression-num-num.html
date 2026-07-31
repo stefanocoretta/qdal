@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -806,7 +807,7 @@ window.Quarto = {
 <p><a href="ch-regression-cat-cat.html" class="quarto-xref"><span>Chapter 34</span></a> and <a href="ch-regression-cat-num.html" class="quarto-xref"><span>Chapter 36</span></a> introduced interactions between two categorical predictors and between a categorical and a numeric predictor respectively. In this chapter, we will learn about the last type of so-called two-way interactions (i.e.&nbsp;interactions with two predictors): an interaction between two numeric predictors. Relative to the other combination of predictor types, numeric-numeric interactions are a bit more difficult to interpret: this is because numeric predictors can take on many numeric values, and the number of combinations of values from two numeric predictors is even larger.</p>
 <section id="the-data" class="level2" data-number="37.1">
 <h2 data-number="37.1" class="anchored" data-anchor-id="the-data"><span class="header-section-number">37.1</span> The data</h2>
-<p>We will use the data from <span class="citation" data-cites="pankratz2021">Pankratz and Van Tiel (<a href="references.html#ref-pankratz2021" role="doc-biblioref">2021</a>)</span> on scalar diversity. Scalar inferences arise when a speaker chooses a weaker expression, such as <em>It’s warm</em>, despite the availability of a stronger alternative, such as <em>It’s hot</em>. This choice often leads listeners to infer that the speaker believes the stronger statement is false. The likelihood of deriving this inference differs across scalar expressions, a phenomenon known as <em>scalar diversity</em>. The original study investigated the effect of several variables on whether participants presented with utterances made a scalar inference or not, but in this chapter we will focus on two: (1) relevance of the scalar inference operationalised as the frequency of co-occurrence of the weak and strong adjectives, and (2) semantic distance between the weak and strong adjectives in the scale. Let’s attach the packages and read the data.</p>
+<p>We will use the data from <span class="citation" data-cites="pankratz2021">Pankratz &amp; Van Tiel (<a href="references.html#ref-pankratz2021" role="doc-biblioref">2021</a>)</span> on scalar diversity. Scalar inferences arise when a speaker chooses a weaker expression, such as <em>It’s warm</em>, despite the availability of a stronger alternative, such as <em>It’s hot</em>. This choice often leads listeners to infer that the speaker believes the stronger statement is false. The likelihood of deriving this inference differs across scalar expressions, a phenomenon known as <em>scalar diversity</em>. The original study investigated the effect of several variables on whether participants presented with utterances made a scalar inference or not, but in this chapter we will focus on two: (1) relevance of the scalar inference operationalised as the frequency of co-occurrence of the weak and strong adjectives, and (2) semantic distance between the weak and strong adjectives in the scale. Let’s attach the packages and read the data.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_light</span>())</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
@@ -824,7 +825,7 @@ window.Quarto = {
 <li><code>freq</code>: How frequently the <code>weak_adj</code> co-occurred with a stronger adjective on the same scale in a large corpus.</li>
 <li><code>semdist</code>: A measure of the semantic distance between <code>weak_adj</code> and <code>strong_adj</code>. A negative score indicates that the words are semantically closer; a positive score indicates that the words are semantically more distant (the units are arbitrary).</li>
 </ul>
-<p>We will fit a regression model to test the following hypotheses (from <span class="citation" data-cites="pankratz2021">Pankratz and Van Tiel (<a href="references.html#ref-pankratz2021" role="doc-biblioref">2021</a>)</span>):</p>
+<p>We will fit a regression model to test the following hypotheses (from <span class="citation" data-cites="pankratz2021">Pankratz &amp; Van Tiel (<a href="references.html#ref-pankratz2021" role="doc-biblioref">2021</a>)</span>):</p>
 <blockquote class="blockquote">
 <p>H1: Higher co-occurrence frequency increases the probability of a scalar inference.</p>
 <p>H2: Greater semantic distance increases the probability of a scalar inference.</p>
@@ -1519,9 +1520,9 @@ Table&nbsp;37.1: Regression coefficients of a Bayesian model of the probability 
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-pankratz2021" class="csl-entry" role="listitem">
-Pankratz, Elizabeth, and Bob Van Tiel. 2021. <span>“The Role of Relevance for Scalar Diversity: A Usage-Based Approach.”</span> <em>Language and Cognition</em> 13 (4): 562–94. <a href="https://doi.org/10.1017/langcog.2021.13">https://doi.org/10.1017/langcog.2021.13</a>.
+Pankratz, Elizabeth &amp; Bob Van Tiel. 2021. The role of relevance for scalar diversity: A usage-based approach. <em>Language and Cognition</em> 13(4). 562–594. <a href="https://doi.org/10.1017/langcog.2021.13">https://doi.org/10.1017/langcog.2021.13</a>.
 </div>
 </div>
 </section>

@@ -62,6 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -808,7 +809,7 @@ window.Quarto = {
 <p>The MCMC algorithm generates a set of values sampled from the joint posterior, called <strong>posterior draws</strong>.</p>
 </div>
 </div>
-<p>This description is necessarily simplified. If you want to learn more about MCMC, I recommend <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span>, Ch. 9, and <span class="citation" data-cites="nicenboim2025">Nicenboim et al. (<a href="references.html#ref-nicenboim2025" role="doc-biblioref">2025</a>)</span>, Ch. 3. However, to be a proficient user of brms and Bayesian regression models, you do not need to fully understand the mathematics behind MCMC, as long as you understand the basic conceptual idea.</p>
+<p>This description is necessarily simplified. If you want to learn more about MCMC, I recommend <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span>, Ch. 9, and <span class="citation" data-cites="nicenboim2025">Nicenboim, Schad &amp; Vasishth (<a href="references.html#ref-nicenboim2025" role="doc-biblioref">2025</a>)</span>, Ch. 3. However, to be a proficient user of brms and Bayesian regression models, you do not need to fully understand the mathematics behind MCMC, as long as you understand the basic conceptual idea.</p>
 <p>When you run a model with brms, the posterior draws are stored in the model object returned by the <code>brm()</code> function. Every operation on a fitted model, such as obtaining the output of <code>summary()</code> and plotting posterior distributions, is ultimately an operation on those draws. By default, brms runs <em>four</em> MCMC chains. The sampling algorithm within each chain performs 2,000 iterations. The first half (1,000 iterations) are used to warm-up the algorithm by tuning parameters that govern the Hamiltonian dynamics, while the second half (1,000 iterations) are retained as posterior draws. Since four chains each contribute 1,000 posterior draws, the fitted model contains 4,000 posterior draws that can be used to learn about the posterior distribution. The rest of this chapter shows how to extract and manipulate these draws by revisiting the model fitted in <a href="ch-regression.html" class="quarto-xref"><span>Chapter 24</span></a>.</p>
 </section>
 <section id="reproducible-model-fit" class="level2" data-number="25.2">
@@ -951,7 +952,7 @@ vdur &amp; \sim Gaussian(\mu, \sigma) \\
 -22.93 -20.49 </code></pre>
 </div>
 </div>
-<p>Compare these values with the ones in summary: again they are the same. Remember: a 95% CrI tells us that there is a 95% probability, given the model and data, that the value of the parameters is between the lower and upper limit of the interval. So a 90% CrI tells us that there is an 90% probability that the value is between the lower and upper limit, a 60% interval that there is a 60% probability and so on. We can also say that we are 95% confident that the value lies between the limits. Intervals at lower level of probability are narrower (they span a smaller range of values) than intervals at higher level of probability: so a 95% CrI is always wider than an 80% CrI, which is wider than a 60% CrI and so on. A narrower CrI means more <em>precision</em>: we have a more precise expectation of which range the parameter lies in. But with more precision comes more uncertainty: a 60% CrI is more precise than a 95% CrI because it is narrower, but it is also more uncertain because we go from a 95% probability to a 60% probability. This is the precision/confidence trade-off that we have to live with when doing research. <span class="citation" data-cites="vasishth2021">Vasishth and Gelman (<a href="references.html#ref-vasishth2021" role="doc-biblioref">2021</a>)</span> say (in the context of frequentist statistics): “[we have to learn] to accept the fact that—in almost all practical data analysis situations—we can only draw uncertain conclusions from data.”</p>
+<p>Compare these values with the ones in summary: again they are the same. Remember: a 95% CrI tells us that there is a 95% probability, given the model and data, that the value of the parameters is between the lower and upper limit of the interval. So a 90% CrI tells us that there is an 90% probability that the value is between the lower and upper limit, a 60% interval that there is a 60% probability and so on. We can also say that we are 95% confident that the value lies between the limits. Intervals at lower level of probability are narrower (they span a smaller range of values) than intervals at higher level of probability: so a 95% CrI is always wider than an 80% CrI, which is wider than a 60% CrI and so on. A narrower CrI means more <em>precision</em>: we have a more precise expectation of which range the parameter lies in. But with more precision comes more uncertainty: a 60% CrI is more precise than a 95% CrI because it is narrower, but it is also more uncertain because we go from a 95% probability to a 60% probability. This is the precision/confidence trade-off that we have to live with when doing research. <span class="citation" data-cites="vasishth2021">Vasishth &amp; Gelman (<a href="references.html#ref-vasishth2021" role="doc-biblioref">2021</a>)</span> say (in the context of frequentist statistics): “[we have to learn] to accept the fact that—in almost all practical data analysis situations—we can only draw uncertain conclusions from data.”</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1206,18 +1207,18 @@ Figure&nbsp;25.6: Posterior distribution of the difference in vowel duration at 
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-mcelreath2020" class="csl-entry" role="listitem">
-McElreath, Richard. 2020. <em>Statistical Rethinking: A Bayesian Course with Examples in r and Stan</em>. Second edition. Chapman &amp; Hall/CRC Texts in Statistical Science Series. CRC Press.
+McElreath, Richard. 2020. <em>Statistical rethinking: A bayesian course with examples in r and stan</em> (Chapman &amp; Hall/CRC Texts in Statistical Science Series). Second edition. Boca Raton: CRC Press.
 </div>
 <div id="ref-nicenboim2025" class="csl-entry" role="listitem">
-Nicenboim, Bruno, Daniel J. Schad, and Shravan Vasishth. 2025. <em>Introduction to Bayesian Data Analysis for Cognitive Science</em>. <a href="https://bruno.nicenboim.me/bayescogsci/">https://bruno.nicenboim.me/bayescogsci/</a>.
+Nicenboim, Bruno, Daniel J. Schad &amp; Shravan Vasishth. 2025. <em>Introduction to bayesian data analysis for cognitive science</em>. <a href="https://bruno.nicenboim.me/bayescogsci/">https://bruno.nicenboim.me/bayescogsci/</a>.
 </div>
 <div id="ref-vasishth2021" class="csl-entry" role="listitem">
-Vasishth, Shravan, and Andrew Gelman. 2021. <span>“How to Embrace Variation and Accept Uncertainty in Linguistic and Psycholinguistic Data Analysis.”</span> <em>Linguistics</em> 59 (5): 13111342. <a href="https://doi.org/10.1515/ling-2019-0051">https://doi.org/10.1515/ling-2019-0051</a>.
+Vasishth, Shravan &amp; Andrew Gelman. 2021. How to embrace variation and accept uncertainty in linguistic and psycholinguistic data analysis. <em>Linguistics</em> 59(5). 13111342. <a href="https://doi.org/10.1515/ling-2019-0051">https://doi.org/10.1515/ling-2019-0051</a>.
 </div>
 <div id="ref-winter2020" class="csl-entry" role="listitem">
-Winter, Bodo. 2020. <em>Statistics for Linguists: An Introduction Using r</em>. Routledge.
+Winter, Bodo. 2020. <em>Statistics for linguists: An introduction using r</em>. Routledge.
 </div>
 </div>
 </section>

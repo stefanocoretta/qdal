@@ -80,6 +80,7 @@ book:
     - app-reg-cheat-sheet.qmd
 
 bibliography: references.bib
+csl: unified-style-sheet-for-linguistics.csl
 
 format:
   html:

@@ -62,6 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -787,7 +788,7 @@ window.Quarto = {
 <p>The previous chapter explained how to include two predictors in a regression model and how to interpret the results of the model. But we were left wondering: what if the effect of attitude differs between the two genders? In this chapter we will talk about <strong>interactions</strong>: regression models can estimate different effects of one predictor depending on the levels of the other other predictor, by adding a so-called <em>interaction term</em>. Keep reading to learn about them.</p>
 <section id="is-the-effect-of-attitude-modulated-by-gender" class="level2" data-number="35.1">
 <h2 data-number="35.1" class="anchored" data-anchor-id="is-the-effect-of-attitude-modulated-by-gender"><span class="header-section-number">35.1</span> Is the effect of attitude modulated by gender?</h2>
-<p>Let’s start by attaching the packages and then reading and filtering the <code>polite</code> data <span class="citation" data-cites="winter2012">(<a href="references.html#ref-winter2012" role="doc-biblioref">Winter and Grawunder 2012</a>)</span>. We drop <code>NA</code> values from the <code>f0mn</code> column.</p>
+<p>Let’s start by attaching the packages and then reading and filtering the <code>polite</code> data <span class="citation" data-cites="winter2012">(<a href="references.html#ref-winter2012" role="doc-biblioref">Winter &amp; Grawunder 2012</a>)</span>. We drop <code>NA</code> values from the <code>f0mn</code> column.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_light</span>())</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
@@ -809,7 +810,7 @@ window.Quarto = {
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> <span class="fl">0.1</span>, <span class="at">seed =</span> <span class="dv">2836</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-polite-f0-gend-att-repr-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" data-fig-align="center">
+<div id="fig-polite-f0-gend-att-repr-2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-polite-f0-gend-att-repr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="ch-regression-interaction_files/figure-html/fig-polite-f0-gend-att-repr-2-1.png" id="fig-polite-f0-gend-att-repr-2" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" width="672">
@@ -1123,15 +1124,15 @@ Figure&nbsp;35.3: Intervals plot of the expected values of mean f0 by gender and
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-burkner2017" class="csl-entry" role="listitem">
-Bürkner, Paul-Christian. 2017. <span>“Brms: An r Package for Bayesian Multilevel Models Using Stan.”</span> <em>Journal of Statistical Software</em> 80 (1): 128. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>.
+Bürkner, Paul-Christian. 2017. Brms: An r package for bayesian multilevel models using stan. <em>Journal of Statistical Software</em> 80(1). 128. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>.
 </div>
 <div id="ref-rcoreteam2025" class="csl-entry" role="listitem">
-R Core Team. 2025. <em>R: A Language and Environment for Statistical Computing [Version 4.5.0]</em>.
+R Core Team. 2025. <em>R: A language and environment for statistical computing [version 4.5.0]</em>.
 </div>
 <div id="ref-winter2012" class="csl-entry" role="listitem">
-Winter, Bodo, and Sven Grawunder. 2012. <span>“The Phonetic Profile of Korean Formal and Informal Speech Registers.”</span> <em>Journal of Phonetics</em> 40 (6): 808–15. <a href="https://doi.org/10.1016/j.wocn.2012.08.006">https://doi.org/10.1016/j.wocn.2012.08.006</a>.
+Winter, Bodo &amp; Sven Grawunder. 2012. The phonetic profile of korean formal and informal speech registers. <em>Journal of Phonetics</em> 40(6). 808–815. <a href="https://doi.org/10.1016/j.wocn.2012.08.006">https://doi.org/10.1016/j.wocn.2012.08.006</a>.
 </div>
 </div>
 </section>

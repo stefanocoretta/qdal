@@ -27,6 +27,7 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -803,7 +804,7 @@ In the Land of Inference where the distributions lie.</p>
 <ul>
 <li>Proportions fall into this category (for example proportion of voicing within closure), although 0 and 1 are not allowed in the beta distribution.</li>
 <li>Fit a beta model with <code>brms::brm(..., family = Beta)</code>.</li>
-<li>Check this tutorial: <span class="citation" data-cites="coretta2025a">Coretta and Bürkner (<a href="references.html#ref-coretta2025a" role="doc-biblioref">2025</a>)</span>.</li>
+<li>Check this tutorial: <span class="citation" data-cites="coretta2025a">Coretta &amp; Bürkner (<a href="references.html#ref-coretta2025a" role="doc-biblioref">2025</a>)</span>.</li>
 </ul></li>
 <li><p>The variable can take on <em>any real number between 0 and 1, including 0 or 0 and 1</em>: <strong>Zero-inflated</strong> or <strong>Zero/one-inflated beta</strong> (ZOIB) distribution.</p>
 <ul>
@@ -824,7 +825,7 @@ In the Land of Inference where the distributions lie.</p>
 <li><p>The variable is <em>counts</em>: <strong>Poisson</strong> distribution.</p>
 <ul>
 <li>Counts of words, segments, gestures, f0 peaks, …</li>
-<li>Check out this tutorial: <span class="citation" data-cites="winter2021">Winter and Bürkner (<a href="references.html#ref-winter2021" role="doc-biblioref">2021</a>)</span>.</li>
+<li>Check out this tutorial: <span class="citation" data-cites="winter2021">Winter &amp; Bürkner (<a href="references.html#ref-winter2021" role="doc-biblioref">2021</a>)</span>.</li>
 <li>Fit a Poisson model with <code>brms::brm(..., family = poisson)</code>.</li>
 <li>Sometimes a negative binomial distribution is preferable, if the count data is dispersed. Fit this model with <code>brms::brm(..., family = negbinomial)</code>.</li>
 </ul></li>
@@ -832,12 +833,12 @@ In the Land of Inference where the distributions lie.</p>
 <ul>
 <li><p>Likert scales and ratings, language attitude questionnaires.</p></li>
 <li><p>Fit ordinal regression models (aka ordinal logistic regression) with <code>brms::brm(..., family = cumulative)</code>.</p></li>
-<li><p>See these tutorials: <span class="citation" data-cites="verissimo2021">Verissimo (<a href="references.html#ref-verissimo2021" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="burkner2019">Bürkner and Vuorre (<a href="references.html#ref-burkner2019" role="doc-biblioref">2019</a>)</span>.</p></li>
+<li><p>See these tutorials: <span class="citation" data-cites="verissimo2021">Verissimo (<a href="references.html#ref-verissimo2021" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="burkner2019">Bürkner &amp; Vuorre (<a href="references.html#ref-burkner2019" role="doc-biblioref">2019</a>)</span>.</p></li>
 </ul></li>
 <li><p>The variable has <em>more than two levels</em>, but it is not ordered: <strong>categorical (multinomial) model</strong>.</p>
 <ul>
 <li><p>Fit categorical (multinomial) models with <code>brms::brm(..., family = categorical)</code>.</p></li>
-<li><p>As far as I know, there isn’t a tutorial for this family, but <span class="citation" data-cites="lorson2021">Lorson et al. (<a href="references.html#ref-lorson2021" role="doc-biblioref">2021</a>)</span> uses categorical models. The research compendium (with data and code) of the paper can be found here: <a href="https://osf.io/e5av9/" class="uri">https://osf.io/e5av9/</a>.</p></li>
+<li><p>As far as I know, there isn’t a tutorial for this family, but <span class="citation" data-cites="lorson2021">Lorson, Cummins &amp; Rohde (<a href="references.html#ref-lorson2021" role="doc-biblioref">2021</a>)</span> uses categorical models. The research compendium (with data and code) of the paper can be found here: <a href="https://osf.io/e5av9/" class="uri">https://osf.io/e5av9/</a>.</p></li>
 <li><p>Just a quick note: if you have an outcome variable with 3 levels (A, B and C) and you fit a categorical (multinomial) model, then <span class="math inline">\(P(A) = \frac{e^0}{e^0 + e^{B} + e^{C}}\)</span>, where the superscripts <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> are the estimated log-odds difference of the B and C level vs the A level (these are the two intercepts in the model). This makes sense, because, assuming each level is equally probable, <span class="math inline">\(\frac{e^{0}}{1 + e^{0} + e^{0}} = 0.333\)</span> for all levels.</p></li>
 </ul></li>
 </ul>
@@ -854,11 +855,11 @@ In the Land of Inference where the distributions lie.</p>
 </ul>
 <p>The presence of “levels” within the data (whether they come from natural groupings like participant or word, or from repeated measures) breaks one of the assumptions of regression models: that each observation must be independent. This is why you must include varying terms in the regression model, to account for this structure (and now you see why they are called hierarchical and multilevel models). If you don’t include any varying term, your model will expect that each observation is independent and hence it will underestimate variance and return unreliable results.</p>
 <p>In the toy-example of f0 measurements, you will want to include varying terms for <em>participant</em> and <em>word</em>. These will take care to let the model know of the structure of the data mentioned above. If you have other predictors in the model, you should also add them as (varying) slopes in the varying terms. For example: <code>(question | participant) + (question | word)</code> (where <code>question</code> = statement vs question).</p>
-<p>Here are some tutorials: <span class="citation" data-cites="winter2013">Winter (<a href="references.html#ref-winter2013" role="doc-biblioref">2013</a>)</span>, <span class="citation" data-cites="debruine2021">DeBruine and Barr (<a href="references.html#ref-debruine2021" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="kirby2018">Kirby and Sonderegger (<a href="references.html#ref-kirby2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="burkner2018">Bürkner (<a href="references.html#ref-burkner2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="veenman2023">Veenman et al. (<a href="references.html#ref-veenman2023" role="doc-biblioref">2023</a>)</span>, <span class="citation" data-cites="pedersen2019">Pedersen et al. (<a href="references.html#ref-pedersen2019" role="doc-biblioref">2019</a>)</span>.</p>
+<p>Here are some tutorials: <span class="citation" data-cites="winter2013">Winter (<a href="references.html#ref-winter2013" role="doc-biblioref">2013</a>)</span>, <span class="citation" data-cites="debruine2021">DeBruine &amp; Barr (<a href="references.html#ref-debruine2021" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="kirby2018">Kirby &amp; Sonderegger (<a href="references.html#ref-kirby2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="burkner2018">Bürkner (<a href="references.html#ref-burkner2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="veenman2023">Veenman, Stefan &amp; Haaf (<a href="references.html#ref-veenman2023" role="doc-biblioref">2023</a>)</span>, <span class="citation" data-cites="pedersen2019">Pedersen et al. (<a href="references.html#ref-pedersen2019" role="doc-biblioref">2019</a>)</span>.</p>
 </section>
 <section id="step-3-are-there-non-linear-effects" class="level2" data-number="A.4">
 <h2 data-number="A.4" class="anchored" data-anchor-id="step-3-are-there-non-linear-effects"><span class="header-section-number">A.4</span> Step 3: Are there non-linear effects?</h2>
-<p>A typical use-case of non-linear terms is when you are dealing with time-series data or spatial data (i.e.&nbsp;geographic coordinates). Generalised Additive Models (GAMs) allow you to fit non-linear effects using so called “smooth” (or “smoother”) terms. You can fit a regression model with smooth terms with <code>brms::brm(y ~ s(x))</code> or with <code>mgcv:gam(y ~ s(x))</code>, among others. See <span class="citation" data-cites="simpson2018">Simpson (<a href="references.html#ref-simpson2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="soskuthy2017a">Sóskuthy (<a href="references.html#ref-soskuthy2017a" role="doc-biblioref">n.d.</a>)</span>, <span class="citation" data-cites="soskuthy2021">Sóskuthy (<a href="references.html#ref-soskuthy2021" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="wieling2018">Wieling (<a href="references.html#ref-wieling2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="pedersen2019">Pedersen et al. (<a href="references.html#ref-pedersen2019" role="doc-biblioref">2019</a>)</span>.</p>
+<p>A typical use-case of non-linear terms is when you are dealing with time-series data or spatial data (i.e.&nbsp;geographic coordinates). Generalised Additive Models (GAMs) allow you to fit non-linear effects using so called “smooth” (or “smoother”) terms. You can fit a regression model with smooth terms with <code>brms::brm(y ~ s(x))</code> or with <code>mgcv:gam(y ~ s(x))</code>, among others. See <span class="citation" data-cites="simpson2018">Simpson (<a href="references.html#ref-simpson2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="soskuthy2017a">Sóskuthy</span>, <span class="citation" data-cites="soskuthy2021">Sóskuthy (<a href="references.html#ref-soskuthy2021" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="wieling2018">Wieling (<a href="references.html#ref-wieling2018" role="doc-biblioref">2018</a>)</span>, <span class="citation" data-cites="pedersen2019">Pedersen et al. (<a href="references.html#ref-pedersen2019" role="doc-biblioref">2019</a>)</span>.</p>
 </section>
 <section id="step-0-bis-number-of-outcome-variables" class="level2" data-number="A.5">
 <h2 data-number="A.5" class="anchored" data-anchor-id="step-0-bis-number-of-outcome-variables"><span class="header-section-number">A.5</span> Step 0-bis: Number of outcome variables</h2>
@@ -866,60 +867,60 @@ In the Land of Inference where the distributions lie.</p>
 <p>To learn more about multivariate models, I really recommend <span class="citation" data-cites="burkner2024a">Bürkner (<a href="references.html#ref-burkner2024a" role="doc-biblioref">2024</a>)</span>.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-burkner2018" class="csl-entry" role="listitem">
-Bürkner, Paul-Christian. 2018. <span>“Advanced Bayesian Multilevel Modeling with the r Package Brms.”</span> <em>The R Journal</em> 10 (1): 395411. <a href="https://doi.org/10.32614/RJ-2018-017">https://doi.org/10.32614/RJ-2018-017</a>.
+Bürkner, Paul-Christian. 2018. Advanced bayesian multilevel modeling with the r package brms. <em>The R Journal</em> 10(1). 395411. <a href="https://doi.org/10.32614/RJ-2018-017">https://doi.org/10.32614/RJ-2018-017</a>.
 </div>
 <div id="ref-burkner2024a" class="csl-entry" role="listitem">
-Bürkner, Paul-Christian. 2024. <span>“Estimating Multivariate Models with Brms.”</span> <a href="https://cran.r-project.org/web/packages/brms/vignettes/brms_multivariate.html">https://cran.r-project.org/web/packages/brms/vignettes/brms_multivariate.html</a>.
+Bürkner, Paul-Christian. 2024. Estimating multivariate models with brms. <a href="https://cran.r-project.org/web/packages/brms/vignettes/brms_multivariate.html">https://cran.r-project.org/web/packages/brms/vignettes/brms_multivariate.html</a>.
 </div>
 <div id="ref-burkner2019" class="csl-entry" role="listitem">
-Bürkner, Paul-Christian, and Matti Vuorre. 2019. <span>“Ordinal Regression Models in Psychology: A Tutorial.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 2 (1): 77101. <a href="https://doi.org/10.1177/2515245918823199">https://doi.org/10.1177/2515245918823199</a>.
+Bürkner, Paul-Christian &amp; Matti Vuorre. 2019. Ordinal regression models in psychology: A tutorial. <em>Advances in Methods and Practices in Psychological Science</em> 2(1). 77101. <a href="https://doi.org/10.1177/2515245918823199">https://doi.org/10.1177/2515245918823199</a>.
 </div>
 <div id="ref-coretta2025a" class="csl-entry" role="listitem">
-Coretta, Stefano, and Paul-Christian Bürkner. 2025. <em>Bayesian Beta Regressions with Brms in r: A Tutorial for Phoneticians</em>. <a href="https://doi.org/10.31219/osf.io/f9rqg_v1">https://doi.org/10.31219/osf.io/f9rqg_v1</a>.
+Coretta, Stefano &amp; Paul-Christian Bürkner. 2025. Bayesian beta regressions with brms in r: A tutorial for phoneticians. <a href="https://doi.org/10.31219/osf.io/f9rqg_v1">https://doi.org/10.31219/osf.io/f9rqg_v1</a>.
 </div>
 <div id="ref-debruine2021" class="csl-entry" role="listitem">
-DeBruine, Lisa M., and Dale J. Barr. 2021. <span>“Understanding Mixed-Effects Models Through Data Simulation.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 4 (1). <a href="https://doi.org/10.1177/2515245920965119">https://doi.org/10.1177/2515245920965119</a>.
+DeBruine, Lisa M. &amp; Dale J. Barr. 2021. Understanding mixed-effects models through data simulation. <em>Advances in Methods and Practices in Psychological Science</em> 4(1). <a href="https://doi.org/10.1177/2515245920965119">https://doi.org/10.1177/2515245920965119</a>.
 </div>
 <div id="ref-gelman2005" class="csl-entry" role="listitem">
-Gelman, Andrew. 2005. <span>“Analysis of Variance: Why It Is More Important Than Ever.”</span> <em>The Annals of Statistics</em> 33 (1). <a href="https://doi.org/10.1214/009053604000001048">https://doi.org/10.1214/009053604000001048</a>.
+Gelman, Andrew. 2005. Analysis of variance: Why it is more important than ever. <em>The Annals of Statistics</em> 33(1). <a href="https://doi.org/10.1214/009053604000001048">https://doi.org/10.1214/009053604000001048</a>.
 </div>
 <div id="ref-heiss2021" class="csl-entry" role="listitem">
-Heiss, Andrew. 2021. <em>A Guide to Modeling Proportions with Bayesian Beta and Zero-Inflated Beta Regression Models</em>. <a href="https://www.andrewheiss.com/blog/2021/11/08/beta-regression-guide">https://www.andrewheiss.com/blog/2021/11/08/beta-regression-guide</a>.
+Heiss, Andrew. 2021. A guide to modeling proportions with bayesian beta and zero-inflated beta regression models. <a href="https://www.andrewheiss.com/blog/2021/11/08/beta-regression-guide">https://www.andrewheiss.com/blog/2021/11/08/beta-regression-guide</a>.
 </div>
 <div id="ref-kirby2018" class="csl-entry" role="listitem">
-Kirby, James, and Morgan Sonderegger. 2018. <span>“Mixed-Effects Design Analysis for Experimental Phonetics.”</span> <em>Journal of Phonetics</em> 70: 7085. <a href="https://doi.org/10.1016/j.wocn.2018.05.005">https://doi.org/10.1016/j.wocn.2018.05.005</a>.
+Kirby, James &amp; Morgan Sonderegger. 2018. Mixed-effects design analysis for experimental phonetics. <em>Journal of Phonetics</em> 70. 7085. <a href="https://doi.org/10.1016/j.wocn.2018.05.005">https://doi.org/10.1016/j.wocn.2018.05.005</a>.
 </div>
 <div id="ref-lorson2021" class="csl-entry" role="listitem">
-Lorson, Alexandra, Chris Cummins, and Hannah Rohde. 2021. <span>“Strategic Use of (Un)certainty Expressions.”</span> <em>Frontiers in Communication</em> 6 (March): 635156. <a href="https://doi.org/10.3389/fcomm.2021.635156">https://doi.org/10.3389/fcomm.2021.635156</a>.
+Lorson, Alexandra, Chris Cummins &amp; Hannah Rohde. 2021. Strategic use of (un)certainty expressions. <em>Frontiers in Communication</em> 6. 635156. <a href="https://doi.org/10.3389/fcomm.2021.635156">https://doi.org/10.3389/fcomm.2021.635156</a>.
 </div>
 <div id="ref-pedersen2019" class="csl-entry" role="listitem">
-Pedersen, Eric J., David L. Miller, Gavin L. Simpson, and Noam Ross. 2019. <span>“Hierarchical Generalized Additive Models in Ecology: An Introduction with Mgcv.”</span> <em>PeerJ</em> 7: e6876. <a href="https://doi.org/10.7717/peerj.6876">https://doi.org/10.7717/peerj.6876</a>.
+Pedersen, Eric J., David L. Miller, Gavin L. Simpson &amp; Noam Ross. 2019. Hierarchical generalized additive models in ecology: An introduction with mgcv. <em>PeerJ</em> 7. e6876. <a href="https://doi.org/10.7717/peerj.6876">https://doi.org/10.7717/peerj.6876</a>.
 </div>
 <div id="ref-simpson2018" class="csl-entry" role="listitem">
-Simpson, Gavin L. 2018. <em>Fitting GAMs with Brms: Part 1</em>. <a href="https://fromthebottomoftheheap.net/2018/04/21/fitting-gams-with-brms/">https://fromthebottomoftheheap.net/2018/04/21/fitting-gams-with-brms/</a>.
+Simpson, Gavin L. 2018. Fitting GAMs with brms: Part 1. <a href="https://fromthebottomoftheheap.net/2018/04/21/fitting-gams-with-brms/">https://fromthebottomoftheheap.net/2018/04/21/fitting-gams-with-brms/</a>.
 </div>
 <div id="ref-soskuthy2021" class="csl-entry" role="listitem">
-Sóskuthy, Márton. 2021. <span>“Evaluating Generalised Additive Mixed Modelling Strategies for Dynamic Speech Analysis.”</span> <em>Journal of Phonetics</em> 84: 101017. <a href="https://doi.org/10.1016/j.wocn.2020.101017">https://doi.org/10.1016/j.wocn.2020.101017</a>.
+Sóskuthy, Márton. 2021. Evaluating generalised additive mixed modelling strategies for dynamic speech analysis. <em>Journal of Phonetics</em> 84. 101017. <a href="https://doi.org/10.1016/j.wocn.2020.101017">https://doi.org/10.1016/j.wocn.2020.101017</a>.
 </div>
 <div id="ref-soskuthy2017a" class="csl-entry" role="listitem">
-Sóskuthy, Márton. n.d. <em>Generalised Additive Mixed Models for Dynamic Analysis in Linguistics: A Practical Introduction</em>. <a href="https://doi.org/10.48550/arXiv.1703.05339">https://doi.org/10.48550/arXiv.1703.05339</a>.
+Sóskuthy, Márton. Generalised additive mixed models for dynamic analysis in linguistics: A practical introduction. <a href="https://doi.org/10.48550/arXiv.1703.05339">https://doi.org/10.48550/arXiv.1703.05339</a>.
 </div>
 <div id="ref-veenman2023" class="csl-entry" role="listitem">
-Veenman, Myrthe, Angelika M. Stefan, and Julia M. Haaf. 2023. <span>“Bayesian Hierarchical Modeling: An Introduction and Reassessment.”</span> <em>Behavior Research Methods</em> 56 (5): 4600–4631. <a href="https://doi.org/10.3758/s13428-023-02204-3">https://doi.org/10.3758/s13428-023-02204-3</a>.
+Veenman, Myrthe, Angelika M. Stefan &amp; Julia M. Haaf. 2023. Bayesian hierarchical modeling: An introduction and reassessment. <em>Behavior Research Methods</em> 56(5). 4600–4631. <a href="https://doi.org/10.3758/s13428-023-02204-3">https://doi.org/10.3758/s13428-023-02204-3</a>.
 </div>
 <div id="ref-verissimo2021" class="csl-entry" role="listitem">
-Verissimo, Joao. 2021. <span>“Analysis of Rating Scales: A Pervasive Problem in Bilingualism Research and a Solution with Bayesian Ordinal Models.”</span> <em>Bilingualism: Language and Cognition</em> 24 (5): 842848. <a href="https://doi.org/10.1017/S1366728921000316">https://doi.org/10.1017/S1366728921000316</a>.
+Verissimo, Joao. 2021. Analysis of rating scales: A pervasive problem in bilingualism research and a solution with bayesian ordinal models. <em>Bilingualism: Language and Cognition</em> 24(5). 842848. <a href="https://doi.org/10.1017/S1366728921000316">https://doi.org/10.1017/S1366728921000316</a>.
 </div>
 <div id="ref-wieling2018" class="csl-entry" role="listitem">
-Wieling, Martijn. 2018. <span>“Analyzing Dynamic Phonetic Data Using Generalized Additive Mixed Modeling: A Tutorial Focusing on Articulatory Differences Between L1 and L2 Speakers of English.”</span> <em>Journal of Phonetics</em> 70: 86116. <a href="https://doi.org/10.1016/j.wocn.2018.03.002">https://doi.org/10.1016/j.wocn.2018.03.002</a>.
+Wieling, Martijn. 2018. Analyzing dynamic phonetic data using generalized additive mixed modeling: A tutorial focusing on articulatory differences between L1 and L2 speakers of english. <em>Journal of Phonetics</em> 70. 86116. <a href="https://doi.org/10.1016/j.wocn.2018.03.002">https://doi.org/10.1016/j.wocn.2018.03.002</a>.
 </div>
 <div id="ref-winter2013" class="csl-entry" role="listitem">
-Winter, Bodo. 2013. <em>Linear Models and Linear Mixed Effects Models in r with Linguistic Applications</em>.
+Winter, Bodo. 2013. Linear models and linear mixed effects models in r with linguistic applications.
 </div>
 <div id="ref-winter2021" class="csl-entry" role="listitem">
-Winter, Bodo, and Paul-Christian Bürkner. 2021. <span>“Poisson Regression for Linguists: A Tutorial Introduction to Modelling Count Data with Brms.”</span> <em>Language and Linguistics Compass</em> 15 (11): e12439. <a href="https://doi.org/10.1111/lnc3.12439">https://doi.org/10.1111/lnc3.12439</a>.
+Winter, Bodo &amp; Paul-Christian Bürkner. 2021. Poisson regression for linguists: A tutorial introduction to modelling count data with brms. <em>Language and Linguistics Compass</em> 15(11). e12439. <a href="https://doi.org/10.1111/lnc3.12439">https://doi.org/10.1111/lnc3.12439</a>.
 </div>
 </div>
 </section>

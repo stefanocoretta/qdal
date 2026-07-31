@@ -62,6 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -783,7 +784,7 @@ window.Quarto = {
 
 
 <p><img src="./img/badge-r.png" class="img-fluid"></p>
-<p><a href="ch-regression-cat.html" class="quarto-xref"><span>Chapter 28</span></a> showed you how to fit a regression model with a categorical predictor. We modelled reaction times as a function of word type (real or non-real) from the MALD dataset <span class="citation" data-cites="tucker2019">(<a href="references.html#ref-tucker2019" role="doc-biblioref">Tucker et al. 2019</a>)</span>. The categorical predictor <code>IsWord</code> (word type: real or non-real) was included in the model using treatment contrasts: the model’s intercept is the mean of the first level and the “slope” is the difference between the second level and the first. In this chapter we will look at new data, Voice Onset Time (VOT) of Mixean Basque <span class="citation" data-cites="egurtzegi2020">(<a href="references.html#ref-egurtzegi2020" role="doc-biblioref">Egurtzegi and Carignan 2020</a>)</span>, to illustrate how to fit and interpret a regression model with a categorical predictor that has three levels, phonation (voiced, voiceless unaspirated, aspirated).</p>
+<p><a href="ch-regression-cat.html" class="quarto-xref"><span>Chapter 28</span></a> showed you how to fit a regression model with a categorical predictor. We modelled reaction times as a function of word type (real or non-real) from the MALD dataset <span class="citation" data-cites="tucker2019">(<a href="references.html#ref-tucker2019" role="doc-biblioref">Tucker et al. 2019</a>)</span>. The categorical predictor <code>IsWord</code> (word type: real or non-real) was included in the model using treatment contrasts: the model’s intercept is the mean of the first level and the “slope” is the difference between the second level and the first. In this chapter we will look at new data, Voice Onset Time (VOT) of Mixean Basque <span class="citation" data-cites="egurtzegi2020">(<a href="references.html#ref-egurtzegi2020" role="doc-biblioref">Egurtzegi &amp; Carignan 2020</a>)</span>, to illustrate how to fit and interpret a regression model with a categorical predictor that has three levels, phonation (voiced, voiceless unaspirated, aspirated).</p>
 <section id="mixean-basque-vot" class="level2" data-number="29.1">
 <h2 data-number="29.1" class="anchored" data-anchor-id="mixean-basque-vot"><span class="header-section-number">29.1</span> Mixean Basque VOT</h2>
 <p>We attach the packages as usual.</p>
@@ -792,7 +793,7 @@ window.Quarto = {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdist)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The data <code>egurtzegi2020/eu_vot.csv</code> contains measurements of VOT from 10 speakers of Mixean Basque <span class="citation" data-cites="egurtzegi2020">(<a href="references.html#ref-egurtzegi2020" role="doc-biblioref">Egurtzegi and Carignan 2020</a>)</span>. Mixean Basque contrasts voiceless unaspirated, voiceless aspirated and voiced stops. Let’s read the data.</p>
+<p>The data <code>egurtzegi2020/eu_vot.csv</code> contains measurements of VOT from 10 speakers of Mixean Basque <span class="citation" data-cites="egurtzegi2020">(<a href="references.html#ref-egurtzegi2020" role="doc-biblioref">Egurtzegi &amp; Carignan 2020</a>)</span>. Mixean Basque contrasts voiceless unaspirated, voiceless aspirated and voiced stops. Let’s read the data.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1253,12 +1254,12 @@ Figure&nbsp;29.2: Expected mean of VOT (in milliseconds) for three phonation cat
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-egurtzegi2020" class="csl-entry" role="listitem">
-Egurtzegi, Ander, and Christopher Carignan. 2020. <span>“An Acoustic Description of Mixean Basque.”</span> <em>The Journal of the Acoustical Society of America</em> 147 (4): 27912802. <a href="https://doi.org/10.1121/10.0000996">https://doi.org/10.1121/10.0000996</a>.
+Egurtzegi, Ander &amp; Christopher Carignan. 2020. An acoustic description of mixean basque. <em>The Journal of the Acoustical Society of America</em> 147(4). 27912802. <a href="https://doi.org/10.1121/10.0000996">https://doi.org/10.1121/10.0000996</a>.
 </div>
 <div id="ref-tucker2019" class="csl-entry" role="listitem">
-Tucker, Benjamin V, Daniel Brenner, Kyle Danielson D, Matthew C Kelley, Filip Nenadić, and Michelle Sims. 2019. <span>“The Massive Auditory Lexical Decision (MALD) Database.”</span> <em>Behavior Research Methods</em> 51 (3): 11871204. <a href="https://doi.org/10.3758/s13428-018-1056-1">https://doi.org/10.3758/s13428-018-1056-1</a>.
+Tucker, Benjamin V, Daniel Brenner, Kyle Danielson D, Matthew C Kelley, Filip Nenadić &amp; Michelle Sims. 2019. The massive auditory lexical decision (MALD) database. <em>Behavior Research Methods</em> 51(3). 11871204. <a href="https://doi.org/10.3758/s13428-018-1056-1">https://doi.org/10.3758/s13428-018-1056-1</a>.
 </div>
 </div>
 </section>

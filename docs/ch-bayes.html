@@ -62,6 +62,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -817,7 +818,7 @@ window.Quarto = {
 </ul>
 </div>
 </div>
-<p>Let’s see a practical example of Bayesian updating based on the “globe-tossing” scenario described in <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span>, Ch 2 <span class="citation" data-cites="gelman2011">(originally from <a href="references.html#ref-gelman2011" role="doc-biblioref">Gelman et al. 2011</a>)</span>. Imagine holding a small globe that represents Earth. You want to know what fraction of its surface is covered by water. To estimate this, you adopt a simple method: toss the globe into the air, and when you catch it, note whether the spot under your right index finger is water (W) or land (L). Then toss it again and repeat. This process produces a sequence of observations. For example, the first nine outcomes might be: WLWWWLWLW. In this sequence, six outcomes are water and three are land. We call this sequence the data, i.e.&nbsp;<span class="math inline">\(d\)</span>. What we are trying to estimate here is the true proportion of water.</p>
+<p>Let’s see a practical example of Bayesian updating based on the “globe-tossing” scenario described in <span class="citation" data-cites="mcelreath2020">McElreath (<a href="references.html#ref-mcelreath2020" role="doc-biblioref">2020</a>)</span>, Ch 2 <span class="citation" data-cites="gelman2011">(originally from <a href="references.html#ref-gelman2011" role="doc-biblioref">Gelman, Nolan &amp; Nolan 2011</a>)</span>. Imagine holding a small globe that represents Earth. You want to know what fraction of its surface is covered by water. To estimate this, you adopt a simple method: toss the globe into the air, and when you catch it, note whether the spot under your right index finger is water (W) or land (L). Then toss it again and repeat. This process produces a sequence of observations. For example, the first nine outcomes might be: WLWWWLWLW. In this sequence, six outcomes are water and three are land. We call this sequence the data, i.e.&nbsp;<span class="math inline">\(d\)</span>. What we are trying to estimate here is the true proportion of water.</p>
 <p>So what about our prior beliefs about the true proportion of water, i.e.&nbsp;<span class="math inline">\(P(h)\)</span>? Let’s say that our prior belief (assuming complete ignorance about the true proportion of water) is that all proportions of water are equally probable. This is called a <strong>uniform prior</strong>, or a <strong>flat</strong> prior. You can see why in <a href="#fig-prior-update" class="quarto-xref">Figure&nbsp;<span>20.1</span></a>. If you look at the top-left panel (the one with “n = 1”), the dashed line represents our prior belief: all proportions of water (on the <em>x</em>-axis) are equally probable, so that the prior probability distribution is flat. Note that a probability of 0 means Earth is all land, and a probability of 1 means Earth is all water.</p>
 <p>Now, let’s update the flat prior distribution with the first observation in the globe-tossing exercise: the first outcome was W, water. This observations corresponds to a distribution in which 1 has the greatest probability and values below it have decreasing probability. This is represented in the top-left panel of <a href="#fig-prior-update" class="quarto-xref">Figure&nbsp;<span>20.1</span></a> as the solid slanted line. This is <span class="math inline">\(P(d | h)\)</span>. If we combine the flat prior and the probability of the data we get the dashed line in the second top panel (with “n = 2”). That is the posterior probability distribution resulting from the Bayesian update at step “n = 1”. This becomes the prior probability distribution at step “n = 2”.</p>
 <div class="cell" data-layout-align="center">
@@ -909,15 +910,15 @@ Figure&nbsp;20.1: Bayesian updating of a prior based on observations. From <span
 </div>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-gelman2011" class="csl-entry" role="listitem">
-Gelman, Andrew, Deborah Ann Nolan, and Deborah Ann Nolan. 2011. <em>Teaching statistics: a bag of tricks</em>. Repr. Oxford Univ. Press.
+Gelman, Andrew, Deborah Ann Nolan &amp; Deborah Ann Nolan. 2011. <em>Teaching statistics: a bag of tricks</em>. Repr. Oxford: Oxford Univ. Press.
 </div>
 <div id="ref-kurtz2023" class="csl-entry" role="listitem">
-Kurtz, Solomon. 2023. <em>Statistical Rethinking with Brms, Ggplot2, and the Tidyverse: Second Edition</em>. Version 0.4.0. <a href="https://bookdown.org/content/4857/">https://bookdown.org/content/4857/</a>.
+Kurtz, Solomon. 2023. <em>Statistical rethinking with brms, ggplot2, and the tidyverse: Second edition</em>. version 0.4.0. <a href="https://bookdown.org/content/4857/">https://bookdown.org/content/4857/</a>.
 </div>
 <div id="ref-mcelreath2020" class="csl-entry" role="listitem">
-McElreath, Richard. 2020. <em>Statistical Rethinking: A Bayesian Course with Examples in r and Stan</em>. Second edition. Chapman &amp; Hall/CRC Texts in Statistical Science Series. CRC Press.
+McElreath, Richard. 2020. <em>Statistical rethinking: A bayesian course with examples in r and stan</em> (Chapman &amp; Hall/CRC Texts in Statistical Science Series). Second edition. Boca Raton: CRC Press.
 </div>
 </div>
 
