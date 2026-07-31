@@ -189,7 +189,7 @@ Of course, if the observation if from an aspirated stop, that is neither a voice
 | `phonation` = `voiced`    |       1        |       0        |
 | `phonation` = `voiceless` |       0        |       1        |
 
-: Treatment contrasts coding of the categorical predictor `phonation`. {#tbl-phon-treat}
+: Treatment contrasts coding of the categorical predictor `phonation`.
 
 Now that we know how `phonation` is coded, we can look at the model formula.
 
@@ -408,7 +408,8 @@ Similarly, some might use "SE" for standard error instead of SD.
 As long as one is consistent, it doesn't matter much since there are indeed different traditions (and even different fields within linguistics might prefer different ways of reporting).
 
 Note that readers not used to Bayesian statistics might find the choice of CrI levels questionable or at least surprising.
-As said many times, there is nothing special about 95% CrI: it is a misguided historical accident from frequentist approaches to default to 95%, as we have seen in @sec-freq. Most of the current research in linguistics is conducted using problematic frequentist methods, so the only thing you can do is learn where the problems lie and do your best to avoid them in your own research.
+Remember that there is nothing special about 95% CrI: it is a misguided historical accident from frequentist approaches to default to 95%, as we have seen in @sec-freq.
+Most of the current research in linguistics is conducted using problematic frequentist methods, so the only thing you can do is learn where the problems lie and do your best to avoid them in your own research.
 
 In the report, you should include plots of the posterior draws.
 @fig-vot-bm-epred shows the expected value of VOT for the three phonation categories, as an example.
@@ -426,7 +427,8 @@ vot_bm_long |>
 
 ```
 
-Do not confuse this density plot of the expected values with the density plot in @fig-eu-vot-dens. The latter shows the density plot of the observations of VOT, while @fig-vot-bm-epred shows the densities of the posterior draws of the *mean* VOT.
+Do not confuse this density plot of the expected values with the density plot in @fig-eu-vot-dens.
+The latter shows the density plot of the observations of VOT, while @fig-vot-bm-epred shows the densities of the posterior draws of the *mean* VOT.
 
 ## Summary
 
@@ -437,3 +439,4 @@ Do not confuse this density plot of the expected values with the density plot in
 
 - Comparisons between levels other than the reference can be calculated from the posterior draws.
 :::
+

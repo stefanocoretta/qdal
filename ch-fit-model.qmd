@@ -385,6 +385,8 @@ So, to summarise, a 95% CrI tells us that we can be 95% confident, or in other w
 Note that this is always conditional on the model and data: in other words, confidence is conditional on assuming that the model we used reflects the true underlying data-generating process and that the data we sampled is representative.
 
 There is nothing special about 95% CrI and in fact it is recommended to calculate and report a few of them.
+The use of 95% is possibly the product of the misunderstanding, common in applied research, of Neyman and Person's threshold of statistical significance (part of the Null Hypothesis Significance Testing approach to inference, which we will discuss in @sec-freq).
+Especially within a Bayesian framework, different probability levels are considered informative, not just 95%.
 Personally, I use 90, 80, 70 and 60% CrIs.
 You can get any CrI with the `summary()` and the `posterior_summary()` functions, but you will also learn an alternative and more succinct way in @sec-regression.
 Here is how to get an 80% CrI with `summary()`.
@@ -459,3 +461,4 @@ cat("c. To fit a Gaussian model in R, the formula has the form `y ~ 1`.", torf(T
 cat("d. The intercept corresponds to the parameter $\\mu$.", torf(TRUE), "\n\n")
 ```
 :::
+
