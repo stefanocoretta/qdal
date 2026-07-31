@@ -809,7 +809,7 @@ window.Quarto = {
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> <span class="fl">0.1</span>, <span class="at">seed =</span> <span class="dv">2836</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-polite-f0-gend-att-repr-2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<div id="fig-polite-f0-gend-att-repr-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-polite-f0-gend-att-repr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="ch-regression-interaction_files/figure-html/fig-polite-f0-gend-att-repr-2-1.png" id="fig-polite-f0-gend-att-repr-2" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" width="672">
@@ -880,6 +880,25 @@ f0mn_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Note that there is a <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> for interactions: instead of writing in full <code>gender + attitude + gender:attitude</code> you can just write <code>gender * attitude</code> (the two predictors separated by a star <code>*</code>). The “star” syntax expands to the full syntax under the hood when the model is run. It is up to you which syntax you use, although for beginners I suggest using the longer one for clarity. Getting a regression model to estimate interactions is easy, but a warning: because we have included an interaction in the model, the interpretation of the coefficients has changed slightly relative to how we interpret the coefficients of categorical predictors in models without interactions!</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Interactions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/interactions.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div>
+<p>An <strong>interaction term</strong> allows the effect of one predictor to vary depending on the value of the other predictor.</p>
+<p>A model with an interaction has <strong>main terms</strong> and an <strong>interaction term</strong>. The coefficients of the main terms are the <strong>coefficients of the main effects</strong> while the coefficient of the interaction term is the <strong>interaction coefficient</strong>.</p>
+</div>
+</div>
 </section>
 <section id="interpreting-models-with-interactions" class="level2" data-number="35.3">
 <h2 data-number="35.3" class="anchored" data-anchor-id="interpreting-models-with-interactions"><span class="header-section-number">35.3</span> Interpreting models with interactions</h2>

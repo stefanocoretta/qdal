@@ -123,6 +123,17 @@ The "star" syntax expands to the full syntax under the hood when the model is ru
 It is up to you which syntax you use, although for beginners I suggest using the longer one for clarity.
 Getting a regression model to estimate interactions is easy, but a warning: because we have included an interaction in the model, the interpretation of the coefficients has changed slightly relative to how we interpret the coefficients of categorical predictors in models without interactions!
 
+::: callout-tip
+## Interactions
+
+![](img/interactions.png){fig-align="center" width="500"}
+
+An **interaction term** allows the effect of one predictor to vary depending on the value of the other predictor.
+
+A model with an interaction has **main terms** and an **interaction term**.
+The coefficients of the main terms are the **coefficients of the main effects** while the coefficient of the interaction term is the **interaction coefficient**.
+:::
+
 ## Interpreting models with interactions
 
 Let's look at the model summary.
