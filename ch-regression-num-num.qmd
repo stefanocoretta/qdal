@@ -568,7 +568,7 @@ si_epred_summary |>
 ::: {.content-visible when-format="html"}
 ```{r}
 #| label: si-3d
-#| eval: format$isHtml()
+#| eval: !expr knitr::is_html_output()
 
 library(plotly)
 
