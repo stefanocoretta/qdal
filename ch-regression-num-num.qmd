@@ -537,12 +537,38 @@ si_epred_summary <- si_epred |>
 
 ```
 
+:::: {.content-visible when-format="pdf"}
+::: callout-warning
+### Warning
+
+The PDF version of this textbook doesn't support interactive materials.
+The code for the interactive plot and the textual explanation are kept here for completeness, but you should check the HTML version for the actual plot.
+:::
+::::
+
 We can now plot the mean expected values as a 3D scatter plot.
 You can click and drag on the plot to rotate the plot and scroll up or down to zoom in and out.
 If you want to reset the plot, click on the little house icon in the top right corner of the plot.
 
+::: {.content-visible when-format="pdf"}
+``` r
+library(plotly)
+
+si_epred_summary |> 
+  plot_ly(
+    x = ~logfreq,
+    y = ~semdist,
+    z = ~mean,
+    marker = list(color = ~mean, size = 4),
+    type = "scatter3d", mode = "markers"
+  )
+```
+:::
+
+::: {.content-visible when-format="html"}
 ```{r}
 #| label: si-3d
+#| eval: format$isHtml()
 
 library(plotly)
 
@@ -556,6 +582,7 @@ si_epred_summary |>
   )
 
 ```
+:::
 
 We plotted log-frequency and semantic distance on the *x* and *y*-axes (the horizontal axes) and the mean of the expected values on the *z*-axis (the vertical axis).
 The points are also coloured based on the value of the mean of the expected values.
