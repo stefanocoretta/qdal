@@ -1169,6 +1169,11 @@ Figure&nbsp;30.4: The bad way of plotting proportions.
 <span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Computation failed in `stat_summary()`.
+Caused by error in `fun.data()`:
+! The package "Hmisc" is required.</code></pre>
+</div>
 <div class="cell-output-display">
 <div id="fig-prop-good" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1189,22 +1194,22 @@ Figure&nbsp;30.5: How to plot participants’ proportions and overall proportion
 <h2 data-number="30.4" class="anchored" data-anchor-id="bernoulli-model-of-nsl-predicates"><span class="header-section-number">30.4</span> Bernoulli model of NSL predicates</h2>
 <p>The hypothesis of the study is that use of multi-verb predicates would increase with each generation. To statistically assess this hypothesis and obtain estimates of the proportion of multiple predicates, we can fit a Bernoulli model with <code>Num_Predicates</code> as the outcome variable and <code>Group</code> as a categorical predictor. Before we move on onto fitting the model, it is useful to transform <code>Num_Predicates</code> into a factor and specify the order of the levels so that <code>single</code> is the first level and <code>multiple</code> is the second level. We need this because Bernoulli models estimate the probability (the parameter <span class="math inline">\(p\)</span> in <span class="math inline">\(Bernoulli(p)\)</span>) of obtaining the <em>second</em> level in the outcome variable (remember, <span class="math inline">\(p\)</span> is the probability of success, i.e.&nbsp;of obtaining <span class="math inline">\(1\)</span> in a 0/1 coded binary variable). The first level in the factor corresponds to <code>0</code> and the second level to <code>1</code>. We want to set the order with multiple as the second level because the hypothesis states that multi-verb predicates should increase, and by modelling the probability of multi-verb predicates we can more straightforwardly address the hypothesis (of course, if the probability of multi-verb predicates increases, the probability of single-verb predicates decreases, because <span class="math inline">\(q = 1 - p\)</span>). Complete the following code to make <code>Num_Predicates</code> into a factor.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>verb_org <span class="ot">&lt;-</span> verb_org <span class="sc">|&gt;</span> </span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>verb_org <span class="ot">&lt;-</span> verb_org <span class="sc">|&gt;</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>If you reproduce <a href="#fig-verb-org" class="quarto-xref">Figure&nbsp;<span>30.3</span></a> now, you will see that the order of <code>Num_Predicates</code> in the legend is “single” then “multiple” and that the order of the proportions in the bar chart have flipped.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>verb_org <span class="sc">|&gt;</span> </span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Group, <span class="at">fill =</span> Num_Predicates)) <span class="sc">+</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion"</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>verb_org <span class="sc">|&gt;</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Group, <span class="at">fill =</span> Num_Predicates)) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion"</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-verb-org-repr" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -1253,8 +1258,8 @@ logit(p_i) &amp; = \beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i \\
 <div class="cell" data-layout-align="center">
 <ol type="a">
 <li><p>Which of the following statements is correct?</p>
-<div id="radio_DUBQRNATGL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DUBQRNATGL" value=""> <span>1. The three coefficients are, respectively, the log-odds of MVPs in home-signers, in NSL1 and in NSL2.</span></label><label><input type="radio" autocomplete="off" name="radio_DUBQRNATGL" value="answer"> <span>2. The three coefficients are, respectively, the log-odds of MVPs in home-signers, the difference between NSL1 and home-signers, and the difference between NSL2 and home-signers.</span></label><label><input type="radio" autocomplete="off" name="radio_DUBQRNATGL" value=""> <span>3. The three coefficients are, respectively, the log-odds of MVPs in home-signers, the difference between NSL1 and home-signers, and the difference between NSL2 and NSL1.</span></label>
+<div id="radio_TXLBEBAQVY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TXLBEBAQVY" value=""> <span>1. The three coefficients are, respectively, the log-odds of MVPs in home-signers, in NSL1 and in NSL2.</span></label><label><input type="radio" autocomplete="off" name="radio_TXLBEBAQVY" value="answer"> <span>2. The three coefficients are, respectively, the log-odds of MVPs in home-signers, the difference between NSL1 and home-signers, and the difference between NSL2 and home-signers.</span></label><label><input type="radio" autocomplete="off" name="radio_TXLBEBAQVY" value=""> <span>3. The three coefficients are, respectively, the log-odds of MVPs in home-signers, the difference between NSL1 and home-signers, and the difference between NSL2 and NSL1.</span></label>
 </div></li>
 <li><p><span class="math inline">\(\beta_0\)</span> is the mean probability of multi-verb predicates in the home-signer group. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
 <li><p>The model implies three dummy variables for the <code>Group</code> variable. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
@@ -1288,18 +1293,18 @@ logit(p_i) &amp; = \beta_0 + \beta_1 \cdot NSL1_i + \beta_2 \cdot NSL2_i \\
 <h2 data-number="30.5" class="anchored" data-anchor-id="fit-the-bernoulli-model-with-brms"><span class="header-section-number">30.5</span> Fit the Bernoulli model with brms</h2>
 <p>We can now fit the model with <code>brm()</code>. The model’s R formula has no surprises: <code>Num_Predicates ~ Group</code>. This looks like the formula of the model in <a href="ch-regression-more.html" class="quarto-xref"><span>Chapter 29</span></a>: <code>VOT_ms ~ phonation</code>. We are modelling <code>Num_Predicates</code> as a function of <code>Group</code>, like we modelled <code>VOT_ms</code> as a function of phonation. In this model, you have to set the family to <code>bernoulli</code> to fit a Bernoulli model. We also set the number of cores, seed and file as usual.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>mvp_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  Num_Predicates <span class="sc">~</span> Group,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> bernoulli,</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> verb_org,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1329</span>,</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"cache/ch-regression-bernoulli_mvp_bm"</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mvp_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  Num_Predicates <span class="sc">~</span> Group,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> bernoulli,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> verb_org,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1329</span>,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"cache/ch-regression-bernoulli_mvp_bm"</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s inspect the model summary (we will get 80% CrIs).</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mvp_bm, <span class="at">prob =</span> <span class="fl">0.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mvp_bm, <span class="at">prob =</span> <span class="fl">0.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Family: bernoulli 
   Links: mu = logit 
@@ -1321,7 +1326,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 </div>
 <p>The summary informs us that we used a Bernoulli family and that the link for the mean <span class="math inline">\(\mu\)</span>, i.e.&nbsp;<span class="math inline">\(p\)</span> in this model, is the logit function. The formula, data and draws parts don’t need explanation. Since the model has only one parameter <span class="math inline">\(p\)</span>, to which we apply the regression equation, we only have a <code>Regression Coefficients</code> table, without a <code>Further Distributional Parameters</code> table. Let’s focus on the regression coefficients. Remember that the regression coefficients estimates are in log-odds, not probabilities.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(mvp_bm, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(mvp_bm, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          Estimate Est.Error   Q10   Q90
 Intercept    -0.58      0.15 -0.77 -0.38
@@ -1348,35 +1353,35 @@ GroupNSL2     0.56      0.21  0.30  0.83</code></pre>
 </div>
 </div>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get draws</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(mvp_bm)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate posterior draws of log-odds by group</span></span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws <span class="ot">&lt;-</span> mvp_bm_draws <span class="sc">|&gt;</span> </span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">homesign =</span> b_Intercept,</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL1 =</span> b_Intercept <span class="sc">+</span> b_GroupNSL1,</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL2 =</span> b_Intercept <span class="sc">+</span> b_GroupNSL2,</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot to longer format</span></span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws_long <span class="ot">&lt;-</span> mvp_bm_draws <span class="sc">|&gt;</span> </span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(homesign<span class="sc">:</span>NSL2) <span class="sc">|&gt;</span> </span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"Group"</span>, <span class="at">values_to =</span> <span class="st">"log"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">p =</span> <span class="fu">plogis</span>(log)</span>
-<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get draws</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(mvp_bm)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate posterior draws of log-odds by group</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws <span class="ot">&lt;-</span> mvp_bm_draws <span class="sc">|&gt;</span> </span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">homesign =</span> b_Intercept,</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL1 =</span> b_Intercept <span class="sc">+</span> b_GroupNSL1,</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL2 =</span> b_Intercept <span class="sc">+</span> b_GroupNSL2,</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot to longer format</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws_long <span class="ot">&lt;-</span> mvp_bm_draws <span class="sc">|&gt;</span> </span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(homesign<span class="sc">:</span>NSL2) <span class="sc">|&gt;</span> </span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"Group"</span>, <span class="at">values_to =</span> <span class="st">"log"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">p =</span> <span class="fu">plogis</span>(log)</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can now summarise the draws to get CrIs and plot the posteriors.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws_long <span class="sc">|&gt;</span> </span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Group) <span class="sc">|&gt;</span> </span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cri_l80 =</span> <span class="fu">quantile2</span>(p, <span class="fl">0.1</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>),</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">cri_u80 =</span> <span class="fu">quantile2</span>(p, <span class="fl">0.9</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws_long <span class="sc">|&gt;</span> </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Group) <span class="sc">|&gt;</span> </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">cri_l80 =</span> <span class="fu">quantile2</span>(p, <span class="fl">0.1</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>),</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">cri_u80 =</span> <span class="fu">quantile2</span>(p, <span class="fl">0.9</span>) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div data-pagedtable="false">
@@ -1390,11 +1395,11 @@ GroupNSL2     0.56      0.21  0.30  0.83</code></pre>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws_long <span class="sc">|&gt;</span> </span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Group =</span> <span class="fu">factor</span>(Group, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"homesign"</span>, <span class="st">"NSL1"</span>, <span class="st">"NSL2"</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(p, Group)) <span class="sc">+</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_halfeye</span>() <span class="sc">+</span></span>
-<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Probability of multi-verb predicate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws_long <span class="sc">|&gt;</span> </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Group =</span> <span class="fu">factor</span>(Group, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"homesign"</span>, <span class="st">"NSL1"</span>, <span class="st">"NSL2"</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(p, Group)) <span class="sc">+</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_halfeye</span>() <span class="sc">+</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Probability of multi-verb predicate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-mvp-bm-pred" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
@@ -1411,18 +1416,18 @@ Figure&nbsp;30.7: Expected probabilities of multi-verb predicates by group as pe
 </div>
 <p>Very often, we also want to know the posterior probability of the difference of expected probabilities between a level and another level that is not the reference: here for example we might want to know the difference between NSL1 and NSL2. It is easy: we just take the difference of the log-odds expected draws columns <code>NSL1</code> and <code>NSL2</code> in <code>mpv_bm_draws</code>. If we want to know the difference between the probabilities rather than the log-odds, we use the inverse-logit-transformed (<code>plogis()</code>) draws.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws <span class="ot">&lt;-</span> mvp_bm_draws <span class="sc">|&gt;</span> </span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL2_NSL1_log =</span> NSL2 <span class="sc">-</span> NSL1,</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL2_NSL1_p =</span> <span class="fu">plogis</span>(NSL2) <span class="sc">-</span> <span class="fu">plogis</span>(NSL1)</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(mvp_bm_draws<span class="sc">$</span>NSL2_NSL1_log, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws <span class="ot">&lt;-</span> mvp_bm_draws <span class="sc">|&gt;</span> </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL2_NSL1_log =</span> NSL2 <span class="sc">-</span> NSL1,</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL2_NSL1_p =</span> <span class="fu">plogis</span>(NSL2) <span class="sc">-</span> <span class="fu">plogis</span>(NSL1)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(mvp_bm_draws<span class="sc">$</span>NSL2_NSL1_log, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> q10  q90 
 1.17 1.73 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(mvp_bm_draws<span class="sc">$</span>NSL2_NSL1_p, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(mvp_bm_draws<span class="sc">$</span>NSL2_NSL1_p, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> q10  q90 
 0.25 0.36 </code></pre>
