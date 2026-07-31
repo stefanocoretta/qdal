@@ -183,6 +183,7 @@ This is illustrated in @tbl-phon-treat.
 For each observation, $ph_\text{VD}$ indicates if the observation is from a voiced stop (1) or not (0), and $ph_\text{VL}$ indicates if the observation is from a voiceless (unaspirated) stop (1) or not (0).
 Of course, if the observation if from an aspirated stop, that is neither a voiced nor a voiceless (unaspirated) stop, so both $ph_\text{VD}$ and $ph_\text{VL}$ are 0.
 
+::: {#tbl-phon-treat}
 | `phonation`               | $ph_\text{VD}$ | $ph_\text{VL}$ |
 |---------------------------|:--------------:|:--------------:|
 | `phonation` = `aspirated` |       0        |       0        |
@@ -190,6 +191,7 @@ Of course, if the observation if from an aspirated stop, that is neither a voice
 | `phonation` = `voiceless` |       0        |       1        |
 
 : Treatment contrasts coding of the categorical predictor `phonation`.
+:::
 
 Now that we know how `phonation` is coded, we can look at the model formula.
 
@@ -439,4 +441,3 @@ The latter shows the density plot of the observations of VOT, while @fig-vot-bm-
 
 - Comparisons between levels other than the reference can be calculated from the posterior draws.
 :::
-
