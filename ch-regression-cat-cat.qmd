@@ -114,7 +114,7 @@ The second variable states if the $f0mn$ value is from the informal condition ($
 
 ::: {#tbl-gen-att-contrasts}
 |                                            | $gen_\text{M}$ | $att_\text{POL}$ |
-|:------------------------------------------:|:--------------:|:----------------:|
+|:------------------------------------:|:---------------:|:---------------:|
 | `gender` = `F` and `attitude` = `informal` |       0        |        0         |
 |  `gender` = `F` and `attitude` = `polite`  |       0        |        1         |
 | `gender` = `M` and `attitude` = `informal` |       1        |        0         |
@@ -174,7 +174,8 @@ When we say that the model controls for attitude, we mean that the estimated dif
 The model accounts for the variation associated with attitude separately from the variation associated with gender.
 The difference between genders is estimated by comparing males and females when producing the same type of speech.
 In other words, the model asks: how different is the mean f0 of males compared with females when attitude is held constant?
-Because both genders produced both polite and informal speech, the model can make this comparison separately for informal speech and for polite speech, and then combine these comparisons into a single estimate of the gender difference.
+Or similarly, when looking at utterances with the same attitude, how different is the mean f0 of males compared with females?
+Because both genders produced both polite and informal speech, the model can make this comparison separately for informal speech and for polite speech, and combine these comparisons into a single estimate of the gender difference.
 The same logic applies to attitude: the difference associated with attitude is estimated by comparing polite and informal speech while holding gender constant.
 The model asks: how different is the mean f0 in polite speech compared with informal speech, after accounting for differences between genders?
 
@@ -193,7 +194,7 @@ Here is how we interpret the results of this model (based on the 95% CrIs):
 
 - `attitudepol`: the mean `f0mn` is between 4 and 25 Hz lower in the polite condition than in the informal condition (when controlling for gender), at 95% probability.
 
-It is worth stressing here that, because of the "averaging across levels" of the "other" predictor, the estimated difference of each predictor is implied to be the same in all levels of the other predictor.
+It is worth stressing here that, because of the controlling for the other predictor, the estimated difference of each predictor is implied to be the same in all levels of the other predictor.
 We can see this by plotting the expected `f0mn` based on both predictors.
 We use `conditional_effects()` here for convenience (you will have to plot the posterior distributions from the draws in the exercise below).
 First, @fig-f0-bm-cond shows the expected values of `f0mn` depending on gender and attitude, separately.
