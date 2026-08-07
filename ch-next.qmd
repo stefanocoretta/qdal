@@ -160,7 +160,7 @@ In these cases, it is useful to reduce the dimensionality of the data: in other 
 
 Principal Component Analysis (PCA) finds numeric components, called principal components (PCs), that can capture the covariation of the numeric variables in the data set.
 The scores of the principal components capturing variation in the data can be used for further analysis.
-You can find information about PCA [here](https://www.sthda.com/english/articles/index.php?url=/31-principal-component-methods-in-r-practical-guide/#google_vignette).
+You can find information about PCA [here](https://www.datanovia.com/learn/machine-learning/dimension-reduction/principal-component-analysis).
 Multiple Correspondence Analysis (McA) is the discrete equivalent of PCA, i.e. it can be used with discrete/categorical variables.
 See [here](https://www.sthda.com/english/articles/31-principal-component-methods-in-r-practical-guide/114-mca-multiple-correspondence-analysis-in-r-essentials/) for an introduction.
 Another dimensionality reduction technique is Cluster Analysis (CA, aka hierarchical clustering).
