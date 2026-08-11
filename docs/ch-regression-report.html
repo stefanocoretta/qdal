@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -747,9 +782,53 @@ window.Quarto = {
 <p><img src="./img/badge-stats.png" class="img-fluid"></p>
 <p>You have seen an example of model reporting in <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>. We can use that as a template for reporting a regression model, by reworking a few parts and adding information related to the numeric predictor in the regression. You could report the vowel duration regression model like so:</p>
 <blockquote class="blockquote">
-<p>We fitted a Bayesian regression model using the brms package <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. We used a Gaussian distribution for the outcome variable, vowel duration (in milliseconds). We included speech rate (measured as syllables per second) as the regression predictor.</p>
+<p>We fitted a Bayesian regression model using the brms package <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. We used a Gaussian distribution for the outcome variable, vowel duration (in milliseconds). We included speech rate (measured as syllables per second) as the regression predictor. See <a href="#tbl-vow-bm-coefs" class="quarto-xref">Table&nbsp;<span>26.1</span></a> for the regression coefficients table.</p>
 <p>Based on the model results, there is a 95% probability that the mean vowel duration, when speech rate is 0, is between 192 and 205 ms (mean = 198, SD = 3). For each unit increase of speech rate (i.e.&nbsp;for each one syllable per second added), vowel duration decreases by 20 to 23 ms (mean = -22, SD = 1). The residual standard deviation is between 21 and 22 ms (mean = 22, SD = 0). When comparing vowel duration at speech rate 4 syl/s vs 7 syl/s, the difference is between -69 and -61 ms, at 95% probability.</p>
 </blockquote>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(vow_bm) <span class="sc">|&gt;</span> <span class="fu">round</span>() <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-vow-bm-coefs" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-vow-bm-coefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;26.1: Regression coefficients of a Bayesian regression model of vowel duration. Posterior mean, SD and 95% Credible Intervals are reported.
+</figcaption>
+<div aria-describedby="tbl-vow-bm-coefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">Est.Error</th>
+<th style="text-align: right;">Q2.5</th>
+<th style="text-align: right;">Q97.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: right;">198</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">192</td>
+<td style="text-align: right;">205</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">speech_rate</td>
+<td style="text-align: right;">-22</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-23</td>
+<td style="text-align: right;">-20</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
 <p>Note the wording of the speech rate coefficient: “vowel duration decreases by 20 to 23 ms”. The speech rate coefficient 95% CrI is fully negative (i.e.&nbsp;both lower and upper limit are negative) so we can say that vowel duration <em>decreases</em>. Furthermore, since we say “decreases” then we should report the CrI limits as positive numbers. Think about it: we say “decrease X by 2” to mean “X - 2”, rather than “decrease X by -2”. Finally, given we flipped the signs of the CrI limits, it is clearer to write “20 to 23 ms”, rather than the other way round as you would if you reported the interval as is: 95% CrI [-23, -20].</p>
 <p>Another point to note is that in the reporting style I am using in this book, we place more emphasis on the posterior CrI than on the posterior mean and SD. So the CrI is in the main text, while mean and SD are between parentheses. Other researchers might in fact do it the other way round. Whatever you decide to do, be consistent. Finally, it is unusual to report the coefficients of <span class="math inline">\(\sigma\)</span>: I have done it here for completeness, since it doesn’t hurt to do so.</p>
 <p>Your modelling report should also include figures that show posterior distributions of parameters, of expected values and of other quantities of interest (like the comparison at different values of speech rate). What you include really depends on the research question, so there isn’t a single answer. Our research question was:</p>

@@ -1274,9 +1274,53 @@ Figure&nbsp;28.5: Expected predictions of RTs by word type.
 <h2 data-number="28.5" class="anchored" data-anchor-id="reporting"><span class="header-section-number">28.5</span> Reporting</h2>
 <p>Reporting regression models with categorical predictors is not too different from reporting models with a numeric predictor, but there are a couple of things that you need to keep in mind. With a categorical predictor you should report the estimates for the intercept, the difference from the intercept and the predicted value for the second level in the categorical predictor. You should also tell the reader how the categorical predictor was coded. Here is the full report for our model of reaction times.</p>
 <blockquote class="blockquote">
-<p>We fitted a Bayesian regression model using the brms package <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. We used a Gaussian distribution for the outcome variable, reaction times (in milliseconds). We included word type (real vs non-word) as the regression predictor. Word type was coded using the default R treatment contrasts, with real word set as the reference level.</p>
+<p>We fitted a Bayesian regression model using the brms package <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. We used a Gaussian distribution for the outcome variable, reaction times (in milliseconds). We included word type (real vs non-word) as the regression predictor. Word type was coded using the default R treatment contrasts, with real word set as the reference level. See <a href="#tbl-rt-bm-1-coef" class="quarto-xref">Table&nbsp;<span>28.4</span></a> for the regression coefficients table.</p>
 <p>Based on the model results, there is a 95% probability that the mean RT with real words is between 941 and 965 ms (mean = 953, SD = 6). When the word is a non-word, the RTs are between 1057 and 1082 ms at 95% confidence (mean = 1069, SD = 6). When comparing RTs for non- vs real words, there is an 95% probability that the difference is between 99 to 134 ms (mean = 116, SD = 9). The residual standard deviation is between 306 and 319 ms (mean = 312, SD = 3).</p>
 </blockquote>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(rt_bm_1) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-rt-bm-1-coef" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rt-bm-1-coef-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;28.4: Regression coefficients of the Bayesian regression model. Posterior mean, SD and 95% Credible Intervals are shown.
+</figcaption>
+<div aria-describedby="tbl-rt-bm-1-coef-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">Est.Error</th>
+<th style="text-align: right;">Q2.5</th>
+<th style="text-align: right;">Q97.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: right;">953</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">941</td>
+<td style="text-align: right;">965</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">IsWordFALSE</td>
+<td style="text-align: right;">116</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">134</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
 </section>
 <section id="conclusion" class="level2" data-number="28.6">
 <h2 data-number="28.6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">28.6</span> Conclusion</h2>

@@ -26,11 +26,21 @@ You could report the vowel duration regression model like so:
 > We fitted a Bayesian regression model using the brms package [@burkner2017] in R [@rcoreteam2025].
 > We used a Gaussian distribution for the outcome variable, vowel duration (in milliseconds).
 > We included speech rate (measured as syllables per second) as the regression predictor.
+> See @tbl-vow-bm-coefs for the regression coefficients table.
 >
 > Based on the model results, there is a 95% probability that the mean vowel duration, when speech rate is 0, is between `{r} round(brms::fixef(vow_bm)[1, 3])` and `{r} round(brms::fixef(vow_bm)[1, 4])` ms (mean = `{r} round(brms::fixef(vow_bm)[1, 1])`, SD = `{r} round(brms::fixef(vow_bm)[1, 2])`).
 > For each unit increase of speech rate (i.e. for each one syllable per second added), vowel duration decreases by `{r} -round(brms::fixef(vow_bm)[2, 4])` to `{r} -round(brms::fixef(vow_bm)[2, 3])` ms (mean = `{r} round(brms::fixef(vow_bm)[2, 1])`, SD = `{r} round(brms::fixef(vow_bm)[2, 2])`).
 > The residual standard deviation is between `{r} round(brms::posterior_summary(vow_bm)["sigma", "Q2.5"])` and `{r} round(brms::posterior_summary(vow_bm)["sigma", "Q97.5"])` ms (mean = `{r} round(brms::posterior_summary(vow_bm)["sigma", "Estimate"])`, SD = `{r} round(brms::posterior_summary(vow_bm)["sigma", "Est.Error"])`).
 > When comparing vowel duration at speech rate 4 syl/s vs 7 syl/s, the difference is between `{r} round(quantile2(vow_bm_draws$diff_sr_4_7, 0.025))` and `{r} round(quantile2(vow_bm_draws$diff_sr_4_7, 0.975))` ms, at 95% probability.
+
+```{r}
+#| label: tbl-vow-bm-coefs
+#| tbl-cap: "Regression coefficients of a Bayesian regression model of vowel duration. Posterior mean, SD and 95% Credible Intervals are reported."
+#| code-fold: true
+
+fixef(vow_bm) |> round() |> knitr::kable()
+
+```
 
 Note the wording of the speech rate coefficient: "vowel duration decreases by `{r} -round(brms::fixef(vow_bm)[2, 4])` to `{r} -round(brms::fixef(vow_bm)[2, 3])` ms".
 The speech rate coefficient 95% CrI is fully negative (i.e. both lower and upper limit are negative) so we can say that vowel duration *decreases*.

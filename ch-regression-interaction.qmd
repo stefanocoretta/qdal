@@ -340,13 +340,55 @@ We are just very uncertain about it.
 
 ## Reporting
 
-The following paragraph shows you how to report the model specification of the model we fitted in this chapter.
-I don't include the part where you report the results of the model, because it would just be repeating the text from the previous sections.
+The following paragraphs show you how to report the model specification and results of the model we fitted in this chapter.
+Some of the text is repeated from the sections above.
 
-> We fitted a Bayesian regression model using the brms package [@burkner2017] in R [@rcoreteam2025].
-> We used a Gaussian distribution for the outcome variable, mean f0 (in Hz).
-> We included attitude (informal vs polite) and gender (female vs male) as the regression predictors and their interaction.
-> Both predictors were coded using the default R treatment contrasts, with informal and female set as the reference levels.
+We fitted a Bayesian regression model using the brms package [@burkner2017] in R [@rcoreteam2025].
+We used a Gaussian distribution for the outcome variable, mean f0 (in Hz).
+We included attitude (informal vs polite) and gender (female vs male) as the regression predictors and their interaction.
+Both predictors were coded using the default R treatment contrasts, with informal and female set as the reference levels.
+See @tbl-f0-bm-int-coefs for the full regression coefficients table.
+
+According to the model, the mean f0 of female speakers in the informal condition is 246-267 Hz ($\beta$ = 257, SD = 5), at 95% probability.
+The mean f0 of male speakers (in the informal condition) is 105-134 Hz lower than female speakers ($\beta$ = -119, SD = 8).
+When comparing polite vs informal speech in female speakers, the mean f0 is 3-32 Hz lower in polite than informal speech ($\beta$ = -17, SD = 7).
+The 95% CrI of the estimated interaction term between gender and attitude is [-14, +7] Hz ($\beta$ = 7, SD = 11). @tbl-f0-bm-int-epred reports the mean, SD and 95% CrIs of the expected values of mean f0 in female and male speakers, in informal and polite speech separately. Looking at informal vs polite speech in male speakers, based on the main effect of attitude and the interaction term, the mean difference in polite vs informal speech in male speakers is -11 Hz (SD = 8) and the 95% CrI is [-27, +5] Hz.
+This is somewhat indicative of a difference (polite speech is produced with a somewhat lower f0 in male speakers) but it is also possible that there is instead a smaller positive difference (up to +5 Hz, at 95% probability).
+Comparing this with the effect of attitude in female participants (which is at 95% confidence between -32 to -3 Hz), we cannot really argue for or against the effect of attitude being different in the two genders.
+
+At 95% probability, given the 95% CrI \[-14, +27\], the difference between attitudes in males is between 14 Hz lower and 27 Hz higher than the corresponding difference in females (the 95% CrI of which is \[-32, -3\]).
+At 60% probability, the difference in males is between 2 Hz lower and 16 Hz higher (95% CrI \[-2, +15\]) than that in females.
+While we can be quite confident that polite speech has a somewhat lower mean f0 in females, this might be the case in male speakers too although possibly to a lower degree and considering there might be no difference by attitude in males.
+To conclude, the current data and model results do not allow us to straightforwardly answer the question of how the effect of attitude differs in the two genders.
+
+```{r}
+#| label: tbl-f0-bm-int-coefs
+#| tbl-cap: "Regression coefficients from the Bayesian Gaussian regression model of mean f0. Posterior mean, SD and 95% CrI are shown."
+#| code-fold: true
+
+fixef(f0_bm_int) |> knitr::kable(digits = 0)
+```
+
+```{r}
+#| label: tbl-f0-bm-int-epred
+#| tbl-cap: "Mean, SD and 95% CrI of the expected values of mean f0 from the Bayesian regression model, by gender and attitude."
+#| code-fold: true
+#| message: false
+
+f0_bm_int_epred_2 |> 
+  group_by(gender, attitude) |> 
+  summarise(
+    mean = mean(.epred), SD = sd(.epred),
+    `95%` = paste0("[", paste(quantile2(.epred, c(0.025, 0.975)) |> round(), collapse = ", "), "]")
+  ) |> 
+  mutate(
+    attitude = replace_values(
+      attitude, "inf" ~ "informal", "pol" ~ "polite"
+    )
+  ) |> 
+  knitr::kable(digits = 0)
+
+```
 
 Note that there isn't a single "right" way of reporting model results, or a fixed procedure.
 It much depends on the specific research question and on which part of the results you place focus on.
@@ -360,5 +402,5 @@ With more complex models, including all that in a report might be too much so yo
 
 - Interpretation of a coefficient for any one predictor is thus based on the reference level of the other predictors.
 
-- We can still calculate expected predictions and any comparison of interest based on the model's draws.
+- We can still calculate expected predictions and any comparison of interest based on the model's draws.'s draws.
 :::

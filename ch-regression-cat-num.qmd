@@ -419,6 +419,49 @@ quantile2(exp(rt_lw_int_draws$b_PhonLev * 5 + rt_lw_int_draws$`b_PhonLev:IsWordF
 
 The RTs increase by 21-27% from distance 7 to distance 12 in real words, but only by 11-17% in non-words, at 80% confidence.
 
+## Reporting
+
+```{r}
+#| label: quants
+#| include: false
+
+quantile2(exp(rt_lw_int_draws$b_Intercept)) |> round()
+quantile2(exp(rt_lw_int_draws$b_PhonLev)) |> round(2)
+quantile2(exp(rt_lw_int_draws$b_IsWordFALSE)) |> round(2)
+quantile2(rt_lw_int_draws$`b_PhonLev:IsWordFALSE`) |> round(2)
+quantile2(exp(rt_lw_int_draws$b_PhonLev + rt_lw_int_draws$`b_PhonLev:IsWordFALSE`)) |> round(2)
+quantile2(exp(rt_lw_int_draws$rt_log_7)) |> round(2)
+quantile2(exp(rt_lw_int_draws$rt_log_10)) |> round(2)
+quantile2(exp(rt_lw_int_draws$rt_log_12)) |> round(2)
+
+```
+
+We fitted a Bayesian regression model using the brms package [@burkner2017] in R [@rcoreteam2025].
+We used a log-normal distribution for the outcome variable, reaction times (RTs, milliseconds).
+We included mean phoneme-level Levenshtein distance and word type (real vs non-real word) as the regression predictors and their interaction.
+Word type was coded using the default R treatment contrasts, with real word set as the reference level.
+See @tbl-rt-lw-int-coefs for the full regression coefficients table.
+
+According to the model's intercept, The 90% CrI of RTs is \[647, 713\] ms when phoneme-level distance is 0 ($\beta$ = 6.52, SD = 0.03).
+For real words, each unit increase of phoneme-level distance increases RTs by a factor of 1.04-1.05 at 90% probability ($\beta$ = 0.04, SD = 0.004).
+When distance is 0, non-real words elicit RTs that are 1.18-1.25 times longer than real words ($\beta$ = 0.23, SD = 0.04).
+The 90% CrI of the interaction coefficient is \[-0.03, -0.01\] on the log scale.
+In other words, each unit increase of phoneme-level distance in non-words increases RTs by a factor of 1.02-1.03 at 90% confidence (cf with 1.04-1.05 in real words).
+These results suggest that the effect of phoneme-level distance differs in real and non-real words, the effect being somewhat weaker in non-real words.
+
+While the research question focuses on the effect of phoneme-level distance in real and non-words (*Does the effect of Levenshtein distance on RTs differ in real and non-real words?*), we can approach the results from the point of view of comparing the RTs of real and non-words at different values of distance.
+Because of the negative interaction coefficient, the difference in RTs between real and non-words is larger at lower phoneme-level distance and, conversely, smaller at higher phoneme-level distance.
+For illustration, at phoneme-level distance = 7, RTs for non-words are 1.10-1.13 times longer than real words; at distance = 10, they are 1.03-1.09 longer; and at distance = 12, they are 0.97 times shorter to 1.07 times longer, at 90% probability.
+
+```{r}
+#| label: tbl-rt-lw-int-coefs
+#| tbl-cap: "Regression coefficients of the Bayesian log-normal regression model of RTs. Posterior mean, SD and 95% CrIs are shown, on the log-link scale (rounded to the second decimal)."
+#| code-fold: true
+
+fixef(rt_lw_int) |> knitr::kable(digits = 2)
+
+```
+
 ## Summary
 
 ::: {.callout-note appearance="simple"}

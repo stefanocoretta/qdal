@@ -753,11 +753,19 @@ rt_14_up <- quantile2(exp(rt_bm_2_draws$b_Intercept + rt_bm_2_draws$b_PhonLev * 
 You could report the model we fitted in this chapter like so:
 
 > We fitted a Bayesian regression model with a log-normal family for the outcome variable (reaction times, RT) using brms [@burkner2017] in R [@rcoreteam2025].
-> As predictor, we entered the mean phoneme-level Levenshtein distance of the word.
+> As a predictor, we entered the mean phoneme-level Levenshtein distance of the word.
 >
 > The model indicates that the average RT when mean distance is 0 is between `{r} rt_0_lo` and `{r} rt_0_up` ms, at 80% confidence ($\beta$ = 6.63, SD = 0.02).
 > For each unit increase of mean distance, the RTs increase by a factor of `{r} pl_lo`-`{r} pl_up` (or `{r} 100 * (pl_lo - 1)`-`{r} 100 * (pl_up - 1)`%), ($\beta$ = 0.04, SD = 0.003).
 > As an example, the expected RTs at mean distance 5 are `{r} rt_5_lo`-`{r} rt_5_up` ms, while at mean distance 14 are `{r} rt_14_lo`-`{r} rt_14_up`ms, at 80% probability.
+
+```{r}
+#| label: tbl-rt-bm-2-coefs
+#| tbl-cap: "Regression coefficients from the Bayesian log-normal regression model. Posterior mean, SD and 95% Credible Intervals are shown on the log-link scale."
+#| code-fold: true
+
+fixef(rt_bm_2) |> knitr::kable(digits = 2)
+```
 
 This answers our research question above ("Does mean phoneme-level Levenshtein distance of the target word have an effect on the response reaction times?"): we know now that for each unit increase of mean distance, the RTs increase by 3-4% at 80% probability.
 
@@ -774,3 +782,4 @@ This answers our research question above ("Does mean phoneme-level Levenshtein d
 
 - Predictions can be converted back to the original scale with `exp()` as well (for predictions, you should *always* include the intercept; exponentiating difference coefficients alone gives you for example the ratio difference in RTs, not the predicted RTs in milliseconds).
 :::
+

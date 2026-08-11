@@ -1100,10 +1100,137 @@ Figure&nbsp;35.3: Intervals plot of the expected values of mean f0 by gender and
 </section>
 <section id="reporting" class="level2" data-number="35.5">
 <h2 data-number="35.5" class="anchored" data-anchor-id="reporting"><span class="header-section-number">35.5</span> Reporting</h2>
-<p>The following paragraph shows you how to report the model specification of the model we fitted in this chapter. I don’t include the part where you report the results of the model, because it would just be repeating the text from the previous sections.</p>
-<blockquote class="blockquote">
-<p>We fitted a Bayesian regression model using the brms package <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. We used a Gaussian distribution for the outcome variable, mean f0 (in Hz). We included attitude (informal vs polite) and gender (female vs male) as the regression predictors and their interaction. Both predictors were coded using the default R treatment contrasts, with informal and female set as the reference levels.</p>
-</blockquote>
+<p>The following paragraphs show you how to report the model specification and results of the model we fitted in this chapter. Some of the text is repeated from the sections above.</p>
+<p>We fitted a Bayesian regression model using the brms package <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. We used a Gaussian distribution for the outcome variable, mean f0 (in Hz). We included attitude (informal vs polite) and gender (female vs male) as the regression predictors and their interaction. Both predictors were coded using the default R treatment contrasts, with informal and female set as the reference levels. See <a href="#tbl-f0-bm-int-coefs" class="quarto-xref">Table&nbsp;<span>35.1</span></a> for the full regression coefficients table.</p>
+<p>According to the model, the mean f0 of female speakers in the informal condition is 246-267 Hz (<span class="math inline">\(\beta\)</span> = 257, SD = 5), at 95% probability. The mean f0 of male speakers (in the informal condition) is 105-134 Hz lower than female speakers (<span class="math inline">\(\beta\)</span> = -119, SD = 8). When comparing polite vs informal speech in female speakers, the mean f0 is 3-32 Hz lower in polite than informal speech (<span class="math inline">\(\beta\)</span> = -17, SD = 7). The 95% CrI of the estimated interaction term between gender and attitude is [-14, +7] Hz (<span class="math inline">\(\beta\)</span> = 7, SD = 11). <a href="#tbl-f0-bm-int-epred" class="quarto-xref">Table&nbsp;<span>35.2</span></a> reports the mean, SD and 95% CrIs of the expected values of mean f0 in female and male speakers, in informal and polite speech separately. Looking at informal vs polite speech in male speakers, based on the main effect of attitude and the interaction term, the mean difference in polite vs informal speech in male speakers is -11 Hz (SD = 8) and the 95% CrI is [-27, +5] Hz. This is somewhat indicative of a difference (polite speech is produced with a somewhat lower f0 in male speakers) but it is also possible that there is instead a smaller positive difference (up to +5 Hz, at 95% probability). Comparing this with the effect of attitude in female participants (which is at 95% confidence between -32 to -3 Hz), we cannot really argue for or against the effect of attitude being different in the two genders.</p>
+<p>At 95% probability, given the 95% CrI [-14, +27], the difference between attitudes in males is between 14 Hz lower and 27 Hz higher than the corresponding difference in females (the 95% CrI of which is [-32, -3]). At 60% probability, the difference in males is between 2 Hz lower and 16 Hz higher (95% CrI [-2, +15]) than that in females. While we can be quite confident that polite speech has a somewhat lower mean f0 in females, this might be the case in male speakers too although possibly to a lower degree and considering there might be no difference by attitude in males. To conclude, the current data and model results do not allow us to straightforwardly answer the question of how the effect of attitude differs in the two genders.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(f0_bm_int) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-f0-bm-int-coefs" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-f0-bm-int-coefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;35.1: Regression coefficients from the Bayesian Gaussian regression model of mean f0. Posterior mean, SD and 95% CrI are shown.
+</figcaption>
+<div aria-describedby="tbl-f0-bm-int-coefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">Est.Error</th>
+<th style="text-align: right;">Q2.5</th>
+<th style="text-align: right;">Q97.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: right;">257</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">246</td>
+<td style="text-align: right;">267</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">genderM</td>
+<td style="text-align: right;">-119</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">-134</td>
+<td style="text-align: right;">-105</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">attitudepol</td>
+<td style="text-align: right;">-17</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">-32</td>
+<td style="text-align: right;">-3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">genderM:attitudepol</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">-14</td>
+<td style="text-align: right;">27</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>f0_bm_int_epred_2 <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(gender, attitude) <span class="sc">|&gt;</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(.epred), <span class="at">SD =</span> <span class="fu">sd</span>(.epred),</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">95%</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">"["</span>, <span class="fu">paste</span>(<span class="fu">quantile2</span>(.epred, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(), <span class="at">collapse =</span> <span class="st">", "</span>), <span class="st">"]"</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">attitude =</span> <span class="fu">replace_values</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>      attitude, <span class="st">"inf"</span> <span class="sc">~</span> <span class="st">"informal"</span>, <span class="st">"pol"</span> <span class="sc">~</span> <span class="st">"polite"</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-f0-bm-int-epred" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-f0-bm-int-epred-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;35.2: Mean, SD and 95% CrI of the expected values of mean f0 from the Bayesian regression model, by gender and attitude.
+</figcaption>
+<div aria-describedby="tbl-f0-bm-int-epred-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">gender</th>
+<th style="text-align: left;">attitude</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">SD</th>
+<th style="text-align: left;">95%</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">informal</td>
+<td style="text-align: right;">257</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">[246, 267]</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">polite</td>
+<td style="text-align: right;">239</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">[229, 249]</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">informal</td>
+<td style="text-align: right;">137</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">[126, 148]</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">polite</td>
+<td style="text-align: right;">126</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">[115, 138]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
 <p>Note that there isn’t a single “right” way of reporting model results, or a fixed procedure. It much depends on the specific research question and on which part of the results you place focus on. Generally speaking, you should report credible intervals at various levels of probability, mean and SD and include plots (density or interval plots) of regression coefficients, expected values, and of other comparisons (not already covered by the regression coefficients). With more complex models, including all that in a report might be too much so you can take advantage of tables and appendices: for example, you can refer the reader to a table containing summaries of the regression coefficients and only directly report relevant CrIs in the text, accompanied by some plots of relevant posterior distributions.</p>
 </section>
 <section id="summary" class="level2" data-number="35.6">
@@ -1117,7 +1244,7 @@ Figure&nbsp;35.3: Intervals plot of the expected values of mean f0 by gender and
 <ul>
 <li><p>Interaction terms allow us to estimate how the effect of one predictor differs based on the levels of another.</p></li>
 <li><p>Interpretation of a coefficient for any one predictor is thus based on the reference level of the other predictors.</p></li>
-<li><p>We can still calculate expected predictions and any comparison of interest based on the model’s draws.</p></li>
+<li><p>We can still calculate expected predictions and any comparison of interest based on the model’s draws.’s draws.</p></li>
 </ul>
 </div>
 </div>

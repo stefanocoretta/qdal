@@ -58,7 +58,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -737,7 +757,8 @@ window.Quarto = {
   <li><a href="#one-categorical-and-one-numeric-predictor-in-interaction" id="toc-one-categorical-and-one-numeric-predictor-in-interaction" class="nav-link" data-scroll-target="#one-categorical-and-one-numeric-predictor-in-interaction"><span class="header-section-number">36.3</span> One categorical and one numeric predictor in interaction</a></li>
   <li><a href="#calculating-posterior-draws-at-specific-predictor-values" id="toc-calculating-posterior-draws-at-specific-predictor-values" class="nav-link" data-scroll-target="#calculating-posterior-draws-at-specific-predictor-values"><span class="header-section-number">36.4</span> Calculating posterior draws at specific predictor values</a></li>
   <li><a href="#ratio-effects" id="toc-ratio-effects" class="nav-link" data-scroll-target="#ratio-effects"><span class="header-section-number">36.5</span> Ratio effects</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">36.6</span> Summary</a></li>
+  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">36.6</span> Reporting</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">36.7</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-cat-num.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -1044,8 +1065,8 @@ Figure&nbsp;36.4: Expected values of RT from a model with a phoneme-level distan
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
 Which is the correct regression formula to get the linear predictor of non-words when phoneme-level distance is 10?
-<div id="radio_STOPYFQEFG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_STOPYFQEFG" value=""> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_STOPYFQEFG" value="answer"> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10 + \beta_2 + \beta_3 \cdot 10\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_STOPYFQEFG" value=""> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10 + \beta_3 \cdot 10\)</span></span></label>
+<div id="radio_XMKIXXQFOV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XMKIXXQFOV" value=""> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_XMKIXXQFOV" value="answer"> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10 + \beta_2 + \beta_3 \cdot 10\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_XMKIXXQFOV" value=""> <span><span class="math inline">\(\beta_0 + \beta_1 \cdot 10 + \beta_3 \cdot 10\)</span></span></label>
 </div>
 </div>
 </div>
@@ -1150,8 +1171,72 @@ Which is the correct regression formula to get the linear predictor of non-words
 </div>
 <p>The RTs increase by 21-27% from distance 7 to distance 12 in real words, but only by 11-17% in non-words, at 80% confidence.</p>
 </section>
-<section id="summary" class="level2" data-number="36.6">
-<h2 data-number="36.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">36.6</span> Summary</h2>
+<section id="reporting" class="level2" data-number="36.6">
+<h2 data-number="36.6" class="anchored" data-anchor-id="reporting"><span class="header-section-number">36.6</span> Reporting</h2>
+<p>We fitted a Bayesian regression model using the brms package <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. We used a log-normal distribution for the outcome variable, reaction times (RTs, milliseconds). We included mean phoneme-level Levenshtein distance and word type (real vs non-real word) as the regression predictors and their interaction. Word type was coded using the default R treatment contrasts, with real word set as the reference level. See <a href="#tbl-rt-lw-int-coefs" class="quarto-xref">Table&nbsp;<span>36.1</span></a> for the full regression coefficients table.</p>
+<p>According to the model’s intercept, The 90% CrI of RTs is [647, 713] ms when phoneme-level distance is 0 (<span class="math inline">\(\beta\)</span> = 6.52, SD = 0.03). For real words, each unit increase of phoneme-level distance increases RTs by a factor of 1.04-1.05 at 90% probability (<span class="math inline">\(\beta\)</span> = 0.04, SD = 0.004). When distance is 0, non-real words elicit RTs that are 1.18-1.25 times longer than real words (<span class="math inline">\(\beta\)</span> = 0.23, SD = 0.04). The 90% CrI of the interaction coefficient is [-0.03, -0.01] on the log scale. In other words, each unit increase of phoneme-level distance in non-words increases RTs by a factor of 1.02-1.03 at 90% confidence (cf with 1.04-1.05 in real words). These results suggest that the effect of phoneme-level distance differs in real and non-real words, the effect being somewhat weaker in non-real words.</p>
+<p>While the research question focuses on the effect of phoneme-level distance in real and non-words (<em>Does the effect of Levenshtein distance on RTs differ in real and non-real words?</em>), we can approach the results from the point of view of comparing the RTs of real and non-words at different values of distance. Because of the negative interaction coefficient, the difference in RTs between real and non-words is larger at lower phoneme-level distance and, conversely, smaller at higher phoneme-level distance. For illustration, at phoneme-level distance = 7, RTs for non-words are 1.10-1.13 times longer than real words; at distance = 10, they are 1.03-1.09 longer; and at distance = 12, they are 0.97 times shorter to 1.07 times longer, at 90% probability.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fixef</span>(rt_lw_int) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-rt-lw-int-coefs" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rt-lw-int-coefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;36.1: Regression coefficients of the Bayesian log-normal regression model of RTs. Posterior mean, SD and 95% CrIs are shown, on the log-link scale (rounded to the second decimal).
+</figcaption>
+<div aria-describedby="tbl-rt-lw-int-coefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">Est.Error</th>
+<th style="text-align: right;">Q2.5</th>
+<th style="text-align: right;">Q97.5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: right;">6.52</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right;">6.46</td>
+<td style="text-align: right;">6.58</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PhonLev</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">0.03</td>
+<td style="text-align: right;">0.05</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">IsWordFALSE</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">0.31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PhonLev:IsWordFALSE</td>
+<td style="text-align: right;">-0.02</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">-0.03</td>
+<td style="text-align: right;">-0.01</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="summary" class="level2" data-number="36.7">
+<h2 data-number="36.7" class="anchored" data-anchor-id="summary"><span class="header-section-number">36.7</span> Summary</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1169,6 +1254,14 @@ Which is the correct regression formula to get the linear predictor of non-words
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-burkner2017" class="csl-entry" role="listitem">
+Bürkner, Paul-Christian. 2017. Brms: An <span>R</span> package for <span>B</span>ayesian multilevel models using stan. <em>Journal of Statistical Software</em> 80(1). 128. <a href="https://doi.org/10.18637/jss.v080.i01">https://doi.org/10.18637/jss.v080.i01</a>.
+</div>
+<div id="ref-rcoreteam2025" class="csl-entry" role="listitem">
+R Core Team. 2025. <em>R: A language and environment for statistical computing [version 4.5.0]</em>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

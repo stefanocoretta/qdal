@@ -404,8 +404,6 @@ The following paragraph shows you how you could write up the model and results i
 
 You might find that certain authors use $\beta$ instead of "mean" for the posterior mean reported between parentheses: for example, ($\beta$ = 33, SD = 1.5).
 The $\beta$ stands for $\hat{\beta}$, which is a notation to indicate that the $\beta$ is estimated (that's what the little hat on top of the letter signifies).
-This practice is probably more common in the frequentist approach than the Bayesian approach to inference.
-I find it more straightforward to say "mean" since that is what the estimand is: the mean of the posterior distribution of the coefficient.
 Similarly, some might use "SE" for standard error instead of SD.
 As long as one is consistent, it doesn't matter much since there are indeed different traditions (and even different fields within linguistics might prefer different ways of reporting).
 
