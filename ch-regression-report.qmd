@@ -26,6 +26,8 @@ You could report the vowel duration regression model like so:
 > We fitted a Bayesian regression model using the brms package [@burkner2017] in R [@rcoreteam2025].
 > We used a Gaussian distribution for the outcome variable, vowel duration (in milliseconds).
 > We included speech rate (measured as syllables per second) as the regression predictor.
+> The model was fitted with four MCMC chains, each with 2000 iterations, of which 1000 for warm-up.
+> The default brms priors were used.
 > See @tbl-vow-bm-coefs for the regression coefficients table.
 >
 > Based on the model results, there is a 95% probability that the mean vowel duration, when speech rate is 0, is between `{r} round(brms::fixef(vow_bm)[1, 3])` and `{r} round(brms::fixef(vow_bm)[1, 4])` ms (mean = `{r} round(brms::fixef(vow_bm)[1, 1])`, SD = `{r} round(brms::fixef(vow_bm)[1, 2])`).

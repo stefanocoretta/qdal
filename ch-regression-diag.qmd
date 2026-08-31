@@ -101,6 +101,12 @@ If brms suggests to increase either of these parameters you can do so with `cont
 The higher these values, the longer the model takes but the better the exploration of the MCMC algorithm should be.
 
 After fitting Bayesian regression models, you should always check the model diagnostics discussed in this chapter and address issues with convergence if there are any.
+When reporting the model specification and results, you should mention which diagnostics you used and what their outcome was.
+For example:
+
+> The models' $\hat{R}$ values were all approximately 1, indicating convergence.
+> The bulk and tail Estimated Sample Size were sufficient and the trace plots suggest the chains have mixed well.
+> The posterior predictive plot doesn't indicate major deviations from the observed distribution.
 
 ## Summary
 

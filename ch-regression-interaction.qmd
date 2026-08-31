@@ -347,6 +347,11 @@ We fitted a Bayesian regression model using the brms package [@burkner2017] in R
 We used a Gaussian distribution for the outcome variable, mean f0 (in Hz).
 We included attitude (informal vs polite) and gender (female vs male) as the regression predictors and their interaction.
 Both predictors were coded using the default R treatment contrasts, with informal and female set as the reference levels.
+The model was fitted with four MCMC chains, each with 2000 iterations, of which 1000 for warm-up.
+The default brms priors were used.
+The models' $\hat{R}$ values were all approximately 1, indicating convergence.
+The bulk and tail Estimated Sample Size were sufficient and the trace plots suggest the chains have mixed well.
+The posterior predictive plot doesn't indicate major deviations from the observed distribution.
 See @tbl-f0-bm-int-coefs for the full regression coefficients table.
 
 According to the model, the mean f0 of female speakers in the informal condition is 246-267 Hz ($\beta$ = 257, SD = 5), at 95% probability.

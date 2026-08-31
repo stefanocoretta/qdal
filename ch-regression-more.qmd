@@ -396,6 +396,8 @@ The following paragraph shows you how you could write up the model and results i
 > We fitted a Bayesian regression model to Voice Onset Time (VOT) of Mixean Basque stops.
 > We used a Gaussian distribution for the outcome and phonation (aspirated, voiced, voiceless) as the only predictor.
 > Phonation was coded using the default treatment coding.
+> The model was fitted with four MCMC chains, each with 2000 iterations, of which 1000 for warm-up.
+> The default brms priors were used.
 >
 > According to the model, the mean VOT of aspirated stops is between 29 and 37 ms, of voiced stops is between -47 and -42 ms, of voiceless stops is between 19 and 21 ms, at 99% probability.
 > @tbl-vot-bm-tab reports mean, SD, 99% and 60% CrIs.

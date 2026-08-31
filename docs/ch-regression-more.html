@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -96,14 +99,14 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-9e7382ee7cd961dafdf7e033f60763af.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-bf8541b1296accc9344c8d492b94c564.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-4e751885b82ca7a74ee44247aeca922a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-bf8541b1296accc9344c8d492b94c564.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -141,7 +144,7 @@ div.csl-indent {
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -1038,8 +1041,8 @@ VOT_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
 <strong>How many regression coefficients are there in the model above?</strong>
-<div id="radio_JDJPGPZJUI" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JDJPGPZJUI" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_JDJPGPZJUI" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_JDJPGPZJUI" value=""> <span>4</span></label>
+<div id="radio_ZHITTLVBSQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZHITTLVBSQ" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_ZHITTLVBSQ" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_ZHITTLVBSQ" value=""> <span>4</span></label>
 </div>
 </div>
 </div>
@@ -1057,8 +1060,8 @@ VOT_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
 <strong>Based on the density plots of VOT you made above, which of the following sets of expectations makes sense?</strong>
-<div id="radio_BHRQWHHBGC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BHRQWHHBGC" value=""> <span><span class="math inline">\(\beta_0, \beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_BHRQWHHBGC" value="answer"> <span><span class="math inline">\(\beta_0\)</span> should have positive values and <span class="math inline">\(\beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_BHRQWHHBGC" value=""> <span><span class="math inline">\(\beta_0, \beta_1\)</span> should have positive values, <span class="math inline">\(\beta_2\)</span> should have negative values.</span></label>
+<div id="radio_PLTYSMXUMY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PLTYSMXUMY" value=""> <span><span class="math inline">\(\beta_0, \beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_PLTYSMXUMY" value="answer"> <span><span class="math inline">\(\beta_0\)</span> should have positive values and <span class="math inline">\(\beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_PLTYSMXUMY" value=""> <span><span class="math inline">\(\beta_0, \beta_1\)</span> should have positive values, <span class="math inline">\(\beta_2\)</span> should have negative values.</span></label>
 </div>
 </div>
 </div>
@@ -1206,7 +1209,7 @@ Table&nbsp;29.2: Posterior summaries from a Bayesian regression model of VOT.
 <h2 data-number="29.4" class="anchored" data-anchor-id="reporting"><span class="header-section-number">29.4</span> Reporting</h2>
 <p>The following paragraph shows you how you could write up the model and results in a paper.</p>
 <blockquote class="blockquote">
-<p>We fitted a Bayesian regression model to Voice Onset Time (VOT) of Mixean Basque stops. We used a Gaussian distribution for the outcome and phonation (aspirated, voiced, voiceless) as the only predictor. Phonation was coded using the default treatment coding.</p>
+<p>We fitted a Bayesian regression model to Voice Onset Time (VOT) of Mixean Basque stops. We used a Gaussian distribution for the outcome and phonation (aspirated, voiced, voiceless) as the only predictor. Phonation was coded using the default treatment coding. The model was fitted with four MCMC chains, each with 2000 iterations, of which 1000 for warm-up. The default brms priors were used.</p>
 <p>According to the model, the mean VOT of aspirated stops is between 29 and 37 ms, of voiced stops is between -47 and -42 ms, of voiceless stops is between 19 and 21 ms, at 99% probability. <a href="#tbl-vot-bm-tab" class="quarto-xref">Table&nbsp;<span>29.2</span></a> reports mean, SD, 99% and 60% CrIs. When comparing voiced and voiceless stops to aspirated stops, at 99% confidence, the VOT of voiced stops is 72-82 ms shorter than that of aspirated stops (mean = -77, SD = 1.86), while the VOT of voiceless stops is 9-17 ms shorter than that of aspirated stops (mean = -13, SD = 1.58). Finally, the difference in VOT between voiceless and voiced stops is between 61 and 67 ms.</p>
 </blockquote>
 <p>You might find that certain authors use <span class="math inline">\(\beta\)</span> instead of “mean” for the posterior mean reported between parentheses: for example, (<span class="math inline">\(\beta\)</span> = 33, SD = 1.5). The <span class="math inline">\(\beta\)</span> stands for <span class="math inline">\(\hat{\beta}\)</span>, which is a notation to indicate that the <span class="math inline">\(\beta\)</span> is estimated (that’s what the little hat on top of the letter signifies). Similarly, some might use “SE” for standard error instead of SD. As long as one is consistent, it doesn’t matter much since there are indeed different traditions (and even different fields within linguistics might prefer different ways of reporting).</p>

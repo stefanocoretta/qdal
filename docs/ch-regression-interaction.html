@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -96,14 +99,14 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-9e7382ee7cd961dafdf7e033f60763af.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-ea8ef702a3f84812c808b1cddcfad5b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-bf8541b1296accc9344c8d492b94c564.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-4e751885b82ca7a74ee44247aeca922a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-bf8541b1296accc9344c8d492b94c564.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -141,7 +144,7 @@ div.csl-indent {
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -1101,7 +1104,7 @@ Figure&nbsp;35.3: Intervals plot of the expected values of mean f0 by gender and
 <section id="reporting" class="level2" data-number="35.5">
 <h2 data-number="35.5" class="anchored" data-anchor-id="reporting"><span class="header-section-number">35.5</span> Reporting</h2>
 <p>The following paragraphs show you how to report the model specification and results of the model we fitted in this chapter. Some of the text is repeated from the sections above.</p>
-<p>We fitted a Bayesian regression model using the brms package <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. We used a Gaussian distribution for the outcome variable, mean f0 (in Hz). We included attitude (informal vs polite) and gender (female vs male) as the regression predictors and their interaction. Both predictors were coded using the default R treatment contrasts, with informal and female set as the reference levels. See <a href="#tbl-f0-bm-int-coefs" class="quarto-xref">Table&nbsp;<span>35.1</span></a> for the full regression coefficients table.</p>
+<p>We fitted a Bayesian regression model using the brms package <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. We used a Gaussian distribution for the outcome variable, mean f0 (in Hz). We included attitude (informal vs polite) and gender (female vs male) as the regression predictors and their interaction. Both predictors were coded using the default R treatment contrasts, with informal and female set as the reference levels. The model was fitted with four MCMC chains, each with 2000 iterations, of which 1000 for warm-up. The default brms priors were used. The models’ <span class="math inline">\(\hat{R}\)</span> values were all approximately 1, indicating convergence. The bulk and tail Estimated Sample Size were sufficient and the trace plots suggest the chains have mixed well. The posterior predictive plot doesn’t indicate major deviations from the observed distribution. See <a href="#tbl-f0-bm-int-coefs" class="quarto-xref">Table&nbsp;<span>35.1</span></a> for the full regression coefficients table.</p>
 <p>According to the model, the mean f0 of female speakers in the informal condition is 246-267 Hz (<span class="math inline">\(\beta\)</span> = 257, SD = 5), at 95% probability. The mean f0 of male speakers (in the informal condition) is 105-134 Hz lower than female speakers (<span class="math inline">\(\beta\)</span> = -119, SD = 8). When comparing polite vs informal speech in female speakers, the mean f0 is 3-32 Hz lower in polite than informal speech (<span class="math inline">\(\beta\)</span> = -17, SD = 7). The 95% CrI of the estimated interaction term between gender and attitude is [-14, +7] Hz (<span class="math inline">\(\beta\)</span> = 7, SD = 11). <a href="#tbl-f0-bm-int-epred" class="quarto-xref">Table&nbsp;<span>35.2</span></a> reports the mean, SD and 95% CrIs of the expected values of mean f0 in female and male speakers, in informal and polite speech separately. Looking at informal vs polite speech in male speakers, based on the main effect of attitude and the interaction term, the mean difference in polite vs informal speech in male speakers is -11 Hz (SD = 8) and the 95% CrI is [-27, +5] Hz. This is somewhat indicative of a difference (polite speech is produced with a somewhat lower f0 in male speakers) but it is also possible that there is instead a smaller positive difference (up to +5 Hz, at 95% probability). Comparing this with the effect of attitude in female participants (which is at 95% confidence between -32 to -3 Hz), we cannot really argue for or against the effect of attitude being different in the two genders.</p>
 <p>At 95% probability, given the 95% CrI [-14, +27], the difference between attitudes in males is between 14 Hz lower and 27 Hz higher than the corresponding difference in females (the 95% CrI of which is [-32, -3]). At 60% probability, the difference in males is between 2 Hz lower and 16 Hz higher (95% CrI [-2, +15]) than that in females. While we can be quite confident that polite speech has a somewhat lower mean f0 in females, this might be the case in male speakers too although possibly to a lower degree and considering there might be no difference by attitude in males. To conclude, the current data and model results do not allow us to straightforwardly answer the question of how the effect of attitude differs in the two genders.</p>
 <div class="cell" data-layout-align="center">

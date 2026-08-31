@@ -717,6 +717,8 @@ quantile2(mvp_bm_draws$NSL1_homesign_p, c(0.1, 0.9)) |> round(2)
 > We fitted a Bayesian Bernoulli regression model to assess the probability of multi-verb predicates in NSL.
 > The model was fitted with brms @burkner2017 in R @rcoreteam2025, with the default priors, four chains with 2000 iterations each, of which 1000 for warm-up.
 > We included group (home-signers, NSL1 and NSL2) as the only predictor, which was coded with the default treatment contrasts (home-signers as the reference level).
+> The model was fitted with four MCMC chains, each with 2000 iterations, of which 1000 for warm-up.
+> The default brms priors were used.
 > See @tbl-mvp-bm-coefs for the regression coefficients table.
 > The mean and SD of the posterior probability distribution of the coefficients in log-odds are also reported in the following paragraph between parentheses.
 >

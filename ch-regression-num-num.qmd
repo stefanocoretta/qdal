@@ -681,6 +681,11 @@ quantile2(exp(si_draws$b_semdist + si_draws$`b_logfreq:semdist` * mean(si$logfre
 
 We fitted a Bayesian model to scalar inference (absent vs present), using a Bernoulli distribution.
 We included logged co-occurrence frequency and semantic distance, and their interaction as predictors.
+The model was fitted with four MCMC chains, each with 2000 iterations, of which 1000 for warm-up.
+The default brms priors were used.
+The models' $\hat{R}$ values were all approximately 1, indicating convergence.
+The bulk and tail Estimated Sample Size were sufficient and the trace plots suggest the chains have mixed well.
+The posterior predictive plot doesn't indicate major deviations from the observed distribution.
 In the following paragraph, we report 90% CrI as ranges, plus the mean and SD of the posterior distribution of the relevant regression coefficients).
 See @tbl-coefs for the full coefficient table.
 

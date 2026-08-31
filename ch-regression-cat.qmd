@@ -469,6 +469,8 @@ Here is the full report for our model of reaction times.
 > We used a Gaussian distribution for the outcome variable, reaction times (in milliseconds).
 > We included word type (real vs non-word) as the regression predictor.
 > Word type was coded using the default R treatment contrasts, with real word set as the reference level.
+> The model was fitted with four MCMC chains, each with 2000 iterations, of which 1000 for warm-up.
+> The default brms priors were used.
 > See @tbl-rt-bm-1-coef for the regression coefficients table.
 >
 > Based on the model results, there is a 95% probability that the mean RT with real words is between `{r} round(brms::fixef(rt_bm_1)[1, 3])` and `{r} round(brms::fixef(rt_bm_1)[1, 4])` ms (mean = `{r} round(brms::fixef(rt_bm_1)[1, 1])`, SD = `{r} round(brms::fixef(rt_bm_1)[1, 2])`).
@@ -506,4 +508,3 @@ After having obtained estimates from a model, always ask yourself: **what do tho
 - The **intercept is the mean outcome for the reference level** of the categorical predictor.
   The **slope is the difference** in mean outcome between the second level and the reference.
 :::
-
