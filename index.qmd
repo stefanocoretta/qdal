@@ -17,7 +17,7 @@ Cite as:
 
 > Stefano Coretta.
 > 2026.
-> Quantitative data analysis for linguists in R \[v1.9000\].
+> Quantitative data analysis for linguists in R \[v2.0\].
 > <https://stefanocoretta.github.io/qdal/>.
 
 ## Acknowledgements
