@@ -5,7 +5,7 @@ project:
 
 book:
   title: Quantitative Data Analysis for Linguists in R
-  subtitle: "v2.0"
+  subtitle: "v2.1"
   author: Stefano Coretta
   repo-url: https://github.com/stefanocoretta/qdal
   repo-link-target: "_blank"

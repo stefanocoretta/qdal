@@ -1,4 +1,4 @@
-# QDAL v1.1.9000
+# QDAL v2.1
 
 - All chapters shifted by one week to match the new weekly schedule of the QML course.
   There is no content in Week 1, so no Week 1 part is included in the textbook.
