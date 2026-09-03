@@ -127,7 +127,7 @@ An **absolute path** is a file path that starts with a top-most folder.
 
 There is another type of file paths, called **relative** paths.
 A relative path is a partial file path, relative to a specific folder.
-You can learn how to use relative paths in @sec-read-data.
+You will learn how to use relative paths in @sec-rel-paths below.
 Importing files in R is very easy with the tidyverse packages.
 You just need to know the file type (very often the file extension helps) and the location of the file (i.e. the file path).
 
@@ -400,7 +400,7 @@ But wait, what is that `"./data/song2020/shallow.csv"`?
 That's a **relative path**.
 Let's understand the concept of relative paths now.
 
-### Relative paths
+### Relative paths {#sec-rel-paths}
 
 File paths can be specified in two formats.
 One format is called **absolute** file path.
