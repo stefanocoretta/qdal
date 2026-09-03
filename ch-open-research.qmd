@@ -43,10 +43,15 @@ Sharing a research compendium, especially data, of course is intertwined with et
 In other words, there is a lot of room for improving the sharing of research compendia in linguistics.
 
 There are many online repositories that allow researchers to share their research compendia.
-A commonly used service is the Open Science Framework: <https://osf.io/>.
-An example of research compendium on OSF can be found here: <https://osf.io/3bmcp/> [this is the compendium of @coretta2023].
-Zenodo also allows you to upload research compendia: <https://zenodo.org>.
-There are other specialised repositories like the Tromsø Repository of Language and Linguistics (TROLLing): <https://dataverse.no/dataverse/trolling>.
+A commonly used service was the Open Science Framework (OSF): <https://osf.io/>.
+As of November 16 2026, OSF will no longer allow the creation of projects, so researchers will have to seek other options (some of which have been already in use).[^ch-open-research-1]
+An example of research compendium on OSF, just for illustration purposes, can be found here: <https://osf.io/3bmcp/> [this is the compendium of @coretta2023].
+Zenodo (<https://zenodo.org>) is the recommended alternative for depositing research compendia.
+An example of compendium on Zenodo can be see at <https://zenodo.org/records/15768992> [this is the compendium of @hampton2024].
+This compendium is a GitHub repository (see below on GitHub) which has been linked into a Zotero entry.
+There are also other specialised repositories like the Tromsø Repository of Language and Linguistics (TROLLing): <https://dataverse.no/dataverse/trolling>.
+
+[^ch-open-research-1]: If you are interested in knowing why, see <https://www.cos.io/osf-changes> and <https://www.cos.io/blog/osf-changes-a-note-to-users>.
 
 ## Pre-registration and Registered Reports
 
@@ -81,6 +86,7 @@ git allows you to track changes in files, commit those changes into "snapshots" 
 Note that git is software that runs on your computer.
 git repositories can be shared and managed online with other services, like GitHub (<https://github.com>) or GitLab (<https://about.gitlab.com>).
 The code and the website of this textbook are hosted on GitHub: <https://github.com/stefanocoretta/qdal>.
+GitHub repositories can be linked into Zenodo entries thanks to the GitHub/Zenodo integration, making version control and sharing of research compendia seamless.
 
 One of the advantages of using a version control system is that it helps ensuring computational reproducibility.
 Everything needed for code to be run is managed by the version control system and independent researchers can access and clone the versioned repository and re-use the code.
