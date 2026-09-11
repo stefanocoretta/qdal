@@ -27,7 +27,7 @@ These variables, in the absence of more specific knowledge, can be assumed to be
 ## Log-normal distribution
 
 The log-normal distribution is a continuous probability distribution of variables that can only be positive and not zero.
-It has two parameters: the mean $\mu$ and the standard deviation $\sigma$.
+It has two parameters: the mean $\mu$\$\\mu\$ and the standard deviation $\sigma$.
 These are the same parameters of the Gaussian distribution, but the parameters of the log-normal distribution are in logged units.
 The name log-normal comes from the fact that variables that are log-normal approximate a Gaussian (aka normal) distribution when we take the logarithm (log) of the values.
 In other words, the variable is assumed to be Gaussian on the log scale, rather than on the natural scale.
@@ -87,7 +87,7 @@ mald |>
 
 We have already observed in @sec-regression-cat that the distribution of RTs is right-skewed: which is, there are more extreme values to the right of the distribution than what would be expected if this were a Gaussian variable.
 This is because RTs are naturally bounded to positive numbers only, while Gaussian variables are unbounded.
-A common procedure, which you will likely encounter in the literature, is to take the logarithm of RTs (and other log-normal variables), or simply to log them: the logarithm of a log-normal variable transforms the variable so that it approximates a Gaussian distribution.
+A common procedure, which you will likely encounter in the literature, is to *take the logarithm* of RTs (and other log-normal variables), or in other words to *log* them: the logarithm of a log-normal variable transforms the variable so that it approximates a Gaussian distribution.
 In R, the logarithm function is simply applied with `log()` (this uses the natural logarithm, which is the logarithm with base $e$; if you need a refresher, see [Introduction to logarithms](https://www.mathsisfun.com/algebra/logarithms.html)).
 
 ```{r}
@@ -288,7 +288,7 @@ For each word in the data, @tucker2019 measured the pairwise phoneme-level Leven
 Words that are more phonemically unique have a higher mean phoneme-level Levenshtein distance, while more similar words have lower mean phoneme-level Levenshtein distance.
 We can thus ask the following research question:
 
-> Does mean phoneme-level Levenshtein distance of the target word have an effect on the response reaction times?
+> Does mean phoneme-level Levenshtein distance of the target word have an effect on the response reaction times in an English lexical decision task?
 
 Let's plot the data.
 @fig-rt-lev shows a scatter plot of RTs and mean phoneme-level Levenshtein distance.
@@ -418,7 +418,7 @@ The family is `lognormal`.
 The link functions are `identity` for both the mean `mu` and the standard deviation `sigma` (these are $\mu$ and $\sigma$ from the model formula above).
 You have encountered link functions in the previous chapter, when you learned about Bernoulli models.
 A Gaussian model uses the identity link, while a Bernoulli model uses the logit link to model probabilities, which are bounded between 0 and 1.
-The log-normal model we just fitted uses the identity function instead: the identity function simply returns the same values, in other words the values are not transformed.
+The log-normal model we just fitted uses the identity function instead: with the identity function, the input values are simply returned untransformed, in other words, no transformation is applied to the values.
 This might look surprising because we know that the estimates are on the log scale, not on the natural scale, so we would assume a log link.
 
 However, link functions are applied to model parameters, rather than on the outcome variable.
@@ -580,7 +580,7 @@ quantile2(rt_bm_2_draws$rt_14_13, probs = c(0.1, 0.9)) |> round()
 
 ## Using `epred_draws()` and `linpred_draws()` from tidybayes {#sec-epred-draws}
 
-We can plot the expected values easily as per usual, using the `conditional_effect()` function.
+We can plot the expected values easily as per usual, using the `conditional_effects()` function.
 @fig-rt-bm-2-cond shows the output of the function.
 Note how RTs are plotted on the original millisecond scale, rather than in logged milliseconds.
 This is because we fitted a log-normal model (rather than fitting a Gaussian model to logged RTs, in which case the function would plot logged RTs).
@@ -592,7 +592,7 @@ This is because we fitted a log-normal model (rather than fitting a Gaussian mod
 conditional_effects(rt_bm_2)
 ```
 
-But what if we want to calculate the expected draws from the model draws outselves?
+But what if we want to calculate the expected draws from the model draws ourselves?
 Since mean distance is numeric, it would be tedious to manually calculate the expected values for several values of mean distance.
 Instead, we can use the function `epred_draws()` from the [tidybayes](https://mjskay.github.io/tidybayes/) package.
 Add the code to attach the package at the top of your Quarto document, below the other packages.
