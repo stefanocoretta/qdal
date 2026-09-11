@@ -119,10 +119,12 @@ Its motion is guided by the shape of the landscape using equations from classica
 At each step of this simulated motion, the algorithm records the particle's position as one **posterior draw**.
 Each of these steps is called an **iteration**.
 A sequence of iterations produced by the same simulation forms a **Markov chain** (or simply a chain).
-In the three-dimensional landscape of a mean and a standard deviation (for a Gaussian model), each draw therefore contains one mean value and one standard deviation value sampled together from the joint posterior distribution.
+In the three-dimensional landscape of a mean and a standard deviation (for a Gaussian model) like in @fig-joint, each draw therefore contains one mean value and one standard deviation value sampled together from the joint posterior distribution.
 The algorithm repeats this process thousands of times, producing a large collection of posterior draws.
-Looking only at the mean values across all draws gives the posterior distribution of the mean, while looking only at the standard deviation values gives the posterior distribution of the standard deviation.
-Of course, in the type of regression model we have talked about in the previous chapter there are three parameters (intercept $\beta_0$, slope $\beta_1$, and $\sigma$) but we humans are not good at imagining more than three dimensions at a time so we will not attempt it, but the principle is the same.
+Regions of high posterior probability are sampled more often than regions of low posterior probability, so the collection of sampled values approximates the joint posterior distribution.
+The output of a Bayesian model is therefore not a single value for each parameter but a large collection of values, called the **posterior draws**, for each model parameter.
+You can see a visual illustration of this process at <https://chi-feng.github.io/mcmc-demo/app.html>, a web app by Chi Feng.
+In the top-right options box, select "standard" as the target distribution: this is a bivariate Gaussian distribution, which you can think of as the joint distribution of $\mu$ and $\sigma$ from above.
 
 ::: callout-tip
 ## MCMC
@@ -133,14 +135,9 @@ Stan, used by brms, uses the Hamiltonian Monte Carlo implementation of MCMC.
 The MCMC algorithm generates a set of values sampled from the joint posterior, called **posterior draws**.
 :::
 
-This description is necessarily simplified.
-If you want to learn more about MCMC, I recommend @mcelreath2020, Ch.
-9, and @nicenboim2025, Ch.
-3.
-However, to be a proficient user of brms and Bayesian regression models, you do not need to fully understand the mathematics behind MCMC, as long as you understand the basic conceptual idea.
-
-Regions of high posterior probability are sampled more often than regions of low posterior probability, so the collection of sampled values approximates the joint posterior distribution.
-The output of a Bayesian model is therefore not a single value for each parameter but a large collection of values, called the **posterior draws**, for each model parameter.
+Looking only at the values across all draws for $\mu$ gives the posterior distribution of the mean, while looking only at the values across all draws for $\sigma$ gives the posterior distribution of the standard deviation.
+These posterior distributions can be summarised as you would with any distribution: for example, you can take the mean and SD of the posterior draws of $\mu$ and $\sigma$.
+Of course, in the type of regression model we have talked about in the previous chapter there are three parameters (intercept $\beta_0$, slope $\beta_1$, and $\sigma$) but we humans are not good at imagining more than three dimensions at a time so we will not attempt it, but the principle is the same.
 
 When you run a model with brms, the posterior draws are stored in the model object returned by the `brm()` function.
 Every operation on a fitted model, such as obtaining the output of `summary()` and plotting posterior distributions, is ultimately an operation on those draws.
@@ -148,14 +145,20 @@ By default, brms runs *four* MCMC chains.
 The sampling algorithm within each chain performs 2,000 iterations.
 The first half (1,000 iterations) are used to warm-up the algorithm by tuning parameters that govern the Hamiltonian dynamics, while the second half (1,000 iterations) are retained as posterior draws.
 Since four chains each contribute 1,000 posterior draws, the fitted model contains 4,000 posterior draws that can be used to learn about the posterior distribution.
-The rest of this chapter shows how to extract and manipulate these draws by revisiting the model fitted in @sec-regression.
+
+This description is necessarily simplified.
+If you want to learn more about MCMC, I recommend @mcelreath2020, Ch.
+9, and @nicenboim2025, Ch.
+3.
+However, to be a proficient user of brms and Bayesian regression models, you do not need to fully understand the mathematics behind MCMC, as long as you understand the basic conceptual idea.
+The rest of this chapter shows how to extract and manipulate posterior draws from a fitted model by revisiting the model from @sec-regression.
 
 ## Reproducible model fit
 
 Before we move to the model, it is worth making a couple practical considerations.
 Fitting simple models with brms is relatively quick.
 However, more complex models using larger data sets can take some time for the MCMC to efficiently sample the posterior distribution (sometimes even hours!).
-It is useful to save the model fit to a file so that, once the model is fit once, you don't have to rune the MCMC algorithm again.
+It is useful to save the model fit to a file so that, once the model is fit once, you don't have to run the MCMC algorithm again.
 This can be done by specifying a file path in the `file` argument in the `brm()` function.
 I suggest developing the habit of having a dedicated `cache/` in your Quarto project to save all of the brms model objects in.
 Go ahead and create a `cache/` folder in your project.
@@ -218,8 +221,8 @@ When you save the model fit to a file, R does not keep track of changes in the m
 The draws are stored in the model object `vow_bm`.
 This object is actually a list of other objects, and you can inspect it by clicking on `vow_bm` in the Environment panel of RStudio.
 After clicking, the object will appear in the Viewer panel.
-You can see what looks like in @fig-brms-model-object.
-There, click on the blue arrow next to `fit`, more objects will be revealed.
+You can see what that looks like in @fig-brms-model-object.
+In the Viewer panel, click on the blue arrow next to `fit`, more objects will be revealed.
 Then click on `sim` and `samples`.
 The samples object is a list of four objects (`[[1]]`, `[[2]]`, `[[3]]`, `[[4]]`: each object contains the draws from each Markov chain, for each parameter (plus other things you shall not worry about).
 The parameters of the model are `b_Intercept`, `b_speech_rate` and `sigma`.
@@ -232,7 +235,7 @@ This is because we represent regression coefficients with $\beta$, so we can eas
 Each parameter has 2000 draws (values): these are the 1000 draws from the 1000 warm-up iterations plus the 1000 draws from the 1000 sampling iterations.
 As mentioned above, all operations on draws are done on the post- warm-up draws (the warm-up draws are discarded).
 
-There are different ways to extract the (post- warm-up) MCMC posterior draws from a fitted model.
+There are different ways to extract the (post-warm-up) MCMC posterior draws from a fitted model.
 In this book, we will use the `as_draws_df()` function from the [posterior](https://mc-stan.org/posterior/) package.
 The function extracts the draws from a Bayesian regression model object and outputs them as a data frame.
 Before we extract the draws from the `vow_bm` model, let's revisit the summary.
