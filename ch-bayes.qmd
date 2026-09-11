@@ -42,9 +42,9 @@ This is possible through the Bayesian interpretation of probabilities in the con
 **Bayesian inference** is the process of updating prior beliefs (expressed as prior probability distributions) in light of new data (observations) to produce posterior probability distributions.
 :::
 
-In simple conceptual terms, the Bayesian interpretation of Bayes' Theorem states that the probability of a hypothesis $h$ given the observed data $d$ (the *posterior probability*) is proportional to the product of the *prior probability* of $h$ and the probability of $d$ given $h$ (the evidence, also known as the *likelihood*).
+In simple conceptual terms, the Bayesian interpretation of Bayes' Theorem states that the probability of a hypothesis $h$ given the observed data $d$ (the *posterior probability*) is proportional to the product of the *prior probability* of $h$ and the probability of $d$ given $h$ (the *likelihood*).
 
-$$P(h|d) \propto P(h) \cdot P(d|h)$$
+$$P(h \mid d) \propto P(h) \cdot P(d \mid h)$$
 
 The prior probability $P(h)$ represents the researcher's beliefs towards $h$.
 These beliefs can be based on expert knowledge, previous studies or mathematical principles.
@@ -54,15 +54,15 @@ These beliefs can be based on expert knowledge, previous studies or mathematical
 
 According to **Bayes' Theorem**:
 
-$$P(h|d) \propto P(h) \cdot P(d|h)$$
+$$P(h \mid d) \propto P(h) \cdot P(d \mid h)$$
 
 where:
 
-- $P(h|d)$ is a **posterior probability**.
+- $P(h \mid d)$ is a **posterior probability**.
 
 - $P(h)$ is the **prior probability**.
 
-- $P(d|h)$ is the **evidence** (or likelihood).
+- $P(d \mid h)$ is the likelihood.
 :::
 
 Let's see a practical example of Bayesian updating based on the "globe-tossing" scenario described in @mcelreath2020, Ch 2 [originally from @gelman2011].
@@ -86,7 +86,7 @@ Note that a probability of 0 means Earth is all land, and a probability of 1 mea
 Now, let's update the flat prior distribution with the first observation in the globe-tossing exercise: the first outcome was W, water.
 This observations corresponds to a distribution in which 1 has the greatest probability and values below it have decreasing probability.
 This is represented in the top-left panel of @fig-prior-update as the solid slanted line.
-This is $P(d | h)$.
+This is $P(d \mid h)$.
 If we combine the flat prior and the probability of the data we get the dashed line in the second top panel (with "n = 2").
 That is the posterior probability distribution resulting from the Bayesian update at step "n = 1".
 This becomes the prior probability distribution at step "n = 2".
@@ -148,8 +148,8 @@ You see that the highest density of the dashed lines quickly moves to the right.
 They are now suggesting that the globe has a higher proportion of water than land.
 Chapter 2 of @mcelreath2020 goes into much more details and I recommend you read that at some point if you feel this section felt a bit too abstract.
 
-Hopefully you can appreciate how different the frequentist and Bayesian approaches are: while frequentist statistics focusses on the rejection of a null/nil hypothesis based on the probability of the data given the hypothesis, or $P(d|h)$, Bayesian statistics is about obtaining the probability of any hypothesis given the data, or $P(h|d)$.
-You might also realise now that $P(d|h)$ appears in Bayes' Theorem.
+Hopefully you can appreciate how different the frequentist and Bayesian approaches are: while frequentist statistics focusses on the rejection of a null/nil hypothesis based on the probability of the data given the hypothesis, or $P(d \mid h)$, Bayesian statistics is about obtaining the probability of any hypothesis given the data, or $P(h \mid d)$.
+You might also realise now that $P(d \mid h)$ appears in Bayes' Theorem.
 But the theorem also includes the prior, $P(h)$.
 The prior is missing in the frequentist approach.
 
@@ -182,7 +182,7 @@ cat("b. In the 'globe-tossing' example, what does a uniform prior (or flat prior
 
 
 opts_3 <- c(
-   "The probability of the data given the hypothesis, $P(d|h)$.",
+   "The probability of the data given the hypothesis, $P(d \mid h)$.",
    answer = "The updating of prior beliefs in light of new data.",
    "The concept of hypothesis testing with a null hypothesis.",
    "The use of repeated replications of a study."

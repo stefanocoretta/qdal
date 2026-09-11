@@ -15,39 +15,117 @@ library(posterior)
 ## MCMC what?
 
 Bayesian regression models aim to estimate the posterior probability distribution of all the model's parameters.
-For example, in a simple regression, like the one from the previous chapter, we want to know which combinations of intercept, slope and $\sigma$ values are most plausible given our prior beliefs and the observed data.
+For example, in a simple regression, like the one from the previous chapter, we want to know which combinations of intercept $\beta_0$, slope $\beta_1$ and standard deviation $\sigma$ values are most plausible given our prior beliefs and the observed data.
 More generally, if a model has many parameters, we want to know which combinations of values are plausible for all of them simultaneously.
-This collection of probabilities is called the **joint posterior probability distribution** of the parameters.
+This type of probability is called the **joint posterior probability distribution** of the parameters.
+In mathematical notation, the joint posterior probability distribution for a regression model is written as $P(\beta_0, \beta_1, \sigma \mid d)$, where $d$ is the observed data.
+This is a Bayesian posterior distribution $P(h \mid d)$ like the one we saw in @sec-bayes (here $h = (\beta_0, \beta_1, \sigma)$, but the principle is the same).
+The Greek letter $\theta$ (theta, \[ˈθiːtə\]) can be used to indicate any parameter (whether, an intercept, slope, mean, standard deviation, etc...) so we can generally define $h = (\theta_1, ..., \theta_k)$, where $k$ is the number of parameters.
+In the regression model we are discussion, $k = 3$, so $(\theta_1, \theta_2, \theta_3)$ or using explicit notation $(\beta_0, \beta_1, \sigma)$.
 
-For realistic regression models, determining this joint posterior distribution analytically (i.e. by solving Bayes' theorem mathematically) is often very difficult or even impossible.
-Instead of calculating the posterior distribution directly, Bayesian software uses the **Markov Chain Monte Carlo (MCMC)** sampling algorithm to generate sampled values from it.
-You first encountered MCMC in @sec-fit-model, when we run a Gaussian model with `brm()`: the text printed when running `brm()` is about the MCMC algorithm.
-In the Stan software, which brms uses to fit Bayesian models, MCMC uses a specific implementation called Hamiltonian Monte Carlo (HMC).
+::: callout-tip
+## Joint posterior probability distribution
+
+$$
+\begin{aligned}
+h & = (\theta_1, ..., \theta_k)\\
+P(h \mid d) & \propto P(h) \cdot P(d|h)
+\end{aligned}
+$$
+
+The **joint posterior probability distribution** is the posterior probability distribution of a vector of parameters $h$ conditional on observed data $d$.
+:::
 
 The joint posterior distribution can be thought of as a multidimensional landscape, with one dimension for each parameter.
-Since we humans find it difficult to think in more than three dimensions, let's stick with a Gaussian model like the one from @sec-fit-model.
-This model had two parameters: the mean $\mu$ and the standard deviation $\sigma$.
-With two parameters, the joint posterior distribution can be thought of as a three-dimensional landscape.
-The *x*-axis represents values of the mean, the *y*-axis values of the standard deviation, and the *z*-axis (the vertical axis) the posterior probability density.
-Hills correspond to highly probable combinations of mean and standard deviation values, whereas valleys correspond to unlikely combinations.
-This landscape is determined by the two components of Bayes' theorem: the prior probability distribution, $P(h)$, and the probability of the data given the prior, $P(d \mid h)$.
-Regions of high posterior probability are sampled more often than regions of low posterior probability, so the collection of sampled values approximates the joint posterior distribution.
-The output of a Bayesian model is therefore not a single value for each parameter but a large collection of values, called the **posterior draws**, for each model parameter.
+Since we humans find it difficult to think in more than three dimensions, let's stick with a Gaussian model like the one from @sec-fit-model and let's assume data $d$ from $Gaussian(\mu = 10, \sigma = 2)$.
+The model has two parameters: the mean $\mu$ and the standard deviation $\sigma$, so $h = (\mu, \sigma)$.
+With these parameters, the joint posterior distribution is $P(\mu, \sigma \mid d)$ and can be thought of as a three-dimensional landscape, like the one in @fig-joint.
+The *x*-axis represents possible values of the mean $\mu$, the *y*-axis possible values of the standard deviation $\sigma$, and the *z*-axis (the vertical axis) their posterior probability density given $d$.
+This landscape (of the posterior probability density) is determined by the two components of Bayes' theorem: the prior probability distribution, $P(h)$, and the likelihood $P(d \mid h)$.
+In this example, $h = (\mu, \sigma)$ denotes a particular combination of possible values for $\mu$ and $\sigma$.
+So, the prior $P(h) = P(\mu, \sigma)$ is a the prior probability of the particular values $(\mu, \sigma)$ and the likelihood $P(d \mid \mu, \sigma)$ is the probability of the observed data $d$ given the particular values of $(\mu, \sigma)$.
+Hills in the posterior probability landscape correspond to highly probable combinations of mean and standard deviation values given the priors and the data, whereas valleys correspond to combinations with low posterior density.
+
+```{r}
+#| label: fig-joint
+#| fig-cap: "3D representation of the joint posterior probability distribution of $\\mu$ and $\\sigma$ from a Bayesian Gaussian model."
+#| code-fold: true
+
+set.seed(123)
+data <- rnorm(20, mean = 10, sd = 2)
+
+posterior <- crossing(
+  # h = (mu, sigma)
+  mu = seq(8, 12, length.out = 100),
+  sigma = seq(0.5, 3.5, length.out = 100)
+) %>%
+  mutate(
+    # Likelihood P(d|h)
+    log_likelihood = map2_dbl(
+      mu, sigma,
+      ~ sum(dnorm(data, mean = .x, sd = .y, log = TRUE))
+    ),
+    # Prior P(mu)
+    log_prior_mu = dnorm(mu, mean = 10, sd = 5, log = TRUE),
+    # Prior P(sigma)
+    log_prior_sigma = dnorm(sigma, mean = 2, sd = 1, log = TRUE),
+    log_posterior = log_likelihood +
+      log_prior_mu +
+      log_prior_sigma,
+    # Posterior P(h|d)
+    posterior = exp(log_posterior - max(log_posterior))
+  )
+
+z <- posterior %>%
+  select(mu, sigma, posterior) %>%
+  pivot_wider(
+    names_from = sigma,
+    values_from = posterior
+  ) %>%
+  select(-mu) %>%
+  as.matrix()
+
+mu <- sort(unique(posterior$mu))
+sigma <- sort(unique(posterior$sigma))
+
+par(mar = c(1, 1, 1, 1))
+
+persp(
+  x = mu,
+  y = sigma,
+  z = z,
+  theta = 35,
+  phi = 30,
+  expand = 0.7,
+  border = NA,
+  shade = 0.4,
+  col = "grey80",
+  ticktype = "detailed",
+  nticks = 5,
+  xlab = "\u03bc",
+  ylab = "\u03c3",
+  zlab = "Posterior density"
+)
+
+```
+
+For realistic regression models, determining this joint posterior distribution analytically (i.e. by solving Bayes' theorem mathematically like we have done in the code of @fig-joint) is often very difficult or even impossible.
+Instead of calculating the posterior distribution directly, Bayesian software uses the **Markov Chain Monte Carlo (MCMC)** sampling algorithm to generate sampled values from it.
+You first encountered MCMC in @sec-fit-model, when we ran a Gaussian model with `brm()`: the text printed when running `brm()` is about the MCMC algorithm.
+In the Stan software, which brms uses to fit Bayesian models, MCMC uses a specific implementation called Hamiltonian Monte Carlo (HMC).
 
 Hamiltonian Monte Carlo imagines a particle moving through this posterior landscape.
 Its motion is guided by the shape of the landscape using equations from classical mechanics, allowing it to move efficiently between regions of high posterior probability.
 At each step of this simulated motion, the algorithm records the particle's position as one **posterior draw**.
 Each of these steps is called an **iteration**.
 A sequence of iterations produced by the same simulation forms a **Markov chain** (or simply a chain).
-In the three-dimensional landscape of an intercept and a slope, each draw therefore contains one mean value and one standard deviation value sampled together from the joint posterior distribution.
+In the three-dimensional landscape of a mean and a standard deviation (for a Gaussian model), each draw therefore contains one mean value and one standard deviation value sampled together from the joint posterior distribution.
 The algorithm repeats this process thousands of times, producing a large collection of posterior draws.
 Looking only at the mean values across all draws gives the posterior distribution of the mean, while looking only at the standard deviation values gives the posterior distribution of the standard deviation.
 Of course, in the type of regression model we have talked about in the previous chapter there are three parameters (intercept $\beta_0$, slope $\beta_1$, and $\sigma$) but we humans are not good at imagining more than three dimensions at a time so we will not attempt it, but the principle is the same.
 
 ::: callout-tip
 ## MCMC
-
-The **joint posterior probability distribution** is the collection of the posterior probability distributions of all the parameters in the model.
 
 **Markov Chain Monte Carlo** (MCMC) is an algorithm used to sample values from a joint posterior distribution.
 Stan, used by brms, uses the Hamiltonian Monte Carlo implementation of MCMC.
@@ -60,6 +138,9 @@ If you want to learn more about MCMC, I recommend @mcelreath2020, Ch.
 9, and @nicenboim2025, Ch.
 3.
 However, to be a proficient user of brms and Bayesian regression models, you do not need to fully understand the mathematics behind MCMC, as long as you understand the basic conceptual idea.
+
+Regions of high posterior probability are sampled more often than regions of low posterior probability, so the collection of sampled values approximates the joint posterior distribution.
+The output of a Bayesian model is therefore not a single value for each parameter but a large collection of values, called the **posterior draws**, for each model parameter.
 
 When you run a model with brms, the posterior draws are stored in the model object returned by the `brm()` function.
 Every operation on a fitted model, such as obtaining the output of `summary()` and plotting posterior distributions, is ultimately an operation on those draws.
