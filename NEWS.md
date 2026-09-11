@@ -1,3 +1,7 @@
+# QDAL v2.1.9000
+
+- Update `ch-open-research.qmd` after Open Science Framework change.
+
 # QDAL v2.1
 
 - All chapters shifted by one week to match the new weekly schedule of the QML course.
