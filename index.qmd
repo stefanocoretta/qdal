@@ -22,4 +22,4 @@ Cite as:
 
 ## Acknowledgements
 
-I want to particularly thank the following students of the course cohort 2025/26, Rebecca Bull for her extensive editing and Aditya Dalmia and Aidan Lowrie for their contributions.
+I want to particularly thank the following students of the course cohort 2025/26, Rebecca Bull for her extensive editing, Aditya Dalmia and Aidan Lowrie for their contributions, and Owen Raymond for his careful reading of and commenting on the updated versions of @sec-regression-draws and @sec-regression-lognorm.
