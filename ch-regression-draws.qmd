@@ -233,7 +233,7 @@ This is because we represent regression coefficients with $\beta$, so we can eas
 ![brms model object in the RStudio Viewer.](img/brms-samples.png){#fig-brms-model-object fig-align="center" width="500"}
 
 Each parameter has 2000 draws (values): these are the 1000 draws from the 1000 warm-up iterations plus the 1000 draws from the 1000 sampling iterations.
-As mentioned above, all operations on draws are done on the post- warm-up draws (the warm-up draws are discarded).
+As mentioned above, all operations on draws are done on the post-warm-up draws (the warm-up draws are discarded).
 
 There are different ways to extract the (post-warm-up) MCMC posterior draws from a fitted model.
 In this book, we will use the `as_draws_df()` function from the [posterior](https://mc-stan.org/posterior/) package.
@@ -250,7 +250,7 @@ The `Draws` information in the summary are exactly that: information on the MCMC
 It says 4 chains were run each with 2000 iterations of which 1000 used for warm-up.
 `thin = 1` just tells brms to keep all the post-warm-up draws, and it's fine as is so you can just ignore it.
 Then the summary tells us that there are 4000 total post-warm-up draws.
-We are good to go!
+As mentioned above (and as we will see in more details below), the summary contains summary measures of the draws: `Estimate` is the mean of the posterior draws, `Est.Err` is their SD, and the CrIs are the CrIs of the posterior draws.
 We can extract the MCMC draws from the model using the `as_draws_df()` function.
 This function returns a data frame (more specifically a tidyverse tibble with class `draws_df`) with values from each draw of the MCMC algorithm.
 Since there are 4000 post-warm-up draws, the tibble has 4000 rows.
@@ -292,7 +292,7 @@ One could say that the model "results" are, to put it simply, these draws and th
 ## Summary measures of the posterior draws
 
 The `Regression Coefficients` table from the `summary()` of the model reports summary measures calculated from the drawn values of `b_Intercept` and `b_speech_rate`.
-These summary measures are the mean (`Estimate`), the standard deviation (`Est.error`) of the draws and the lower and upper limits of the 95% Credible Interval (CrI).
+These summary measures are the mean (`Estimate`), the standard deviation (`Est.error`) of the draws and the lower and upper limits of the 95% Credible Interval (CrI) of the draws.
 We can obtain those same measures ourselves from the data frame with the draws, `vow_bm_draws`.
 Let's calculate the mean and SD of `b_Intercept` and `b_speech_rate` (we round to the second digit with `round(2)`).
 
@@ -337,7 +337,7 @@ quantile2(vow_bm_draws$b_speech_rate, c(0.025, 0.975)) |> round(2)
 
 Compare these values with the ones in summary: again they are the same.
 Remember: a 95% CrI tells us that there is a 95% probability, given the model and data, that the value of the parameters is between the lower and upper limit of the interval.
-So a 90% CrI tells us that there is an 90% probability that the value is between the lower and upper limit, a 60% interval that there is a 60% probability and so on.
+So a 90% CrI tells us that there is an 90% probability that the value is between the lower and upper limit, a 60% interval that there is a 60% probability and so on, conditional on the model and data.
 We can also say that we are 95% confident that the value lies between the limits.
 Intervals at lower level of probability are narrower (they span a smaller range of values) than intervals at higher level of probability: so a 95% CrI is always wider than an 80% CrI, which is wider than a 60% CrI and so on.
 A narrower CrI means more *precision*: we have a more precise expectation of which range the parameter lies in.
@@ -348,12 +348,12 @@ This is the precision/confidence trade-off that we have to live with when doing 
 ::: callout-warning
 ### Exercise 1
 
-Calculate the 90%, 80% and 60% CrIs of `b_Intecept` and `b_speech_rate`.
+Calculate the 90%, 80% and 60% CrIs of `b_Intercept` and `b_speech_rate`.
 :::
 
-With this model, `vow_bm`, getting all of these CrIs might look trivial: the 95% CrIs are quite narrow, giving us quite a precise range of values for both the intercept and the coefficient of speech rate.
-This is because there is quite a lot of data and the model is quite simple, there is only one predictor.
-With more complex models and smaller data sets, uncertainty is greater and the intervals will span a large range of values.
+With this model, `vow_bm`, getting all of these CrIs might sound very informative: the 95% CrIs are quite narrow, giving us quite a precise range of values for both the intercept and the coefficient of speech rate.
+This is because there is quite a lot of data and the model is quite simple (there is only one predictor).
+With more complex models and smaller data sets, uncertainty is greater and the intervals will span a larger range of values.
 We will see examples later in the book.
 In those cases, it is helpful to be able to discuss CrIs at different levels of probability, since a lower-probability CrI might tell us something clearer about what we are investigating, while warning us of the increased uncertainty that comes with it.
 
@@ -381,7 +381,7 @@ The [ggdist](https://mjskay.github.io/ggdist/index.html) package has some conven
 The `stat_halfeye()` can shade the area under the curve depending on the specified interval levels, like in the code for @fig-vow-bm-sr-cris below, which shows 50%, 80% and 95% CrIs.
 Below the density curve there are error bars of increasing thickness, each corresponding to a CrI.
 The large dot represents the *median* of the draws (rather than the mean, like in the model summary).
-The median is another acceptable summary measure for posteriors.
+The median is another acceptable summary measure for posterior draws.
 
 ```{r}
 #| label: fig-vow-bm-sr-cris
