@@ -1,4 +1,4 @@
-# QDAL v2.1.9000
+# QDAL v2.2
 
 - Update `ch-open-research.qmd` after Open Science Framework change.
 
