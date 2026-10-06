@@ -20,7 +20,7 @@ This course will focus on the analysis of tabular data, since all of the techniq
 ![](img/inclusive-community.png)
 
 The R community is a **very inclusive community** and it's easy to find help.
-There are several groups that promote R in minority/minoritised groups, like [R-Ladies](https://www.r-consortium.org/all-projects/r-ladies), [Africa R](https://r4africa.org), and [Rainbow R](https://rainbowr.netlify.app) just to mention a few.
+There are several groups that promote R in minority/minoritised groups, like [R-Ladies](https://rladies.org), [Africa R](https://r4africa.org), and [Rainbow R](https://rainbowr.netlify.app) just to mention a few.
 
 Moreover, R is **open source and free** for anyone to use!
 
@@ -664,7 +664,7 @@ for (fruit in fruits) {
 }
 ```
 
-For more, check the [For loops](https://r4ds.hadley.nz/base-r#for-loops) section of the R4DS book and the [R if else statement](https://www.datamentor.io/r-programming/if-else-statement) post from DataMentor.
+For more, check the [For loops](https://r4ds.hadley.nz/base-R.html#for-loops) section of the R4DS book and the [R if else statement](https://www.datamentor.io/r-programming/if-else-statement) post from DataMentor.
 :::
 
 ## Summary

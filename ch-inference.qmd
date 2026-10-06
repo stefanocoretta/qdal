@@ -201,7 +201,7 @@ There are at least four ways of looking at statistics as a tool.
   (From the [Standford Encyclopedia of Philosophy](https://plato.stanford.edu/entries/statistics/))
 
 - Statistics is the **art** of applying the science of scientific methods.
-  (From [ORI Results](https://www.oriresults.com/articles/blog-posts/the-art-of-statistics/), [Nature](https://www.nature.com/articles/d41586-019-00898-0))
+  (From [Nature](https://www.nature.com/articles/d41586-019-00898-0))
 
 To quote a historically important statistician:
 

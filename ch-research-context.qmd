@@ -90,7 +90,7 @@ John Spacey defines statement falsificability in his blog post [Seven examples o
 Some examples of falsifiable hypotheses:
 
 - "Life only exists on Earth." (it would be falsified by the observation of life somewhere else).
-- "If there is a 1st person exclusive dual, then there is also a 1st person inclusive dual." [\[Universal 1871\]](https://typo.uni-konstanz.de/rara/universals-archive/1876/) (it would be falsified by the observation of languages with a 1st person exclusive dual but without the inclusive alternative).
+- "If there is a 1st person exclusive dual, then there is also a 1st person inclusive dual." [\[Universal 1876\]](https://typo.uni-konstanz.de/rara/ARCHIVE/entry.php?id=1876) (it would be falsified by the observation of languages with a 1st person exclusive dual but without the inclusive alternative).
 - "Infants start uttering full sentences only after their 12th month of life." (it would be falsified by the observation of infants uttering full sentences before their 12th month of life).
 
 The following are some examples of non-falsifiable hypotheses:
