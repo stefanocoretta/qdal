@@ -14,7 +14,7 @@
     "href": "index.html#license",
     "title": "Quantitative Data Analysis for Linguists in R",
     "section": "License",
-    "text": "License\nQuantitative Data Analysis for Linguists in R © 2025-2026 by Stefano Coretta is licensed under CC BY-NC-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/\nCite as:\n\nStefano Coretta. 2026. Quantitative data analysis for linguists in R [v2.3]. https://stefanocoretta.github.io/qdal/.",
+    "text": "License\nQuantitative Data Analysis for Linguists in R © 2025-2026 by Stefano Coretta is licensed under CC BY-NC-SA 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/\nCite as:\n\nStefano Coretta. 2026. Quantitative data analysis for linguists in R [v2.3.9000]. https://stefanocoretta.github.io/qdal/.",
     "crumbs": [
       "Welcome!"
     ]
@@ -24,7 +24,7 @@
     "href": "index.html#acknowledgements",
     "title": "Quantitative Data Analysis for Linguists in R",
     "section": "Acknowledgements",
-    "text": "Acknowledgements\nI want to particularly thank the following students of the course cohort 2025/26, Rebecca Bull for her extensive editing, Aditya Dalmia and Aidan Lowrie for their contributions, and Owen Raymond for his careful reading of and commenting on the updated versions of 25  Working with MCMC draws and 31  Log-normal regression.",
+    "text": "Acknowledgements\nI want to particularly thank the following students of the course cohort 2025/26, Rebecca Bull for her extensive editing, Aditya Dalmia and Aidan Lowrie for their contributions, and Owen Raymond for his careful reading of and commenting on the updated versions of 25  Working with MCMC draws and 32  Log-normal regression.",
     "crumbs": [
       "Welcome!"
     ]
