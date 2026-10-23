@@ -64,6 +64,7 @@ book:
   - part: Week 8
     chapters:
       - ch-regression-bernoulli.qmd
+      - ch-regression-odds.qmd
       - ch-regression-lognorm.qmd
       - ch-regression-diag.qmd
   - part: Week 9

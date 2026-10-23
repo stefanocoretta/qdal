@@ -43,16 +43,21 @@ p(\text{incorrect}) & = 1 - p(\text{correct}) = 0.2
 You see that if you know the probability of one level (correct) you automatically know the probability of the other level, since there are only two levels and the total probability has to sum to 1.
 The distribution family for binary probabilities is the **Bernoulli family**.
 The Bernoulli family has only one parameter, $p$, which is the probability of obtaining one of the two levels (one can pick which level).
-With our lexical decision task example, we can write:
+With our lexical decision task example, we can model the response as:
 
 $$\begin{aligned}
-resp_{\text{correct}} & \sim Bernoulli(p) \\
+resp & \sim Bernoulli(p) \\
 p & = 0.8
 \end{aligned}$$
 
-You can read it as:
+where $Y=1$ represents a correct response and $Y=0$ an incorrect response.
+In our example,
 
-> The probability of getting a correct response follows a Bernoulli distribution with $p$ = 0.8.
+$$
+p = P(Y=1) = 0.8
+$$
+
+In other words, each response has a probability of 0.8 of being correct.
 
 If you randomly sampled from $Bernoulli(0.8)$ you would get "correct" 80% of the times and "incorrect" 20% of the times.
 We can test this in R.
@@ -112,7 +117,7 @@ rbinom(25, 1, 0.8)
 
 For each trial, we get a `1` for correct or a `0` for incorrect.
 If you take the mean of the trials it should be very close to 0.8 (with those random observations, it is 0.84).
-Again, $p$ is the mean probability of success across trials.
+Again, $p$ is the probability of success across trials.
 
 Now, what we are trying to do when modelling binary outcome variables is to estimate the probability $p$ from the data.
 But there is a catch: probabilities are bounded between 0 and 1 and regression models don't work with bounded variables out of the box!
@@ -141,12 +146,19 @@ The logit function is:
 
 $$\text{logit}(p) = ln(\frac{p}{1-p})$$
 
-where $ln$ is the natural logarithm (the logarithm with base $e$ (Euler's number, approximately 2.71828), simply `log()` in R) and $p$ is a probability.
+where $ln$ is the natural logarithm (the logarithm with base $e$ (Euler's number, approximately 2.71828), simply `log()` in R).
+The part inside $ln(...)$ are the **odds**:
 
-The logit function is also the quantile function (the function that returns quantiles, i.e. the value below which a given proportion of a probability distribution lies) of the **logistic distribution**.
-More specifically, the logit function is the quantile of a logistic distribution with mean 0 and standard deviation 1 (a standard logistic distribution).
+$$\frac{p}{1-p}$$
+
+or, the probability of success $p$ divided by probability of failure $1 - p$.
+This is why we say "log odds": it is indeed the logarithm (log) of the odds.
+
+The logit function is also the quantile function (the function that returns quantiles, i.e. the value below which a given proportion of a probability distribution lies) of the **standard logistic distribution**.
+The logistic distribution has two parameters: the location $\mu$, which determines the centre of the distribution like a mean, and the scale $s$, which controls the spread of the distribution.
+The standard logistic distribution has location $\mu = 0$ and scale $s = 1$.
 In R, the logit function can be applied using the function `qlogis()`.
-The default mean and SD in `qlogis()` are 0 and 1 respectively, so you can just input the first argument to obtain log odds from a probability `p`.
+The default location and scale in `qlogis()` are 0 and 1 respectively, so you can just input the first argument to obtain log odds from a probability `p`.
 
 ```{r}
 #| label: qlogis
@@ -157,12 +169,12 @@ qlogis(0.8)
 
 ```
 
-@fig-p-log odds shows the logit function (the quantile function of the standard logistic distribution).
+@fig-p-log-odds shows the logit function (the quantile function of the standard logistic distribution).
 The probabilities on the *x*-axis are transformed into log odds on the *y* axis.
 When you fit a regression model with a binary outcome and a Bernoulli family, the estimates of the regression coefficients are in log odds.
 
 ```{r}
-#| label: fig-p-log odds
+#| label: fig-p-log-odds
 #| fig-cap: "The logit function (quantile function): from probabilities to log odds."
 #| warning: false
 #| code-fold: true
@@ -214,7 +226,7 @@ plogis(6)
 plogis(qlogis(0.2))
 ```
 
-@fig-p-log odds shows the inverse logit transformation of log odds (on the *x*-axis) into probabilities (on the *y*-axis).
+@fig-p-log-odds shows the inverse logit transformation of log odds (on the *x*-axis) into probabilities (on the *y*-axis).
 The inverse logit constructs the typical S-shaped curve (black thick line) of the CDF of the standard logistic distribution.
 Since probabilities can't be smaller than 0 and greater than 1, the black line slopes in either direction and it approaches 0 and 1 on the *y*-axis without ever reaching them (in mathematical terms, it's an *asymptotic* line).
 It is helpful to just memorise that log odds 0 corresponds to probability 0.5 (and vice versa of course).
@@ -659,10 +671,10 @@ mvp_bm_draws_long |>
   )
 ```
 
-The predicted probability of multi-verb predicates in home-signers is 32-41%, for NSL1 it is 16-22% and for NSL2 it is 45-54%, at 80% confidence.
+The expected probability of multi-verb predicates in home-signers is 32-41%, for NSL1 it is 16-22% and for NSL2 it is 45-54%, at 80% confidence.
 Based on these results, we can see more clearly that the hypothesis of the study is not fully borne out by the data: we do not observe an increase in probability of multi-verb predicates from home-signers to NSL1 to NSL2.
 Instead, there is a decrease from home-signers to NSL1 and an increase from NSL1 to NSL2.
-Moreover, the predicted probability of multi-verb predicates in NSL2, 45-54%, indicates that NSL2 possibly use either single and multi-verb predicates with equal probability.
+Moreover, the expected probability of multi-verb predicates in NSL2, 45-54%, indicates that NSL2 possibly use either single and multi-verb predicates with equal probability.
 @fig-mvp-bm-pred plots the expected probabilities of multi-verb predicates.
 
 ```{r}

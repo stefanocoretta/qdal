@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>31&nbsp; Log-normal regression – Quantitative Data Analysis for Linguists in R</title>
+<title>32&nbsp; Log-normal regression – Quantitative Data Analysis for Linguists in R</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -92,7 +92,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./ch-regression-diag.html" rel="next">
-<link href="./ch-regression-bernoulli.html" rel="prev">
+<link href="./ch-regression-odds.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -347,7 +347,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html">Week 8</a></li><li class="breadcrumb-item"><a href="./ch-regression-lognorm.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html">Week 8</a></li><li class="breadcrumb-item"><a href="./ch-regression-lognorm.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Log-normal regression</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -646,14 +646,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-regression-odds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log odds, odds and odds ratios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
   </div>
 </li>
       </ul>
@@ -670,25 +676,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Multiple predictors in regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Multiple predictors in regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Interactions in regression: two categorical predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Interactions in regression: two categorical predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-num.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Interactions in regression: one categorical and one numeric predictor</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: one categorical and one numeric predictor</span></span></a>
   </div>
 </li>
       </ul>
@@ -705,19 +711,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-num-num.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
       </ul>
@@ -755,16 +761,16 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#log-normal-distribution" id="toc-log-normal-distribution" class="nav-link active" data-scroll-target="#log-normal-distribution"><span class="header-section-number">31.1</span> Log-normal distribution</a></li>
-  <li><a href="#dealing-with-outliers" id="toc-dealing-with-outliers" class="nav-link" data-scroll-target="#dealing-with-outliers"><span class="header-section-number">31.2</span> Dealing with outliers</a></li>
-  <li><a href="#modelling-rts-with-a-log-normal-family" id="toc-modelling-rts-with-a-log-normal-family" class="nav-link" data-scroll-target="#modelling-rts-with-a-log-normal-family"><span class="header-section-number">31.3</span> Modelling RTs with a log-normal family</a></li>
-  <li><a href="#levenshtein-distance-and-rts" id="toc-levenshtein-distance-and-rts" class="nav-link" data-scroll-target="#levenshtein-distance-and-rts"><span class="header-section-number">31.4</span> Levenshtein distance and RTs</a></li>
-  <li><a href="#a-log-normal-regression-model" id="toc-a-log-normal-regression-model" class="nav-link" data-scroll-target="#a-log-normal-regression-model"><span class="header-section-number">31.5</span> A log-normal regression model</a></li>
-  <li><a href="#interpreting-log-normal-regressions" id="toc-interpreting-log-normal-regressions" class="nav-link" data-scroll-target="#interpreting-log-normal-regressions"><span class="header-section-number">31.6</span> Interpreting log-normal regressions</a></li>
-  <li><a href="#logs-and-ratios" id="toc-logs-and-ratios" class="nav-link" data-scroll-target="#logs-and-ratios"><span class="header-section-number">31.7</span> Logs and ratios</a></li>
-  <li><a href="#sec-epred-draws" id="toc-sec-epred-draws" class="nav-link" data-scroll-target="#sec-epred-draws"><span class="header-section-number">31.8</span> Using <code>epred_draws()</code> and <code>linpred_draws()</code> from tidybayes</a></li>
-  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">31.9</span> Reporting</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">31.10</span> Summary</a></li>
+  <li><a href="#log-normal-distribution" id="toc-log-normal-distribution" class="nav-link active" data-scroll-target="#log-normal-distribution"><span class="header-section-number">32.1</span> Log-normal distribution</a></li>
+  <li><a href="#dealing-with-outliers" id="toc-dealing-with-outliers" class="nav-link" data-scroll-target="#dealing-with-outliers"><span class="header-section-number">32.2</span> Dealing with outliers</a></li>
+  <li><a href="#modelling-rts-with-a-log-normal-family" id="toc-modelling-rts-with-a-log-normal-family" class="nav-link" data-scroll-target="#modelling-rts-with-a-log-normal-family"><span class="header-section-number">32.3</span> Modelling RTs with a log-normal family</a></li>
+  <li><a href="#levenshtein-distance-and-rts" id="toc-levenshtein-distance-and-rts" class="nav-link" data-scroll-target="#levenshtein-distance-and-rts"><span class="header-section-number">32.4</span> Levenshtein distance and RTs</a></li>
+  <li><a href="#a-log-normal-regression-model" id="toc-a-log-normal-regression-model" class="nav-link" data-scroll-target="#a-log-normal-regression-model"><span class="header-section-number">32.5</span> A log-normal regression model</a></li>
+  <li><a href="#interpreting-log-normal-regressions" id="toc-interpreting-log-normal-regressions" class="nav-link" data-scroll-target="#interpreting-log-normal-regressions"><span class="header-section-number">32.6</span> Interpreting log-normal regressions</a></li>
+  <li><a href="#logs-and-ratios" id="toc-logs-and-ratios" class="nav-link" data-scroll-target="#logs-and-ratios"><span class="header-section-number">32.7</span> Logs and ratios</a></li>
+  <li><a href="#sec-epred-draws" id="toc-sec-epred-draws" class="nav-link" data-scroll-target="#sec-epred-draws"><span class="header-section-number">32.8</span> Using <code>epred_draws()</code> and <code>linpred_draws()</code> from tidybayes</a></li>
+  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting"><span class="header-section-number">32.9</span> Reporting</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">32.10</span> Summary</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/stefanocoretta/qdal/blob/main/ch-regression-lognorm.qmd" target="_blank" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/stefanocoretta/qdal/issues/new" target="_blank" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -772,10 +778,10 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html">Week 8</a></li><li class="breadcrumb-item"><a href="./ch-regression-lognorm.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html">Week 8</a></li><li class="breadcrumb-item"><a href="./ch-regression-lognorm.html"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Log-normal regression</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-regression-lognorm" class="quarto-section-identifier"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></h1>
-<p class="subtitle lead">v2.3</p>
+<h1 class="title"><span id="sec-regression-lognorm" class="quarto-section-identifier"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></h1>
+<p class="subtitle lead">v2.3.9000</p>
 </div>
 
 
@@ -795,8 +801,8 @@ window.Quarto = {
 <p><img src="./img/badge-stats.png" class="img-fluid"> <img src="./img/badge-r.png" class="img-fluid"></p>
 <p>In <a href="ch-probability.html" class="quarto-xref"><span>Chapter 18</span></a>, we talked about skewness of distributions in relation to the density plots of reaction times. In <a href="ch-gauss-model.html" class="quarto-xref"><span>Chapter 21</span></a>, we further explained that it is the onus of the researcher to decide on a distribution family when fitting regression models and we said that, in the absence of more specific knowledge, the Gaussian distribution is a safe assumption to make. Note that the choice of distribution family should be based as much as possible on theoretical (as opposed to empirical) grounds. In other words, you shouldn’t just plot the variable to check which distribution it might follow (more on this below).</p>
 <p>There are heuristics one can follow to pick a theoretically grounded distribution. The major ones are listed in <a href="app-reg-cheat-sheet.html#sec-outcome" class="quarto-xref"><span>Section A.2</span></a>, so you can refer to that section in the appendix, but in this chapter we will focus on one type of variables and the default distribution choice: i.e.&nbsp;variables that can only take on values that are positive numbers. These variables, in the absence of more specific knowledge, can be assumed to be from a log-normal distribution.</p>
-<section id="log-normal-distribution" class="level2" data-number="31.1">
-<h2 data-number="31.1" class="anchored" data-anchor-id="log-normal-distribution"><span class="header-section-number">31.1</span> Log-normal distribution</h2>
+<section id="log-normal-distribution" class="level2" data-number="32.1">
+<h2 data-number="32.1" class="anchored" data-anchor-id="log-normal-distribution"><span class="header-section-number">32.1</span> Log-normal distribution</h2>
 <p>The log-normal distribution is a continuous probability distribution of variables that can only be positive and not zero. It has two parameters: the mean <span class="math inline">\(\mu\)</span>$\mu$ and the standard deviation <span class="math inline">\(\sigma\)</span>. These are the same parameters of the Gaussian distribution, but the parameters of the log-normal distribution are in logged units. The name log-normal comes from the fact that variables that are log-normal approximate a Gaussian (aka normal) distribution when we take the logarithm (log) of the values. In other words, the variable is assumed to be Gaussian on the log scale, rather than on the natural scale. Mathematically, we represent the log-normal distribution with <span class="math inline">\(LogNormal(\mu, \sigma)\)</span>.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -845,7 +851,7 @@ window.Quarto = {
 <img src="ch-regression-lognorm_files/figure-html/fig-rt-lognorm-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-lognorm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;31.1: Density plot of reaction times, by word type (real and nonce).
+Figure&nbsp;32.1: Density plot of reaction times, by word type (real and nonce).
 </figcaption>
 </figure>
 </div>
@@ -867,13 +873,13 @@ Figure&nbsp;31.1: Density plot of reaction times, by word type (real and nonce).
 <img src="ch-regression-lognorm_files/figure-html/fig-rt-gaussian-log-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-gaussian-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;31.2: Density plot of logged RTs by word type.
+Figure&nbsp;32.2: Density plot of logged RTs by word type.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-rt-gaussian-log" class="quarto-xref">Figure&nbsp;<span>31.2</span></a> shows the density of logged RTs. Note how the density curve is less skewed now compared to <a href="#fig-rt-lognorm" class="quarto-xref">Figure&nbsp;<span>31.1</span></a>. You will also note that the some lower RTs values now look more extreme than in the first figure: logging a variable compresses the scale more at higher values and spreads the scale more at lower values, which results in the reduction of right-skew, but also in making very low values look more extreme. Before moving onto discussing what to do with outliers, an important clarification is due.</p>
+<p><a href="#fig-rt-gaussian-log" class="quarto-xref">Figure&nbsp;<span>32.2</span></a> shows the density of logged RTs. Note how the density curve is less skewed now compared to <a href="#fig-rt-lognorm" class="quarto-xref">Figure&nbsp;<span>32.1</span></a>. You will also note that the some lower RTs values now look more extreme than in the first figure: logging a variable compresses the scale more at higher values and spreads the scale more at lower values, which results in the reduction of right-skew, but also in making very low values look more extreme. Before moving onto discussing what to do with outliers, an important clarification is due.</p>
 <div class="callout callout-style-default callout-important no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -887,7 +893,7 @@ Important
 <p><strong>Looking at a density plot is not a safe way to decide if you need to log a variable or if a variable is log-normal.</strong></p>
 </div>
 </div>
-<p>There are cases where the density plot is a combination of multiple underlying distributions with different means and SDs that makes it look as if it is skewed. For example, the following code creates a mixture of three Gaussian distributions of the same variable, but coming from three different groups, each with a slightly higher mean and SD than the first group. <a href="#fig-gauss-mix" class="quarto-xref">Figure&nbsp;<span>31.3</span></a> shows a single density curve for the data (<a href="#fig-gauss-mix-1" class="quarto-xref">Figure&nbsp;<span>31.3 (a)</span></a>), and the density plots for the individual groups (<a href="#fig-gauss-mix-2" class="quarto-xref">Figure&nbsp;<span>31.3 (b)</span></a>). In the single density plot, we might be given the impression that this is a log-normal variable because of the right skew, but in fact, when plotting the density curves of the individual groups we can see that the distribution in each group is quite symmetric (not skewed) and quite Gaussian-like.</p>
+<p>There are cases where the density plot is a combination of multiple underlying distributions with different means and SDs that makes it look as if it is skewed. For example, the following code creates a mixture of three Gaussian distributions of the same variable, but coming from three different groups, each with a slightly higher mean and SD than the first group. <a href="#fig-gauss-mix" class="quarto-xref">Figure&nbsp;<span>32.3</span></a> shows a single density curve for the data (<a href="#fig-gauss-mix-1" class="quarto-xref">Figure&nbsp;<span>32.3 (a)</span></a>), and the density plots for the individual groups (<a href="#fig-gauss-mix-2" class="quarto-xref">Figure&nbsp;<span>32.3 (b)</span></a>). In the single density plot, we might be given the impression that this is a log-normal variable because of the right skew, but in fact, when plotting the density curves of the individual groups we can see that the distribution in each group is quite symmetric (not skewed) and quite Gaussian-like.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -935,14 +941,14 @@ Important
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gauss-mix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;31.3: A Gaussian variable from three groups with different mean/SDs might look like a log-normal distribution (right-skewed).
+Figure&nbsp;32.3: A Gaussian variable from three groups with different mean/SDs might look like a log-normal distribution (right-skewed).
 </figcaption>
 </figure>
 </div>
 <p>Deciding if a variable is log-normal should be based on theoretical considerations rather than on the empirical distribution. Ask yourself, before seeing the data: is this variable continuous and can it only take on positive values? If the answer is yes, then assuming a log-normal distribution is safe.</p>
 </section>
-<section id="dealing-with-outliers" class="level2" data-number="31.2">
-<h2 data-number="31.2" class="anchored" data-anchor-id="dealing-with-outliers"><span class="header-section-number">31.2</span> Dealing with outliers</h2>
+<section id="dealing-with-outliers" class="level2" data-number="32.2">
+<h2 data-number="32.2" class="anchored" data-anchor-id="dealing-with-outliers"><span class="header-section-number">32.2</span> Dealing with outliers</h2>
 <p>Very extreme values are generally called <strong>outliers</strong>: an outlier is a value that is more extreme than what the distribution would indicate. The definition of outlier is quite vague and there are different ways of operationalising “outlierness” (i.e.&nbsp;to determine if a value is an outlier). There are also different camps as to what to do with outliers, particularly in regard to inclusion/exclusion criteria. I side with the camp that suggests not to exclude outliers, if they are real outliers. In most cases, thinking about errors is a much more useful way of deciding which values to include or exclude. For example, in our RT data there is one observation of 34 ms. The second lowest RT is 200 ms. Given the task participants had to complete, a lexical decision task, it is unlikely that they could thoughtfully answer after only 34 ms (that is a very short time). So we could argue that that was an error: the participant mistakenly pressed the button before thinking about the answer.</p>
 <p>We have a good theoretical reason to exclude that observation. We would not call this an outlier, because it is an error. You should reserve the word outlier only for extreme observations that are not the result of an error, misunderstanding or the like. It also very often depends on the specific task at hand: for certain tasks, an RT of 5 seconds might still be acceptable, but for others it probably means the participant was distracted. This type of observations do not represent the process one is interested in, so they are best left out. But if there are observations that are extreme, but not so extreme to believe that they come from errors or other causes, then it is theoretically more sound to keep them.</p>
 <p>Since we have established that this very low RT observation of 34 ms must be an error, let’s drop it from the data before moving on onto modelling.</p>
@@ -951,8 +957,8 @@ Figure&nbsp;31.3: A Gaussian variable from three groups with different mean/SDs 
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(RT <span class="sc">&gt;</span> <span class="dv">34</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="modelling-rts-with-a-log-normal-family" class="level2" data-number="31.3">
-<h2 data-number="31.3" class="anchored" data-anchor-id="modelling-rts-with-a-log-normal-family"><span class="header-section-number">31.3</span> Modelling RTs with a log-normal family</h2>
+<section id="modelling-rts-with-a-log-normal-family" class="level2" data-number="32.3">
+<h2 data-number="32.3" class="anchored" data-anchor-id="modelling-rts-with-a-log-normal-family"><span class="header-section-number">32.3</span> Modelling RTs with a log-normal family</h2>
 <p>The problems arising from assuming a Gaussian distribution for RTs is visually obvious when comparing the empirical distribution of the observed RTs with the predicted distribution from a Gaussian model. Let’s reload the Gaussian model from <a href="ch-fit-model.html" class="quarto-xref"><span>Chapter 22</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rt_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
@@ -968,7 +974,7 @@ Figure&nbsp;31.3: A Gaussian variable from three groups with different mean/SDs 
 RT_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 \end{aligned}\]</span></p>
 <p>The joint posterior distribution of the outcome <span class="math inline">\(RT\)</span> is the <span class="math inline">\(Gaussian(\mu, \sigma)\)</span> distribution in the model. This is based on the posterior probability of the mean <span class="math inline">\(\mu\)</span> and the overall standard deviation <span class="math inline">\(\sigma\)</span>. Remember that inference in the context of Bayesian regression models using MCMC is based on the MCMC draws. Each draw has sampled a value for the model parameters. So for each draw we can reconstruct one joint posterior distribution based on the specific parameter values of that draw. It is useful to plot the joint posterior based on several draws, but since this computation is expensive, it is usually best to use just some and not all the draws. There isn’t a specific number and by default <code>pp_check()</code> uses 10 draws. In most cases these suffice. In the following code I set the number of draws to 50 just to illustrate how to use the <code>ndraws</code> argument.</p>
-<p><a href="#fig-rt-bm-pp" class="quarto-xref">Figure&nbsp;<span>31.4</span></a> shows the output of the <code>pp_check()</code> function. The first argument of the function is simply the model object, <code>rt_bm_1</code>. We set <code>ndraws = 50</code> to use 50 random draws from the MCMC draws to reconstruct joint posteriors. These are in light blue in the figure. The dark blue, thicker line is the empirical density of the data, the same density you would get with <code>geom_density()</code>. It is quite obvious that the reconstructed posterior densities do not match the empirical density. Values below 500 ms are over-estimated by the model (in other words, the model over-predicts the presence of lower RT values) and similarly values between 1000 and 1500 ms are over-estimated. The empirical density of the data is much more compact around the peak of the distribution, compare to the posteriors from the model.</p>
+<p><a href="#fig-rt-bm-pp" class="quarto-xref">Figure&nbsp;<span>32.4</span></a> shows the output of the <code>pp_check()</code> function. The first argument of the function is simply the model object, <code>rt_bm_1</code>. We set <code>ndraws = 50</code> to use 50 random draws from the MCMC draws to reconstruct joint posteriors. These are in light blue in the figure. The dark blue, thicker line is the empirical density of the data, the same density you would get with <code>geom_density()</code>. It is quite obvious that the reconstructed posterior densities do not match the empirical density. Values below 500 ms are over-estimated by the model (in other words, the model over-predicts the presence of lower RT values) and similarly values between 1000 and 1500 ms are over-estimated. The empirical density of the data is much more compact around the peak of the distribution, compare to the posteriors from the model.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(rt_bm, <span class="at">ndraws =</span> <span class="dv">50</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -978,7 +984,7 @@ RT_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 <img src="ch-regression-lognorm_files/figure-html/fig-rt-bm-pp-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-bm-pp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;31.4: Posterior predictive checks for a Gaussian regression model of RTs.
+Figure&nbsp;32.4: Posterior predictive checks for a Gaussian regression model of RTs.
 </figcaption>
 </figure>
 </div>
@@ -1008,23 +1014,23 @@ RT_i &amp; \sim LogNormal(\mu_i, \sigma)\\
 <img src="ch-regression-lognorm_files/figure-html/fig-rt-bm-log-pp-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-bm-log-pp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;31.5: Posterior predictive checks for a lognormal model of RTs.
+Figure&nbsp;32.5: Posterior predictive checks for a lognormal model of RTs.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The posterior predictive distributions in <a href="#fig-rt-bm-log-pp" class="quarto-xref">Figure&nbsp;<span>31.5</span></a> (light blue) now are much more similar to the empirical distribution (dark blue). This is because a log-normal distribution better captures the distribution of RTs, which are bounded to positive numbers and cannot be 0.</p>
+<p>The posterior predictive distributions in <a href="#fig-rt-bm-log-pp" class="quarto-xref">Figure&nbsp;<span>32.5</span></a> (light blue) now are much more similar to the empirical distribution (dark blue). This is because a log-normal distribution better captures the distribution of RTs, which are bounded to positive numbers and cannot be 0.</p>
 <p>In the following sections we will fit a log-normal regression model to RTs and a measure called mean phoneme-level Levenshtein distance.</p>
 </section>
-<section id="levenshtein-distance-and-rts" class="level2" data-number="31.4">
-<h2 data-number="31.4" class="anchored" data-anchor-id="levenshtein-distance-and-rts"><span class="header-section-number">31.4</span> Levenshtein distance and RTs</h2>
+<section id="levenshtein-distance-and-rts" class="level2" data-number="32.4">
+<h2 data-number="32.4" class="anchored" data-anchor-id="levenshtein-distance-and-rts"><span class="header-section-number">32.4</span> Levenshtein distance and RTs</h2>
 <p>The Levenshtein distance is a measure of how different two strings are. It is defined as the minimum number of single-character edits needed to transform one string into the other, where the allowed edits are inserting a character, deleting a character, or substituting one character for another. For example, the Levenshtein distance between <em>kitten</em> and <em>sitting</em> is 3 because three edits are required to convert one word into the other. <span class="citation" data-cites="tucker2019">Tucker et al. (<a href="references.html#ref-tucker2019" role="doc-biblioref">2019</a>)</span> apply this measure to the phonemic representation of words, rather than their written string. For example, the words <em>through</em> and <em>though</em> have a string-based Levenshtein distance of 1 (deleting <em>r</em>), but their phonemic transcriptions are /θruː/ and /ðoʊ/, respectively. At the phoneme level, transforming /θ r uː/ into /ð oʊ/ requires substituting /θ/ with /ð/, deleting /r/, and substituting /uː/ with /oʊ/, giving a phoneme-level Levenshtein distance of 3.</p>
 <p>For each word in the data, <span class="citation" data-cites="tucker2019">Tucker et al. (<a href="references.html#ref-tucker2019" role="doc-biblioref">2019</a>)</span> measured the pairwise phoneme-level Levenshtein distance of that word and all the other words, and then calculated the mean distance for that word. Words that are more phonemically unique have a higher mean phoneme-level Levenshtein distance, while more similar words have lower mean phoneme-level Levenshtein distance. We can thus ask the following research question:</p>
 <blockquote class="blockquote">
 <p>Does mean phoneme-level Levenshtein distance of the target word have an effect on the response reaction times in an English lexical decision task?</p>
 </blockquote>
-<p>Let’s plot the data. <a href="#fig-rt-lev" class="quarto-xref">Figure&nbsp;<span>31.6</span></a> shows a scatter plot of RTs and mean phoneme-level Levenshtein distance. We also added a regression line. Note that this regression line is based on a Gaussian regression model, <code>RT ~ PhonLev</code>, but RTs are not Gaussian, so the regression line is somewhat deceiving.</p>
+<p>Let’s plot the data. <a href="#fig-rt-lev" class="quarto-xref">Figure&nbsp;<span>32.6</span></a> shows a scatter plot of RTs and mean phoneme-level Levenshtein distance. We also added a regression line. Note that this regression line is based on a Gaussian regression model, <code>RT ~ PhonLev</code>, but RTs are not Gaussian, so the regression line is somewhat deceiving.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1041,7 +1047,7 @@ Figure&nbsp;31.5: Posterior predictive checks for a lognormal model of RTs.
 <img src="ch-regression-lognorm_files/figure-html/fig-rt-lev-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-lev-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;31.6: Scatter plot of reaction times and mean phoneme-level Levenshtein distance.
+Figure&nbsp;32.6: Scatter plot of reaction times and mean phoneme-level Levenshtein distance.
 </figcaption>
 </figure>
 </div>
@@ -1054,7 +1060,7 @@ Figure&nbsp;31.6: Scatter plot of reaction times and mean phoneme-level Levensht
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">RT_log =</span> <span class="fu">log</span>(RT)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Let’s plot the data again, this time by logging both RTs and distance. <a href="#fig-rt-lev-log" class="quarto-xref">Figure&nbsp;<span>31.7</span></a> shows a scatter plot with logged RTs and distance. Now the regression line is based on a Gaussian regression of logged RTs: this is equivalent to a log-normal regression model of (untransformed) RTs.</p>
+<p>Let’s plot the data again, this time by logging both RTs and distance. <a href="#fig-rt-lev-log" class="quarto-xref">Figure&nbsp;<span>32.7</span></a> shows a scatter plot with logged RTs and distance. Now the regression line is based on a Gaussian regression of logged RTs: this is equivalent to a log-normal regression model of (untransformed) RTs.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1071,15 +1077,15 @@ Figure&nbsp;31.6: Scatter plot of reaction times and mean phoneme-level Levensht
 <img src="ch-regression-lognorm_files/figure-html/fig-rt-lev-log-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-lev-log-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;31.7: Scatter plot of logged reaction times and logged mean phoneme-level Levenshtein distance.
+Figure&nbsp;32.7: Scatter plot of logged reaction times and logged mean phoneme-level Levenshtein distance.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="a-log-normal-regression-model" class="level2" data-number="31.5">
-<h2 data-number="31.5" class="anchored" data-anchor-id="a-log-normal-regression-model"><span class="header-section-number">31.5</span> A log-normal regression model</h2>
+<section id="a-log-normal-regression-model" class="level2" data-number="32.5">
+<h2 data-number="32.5" class="anchored" data-anchor-id="a-log-normal-regression-model"><span class="header-section-number">32.5</span> A log-normal regression model</h2>
 <p>We can proceed with modelling RTs using a log-normal regression model. This is just a regression model with a log-normal family as the distribution family for the outcome variable, here RTs. Here are the model formulae:</p>
 <p><span class="math display">\[\begin{aligned}
 RT_i &amp; \sim LogNormal(\mu_i, \sigma)\\
@@ -1101,7 +1107,7 @@ RT_i &amp; \sim LogNormal(\mu_i, \sigma)\\
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"cache/ch-regression-lognormal-rt_bm_2"</span></span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Before we learn how to interpret the model summary of a log-normal regression, let’s check the posterior predictive plot, shown in <a href="#fig-rt-bm-2-pp" class="quarto-xref">Figure&nbsp;<span>31.8</span></a>. Look at how the posterior predictive distributions match the empirical distribution much better, compared to <a href="#fig-rt-bm-pp" class="quarto-xref">Figure&nbsp;<span>31.4</span></a>. They are not perfect, but there is indeed much improvement with a log-normal model, as we have also seen in <a href="#fig-rt-bm-log-pp" class="quarto-xref">Figure&nbsp;<span>31.5</span></a>. The remaining differences are probably because RTs are not specifically log-normal, and other distributions have been proposed, like the exponential-Gaussian, or ex-Gaussian distribution. We will not treat these alternatives here: just remember that a log-normal distribution is a good initial assumption for continuous variables that are bounded to positive numbers and cannot be 0.</p>
+<p>Before we learn how to interpret the model summary of a log-normal regression, let’s check the posterior predictive plot, shown in <a href="#fig-rt-bm-2-pp" class="quarto-xref">Figure&nbsp;<span>32.8</span></a>. Look at how the posterior predictive distributions match the empirical distribution much better, compared to <a href="#fig-rt-bm-pp" class="quarto-xref">Figure&nbsp;<span>32.4</span></a>. They are not perfect, but there is indeed much improvement with a log-normal model, as we have also seen in <a href="#fig-rt-bm-log-pp" class="quarto-xref">Figure&nbsp;<span>32.5</span></a>. The remaining differences are probably because RTs are not specifically log-normal, and other distributions have been proposed, like the exponential-Gaussian, or ex-Gaussian distribution. We will not treat these alternatives here: just remember that a log-normal distribution is a good initial assumption for continuous variables that are bounded to positive numbers and cannot be 0.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pp_check</span>(rt_bm_2, <span class="at">ndraws =</span> <span class="dv">50</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -1111,7 +1117,7 @@ RT_i &amp; \sim LogNormal(\mu_i, \sigma)\\
 <img src="ch-regression-lognorm_files/figure-html/fig-rt-bm-2-pp-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-bm-2-pp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;31.8: Posterior predictive checks for a log-normal regression model of RTs with Levenshtein distance as the predictor.
+Figure&nbsp;32.8: Posterior predictive checks for a log-normal regression model of RTs with Levenshtein distance as the predictor.
 </figcaption>
 </figure>
 </div>
@@ -1136,8 +1142,8 @@ Figure&nbsp;31.8: Posterior predictive checks for a log-normal regression model 
 </div>
 </div>
 </section>
-<section id="interpreting-log-normal-regressions" class="level2" data-number="31.6">
-<h2 data-number="31.6" class="anchored" data-anchor-id="interpreting-log-normal-regressions"><span class="header-section-number">31.6</span> Interpreting log-normal regressions</h2>
+<section id="interpreting-log-normal-regressions" class="level2" data-number="32.6">
+<h2 data-number="32.6" class="anchored" data-anchor-id="interpreting-log-normal-regressions"><span class="header-section-number">32.6</span> Interpreting log-normal regressions</h2>
 <p>Interpretation of log-normal regression models is not that different from interpreting Gaussian models, with the difference that estimates are in the log-scale. Let’s print the model summary.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rt_bm_2, <span class="at">prob =</span> <span class="fl">0.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1180,9 +1186,9 @@ PhonLev       0.04      0.00 0.03 0.04</code></pre>
 </ul>
 <p>You see that, apart from the fact that the estimates are about log-RTs rather than RTs in milliseconds, the interpretation of the estimates is the same as in the Gaussian regression model you fitted in <a href="ch-regression-cat.html" class="quarto-xref"><span>Chapter 28</span></a>. The model suggests that the log-RTs increase by 0.03 to 0.04 for each unit increase of distance, at 80% confidence.</p>
 </section>
-<section id="logs-and-ratios" class="level2" data-number="31.7">
-<h2 data-number="31.7" class="anchored" data-anchor-id="logs-and-ratios"><span class="header-section-number">31.7</span> Logs and ratios</h2>
-<p>Differences of logged variables, aka log differences for short, can also be interpreted by converting them to the ratio of the difference. Converting log differences to ratios is done by applying the inverse of the logarithm function, which is the exponential function: in R, this is simply <code>exp()</code>. <a href="#fig-log-ratio" class="quarto-xref">Figure&nbsp;<span>31.9</span></a> illustrates the relationship between logs on the <em>x</em>-axis and ratios on the <em>y</em>-axes (logs are converted to ratios with <code>exp()</code>).</p>
+<section id="logs-and-ratios" class="level2" data-number="32.7">
+<h2 data-number="32.7" class="anchored" data-anchor-id="logs-and-ratios"><span class="header-section-number">32.7</span> Logs and ratios</h2>
+<p>Differences of logged variables, aka log differences for short, can also be interpreted by converting them to the ratio of the difference. Converting log differences to ratios is done by applying the inverse of the logarithm function, which is the exponential function: in R, this is simply <code>exp()</code>. <a href="#fig-log-ratio" class="quarto-xref">Figure&nbsp;<span>32.9</span></a> illustrates the relationship between logs on the <em>x</em>-axis and ratios on the <em>y</em>-axes (logs are converted to ratios with <code>exp()</code>).</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1210,7 +1216,7 @@ PhonLev       0.04      0.00 0.03 0.04</code></pre>
 <img src="ch-regression-lognorm_files/figure-html/fig-log-ratio-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-log-ratio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;31.9: The exponential function: from logs to ratios.
+Figure&nbsp;32.9: The exponential function: from logs to ratios.
 </figcaption>
 </figure>
 </div>
@@ -1218,7 +1224,7 @@ Figure&nbsp;31.9: The exponential function: from logs to ratios.
 </div>
 <p>Log 0 corresponds to ratio 1. Positive logs correspond to increasingly larger ratios, while negative logs correspond to increasingly smaller ratios. Note however that a ratio can only be positive! There are no negative ratios. Ratios can be thought of as a the number to multiply the reference number by: if the log difference is 0, the ratio is 1 which means you multiply the reference value by 1. If you multiply by 1, you simply get the same value: for example, if the reference (like the model intercept) is 6 then the value resulting from the difference is also 6. In other words, there is no difference.</p>
 <p>Logs that are greater than 0 correspond to ratios that are greater than 1. Since we multiply the reference value by the ratio value, positive logs correspond to greater values relative to the reference. For example, with a baseline value of 6 and a ratio of 1.5 (approximately log = 0.405), the value resulting from the ratio is <span class="math inline">\(6 \times 1.5 = 9\)</span>. Ratios can also be interpreted as percentages: a ratio of 1.5 corresponds to a 50% increase (50% of 6 is 3 and <span class="math inline">\(9 = 6 + 3\)</span>). Conversely, logs that are smaller than zero corresponds to ratios that are smaller than 1, which in turn correspond to percentage decreases: For example, with a baseline 6 and a ratio of 0.8, there is a 20% decrease (<span class="math inline">\(1 - 0.8 = 0.2\)</span>): <span class="math inline">\(6 \times 0.8 = 4.8\)</span>, or <span class="math inline">\(6 - (6 \times 0.2)\)</span>.</p>
-<p>Ratios are useful with log-normal variables because the magnitude of the difference depends on the baseline. This is similar to log-odds: if a Bernoulli model suggests an increase of 0.3 log-odds, the difference in percentage points depends on the baseline value, as illustrated by the following code:</p>
+<p>Ratios are useful with log-normal variables because the magnitude of the difference depends on the baseline. This is similar to log odds: if a Bernoulli model suggests an increase of 0.3 log odds, the difference in percentage points depends on the baseline value, as illustrated by the following code:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">plogis</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="fl">0.3</span>) <span class="sc">-</span> <span class="fu">plogis</span>(<span class="dv">1</span>), <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1229,7 +1235,7 @@ Figure&nbsp;31.9: The exponential function: from logs to ratios.
 <pre><code>[1] 0.03</code></pre>
 </div>
 </div>
-<p>When the baseline log-odds is 1 (corresponding to about 73%), a 0.3 log-odd increase corresponds to a 5 percentage point increase (from 73 to 78%). When the baseline is 2 (about 88%) the same increase corresponds to a 3 percentage point increase. With log estimates, the same principle applies: for the same log difference, the difference in the original scale (like milliseconds for RT) is greater with larger baselines.</p>
+<p>When the baseline log odds is 1 (corresponding to about 73%), a 0.3 log-odd increase corresponds to a 5 percentage point increase (from 73 to 78%). When the baseline is 2 (about 88%) the same increase corresponds to a 3 percentage point increase. With log estimates, the same principle applies: for the same log difference, the difference in the original scale (like milliseconds for RT) is greater with larger baselines.</p>
 <p>We can extract the posterior draws of the coefficients of <code>PhonLev</code> from the model and transform the values (log differences) to ratios. As usual, we can plot the posterior draws and calculate summary measures.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>rt_bm_2_draws <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(rt_bm_2) <span class="sc">|&gt;</span> </span>
@@ -1271,9 +1277,9 @@ RT_i &amp; \sim LogNormal(\mu_i, \sigma)\\
 </div>
 <p>When we go from mean distance 1 to mean distance 2, the RTs increase by 26 to 30 ms (at 80% confidence). Now, calculate the difference in milliseconds when comparing mean distance 13 and 14. You will see that it is larger (if you did things right, 37-49 ms). This is because of the log-normal family: at larger baseline values, the difference on the original scale is larger.</p>
 </section>
-<section id="sec-epred-draws" class="level2" data-number="31.8">
-<h2 data-number="31.8" class="anchored" data-anchor-id="sec-epred-draws"><span class="header-section-number">31.8</span> Using <code>epred_draws()</code> and <code>linpred_draws()</code> from tidybayes</h2>
-<p>We can plot the expected values easily as per usual, using the <code>conditional_effects()</code> function. <a href="#fig-rt-bm-2-cond" class="quarto-xref">Figure&nbsp;<span>31.10</span></a> shows the output of the function. Note how RTs are plotted on the original millisecond scale, rather than in logged milliseconds. This is because we fitted a log-normal model (rather than fitting a Gaussian model to logged RTs, in which case the function would plot logged RTs).</p>
+<section id="sec-epred-draws" class="level2" data-number="32.8">
+<h2 data-number="32.8" class="anchored" data-anchor-id="sec-epred-draws"><span class="header-section-number">32.8</span> Using <code>epred_draws()</code> and <code>linpred_draws()</code> from tidybayes</h2>
+<p>We can plot the expected values easily as per usual, using the <code>conditional_effects()</code> function. <a href="#fig-rt-bm-2-cond" class="quarto-xref">Figure&nbsp;<span>32.10</span></a> shows the output of the function. Note how RTs are plotted on the original millisecond scale, rather than in logged milliseconds. This is because we fitted a log-normal model (rather than fitting a Gaussian model to logged RTs, in which case the function would plot logged RTs).</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">conditional_effects</span>(rt_bm_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
@@ -1291,7 +1297,7 @@ Ignoring unknown labels:
 <img src="ch-regression-lognorm_files/figure-html/fig-rt-bm-2-cond-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-bm-2-cond-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;31.10: Posterior predictions of RTs based on a log-normal regression model, by lexical status.
+Figure&nbsp;32.10: Posterior predictions of RTs based on a log-normal regression model, by lexical status.
 </figcaption>
 </figure>
 </div>
@@ -1363,7 +1369,7 @@ Figure&nbsp;31.10: Posterior predictions of RTs based on a log-normal regression
 <img src="ch-regression-lognorm_files/figure-html/fig-rt-epred-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-epred-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;31.11: Expected values from a log-normal regression model of RTs as a function of mean phoneme-level distance.
+Figure&nbsp;32.11: Expected values from a log-normal regression model of RTs as a function of mean phoneme-level distance.
 </figcaption>
 </figure>
 </div>
@@ -1385,7 +1391,7 @@ Figure&nbsp;31.11: Expected values from a log-normal regression model of RTs as 
 </div>
 </div>
 </div>
-<p>The <code>.linpred</code> column has linear predictor values in logged milliseconds. We can reuse the code above to get the mean and CrIs and plot the linear predictor values in <a href="#fig-rt-linpred" class="quarto-xref">Figure&nbsp;<span>31.12</span></a>.</p>
+<p>The <code>.linpred</code> column has linear predictor values in logged milliseconds. We can reuse the code above to get the mean and CrIs and plot the linear predictor values in <a href="#fig-rt-linpred" class="quarto-xref">Figure&nbsp;<span>32.12</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1408,17 +1414,17 @@ Figure&nbsp;31.11: Expected values from a log-normal regression model of RTs as 
 <img src="ch-regression-lognorm_files/figure-html/fig-rt-linpred-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rt-linpred-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;31.12: Linear predictor values from a log-normal model of RTs with mean distance as predictor.
+Figure&nbsp;32.12: Linear predictor values from a log-normal model of RTs with mean distance as predictor.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The regression line in <a href="#fig-rt-linpred" class="quarto-xref">Figure&nbsp;<span>31.12</span></a> is a straight line, as we expected. The functions <code>epred_draws()</code> and <code>linpred_draws()</code> can also be used with categorical predictors, and with models using any family distribution (including Gaussian and Bernoulli families).</p>
+<p>The regression line in <a href="#fig-rt-linpred" class="quarto-xref">Figure&nbsp;<span>32.12</span></a> is a straight line, as we expected. The functions <code>epred_draws()</code> and <code>linpred_draws()</code> can also be used with categorical predictors, and with models using any family distribution (including Gaussian and Bernoulli families).</p>
 </section>
-<section id="reporting" class="level2" data-number="31.9">
-<h2 data-number="31.9" class="anchored" data-anchor-id="reporting"><span class="header-section-number">31.9</span> Reporting</h2>
-<p>Like with Bernoulli models, while the estimates in log-normal regressions are in log-odds, it is more straightforward to understand differences and effects in the original scale. However, when reporting, you should report effects on the logged scale and as ratios/percentages). In complex models, it might be worth reporting ratios/percentages and put log differences in tables. There isn’t a rule for this.</p>
+<section id="reporting" class="level2" data-number="32.9">
+<h2 data-number="32.9" class="anchored" data-anchor-id="reporting"><span class="header-section-number">32.9</span> Reporting</h2>
+<p>Like with Bernoulli models, while the estimates in log-normal regressions are in log odds, it is more straightforward to understand differences and effects in the original scale. However, when reporting, you should report effects on the logged scale and as ratios/percentages). In complex models, it might be worth reporting ratios/percentages and put log differences in tables. There isn’t a rule for this.</p>
 <p>You could report the model we fitted in this chapter like so:</p>
 <blockquote class="blockquote">
 <p>We fitted a Bayesian regression model with a log-normal family for the outcome variable (reaction times, RT) using brms <span class="citation" data-cites="burkner2017">(<a href="references.html#ref-burkner2017" role="doc-biblioref">Bürkner 2017</a>)</span> in R <span class="citation" data-cites="rcoreteam2025">(<a href="references.html#ref-rcoreteam2025" role="doc-biblioref">R Core Team 2025</a>)</span>. As a predictor, we entered the mean phoneme-level Levenshtein distance of the word. The model was fitted with four MCMC chains, each with 2000 iterations, of which 1000 for warm-up. The default brms priors were used.</p>
@@ -1432,7 +1438,7 @@ Figure&nbsp;31.12: Linear predictor values from a log-normal model of RTs with m
 <div id="tbl-rt-bm-2-coefs" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-layout-align="center">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-rt-bm-2-coefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;31.1: Regression coefficients from the Bayesian log-normal regression model. Posterior mean, SD and 95% Credible Intervals are shown on the log-link scale.
+Table&nbsp;32.1: Regression coefficients from the Bayesian log-normal regression model. Posterior mean, SD and 95% Credible Intervals are shown on the log-link scale.
 </figcaption>
 <div aria-describedby="tbl-rt-bm-2-coefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -1470,8 +1476,8 @@ Table&nbsp;31.1: Regression coefficients from the Bayesian log-normal regression
 </div>
 <p>This answers our research question above (“Does mean phoneme-level Levenshtein distance of the target word have an effect on the response reaction times?”): we know now that for each unit increase of mean distance, the RTs increase by 3-4% at 80% probability.</p>
 </section>
-<section id="summary" class="level2" data-number="31.10">
-<h2 data-number="31.10" class="anchored" data-anchor-id="summary"><span class="header-section-number">31.10</span> Summary</h2>
+<section id="summary" class="level2" data-number="32.10">
+<h2 data-number="32.10" class="anchored" data-anchor-id="summary"><span class="header-section-number">32.10</span> Summary</h2>
 <div class="callout callout-style-simple callout-note no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -2133,13 +2139,13 @@ window.onload = function() {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./ch-regression-bernoulli.html" class="pagination-link" aria-label="Binary outcomes: Bernoulli regression">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">Binary outcomes: Bernoulli regression</span></span>
+      <a href="./ch-regression-odds.html" class="pagination-link" aria-label="Log odds, odds and odds ratios">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log odds, odds and odds ratios</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ch-regression-diag.html" class="pagination-link" aria-label="Model diagnostics">
-        <span class="nav-page-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
