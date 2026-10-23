@@ -123,5 +123,3 @@ editor:
     wrap: sentence
     canonical: true
 
-filters:
-  - version.lua
