@@ -24,6 +24,13 @@ This is why it is useful to not only report changes in log odds, but also in per
 Coefficients that indicate differences in log odds between two levels, like in the case of the NSL1 coefficient above $\beta = -0.88$, can also be expressed as odds ratios.
 An **odds ratio (OR)** is the ratio of the odds of one level to the odds of the other level.
 One can obtain odds ratios from log odds by exponentiating the log odds.
+
+::: callout-tip
+### Odds ratio
+
+An **odds ratio** is the ratio between two odds and it is also the factor by which you multiply one odd to get the other.
+:::
+
 Let's go back to the model from @sec-regression-bernoulli.
 
 ```{r}

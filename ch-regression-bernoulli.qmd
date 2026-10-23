@@ -267,6 +267,9 @@ p_log_odds
 ::: callout-tip
 ### Logit and inverse logit functions
 
+The **odds** are the probability of success divided by the probability of failure: $\frac{p}{1-p}$.
+The logarithm of the odds are known as the **log odds**.
+
 The **logit function** is the quantile function of a standard logistic distribution, used to convert probabilities into log odds.
 
 The **inverse logit** (aka logistic) **function** is the CDF of the standard logistic distribution, used to convert log odds to probabilities.

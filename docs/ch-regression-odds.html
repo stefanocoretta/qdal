@@ -752,7 +752,6 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-bernoulli.html">Week 8</a></li><li class="breadcrumb-item"><a href="./ch-regression-odds.html"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log odds, odds and odds ratios</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-regression-odds" class="quarto-section-identifier"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log odds, odds and odds ratios</span></span></h1>
-<p class="subtitle lead">v2.3.9000</p>
 </div>
 
 
@@ -783,39 +782,56 @@ window.Quarto = {
 <p>Something that we glossed over in the previous chapter is that the same change in log odds corresponds to a different change in percentage points depending on the baseline probability. So for example a change in log odds of +1 corresponds to a change of about 23 percentage points when the baseline probability is 50% (approximately from 50% to 73%), but only about 3 percentage points when the baseline probability is 95% (approximately from 95% to 98%). This is why it is useful to not only report changes in log odds, but also in percentage points.</p>
 <section id="odds-ratios" class="level2" data-number="31.1">
 <h2 data-number="31.1" class="anchored" data-anchor-id="odds-ratios"><span class="header-section-number">31.1</span> Odds ratios</h2>
-<p>Coefficients that indicate differences in log odds between two levels, like in the case of the NSL1 coefficient above <span class="math inline">\(\beta = -0.88\)</span>, can also be expressed as odds ratios. An <strong>odds ratio (OR)</strong> is the ratio of the odds of one level to the odds of the other level. One can obtain odds ratios from log odds by exponentiating the log odds. Let’s go back to the model from <a href="ch-regression-bernoulli.html" class="quarto-xref"><span>Chapter 30</span></a>.</p>
+<p>Coefficients that indicate differences in log odds between two levels, like in the case of the NSL1 coefficient above <span class="math inline">\(\beta = -0.88\)</span>, can also be expressed as odds ratios. An <strong>odds ratio (OR)</strong> is the ratio of the odds of one level to the odds of the other level. One can obtain odds ratios from log odds by exponentiating the log odds.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Odds ratio
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An <strong>odds ratio</strong> is the ratio between two odds and it is also the factor by which you multiply one odd to get the other.</p>
+</div>
+</div>
+<p>Let’s go back to the model from <a href="ch-regression-bernoulli.html" class="quarto-xref"><span>Chapter 30</span></a>.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>mvp_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  Num_Predicates <span class="sc">~</span> Group,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> bernoulli,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> verb_org,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">cores =</span> <span class="dv">4</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1329</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"cache/ch-regression-bernoulli_mvp_bm"</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(brms)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'Rcpp' was built under R version 4.6.1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(posterior)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>mvp_bm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  Num_Predicates <span class="sc">~</span> Group,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> bernoulli,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> verb_org,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">cores =</span> <span class="dv">4</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">seed =</span> <span class="dv">1329</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"cache/ch-regression-bernoulli_mvp_bm"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We can extract the draws as usual and calculate the odd ratios for <code>NLS1</code> and <code>NLS2</code>. We also calculate the 80% CrIs of the odds ratios.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get draws</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(mvp_bm)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate posterior draws of odds ratios</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws <span class="ot">&lt;-</span> mvp_bm_draws <span class="sc">|&gt;</span> </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL1_OR =</span> <span class="fu">exp</span>(b_GroupNSL1),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL2_OR =</span> <span class="fu">exp</span>(b_GroupNSL2),</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(mvp_bm_draws<span class="sc">$</span>NSL1_OR, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get draws</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws <span class="ot">&lt;-</span> <span class="fu">as_draws_df</span>(mvp_bm)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate posterior draws of odds ratios</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>mvp_bm_draws <span class="ot">&lt;-</span> mvp_bm_draws <span class="sc">|&gt;</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL1_OR =</span> <span class="fu">exp</span>(b_GroupNSL1),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">NSL2_OR =</span> <span class="fu">exp</span>(b_GroupNSL2),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(mvp_bm_draws<span class="sc">$</span>NSL1_OR, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> q10  q90 
 0.31 0.55 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(mvp_bm_draws<span class="sc">$</span>NSL2_OR, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile2</span>(mvp_bm_draws<span class="sc">$</span>NSL2_OR, <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)) <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> q10  q90 
 1.35 2.29 </code></pre>

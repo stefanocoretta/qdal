@@ -646,14 +646,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-regression-odds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log odds, odds and odds ratios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
   </div>
 </li>
       </ul>
@@ -670,25 +676,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Multiple predictors in regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Multiple predictors in regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Interactions in regression: two categorical predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Interactions in regression: two categorical predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-num.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Interactions in regression: one categorical and one numeric predictor</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: one categorical and one numeric predictor</span></span></a>
   </div>
 </li>
       </ul>
@@ -705,19 +711,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-num-num.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
       </ul>
@@ -772,7 +778,6 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-null-ritual.html">Week 7</a></li><li class="breadcrumb-item"><a href="./ch-regression-cat.html"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-regression-cat" class="quarto-section-identifier"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">Regression with categorical predictors</span></span></h1>
-<p class="subtitle lead">v2.3</p>
 </div>
 
 
@@ -845,7 +850,7 @@ Figure&nbsp;28.1: Density plot of reaction times from the MALD data <span class=
 </div>
 </div>
 </div>
-<p>You might also notice that the “tails” of the distributions (the left and right sides) are not symmetric: the right tail is heavier that the left tail. This is a very common characteristics of RT values and of any variable that can only be positive (like vowel duration or the duration of any other phonetic unit). These variables are “bounded” to only positive numbers. You will learn later on that the values in these variables are generated by a log-normal distribution (<a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 31</span></a>), rather than by a Gaussian distribution (which is “unbounded”). For the time being though, we will model the data as if they were generated by a Gaussian distribution, so that we can focus on the categorical predictor part.</p>
+<p>You might also notice that the “tails” of the distributions (the left and right sides) are not symmetric: the right tail is heavier that the left tail. This is a very common characteristics of RT values and of any variable that can only be positive (like vowel duration or the duration of any other phonetic unit). These variables are “bounded” to only positive numbers. You will learn later on that the values in these variables are generated by a log-normal distribution (<a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 32</span></a>), rather than by a Gaussian distribution (which is “unbounded”). For the time being though, we will model the data as if they were generated by a Gaussian distribution, so that we can focus on the categorical predictor part.</p>
 <p>Another way to present a numeric variable like RTs depending on categorical variables is to use a jitter plot, like <a href="#fig-mald-jit" class="quarto-xref">Figure&nbsp;<span>28.2</span></a>. A jitter plot places dots corresponding to the values in the data on “strips”. The strips are created by randomly jittering dots horizontally, so that they don’t all fall on a straight line. The width of the strips, aka the jitter, can be adjusted with the <code>width</code> argument. It’s subtle, but you can see how in the range 1 to 2 seconds there are a bit more dots in non-words (right, orange) than in real words (left, green). In other words, the density of dots in that range is greater in non-words than real words. If you compare again the densities in <a href="#fig-mald-dens" class="quarto-xref">Figure&nbsp;<span>28.1</span></a> above, you will notice that the orange density in the 1-2 seconds range is higher in non-words. These are just two ways of visualising the same thing.</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mald <span class="sc">|&gt;</span></span>

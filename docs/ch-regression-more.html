@@ -646,14 +646,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-regression-odds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log odds, odds and odds ratios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
   </div>
 </li>
       </ul>
@@ -670,25 +676,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Multiple predictors in regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Multiple predictors in regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Interactions in regression: two categorical predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Interactions in regression: two categorical predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-num.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Interactions in regression: one categorical and one numeric predictor</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: one categorical and one numeric predictor</span></span></a>
   </div>
 </li>
       </ul>
@@ -705,19 +711,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-num-num.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
       </ul>
@@ -770,7 +776,6 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-null-ritual.html">Week 7</a></li><li class="breadcrumb-item"><a href="./ch-regression-more.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">More than two levels</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-regression-more" class="quarto-section-identifier"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">More than two levels</span></span></h1>
-<p class="subtitle lead">v2.3</p>
 </div>
 
 
@@ -941,7 +946,7 @@ Show me
 </section>
 <section id="treatment-contrasts-with-three-levels" class="level2" data-number="29.2">
 <h2 data-number="29.2" class="anchored" data-anchor-id="treatment-contrasts-with-three-levels"><span class="header-section-number">29.2</span> Treatment contrasts with three levels</h2>
-<p>Let’s proceed with modelling VOT. We will assume that VOT values follow a Gaussian distribution: as with reaction times, this is just a pedagogical step for you to get familiar with fitting models with categorical predictors, but other distribution families might be more appropriate. While for reaction times there are some recommended distributions (which you will learn about in <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 31</span></a>), there are really no recommendations for VOT, so a Gaussian distribution will have to do for now.</p>
+<p>Let’s proceed with modelling VOT. We will assume that VOT values follow a Gaussian distribution: as with reaction times, this is just a pedagogical step for you to get familiar with fitting models with categorical predictors, but other distribution families might be more appropriate. While for reaction times there are some recommended distributions (which you will learn about in <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 32</span></a>), there are really no recommendations for VOT, so a Gaussian distribution will have to do for now.</p>
 <p>Before fitting the model, it is important to go through the model’s mathematical formula and to pay particular attention to how phonation type is coded using treatment contrasts. The <code>phonation</code> predictor has three levels: aspirated, voiced and voiceless. The order of the levels follows the alphabetical order. You will remember from <a href="ch-regression-cat.html" class="quarto-xref"><span>Chapter 28</span></a> that the mean of the first level of a categorical predictor ends up being the intercept of the model while the difference of the second level relative to the first is the slope. With a third level, the model estimates another “slope”, which is <em>the difference between the third level and the first</em>. With treatment contrasts, the second and higher levels of a categorical predictor are compared to (or contrasted with) the first level. With the default alphabetical order, this means that the intercept of the model will tell us the mean VOT of aspirated stops, and the mean of voiced and voiceless stops will be compared to that of aspirated stops.</p>
 <p>An other important aspect of treatment coding of categorical predictors that we haven’t discussed is the number of indicator variables needed: the number of indicator variables is always the number of the levels of the predictor minus one (<span class="math inline">\(N - 1\)</span>, where <span class="math inline">\(N\)</span> is the number of levels). It follows that a predictor with three levels needs two indicator variables (<span class="math inline">\(N = 3\)</span>, <span class="math inline">\(3 - 1 = 2\)</span>). This is illustrated in <a href="#tbl-phon-treat" class="quarto-xref">Table&nbsp;<span>29.1</span></a>. For each observation, <span class="math inline">\(ph_\text{VD}\)</span> indicates if the observation is from a voiced stop (1) or not (0), and <span class="math inline">\(ph_\text{VL}\)</span> indicates if the observation is from a voiceless (unaspirated) stop (1) or not (0). Of course, if the observation if from an aspirated stop, that is neither a voiced nor a voiceless (unaspirated) stop, so both <span class="math inline">\(ph_\text{VD}\)</span> and <span class="math inline">\(ph_\text{VL}\)</span> are 0.</p>
 <div id="tbl-phon-treat" class="quarto-float quarto-figure quarto-figure-center anchored">

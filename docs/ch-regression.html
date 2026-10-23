@@ -646,14 +646,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch-regression-odds.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log odds, odds and odds ratios</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./ch-regression-lognorm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">31</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Log-normal regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-diag.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">32</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
+ <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Model diagnostics</span></span></a>
   </div>
 </li>
       </ul>
@@ -670,25 +676,25 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-open-research.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Open Research</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-cat.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">Multiple predictors in regression</span></span></a>
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Multiple predictors in regression</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-interaction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Interactions in regression: two categorical predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Interactions in regression: two categorical predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-cat-num.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Interactions in regression: one categorical and one numeric predictor</span></span></a>
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: one categorical and one numeric predictor</span></span></a>
   </div>
 </li>
       </ul>
@@ -705,19 +711,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-regression-num-num.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Interactions in regression: two numeric predictors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-next.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">What’s next?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./ch-workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">A workflow for quantitative studies</span></span></a>
   </div>
 </li>
       </ul>
@@ -772,7 +778,6 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch-regression-intro.html">Week 6</a></li><li class="breadcrumb-item"><a href="./ch-regression.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models with brms</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span id="sec-regression" class="quarto-section-identifier"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Regression models with brms</span></span></h1>
-<p class="subtitle lead">v2.3</p>
 </div>
 
 
@@ -798,7 +803,7 @@ y &amp; \sim Gaussian(\mu, \sigma)\\
 \mu &amp; = \beta_0 + \beta_1 x\\
 \end{aligned}\]</span></p>
 <p>From now on, we will use the latter way of expressing regression models, because it makes it clear which distribution we assume the variable <span class="math inline">\(y\)</span> to be generated by (here, a Gaussian distribution). Note that in the wild, variables very rarely are generated by Gaussian distributions. It is just pedagogically convenient to start with Gaussian regression models (i.e.&nbsp;regression models with a Gaussian distribution as the distribution of the outcome variable <span class="math inline">\(y\)</span>) because the parameters of the Gaussian distribution, <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> can be interpreted straightforwardly on the same scale as the outcome variable <span class="math inline">\(y\)</span>: so for example if <span class="math inline">\(y\)</span> is in centimetres, then the mean and standard deviation are in centimetres, if <span class="math inline">\(y\)</span> is in Hz, then the mean and SD are in Hz, and so on. Similarly, the regression <span class="math inline">\(\beta\)</span> coefficients will be on the same scale as the outcome variable <span class="math inline">\(y\)</span>. You will be introduced later to regression models with distributions other than the Gaussian, where the regression parameters are estimated on a different scale than that of the outcome variable <span class="math inline">\(y\)</span>.</p>
-<p>The goal of the Gaussian regression model expressed in the formulae above is to estimate <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma\)</span> from observed data. Now, since truly Gaussian data is difficult to come by, especially in linguistics, for the sake of pedagogical simplicity we will start the learning journey on fitting regression models using vowel durations, i.e.&nbsp;data for which a Gaussian regression is generally not appropriate. You will learn in <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 31</span></a> a more appropriate distribution family for this type of data.</p>
+<p>The goal of the Gaussian regression model expressed in the formulae above is to estimate <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\sigma\)</span> from observed data. Now, since truly Gaussian data is difficult to come by, especially in linguistics, for the sake of pedagogical simplicity we will start the learning journey on fitting regression models using vowel durations, i.e.&nbsp;data for which a Gaussian regression is generally not appropriate. You will learn in <a href="ch-regression-lognorm.html" class="quarto-xref"><span>Chapter 32</span></a> a more appropriate distribution family for this type of data.</p>
 <section id="vowel-duration-in-italian-the-data" class="level2" data-number="24.1">
 <h2 data-number="24.1" class="anchored" data-anchor-id="vowel-duration-in-italian-the-data"><span class="header-section-number">24.1</span> Vowel duration in Italian: the data</h2>
 <p>We will analyse the duration of vowels in Italian from <span class="citation" data-cites="coretta2019k">Coretta (<a href="references.html#ref-coretta2019k" role="doc-biblioref">2019</a>)</span> and how speech rate affects vowel duration. Vowel duration doesn’t need introductions, and speech rate is simply the number of syllables per second, calculated from the frame sentence the vowel was uttered in. An expectation we might have is that vowels get shorter with increasing speech rate. You will notice how this is a very vague hypothesis: how shorter do they get? Is the shortening the same across all speech rates, or does it get weaker with higher speech rates? Our expectation/hypothesis simply states that vowels get shorter with increasing speech rate. Maybe we could do better and use what we know from speech production and come up with something more precise, but this type of vague hypothesis are very common, if not standard, in linguistic research, so we will stick to it for practical and pedagogical reasons. Remember, however, that sound research should strive for precision.</p>

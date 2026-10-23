@@ -1,6 +1,10 @@
-# QDAL v2.3.9000
+# QDAL v2.4
 
 - Changed "log-odds" to "log odds" when noun.
+
+- New chapter on odds ratios.
+
+- Clarified ratios in the log-normal chapter.
 
 # QDAL v2.3
 
