@@ -1,3 +1,9 @@
+# QDAL v2.3
+
+- Fix broken links.
+
+- Use "construct" instead of "estimandum".
+
 # QDAL v2.2
 
 - Update `ch-open-research.qmd` after Open Science Framework change.
