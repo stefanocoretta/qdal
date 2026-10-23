@@ -119,7 +119,7 @@ Depending on the answer, check out @sec-cont or @sec-disc.
     -   As far as I know, there isn't a tutorial for this family, but @lorson2021 uses categorical models.
         The research compendium (with data and code) of the paper can be found here: <https://osf.io/e5av9/>.
 
-    -   Just a quick note: if you have an outcome variable with 3 levels (A, B and C) and you fit a categorical (multinomial) model, then $P(A) = \frac{e^0}{e^0 + e^{B} + e^{C}}$, where the superscripts $B$ and $C$ are the estimated log-odds difference of the B and C level vs the A level (these are the two intercepts in the model).
+    -   Just a quick note: if you have an outcome variable with 3 levels (A, B and C) and you fit a categorical (multinomial) model, then $P(A) = \frac{e^0}{e^0 + e^{B} + e^{C}}$, where the superscripts $B$ and $C$ are the estimated log odds difference of the B and C level vs the A level (these are the two intercepts in the model).
         This makes sense, because, assuming each level is equally probable, $\frac{e^{0}}{1 + e^{0} + e^{0}} = 0.333$ for all levels.
 
 [^app-reg-cheat-sheet-2]: Note that, despite using `family = binomial` in `glm()`, under the hood a Bernoulli distribution is used.

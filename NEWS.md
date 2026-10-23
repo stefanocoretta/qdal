@@ -1,3 +1,7 @@
+# QDAL v2.3.9000
+
+- Changed "log-odds" to "log odds" when noun.
+
 # QDAL v2.3
 
 - Fix broken links.

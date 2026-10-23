@@ -373,14 +373,14 @@ summary(si_bm)
 
 Now, let's interpret the model estimates.
 
-- `Intercept`, $\beta_0$: When **log frequency and semantic distance are 0**, there is a 95% probability that the log-odds of a scalar inference being made lie between -3.06 and -2.24.
-- `logfreq`, $\beta_1$: When **semantic distance is 0**, each **unit increase in log frequency**, corresponds to an *increase* in log-odds (of making a scalar inference) of 0.42 and 0.63 at 95% probability.
-- `semdist`, $\beta_2$: When **log frequency is 0**, each **unit increase in semantic distance**, corresponds to a *decrease* in log-odds of 0 to 0.21, at 95% confidence.
+- `Intercept`, $\beta_0$: When **log frequency and semantic distance are 0**, there is a 95% probability that the log odds of a scalar inference being made lie between -3.06 and -2.24.
+- `logfreq`, $\beta_1$: When **semantic distance is 0**, each **unit increase in log frequency**, corresponds to an *increase* in log odds (of making a scalar inference) of 0.42 and 0.63 at 95% probability.
+- `semdist`, $\beta_2$: When **log frequency is 0**, each **unit increase in semantic distance**, corresponds to a *decrease* in log odds of 0 to 0.21, at 95% confidence.
 
 You might be inclined to believe that semantic distance has a negative effect on probability of semantic inference, which is at odds with the plot above that showed a positive effect of semantic distance.
 However, the estimate in the model is giving us the effect of semantic distance *when logged frequency is 0.* Crucially, the interaction coefficient is positive.
 
-- `logfreq:semdist`, $\beta3$: a unit increase in log frequency is associated with a positive adjustment to the effect of (centred) semantic distance between 0.03 and 0.08 log-odds, at 95% probability.
+- `logfreq:semdist`, $\beta3$: a unit increase in log frequency is associated with a positive adjustment to the effect of (centred) semantic distance between 0.03 and 0.08 log odds, at 95% probability.
 
 In other words, as centred log frequency increases, the effect of semantic distance on the probability of a scalar inference being made increases as well (and conversely, as semantic distance increases, the effect of log frequency on the probability of a scalar inference being made increases, given the fact that interactions are symmetric).
 What this means is that at a certain value of logged frequency, the negative effect of semantic distance becomes positive.
@@ -647,9 +647,9 @@ si_epred_2_summary |>
 ::: callout-warning
 ### Exercise 3
 
-- Calculate the 90-80-60% CrIs of the effect (in log-odds and odds ratio) of log-frequency when semantic distance is at its mean, minimum and maximum in the data.
+- Calculate the 90-80-60% CrIs of the effect (in log odds and odds ratio) of log-frequency when semantic distance is at its mean, minimum and maximum in the data.
 
-- Calculate the 90-80-60% CrIs of the effect (in log-odds and odds ratio) of semantic distance when log-frequency is at its mean, minimum and maximum in the data.
+- Calculate the 90-80-60% CrIs of the effect (in log odds and odds ratio) of semantic distance when log-frequency is at its mean, minimum and maximum in the data.
 :::
 
 ## Reporting
@@ -690,9 +690,9 @@ In the following paragraph, we report 90% CrI as ranges, plus the mean and SD of
 See @tbl-coefs for the full coefficient table.
 
 The model's results suggest that, when logged frequency and semantic distance are at 0, the probability of a scalar inference being present is 5-9% at 90% probability (intercept, $\beta$ = -2.66, SD = 0.19).
-For each unit increase of log-frequency when semantic distance is 0, the log-odds of the probability of a scalar inference increase by a factor of 1.56-1.84 ($\beta$ = 0.53, SD = 0.05).
-For each unit increase of semantic distance when log-frequency is 0, the log-odds decrease by 2-17% ($\beta$ = -0.1, SD = 0.05).
-However, at mean log-frequency, the effect of semantic distance is positive: for each unit increase of semantic distance, the log-odds of the probability of a scalar inference increase by 7-11%.
+For each unit increase of log-frequency when semantic distance is 0, the log odds of the probability of a scalar inference increase by a factor of 1.56-1.84 ($\beta$ = 0.53, SD = 0.05).
+For each unit increase of semantic distance when log-frequency is 0, the log odds decrease by 2-17% ($\beta$ = -0.1, SD = 0.05).
+However, at mean log-frequency, the effect of semantic distance is positive: for each unit increase of semantic distance, the log odds of the probability of a scalar inference increase by 7-11%.
 Indeed, the interaction term of the model indicate a positive interaction between log-frequency and semantic distance: with greater log-frequency, the effect of semantic distance increases and, equivalently, with greater semantic distance, the effect of log-frequency increases.
 
 In sum, the model's result are generally compatible with H1 and H2, i.e. that the effect of log-frequency and semantic distance are positive.

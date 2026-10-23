@@ -114,7 +114,7 @@ $$
 
 -   `conditional_effects()` is a convenience function that plots the expected values of the outcome based on model's draws.
 
--   The draws of Bernoulli models are in log-odds and log-odds can be transformed into probabilities with the inverse logit (or logistic) function, in R `plogis()`.
+-   The draws of Bernoulli models are in log odds and log odds can be transformed into probabilities with the inverse logit (or logistic) function, in R `plogis()`.
     Remember to always include `b_Intercept` when using `plogis()` (do `plogis(b_Intercept)` and `plogis(b_Intercept + ...)` where `...` is other coefficients.
 
 -   You can calculate Credible Intervals with `quantile2()` from the posterior package.

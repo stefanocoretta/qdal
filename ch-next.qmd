@@ -135,7 +135,7 @@ For example, in Bernoulli models the linear equation is applied to the logit tra
 
 However, all regression models assume a linear relationship between a predictor and an outcome at the level of the linear term.
 In some cases, a linear relationship might not make sense.
-For example, if you are modelling change in probability of a morphological form across time, it is possible that the change is not linear even in log-odds, and maybe the probability first rises but then gets lower.
+For example, if you are modelling change in probability of a morphological form across time, it is possible that the change is not linear even in log odds, and maybe the probability first rises but then gets lower.
 This type of non-linear relationship can be modelled in Bayesian regression models using smoothers, `s()` in the model's formula.
 
 You can check out the tutorials on non-linear models and smoothers with brms in @franke2025 [Ch 10].

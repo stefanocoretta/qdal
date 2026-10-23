@@ -490,7 +490,7 @@ Ratios can also be interpreted as percentages: a ratio of 1.5 corresponds to a 5
 Conversely, logs that are smaller than zero corresponds to ratios that are smaller than 1, which in turn correspond to percentage decreases: For example, with a baseline 6 and a ratio of 0.8, there is a 20% decrease ($1 - 0.8 = 0.2$): $6 \times 0.8 = 4.8$, or $6 - (6 \times 0.2)$.
 
 Ratios are useful with log-normal variables because the magnitude of the difference depends on the baseline.
-This is similar to log-odds: if a Bernoulli model suggests an increase of 0.3 log-odds, the difference in percentage points depends on the baseline value, as illustrated by the following code:
+This is similar to log odds: if a Bernoulli model suggests an increase of 0.3 log odds, the difference in percentage points depends on the baseline value, as illustrated by the following code:
 
 ```{r}
 #| label: plogis
@@ -500,7 +500,7 @@ round(plogis(2 + 0.3) - plogis(2), 2)
 
 ```
 
-When the baseline log-odds is 1 (corresponding to about 73%), a 0.3 log-odd increase corresponds to a 5 percentage point increase (from 73 to 78%).
+When the baseline log odds is 1 (corresponding to about 73%), a 0.3 log-odd increase corresponds to a 5 percentage point increase (from 73 to 78%).
 When the baseline is 2 (about 88%) the same increase corresponds to a 3 percentage point increase.
 With log estimates, the same principle applies: for the same log difference, the difference in the original scale (like milliseconds for RT) is greater with larger baselines.
 
@@ -728,7 +728,7 @@ The functions `epred_draws()` and `linpred_draws()` can also be used with catego
 
 ## Reporting
 
-Like with Bernoulli models, while the estimates in log-normal regressions are in log-odds, it is more straightforward to understand differences and effects in the original scale.
+Like with Bernoulli models, while the estimates in log-normal regressions are in log odds, it is more straightforward to understand differences and effects in the original scale.
 However, when reporting, you should report effects on the logged scale and as ratios/percentages).
 In complex models, it might be worth reporting ratios/percentages and put log differences in tables.
 There isn't a rule for this.
