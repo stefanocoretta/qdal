@@ -467,6 +467,76 @@ fixef(rt_lw_int) |> knitr::kable(digits = 2)
 
 ```
 
+::: callout-note
+## Quiz 2
+
+```{r}
+#| label: quiz-2
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+  "The effect of Levenshtein distance must be zero for one word type.",
+  answer = "The effect of Levenshtein distance on RTs can differ between real and non-real words.",
+  "The effect of word type is averaged across all values of Levenshtein distance."
+)
+
+cat("a. What does an interaction between word type and Levenshtein distance allow the model to estimate?", longmcq(opts_1))
+
+
+opts_2 <- c(
+  "The effect of speech rate averaged across both languages.",
+  answer = "The effect of speech rate on vowel duration in the reference language.",
+  "The difference in vowel duration between the two languages when speech rate is 0."
+)
+
+cat("b. A model predicts vowel duration from speech rate, language, and their interaction. What does the coefficient for speech rate represent?", longmcq(opts_2))
+
+
+opts_3 <- c(
+  "The difference between child and adult speakers averaged across all word frequencies.",
+  "The effect of word frequency for child speakers.",
+  answer = "The difference between child and adult speakers when word frequency is 0."
+)
+
+cat("c. A model predicts naming time from word frequency, age group (adult vs child), and their interaction, with adults as the reference level. What does the coefficient for age group represent?", longmcq(opts_3))
+
+
+opts_7 <- c(
+  "Because expected values cannot be calculated for log-normal models.",
+  answer = "Because the linear predictor shows the effects on the logged RT scale, where the relationship is linear.",
+  "Because `posterior_epred()` can only be used with categorical predictors."
+)
+
+cat("d. Why can it be useful to plot the linear predictor rather than expected RTs for a log-normal regression?", longmcq(opts_7))
+
+
+opts_8 <- c(
+  "The effect of Levenshtein distance is stronger in non-real words.",
+  answer = "The effect of Levenshtein distance is weaker in non-real words than in real words.",
+  "Levenshtein distance has no effect on RTs in non-real words."
+)
+
+cat("e. What does a negative `PhonLev:IsWordFALSE` interaction coefficient indicate?", longmcq(opts_8))
+
+
+opts_10 <- c(
+  "Use only the coefficient for language group.",
+  "Use only the interaction coefficient.",
+  answer = "Calculate the linear predictor for both language groups at that frequency and compare them."
+)
+
+cat("f. A model predicts lexical decision time from word frequency, language group, and their interaction. How can the difference between the two language groups at a particular word frequency be estimated?", longmcq(opts_10))
+
+cat("**True or false?**", "\n\n")
+cat("g. Without an interaction term, the model assumes that the effect of Levenshtein distance is the same in real and non-real words.", torf(TRUE), "\n\n")
+cat("h. In the interaction model, the main effect of a numeric predictor is interpreted at the reference level of the categorical predictor.", torf(TRUE), "\n\n")
+cat("i. A negative interaction coefficient necessarily means that RTs decrease as Levenshtein distance increases in non-real words.", torf(FALSE), "\n\n")
+cat("j. When an interaction is present, the difference between the two levels of the categorical predictor can change as the numeric predictor changes.", torf(TRUE), "\n\n")
+cat("k. To calculate a ratio for a five-unit increase in Levenshtein distance in non-real words, both the main effect of distance and its interaction coefficient must be taken into account.", torf(TRUE))
+```
+:::
+
 ## Summary
 
 ::: {.callout-note appearance="simple"}

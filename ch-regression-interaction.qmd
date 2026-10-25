@@ -400,6 +400,68 @@ It much depends on the specific research question and on which part of the resul
 Generally speaking, you should report credible intervals at various levels of probability, mean and SD and include plots (density or interval plots) of regression coefficients, expected values, and of other comparisons (not already covered by the regression coefficients).
 With more complex models, including all that in a report might be too much so you can take advantage of tables and appendices: for example, you can refer the reader to a table containing summaries of the regression coefficients and only directly report relevant CrIs in the text, accompanied by some plots of relevant posterior distributions.
 
+::: callout-note
+## Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+  "It estimates the average effect of each predictor independently of the other predictor.",
+  answer = "It allows the effect of one predictor to vary depending on the level of another predictor.",
+  "It removes the main effects of the predictors from the model."
+)
+
+cat("a. What does an interaction term allow a regression model to estimate?", longmcq(opts_1))
+
+
+opts_2 <- c(
+  "$\\beta_0 + \\beta_1 + \\beta_2$",
+  "$\\beta_0 + \\beta_3$",
+  answer = "$\\beta_0 + \\beta_1 + \\beta_2 + \\beta_3$"
+)
+
+cat("b. In the interaction model above, what is the expected mean f0 for a male participant in the polite condition?", longmcq(opts_2))
+
+
+opts_3 <- c(
+  "The average difference between two levels of one predictor across the levels of the other",
+  answer = "The difference between two levels of one predictor when the other is at its reference level.",
+  "The difference between two levels of one predictor at the non-reference level of the other."
+)
+
+cat("c. How is the main effect coefficient interpreted in a model containing an interaction?", longmcq(opts_3))
+
+
+opts_4 <- c(
+  "The mean f0 of male participants in polite speech.",
+  "The sum of the separate effects of gender and attitude.",
+  answer = "The adjustment to the additive effects of gender and attitude when both predictors are at their non-reference levels."
+)
+
+cat("d. What does the interaction coefficient $\\beta_3$ represent in the model of this chapter?", longmcq(opts_4))
+
+
+opts_5 <- c(
+  "`x + z`",
+  "`x:z`",
+  answer = "`x * z`"
+)
+
+cat("e. Which R formula syntax includes both main terms and their interaction?", longmcq(opts_5))
+
+cat("**True or false?**", "\n\n")
+cat("f. The formula `group * language` expands to `group + language + group:language`.", torf(TRUE), "\n\n")
+cat("g. In a model with an interaction `group * language`, the coefficient for language represents the average effect of language across both groups.", torf(FALSE), "\n\n")
+cat("h. With large and bilingual as the reference levels, the intercept represents the expected outcome for bilingual participants in the large group condition.", torf(TRUE), "\n\n")
+cat("i. If an interaction coefficient is uncertain and its Credible Interval includes both negative and positive values, the interaction term should be removed and the model refitted without it.", torf(FALSE), "\n\n")
+cat("j. Expected values and comparisons between specific combinations of predictor levels can be calculated from the posterior draws of a model with an interaction.", torf(TRUE))
+
+```
+:::
+
 ## Summary
 
 ::: {.callout-note appearance="minimal"}

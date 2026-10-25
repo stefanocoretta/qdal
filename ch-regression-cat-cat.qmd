@@ -114,7 +114,7 @@ The second variable states if the $f0mn$ value is from the informal condition ($
 
 ::: {#tbl-gen-att-contrasts}
 |                                            | $gen_\text{M}$ | $att_\text{POL}$ |
-|:------------------------------------:|:---------------:|:---------------:|
+|:------------------------------------------:|:--------------:|:----------------:|
 | `gender` = `F` and `attitude` = `informal` |       0        |        0         |
 |  `gender` = `F` and `attitude` = `polite`  |       0        |        1         |
 | `gender` = `M` and `attitude` = `informal` |       1        |        0         |
@@ -285,3 +285,63 @@ polite_filt |>
 
 How do we let the model estimate a different effect of attitude based on gender?
 This is the topic of the next chapter.
+
+::: callout-note
+## Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+  "The mean f0 for male participants in the polite condition.",
+  answer = "The mean f0 for female participants in the informal condition.",
+  "The mean f0 averaged across all gender and attitude combinations."
+)
+
+cat("a. What does the intercept represent in the model `f0mn ~ gender + attitude`?", longmcq(opts_1))
+
+
+opts_2 <- c(
+  "The difference between males and females only in the informal condition.",
+  "The difference between males and females only in the polite condition.",
+  answer = "The difference between males and females after accounting for variation associated with attitude."
+)
+
+cat("b. What does it mean for the model to estimate the effect of gender while controlling for attitude?", longmcq(opts_2))
+
+
+opts_3 <- c(
+  "The model estimates separate place effects for each vowel.",
+  answer = "The model assumes that the effect of place is the same for each vowel.",
+  "The model estimates attitude only for the reference vowel."
+)
+
+cat("c. What does the model `d ~ place + vowel` assume about the effect of place?", longmcq(opts_3))
+
+
+opts_4 <- c(
+  "$\\beta_0 + \\beta_1$",
+  "$\\beta_0 + \\beta_2$",
+  answer = "$\\beta_0 + \\beta_1 + \\beta_2$"
+)
+
+cat("d. What is the expected mean f0 for a male participant in the polite condition?", longmcq(opts_4))
+
+
+opts_5 <- c(
+  "It estimates the effect of each predictor without accounting for the other predictor.",
+  answer = "It combines comparisons into a single adjusted estimate made while holding the other predictor constant.",
+  "It restricts the model to observations at the reference level of the other predictor."
+)
+
+cat("e. How can a regression coefficient be understood when a model contains multiple predictors?", longmcq(opts_5))
+
+cat("**True or false?**", "\n\n")
+cat("f. In the treatment coding used for the model of this chapter, female and informal are the reference levels of gender and attitude.", torf(TRUE), "\n\n")
+cat("g. The coefficient for attitude represents the difference between polite and informal speech after accounting for differences between genders.", torf(TRUE), "\n\n")
+cat("h. In a balanced design, the comparisons across the levels of the predictor being controlled for receive equal weight.", torf(TRUE), "\n\n")
+cat("i. For a female participant in the polite condition, the expected mean f0 is $\\beta_0 + \\beta_1$.", torf(FALSE))
+```
+:::

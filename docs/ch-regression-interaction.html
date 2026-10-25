@@ -819,7 +819,7 @@ window.Quarto = {
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> <span class="fl">0.1</span>, <span class="at">seed =</span> <span class="dv">2836</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-polite-f0-gend-att-repr-2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<div id="fig-polite-f0-gend-att-repr-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-polite-f0-gend-att-repr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="ch-regression-interaction_files/figure-html/fig-polite-f0-gend-att-repr-2-1.png" id="fig-polite-f0-gend-att-repr-2" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" width="672">
@@ -1241,6 +1241,48 @@ Table&nbsp;36.2: Mean, SD and 95% CrI of the expected values of mean f0 from the
 </div>
 </div>
 <p>Note that there isn’t a single “right” way of reporting model results, or a fixed procedure. It much depends on the specific research question and on which part of the results you place focus on. Generally speaking, you should report credible intervals at various levels of probability, mean and SD and include plots (density or interval plots) of regression coefficients, expected values, and of other comparisons (not already covered by the regression coefficients). With more complex models, including all that in a report might be too much so you can take advantage of tables and appendices: for example, you can refer the reader to a table containing summaries of the regression coefficients and only directly report relevant CrIs in the text, accompanied by some plots of relevant posterior distributions.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Quiz 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<ol type="a">
+<li><p>What does an interaction term allow a regression model to estimate?</p>
+<div id="radio_ZFFZMYMXMN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ZFFZMYMXMN" value=""> <span>It estimates the average effect of each predictor independently of the other predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_ZFFZMYMXMN" value="answer"> <span>It allows the effect of one predictor to vary depending on the level of another predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_ZFFZMYMXMN" value=""> <span>It removes the main effects of the predictors from the model.</span></label>
+</div></li>
+<li><p>In the interaction model above, what is the expected mean f0 for a male participant in the polite condition?</p>
+<div id="radio_NTYSYEWJGB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NTYSYEWJGB" value=""> <span><span class="math inline">\(\beta_0 + \beta_1 + \beta_2\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_NTYSYEWJGB" value=""> <span><span class="math inline">\(\beta_0 + \beta_3\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_NTYSYEWJGB" value="answer"> <span><span class="math inline">\(\beta_0 + \beta_1 + \beta_2 + \beta_3\)</span></span></label>
+</div></li>
+<li><p>How is the main effect coefficient interpreted in a model containing an interaction?</p>
+<div id="radio_QUXIHHTEYI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QUXIHHTEYI" value=""> <span>The average difference between two levels of one predictor across the levels of the other</span></label><label><input type="radio" autocomplete="off" name="radio_QUXIHHTEYI" value="answer"> <span>The difference between two levels of one predictor when the other is at its reference level.</span></label><label><input type="radio" autocomplete="off" name="radio_QUXIHHTEYI" value=""> <span>The difference between two levels of one predictor at the non-reference level of the other.</span></label>
+</div></li>
+<li><p>What does the interaction coefficient <span class="math inline">\(\beta_3\)</span> represent in the model of this chapter?</p>
+<div id="radio_OKORZSDZWB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OKORZSDZWB" value=""> <span>The mean f0 of male participants in polite speech.</span></label><label><input type="radio" autocomplete="off" name="radio_OKORZSDZWB" value=""> <span>The sum of the separate effects of gender and attitude.</span></label><label><input type="radio" autocomplete="off" name="radio_OKORZSDZWB" value="answer"> <span>The adjustment to the additive effects of gender and attitude when both predictors are at their non-reference levels.</span></label>
+</div></li>
+<li><p>Which R formula syntax includes both main terms and their interaction?</p>
+<div id="radio_TKUHZSVSTM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TKUHZSVSTM" value=""> <span><code>x + z</code></span></label><label><input type="radio" autocomplete="off" name="radio_TKUHZSVSTM" value=""> <span><code>x:z</code></span></label><label><input type="radio" autocomplete="off" name="radio_TKUHZSVSTM" value="answer"> <span><code>x * z</code></span></label>
+</div>
+<p><strong>True or false?</strong></p></li>
+<li><p>The formula <code>group * language</code> expands to <code>group + language + group:language</code>. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>In a model with an interaction <code>group * language</code>, the coefficient for language represents the average effect of language across both groups. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+<li><p>With large and bilingual as the reference levels, the intercept represents the expected outcome for bilingual participants in the large group condition. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>If an interaction coefficient is uncertain and its Credible Interval includes both negative and positive values, the interaction term should be removed and the model refitted without it. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+<li><p>Expected values and comparisons between specific combinations of predictor levels can be calculated from the posterior draws of a model with an interaction. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+</ol>
+</div>
+</div>
+</div>
 </section>
 <section id="summary" class="level2" data-number="36.6">
 <h2 data-number="36.6" class="anchored" data-anchor-id="summary"><span class="header-section-number">36.6</span> Summary</h2>

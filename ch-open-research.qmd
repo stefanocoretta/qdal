@@ -103,6 +103,49 @@ In particular the CC-BY licence allows re-use of compendia provided attribution 
 For software more specifically, there are several licences like the MIT license and the GNU licence.
 When sharing compendia you should carefully think about which licence to distribute the compendia under.
 
+::: callout-note
+## Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+  "Same data and a different analysis pipeline.",
+  answer = "Same data and the same analysis pipeline.",
+  "New data and a different analysis pipeline."
+)
+
+cat("a. When are research results considered reproducible?", longmcq(opts_1))
+
+
+opts_2 <- c(
+  "A procedure for publishing the data only after a study has been completed.",
+  answer = "A procedure for registering the study design and analysis pipeline before conducting the study.",
+  "A procedure for peer-reviewing a completed study before journal submission."
+)
+
+cat("b. What is pre-registration?", longmcq(opts_2))
+
+
+opts_3 <- c(
+  "It automatically prevents others from modifying the research files.",
+  "It is primarily designed to store large data files efficiently.",
+  answer = "It tracks changes to files and allows researchers to return to earlier versions."
+)
+
+cat("c. What is a key function of a version control system such as git?", longmcq(opts_3))
+
+cat("**True or false?**", "\n\n")
+cat("d. Results obtained from new data using the same data-collection protocol and the same analysis workflow are considered replicable.", torf(TRUE), "\n\n")
+cat("e. In a Registered Report, publication after Stage 2 depends on whether the study produces statistically significant results.", torf(FALSE), "\n\n")
+cat("f. Registered Reports can include analyses that were not planned at Stage 1, provided they are clearly identified as exploratory or not pre-registered.", torf(TRUE), "\n\n")
+cat("g. Sharing a research compendium without specifying how it can be reused automatically makes it open for reuse.", torf(FALSE), "\n\n")
+cat("h. A CC-BY licence permits reuse provided that the original authors are attributed.", torf(TRUE))
+```
+:::
+
 ## Summary
 
 ::: {.callout-note appearance="simple"}

@@ -890,8 +890,8 @@ Table&nbsp;35.1: Treatment contrasts coding of the categorical predictors gender
 <div aria-describedby="tbl-gen-att-contrasts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 52%">
-<col style="width: 23%">
+<col style="width: 56%">
+<col style="width: 20%">
 <col style="width: 23%">
 </colgroup>
 <thead>
@@ -1138,7 +1138,7 @@ Figure&nbsp;35.4: Expected predictions of mean f0 by gender and attitude.
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> <span class="fl">0.1</span>, <span class="at">seed =</span> <span class="dv">2836</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-polite-f0-gend-att-repr" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" width="672">
+<div id="fig-polite-f0-gend-att-repr" class="quarto-float quarto-figure quarto-figure-center anchored" width="672" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-polite-f0-gend-att-repr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="ch-regression-cat-cat_files/figure-html/fig-polite-f0-gend-att-repr-1.png" id="fig-polite-f0-gend-att-repr" class="img-fluid quarto-figure quarto-figure-center anchored figure-img" width="672">
@@ -1151,6 +1151,47 @@ Figure&nbsp;35.5
 </div>
 </div>
 <p>How do we let the model estimate a different effect of attitude based on gender? This is the topic of the next chapter.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Quiz 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<ol type="a">
+<li><p>What does the intercept represent in the model <code>f0mn ~ gender + attitude</code>?</p>
+<div id="radio_DXQZPQZZVZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DXQZPQZZVZ" value=""> <span>The mean f0 for male participants in the polite condition.</span></label><label><input type="radio" autocomplete="off" name="radio_DXQZPQZZVZ" value="answer"> <span>The mean f0 for female participants in the informal condition.</span></label><label><input type="radio" autocomplete="off" name="radio_DXQZPQZZVZ" value=""> <span>The mean f0 averaged across all gender and attitude combinations.</span></label>
+</div></li>
+<li><p>What does it mean for the model to estimate the effect of gender while controlling for attitude?</p>
+<div id="radio_FNJTIKVKUS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FNJTIKVKUS" value=""> <span>The difference between males and females only in the informal condition.</span></label><label><input type="radio" autocomplete="off" name="radio_FNJTIKVKUS" value=""> <span>The difference between males and females only in the polite condition.</span></label><label><input type="radio" autocomplete="off" name="radio_FNJTIKVKUS" value="answer"> <span>The difference between males and females after accounting for variation associated with attitude.</span></label>
+</div></li>
+<li><p>What does the model <code>d ~ place + vowel</code> assume about the effect of place?</p>
+<div id="radio_QBMRAKRYZD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QBMRAKRYZD" value=""> <span>The model estimates separate place effects for each vowel.</span></label><label><input type="radio" autocomplete="off" name="radio_QBMRAKRYZD" value="answer"> <span>The model assumes that the effect of place is the same for each vowel.</span></label><label><input type="radio" autocomplete="off" name="radio_QBMRAKRYZD" value=""> <span>The model estimates attitude only for the reference vowel.</span></label>
+</div></li>
+<li><p>What is the expected mean f0 for a male participant in the polite condition?</p>
+<div id="radio_VBVOBDOHHM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VBVOBDOHHM" value=""> <span><span class="math inline">\(\beta_0 + \beta_1\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_VBVOBDOHHM" value=""> <span><span class="math inline">\(\beta_0 + \beta_2\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_VBVOBDOHHM" value="answer"> <span><span class="math inline">\(\beta_0 + \beta_1 + \beta_2\)</span></span></label>
+</div></li>
+<li><p>How can a regression coefficient be understood when a model contains multiple predictors?</p>
+<div id="radio_YZRATYXQDO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YZRATYXQDO" value=""> <span>It estimates the effect of each predictor without accounting for the other predictor.</span></label><label><input type="radio" autocomplete="off" name="radio_YZRATYXQDO" value="answer"> <span>It combines comparisons into a single adjusted estimate made while holding the other predictor constant.</span></label><label><input type="radio" autocomplete="off" name="radio_YZRATYXQDO" value=""> <span>It restricts the model to observations at the reference level of the other predictor.</span></label>
+</div>
+<p><strong>True or false?</strong></p></li>
+<li><p>In the treatment coding used for the model of this chapter, female and informal are the reference levels of gender and attitude. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>The coefficient for attitude represents the difference between polite and informal speech after accounting for differences between genders. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>In a balanced design, the comparisons across the levels of the predictor being controlled for receive equal weight. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>For a female participant in the polite condition, the expected mean f0 is <span class="math inline">\(\beta_0 + \beta_1\)</span>. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+</ol>
+</div>
+</div>
+</div>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
