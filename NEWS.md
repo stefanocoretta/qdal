@@ -1,3 +1,7 @@
+# QDAL v2.5
+
+- Added quizzes to Weeks 7-9
+
 # QDAL v2.4
 
 - Changed "log-odds" to "log odds" when noun.

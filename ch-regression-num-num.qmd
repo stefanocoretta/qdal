@@ -708,6 +708,93 @@ fixef(si_bm) |>
 
 ```
 
+::: callout-note
+## Quiz 2
+
+```{r}
+#| label: quiz-2
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+  "It allows the intercept to vary across observations.",
+  answer = "It allows the effect of one numeric predictor to vary depending on the value of another numeric predictor.",
+  "It converts both numeric predictors into categorical predictors."
+)
+
+cat("a. What does an interaction between two numeric predictors allow a regression model to estimate?", longmcq(opts_1))
+
+
+opts_2 <- c(
+  "The effect of semantic distance averaged across all values of log-frequency.",
+  answer = "The effect of semantic distance when log-frequency is 0.",
+  "The effect of log-frequency when semantic distance is 0."
+)
+
+cat("b. In a model with an interaction between log-frequency and semantic distance, what does the main coefficient for semantic distance represent?", longmcq(opts_2))
+
+
+opts_3 <- c(
+  "$\\beta_1$",
+  "$\\beta_3 \\cdot a$",
+  answer = "$\\beta_1 + \\beta_3 \\cdot a$"
+)
+
+cat("c. A model predicts a linguistic outcome from speech rate, age, and their interaction. If $\\beta_1$ is the coefficient for speech rate and $\\beta_3$ is the interaction coefficient, what is the effect of speech rate when age is $a$?", longmcq(opts_3))
+
+
+opts_4 <- c(
+  "The effect of speech rate becomes more negative as age increases.",
+  answer = "The effect of speech rate becomes more positive as age increases.",
+  "The effect of speech rate remains constant as age increases."
+)
+
+cat("d. A model predicts vowel duration from speech rate, age, and their interaction. What does a positive interaction coefficient indicate about the effect of speech rate as age increases?", longmcq(opts_4))
+
+
+opts_5 <- c(
+  "$-\\beta_1 / \\beta_3$",
+  answer = "$-\\beta_2 / \\beta_3$",
+  "$\\beta_2 + \\beta_3$"
+)
+
+cat("e. In a model $y = \\beta_0 + \\beta_1x + \\beta_2z + \\beta_3xz$, at what value of $x$ is the conditional effect of $z$ equal to 0?", longmcq(opts_5))
+
+
+opts_6 <- c(
+  "The same increase on the original frequency scale regardless of the starting value.",
+  "A decrease on the original frequency scale.",
+  answer = "Different absolute increases on the original frequency scale depending on the starting value."
+)
+
+cat("f. What does a one-unit increase in a log-transformed frequency predictor correspond to on the original frequency scale?", longmcq(opts_6))
+
+
+opts_7 <- c(
+  "The effect of speech rate when f0 is at its maximum.",
+  "The average effect of speech rate across all values of f0",
+  answer = "The effect of speech rate when f0 is 0."
+)
+
+cat("g. A model predicts vowel formant frequency from speech rate, f0, and their interaction. What does the main coefficient for speech rate represent?", longmcq(opts_7))
+
+
+opts_8 <- c(
+  "The effect of one predictor must have the same sign at every value of the other predictor.",
+  answer = "The effect of one predictor can change from negative to positive, or vice versa, as the other predictor changes.",
+  "Both predictors must have positive main effects."
+)
+
+cat("h. What can happen to a predictor's conditional effect when a numeric-numeric interaction is present?", longmcq(opts_8))
+
+cat("**True or false?**", "\n\n")
+cat("i. With an interaction between two numeric predictors, the main coefficient for one predictor represents its effect when the other predictor is 0.", torf(TRUE), "\n\n")
+cat("j. A positive interaction coefficient means that both predictors must have positive main-effect coefficients.", torf(FALSE), "\n\n")
+cat("k. The conditional effect of semantic distance can be calculated as $\\beta_2 + \\beta_3 \\cdot f$, where $f$ is the value of log-frequency.", torf(TRUE), "\n\n")
+cat("l. `conditional_effects()` evaluates other numeric predictors at 0 by default when plotting the effect of a numeric predictor.", torf(FALSE))
+```
+:::
+
 ## Summary
 
 ::: {.callout-note appearance="simple"}
