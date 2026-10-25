@@ -761,6 +761,77 @@ It is just that different research traditions call them differently.
 So if somebody asks you to run a logistic regression, or if you read a paper that reports one, what they just mean is to run a regression with a binary outcome variable and a Bernoulli distribution!
 :::
 
+::: callout-note
+## Quiz 2
+
+```{r}
+#| label: quiz-2
+#| results: asis
+#| echo: false
+
+opts_2 <- c(
+  "The probability of obtaining 0.",
+  answer = "The probability of obtaining 1.",
+  "The total number of observations."
+)
+
+cat("a. What does $p$ represent in a Bernoulli distribution when the two outcomes are coded as 0 and 1?", longmcq(opts_2))
+
+
+opts_3 <- c(
+  "A Bernoulli distribution has two parameters, while a binomial distribution has one.",
+  "A Bernoulli distribution is used for continuous outcomes, while a binomial distribution is used for categorical outcomes.",
+  answer = "A Bernoulli distribution is equivalent to a binomial distribution with one trial."
+)
+
+cat("b. What is the relationship between the Bernoulli and binomial distributions?", longmcq(opts_3))
+
+
+opts_4 <- c(
+  "The probability of success divided by the total number of observations.",
+  answer = "The probability of success divided by the probability of failure.",
+  "The probability of failure divided by the probability of success."
+)
+
+cat("c. How are the odds of an event calculated from its probability $p$?", longmcq(opts_4))
+
+
+opts_5 <- c(
+  answer = "`qlogis()`.",
+  "`plogis()`.",
+  "`rbinom()`."
+)
+
+cat("d. Which R function transforms probabilities into log odds?", longmcq(opts_5))
+
+
+opts_8 <- c(
+  "Because the first level is always assigned a probability of 0.",
+  answer = "Because a Bernoulli model estimates the probability of the second level of the outcome.",
+  "Because treatment contrasts can only be applied when the outcome levels are alphabetically ordered."
+)
+
+cat("e. Why is the order of the levels of a binary outcome important when fitting a Bernoulli model?", longmcq(opts_8))
+
+
+opts_9 <- c(
+  "A function that converts posterior draws into Credible Intervals.",
+  answer = "A function that maps a distribution parameter onto an unrestricted scale used by the regression equation.",
+  "A function that converts a categorical predictor into dummy variables."
+)
+
+cat("f. What is a link function in a regression model?", longmcq(opts_9))
+
+cat("**True or false?**", "\n\n")
+cat("g. In brms, `family = bernoulli` is used to fit a regression model with a binary outcome variable.", torf(TRUE), "\n\n")
+cat("h. `plogis()` transforms log odds into probabilities.", torf(TRUE), "\n\n")
+cat("i. When participants contribute different numbers of observations, the mean of their individual proportions is necessarily equal to the overall proportion calculated from all observations.", torf(FALSE), "\n\n")
+cat("j. The regression coefficients are probabilities, while the expected values are log odds.", torf(FALSE), "\n\n")
+cat("k. A difference of 30 percentage points between two probabilities is the same as saying that one probability increased by 30 percent.", torf(FALSE), "\n\n")
+cat("l. Logistic regression is another name commonly used for regression with a binary outcome and a Bernoulli distribution.", torf(TRUE))
+```
+:::
+
 ## Summary
 
 ::: {.callout-note appearance="simple"}

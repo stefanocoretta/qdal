@@ -1509,6 +1509,53 @@ Table&nbsp;30.1: Regression coefficients from the Bayesian Bernoulli regression 
 <p>So if somebody asks you to run a logistic regression, or if you read a paper that reports one, what they just mean is to run a regression with a binary outcome variable and a Bernoulli distribution!</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Quiz 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<ol type="a">
+<li><p>What does <span class="math inline">\(p\)</span> represent in a Bernoulli distribution when the two outcomes are coded as 0 and 1?</p>
+<div id="radio_VXGXHPOEKB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VXGXHPOEKB" value=""> <span>The probability of obtaining 0.</span></label><label><input type="radio" autocomplete="off" name="radio_VXGXHPOEKB" value="answer"> <span>The probability of obtaining 1.</span></label><label><input type="radio" autocomplete="off" name="radio_VXGXHPOEKB" value=""> <span>The total number of observations.</span></label>
+</div></li>
+<li><p>What is the relationship between the Bernoulli and binomial distributions?</p>
+<div id="radio_AYRGKAEOIJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AYRGKAEOIJ" value=""> <span>A Bernoulli distribution has two parameters, while a binomial distribution has one.</span></label><label><input type="radio" autocomplete="off" name="radio_AYRGKAEOIJ" value=""> <span>A Bernoulli distribution is used for continuous outcomes, while a binomial distribution is used for categorical outcomes.</span></label><label><input type="radio" autocomplete="off" name="radio_AYRGKAEOIJ" value="answer"> <span>A Bernoulli distribution is equivalent to a binomial distribution with one trial.</span></label>
+</div></li>
+<li><p>How are the odds of an event calculated from its probability <span class="math inline">\(p\)</span>?</p>
+<div id="radio_HCOICLYCHZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HCOICLYCHZ" value=""> <span>The probability of success divided by the total number of observations.</span></label><label><input type="radio" autocomplete="off" name="radio_HCOICLYCHZ" value="answer"> <span>The probability of success divided by the probability of failure.</span></label><label><input type="radio" autocomplete="off" name="radio_HCOICLYCHZ" value=""> <span>The probability of failure divided by the probability of success.</span></label>
+</div></li>
+<li><p>Which R function transforms probabilities into log odds?</p>
+<div id="radio_YMYWEYMWAI" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_YMYWEYMWAI" value="answer"> <span><code>qlogis()</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_YMYWEYMWAI" value=""> <span><code>plogis()</code>.</span></label><label><input type="radio" autocomplete="off" name="radio_YMYWEYMWAI" value=""> <span><code>rbinom()</code>.</span></label>
+</div></li>
+<li><p>Why is the order of the levels of a binary outcome important when fitting a Bernoulli model?</p>
+<div id="radio_NXUJHRZMGF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NXUJHRZMGF" value=""> <span>Because the first level is always assigned a probability of 0.</span></label><label><input type="radio" autocomplete="off" name="radio_NXUJHRZMGF" value="answer"> <span>Because a Bernoulli model estimates the probability of the second level of the outcome.</span></label><label><input type="radio" autocomplete="off" name="radio_NXUJHRZMGF" value=""> <span>Because treatment contrasts can only be applied when the outcome levels are alphabetically ordered.</span></label>
+</div></li>
+<li><p>What is a link function in a regression model?</p>
+<div id="radio_JHCBFOPOGE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JHCBFOPOGE" value=""> <span>A function that converts posterior draws into Credible Intervals.</span></label><label><input type="radio" autocomplete="off" name="radio_JHCBFOPOGE" value="answer"> <span>A function that maps a distribution parameter onto an unrestricted scale used by the regression equation.</span></label><label><input type="radio" autocomplete="off" name="radio_JHCBFOPOGE" value=""> <span>A function that converts a categorical predictor into dummy variables.</span></label>
+</div>
+<p><strong>True or false?</strong></p></li>
+<li><p>In brms, <code>family = bernoulli</code> is used to fit a regression model with a binary outcome variable. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p><code>plogis()</code> transforms log odds into probabilities. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>When participants contribute different numbers of observations, the mean of their individual proportions is necessarily equal to the overall proportion calculated from all observations. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+<li><p>The regression coefficients are probabilities, while the expected values are log odds. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+<li><p>A difference of 30 percentage points between two probabilities is the same as saying that one probability increased by 30 percent. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+<li><p>Logistic regression is another name commonly used for regression with a binary outcome and a Bernoulli distribution. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+</ol>
+</div>
+</div>
+</div>
 </section>
 <section id="summary" class="level2" data-number="30.7">
 <h2 data-number="30.7" class="anchored" data-anchor-id="summary"><span class="header-section-number">30.7</span> Summary</h2>

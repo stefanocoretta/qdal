@@ -1474,6 +1474,60 @@ Table&nbsp;32.1: Regression coefficients from the Bayesian log-normal regression
 </div>
 </div>
 <p>This answers our research question above (“Does mean phoneme-level Levenshtein distance of the target word have an effect on the response reaction times?”): we know now that for each unit increase of mean distance, the RTs increase by 3-4% at 80% probability.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Quiz 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<ol type="a">
+<li><p>When is a log-normal distribution a reasonable initial assumption for a continuous outcome?</p>
+<div id="radio_AXCCKVWGXJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AXCCKVWGXJ" value=""> <span>Any continuous variable that is right-skewed in the observed data.</span></label><label><input type="radio" autocomplete="off" name="radio_AXCCKVWGXJ" value="answer"> <span>A continuous variable that can only take positive values and cannot be zero.</span></label><label><input type="radio" autocomplete="off" name="radio_AXCCKVWGXJ" value=""> <span>A continuous variable that can take both positive and negative values.</span></label>
+</div></li>
+<li><p>What happens when the logarithm is taken of a log-normal variable?</p>
+<div id="radio_JVNPWZLQMF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JVNPWZLQMF" value=""> <span>It makes the highest values more extreme.</span></label><label><input type="radio" autocomplete="off" name="radio_JVNPWZLQMF" value=""> <span>It transforms the variable into a binary outcome.</span></label><label><input type="radio" autocomplete="off" name="radio_JVNPWZLQMF" value="answer"> <span>It makes a log-normal variable approximate a Gaussian distribution.</span></label>
+</div></li>
+<li><p>When should an extreme observation be excluded from an analysis?</p>
+<div id="radio_EXPSQGBPSN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EXPSQGBPSN" value=""> <span>Any observation far from the mean should be excluded.</span></label><label><input type="radio" autocomplete="off" name="radio_EXPSQGBPSN" value="answer"> <span>An extreme observation should be excluded when there is a theoretical reason to consider it an error or otherwise unrelated to the process of interest.</span></label><label><input type="radio" autocomplete="off" name="radio_EXPSQGBPSN" value=""> <span>Extreme observations should always be excluded before fitting a regression model.</span></label>
+</div></li>
+<li><p>What is the purpose of a posterior predictive check with <code>pp_check()</code>?</p>
+<div id="radio_CJTKQWHJMF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CJTKQWHJMF" value=""> <span>It compares the posterior distributions of the regression coefficients with their priors.</span></label><label><input type="radio" autocomplete="off" name="radio_CJTKQWHJMF" value="answer"> <span>It compares distributions predicted by the model with the empirical distribution of the outcome.</span></label><label><input type="radio" autocomplete="off" name="radio_CJTKQWHJMF" value=""> <span>It determines whether the predictor should be log-transformed.</span></label>
+</div></li>
+<li><p>How can a coefficient representing a log difference be transformed into a ratio?</p>
+<div id="radio_NPZWQCLDFQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NPZWQCLDFQ" value=""> <span>By applying <code>log()</code> to the coefficient.</span></label><label><input type="radio" autocomplete="off" name="radio_NPZWQCLDFQ" value=""> <span>By multiplying the coefficient by the intercept.</span></label><label><input type="radio" autocomplete="off" name="radio_NPZWQCLDFQ" value="answer"> <span>By applying <code>exp()</code> to the coefficient.</span></label>
+</div></li>
+<li><p>How can a ratio of 1.5 be interpreted relative to a reference value?</p>
+<div id="radio_ONALWNDBZM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_ONALWNDBZM" value=""> <span>A ratio of 1.5 represents a 150% increase.</span></label><label><input type="radio" autocomplete="off" name="radio_ONALWNDBZM" value="answer"> <span>A ratio of 1.5 represents a 50% increase.</span></label><label><input type="radio" autocomplete="off" name="radio_ONALWNDBZM" value=""> <span>A ratio of 1.5 represents a 50% decrease.</span></label>
+</div></li>
+<li><p>What does <code>epred_draws()</code> provide for the log-normal regression model?</p>
+<div id="radio_CPZPTBDAXC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CPZPTBDAXC" value=""> <span>Posterior draws of regression coefficients on the log scale.</span></label><label><input type="radio" autocomplete="off" name="radio_CPZPTBDAXC" value="answer"> <span>Posterior draws of expected outcome values on the original outcome scale.</span></label><label><input type="radio" autocomplete="off" name="radio_CPZPTBDAXC" value=""> <span>Posterior predictive draws of individual observations.</span></label>
+</div></li>
+<li><p>What does <code>linpred_draws()</code> provide?</p>
+<div id="radio_EFSSSIWKOZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EFSSSIWKOZ" value=""> <span>Expected values on the original outcome scale.</span></label><label><input type="radio" autocomplete="off" name="radio_EFSSSIWKOZ" value=""> <span>Ratios obtained by exponentiating the regression coefficients.</span></label><label><input type="radio" autocomplete="off" name="radio_EFSSSIWKOZ" value="answer"> <span>Values on the logged scale.</span></label>
+</div>
+<p><strong>True or false?</strong></p></li>
+<li><p>A right-skewed density plot alone is sufficient evidence that a variable should be modelled with a log-normal distribution. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+<li><p>In a log-normal regression model, the regression coefficients are estimated on the log scale. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>A log difference of 0 corresponds to a ratio of 1. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>For the same log difference, the absolute difference on the original scale remains constant regardless of the baseline value. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+<li><p>When converting a model prediction to the original outcome scale, exponentiating a difference coefficient alone is sufficient to obtain the predicted value. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+</ol>
+</div>
+</div>
+</div>
 </section>
 <section id="summary" class="level2" data-number="32.10">
 <h2 data-number="32.10" class="anchored" data-anchor-id="summary"><span class="header-section-number">32.10</span> Summary</h2>

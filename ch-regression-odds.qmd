@@ -82,3 +82,45 @@ Alternatively, odds ratio can be expressed as percent decrease with $(1 - OR) * 
 
 While it is useful to know about odds and odd ratios, I personally find talking about differences in percentage points more straightforward when dealing with the substantive interpretations of the results.
 I suggest that you stick to percentage points when reporting models results, while you learn the ropes of Bayesian regression models.
+
+::: callout-note
+## Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+  "By applying the inverse logit function.",
+  answer = "By exponentiating the difference in log odds.",
+  "By dividing the difference in log odds by the baseline probability."
+)
+
+cat("a. How can a difference in log odds be converted into an odds ratio?", longmcq(opts_1))
+
+
+opts_2 <- c(
+  "It represents the percentage-point difference between two probabilities.",
+  answer = "It represents the factor by which one set of odds differs from another.",
+  "It represents the probability of an outcome occurring."
+)
+
+cat("b. How can an odds ratio be interpreted?", longmcq(opts_2))
+
+
+opts_3 <- c(
+  "Because log odds cannot be converted into probabilities.",
+  "Because percentage-point changes are always larger than changes in log odds.",
+  answer = "Because the same change in log odds can correspond to different changes in percentage points depending on the baseline probability."
+)
+
+cat("c. Why can it be useful to report changes in percentage points alongside changes in log odds?", longmcq(opts_3))
+
+cat("**True or false?**", "\n\n")
+cat("d. An odds ratio greater than 1 indicates an increase in odds relative to the reference level.", torf(TRUE), "\n\n")
+cat("e. An odds ratio of 0.5 means that the odds have decreased by 50% relative to the reference level.", torf(TRUE), "\n\n")
+cat("f. A change of +1 in log odds always corresponds to the same change in percentage points, regardless of the baseline probability.", torf(FALSE))
+
+```
+:::

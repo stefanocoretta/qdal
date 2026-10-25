@@ -851,6 +851,39 @@ Figure&nbsp;33.2: Examples of bad MCMC trace plots.
 <blockquote class="blockquote">
 <p>The models’ <span class="math inline">\(\hat{R}\)</span> values were all approximately 1, indicating convergence. The bulk and tail Estimated Sample Size were sufficient and the trace plots suggest the chains have mixed well. The posterior predictive plot doesn’t indicate major deviations from the observed distribution.</p>
 </blockquote>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Quiz 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<ol type="a">
+<li><p>What does <span class="math inline">\(\hat{R}\)</span> measure?</p>
+<div id="radio_BZQHHLACVW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BZQHHLACVW" value=""> <span>A measure of the spread of the posterior distribution.</span></label><label><input type="radio" autocomplete="off" name="radio_BZQHHLACVW" value="answer"> <span>A measure of MCMC convergence.</span></label><label><input type="radio" autocomplete="off" name="radio_BZQHHLACVW" value=""> <span>A measure of the number of divergent transitions.</span></label>
+</div></li>
+<li><p>What is the difference between bulk ESS and tail ESS?</p>
+<div id="radio_BFCRSTMWHQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BFCRSTMWHQ" value=""> <span>Bulk ESS measures convergence, while tail ESS measures the number of MCMC iterations.</span></label><label><input type="radio" autocomplete="off" name="radio_BFCRSTMWHQ" value=""> <span>Bulk ESS focuses on extreme values, while tail ESS focuses on typical values.</span></label><label><input type="radio" autocomplete="off" name="radio_BFCRSTMWHQ" value="answer"> <span>Bulk ESS focuses on the central part of the posterior, while tail ESS focuses on its tails.</span></label>
+</div></li>
+<li><p>What does a ‘hairy caterpillar’ pattern in an MCMC trace plot indicate?</p>
+<div id="radio_UEMRCXLMJC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UEMRCXLMJC" value=""> <span>The chains remain clearly separated throughout the iterations.</span></label><label><input type="radio" autocomplete="off" name="radio_UEMRCXLMJC" value="answer"> <span>The chains mix well and independently explore the same part of the parameter space.</span></label><label><input type="radio" autocomplete="off" name="radio_UEMRCXLMJC" value=""> <span>The parameter remains at approximately the same value across all iterations.</span></label>
+</div>
+<p><strong>True or false?</strong></p></li>
+<li><p>Posterior predictive checks compare distributions predicted by the fitted model with the empirical distribution of the data. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>An <span class="math inline">\(\hat{R}\)</span> value substantially greater than 1 provides evidence of good convergence. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+<li><p>Increasing the number of MCMC iterations can sometimes help address convergence problems. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>Increasing <code>max_treedepth</code> or <code>adapt_delta</code> is guaranteed to solve diagnostic problems even when the model itself is poorly specified. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+</ol>
+</div>
+</div>
+</div>
 </section>
 <section id="summary" class="level2" data-number="33.4">
 <h2 data-number="33.4" class="anchored" data-anchor-id="summary"><span class="header-section-number">33.4</span> Summary</h2>

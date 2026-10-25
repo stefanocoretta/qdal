@@ -108,6 +108,49 @@ For example:
 > The bulk and tail Estimated Sample Size were sufficient and the trace plots suggest the chains have mixed well.
 > The posterior predictive plot doesn't indicate major deviations from the observed distribution.
 
+::: callout-note
+## Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+  "A measure of the spread of the posterior distribution.",
+  answer = "A measure of MCMC convergence.",
+  "A measure of the number of divergent transitions."
+)
+
+cat("a. What does $\\hat{R}$ measure?", longmcq(opts_1))
+
+
+opts_2 <- c(
+  "Bulk ESS measures convergence, while tail ESS measures the number of MCMC iterations.",
+  "Bulk ESS focuses on extreme values, while tail ESS focuses on typical values.",
+  answer = "Bulk ESS focuses on the central part of the posterior, while tail ESS focuses on its tails."
+)
+
+cat("b. What is the difference between bulk ESS and tail ESS?", longmcq(opts_2))
+
+
+opts_3 <- c(
+  "The chains remain clearly separated throughout the iterations.",
+  answer = "The chains mix well and independently explore the same part of the parameter space.",
+  "The parameter remains at approximately the same value across all iterations."
+)
+
+cat("c. What does a 'hairy caterpillar' pattern in an MCMC trace plot indicate?", longmcq(opts_3))
+
+cat("**True or false?**", "\n\n")
+cat("d. Posterior predictive checks compare distributions predicted by the fitted model with the empirical distribution of the data.", torf(TRUE), "\n\n")
+cat("e. An $\\hat{R}$ value substantially greater than 1 provides evidence of good convergence.", torf(FALSE), "\n\n")
+cat("f. Increasing the number of MCMC iterations can sometimes help address convergence problems.", torf(TRUE), "\n\n")
+cat("g. Increasing `max_treedepth` or `adapt_delta` is guaranteed to solve diagnostic problems even when the model itself is poorly specified.", torf(FALSE))
+
+```
+:::
+
 ## Summary
 
 ::: callout-note

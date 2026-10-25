@@ -773,6 +773,95 @@ fixef(rt_bm_2) |> knitr::kable(digits = 2)
 
 This answers our research question above ("Does mean phoneme-level Levenshtein distance of the target word have an effect on the response reaction times?"): we know now that for each unit increase of mean distance, the RTs increase by 3-4% at 80% probability.
 
+::: callout-note
+## Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+  "Any continuous variable that is right-skewed in the observed data.",
+  answer = "A continuous variable that can only take positive values and cannot be zero.",
+  "A continuous variable that can take both positive and negative values."
+)
+
+cat("a. When is a log-normal distribution a reasonable initial assumption for a continuous outcome?", longmcq(opts_1))
+
+
+opts_2 <- c(
+  "It makes the highest values more extreme.",
+  "It transforms the variable into a binary outcome.",
+  answer = "It makes a log-normal variable approximate a Gaussian distribution."
+)
+
+cat("b. What happens when the logarithm is taken of a log-normal variable?", longmcq(opts_2))
+
+
+opts_3 <- c(
+  "Any observation far from the mean should be excluded.",
+  answer = "An extreme observation should be excluded when there is a theoretical reason to consider it an error or otherwise unrelated to the process of interest.",
+  "Extreme observations should always be excluded before fitting a regression model."
+)
+
+cat("c. When should an extreme observation be excluded from an analysis?", longmcq(opts_3))
+
+
+opts_4 <- c(
+  "It compares the posterior distributions of the regression coefficients with their priors.",
+  answer = "It compares distributions predicted by the model with the empirical distribution of the outcome.",
+  "It determines whether the predictor should be log-transformed."
+)
+
+cat("d. What is the purpose of a posterior predictive check with `pp_check()`?", longmcq(opts_4))
+
+
+opts_7 <- c(
+  "By applying `log()` to the coefficient.",
+  "By multiplying the coefficient by the intercept.",
+  answer = "By applying `exp()` to the coefficient."
+)
+
+cat("g. How can a coefficient representing a log difference be transformed into a ratio?", longmcq(opts_7))
+
+
+opts_8 <- c(
+  "A ratio of 1.5 represents a 150% increase.",
+  answer = "A ratio of 1.5 represents a 50% increase.",
+  "A ratio of 1.5 represents a 50% decrease."
+)
+
+cat("h. How can a ratio of 1.5 be interpreted relative to a reference value?", longmcq(opts_8))
+
+
+opts_9 <- c(
+  "Posterior draws of regression coefficients on the log scale.",
+  answer = "Posterior draws of expected outcome values on the original outcome scale.",
+  "Posterior predictive draws of individual observations."
+)
+
+cat("i. What does `epred_draws()` provide for the log-normal regression model?", longmcq(opts_9))
+
+
+opts_10 <- c(
+  "Expected values on the original outcome scale.",
+  "Ratios obtained by exponentiating the regression coefficients.",
+  answer = "Values on the logged scale."
+)
+
+cat("j. What does `linpred_draws()` provide?", longmcq(opts_10))
+
+cat("**True or false?**", "\n\n")
+cat("k. A right-skewed density plot alone is sufficient evidence that a variable should be modelled with a log-normal distribution.", torf(FALSE), "\n\n")
+cat("l. In a log-normal regression model, the regression coefficients are estimated on the log scale.", torf(TRUE), "\n\n")
+cat("m. A log difference of 0 corresponds to a ratio of 1.", torf(TRUE), "\n\n")
+cat("n. For the same log difference, the absolute difference on the original scale remains constant regardless of the baseline value.", torf(FALSE), "\n\n")
+cat("o. When converting a model prediction to the original outcome scale, exponentiating a difference coefficient alone is sufficient to obtain the predicted value.", torf(FALSE))
+
+```
+:::
+
 ## Summary
 
 ::: {.callout-note appearance="simple"}
