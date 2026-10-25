@@ -264,7 +264,7 @@ Of course, you could also drop them yourself in the data and feed the filtered d
 This is probably a better practice because it gives you the opportunity to explicitly find out which rows have `NA`s (and why).
 
 ::: callout-note
-### Quiz 1
+### Quiz 2
 
 ```{r}
 #| label: quiz-2
@@ -431,6 +431,83 @@ vot_bm_long |>
 
 Do not confuse this density plot of the expected values with the density plot in @fig-eu-vot-dens.
 The latter shows the density plot of the observations of VOT, while @fig-vot-bm-epred shows the densities of the posterior draws of the *mean* VOT.
+
+::: callout-note
+## Quiz 3
+
+```{r}
+#| label: quiz-3
+#| results: asis
+#| echo: false
+
+opts_1 <- c(
+  "One",
+  answer = "Two",
+  "Three"
+)
+
+cat("a. How many indicator variables are needed for a categorical predictor with three levels using treatment coding?", longmcq(opts_1))
+
+
+opts_3 <- c(
+  "The number of levels.",
+  answer = "The number of levels minus one.",
+  "The number of levels plus one."
+)
+
+cat("b. For a categorical predictor with $N$ levels, how many indicator variables are required with treatment coding?", longmcq(opts_3))
+
+
+opts_4 <- c(
+  "Safe.",
+  answer = "Endangered.",
+  "Severely endangered."
+)
+
+cat("c. With the default ordering of a variable `endangerment` with the listed levels, which level would be the reference level?", longmcq(opts_4))
+
+opts_5 <- c(
+  answer = "The mean VOT of aspirated stops.",
+  "The mean VOT of voiced stops.",
+  "The difference in mean VOT between aspirated and voiced stops."
+)
+
+cat("d. What does $\\beta_0$ represent in the model of VOT by phonation?", longmcq(opts_5))
+
+
+opts_6 <- c(
+  "The mean VOT of voiced stops.",
+  answer = "The difference in mean VOT between voiced and aspirated stops.",
+  "The difference in mean VOT between voiced and voiceless stops."
+)
+
+cat("e. What does $\\beta_1$ represent when the indicator variable associated with it identifies voiced stops?", longmcq(opts_6))
+
+
+opts_8 <- c(
+  "$\\beta_2$",
+  answer = "$\\beta_0 + \\beta_2$",
+  "$\\beta_1 + \\beta_2$"
+)
+
+cat("f. What is the expected mean VOT for voiceless stops in the treatment-coded model?", longmcq(opts_8))
+
+
+opts_9 <- c(
+  "It is represented directly by the intercept.",
+  "It is represented directly by one of the two slope coefficients.",
+  answer = "It can be calculated from the posterior draws of the expected values."
+)
+
+cat("g. How can the contrast between voiceless and voiced stops be obtained?", longmcq(opts_9))
+
+cat("**True or false?**", "\n\n")
+cat("h. With treatment coding, a categorical predictor with four levels requires three indicator variables.", torf(TRUE), "\n\n")
+cat("i. For a three-level categorical predictor, each non-reference level is compared directly with the reference level.", torf(TRUE), "\n\n")
+cat("j. If aspirated stops are the reference level, both indicator variables are equal to 1 for observations from aspirated stops.", torf(FALSE), "\n\n")
+cat("k. The regression coefficients directly provide every possible pairwise comparison between the levels of a categorical predictor.", torf(FALSE), "\n\n")
+```
+:::
 
 ## Summary
 

@@ -487,6 +487,71 @@ fixef(rt_bm_1) |> knitr::kable(digits = 0)
 
 ```
 
+::: callout-note
+## Quiz 1
+
+```{r}
+#| label: quiz-1
+#| results: asis
+#| echo: false
+
+opts_3 <- c(
+  "The level with the largest number of observations.",
+  "The level coded as 1.",
+  answer = "The level against which the other level is compared."
+)
+
+cat("a. What is the reference level in treatment contrasts?", longmcq(opts_3))
+
+opts_4 <- c(
+  answer = "The reference level is coded as 0 and the other level as 1.",
+  "The reference level is coded as 1 and the other level as 0.",
+  "Both levels are coded as 1."
+)
+
+cat("b. How are the two levels of a categorical predictor coded using dummy coding", longmcq(opts_4))
+
+opts_6 <- c(
+  "The mean RT for real words.",
+  "The mean RT for non-words.",
+  answer = "The difference in mean RT between non-words and real words."
+)
+
+cat("c. In the treatment-coded model of RTs, what does $\\beta_1$ represent?", longmcq(opts_6))
+
+
+opts_7 <- c(
+  "$\\beta_1$",
+  answer = "$\\beta_0 + \\beta_1$",
+  "$\\beta_0 - \\beta_1$"
+)
+
+cat("d. If the reference level is coded as 0 and non-words are coded as 1, what is the expected mean RT for non-words?", longmcq(opts_7))
+
+opts_9 <- c(
+  "The posterior mean of the regression coefficients.",
+  answer = "The expected values of the outcome variable for specified predictor values.",
+  "The residual standard deviation of the model."
+)
+
+cat("e. What does `conditional_effects()` from brms allow you to plot?", longmcq(opts_9))
+
+opts_10 <- c(
+  "The difference between the two levels.",
+  "The predicted value for the reference level.",
+  answer = "The intercept, the difference from the intercept, the predicted value for the second level, and how the predictor was coded."
+)
+
+cat("f. What should be reported for a regression model with a categorical predictor, according to the chapter?", longmcq(opts_10))
+
+cat("**True or false?**", "\n\n")
+cat("g. In treatment coding, the intercept represents the mean outcome for the reference level of the categorical predictor.", torf(TRUE), "\n\n")
+cat("h. With treatment coding and two levels, the coefficient for the categorical predictor represents the mean outcome for the second level.", torf(FALSE), "\n\n")
+cat("i. When IsWord = TRUE is coded as 0 and IsWord = FALSE as 1, the expected mean for IsWord = FALSE is $\\beta_0 + \\beta_1$.", torf(TRUE), "\n\n")
+cat("j. A difference between groups can be statistically convincing without necessarily being linguistically meaningful.", torf(TRUE))
+```
+:::
+
 ## Conclusion
 
 To summarise, the model suggests that RTs with non-words are 99-134 ms longer than RTs with real words.

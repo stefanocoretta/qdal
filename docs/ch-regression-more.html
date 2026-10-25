@@ -1047,8 +1047,8 @@ VOT_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
 <strong>How many regression coefficients are there in the model above?</strong>
-<div id="radio_ZHITTLVBSQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZHITTLVBSQ" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_ZHITTLVBSQ" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_ZHITTLVBSQ" value=""> <span>4</span></label>
+<div id="radio_NJTEHVSUEX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_NJTEHVSUEX" value=""> <span>2</span></label><label><input type="radio" autocomplete="off" name="radio_NJTEHVSUEX" value="answer"> <span>3</span></label><label><input type="radio" autocomplete="off" name="radio_NJTEHVSUEX" value=""> <span>4</span></label>
 </div>
 </div>
 </div>
@@ -1060,14 +1060,14 @@ VOT_i &amp; \sim Gaussian(\mu_i, \sigma)\\
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Quiz 1
+<span class="screen-reader-only">Note</span>Quiz 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
 <strong>Based on the density plots of VOT you made above, which of the following sets of expectations makes sense?</strong>
-<div id="radio_PLTYSMXUMY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PLTYSMXUMY" value=""> <span><span class="math inline">\(\beta_0, \beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_PLTYSMXUMY" value="answer"> <span><span class="math inline">\(\beta_0\)</span> should have positive values and <span class="math inline">\(\beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_PLTYSMXUMY" value=""> <span><span class="math inline">\(\beta_0, \beta_1\)</span> should have positive values, <span class="math inline">\(\beta_2\)</span> should have negative values.</span></label>
+<div id="radio_CINLWTFSTM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CINLWTFSTM" value=""> <span><span class="math inline">\(\beta_0, \beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_CINLWTFSTM" value="answer"> <span><span class="math inline">\(\beta_0\)</span> should have positive values and <span class="math inline">\(\beta_1, \beta_2\)</span> should have negative values.</span></label><label><input type="radio" autocomplete="off" name="radio_CINLWTFSTM" value=""> <span><span class="math inline">\(\beta_0, \beta_1\)</span> should have positive values, <span class="math inline">\(\beta_2\)</span> should have negative values.</span></label>
 </div>
 </div>
 </div>
@@ -1244,6 +1244,55 @@ Figure&nbsp;29.2: Expected mean of VOT (in milliseconds) for three phonation cat
 </div>
 </div>
 <p>Do not confuse this density plot of the expected values with the density plot in <a href="#fig-eu-vot-dens" class="quarto-xref">Figure&nbsp;<span>29.1</span></a>. The latter shows the density plot of the observations of VOT, while <a href="#fig-vot-bm-epred" class="quarto-xref">Figure&nbsp;<span>29.2</span></a> shows the densities of the posterior draws of the <em>mean</em> VOT.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Quiz 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<ol type="a">
+<li><p>How many indicator variables are needed for a categorical predictor with three levels using treatment coding?</p>
+<div id="radio_FVOSFHCNTP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FVOSFHCNTP" value=""> <span>One</span></label><label><input type="radio" autocomplete="off" name="radio_FVOSFHCNTP" value="answer"> <span>Two</span></label><label><input type="radio" autocomplete="off" name="radio_FVOSFHCNTP" value=""> <span>Three</span></label>
+</div></li>
+<li><p>For a categorical predictor with <span class="math inline">\(N\)</span> levels, how many indicator variables are required with treatment coding?</p>
+<div id="radio_RJRDUQAXDY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RJRDUQAXDY" value=""> <span>The number of levels.</span></label><label><input type="radio" autocomplete="off" name="radio_RJRDUQAXDY" value="answer"> <span>The number of levels minus one.</span></label><label><input type="radio" autocomplete="off" name="radio_RJRDUQAXDY" value=""> <span>The number of levels plus one.</span></label>
+</div></li>
+<li><p>With the default ordering of a variable <code>endangerment</code> with the listed levels, which level would be the reference level?</p>
+<div id="radio_PFKDEFSQYX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PFKDEFSQYX" value=""> <span>Safe.</span></label><label><input type="radio" autocomplete="off" name="radio_PFKDEFSQYX" value="answer"> <span>Endangered.</span></label><label><input type="radio" autocomplete="off" name="radio_PFKDEFSQYX" value=""> <span>Severely endangered.</span></label>
+</div></li>
+<li><p>What does <span class="math inline">\(\beta_0\)</span> represent in the model of VOT by phonation?</p>
+<div id="radio_FATMLCUYHU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FATMLCUYHU" value="answer"> <span>The mean VOT of aspirated stops.</span></label><label><input type="radio" autocomplete="off" name="radio_FATMLCUYHU" value=""> <span>The mean VOT of voiced stops.</span></label><label><input type="radio" autocomplete="off" name="radio_FATMLCUYHU" value=""> <span>The difference in mean VOT between aspirated and voiced stops.</span></label>
+</div></li>
+<li><p>What does <span class="math inline">\(\beta_1\)</span> represent when the indicator variable associated with it identifies voiced stops?</p>
+<div id="radio_VUBSJPTYDY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VUBSJPTYDY" value=""> <span>The mean VOT of voiced stops.</span></label><label><input type="radio" autocomplete="off" name="radio_VUBSJPTYDY" value="answer"> <span>The difference in mean VOT between voiced and aspirated stops.</span></label><label><input type="radio" autocomplete="off" name="radio_VUBSJPTYDY" value=""> <span>The difference in mean VOT between voiced and voiceless stops.</span></label>
+</div></li>
+<li><p>What is the expected mean VOT for voiceless stops in the treatment-coded model?</p>
+<div id="radio_EENKFMHDVL" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EENKFMHDVL" value=""> <span><span class="math inline">\(\beta_2\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_EENKFMHDVL" value="answer"> <span><span class="math inline">\(\beta_0 + \beta_2\)</span></span></label><label><input type="radio" autocomplete="off" name="radio_EENKFMHDVL" value=""> <span><span class="math inline">\(\beta_1 + \beta_2\)</span></span></label>
+</div></li>
+<li><p>How can the contrast between voiceless and voiced stops be obtained?</p>
+<div id="radio_HRWBIANUMQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HRWBIANUMQ" value=""> <span>It is represented directly by the intercept.</span></label><label><input type="radio" autocomplete="off" name="radio_HRWBIANUMQ" value=""> <span>It is represented directly by one of the two slope coefficients.</span></label><label><input type="radio" autocomplete="off" name="radio_HRWBIANUMQ" value="answer"> <span>It can be calculated from the posterior draws of the expected values.</span></label>
+</div>
+<p><strong>True or false?</strong></p></li>
+<li><p>With treatment coding, a categorical predictor with four levels requires three indicator variables. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>For a three-level categorical predictor, each non-reference level is compared directly with the reference level. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p></li>
+<li><p>If aspirated stops are the reference level, both indicator variables are equal to 1 for observations from aspirated stops. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+<li><p>The regression coefficients directly provide every possible pairwise comparison between the levels of a categorical predictor. <select class="webex-select"><option value="blank"></option><option value="">TRUE</option><option value="answer">FALSE</option></select></p></li>
+</ol>
+</div>
+</div>
+</div>
 </section>
 <section id="summary" class="level2" data-number="29.5">
 <h2 data-number="29.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">29.5</span> Summary</h2>
