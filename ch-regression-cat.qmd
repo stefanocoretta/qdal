@@ -373,7 +373,7 @@ Moving onto the 95% CrIs:
 
 - The 95% CrI of `Intercept` $\beta_0$ is \[941, 965\] ms: this means that there is a 95% probability that the mean RT when `IsWord` is `TRUE` is between 941 and 965 ms.
 
-- The 95% CrI of `IsWordFALSE` $\beta_0$ is \[99, 134\] ms: this means that there is a 95% probability that the *difference* in mean RT between non- and real words is between 99 and 134 ms.
+- The 95% CrI of `IsWordFALSE` $\beta_1$ is \[99, 134\] ms: this means that there is a 95% probability that the *difference* in mean RT between non- and real words is between 99 and 134 ms.
 
 So here we have our answer: at 95% confidence (another way of saying at 95% probability), based on the model and data, RTs for non-words are 99 to 134 ms longer than RTs for real words.
 What about the expected value of RTs for non-words?
